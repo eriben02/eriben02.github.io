@@ -238,7 +238,7 @@ h3 {
 .calc-grid,
 .calc-controls {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
   gap: 18px;
   margin-bottom: 22px;
   align-items: stretch;
@@ -974,3 +974,5 @@ footer.site-footer {
     font-family: var(--sans);
   }
 }
+
+.sr-only-control { display: none !important; }
