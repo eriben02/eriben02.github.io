@@ -36,7 +36,13 @@ body {
 a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
 a:hover { color: var(--accent-hover); }
 
-.container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+.container {
+  max-width: 1020px;
+  width: 100%;
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
 
 header.site-header {
   border-bottom: 1px solid var(--border);
@@ -50,7 +56,8 @@ header.site-header {
   min-height: 68px;
   gap: 20px;
   flex-wrap: wrap;
-  padding: 18px 0;
+  padding-top: 18px;
+  padding-bottom: 18px;
 }
 
 .brand-wrap {
