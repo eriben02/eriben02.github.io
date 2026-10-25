@@ -1361,9 +1361,9 @@ footer.site-footer {
 
 .wb-vbar-row {
   display: grid;
-  grid-template-columns: 148px 217px;
+  grid-template-columns: 154px 211px;
   align-items: stretch;
-  min-height: 64px;
+  min-height: 36px;
   overflow: hidden;
   transition: flex-grow 140ms ease-out;
 }
@@ -1372,7 +1372,7 @@ footer.site-footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 8px 14px;
+  padding: 4px 12px;
   color: #FFFFFF;
   overflow: hidden;
   white-space: nowrap;
@@ -1401,9 +1401,9 @@ footer.site-footer {
 }
 
 .wb-block-title {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 400;
-  line-height: 1.2;
+  line-height: 1.1;
   opacity: 0.95;
   white-space: nowrap;
   overflow: hidden;
@@ -1412,10 +1412,10 @@ footer.site-footer {
 
 .wb-block-amount {
   font-family: var(--sans);
-  font-size: 1.02rem;
+  font-size: 0.96rem;
   font-weight: 700;
-  line-height: 1.25;
-  margin-top: 2px;
+  line-height: 1.15;
+  margin-top: 1px;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
