@@ -1,11 +1,11 @@
 # SaaSBill (2026 B2B SaaS True-Cost & Contract Trap Directory)
 
 > Independent B2B SaaS pricing, mandatory onboarding fee, seat-bucket minimum, AI resolution tax, and payment processor reserve audit directory.
-> Last Updated / Verified: Oct 25, 2026 (2026-10-25T18:15:43+01:00)
+> Last Updated / Verified: Oct 25, 2026 (2026-10-25T18:30:14+01:00)
 
 ## Freshness & Verification Metadata
 - **datePublished:** 2026-10-25
-- **dateModified:** 2026-10-25T18:15:43+01:00
+- **dateModified:** 2026-10-25T18:30:14+01:00
 - **lastReviewed:** 2026-10-25
 - **Verification Standard:** All pricing schedules, onboarding fees, seat minimums, and reserve clauses are verified against official vendor pricing pages and documented user contract reports on X and Reddit.
 
@@ -28,7 +28,7 @@
 - [Full Machine-Readable Dataset (llms-full.txt)](https://saasbill.io/llms-full.txt): Complete JSON/Markdown dump of all audited tools, rates, and sources.
 
 
-## Complete Audited Tool Dataset (JSON, Last Modified 2026-10-25T18:15:43+01:00)
+## Complete Audited Tool Dataset (JSON, Last Modified 2026-10-25T18:30:14+01:00)
 
 ```json
 [
@@ -55,7 +55,17 @@
     "trap_badge": "$1,500 Mandatory Onboarding + Annual Lock-In",
     "trap_severity": "high",
     "verified_date": "2026-10-25",
-    "affiliate_slug": "hubspot"
+    "affiliate_slug": "hubspot",
+    "verification_status": "Verified",
+    "source_label": "HubSpot Pricing & Legal Terms",
+    "source_urls": [
+      "https://www.hubspot.com/pricing/sales",
+      "https://legal.hubspot.com/terms-of-service"
+    ],
+    "sources": [
+      "https://www.hubspot.com/pricing/sales",
+      "https://legal.hubspot.com/terms-of-service"
+    ]
   },
   {
     "id": "hubspot-marketing-pro",
@@ -80,7 +90,17 @@
     "trap_badge": "$3,000 Mandatory Onboarding ($7,000 on Enterprise)",
     "trap_severity": "high",
     "verified_date": "2026-10-25",
-    "affiliate_slug": "hubspot"
+    "affiliate_slug": "hubspot",
+    "verification_status": "Verified",
+    "source_label": "HubSpot Marketing Pricing & Legal Terms",
+    "source_urls": [
+      "https://www.hubspot.com/pricing/marketing",
+      "https://legal.hubspot.com/terms-of-service"
+    ],
+    "sources": [
+      "https://www.hubspot.com/pricing/marketing",
+      "https://legal.hubspot.com/terms-of-service"
+    ]
   },
   {
     "id": "close-crm",
@@ -105,7 +125,15 @@
     "trap_badge": "$0 Onboarding Fee \u00b7 True 1-Seat Minimum",
     "trap_severity": "low",
     "verified_date": "2026-10-25",
-    "affiliate_slug": "close-crm"
+    "affiliate_slug": "close-crm",
+    "verification_status": "Verified",
+    "source_label": "Close CRM Official Pricing",
+    "source_urls": [
+      "https://close.com/pricing"
+    ],
+    "sources": [
+      "https://close.com/pricing"
+    ]
   },
   {
     "id": "pipedrive-crm",
@@ -130,7 +158,15 @@
     "trap_badge": "$0 Onboarding \u00b7 True 1-User Pricing",
     "trap_severity": "low",
     "verified_date": "2026-10-25",
-    "affiliate_slug": "pipedrive"
+    "affiliate_slug": "pipedrive",
+    "verification_status": "Verified",
+    "source_label": "Pipedrive Official Pricing",
+    "source_urls": [
+      "https://www.pipedrive.com/en/pricing"
+    ],
+    "sources": [
+      "https://www.pipedrive.com/en/pricing"
+    ]
   },
   {
     "id": "monday-crm",
@@ -155,7 +191,15 @@
     "trap_badge": "3-Seat Minimum + Seat Bucket Increments (3, 5, 10)",
     "trap_severity": "medium",
     "verified_date": "2026-10-25",
-    "affiliate_slug": "monday"
+    "affiliate_slug": "monday",
+    "verification_status": "Verified",
+    "source_label": "monday CRM Pricing & Seat Tiers",
+    "source_urls": [
+      "https://monday.com/pricing"
+    ],
+    "sources": [
+      "https://monday.com/pricing"
+    ]
   },
   {
     "id": "intercom-fin-ai",
@@ -180,7 +224,15 @@
     "trap_badge": "$0.99 Per AI Resolution Uncapped Meter",
     "trap_severity": "high",
     "verified_date": "2026-10-25",
-    "affiliate_slug": "intercom"
+    "affiliate_slug": "intercom",
+    "verification_status": "Verified",
+    "source_label": "Intercom Pricing & Fin AI Terms",
+    "source_urls": [
+      "https://www.intercom.com/pricing"
+    ],
+    "sources": [
+      "https://www.intercom.com/pricing"
+    ]
   },
   {
     "id": "freshdesk-support",
@@ -208,7 +260,14 @@
     "affiliate_slug": "freshworks",
     "notes": "Plans verified 2026-10-25: Growth $19 / Pro $55 / Enterprise $89 per agent/month annual; $23 / $66 / $107 monthly (from pricing-page data).",
     "sources": [
-      "https://www.freshworks.com/freshdesk/pricing/"
+      "https://www.freshworks.com/freshdesk/pricing/",
+      "https://support.freshdesk.com/support/solutions/articles/50000011515-manage-freddy-ai-add-ons"
+    ],
+    "verification_status": "Verified",
+    "source_label": "Freshdesk Pricing & Freddy AI Sessions FAQ",
+    "source_urls": [
+      "https://www.freshworks.com/freshdesk/pricing/",
+      "https://support.freshdesk.com/support/solutions/articles/50000011515-manage-freddy-ai-add-ons"
     ]
   },
   {
@@ -239,7 +298,13 @@
     "sources": [
       "https://www.zendesk.com/pricing/",
       "https://support.zendesk.com/hc/en-us/articles/10479587390106-Managing-resolution-allowances",
-      "https://support.zendesk.com/hc/en-us/articles/9570369117338-About-automated-resolution-tiers",
+      "https://www.zendesk.com/company/agreements-and-terms/zendesk-customer-agreement/"
+    ],
+    "verification_status": "Verified",
+    "source_label": "Zendesk Pricing & Resolution Allowances",
+    "source_urls": [
+      "https://www.zendesk.com/pricing/",
+      "https://support.zendesk.com/hc/en-us/articles/10479587390106-Managing-resolution-allowances",
       "https://www.zendesk.com/company/agreements-and-terms/zendesk-customer-agreement/"
     ]
   },
@@ -271,7 +336,13 @@
     "sources": [
       "https://www.zendesk.com/pricing/",
       "https://support.zendesk.com/hc/en-us/articles/10479587390106-Managing-resolution-allowances",
-      "https://support.zendesk.com/hc/en-us/articles/9570369117338-About-automated-resolution-tiers",
+      "https://www.zendesk.com/company/agreements-and-terms/zendesk-customer-agreement/"
+    ],
+    "verification_status": "Verified",
+    "source_label": "Zendesk Pricing & Resolution Allowances",
+    "source_urls": [
+      "https://www.zendesk.com/pricing/",
+      "https://support.zendesk.com/hc/en-us/articles/10479587390106-Managing-resolution-allowances",
       "https://www.zendesk.com/company/agreements-and-terms/zendesk-customer-agreement/"
     ]
   },
@@ -303,6 +374,12 @@
     "sources": [
       "https://www.helpscout.com/pricing/",
       "https://docs.helpscout.com/article/1421-about-annual-payments"
+    ],
+    "verification_status": "Verified",
+    "source_label": "Help Scout Pricing & Annual Payment Docs",
+    "source_urls": [
+      "https://www.helpscout.com/pricing/",
+      "https://docs.helpscout.com/article/1421-about-annual-payments"
     ]
   },
   {
@@ -328,7 +405,17 @@
     "trap_badge": "$1,500 Pro Onboarding Fee \u00b7 $0 Per-Ticket Tax",
     "trap_severity": "medium",
     "verified_date": "2026-10-25",
-    "affiliate_slug": "hubspot"
+    "affiliate_slug": "hubspot",
+    "verification_status": "Verified",
+    "source_label": "HubSpot Service Hub Pricing",
+    "source_urls": [
+      "https://www.hubspot.com/pricing/service",
+      "https://legal.hubspot.com/terms-of-service"
+    ],
+    "sources": [
+      "https://www.hubspot.com/pricing/service",
+      "https://legal.hubspot.com/terms-of-service"
+    ]
   },
   {
     "id": "stripe-payments",
@@ -353,7 +440,17 @@
     "trap_badge": "120-180 Day Payout Freeze & 25% Rolling Reserve Risk",
     "trap_severity": "high",
     "verified_date": "2026-10-25",
-    "affiliate_slug": "stripe"
+    "affiliate_slug": "stripe",
+    "verification_status": "Verified",
+    "source_label": "Stripe Pricing & Reserves Documentation",
+    "source_urls": [
+      "https://stripe.com/pricing",
+      "https://docs.stripe.com/reserves"
+    ],
+    "sources": [
+      "https://stripe.com/pricing",
+      "https://docs.stripe.com/reserves"
+    ]
   },
   {
     "id": "paddle-mor",
@@ -378,7 +475,17 @@
     "trap_badge": "MoR Token Lock-In: Zero Card Portability if Terminated",
     "trap_severity": "high",
     "verified_date": "2026-10-25",
-    "affiliate_slug": "paddle"
+    "affiliate_slug": "paddle",
+    "verification_status": "Verified",
+    "source_label": "Paddle MoR Pricing & Buyer Terms",
+    "source_urls": [
+      "https://www.paddle.com/pricing",
+      "https://www.paddle.com/legal/terms"
+    ],
+    "sources": [
+      "https://www.paddle.com/pricing",
+      "https://www.paddle.com/legal/terms"
+    ]
   },
   {
     "id": "whop-payments",
@@ -403,7 +510,15 @@
     "trap_badge": "Multi-Processor Failover \u00b7 2.7% + $0.30",
     "trap_severity": "low",
     "verified_date": "2026-10-25",
-    "affiliate_slug": "whop"
+    "affiliate_slug": "whop",
+    "verification_status": "Verified",
+    "source_label": "Whop Payments Fee Schedule",
+    "source_urls": [
+      "https://whop.com/sell"
+    ],
+    "sources": [
+      "https://whop.com/sell"
+    ]
   },
   {
     "id": "lemon-squeezy",
@@ -428,7 +543,15 @@
     "trap_badge": "+0.5% Subscription Tax + Underlying Stripe Risk Rules",
     "trap_severity": "medium",
     "verified_date": "2026-10-25",
-    "affiliate_slug": "lemon-squeezy"
+    "affiliate_slug": "lemon-squeezy",
+    "verification_status": "Verified",
+    "source_label": "Lemon Squeezy MoR Pricing",
+    "source_urls": [
+      "https://www.lemonsqueezy.com/pricing"
+    ],
+    "sources": [
+      "https://www.lemonsqueezy.com/pricing"
+    ]
   },
   {
     "id": "chargeflow",
@@ -453,7 +576,15 @@
     "trap_badge": "$0 Setup Fee \u00b7 Prevents Processor Account Freezes",
     "trap_severity": "low",
     "verified_date": "2026-10-25",
-    "affiliate_slug": "chargeflow"
+    "affiliate_slug": "chargeflow",
+    "verification_status": "Verified",
+    "source_label": "Chargeflow Performance Pricing",
+    "source_urls": [
+      "https://www.chargeflow.io/pricing"
+    ],
+    "sources": [
+      "https://www.chargeflow.io/pricing"
+    ]
   },
   {
     "id": "jotform-hipaa",
@@ -481,7 +612,13 @@
     "affiliate_slug": "jotform",
     "sources": [
       "https://www.jotform.com/hipaa/pricing/",
-      "https://www.jotform.com/pricing/"
+      "https://www.jotform.com/hipaa/faq/"
+    ],
+    "verification_status": "Verified",
+    "source_label": "Jotform Gold HIPAA Pricing & BAA FAQ",
+    "source_urls": [
+      "https://www.jotform.com/hipaa/pricing/",
+      "https://www.jotform.com/hipaa/faq/"
     ]
   },
   {
@@ -507,7 +644,15 @@
     "trap_badge": "Zero SSO Tax: Okta/Entra SSO & Audit Logs at $7.99/user",
     "trap_severity": "low",
     "verified_date": "2026-10-25",
-    "affiliate_slug": "1password"
+    "affiliate_slug": "1password",
+    "verification_status": "Verified",
+    "source_label": "1Password Business Pricing",
+    "source_urls": [
+      "https://1password.com/business-pricing"
+    ],
+    "sources": [
+      "https://1password.com/business-pricing"
+    ]
   },
   {
     "id": "vanta-soc2",
@@ -532,7 +677,15 @@
     "trap_badge": "Auditor Fee ($6k\u2013$15k) Billed Separately + Multi-Framework Upsells",
     "trap_severity": "high",
     "verified_date": "2026-10-25",
-    "affiliate_slug": "vanta"
+    "affiliate_slug": "vanta",
+    "verification_status": "Estimated (Benchmark)",
+    "source_label": "Vanta Trust/Pricing & Buyer Quote Benchmarks",
+    "source_urls": [
+      "https://www.vanta.com/pricing"
+    ],
+    "sources": [
+      "https://www.vanta.com/pricing"
+    ]
   },
   {
     "id": "drata-soc2",
@@ -557,7 +710,15 @@
     "trap_badge": "Initial Quotes Inflated ~40\u201350% + Separate CPA Audit Bill",
     "trap_severity": "medium",
     "verified_date": "2026-10-25",
-    "affiliate_slug": "drata"
+    "affiliate_slug": "drata",
+    "verification_status": "Estimated (Benchmark)",
+    "source_label": "Drata Plans & Buyer Quote Benchmarks",
+    "source_urls": [
+      "https://drata.com/"
+    ],
+    "sources": [
+      "https://drata.com/"
+    ]
   }
 ]
 ```
