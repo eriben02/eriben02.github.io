@@ -1,11 +1,11 @@
 # SaaSBill (2026 B2B SaaS True-Cost & Contract Trap Directory)
 
 > Independent B2B SaaS pricing, mandatory onboarding fee, seat-bucket minimum, AI resolution tax, and payment processor reserve audit directory.
-> Last Updated / Verified: Oct 25, 2026 (2026-10-25T17:54:41+01:00)
+> Last Updated / Verified: Oct 25, 2026 (2026-10-25T18:15:43+01:00)
 
 ## Freshness & Verification Metadata
 - **datePublished:** 2026-10-25
-- **dateModified:** 2026-10-25T17:54:41+01:00
+- **dateModified:** 2026-10-25T18:15:43+01:00
 - **lastReviewed:** 2026-10-25
 - **Verification Standard:** All pricing schedules, onboarding fees, seat minimums, and reserve clauses are verified against official vendor pricing pages and documented user contract reports on X and Reddit.
 
@@ -28,7 +28,7 @@
 - [Full Machine-Readable Dataset (llms-full.txt)](https://saasbill.io/llms-full.txt): Complete JSON/Markdown dump of all audited tools, rates, and sources.
 
 
-## Complete Audited Tool Dataset (JSON, Last Modified 2026-10-25T17:54:41+01:00)
+## Complete Audited Tool Dataset (JSON, Last Modified 2026-10-25T18:15:43+01:00)
 
 ```json
 [
@@ -180,7 +180,7 @@
     "trap_badge": "$0.99 Per AI Resolution Uncapped Meter",
     "trap_severity": "high",
     "verified_date": "2026-10-25",
-    "affiliate_slug": "freshworks"
+    "affiliate_slug": "intercom"
   },
   {
     "id": "freshdesk-support",
@@ -202,7 +202,7 @@
     "hipaa_baa_minimum_tier": "Not listed on Freshdesk pricing page (unverified)",
     "soc2_report_tier": "Not verified in this audit",
     "sso_minimum_tier": "SAML SSO listed on all plans (Growth, Pro, Enterprise)",
-    "trap_badge": "Predictable Seats \u00b7 $0.49/AI Session (charged even if unresolved)",
+    "trap_badge": "Predictable Seats \u00b7 $49/100 AI Sessions (500 1x free; charged per session)",
     "trap_severity": "low",
     "verified_date": "2026-10-25",
     "affiliate_slug": "freshworks",
@@ -225,16 +225,17 @@
     "enterprise_seat_price_usd": null,
     "ai_usage_tax_model": "5 automated resolutions/agent/month included (pricing page; help-center allowance model: $2/agent/month); then $1.50 committed or $2.00 pay-as-you-go per automated resolution. 'Allow overage' is the default setting; overage billed monthly regardless of subscription term.",
     "ai_per_resolution_usd": 2.0,
+    "ai_committed_per_resolution_usd": 1.5,
     "billing_lock_in_type": "Annual or monthly; auto-renews for equivalent term at then-current rates unless 30 days' written notice (Zendesk Customer Agreement \u00a77.2)",
     "cancellation_notice_days": 30,
     "data_and_token_portability": "Not verified in this audit",
     "hipaa_baa_minimum_tier": "Not HIPAA-enabled on Suite Team (pricing page: HIPAA enabled on Suite Professional)",
     "soc2_report_tier": "Not verified in this audit",
     "sso_minimum_tier": "SAML/JWT SSO listed for all plans in pricing table",
-    "trap_badge": "$2.00 PAYG per AI Resolution \u00b7 Overage ON by Default",
+    "trap_badge": "$1.50 Committed / $2.00 PAYG per AI Resolution \u00b7 Overage ON by Default",
     "trap_severity": "high",
     "verified_date": "2026-10-25",
-    "affiliate_slug": "freshworks",
+    "affiliate_slug": "zendesk",
     "sources": [
       "https://www.zendesk.com/pricing/",
       "https://support.zendesk.com/hc/en-us/articles/10479587390106-Managing-resolution-allowances",
@@ -256,16 +257,17 @@
     "enterprise_seat_price_usd": null,
     "ai_usage_tax_model": "10 automated resolutions/agent/month included (pricing page; help-center allowance model: $5/agent/month, max $5,000/yr); then $1.50 committed or $2.00 pay-as-you-go. Copilot add-on $50/agent/month (annual).",
     "ai_per_resolution_usd": 2.0,
+    "ai_committed_per_resolution_usd": 1.5,
     "billing_lock_in_type": "Annual or monthly; auto-renews for equivalent term at then-current rates unless 30 days' written notice (Zendesk Customer Agreement \u00a77.2)",
     "cancellation_notice_days": 30,
     "data_and_token_portability": "Not verified in this audit",
     "hipaa_baa_minimum_tier": "Suite Professional ('HIPAA Enabled' in pricing table; BAA executed separately)",
     "soc2_report_tier": "Not verified in this audit",
     "sso_minimum_tier": "SAML/JWT SSO listed for all plans in pricing table",
-    "trap_badge": "$115 Seat + $1.50\u2013$2.00 per Verified AI Resolution",
+    "trap_badge": "$115 Seat + $1.50 Committed / $2.00 PAYG per Verified AI Resolution",
     "trap_severity": "high",
     "verified_date": "2026-10-25",
-    "affiliate_slug": "freshworks",
+    "affiliate_slug": "zendesk",
     "sources": [
       "https://www.zendesk.com/pricing/",
       "https://support.zendesk.com/hc/en-us/articles/10479587390106-Managing-resolution-allowances",
@@ -351,7 +353,7 @@
     "trap_badge": "120-180 Day Payout Freeze & 25% Rolling Reserve Risk",
     "trap_severity": "high",
     "verified_date": "2026-10-25",
-    "affiliate_slug": "chargeflow"
+    "affiliate_slug": "stripe"
   },
   {
     "id": "paddle-mor",
@@ -458,25 +460,29 @@
     "name": "Jotform (HIPAA & Enterprise Forms)",
     "vendor": "Jotform",
     "category": "Compliance, HIPAA & SOC 2",
-    "advertised_monthly_price_usd": 34,
-    "monthly_billing_price_usd": 39,
+    "advertised_monthly_price_usd": 99,
+    "monthly_billing_price_usd": 129,
     "seat_minimum": 1,
     "actual_minimum_monthly_spend_usd": 99,
     "mandatory_onboarding_fee_usd": 0,
     "enterprise_onboarding_fee_usd": 0,
     "enterprise_seat_price_usd": 99,
-    "ai_usage_tax_model": "Included form limits by tier",
+    "ai_usage_tax_model": "Included form limits by tier (10,000 monthly submissions on Gold)",
     "ai_per_resolution_usd": 0.0,
-    "billing_lock_in_type": "Monthly or Annual; HIPAA BAA requires Gold ($99/mo annual) or Enterprise",
+    "billing_lock_in_type": "Monthly ($129/mo) or Annual ($99/mo); HIPAA BAA requires Gold (1-user plan) or Enterprise (multi-user)",
     "cancellation_notice_days": 1,
     "data_and_token_portability": "Full CSV/PDF/API Export",
-    "hipaa_baa_minimum_tier": "Gold Plan ($99/mo billed annually) \u2013 Automated BAA included",
+    "hipaa_baa_minimum_tier": "Gold Plan ($99/mo billed annually, $129/mo monthly) \u2013 Automated BAA included",
     "soc2_report_tier": "SOC 2 Type II & HIPAA Compliant",
     "sso_minimum_tier": "Enterprise (Multi-user SAML SSO)",
-    "trap_badge": "HIPAA BAA Unlocked on Gold ($99/mo) \u2013 No $50k Enterprise Quote Needed",
+    "trap_badge": "HIPAA BAA Unlocked on Gold ($99/mo annual \u00b7 1-User Plan)",
     "trap_severity": "low",
     "verified_date": "2026-10-25",
-    "affiliate_slug": "jotform"
+    "affiliate_slug": "jotform",
+    "sources": [
+      "https://www.jotform.com/hipaa/pricing/",
+      "https://www.jotform.com/pricing/"
+    ]
   },
   {
     "id": "1password-business",
