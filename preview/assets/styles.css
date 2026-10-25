@@ -1100,14 +1100,20 @@ footer.site-footer {
 
 .editorial-hero h1 {
   font-family: var(--serif);
-  font-size: clamp(2.4rem, 4.3vw, 3.35rem);
+  font-size: clamp(2.1rem, 3.8vw, 3.1rem);
   line-height: 1.1;
   font-weight: 700;
   letter-spacing: -0.025em;
   color: #20231F;
   margin-bottom: 18px;
-  max-width: 100%;
-  text-wrap: balance;
+  max-width: none;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .editorial-hero h1 {
+    white-space: normal;
+  }
 }
 
 .editorial-hero .lead {
