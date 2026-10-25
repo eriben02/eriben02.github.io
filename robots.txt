@@ -1,5 +1,5 @@
-# SaaSTruth (https://saasbill.io) - GEO & AI Search Optimized robots.txt
-# Last Updated: 2026-10-25T17:25:49+01:00
+# SaaSBill (https://saasbill.io) - GEO & AI Search Optimized robots.txt
+# Last Updated: 2026-10-25T17:49:14+01:00
 User-agent: OAI-SearchBot
 Allow: /
 
