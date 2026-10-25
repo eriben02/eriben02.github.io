@@ -1216,8 +1216,8 @@ footer.site-footer {
 
 .workbench-grid {
   display: grid;
-  grid-template-columns: 280px 365px 1fr;
-  gap: 42px;
+  grid-template-columns: 268px 344px minmax(0, 1fr);
+  gap: 32px;
   align-items: start;
 }
 
@@ -1373,7 +1373,7 @@ footer.site-footer {
 
 .wb-vbar-row {
   display: grid;
-  grid-template-columns: 146px 219px;
+  grid-template-columns: 136px 208px;
   align-items: stretch;
   min-height: 46px;
   overflow: visible;
@@ -1478,6 +1478,8 @@ footer.site-footer {
   flex-direction: column;
   align-items: flex-start;
   min-height: 310px;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .wb-selected-product {
@@ -1498,14 +1500,15 @@ footer.site-footer {
 
 .wb-big-total {
   font-family: var(--serif);
-  font-size: clamp(3.1rem, 5vw, 4.25rem);
+  font-size: clamp(2.35rem, 3.3vw, 3.05rem);
   font-weight: 700;
-  line-height: 1.02;
+  line-height: 1.04;
   letter-spacing: -0.03em;
   color: #20231F;
   margin: 0 0 14px 0;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
+  max-width: 100%;
 }
 
 .wb-big-total .wb-per-year {
