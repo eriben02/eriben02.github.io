@@ -7,3 +7,7 @@
 - **Fortnox Access (obligatorisk avgift):** Utöver paketpriset (Mini 209 kr/mån, Liten 349 kr/mån) tillkommer obligatoriska Fortnox Access: 29 kr/mån år 1 för ny direktkund, därefter **9 kr/mån (0–39 verifikat), 29 kr/mån (40–99), 99 kr/mån (100–999) eller 199 kr/mån (1 000+ verifikat)**, samt +15 % vid 3 månaders avtalsperiod.
 - **API- & Integrationslicens (Shopify / WooCommerce):** Kostar **119 kr/mån extra** hos Spiris (ingår i Skala 549 kr/mån) och **189 kr/mån extra** hos Fortnox (ingår i Mellan+ från 688 kr/mån).
 - **Bokio Basic:** 269 kr/mån vid årsbetalning (319 kr/mån kvartalsvis).
+
+## Sidor
+- [Systemkalkyl.se startsida – totalkostnadskalkylator](https://eriben02.github.io/systemkalkyl/)
+- [Fortnox vs Spiris (Visma) 2026: Uträknad totalkostnad med Fortnox Access, 152-verifikatsgränsen & lön](https://eriben02.github.io/systemkalkyl/jamfor/fortnox-vs-spiris-totalkostnad/) – Exempel år 2 (250 verifikat/år, 5 fakturor/mån, 1 egen lön): Spiris Driva 5 010 kr/år, Fortnox Liten 5 844 kr/år, Fortnox Mini 6 504 kr/år, Spiris Skala 6 588 kr/år, Fortnox Mellan 7 068 kr/år, Spiris Starta 10 068 kr/år (exkl. moms, verifierat 2026-10-25).

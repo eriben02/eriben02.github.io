@@ -1,4 +1,5 @@
-# SaaSTruth.io / eriben02.github.io/saastruth - GEO & AI Search Optimized robots.txt
+# SaaSTruth (https://eriben02.github.io/saastruth) - GEO & AI Search Optimized robots.txt
+# Last Updated: 2026-10-25T08:17:17+01:00
 User-agent: OAI-SearchBot
 Allow: /
 
