@@ -1455,7 +1455,7 @@ footer.site-footer {
   font-size: 0.81rem;
   font-weight: 700;
   color: #20231F;
-  line-height: 1.22;
+  line-height: 1.15;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1465,11 +1465,15 @@ footer.site-footer {
   display: block;
   font-size: 0.74rem;
   color: #5A6058;
-  line-height: 1.25;
-  margin-top: 2px;
+  line-height: 1.15;
+  margin-top: 1px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.wb-vbar-row.is-compact .wb-callout-text span {
+  display: none;
 }
 
 /* Right Column: Prominent Editorial Serif Year-1 Figure + Fixed-Height Copy + CTA */
