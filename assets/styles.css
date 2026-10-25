@@ -108,11 +108,11 @@ header.site-header {
 }
 
 .byline-bar {
-  font-size: 0.82rem;
+  font-size: 12px;
+  line-height: 1.2;
   color: var(--muted);
-  padding: 10px 0 6px;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 10px;
+  padding: 2px 0;
+  margin: 2px 0;
 }
 
 .hero {
