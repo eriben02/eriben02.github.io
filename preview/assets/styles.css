@@ -1362,20 +1362,20 @@ footer.site-footer {
   cursor: pointer;
 }
 
-/* Center Column: Locked-Height Vertical Stacked Bar + Aligned Leader Lines */
+/* Center Column: Locked-Height 360px Vertical Stacked Bar + Aligned Leader Lines */
 .wb-vbar-container {
   display: flex;
   flex-direction: column;
-  height: 252px;
-  min-height: 252px;
-  max-height: 252px;
+  height: 360px;
+  min-height: 360px;
+  max-height: 360px;
 }
 
 .wb-vbar-row {
   display: grid;
   grid-template-columns: 154px 211px;
   align-items: stretch;
-  min-height: 36px;
+  min-height: 44px;
   overflow: hidden;
   transition: flex-grow 140ms ease-out;
 }
@@ -1472,17 +1472,30 @@ footer.site-footer {
   text-overflow: ellipsis;
 }
 
-.wb-vbar-row.is-compact .wb-callout-text span {
-  display: none;
-}
 
 /* Right Column: Prominent Editorial Serif Year-1 Figure + Fixed-Height Copy + CTA */
 .wb-result-col {
-  padding-top: 30px;
+  padding-top: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  min-height: 252px;
+  min-height: 360px;
+}
+
+.wb-selected-product {
+  font-family: var(--sans);
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: #536B56;
+  margin-bottom: 18px;
+  height: 18px;
+  line-height: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .wb-big-total {
@@ -1639,7 +1652,11 @@ hr.editorial-rule {
 }
 
 .table-wrap.editorial-gap-table tr.is-spotlight-row td {
-  background: #EFECE3;
+  background: #EBF0E9;
+}
+
+.table-wrap.editorial-gap-table tr.is-spotlight-row td:first-child {
+  box-shadow: inset 3px 0 0 #536B56;
 }
 
 .gap-platform-name {
