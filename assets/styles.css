@@ -21,7 +21,8 @@
   --rose-border: #FECACA;
   --bar-seats: #536B56;
   --bar-onboarding: #D97706;
-  --bar-ai: #B91C1C;
+  --bar-ai: #EA580C;
+  --bar-hidden: #D97706;
   --serif: 'Georgia', 'Charter', 'Newsreader', 'Cambria', serif;
   --sans: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
   --mono: 'JetBrains Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
@@ -1085,3 +1086,665 @@ footer.site-footer {
 }
 
 .sr-only-control { display: none !important; }
+
+
+
+
+
+/* =========================================================
+   Option 3: Editorial Magazine Layout ("Field Notes" Style v2)
+   ========================================================= */
+.editorial-hero {
+  padding: 56px 0 36px;
+}
+
+.editorial-hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.1rem, 3.8vw, 3.1rem);
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: #20231F;
+  margin-bottom: 18px;
+  max-width: none;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .editorial-hero h1 {
+    white-space: normal;
+  }
+}
+
+.editorial-hero .lead {
+  font-family: var(--sans);
+  font-size: 1.12rem;
+  line-height: 1.65;
+  color: #484D46;
+  max-width: 650px;
+  margin-bottom: 0;
+}
+
+/* Understated Editorial Category Filter & Whisper-Quiet Scenario Note */
+.editorial-cat-bar {
+  margin: 0 0 34px;
+  padding-top: 22px;
+  border-top: 1px solid #E2DFD7;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.editorial-cat-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.editorial-cat-bar .cat-tabs {
+  gap: 8px;
+}
+
+.editorial-cat-bar .cat-tab {
+  background: transparent;
+  border: 1px solid #D6D3CA;
+  color: #4A4F48;
+  border-radius: 999px;
+  padding: 5px 14px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: all 0.15s ease;
+}
+
+.editorial-cat-bar .cat-tab:hover {
+  background: #EFECE6;
+  color: #20231F;
+  border-color: #B8B5AC;
+}
+
+.editorial-cat-bar .cat-tab.active {
+  background: #647A65;
+  border-color: #647A65;
+  color: #FFFFFF;
+  font-weight: 600;
+}
+
+.editorial-cat-bar .prefill-banner {
+  background: transparent;
+  border: none;
+  border-left: none;
+  border-radius: 0;
+  padding: 2px 0;
+  margin-bottom: 0;
+  font-size: 0.78rem;
+  color: #6B7068;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 22px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.editorial-cat-bar .prefill-badge {
+  background: #E8EEE6;
+  color: #465947;
+  border: 1px solid #C5D1C6;
+  font-size: 0.65rem;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-weight: 600;
+}
+
+.editorial-cat-bar .prefill-badge.is-custom {
+  background: #EFECE6;
+  color: #3A3F38;
+  border-color: #CFCBC0;
+}
+
+/* 3-Column Interactive Workbench directly on Cream Paper */
+.calc-box.editorial-workbench {
+  background: transparent;
+  border: none;
+  padding: 10px 0 54px;
+  margin: 0;
+  box-shadow: none;
+}
+
+.workbench-grid {
+  display: grid;
+  grid-template-columns: 280px 368px 282px;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.wb-col-title {
+  font-family: var(--sans);
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: #3A3F38;
+  margin-bottom: 24px;
+}
+
+/* Left Column: Clean Sliders with Zero Layout Shift */
+.wb-controls-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.wb-control-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: opacity 0.15s ease;
+}
+
+/* Never collapse height on disabled controls so the workbench never jumps */
+.wb-control-item.is-dimmed {
+  opacity: 0.38;
+  pointer-events: none;
+}
+
+.wb-control-label {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #2A2E29;
+  line-height: 1.25;
+}
+
+.wb-slider-row {
+  display: grid;
+  grid-template-columns: 1fr 64px;
+  align-items: center;
+  gap: 14px;
+  height: 28px;
+}
+
+.wb-slider-row input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  background: #D5DBD3;
+  border-radius: 999px;
+  outline: none;
+  cursor: pointer;
+  margin: 0;
+}
+
+.wb-slider-row input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #647A65;
+  border: 2px solid #FAF9F5;
+  box-shadow: 0 1px 4px rgba(32, 35, 31, 0.28);
+  cursor: pointer;
+}
+
+.wb-slider-row input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #647A65;
+  border: 2px solid #FAF9F5;
+  box-shadow: 0 1px 4px rgba(32, 35, 31, 0.28);
+  cursor: pointer;
+}
+
+.wb-slider-val {
+  font-family: var(--sans);
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: #20231F;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.wb-tool-select {
+  width: 100%;
+  height: 38px;
+  background: #F4F2EC;
+  color: #20231F;
+  border: 1px solid #D5D2C9;
+  border-radius: 5px;
+  padding: 0 12px;
+  font-size: 0.88rem;
+  font-family: var(--sans);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.wb-quiet-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #EAE7DF;
+  font-size: 0.8rem;
+  color: #5A6058;
+}
+
+.wb-quiet-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.wb-quiet-field label {
+  font-size: 0.73rem;
+  color: #6B7068;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.wb-quiet-field select {
+  width: 100%;
+  height: 32px;
+  background: #F4F2EC;
+  border: 1px solid #D5D2C9;
+  border-radius: 4px;
+  color: #20231F;
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 0 8px;
+  cursor: pointer;
+}
+
+/* Center Column: Locked-Height 310px Vertical Stacked Bar Aligned to Left Controls + Leader Lines */
+.wb-vbar-container {
+  display: flex;
+  flex-direction: column;
+  height: 310px;
+  min-height: 310px;
+  max-height: 310px;
+}
+
+.wb-vbar-row {
+  display: grid;
+  grid-template-columns: 148px 220px;
+  align-items: stretch;
+  min-height: 46px;
+  overflow: visible;
+  transition: flex-grow 140ms ease-out;
+}
+
+.wb-vbar-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 4px 10px;
+  color: #FFFFFF;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.wb-vbar-row:first-child .wb-vbar-block {
+  border-radius: 3px 3px 0 0;
+}
+
+.wb-vbar-row:last-child .wb-vbar-block {
+  border-radius: 0 0 3px 3px;
+}
+
+.wb-vbar-block.block-base {
+  background: #849683;
+  border-bottom: 1px solid rgba(250, 249, 245, 0.35);
+}
+
+.wb-vbar-block.block-seats {
+  background: #647A65;
+  border-bottom: 1px solid rgba(250, 249, 245, 0.35);
+}
+
+.wb-vbar-block.block-hidden {
+  background: #CF6530;
+}
+
+.wb-block-title {
+  font-size: 0.72rem;
+  font-weight: 400;
+  line-height: 1.1;
+  opacity: 0.95;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wb-block-amount {
+  font-family: var(--sans);
+  font-size: 1.04rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-top: 0;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.wb-callout-item {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  align-items: center;
+  gap: 10px;
+  padding-left: 2px;
+}
+
+.wb-leader-line {
+  height: 1px;
+  background: #9CA098;
+  width: 24px;
+}
+
+.wb-callout-text {
+  overflow: visible;
+}
+
+.wb-callout-text strong {
+  display: block;
+  font-size: 0.81rem;
+  font-weight: 700;
+  color: #20231F;
+  line-height: 1.2;
+  white-space: normal;
+}
+
+.wb-callout-text span {
+  display: block;
+  font-size: 0.74rem;
+  color: #5A6058;
+  line-height: 1.25;
+  margin-top: 2px;
+  white-space: normal;
+}
+
+
+/* Right Column: Prominent Editorial Serif Year-1 Figure + Fixed-Height Copy + CTA */
+.wb-result-col {
+  padding-top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 310px;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.wb-selected-product {
+  font-family: var(--sans);
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: #536B56;
+  margin-bottom: 18px;
+  height: 18px;
+  line-height: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.wb-big-total {
+  font-family: var(--serif);
+  font-size: clamp(2.5rem, 3.6vw, 3.35rem);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  color: #20231F;
+  margin: 0 0 14px 0;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.wb-big-total .wb-per-year {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 0.52em;
+  letter-spacing: -0.01em;
+  color: #2A2E29;
+  margin-left: 2px;
+}
+
+.wb-budget-quote {
+  font-size: 0.98rem;
+  line-height: 1.48;
+  color: #2A2E29;
+  margin: 0 0 8px 0;
+  max-width: 310px;
+}
+
+.wb-budget-subnote {
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: #686E66;
+  margin: 0 0 20px 0;
+  max-width: 330px;
+  height: 36px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  font-variant-numeric: tabular-nums;
+}
+
+.wb-result-col .cta-stack {
+  width: 100%;
+}
+
+.wb-primary-cta.btn-cta {
+  background: #647A65;
+  border: 1px solid #647A65;
+  color: #FFFFFF;
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 14px 20px;
+  border-radius: 3px;
+  text-decoration: none;
+  width: 100%;
+  justify-content: center;
+}
+
+.wb-primary-cta.btn-cta:hover {
+  background: #4F6350;
+  border-color: #4F6350;
+}
+
+.wb-result-col .direct-link-tag {
+  font-size: 0.68rem;
+  color: #7A8078;
+  margin-top: 4px;
+}
+
+/* Horizontal Divider */
+hr.editorial-rule {
+  border: none;
+  border-top: 1px solid #D8D5CC;
+  margin: 4px 0 48px;
+}
+
+/* THE HIDDEN COST GAP: Airy Editorial Reference Table */
+.hidden-gap-section {
+  margin: 0 0 56px;
+}
+
+.gap-eyebrow {
+  font-family: var(--sans);
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: #525850;
+  margin-bottom: 8px;
+}
+
+.hidden-gap-section h2 {
+  font-family: var(--serif);
+  font-size: clamp(1.9rem, 3.2vw, 2.45rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #20231F;
+  margin: 0 0 8px 0;
+}
+
+.gap-subhead {
+  font-size: 1.02rem;
+  color: #4A4F48;
+  margin-bottom: 26px;
+}
+
+.table-wrap.editorial-gap-table {
+  background: #FAF9F5;
+  border: 1px solid #DFDDD6;
+  border-radius: 3px;
+  margin: 0 0 16px;
+  box-shadow: none;
+}
+
+.table-wrap.editorial-gap-table table caption {
+  display: none;
+}
+
+.table-wrap.editorial-gap-table th {
+  background: #F2EFE9;
+  color: #3A3F38;
+  font-family: var(--sans);
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 16px 22px;
+  border-bottom: 1px solid #DFDDD6;
+  border-right: 1px solid #EAE7E0;
+}
+
+.table-wrap.editorial-gap-table th:last-child {
+  border-right: none;
+}
+
+.table-wrap.editorial-gap-table td {
+  padding: 20px 22px;
+  border-bottom: 1px solid #E5E3DC;
+  border-right: 1px solid #EFECE6;
+  background: #FAF9F5;
+  vertical-align: middle;
+  font-variant-numeric: tabular-nums;
+}
+
+.table-wrap.editorial-gap-table td:last-child {
+  border-right: none;
+}
+
+.table-wrap.editorial-gap-table tr:hover td {
+  background: #F4F1EB;
+}
+
+.table-wrap.editorial-gap-table tr.is-spotlight-row td {
+  background: #EBF0E9;
+}
+
+.table-wrap.editorial-gap-table tr.is-spotlight-row td:first-child {
+  box-shadow: inset 3px 0 0 #536B56;
+}
+
+.gap-platform-name {
+  font-size: 0.96rem;
+  font-weight: 600;
+  color: #20231F;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.gap-platform-meta {
+  font-size: 0.77rem;
+  color: #686E66;
+  margin-top: 3px;
+}
+
+.gap-figure {
+  font-family: var(--sans);
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: #20231F;
+  font-variant-numeric: tabular-nums;
+}
+
+.gap-orange-pill {
+  font-family: var(--sans);
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #C85A28;
+  font-variant-numeric: tabular-nums;
+}
+
+.gap-zero-pill {
+  font-family: var(--sans);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #2E5A36;
+}
+
+.gap-sub-detail {
+  font-size: 0.75rem;
+  color: #686E66;
+  margin-top: 3px;
+}
+
+.table-disclaimer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: #5A6058;
+  margin-top: 14px;
+}
+
+/* Clean Editorial Sections Below Table */
+.editorial-below-section {
+  margin: 48px 0;
+  padding-top: 36px;
+  border-top: 1px solid #DFDDD6;
+}
+
+.editorial-below-section h2 {
+  font-family: var(--serif);
+  font-size: clamp(1.65rem, 2.8vw, 2.15rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #20231F;
+  margin: 0 0 8px 0;
+}
+
+.fine-print-grid {
+  margin-top: 18px;
+}
+
+@media (max-width: 960px) {
+  .workbench-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .wb-result-col {
+    padding-top: 4px;
+    min-height: auto;
+  }
+}
