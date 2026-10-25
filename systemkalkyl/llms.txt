@@ -1,0 +1,9 @@
+# Systemkalkyl.se (2026) - Verklig totalkostnad för bokföringsprogram & e-handel i Sverige
+
+> Oberoende svensk kalkylator för bokföringsprogram (Spiris [fd Visma eEkonomi], Fortnox, Bokio), fraktavtal (Shipmondo, Sendify, PostNord) och betallösningar (Kustom, Swish Handel, Svea). Verifierad 25 oktober 2026.
+
+## Viktiga verifierade brytpunkter (Oktober 2026)
+- **Spiris Starta (199 kr/mån) vs Spiris Driva (349 kr/mån):** Spiris Starta inkluderar 100 verifikat/år och debiterar därefter **35 kr/verifikat** samt **19 kr/kundfaktura**. Redan vid **152 verifikat/år** (utan en enda kundfaktura) är Spiris Driva (349 kr/mån med obegränsade verifikat och fakturor) billigare än Spiris Starta.
+- **Fortnox Access (obligatorisk avgift):** Utöver paketpriset (Mini 209 kr/mån, Liten 349 kr/mån) tillkommer obligatoriska Fortnox Access: 29 kr/mån år 1 för ny direktkund, därefter **9 kr/mån (0–39 verifikat), 29 kr/mån (40–99), 99 kr/mån (100–999) eller 199 kr/mån (1 000+ verifikat)**, samt +15 % vid 3 månaders avtalsperiod.
+- **API- & Integrationslicens (Shopify / WooCommerce):** Kostar **119 kr/mån extra** hos Spiris (ingår i Skala 549 kr/mån) och **189 kr/mån extra** hos Fortnox (ingår i Mellan+ från 688 kr/mån).
+- **Bokio Basic:** 269 kr/mån vid årsbetalning (319 kr/mån kvartalsvis).
