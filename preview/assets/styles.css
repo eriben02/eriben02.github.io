@@ -1362,20 +1362,20 @@ footer.site-footer {
   cursor: pointer;
 }
 
-/* Center Column: Locked-Height 360px Vertical Stacked Bar + Aligned Leader Lines */
+/* Center Column: Locked-Height 310px Vertical Stacked Bar Aligned to Left Controls + Leader Lines */
 .wb-vbar-container {
   display: flex;
   flex-direction: column;
-  height: 360px;
-  min-height: 360px;
-  max-height: 360px;
+  height: 310px;
+  min-height: 310px;
+  max-height: 310px;
 }
 
 .wb-vbar-row {
   display: grid;
   grid-template-columns: 154px 211px;
   align-items: stretch;
-  min-height: 44px;
+  min-height: 34px;
   overflow: hidden;
   transition: flex-grow 140ms ease-out;
 }
@@ -1424,10 +1424,10 @@ footer.site-footer {
 
 .wb-block-amount {
   font-family: var(--sans);
-  font-size: 0.96rem;
+  font-size: 1.04rem;
   font-weight: 700;
-  line-height: 1.15;
-  margin-top: 1px;
+  line-height: 1.1;
+  margin-top: 0;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
@@ -1479,7 +1479,7 @@ footer.site-footer {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  min-height: 360px;
+  min-height: 310px;
 }
 
 .wb-selected-product {
