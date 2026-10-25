@@ -1,11 +1,11 @@
-# SaaSTruth (2026 B2B SaaS True-Cost & Contract Trap Directory)
+# SaaSBill (2026 B2B SaaS True-Cost & Contract Trap Directory)
 
 > Independent B2B SaaS pricing, mandatory onboarding fee, seat-bucket minimum, AI resolution tax, and payment processor reserve audit directory.
-> Last Updated / Verified: October 25, 2026 (2026-10-25T08:17:17+01:00)
+> Last Updated / Verified: Oct 25, 2026 (2026-10-25T17:49:14+01:00)
 
 ## Freshness & Verification Metadata
 - **datePublished:** 2026-10-25
-- **dateModified:** 2026-10-25T08:17:17+01:00
+- **dateModified:** 2026-10-25T17:49:14+01:00
 - **lastReviewed:** 2026-10-25
 - **Verification Standard:** All pricing schedules, onboarding fees, seat minimums, and reserve clauses are verified against official vendor pricing pages and documented user contract reports on X and Reddit.
 
@@ -18,11 +18,11 @@
 - **Zendesk AI Automated Resolution Pricing (Verified 2026-10-25):** Zendesk Suite Team ($55/agent/mo annual, $69 monthly) includes 5 automated resolutions per agent/month and Suite Professional ($115 annual, $149 monthly) includes 10 (pricing page; capped at 10,000/yr). Beyond the allowance each automated resolution costs **$1.50 committed or $2.00 pay-as-you-go**; "Allow overage" is the default and overage is billed monthly regardless of subscription term. Since May 18, 2026 only LLM-"Verified" resolutions are billed. Alternatives: **Freshdesk** ($19/$55/$89 per agent annual; AI Agent $49 per 100 sessions after 500 one-time free) and **Help Scout** ($25/$45/$75 per user annual; AI Answers $0.75/resolution with optional monthly cap). Sources: zendesk.com/pricing, support.zendesk.com articles 10479587390106 & 9570369117338, freshworks.com/freshdesk/pricing, helpscout.com/pricing.
 
 ## Audited Calculator Pages
-- [Year-1 SaaS True-Cost Calculator Directory](https://eriben02.github.io/saastruth/): Interactive calculator across 15+ B2B SaaS and payment tools. (Last updated: 2026-10-25)
-- [HubSpot Pricing & Mandatory Onboarding Fee Calculator](https://eriben02.github.io/saastruth/pricing/hubspot-true-cost-and-onboarding-fees/): $1,500–$7,000 onboarding fee schedule vs. Close CRM & Pipedrive. (Last updated: 2026-10-25)
-- [Intercom Fin AI $0.99/Resolution Calculator](https://eriben02.github.io/saastruth/pricing/intercom-fin-ai-resolution-cost-calculator/): Per-resolution outcome billing calculator vs. Freshdesk. (Last updated: 2026-10-25)
-- [Stripe, Shopify Payments & Paddle Payout Holds & Token Portability Matrix](https://eriben02.github.io/saastruth/exit/stripe-shopify-paddle-frozen-funds-alternatives/): Rolling reserve simulator and MoR token lock-in audit. (Last updated: 2026-10-25)
-- [Monday CRM vs. Pipedrive vs. HubSpot Seat-Minimum Calculator](https://eriben02.github.io/saastruth/compare/monday-crm-vs-pipedrive-vs-hubspot-seat-minimums/): 1–15 user bucket math. (Last updated: 2026-10-25)
-- [HIPAA BAA & SOC 2 Type II Pricing Tier Matrix](https://eriben02.github.io/saastruth/compliance/hipaa-baa-and-soc2-pricing-tiers/): Self-serve BAA tiers and Vanta/Drata negotiation calculator. (Last updated: 2026-10-25)
-- [Zendesk AI Outcome Pricing Calculator](https://eriben02.github.io/saastruth/pricing/zendesk-ai-resolution-and-automated-outcome-cost/): Per-verified-resolution overage ($1.50/$2.00) vs. Freshdesk sessions and Help Scout $0.75/resolution. (Last updated: 2026-10-25)
-- [Full Machine-Readable Dataset (llms-full.txt)](https://eriben02.github.io/saastruth/llms-full.txt): Complete JSON/Markdown dump of all audited tools, rates, and sources.
+- [Year-1 SaaS True-Cost Calculator Directory](https://saasbill.io/): Interactive calculator across 15+ B2B SaaS and payment tools. (Last updated: 2026-10-25)
+- [HubSpot Pricing & Mandatory Onboarding Fee Calculator](https://saasbill.io/pricing/hubspot-true-cost-and-onboarding-fees/): $1,500–$7,000 onboarding fee schedule vs. Close CRM & Pipedrive. (Last updated: 2026-10-25)
+- [Intercom Fin AI $0.99/Resolution Calculator](https://saasbill.io/pricing/intercom-fin-ai-resolution-cost-calculator/): Per-resolution outcome billing calculator vs. Freshdesk. (Last updated: 2026-10-25)
+- [Stripe, Shopify Payments & Paddle Payout Holds & Token Portability Matrix](https://saasbill.io/exit/stripe-shopify-paddle-frozen-funds-alternatives/): Rolling reserve simulator and MoR token lock-in audit. (Last updated: 2026-10-25)
+- [Monday CRM vs. Pipedrive vs. HubSpot Seat-Minimum Calculator](https://saasbill.io/compare/monday-crm-vs-pipedrive-vs-hubspot-seat-minimums/): 1–15 user bucket math. (Last updated: 2026-10-25)
+- [HIPAA BAA & SOC 2 Type II Pricing Tier Matrix](https://saasbill.io/compliance/hipaa-baa-and-soc2-pricing-tiers/): Self-serve BAA tiers and Vanta/Drata negotiation calculator. (Last updated: 2026-10-25)
+- [Zendesk AI Outcome Pricing Calculator](https://saasbill.io/pricing/zendesk-ai-resolution-and-automated-outcome-cost/): Per-verified-resolution overage ($1.50/$2.00) vs. Freshdesk sessions and Help Scout $0.75/resolution. (Last updated: 2026-10-25)
+- [Full Machine-Readable Dataset (llms-full.txt)](https://saasbill.io/llms-full.txt): Complete JSON/Markdown dump of all audited tools, rates, and sources.
