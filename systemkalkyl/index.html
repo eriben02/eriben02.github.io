@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Systemkalkyl.se (2026) – Jämför Bokföringsprogram &amp; Företagssystem (Verklig Totalkostnad)</title>
+  <meta name="description" content="Räkna ut verklig årskostnad för Fortnox (inkl. Fortnox Access), Spiris (fd Visma eEkonomi) och Bokio utifrån antal verifikat, kundfakturor, lön och Shopify-integration." />
+  <style>
+    body { font-family: 'Inter', -apple-system, sans-serif; background: #0b0f19; color: #f8fafc; margin: 0; line-height: 1.6; }
+    .container { max-width: 1120px; margin: 0 auto; padding: 32px 24px; }
+    .badge { display: inline-block; background: rgba(56,189,248,0.12); color: #38bdf8; border: 1px solid rgba(56,189,248,0.3); padding: 4px 10px; border-radius: 999px; font-size: 0.78rem; font-family: monospace; }
+    .badge-warn { background: rgba(244,63,94,0.14); color: #f43f5e; border: 1px solid rgba(244,63,94,0.3); }
+    .calc-box { background: #111827; border: 1px solid #334155; border-radius: 12px; padding: 24px; margin: 28px 0; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; margin-bottom: 22px; }
+    label { display: block; font-size: 0.85rem; color: #94a3b8; margin-bottom: 6px; font-weight: 600; }
+    input[type="range"], select { width: 100%; background: #1e293b; color: #fff; border: 1px solid #334155; padding: 8px 10px; border-radius: 8px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 0.92rem; }
+    th, td { padding: 13px 14px; border-bottom: 1px solid #334155; text-align: left; }
+    th { background: #1e293b; color: #94a3b8; font-size: 0.78rem; text-transform: uppercase; }
+    .btn { display: inline-block; background: #10b981; color: #052e16; font-weight: 700; padding: 8px 13px; border-radius: 8px; text-decoration: none; font-size: 0.84rem; }
+    .highlight { font-family: monospace; font-size: 1.12rem; font-weight: 700; color: #38bdf8; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <span class="badge">SYSTEMKALKYL.SE · VERIFIERAD PRISDATA OKTOBER 2026</span>
+    <h1 style="margin:14px 0 10px;">Jämför Bokföringsprogram 2026 – Se Verklig Totalkostnad (Inkl. Fortnox Access, Verifikat &amp; Integrationslicens)</h1>
+    <p style="color:#94a3b8; max-width:840px;">Andra jämförelsesajter visar bara listpriset (199–269 kr/mån) och friskriver sig från att räkna ut totalpriset. Dra i reglagen nedan för att se exakt vad <strong>Spiris (fd Visma eEkonomi)</strong>, <strong>Fortnox</strong> och <strong>Bokio</strong> kostar per år med dina fakturor, verifikat, lönebesked och API-kopplingar.</p>
+
+    <div class="calc-box">
+      <h2 style="margin-top:0;">Interaktiv Totalkostnadskalkylator (kr/år exkl. moms)</h2>
+      <div class="grid">
+        <div>
+          <label for="se-ver">Antal verifikationer per år: <strong id="se-ver-val" style="color:#38bdf8;">200</strong> st/år</label>
+          <input type="range" id="se-ver" min="30" max="1200" step="10" value="200" />
+        </div>
+        <div>
+          <label for="se-inv">Kundfakturor per månad: <strong id="se-inv-val" style="color:#38bdf8;">5</strong> st/mån</label>
+          <input type="range" id="se-inv" min="0" max="50" step="1" value="5" />
+        </div>
+        <div>
+          <label for="se-lon">1 Ägarlön (Aktiebolag)</label>
+          <select id="se-lon">
+            <option value="0">Nej (Enskild firma / Ingen lön)</option>
+            <option value="1" selected>Ja (1 lönebesked/mån)</option>
+          </select>
+        </div>
+        <div>
+          <label for="se-int">API-integration (Shopify/WooCommerce)</label>
+          <select id="se-int">
+            <option value="0" selected>Nej</option>
+            <option value="1">Ja (Kräver integrationslicens)</option>
+          </select>
+        </div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Program &amp; Paket</th>
+            <th>Baspris / mån</th>
+            <th>Tillägg (Access / Verifikat / Faktura / Lön / API)</th>
+            <th>Verklig Årskostnad</th>
+            <th>Gå till erbjudande</th>
+          </tr>
+        </thead>
+        <tbody id="se-tbody"></tbody>
+      </table>
+      <p style="font-size:0.84rem; color:#94a3b8; margin-top:14px;">💡 <strong>Brytpunktsnotis:</strong> Spiris Starta (199 kr/mån) inkluderar 100 verifikat/år och tar därefter 35 kr/verifikat + 19 kr/kundfaktura. Redan vid <strong>152 verifikat/år</strong> (utan en enda kundfaktura) blir Spiris Driva (349 kr/mån) billigare än Spiris Starta!</p>
+    </div>
+  </div>
+
+  <script>
+    function calcFortnoxAccess(ver) {
+      if (ver <= 39) return 9;
+      if (ver <= 99) return 29;
+      if (ver <= 999) return 99;
+      return 199;
+    }
+    function updateSeCalc() {
+      const ver = parseInt(document.getElementById('se-ver').value, 10);
+      const invMo = parseInt(document.getElementById('se-inv').value, 10);
+      const hasLon = parseInt(document.getElementById('se-lon').value, 10) === 1;
+      const hasInt = parseInt(document.getElementById('se-int').value, 10) === 1;
+
+      document.getElementById('se-ver-val').textContent = ver;
+      document.getElementById('se-inv-val').textContent = invMo;
+
+      // 1. Spiris Starta
+      const extraVer = Math.max(0, ver - 100);
+      const startaAddYr = (extraVer * 35) + (invMo * 12 * 19) + (hasLon ? 49 * 12 : 0) + (hasInt ? 119 * 12 : 0);
+      const startaTotYr = (199 * 12) + startaAddYr;
+
+      // 2. Spiris Driva
+      const drivaAddYr = (hasLon ? 49 * 12 : 0) + (hasInt ? 119 * 12 : 0);
+      const drivaTotYr = (349 * 12) + drivaAddYr;
+
+      // 3. Spiris Skala (549 kr/mån inkl egen lön & integration)
+      const skalaTotYr = 549 * 12;
+
+      // 4. Fortnox Liten (349 kr/mån + Access efter verifikatvolym + Enkel lön 39 kr + Integration 189 kr)
+      const fnAccessMo = calcFortnoxAccess(ver);
+      const fnAddYr = (fnAccessMo * 12) + (hasLon ? 39 * 12 : 0) + (hasInt ? 189 * 12 : 0);
+      const fnTotYr = (349 * 12) + fnAddYr;
+
+      // 5. Bokio Basic / Premium
+      const bokioMo = (hasLon || hasInt || invMo > 0) ? 399 : 269;
+      const bokioTotYr = bokioMo * 12;
+
+      const rows = [
+        { name: 'Spiris Driva (fd Visma eEkonomi)', base: '349 kr/mån', add: `${drivaAddYr.toLocaleString('sv-SE')} kr/år (Obegränsade verifikat & fakturor)`, tot: drivaTotYr, url: 'https://www.spiris.se/priser', badge: '0 kr i 6 mån för nystartade' },
+        { name: 'Spiris Starta', base: '199 kr/mån', add: `${startaAddYr.toLocaleString('sv-SE')} kr/år (${extraVer} extra verifikat à 35 kr, ${invMo*12} fakturor à 19 kr)`, tot: startaTotYr, url: 'https://www.spiris.se/priser', badge: ver >= 152 ? 'VARNING: Dyrare än Driva vid >151 verifikat!' : 'Billigast vid <100 verifikat' },
+        { name: 'Bokio (' + (bokioMo === 269 ? 'Basic' : 'Premium') + ')', base: bokioMo + ' kr/mån', add: '0 kr i rörliga verifikatavgifter', tot: bokioTotYr, url: 'https://www.bokio.se/', badge: 'Årsbetalning' },
+        { name: 'Fortnox Liten + Fortnox Access', base: '349 kr/mån', add: `${fnAddYr.toLocaleString('sv-SE')} kr/år (Fortnox Access: ${fnAccessMo} kr/mån vid ${ver} verifikat)`, tot: fnTotYr, url: 'https://www.fortnox.se/paket', badge: 'Obligatorisk Fortnox Access' },
+        { name: 'Spiris Skala (All-inclusive)', base: '549 kr/mån', add: '0 kr (Egen lön, API-integration & AI-kvitton ingår)', tot: skalaTotYr, url: 'https://www.spiris.se/priser', badge: 'Bäst vid API-integration + lön' }
+      ];
+
+      rows.sort((a, b) => a.tot - b.tot);
+
+      document.getElementById('se-tbody').innerHTML = rows.map(r => `
+        <tr>
+          <td><strong>${r.name}</strong><div style="margin-top:4px;"><span class="badge ${r.badge.includes('VARNING') || r.badge.includes('Obligatorisk') ? 'badge-warn' : ''}">${r.badge}</span></div></td>
+          <td>${r.base}</td>
+          <td>${r.add}</td>
+          <td class="highlight">${r.tot.toLocaleString('sv-SE')} kr / år</td>
+          <td><a class="btn" href="${r.url}" target="_blank" rel="nofollow sponsored">Se paket &rarr;</a></td>
+        </tr>
+      `).join('');
+    }
+    ['se-ver', 'se-inv', 'se-lon', 'se-int'].forEach(id => document.getElementById(id).addEventListener('input', updateSeCalc));
+    updateSeCalc();
+  </script>
+</body>
+</html>
