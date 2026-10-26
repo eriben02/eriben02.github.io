@@ -1748,3 +1748,107 @@ hr.editorial-rule {
     min-height: auto;
   }
 }
+
+/* =========================================================
+   Mobile Polish & Responsive Overrides (320px–768px)
+   ========================================================= */
+@media (max-width: 768px) {
+  /* 1. Compact 2-row header on mobile */
+  .brand-tagline {
+    display: none;
+  }
+  .nav-inner {
+    gap: 8px 12px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+  .nav-links {
+    gap: 12px;
+    font-size: 0.82rem;
+  }
+  .byline-bar {
+    font-size: 11px;
+    padding-left: 8px;
+  }
+
+  /* 2. Editorial hero & scenario note wrap cleanly without clipping */
+  .editorial-hero {
+    padding: 28px 0 22px;
+  }
+  .editorial-cat-bar {
+    margin: 0 0 24px;
+    padding-top: 16px;
+  }
+  .editorial-cat-bar .prefill-banner {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    align-items: flex-start;
+    line-height: 1.4;
+  }
+
+  /* 3. Touch-friendly 24x24 slider thumbs & prevent iOS auto-zoom on selects */
+  .wb-slider-row input[type="range"]::-webkit-slider-thumb {
+    width: 24px;
+    height: 24px;
+  }
+  .wb-slider-row input[type="range"]::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+  }
+  .wb-tool-select,
+  .wb-quiet-field select,
+  .control-group select {
+    font-size: 16px;
+  }
+
+  /* 4. Fluid stacked bar width on 320px–390px screens (no 368px overflow) */
+  .wb-vbar-row {
+    grid-template-columns: 118px minmax(0, 1fr);
+  }
+  .wb-block-amount {
+    font-size: 0.96rem;
+  }
+  .wb-callout-item {
+    grid-template-columns: 16px minmax(0, 1fr);
+    gap: 8px;
+  }
+  .wb-leader-line {
+    width: 16px;
+  }
+  .wb-budget-subnote {
+    height: auto;
+    min-height: 36px;
+    -webkit-line-clamp: 3;
+  }
+
+  /* 5. Editorial gap table & all mobile-cards tables: clean card spacing on mobile */
+  .table-wrap.editorial-gap-table.mobile-cards {
+    border: none;
+    background: transparent;
+  }
+  .table-wrap.editorial-gap-table.mobile-cards tr {
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+  }
+  .table-wrap.editorial-gap-table.mobile-cards td {
+    padding: 8px 0;
+    border-right: none;
+    border-bottom: 1px dashed var(--border);
+    background: transparent;
+  }
+  .table-wrap.editorial-gap-table.mobile-cards tr.is-spotlight-row td {
+    background: transparent;
+  }
+  .table-wrap.editorial-gap-table.mobile-cards tr.is-spotlight-row {
+    background: #EBF0E9;
+    border-color: #536B56;
+  }
+  .table-wrap.editorial-gap-table.mobile-cards td:last-child {
+    border-bottom: none;
+    padding-top: 12px;
+  }
+}
