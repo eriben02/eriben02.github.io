@@ -1582,7 +1582,7 @@ hr.editorial-rule {
 
 /* THE HIDDEN COST GAP: Airy Editorial Reference Table */
 .hidden-gap-section {
-  margin: 0 0 56px;
+  margin: 18px 0 56px;
 }
 
 .gap-eyebrow {
@@ -1604,10 +1604,45 @@ hr.editorial-rule {
   margin: 0 0 8px 0;
 }
 
+.gap-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  margin-bottom: 20px;
+}
+
 .gap-subhead {
-  font-size: 1.02rem;
+  font-size: 0.98rem;
   color: #4A4F48;
-  margin-bottom: 26px;
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.gap-sort-field {
+  flex-shrink: 0;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  margin-right: 7px;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+
+.legend-dot.dot-sticker {
+  background: #536B56;
+  box-shadow: 0 0 0 2px rgba(83, 107, 86, 0.18);
+}
+
+.legend-dot.dot-hidden {
+  background: #C85A28;
+  box-shadow: 0 0 0 2px rgba(200, 90, 40, 0.18);
 }
 
 .table-wrap.editorial-gap-table {
