@@ -1421,8 +1421,8 @@ footer.site-footer {
 }
 
 .wb-quiet-options {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  align-items: flex-start;
   gap: 12px;
   padding-top: 10px;
   border-top: 1px solid #EAE7DF;
@@ -1434,6 +1434,8 @@ footer.site-footer {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  width: 132px;
+  max-width: 100%;
 }
 
 .wb-quiet-field label {
@@ -1712,11 +1714,14 @@ hr.editorial-rule {
 
 .gap-toolbar {
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 12px 20px;
-  margin-bottom: 20px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.unified-inspector-tray #sort-control-group {
+  margin-left: 28px;
 }
 
 .gap-subhead {
@@ -1970,6 +1975,9 @@ hr.editorial-rule {
   .unified-inspector-tray .calc-box.editorial-workbench {
     padding: 16px 14px 18px;
     margin-bottom: 18px;
+  }
+  .unified-inspector-tray #sort-control-group {
+    margin-left: 18px;
   }
   /* 4. Fluid stacked bar width on 320px–390px screens (no 368px overflow) */
   .unified-inspector-tray .wb-vbar-row,
