@@ -1249,13 +1249,13 @@ footer.site-footer {
 
 /* Keep the original 992px outer tray width while creating generous 28px gaps inside the card by making the left controls/dropdown column compact (216px) */
 .unified-inspector-tray .workbench-grid {
-  grid-template-columns: 216px 344px minmax(0, 1fr);
+  grid-template-columns: 210px 364px minmax(0, 1fr);
   column-gap: 28px;
   justify-content: stretch;
 }
 
 .unified-inspector-tray .wb-vbar-row {
-  grid-template-columns: 136px minmax(0, 1fr);
+  grid-template-columns: 118px minmax(0, 1fr);
 }
 
 .unified-inspector-tray .wb-tool-select {
@@ -1470,7 +1470,7 @@ footer.site-footer {
 
 .wb-vbar-row {
   display: grid;
-  grid-template-columns: 136px minmax(0, 1fr);
+  grid-template-columns: 118px minmax(0, 1fr);
   align-items: stretch;
   min-height: 0;
   overflow: hidden;
@@ -1898,8 +1898,14 @@ hr.editorial-rule {
     max-height: none;
   }
   .wb-callout-text strong,
-  .wb-callout-text span {
-    white-space: normal;
+  .unified-inspector-tray .wb-callout-text strong {
+    white-space: nowrap;
+    font-size: 0.68rem;
+  }
+  .wb-callout-text span,
+  .unified-inspector-tray .wb-callout-text span {
+    white-space: nowrap;
+    font-size: 0.62rem;
   }
 }
 
