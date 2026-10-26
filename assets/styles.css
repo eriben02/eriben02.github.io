@@ -1205,6 +1205,113 @@ footer.site-footer {
   border-color: #CFCBC0;
 }
 
+/* Unified Inspector Tray (4) + Dynamic Left Margin Rail (6) */
+.unified-inspector-tray {
+  position: relative;
+  background: #E8EEE6;
+  border: 1.5px solid #C5D0C4;
+  border-radius: 12px;
+  padding: 24px 24px 26px 46px;
+  margin: 0 0 56px 0;
+}
+
+.inspector-left-rail {
+  position: absolute;
+  left: 18px;
+  top: 0;
+  bottom: 0;
+  width: 28px;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+.rail-arm-top {
+  position: absolute;
+  left: 0;
+  width: 28px;
+  height: 2.5px;
+  background: #536B56;
+  transform: translateY(-50%);
+}
+
+.rail-arm-top::after {
+  content: "";
+  position: absolute;
+  right: -4px;
+  top: 50%;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #536B56;
+  transform: translateY(-50%);
+}
+
+.rail-stem {
+  position: absolute;
+  left: 0;
+  width: 2.5px;
+  background: #536B56;
+  border-radius: 2px;
+  transition: top 140ms ease-out, height 140ms ease-out;
+}
+
+.rail-arm-bottom {
+  position: absolute;
+  left: 0;
+  width: 26px;
+  height: 2.5px;
+  background: #536B56;
+  transform: translateY(-50%);
+  transition: top 140ms ease-out;
+}
+
+.rail-arm-bottom::after {
+  content: "";
+  position: absolute;
+  right: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 7px solid #536B56;
+}
+
+.unified-inspector-tray .calc-box.editorial-workbench {
+  background: #FFFFFF;
+  border: 1px solid #C5C2B8;
+  border-left: 4px solid #536B56;
+  border-radius: 6px;
+  padding: 26px 26px 28px;
+  margin: 0 0 24px 0;
+  box-shadow: 0 1px 3px rgba(32, 35, 31, 0.04);
+}
+
+.unified-inspector-tray .workbench-grid {
+  grid-template-columns: 248px 348px 268px;
+}
+
+.unified-inspector-tray .hidden-gap-section {
+  margin: 0;
+}
+
+.unified-inspector-tray .table-wrap.editorial-gap-table {
+  background: #FFFFFF;
+  border: 1px solid #C5C2B8;
+  border-radius: 6px;
+}
+
+.unified-inspector-tray .table-wrap.editorial-gap-table td {
+  background: #FFFFFF;
+}
+
+.unified-inspector-tray .table-wrap.editorial-gap-table tr.is-spotlight-row td {
+  background: #EBF0E9;
+}
+
+.unified-inspector-tray .table-wrap.editorial-gap-table tr.is-spotlight-row td:first-child {
+  box-shadow: inset 4px 0 0 #536B56;
+}
+
 /* 3-Column Interactive Workbench directly on Cream Paper */
 .calc-box.editorial-workbench {
   background: transparent;
@@ -1772,6 +1879,13 @@ hr.editorial-rule {
 }
 
 @media (max-width: 960px) {
+  .unified-inspector-tray {
+    padding: 18px;
+  }
+  .inspector-left-rail {
+    display: none;
+  }
+  .unified-inspector-tray .workbench-grid,
   .workbench-grid {
     grid-template-columns: 1fr;
     gap: 32px;
@@ -1835,6 +1949,14 @@ hr.editorial-rule {
     font-size: 16px;
   }
 
+  .unified-inspector-tray {
+    padding: 12px;
+    border-radius: 10px;
+  }
+  .unified-inspector-tray .calc-box.editorial-workbench {
+    padding: 16px 14px 18px;
+    margin-bottom: 18px;
+  }
   /* 4. Fluid stacked bar width on 320px–390px screens (no 368px overflow) */
   .wb-vbar-row {
     grid-template-columns: 118px minmax(0, 1fr);
