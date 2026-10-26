@@ -1309,6 +1309,11 @@ footer.site-footer {
   letter-spacing: 0.09em;
   color: #3A3F38;
   margin-bottom: 24px;
+  height: 18px;
+  line-height: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Left Column: Clean Sliders with Zero Layout Shift */
@@ -1449,15 +1454,16 @@ footer.site-footer {
   height: 310px;
   min-height: 310px;
   max-height: 310px;
+  overflow: hidden;
 }
 
 .wb-vbar-row {
   display: grid;
-  grid-template-columns: 148px minmax(0, 1fr);
+  grid-template-columns: 136px minmax(0, 1fr);
   align-items: stretch;
-  min-height: 36px;
-  overflow: visible;
-  transition: flex 140ms ease-out;
+  min-height: 0;
+  overflow: hidden;
+  transition: flex 160ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .wb-vbar-block {
@@ -1529,25 +1535,30 @@ footer.site-footer {
 }
 
 .wb-callout-text {
-  overflow: visible;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .wb-callout-text strong {
   display: block;
-  font-size: 0.81rem;
+  font-size: 0.80rem;
   font-weight: 700;
   color: #20231F;
   line-height: 1.2;
-  white-space: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .wb-callout-text span {
   display: block;
-  font-size: 0.74rem;
+  font-size: 0.73rem;
   color: #5A6058;
-  line-height: 1.25;
+  line-height: 1.22;
   margin-top: 2px;
-  white-space: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 
@@ -1557,9 +1568,15 @@ footer.site-footer {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  min-height: 310px;
+  height: 352px;
+  min-height: 352px;
+  max-height: 352px;
   min-width: 0;
   max-width: 100%;
+}
+
+.wb-result-col .cta-stack {
+  margin-top: auto;
 }
 
 .wb-selected-product {
@@ -1865,7 +1882,13 @@ hr.editorial-rule {
   }
   .wb-result-col {
     padding-top: 4px;
+    height: auto;
     min-height: auto;
+    max-height: none;
+  }
+  .wb-callout-text strong,
+  .wb-callout-text span {
+    white-space: normal;
   }
 }
 
