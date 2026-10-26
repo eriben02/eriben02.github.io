@@ -1212,7 +1212,13 @@ footer.site-footer {
   border: 1.5px solid #C5D0C4;
   border-radius: 12px;
   padding: 24px 24px 26px 46px;
-  margin: 0 0 56px 0;
+  margin: 0 -52px 56px -72px;
+}
+
+@media (max-width: 1180px) {
+  .unified-inspector-tray {
+    margin: 0 0 56px 0;
+  }
 }
 
 .inspector-left-rail {
@@ -1297,7 +1303,8 @@ footer.site-footer {
 }
 
 .unified-inspector-tray .workbench-grid {
-  grid-template-columns: 248px 348px 268px;
+  grid-template-columns: minmax(215px, 272px) minmax(310px, 368px) minmax(225px, 280px);
+  column-gap: 34px;
 }
 
 .unified-inspector-tray .hidden-gap-section {
@@ -1334,7 +1341,8 @@ footer.site-footer {
 
 .workbench-grid {
   display: grid;
-  grid-template-columns: 280px 368px 282px;
+  grid-template-columns: minmax(215px, 274px) minmax(310px, 368px) minmax(225px, 280px);
+  column-gap: 34px;
   justify-content: space-between;
   align-items: start;
 }
@@ -1491,7 +1499,7 @@ footer.site-footer {
 
 .wb-vbar-row {
   display: grid;
-  grid-template-columns: 148px 220px;
+  grid-template-columns: 148px minmax(0, 1fr);
   align-items: stretch;
   min-height: 36px;
   overflow: visible;
