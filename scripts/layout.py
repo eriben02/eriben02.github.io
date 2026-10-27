@@ -31,6 +31,7 @@ def render_related_links(rel_path, prefix):
         ("compare/close-crm-vs-hubspot-sales-hub-5-to-20-reps/index.html", "Close CRM vs. HubSpot Sales Hub (5–20 Reps)", "Compare built-in VoIP calling & SMS against HubSpot seat + onboarding fees."),
         ("pricing/gong-io-platform-fee-and-seat-minimum-calculator/index.html", "Gong.io $5,000 Platform Fee & Seat Calculator", "Benchmark Gong's $5k base fee + $1,600/yr seats against Close CRM."),
         ("compare/monday-crm-vs-pipedrive-vs-hubspot-seat-minimums/index.html", "CRM Seat-Minimum & Bucket Calculator", "See where monday CRM's 3/5/10-seat buckets cost more than 1:1 CRMs."),
+        ("intercom-fin-cost-calculator/index.html", "Intercom Fin Cost Calculator ($0.99/Resolution)", "Prefilled 10-agent, 1,500 AI/mo Year-1 calculator vs. Freshdesk & Zendesk."),
         ("pricing/intercom-fin-ai-resolution-cost-calculator/index.html", "Intercom Fin AI ($0.99/Resolution) True Cost", "Calculate monthly Fin AI resolution fees vs. Freshdesk session packs."),
         ("pricing/zendesk-ai-resolution-and-automated-outcome-cost/index.html", "Zendesk AI Automated Resolution Fee Calculator", "Model $1.50–$2.00 AI overage rates vs. Freshdesk & Help Scout."),
         ("pricing/stripe-billing-0-7-percent-recurring-tax-calculator/index.html", "Stripe Billing 0.7% Recurring Fee Calculator", "Compare Stripe 2.9% + 0.7% Billing + 0.5% Tax vs. Whop (2.7% + 30¢) & Paddle."),

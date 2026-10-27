@@ -264,16 +264,19 @@ class TestSaaSBillCalculators(unittest.TestCase):
         self.assertNotIn('id="hs-tbody"', hs_html)
         self.assertIn("https://refer.close.com/3k5hp07b8soi-fetl0j", hs_html)
 
-        ic_page = os.path.join(PUBLIC_DIR, "pricing/intercom-fin-ai-resolution-cost-calculator/index.html")
-        with open(ic_page) as f:
-            ic_html = f.read()
-        self.assertIn("seats * 55", ic_html)
-        self.assertIn("fdMonthlyPacks * 49", ic_html)
+        for ic_rel in ("intercom-fin-cost-calculator/index.html", "pricing/intercom-fin-ai-resolution-cost-calculator/index.html"):
+            ic_page = os.path.join(PUBLIC_DIR, ic_rel)
+            with open(ic_page) as f:
+                ic_html = f.read()
+            self.assertIn("function calcToolYear1(t, seats, aiVol, mode)", ic_html)
+            self.assertIn("const packs = Math.ceil(billableSessions / 100);", ic_html)
+            self.assertIn("aiAnnual = packs * 49;", ic_html)
 
     def test_handoff2_conversion_ux_and_honest_ctas(self):
         """Verify Handoff 2 conversion & UX requirements across all 7 generated HTML pages."""
         pages = [
             "index.html",
+            "intercom-fin-cost-calculator/index.html",
             "pricing/hubspot-true-cost-and-onboarding-fees/index.html",
             "pricing/intercom-fin-ai-resolution-cost-calculator/index.html",
             "exit/stripe-shopify-paddle-frozen-funds-alternatives/index.html",
@@ -296,6 +299,7 @@ class TestSaaSBillCalculators(unittest.TestCase):
         ]
         summary_ids = {
             "index.html": "wb-result-mount",
+            "intercom-fin-cost-calculator/index.html": "wb-result-mount",
             "pricing/hubspot-true-cost-and-onboarding-fees/index.html": "hs-summary",
             "pricing/intercom-fin-ai-resolution-cost-calculator/index.html": "ic-summary",
             "exit/stripe-shopify-paddle-frozen-funds-alternatives/index.html": "hold-summary",
@@ -506,6 +510,7 @@ class TestSaaSBillCalculators(unittest.TestCase):
         """Mandatory mobile usability audit across all generated HTML pages and styles.css."""
         pages = [
             "index.html",
+            "intercom-fin-cost-calculator/index.html",
             "pricing/hubspot-true-cost-and-onboarding-fees/index.html",
             "pricing/intercom-fin-ai-resolution-cost-calculator/index.html",
             "exit/stripe-shopify-paddle-frozen-funds-alternatives/index.html",
@@ -585,7 +590,7 @@ class TestSaaSBillCalculators(unittest.TestCase):
 
         with open(os.path.join(PUBLIC_DIR, "sitemap.xml"), encoding="utf-8") as f:
             sitemap = f.read()
-        self.assertEqual(sitemap.count("<url><loc>"), 20)
+        self.assertEqual(sitemap.count("<url><loc>"), 21)
 
         faq_pages = [
             "faq/does-hubspot-charge-onboarding-fees-2026/index.html",
@@ -798,6 +803,7 @@ class TestSaaSBillCalculators(unittest.TestCase):
         expected_disclosure = "Independent calculations. Some vendor links are affiliate links. This never changes our rankings or calculations."
         pages = [
             "index.html",
+            "intercom-fin-cost-calculator/index.html",
             "pricing/hubspot-true-cost-and-onboarding-fees/index.html",
             "pricing/intercom-fin-ai-resolution-cost-calculator/index.html",
             "exit/stripe-shopify-paddle-frozen-funds-alternatives/index.html",
@@ -881,6 +887,48 @@ class TestSaaSBillCalculators(unittest.TestCase):
         self.assertIn("/guides/jotform-wix-app-setup-and-pricing-guide/", calc_html)
         for bad in ["—", "&mdash;", "SaaSTruth", "Erik", "Bengtsson"]:
             self.assertNotIn(bad, calc_html, f"Forbidden token '{bad}' in {calc_rel}")
+
+
+
+    def test_intercom_fin_cost_calculator_dedicated_page(self):
+        """Verify /intercom-fin-cost-calculator/ uses calcToolYear1, defaults to 10 agents & 1,500 AI/mo, and has full progressive disclosure."""
+        for rel, expected_canonical in [
+            ("intercom-fin-cost-calculator/index.html", "https://saasbill.io/intercom-fin-cost-calculator/"),
+            ("pricing/intercom-fin-ai-resolution-cost-calculator/index.html", "https://saasbill.io/pricing/intercom-fin-ai-resolution-cost-calculator/"),
+        ]:
+            with open(os.path.join(PUBLIC_DIR, rel), encoding="utf-8") as f:
+                html = f.read()
+            self.assertIn(f'<link rel="canonical" href="{expected_canonical}" />', html)
+            self.assertIn('id="seat-slider" min="1" max="50" value="10"', html)
+            self.assertIn('id="ai-slider" min="0" max="5000" step="100" value="1500"', html)
+            self.assertIn("let currentSpotlightId = 'intercom-fin-ai';", html)
+            self.assertIn('id="wb-big-amount">$21,300</span>', html)
+            self.assertIn('id="wb-best-option"', html)
+            self.assertIn('id="wb-calc-details"', html)
+            self.assertIn("See exactly how we calculated this", html)
+            self.assertIn('id="full-table-details"', html)
+            self.assertIn("Compare all tools in this category", html)
+            self.assertIn("Compare all tools &darr;", html)
+
+            pos_inputs = html.find('class="wb-col-controls"')
+            pos_answer = html.find('id="wb-result-mount"')
+            pos_best = html.find('id="wb-best-option"')
+            pos_calc = html.find('id="wb-calc-details"')
+            pos_verdict = html.find('id="verdict-card"')
+            pos_compare_all = html.find('id="full-table-details"')
+            pos_sort = html.find('id="sort-mode"')
+            pos_viz = html.find('id="calc-viz-panel"')
+            pos_tbody = html.find('id="calc-tbody"')
+            self.assertGreater(pos_answer, pos_inputs)
+            self.assertGreater(pos_best, pos_answer)
+            self.assertGreater(pos_calc, pos_best)
+            self.assertGreater(pos_verdict, pos_calc)
+            self.assertGreater(pos_compare_all, pos_verdict)
+            self.assertGreater(pos_sort, pos_compare_all)
+            self.assertGreater(pos_viz, pos_sort)
+            self.assertGreater(pos_tbody, pos_viz)
+            for bad in ["—", "&mdash;", "SaaSTruth", "Erik", "Bengtsson"]:
+                self.assertNotIn(bad, html, f"Forbidden token '{bad}' in {rel}")
 
 
 if __name__ == "__main__":

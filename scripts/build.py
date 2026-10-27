@@ -8,5 +8,6 @@ subprocess.run([sys.executable, "/workspace/saastruth/scripts/build_gumroad_whop
 subprocess.run([sys.executable, "/workspace/saastruth/scripts/build_queued_batch1.py"], check=True, cwd="/workspace/saastruth/scripts")
 subprocess.run([sys.executable, "/workspace/saastruth/scripts/build_workspace_m365_hipaa_page.py"], check=True, cwd="/workspace/saastruth/scripts")
 subprocess.run([sys.executable, "/workspace/saastruth/scripts/build_jotform_wix_guide.py"], check=True, cwd="/workspace/saastruth/scripts")
+subprocess.run([sys.executable, "/workspace/saastruth/scripts/build_intercom_fin_calculator.py"], check=True, cwd="/workspace/saastruth/scripts")
 subprocess.run([sys.executable, "/workspace/saastruth/scripts/update_meta_files.py"], check=True)
 print("Full SaaSBill build + dynamic freshness metadata completed.")

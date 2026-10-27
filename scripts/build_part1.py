@@ -238,7 +238,7 @@ home_body = f"""
     </div>
     <div class="card">
       <span class="badge badge-high">Helpdesk</span>
-      <h3><a href="./pricing/intercom-fin-ai-resolution-cost-calculator/">Intercom Fin ($0.99/resolution) cost simulator</a></h3>
+      <h3><a href="./intercom-fin-cost-calculator/">Intercom Fin ($0.99/resolution) cost calculator</a></h3>
       <p>How monthly ticket volume and AI resolution rates scale an Intercom invoice versus Freshdesk Freddy AI session packs.</p>
     </div>
     <div class="card">
@@ -518,8 +518,8 @@ const INTERNAL_AUDIT_LINKS = {{
   'close-crm': {{ url: './pricing/hubspot-true-cost-and-onboarding-fees/', label: 'Compare vs. HubSpot →' }},
   'pipedrive-crm': {{ url: './compare/monday-crm-vs-pipedrive-vs-hubspot-seat-minimums/', label: 'Read 1–15 seat comparison →' }},
   'monday-crm': {{ url: './compare/monday-crm-vs-pipedrive-vs-hubspot-seat-minimums/', label: 'Read 3-seat bucket audit →' }},
-  'intercom-fin-ai': {{ url: './pricing/intercom-fin-ai-resolution-cost-calculator/', label: 'Read Intercom $0.99 AI audit →' }},
-  'freshdesk-support': {{ url: './pricing/intercom-fin-ai-resolution-cost-calculator/', label: 'Compare AI session packs →' }},
+  'intercom-fin-ai': {{ url: './intercom-fin-cost-calculator/', label: 'Open Intercom Fin cost calculator →' }},
+  'freshdesk-support': {{ url: './intercom-fin-cost-calculator/', label: 'Compare vs. Intercom Fin AI →' }},
   'zendesk-suite-team': {{ url: './pricing/zendesk-ai-resolution-and-automated-outcome-cost/', label: 'Read Zendesk AI overage audit →' }},
   'zendesk-suite-professional': {{ url: './pricing/zendesk-ai-resolution-and-automated-outcome-cost/', label: 'Read Zendesk AI overage audit →' }},
   'help-scout-plus': {{ url: './pricing/zendesk-ai-resolution-and-automated-outcome-cost/', label: 'Compare vs. Zendesk AI →' }},
