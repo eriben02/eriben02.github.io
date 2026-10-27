@@ -1,11 +1,11 @@
 # SaaSBill (2026 B2B SaaS True-Cost & Contract Trap Directory)
 
 > Independent B2B SaaS pricing, mandatory onboarding fee, seat-bucket minimum, AI resolution tax, and payment processor reserve audit directory.
-> Last Updated / Verified: Oct 27, 2026 (2026-10-27T20:57:55+01:00)
+> Last Updated / Verified: Oct 27, 2026 (2026-10-27T21:14:10+01:00)
 
 ## Freshness & Verification Metadata
 - **datePublished:** 2026-10-25
-- **dateModified:** 2026-10-27T20:57:55+01:00
+- **dateModified:** 2026-10-27T21:14:10+01:00
 - **lastReviewed:** 2026-10-27
 - **Verification Standard:** All pricing schedules, onboarding fees, seat minimums, and reserve clauses are verified against official vendor pricing pages and documented user contract reports on X and Reddit.
 
@@ -38,10 +38,12 @@
 - [FAQ: Does HubSpot Charge Onboarding Fees in 2026?](https://saasbill.io/faq/does-hubspot-charge-onboarding-fees-2026/): Answer-first guide & calculator.
 - [FAQ: Intercom Fin AI Cost Calculator (2026)](https://saasbill.io/faq/intercom-fin-ai-cost-calculator/): Answer-first guide & calculator.
 - [FAQ: Stripe vs. Paddle vs. Whop True Cost (2026)](https://saasbill.io/faq/stripe-vs-paddle-true-cost/): Answer-first guide & calculator.
+- [Jotform Wix App Setup & Pricing Guide (2026)](https://saasbill.io/guides/jotform-wix-app-setup-and-pricing-guide/): Step-by-step Wix App installation walkthrough, live B2B quote demo, and tier calculator.
+- [Jotform Pricing Tier Calculator (2026)](https://saasbill.io/pricing/jotform-pricing-tier-calculator/): Starter (Free), Bronze ($34/mo), Silver ($39/mo), and Gold ($99/mo HIPAA BAA) Year-1 calculator.
 - [Full Machine-Readable Dataset (llms-full.txt)](https://saasbill.io/llms-full.txt): Complete JSON/Markdown dump of all audited tools, rates, and sources.
 
 
-## Complete Audited Tool Dataset (JSON, Last Modified 2026-10-27T20:57:55+01:00)
+## Complete Audited Tool Dataset (JSON, Last Modified 2026-10-27T21:14:10+01:00)
 
 ```json
 [

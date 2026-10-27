@@ -272,6 +272,16 @@ home_body = f"""
       <p>Typeform&rsquo;s monthly response caps and Enterprise-only HIPAA BAA versus Jotform Gold ($99/mo annual with BAA included).</p>
     </div>
     <div class="card">
+      <span class="badge badge-low">Guide</span>
+      <h3><a href="./guides/jotform-wix-app-setup-and-pricing-guide/">Jotform Wix App setup &amp; B2B quote form guide</a></h3>
+      <p>5-step visual and video walkthrough for embedding a B2B quote form on Wix using the official Jotform Wix App.</p>
+    </div>
+    <div class="card">
+      <span class="badge badge-low">Pricing</span>
+      <h3><a href="./pricing/jotform-pricing-tier-calculator/">Jotform 2026 pricing tier calculator (Starter to Gold)</a></h3>
+      <p>Compare Starter (Free), Bronze ($34/mo), Silver ($39/mo), and Gold ($99/mo HIPAA BAA) submission and storage limits.</p>
+    </div>
+    <div class="card">
       <span class="badge badge-medium">Compliance</span>
       <h3><a href="./pricing/docusign-envelope-allowance-and-api-overage-calculator/">DocuSign 100-envelope cap &amp; overage calculator</a></h3>
       <p>DocuSign&rsquo;s 100 envelopes/user/year cap on Standard &amp; Business Pro plans compared with PandaDoc and Jotform Sign.</p>

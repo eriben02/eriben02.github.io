@@ -24,7 +24,9 @@ def generate_meta_files(extra_urls=None):
         "/compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/",
         "/faq/does-hubspot-charge-onboarding-fees-2026/",
         "/faq/intercom-fin-ai-cost-calculator/",
-        "/faq/stripe-vs-paddle-true-cost/"
+        "/faq/stripe-vs-paddle-true-cost/",
+        "/guides/jotform-wix-app-setup-and-pricing-guide/",
+        "/pricing/jotform-pricing-tier-calculator/"
     ]
     if extra_urls:
         for u in extra_urls:
@@ -141,6 +143,8 @@ Sitemap: {SITE_ORIGIN}/sitemap.xml
 - [FAQ: Does HubSpot Charge Onboarding Fees in 2026?]({SITE_ORIGIN}/faq/does-hubspot-charge-onboarding-fees-2026/): Answer-first guide & calculator.
 - [FAQ: Intercom Fin AI Cost Calculator (2026)]({SITE_ORIGIN}/faq/intercom-fin-ai-cost-calculator/): Answer-first guide & calculator.
 - [FAQ: Stripe vs. Paddle vs. Whop True Cost (2026)]({SITE_ORIGIN}/faq/stripe-vs-paddle-true-cost/): Answer-first guide & calculator.
+- [Jotform Wix App Setup & Pricing Guide (2026)]({SITE_ORIGIN}/guides/jotform-wix-app-setup-and-pricing-guide/): Step-by-step Wix App installation walkthrough, live B2B quote demo, and tier calculator.
+- [Jotform Pricing Tier Calculator (2026)]({SITE_ORIGIN}/pricing/jotform-pricing-tier-calculator/): Starter (Free), Bronze ($34/mo), Silver ($39/mo), and Gold ($99/mo HIPAA BAA) Year-1 calculator.
 - [Full Machine-Readable Dataset (llms-full.txt)]({SITE_ORIGIN}/llms-full.txt): Complete JSON/Markdown dump of all audited tools, rates, and sources.
 """
     with open(os.path.join(PUBLIC_DIR, "llms.txt"), "w") as f:

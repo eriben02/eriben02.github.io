@@ -2444,6 +2444,112 @@ hr.editorial-rule {
   line-height: 1.45;
 }
 
+
+/* =========================================================
+   Jotform Wix Guide & Partnership Disclosure Components
+   ========================================================= */
+.partnership-disclosure-box {
+  background: #F2F6F1;
+  border: 1px solid #B8C9BA;
+  border-left: 4px solid #3D5240;
+  border-radius: 6px;
+  padding: 12px 16px;
+  margin: 14px 0 6px 0;
+}
+
+.partnership-badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.hashtag-pill {
+  display: inline-block;
+  background: #20231F;
+  color: #FFFFFF;
+  font-family: var(--mono);
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 999px;
+  letter-spacing: 0.01em;
+}
+
+.partnership-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #2E5A36;
+}
+
+.guide-step-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  padding: 20px 22px;
+  margin-bottom: 22px;
+}
+
+.guide-step-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 12px;
+  margin-bottom: 10px;
+}
+
+.guide-step-header h3 {
+  margin: 0;
+  font-size: 1.18rem;
+  color: #20231F;
+}
+
+.guide-step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #3D5240;
+  color: #FFFFFF;
+  font-family: var(--sans);
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.guide-dual-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.guide-figure {
+  margin: 12px 0 0 0;
+  background: #FAF9F5;
+  border: 1px solid #DFDDD6;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.guide-figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-bottom: 1px solid #E5E3DC;
+}
+
+.guide-figure figcaption {
+  padding: 9px 12px;
+  font-size: 0.8rem;
+  color: #4A4F48;
+  line-height: 1.4;
+}
+
 /* =========================================================
    Mobile Polish & Responsive Overrides (320px–768px)
    ========================================================= */

@@ -38,6 +38,8 @@ def render_related_links(rel_path, prefix):
         ("exit/stripe-shopify-paddle-frozen-funds-alternatives/index.html", "Stripe, Shopify & Paddle Reserve & Hold Simulator", "Model 25% rolling reserves and compare Merchant of Record token portability."),
         ("exit/paypal-180-day-permanent-limitation-fund-recovery/index.html", "PayPal 180-Day Hold & Working Capital Calculator", "Calculate frozen cashflow impact and multi-processor failover with Whop."),
         ("compare/typeform-vs-jotform-response-limit-and-hipaa-cost/index.html", "Typeform vs. Jotform Response Limit & HIPAA Cost", "Compare Typeform response tiers & Enterprise BAA vs. Jotform Gold ($99/mo)."),
+        ("guides/jotform-wix-app-setup-and-pricing-guide/index.html", "Jotform Wix App Setup & B2B Quote Form Guide (2026)", "5-step visual & video walkthrough for embedding Jotform on Wix plus tier pricing."),
+        ("pricing/jotform-pricing-tier-calculator/index.html", "Jotform Pricing Tier Calculator (2026)", "Compare Starter (Free), Bronze ($34/mo), Silver ($39/mo) & Gold HIPAA ($99/mo)."),
         ("pricing/docusign-envelope-allowance-and-api-overage-calculator/index.html", "DocuSign 100-Envelope Cap & Overage Calculator", "Expose the 100 envelopes/user/yr cap vs. PandaDoc & Jotform Sign."),
         ("compliance/hipaa-baa-and-soc2-pricing-tiers/index.html", "HIPAA BAA & SOC 2 + CPA Auditor Cost Calculator", "Compare self-serve HIPAA BAA plans and negotiated Vanta/Drata + CPA costs."),
         ("compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/index.html", "Google Workspace vs. Microsoft 365 HIPAA BAA Calculator", "Cheapest BAA-eligible edition per suite ($7 entry), Vault/archiving gaps and form intake costs."),
@@ -224,7 +226,7 @@ def render_page(rel_path, title, description, canonical_path, body_html, faqs=No
   <meta name="dcterms.modified" content="{iso_datetime}" />
   <meta name="dcterms.issued" content="{pub_date}" />
   <link rel="canonical" href="{SITE_ORIGIN}{canonical_path}" />
-  <link rel="stylesheet" href="{prefix}assets/styles.css?v=20261027b" />
+  <link rel="stylesheet" href="{prefix}assets/styles.css?v=20261027c" />
   <link rel="alternate" type="text/plain" href="{SITE_ORIGIN}/llms.txt" title="SaaSBill LLMs.txt Summary" />
   <!-- Privacy-friendly analytics by Plausible -->
   <script defer data-domain="saasbill.io" src="https://plausible.io/js/pa-VAaSVNs5XOobt9cv2UtKo.js"></script>

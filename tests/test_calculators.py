@@ -291,6 +291,8 @@ class TestSaaSBillCalculators(unittest.TestCase):
             "faq/does-hubspot-charge-onboarding-fees-2026/index.html",
             "faq/intercom-fin-ai-cost-calculator/index.html",
             "faq/stripe-vs-paddle-true-cost/index.html",
+            "guides/jotform-wix-app-setup-and-pricing-guide/index.html",
+            "pricing/jotform-pricing-tier-calculator/index.html",
         ]
         summary_ids = {
             "index.html": "wb-result-mount",
@@ -311,6 +313,8 @@ class TestSaaSBillCalculators(unittest.TestCase):
             "faq/does-hubspot-charge-onboarding-fees-2026/index.html": "faq-hs-summary",
             "faq/intercom-fin-ai-cost-calculator/index.html": "faq-ic-summary",
             "faq/stripe-vs-paddle-true-cost/index.html": "faq-sp-summary",
+            "guides/jotform-wix-app-setup-and-pricing-guide/index.html": "jw-summary",
+            "pricing/jotform-pricing-tier-calculator/index.html": "jf-tier-summary",
         }
         forbidden_phrases = [
             "Partner link",
@@ -519,6 +523,8 @@ class TestSaaSBillCalculators(unittest.TestCase):
             "faq/does-hubspot-charge-onboarding-fees-2026/index.html",
             "faq/intercom-fin-ai-cost-calculator/index.html",
             "faq/stripe-vs-paddle-true-cost/index.html",
+            "guides/jotform-wix-app-setup-and-pricing-guide/index.html",
+            "pricing/jotform-pricing-tier-calculator/index.html",
         ]
         for rel in pages:
             full_path = os.path.join(PUBLIC_DIR, rel)
@@ -579,7 +585,7 @@ class TestSaaSBillCalculators(unittest.TestCase):
 
         with open(os.path.join(PUBLIC_DIR, "sitemap.xml"), encoding="utf-8") as f:
             sitemap = f.read()
-        self.assertEqual(sitemap.count("<url><loc>"), 18)
+        self.assertEqual(sitemap.count("<url><loc>"), 20)
 
         faq_pages = [
             "faq/does-hubspot-charge-onboarding-fees-2026/index.html",
@@ -809,6 +815,8 @@ class TestSaaSBillCalculators(unittest.TestCase):
             "faq/does-hubspot-charge-onboarding-fees-2026/index.html",
             "faq/intercom-fin-ai-cost-calculator/index.html",
             "faq/stripe-vs-paddle-true-cost/index.html",
+            "guides/jotform-wix-app-setup-and-pricing-guide/index.html",
+            "pricing/jotform-pricing-tier-calculator/index.html",
         ]
         for rel in pages:
             with open(os.path.join(PUBLIC_DIR, rel), encoding="utf-8") as f:
@@ -836,6 +844,43 @@ class TestSaaSBillCalculators(unittest.TestCase):
             index_html = f.read()
         self.assertIn("function equalizeSummaryCards(stripEl)", index_html)
         self.assertIn("equalizeSummaryCards(summaryEl);", index_html)
+
+
+
+    def test_jotform_wix_app_campaign_guide_and_tier_calculator(self):
+        """Verify /guides/jotform-wix-app-setup-and-pricing-guide/ satisfies all Jotform $200 Creator Campaign requirements."""
+        guide_rel = "guides/jotform-wix-app-setup-and-pricing-guide/index.html"
+        calc_rel = "pricing/jotform-pricing-tier-calculator/index.html"
+        with open(os.path.join(PUBLIC_DIR, guide_rel), encoding="utf-8") as f:
+            html = f.read()
+        for required_token in [
+            "#JotformPartner",
+            "https://www.jotform.com/?partner=eriben02",
+            "https://www.wix.com/app-market/web-solution/jotform",
+            "https://info149840.wixsite.com/my-site-1",
+            "https://form.jotform.com/262996430206056",
+            "jotform-wix-app-walkthrough.mp4",
+            "step1-jotform-builder.webp",
+            "step2a-wix-app-market.webp",
+            "step2b-wix-permissions.webp",
+            "step3a-wix-editor-connect.webp",
+            "step3b-wix-form-selected.webp",
+            "step4a-live-wix-submission.webp",
+            "step4b-thank-you-confirmation.webp",
+            "step5-jotform-tables-verified.webp",
+            "/compare/typeform-vs-jotform-response-limit-and-hipaa-cost/",
+            "/pricing/jotform-pricing-tier-calculator/",
+        ]:
+            self.assertIn(required_token, html, f"Missing '{required_token}' in {guide_rel}")
+        for bad in ["—", "&mdash;", "SaaSTruth", "Erik", "Bengtsson"]:
+            self.assertNotIn(bad, html, f"Forbidden token '{bad}' in {guide_rel}")
+
+        with open(os.path.join(PUBLIC_DIR, calc_rel), encoding="utf-8") as f:
+            calc_html = f.read()
+        self.assertIn("https://www.jotform.com/?partner=eriben02", calc_html)
+        self.assertIn("/guides/jotform-wix-app-setup-and-pricing-guide/", calc_html)
+        for bad in ["—", "&mdash;", "SaaSTruth", "Erik", "Bengtsson"]:
+            self.assertNotIn(bad, calc_html, f"Forbidden token '{bad}' in {calc_rel}")
 
 
 if __name__ == "__main__":
