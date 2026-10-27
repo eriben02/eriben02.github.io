@@ -217,7 +217,8 @@ h3 {
 
 .prefill-badge {
   display: inline-block;
-  font-family: var(--mono);
+  font-family: var(--sans);
+  font-variant-numeric: tabular-nums;
   font-size: 0.73rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -351,7 +352,8 @@ h3 {
 }
 
 .val-pill {
-  font-family: var(--mono);
+  font-family: var(--sans);
+  font-variant-numeric: tabular-nums;
   color: var(--text);
   background: var(--surface-2);
   border: 1px solid var(--border-strong);
@@ -377,6 +379,23 @@ h3 {
   flex-direction: column;
   justify-content: space-between;
   gap: 6px;
+  min-width: 0;
+}
+
+#calc-summary-strip,
+.verdict-section .summary-strip {
+  align-items: start;
+}
+
+#calc-summary-strip .summary-card,
+.verdict-section .summary-card {
+  justify-content: flex-start;
+}
+
+#calc-summary-strip .summary-actions,
+.verdict-section .summary-actions {
+  align-items: flex-start;
+  align-content: flex-start;
 }
 
 .summary-card.card-lowest {
@@ -401,9 +420,11 @@ h3 {
 }
 
 .summary-metric {
-  font-family: var(--mono);
-  font-size: 1.16rem;
+  font-family: var(--serif);
+  font-size: 1.48rem;
   font-weight: 700;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
   color: var(--text);
   line-height: 1.3;
 }
@@ -416,7 +437,8 @@ h3 {
 }
 
 .summary-breakdown {
-  font-family: var(--mono);
+  font-family: var(--sans);
+  font-variant-numeric: tabular-nums;
   font-size: 0.78rem;
   color: var(--text);
   background: var(--surface-2);
@@ -570,13 +592,15 @@ h3 {
 }
 
 .viz-breakdown-text {
-  font-family: var(--mono);
+  font-family: var(--sans);
+  font-variant-numeric: tabular-nums;
   font-size: 0.73rem;
   color: var(--muted);
 }
 
 .viz-total-label {
-  font-family: var(--mono);
+  font-family: var(--sans);
+  font-variant-numeric: tabular-nums;
   font-weight: 700;
   font-size: 0.88rem;
   text-align: right;
@@ -631,7 +655,8 @@ h3 {
 /* Verification Status Badges & Source Links */
 .status-pill {
   display: inline-block;
-  font-family: var(--mono);
+  font-family: var(--sans);
+  font-variant-numeric: tabular-nums;
   font-size: 0.7rem;
   font-weight: 600;
   padding: 1px 6px;
@@ -654,7 +679,8 @@ h3 {
 
 .source-inline {
   display: block;
-  font-family: var(--mono);
+  font-family: var(--sans);
+  font-variant-numeric: tabular-nums;
   font-size: 0.73rem;
   color: var(--muted);
   margin-top: 6px;
@@ -676,12 +702,13 @@ h3 {
   flex-direction: column;
   align-items: flex-start;
   gap: 3px;
+  max-width: 100%;
 }
 
 .direct-link-tag {
   display: block;
   font-size: 0.7rem;
-  font-family: var(--mono);
+  font-family: var(--sans);
   color: var(--muted);
   line-height: 1.25;
 }
@@ -768,7 +795,8 @@ tr:hover td { background: var(--surface-subtle); }
 .badge {
   display: inline-block;
   font-size: 0.78rem;
-  font-family: var(--mono);
+  font-family: var(--sans);
+  font-variant-numeric: tabular-nums;
   font-weight: 600;
   padding: 2px 8px;
   border-radius: 4px;
@@ -781,15 +809,19 @@ tr:hover td { background: var(--surface-subtle); }
 .btn-cta {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   background: var(--accent);
   color: #FFFFFF;
   border: 1px solid var(--accent);
   font-weight: 600;
-  font-size: 0.84rem;
-  padding: 8px 14px;
+  font-size: 0.83rem;
+  line-height: 1.3;
+  padding: 8px 13px;
   border-radius: 6px;
   text-decoration: none;
-  white-space: nowrap;
+  text-align: center;
+  white-space: normal;
+  max-width: 100%;
   transition: background 0.15s ease, border-color 0.15s ease;
 }
 .btn-cta:hover {
@@ -806,15 +838,19 @@ tr:hover td { background: var(--surface-subtle); }
 .btn-secondary {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   background: var(--surface);
   color: var(--accent-hover);
   border: 1px solid var(--accent);
   font-weight: 600;
-  font-size: 0.82rem;
-  padding: 7px 13px;
+  font-size: 0.83rem;
+  line-height: 1.3;
+  padding: 8px 13px;
   border-radius: 6px;
   text-decoration: none;
-  white-space: nowrap;
+  text-align: center;
+  white-space: normal;
+  max-width: 100%;
   transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 .btn-secondary:hover {
@@ -902,7 +938,8 @@ tr:hover td { background: var(--surface-subtle); }
 }
 
 .price-highlight {
-  font-family: var(--mono);
+  font-family: var(--sans);
+  font-variant-numeric: tabular-nums;
   font-size: 1.05rem;
   font-weight: 700;
   color: var(--text);
@@ -1205,6 +1242,85 @@ footer.site-footer {
   border-color: #CFCBC0;
 }
 
+/* Unified Inspector Tray (4) + Dynamic Left Margin Rail (6) */
+.unified-inspector-tray {
+  position: relative;
+  background: #E8EEE6;
+  border: 1.5px solid #C5D0C4;
+  border-radius: 12px;
+  padding: 22px 22px 24px 40px;
+  margin: 0 0 56px 0;
+}
+
+.inspector-left-rail {
+  position: absolute;
+  left: 14px;
+  top: 0;
+  width: 26px;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+  transition: opacity 0.18s ease;
+}
+
+.unified-inspector-tray .calc-box.editorial-workbench {
+  background: #FFFFFF;
+  border: 1px solid #C5C2B8;
+  border-left: 4px solid #536B56;
+  border-radius: 6px;
+  padding: 24px 24px 26px;
+  margin: 0 0 22px 0;
+  box-shadow: 0 1px 3px rgba(32, 35, 31, 0.04);
+}
+
+/* Keep the original 992px outer tray width while creating generous 28px gaps inside the card by making the left controls/dropdown column compact (216px) */
+.unified-inspector-tray .workbench-grid {
+  grid-template-columns: 196px 330px minmax(0, 1fr);
+  column-gap: 24px;
+  justify-content: stretch;
+}
+
+.unified-inspector-tray .wb-vbar-row {
+  grid-template-columns: 118px minmax(0, 1fr);
+}
+
+.unified-inspector-tray .wb-tool-select {
+  max-width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 0 26px 0 10px;
+  font-size: 0.84rem;
+}
+
+.unified-inspector-tray .wb-slider-row {
+  grid-template-columns: 1fr 54px;
+  gap: 10px;
+}
+
+.unified-inspector-tray .hidden-gap-section {
+  margin: 0;
+}
+
+.unified-inspector-tray .table-wrap.editorial-gap-table {
+  background: #FFFFFF;
+  border: 1px solid #C5C2B8;
+  border-radius: 6px;
+}
+
+.unified-inspector-tray .table-wrap.editorial-gap-table td {
+  background: #FFFFFF;
+  transition: background-color 220ms ease, box-shadow 220ms ease;
+}
+
+.unified-inspector-tray .table-wrap.editorial-gap-table tr.is-spotlight-row td {
+  background: #EBF0E9;
+}
+
+.unified-inspector-tray .table-wrap.editorial-gap-table tr.is-spotlight-row td:first-child {
+  box-shadow: inset 4px 0 0 #536B56;
+}
+
 /* 3-Column Interactive Workbench directly on Cream Paper */
 .calc-box.editorial-workbench {
   background: transparent;
@@ -1216,7 +1332,8 @@ footer.site-footer {
 
 .workbench-grid {
   display: grid;
-  grid-template-columns: 280px 368px 282px;
+  grid-template-columns: minmax(196px, 250px) minmax(300px, 340px) minmax(250px, 1fr);
+  column-gap: 24px;
   justify-content: space-between;
   align-items: start;
 }
@@ -1229,6 +1346,11 @@ footer.site-footer {
   letter-spacing: 0.09em;
   color: #3A3F38;
   margin-bottom: 24px;
+  height: 18px;
+  line-height: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Left Column: Clean Sliders with Zero Layout Shift */
@@ -1325,8 +1447,8 @@ footer.site-footer {
 }
 
 .wb-quiet-options {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  align-items: flex-start;
   gap: 12px;
   padding-top: 10px;
   border-top: 1px solid #EAE7DF;
@@ -1338,6 +1460,8 @@ footer.site-footer {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  width: 132px;
+  max-width: 100%;
 }
 
 .wb-quiet-field label {
@@ -1369,15 +1493,16 @@ footer.site-footer {
   height: 310px;
   min-height: 310px;
   max-height: 310px;
+  overflow: hidden;
 }
 
 .wb-vbar-row {
   display: grid;
-  grid-template-columns: 148px 220px;
+  grid-template-columns: 118px minmax(0, 1fr);
   align-items: stretch;
-  min-height: 46px;
-  overflow: visible;
-  transition: flex-grow 140ms ease-out;
+  min-height: 0;
+  overflow: hidden;
+  transition: flex 160ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .wb-vbar-block {
@@ -1386,7 +1511,7 @@ footer.site-footer {
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 4px 10px;
+  padding: 4px 6px;
   color: #FFFFFF;
   overflow: hidden;
   white-space: nowrap;
@@ -1426,7 +1551,7 @@ footer.site-footer {
 
 .wb-block-amount {
   font-family: var(--sans);
-  font-size: 1.04rem;
+  font-size: clamp(0.84rem, 1.05vw, 0.98rem);
   font-weight: 700;
   line-height: 1.1;
   margin-top: 0;
@@ -1449,25 +1574,30 @@ footer.site-footer {
 }
 
 .wb-callout-text {
-  overflow: visible;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .wb-callout-text strong {
   display: block;
-  font-size: 0.81rem;
+  font-size: 0.80rem;
   font-weight: 700;
   color: #20231F;
   line-height: 1.2;
-  white-space: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .wb-callout-text span {
   display: block;
-  font-size: 0.74rem;
+  font-size: 0.73rem;
   color: #5A6058;
-  line-height: 1.25;
+  line-height: 1.22;
   margin-top: 2px;
-  white-space: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 
@@ -1477,9 +1607,15 @@ footer.site-footer {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  min-height: 310px;
+  height: auto;
+  min-height: 352px;
+  max-height: none;
   min-width: 0;
   max-width: 100%;
+}
+
+.wb-result-col .cta-stack {
+  margin-top: auto;
 }
 
 .wb-selected-product {
@@ -1499,25 +1635,33 @@ footer.site-footer {
 }
 
 .wb-big-total {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 6px;
+  row-gap: 2px;
   font-family: var(--serif);
-  font-size: clamp(2.5rem, 3.6vw, 3.35rem);
+  font-size: clamp(1.95rem, 2.5vw, 2.4rem);
   font-weight: 700;
-  line-height: 1.04;
+  line-height: 1.06;
   letter-spacing: -0.03em;
   color: #20231F;
   margin: 0 0 14px 0;
   font-variant-numeric: tabular-nums;
-  white-space: nowrap;
+  white-space: normal;
+  overflow-wrap: anywhere;
   width: 100%;
+  max-width: 100%;
 }
 
 .wb-big-total .wb-per-year {
   font-family: var(--serif);
   font-weight: 400;
-  font-size: 0.52em;
+  font-size: 0.48em;
   letter-spacing: -0.01em;
   color: #2A2E29;
-  margin-left: 2px;
+  margin-left: 0;
+  white-space: nowrap;
 }
 
 .wb-budget-quote {
@@ -1529,16 +1673,14 @@ footer.site-footer {
 }
 
 .wb-budget-subnote {
-  font-size: 0.78rem;
-  line-height: 1.4;
-  color: #686E66;
+  font-size: 0.80rem;
+  line-height: 1.48;
+  color: #5C625A;
   margin: 0 0 20px 0;
-  max-width: 330px;
-  height: 36px;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+  max-width: 350px;
+  min-height: 44px;
+  overflow: visible;
+  display: block;
   font-variant-numeric: tabular-nums;
 }
 
@@ -1551,15 +1693,19 @@ footer.site-footer {
   border: 1px solid #647A65;
   color: #FFFFFF;
   font-family: var(--sans);
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  padding: 14px 20px;
+  letter-spacing: 0.05em;
+  line-height: 1.35;
+  padding: 13px 12px;
   border-radius: 3px;
   text-decoration: none;
   width: 100%;
+  max-width: 100%;
   justify-content: center;
+  text-align: center;
+  white-space: normal;
 }
 
 .wb-primary-cta.btn-cta:hover {
@@ -1582,7 +1728,7 @@ hr.editorial-rule {
 
 /* THE HIDDEN COST GAP: Airy Editorial Reference Table */
 .hidden-gap-section {
-  margin: 0 0 56px;
+  margin: 18px 0 56px;
 }
 
 .gap-eyebrow {
@@ -1604,10 +1750,48 @@ hr.editorial-rule {
   margin: 0 0 8px 0;
 }
 
+.gap-toolbar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.unified-inspector-tray #sort-control-group {
+  margin-left: 28px;
+}
+
 .gap-subhead {
-  font-size: 1.02rem;
+  font-size: 0.98rem;
   color: #4A4F48;
-  margin-bottom: 26px;
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.gap-sort-field {
+  flex-shrink: 0;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  margin-right: 7px;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+
+.legend-dot.dot-sticker {
+  background: #536B56;
+  box-shadow: 0 0 0 2px rgba(83, 107, 86, 0.18);
+}
+
+.legend-dot.dot-hidden {
+  background: #C85A28;
+  box-shadow: 0 0 0 2px rgba(200, 90, 40, 0.18);
 }
 
 .table-wrap.editorial-gap-table {
@@ -1739,12 +1923,630 @@ hr.editorial-rule {
 }
 
 @media (max-width: 960px) {
+  .unified-inspector-tray {
+    padding: 18px;
+  }
+  .inspector-left-rail {
+    display: none;
+  }
+  .unified-inspector-tray .workbench-grid,
   .workbench-grid {
     grid-template-columns: 1fr;
     gap: 32px;
   }
   .wb-result-col {
     padding-top: 4px;
+    height: auto;
     min-height: auto;
+    max-height: none;
+  }
+  .wb-callout-text strong,
+  .unified-inspector-tray .wb-callout-text strong {
+    white-space: nowrap;
+    font-size: 0.68rem;
+  }
+  .wb-callout-text span,
+  .unified-inspector-tray .wb-callout-text span {
+    white-space: nowrap;
+    font-size: 0.62rem;
+  }
+}
+
+/* =========================================================
+   FT / Economist Editorial Horizontal Bar Chart Card
+   ========================================================= */
+.editorial-bar-chart-card {
+  background: #FAF8F3;
+  border: 1px solid #E2DDD3;
+  border-top: 3px solid #20231F;
+  border-radius: 8px;
+  padding: 22px 24px;
+  margin: 28px 0 34px;
+}
+
+.ebc-kicker {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #5A6058;
+  margin-bottom: 6px;
+}
+
+.editorial-bar-chart-card .ebc-title {
+  font-family: var(--serif);
+  font-size: clamp(1.32rem, 2.2vw, 1.68rem);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: #20231F;
+  margin: 0 0 6px 0;
+}
+
+.ebc-subtitle {
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  color: #4A4F48;
+  line-height: 1.45;
+  margin: 0 0 20px 0;
+}
+
+.ebc-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 14px 0;
+  border-top: 1px solid #E5E1D8;
+  border-bottom: 1px solid #E5E1D8;
+}
+
+.ebc-row {
+  display: grid;
+  grid-template-columns: 245px minmax(0, 1fr) minmax(128px, auto);
+  align-items: center;
+  gap: 16px;
+  padding: 6px 8px;
+  border-radius: 6px;
+}
+
+.ebc-row-sage {
+  background: rgba(61, 82, 64, 0.06);
+}
+
+.ebc-row-terracotta {
+  background: rgba(184, 74, 57, 0.06);
+}
+
+.ebc-label-col {
+  min-width: 0;
+}
+
+.ebc-tool-name {
+  font-family: var(--sans);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #20231F;
+  line-height: 1.25;
+}
+
+.ebc-tool-name a {
+  color: #3D5240;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.ebc-tool-name a:hover {
+  color: #20231F;
+}
+
+.ebc-tool-meta {
+  font-family: var(--sans);
+  font-size: 0.76rem;
+  color: #5A6058;
+  line-height: 1.3;
+  margin-top: 2px;
+}
+
+.ebc-bar-col {
+  min-width: 0;
+}
+
+.ebc-bar-track {
+  width: 100%;
+  height: 24px;
+  background: #EDEAE2;
+  border-radius: 3px;
+  overflow: hidden;
+  display: flex;
+  align-items: stretch;
+}
+
+.ebc-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  display: flex;
+  overflow: hidden;
+}
+
+.ebc-fill-neutral {
+  background: #7A8278;
+}
+
+.ebc-fill-sage {
+  background: #3D5240;
+}
+
+.ebc-fill-slate {
+  background: #2C302B;
+}
+
+.ebc-fill-terracotta {
+  background: #B84A39;
+}
+
+.ebc-bar-seg-seats {
+  display: block;
+  height: 100%;
+  background: #C96A5B;
+  border-right: 1.5px solid #FAF8F3;
+}
+
+.ebc-bar-seg-onb {
+  display: block;
+  height: 100%;
+  background: #B84A39;
+}
+
+.ebc-val-col {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.ebc-val-main {
+  display: block;
+  font-family: var(--sans);
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #20231F;
+  line-height: 1.2;
+}
+
+.ebc-val-sage {
+  color: #3D5240;
+}
+
+.ebc-val-terracotta {
+  color: #B84A39;
+}
+
+.ebc-val-sub {
+  display: block;
+  font-family: var(--sans);
+  font-size: 0.73rem;
+  color: #5A6058;
+  margin-top: 1px;
+}
+
+.ebc-controls-grid {
+  margin-bottom: 18px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #E5E1D8;
+}
+
+.ebc-action-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 16px;
+  padding: 14px 0 4px;
+}
+
+.btn-affiliate {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #3D5240;
+  color: #FFFFFF;
+  border: 1px solid #3D5240;
+  border-radius: 6px;
+  padding: 9px 16px;
+  font-family: var(--sans);
+  font-size: 0.86rem;
+  font-weight: 600;
+  line-height: 1.35;
+  text-align: center;
+  text-decoration: none;
+  white-space: normal;
+  max-width: 100%;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-affiliate:hover {
+  background: #2E3F30;
+  border-color: #2E3F30;
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.ebc-secondary-link {
+  font-family: var(--sans);
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: #4A4F48;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.ebc-secondary-link:hover {
+  color: #20231F;
+}
+
+.ebc-footer-note {
+  font-family: var(--sans);
+  font-size: 0.76rem;
+  color: #5A6058;
+  line-height: 1.45;
+  margin: 12px 0 0 0;
+}
+
+/* =========================================================
+   Progressive Disclosure ("See calculation") & 4-Step Result Hierarchy
+   ========================================================= */
+.calc-disclosure {
+  width: 100%;
+  margin: 4px 0 12px 0;
+  border: 1px solid #D5DBD3;
+  border-radius: 5px;
+  background: #F6F8F5;
+}
+
+.calc-disclosure-toggle {
+  list-style: none;
+  cursor: pointer;
+  padding: 7px 11px;
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #3D5240;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  user-select: none;
+}
+
+.calc-disclosure-toggle::-webkit-details-marker {
+  display: none;
+}
+
+.calc-disclosure-toggle::after {
+  content: "+";
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: #536B56;
+  line-height: 1;
+}
+
+.calc-disclosure[open] .calc-disclosure-toggle {
+  border-bottom: 1px solid #DCE2DA;
+  background: #EDF2EB;
+}
+
+.calc-disclosure[open] .calc-disclosure-toggle::after {
+  content: "−";
+}
+
+.calc-disclosure-body {
+  padding: 9px 11px;
+  font-size: 0.76rem;
+  color: #20231F;
+}
+
+.calc-math-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-variant-numeric: tabular-nums;
+}
+
+.calc-math-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px dashed #DCE2DA;
+}
+
+.calc-math-label {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.calc-math-label strong {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #20231F;
+}
+
+.calc-math-formula {
+  font-family: var(--mono);
+  font-size: 0.71rem;
+  color: #525850;
+  overflow-wrap: anywhere;
+}
+
+.calc-math-val {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #20231F;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.calc-math-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  padding-top: 4px;
+  font-weight: 700;
+  font-size: 0.80rem;
+  color: #20231F;
+}
+
+.calc-math-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  padding-top: 4px;
+  font-size: 0.72rem;
+  color: #525850;
+}
+
+.verdict-section {
+  margin: 0 0 18px 0;
+}
+
+.unified-inspector-tray .viz-panel {
+  background: #FFFFFF;
+  border: 1px solid #C5C2B8;
+  border-radius: 6px;
+  margin: 0 0 18px 0;
+}
+
+.viz-row.is-spotlight-row {
+  background: #EBF0E9;
+  border-radius: 5px;
+  padding: 6px 8px;
+  box-shadow: inset 3px 0 0 #536B56;
+}
+
+.full-table-disclosure {
+  background: #FFFFFF;
+  border: 1px solid #C5C2B8;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.full-table-summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  background: #FFFFFF;
+  transition: background 0.15s ease;
+}
+
+.full-table-summary::-webkit-details-marker {
+  display: none;
+}
+
+.full-table-summary:hover {
+  background: #F6F8F5;
+}
+
+.full-table-summary-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.hidden-gap-section .full-table-heading {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #20231F;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.full-table-summary-sub {
+  font-size: 0.83rem;
+  color: #525850;
+}
+
+.full-table-toggle-pill {
+  display: inline-flex;
+  align-items: center;
+  background: #E8EEE6;
+  color: #2E5A36;
+  border: 1px solid #B8C9BA;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.full-table-body {
+  padding: 18px 20px 20px;
+  border-top: 1px solid #E5E3DC;
+  background: #FAF9F5;
+}
+
+.calc-affiliate-disclosure {
+  font-size: 0.78rem;
+  color: #525850;
+  margin: 10px 0 0 0;
+  line-height: 1.45;
+}
+
+/* =========================================================
+   Mobile Polish & Responsive Overrides (320px–768px)
+   ========================================================= */
+@media (max-width: 768px) {
+  /* 1. Compact 2-row header on mobile */
+  .brand-tagline {
+    display: none;
+  }
+  .nav-inner {
+    gap: 8px 12px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+  .nav-links {
+    gap: 12px;
+    font-size: 0.82rem;
+  }
+  .byline-bar {
+    font-size: 11px;
+    padding-left: 8px;
+  }
+
+  /* 2. Editorial hero & scenario note wrap cleanly without clipping */
+  .editorial-hero {
+    padding: 28px 0 22px;
+  }
+  .editorial-cat-bar {
+    margin: 0 0 24px;
+    padding-top: 16px;
+  }
+  .editorial-cat-bar .prefill-banner {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    align-items: flex-start;
+    line-height: 1.4;
+  }
+
+  /* 3. Touch-friendly 24x24 slider thumbs & prevent iOS auto-zoom on selects */
+  .wb-slider-row input[type="range"]::-webkit-slider-thumb {
+    width: 24px;
+    height: 24px;
+  }
+  .wb-slider-row input[type="range"]::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+  }
+  .unified-inspector-tray .wb-tool-select,
+  .wb-tool-select,
+  .wb-quiet-field select,
+  .control-group select {
+    font-size: 16px;
+  }
+
+  .unified-inspector-tray {
+    padding: 12px;
+    border-radius: 10px;
+  }
+  .unified-inspector-tray .calc-box.editorial-workbench {
+    padding: 16px 14px 18px;
+    margin-bottom: 18px;
+  }
+  .unified-inspector-tray #sort-control-group {
+    margin-left: 18px;
+  }
+  /* 4. Fluid stacked bar width on 320px–390px screens (no 368px overflow) */
+  .unified-inspector-tray .wb-vbar-row,
+  .wb-vbar-row {
+    grid-template-columns: 118px minmax(0, 1fr);
+  }
+  .wb-block-amount {
+    font-size: 0.96rem;
+  }
+  .wb-callout-item {
+    grid-template-columns: 16px minmax(0, 1fr);
+    gap: 8px;
+  }
+  .wb-leader-line {
+    width: 16px;
+  }
+  .wb-budget-subnote {
+    height: auto;
+    min-height: 0;
+    max-width: 100%;
+    overflow: visible;
+  }
+
+  /* 5. Editorial gap table & all mobile-cards tables: clean card spacing on mobile */
+  .unified-inspector-tray .table-wrap.editorial-gap-table.mobile-cards,
+  .table-wrap.editorial-gap-table.mobile-cards {
+    border: none;
+    background: transparent;
+  }
+  .table-wrap.editorial-gap-table.mobile-cards tr {
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+  }
+  .table-wrap.editorial-gap-table.mobile-cards td {
+    padding: 8px 0;
+    border-right: none;
+    border-bottom: 1px dashed var(--border);
+    background: transparent;
+  }
+  .table-wrap.editorial-gap-table.mobile-cards tr.is-spotlight-row td {
+    background: transparent;
+  }
+  .table-wrap.editorial-gap-table.mobile-cards tr.is-spotlight-row {
+    background: #EBF0E9;
+    border-color: #536B56;
+  }
+  .table-wrap.editorial-gap-table.mobile-cards td:last-child {
+    border-bottom: none;
+    padding-top: 12px;
+  }
+
+  /* 6. FT / Economist Horizontal Bar Chart responsive layout on 320px–768px */
+  .editorial-bar-chart-card {
+    padding: 16px 14px;
+    margin: 22px 0 26px;
+  }
+  .ebc-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 6px 10px;
+    padding: 8px 6px;
+  }
+  .ebc-label-col {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+  }
+  .ebc-val-col {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    align-self: start;
+  }
+  .ebc-bar-col {
+    grid-column: 1 / -1;
+    grid-row: 2 / 3;
+  }
+  .ebc-bar-track {
+    height: 18px;
   }
 }
