@@ -902,6 +902,7 @@ class TestSaaSBillCalculators(unittest.TestCase):
             self.assertIn('id="seat-slider" min="1" max="50" value="10"', html)
             self.assertIn('id="ai-slider" min="0" max="5000" step="100" value="1500"', html)
             self.assertIn("let currentSpotlightId = 'intercom-fin-ai';", html)
+            self.assertIn("See what Intercom Fin actually costs for your team. Adjust the agents and AI volume below to see your real Year-1 total and how it compares to Freshdesk and Zendesk.", html)
             self.assertIn('id="wb-big-amount">$21,300</span>', html)
             self.assertIn('id="wb-best-option"', html)
             self.assertIn('id="wb-calc-details"', html)

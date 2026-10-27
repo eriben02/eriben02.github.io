@@ -18,7 +18,7 @@ def render_intercom_calculator_body(prefix="../"):
     return f"""
 <section class="hero">
   <h1>Intercom Fin AI Cost Calculator (2026): True Year-1 Price at $0.99 per Resolution</h1>
-  <p class="lead">Intercom charges $0.99 for every customer conversation resolved by Fin AI on top of monthly agent seat licenses ($29 to $132/seat/month billed annually). For a 10-agent support team resolving 1,500 AI conversations a month, Fin AI adds $17,820/year to a $3,480 base seat bill ($21,300/year total), compared with $10,855/year on Freshdesk using predictable session packs.</p>
+  <p class="lead">See what Intercom Fin actually costs for your team. Adjust the agents and AI volume below to see your real Year-1 total and how it compares to Freshdesk and Zendesk.</p>
 </section>
 
 <div class="unified-inspector-tray" id="unified-inspector-tray">
