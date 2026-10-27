@@ -1915,6 +1915,191 @@ hr.editorial-rule {
 }
 
 /* =========================================================
+   FT / Economist Editorial Horizontal Bar Chart Card
+   ========================================================= */
+.editorial-bar-chart-card {
+  background: #FAF8F3;
+  border: 1px solid #E2DDD3;
+  border-top: 3px solid #20231F;
+  border-radius: 8px;
+  padding: 22px 24px;
+  margin: 28px 0 34px;
+}
+
+.ebc-kicker {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #5A6058;
+  margin-bottom: 6px;
+}
+
+.editorial-bar-chart-card .ebc-title {
+  font-family: var(--serif);
+  font-size: clamp(1.32rem, 2.2vw, 1.68rem);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: #20231F;
+  margin: 0 0 6px 0;
+}
+
+.ebc-subtitle {
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  color: #4A4F48;
+  line-height: 1.45;
+  margin: 0 0 20px 0;
+}
+
+.ebc-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 14px 0;
+  border-top: 1px solid #E5E1D8;
+  border-bottom: 1px solid #E5E1D8;
+}
+
+.ebc-row {
+  display: grid;
+  grid-template-columns: 245px minmax(0, 1fr) 128px;
+  align-items: center;
+  gap: 16px;
+  padding: 6px 8px;
+  border-radius: 6px;
+}
+
+.ebc-row-sage {
+  background: rgba(61, 82, 64, 0.06);
+}
+
+.ebc-row-terracotta {
+  background: rgba(184, 74, 57, 0.06);
+}
+
+.ebc-label-col {
+  min-width: 0;
+}
+
+.ebc-tool-name {
+  font-family: var(--sans);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #20231F;
+  line-height: 1.25;
+}
+
+.ebc-tool-name a {
+  color: #3D5240;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.ebc-tool-name a:hover {
+  color: #20231F;
+}
+
+.ebc-tool-meta {
+  font-family: var(--sans);
+  font-size: 0.76rem;
+  color: #5A6058;
+  line-height: 1.3;
+  margin-top: 2px;
+}
+
+.ebc-bar-col {
+  min-width: 0;
+}
+
+.ebc-bar-track {
+  width: 100%;
+  height: 24px;
+  background: #EDEAE2;
+  border-radius: 3px;
+  overflow: hidden;
+  display: flex;
+  align-items: stretch;
+}
+
+.ebc-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  display: flex;
+  overflow: hidden;
+}
+
+.ebc-fill-neutral {
+  background: #7A8278;
+}
+
+.ebc-fill-sage {
+  background: #3D5240;
+}
+
+.ebc-fill-slate {
+  background: #2C302B;
+}
+
+.ebc-fill-terracotta {
+  background: #B84A39;
+}
+
+.ebc-bar-seg-seats {
+  display: block;
+  height: 100%;
+  background: #C96A5B;
+  border-right: 1.5px solid #FAF8F3;
+}
+
+.ebc-bar-seg-onb {
+  display: block;
+  height: 100%;
+  background: #B84A39;
+}
+
+.ebc-val-col {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.ebc-val-main {
+  display: block;
+  font-family: var(--sans);
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #20231F;
+  line-height: 1.2;
+}
+
+.ebc-val-sage {
+  color: #3D5240;
+}
+
+.ebc-val-terracotta {
+  color: #B84A39;
+}
+
+.ebc-val-sub {
+  display: block;
+  font-family: var(--sans);
+  font-size: 0.73rem;
+  color: #5A6058;
+  margin-top: 1px;
+}
+
+.ebc-footer-note {
+  font-family: var(--sans);
+  font-size: 0.76rem;
+  color: #5A6058;
+  line-height: 1.45;
+  margin: 12px 0 0 0;
+}
+
+/* =========================================================
    Mobile Polish & Responsive Overrides (320px–768px)
    ========================================================= */
 @media (max-width: 768px) {
@@ -2030,5 +2215,32 @@ hr.editorial-rule {
   .table-wrap.editorial-gap-table.mobile-cards td:last-child {
     border-bottom: none;
     padding-top: 12px;
+  }
+
+  /* 6. FT / Economist Horizontal Bar Chart responsive layout on 320px–768px */
+  .editorial-bar-chart-card {
+    padding: 16px 14px;
+    margin: 22px 0 26px;
+  }
+  .ebc-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 6px 10px;
+    padding: 8px 6px;
+  }
+  .ebc-label-col {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+  }
+  .ebc-val-col {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    align-self: start;
+  }
+  .ebc-bar-col {
+    grid-column: 1 / -1;
+    grid-row: 2 / 3;
+  }
+  .ebc-bar-track {
+    height: 18px;
   }
 }
