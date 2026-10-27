@@ -1,11 +1,11 @@
 # SaaSBill (2026 B2B SaaS True-Cost & Contract Trap Directory)
 
 > Independent B2B SaaS pricing, mandatory onboarding fee, seat-bucket minimum, AI resolution tax, and payment processor reserve audit directory.
-> Last Updated / Verified: Oct 27, 2026 (2026-10-27T06:52:42+01:00)
+> Last Updated / Verified: Oct 27, 2026 (2026-10-27T07:07:00+01:00)
 
 ## Freshness & Verification Metadata
 - **datePublished:** 2026-10-25
-- **dateModified:** 2026-10-27T06:52:42+01:00
+- **dateModified:** 2026-10-27T07:07:00+01:00
 - **lastReviewed:** 2026-10-27
 - **Verification Standard:** All pricing schedules, onboarding fees, seat minimums, and reserve clauses are verified against official vendor pricing pages and documented user contract reports on X and Reddit.
 
@@ -17,6 +17,7 @@
 - **HIPAA BAA & SOC 2 Type II Cost Benchmarks (Verified 2026-10-27):** Self-serve HIPAA BAAs are available on **Jotform Gold ($99/mo annual, $1,188/yr, 10,000 submissions/mo)** and **1Password Business ($8.99/user/mo billed annually [$107.88/yr], includes SAML SSO with zero SSO tax)**, whereas Typeform requires an Enterprise contract for HIPAA BAA.
 - **DocuSign 100-Envelope Annual Cap (Verified 2026-10-27):** DocuSign Standard ($25/user/mo annual) and Business Pro ($40/user/mo annual) cap users at **100 sent envelopes per user per year** (~8/mo), charging ~$2.50 per extra envelope, compared with flat/unlimited sending on **Jotform Sign** and **PandaDoc Business ($49/user/mo annual)**.
 - **Gong.io $5,000 Platform Fee & Seat Minimums (Verified 2026-10-27):** Gong.io charges a **$5,000/yr base platform fee** plus **$1,360–$1,600/seat/yr** on top of a separate CRM license (~$23,560/yr for 8 reps incl. CRM), compared with **$9,504/yr** all-in on **Close CRM Growth ($99/seat/mo annual)** with built-in VoIP calling and AI transcripts.
+- **Google Workspace vs. Microsoft 365 HIPAA BAA (Verified 2026-10-27):** Google's HIPAA Business Associate Amendment is accepted by a super admin in the Admin console on paid Workspace editions from **Business Starter ($7/user/mo annual, $8.40 Flexible)**; Vault (retention & legal hold) starts at **Business Plus ($22)**. Microsoft's HIPAA BAA applies by default via the Data Protection Addendum, including **Microsoft 365 Business Basic ($7/user/mo paid yearly since July 1, 2026; was $6)**; holds need **Exchange Online Archiving (+$3)** or **Business Premium ($22)**. Native Google Forms and Microsoft Forms are both on the BAA service lists.
 
 ## Audited Calculator Pages & High-Intent FAQ Guides
 - [Year-1 SaaS True-Cost Calculator Directory](https://saasbill.io/): Interactive calculator across 20 B2B SaaS and payment tools. (Last updated: 2026-10-27)
@@ -33,6 +34,7 @@
 - [Typeform vs. Jotform Response Limit & HIPAA Cost Calculator](https://saasbill.io/compare/typeform-vs-jotform-response-limit-and-hipaa-cost/): Response caps & HIPAA BAA tiers ($99/mo Jotform Gold).
 - [DocuSign 100-Envelope Allowance & Overage Calculator](https://saasbill.io/pricing/docusign-envelope-allowance-and-api-overage-calculator/): 100-envelope annual cap vs. Jotform Sign & PandaDoc.
 - [HIPAA BAA & SOC 2 Type II Pricing Tier Matrix](https://saasbill.io/compliance/hipaa-baa-and-soc2-pricing-tiers/): Self-serve BAA tiers and Vanta/Drata negotiation calculator.
+- [Google Workspace vs. Microsoft 365 HIPAA BAA Guide](https://saasbill.io/compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/): Minimum BAA-eligible editions ($7 entry on both), Vault/archiving gaps and form intake costs.
 - [FAQ: Does HubSpot Charge Onboarding Fees in 2026?](https://saasbill.io/faq/does-hubspot-charge-onboarding-fees-2026/): Answer-first guide & calculator.
 - [FAQ: Intercom Fin AI Cost Calculator (2026)](https://saasbill.io/faq/intercom-fin-ai-cost-calculator/): Answer-first guide & calculator.
 - [FAQ: Stripe vs. Paddle vs. Whop True Cost (2026)](https://saasbill.io/faq/stripe-vs-paddle-true-cost/): Answer-first guide & calculator.
