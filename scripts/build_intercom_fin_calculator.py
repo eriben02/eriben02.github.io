@@ -14,11 +14,11 @@ tools_js = json.dumps(TOOLS)
 aff_js = json.dumps(AFFILIATES)
 
 
-def render_intercom_calculator_body(prefix="../"):
+def render_intercom_calculator_body(prefix="../", h1="Intercom Fin AI Cost Calculator (2026): True Year-1 Price at $0.99 per Resolution", lead="See what Intercom Fin actually costs for your team. Adjust the agents and AI volume below to see your real Year-1 total and how it compares to Freshdesk and Zendesk.", compare_mode="intercom_fin", page_id="intercom-fin-cost-calculator"):
     return f"""
 <section class="hero">
-  <h1>Intercom Fin AI Cost Calculator (2026): True Year-1 Price at $0.99 per Resolution</h1>
-  <p class="lead">See what Intercom Fin actually costs for your team. Adjust the agents and AI volume below to see your real Year-1 total and how it compares to Freshdesk and Zendesk.</p>
+  <h1>{h1}</h1>
+  <p class="lead">{lead}</p>
 </section>
 
 <div class="unified-inspector-tray" id="unified-inspector-tray">
@@ -221,6 +221,8 @@ def render_intercom_calculator_body(prefix="../"):
 <script>
 const TOOLS = {tools_js};
 const AFFILIATES = {aff_js};
+const COMPARE_MODE = {json.dumps(compare_mode)};
+const PAGE_ID = {json.dumps(page_id)};
 
 function calcEffectiveSeats(tool, seats) {{
   if (tool.id === 'monday-crm') {{
@@ -364,9 +366,9 @@ const VENDOR_CTA_LABELS = {{
 }};
 
 const INTERNAL_AUDIT_LINKS = {{
-  'intercom-fin-ai': {{ url: '{prefix}faq/intercom-fin-ai-cost-calculator/', label: 'Read Fin AI billing FAQ →' }},
-  'freshdesk-support': {{ url: '{prefix}pricing/zendesk-ai-resolution-and-automated-outcome-cost/', label: 'Compare vs. Zendesk AI →' }},
-  'zendesk-suite-team': {{ url: '{prefix}pricing/zendesk-ai-resolution-and-automated-outcome-cost/', label: 'Read Zendesk AI overage audit →' }},
+  'intercom-fin-ai': {{ url: '{prefix}intercom-fin-cost-calculator/', label: 'Open Intercom Fin calculator →' }},
+  'freshdesk-support': {{ url: '{prefix}intercom-vs-freshdesk-cost-comparison/', label: 'Compare Intercom vs. Freshdesk →' }},
+  'zendesk-suite-team': {{ url: '{prefix}intercom-vs-zendesk-cost-comparison/', label: 'Compare Intercom vs. Zendesk →' }},
   'zendesk-suite-professional': {{ url: '{prefix}pricing/zendesk-ai-resolution-and-automated-outcome-cost/', label: 'Read Zendesk AI overage audit →' }},
   'help-scout-plus': {{ url: '{prefix}pricing/zendesk-ai-resolution-and-automated-outcome-cost/', label: 'Compare vs. Zendesk AI →' }},
   'hubspot-service-hub': {{ url: '{prefix}pricing/hubspot-true-cost-and-onboarding-fees/', label: 'Read HubSpot onboarding audit →' }}
@@ -624,6 +626,18 @@ function renderDirectory() {{
     const icAudit = INTERNAL_AUDIT_LINKS[icR.tool.id];
     const zdAudit = INTERNAL_AUDIT_LINKS[zdTeamR.tool.id];
 
+    const fdR = rows.find(r => r.tool.id === 'freshdesk-support') || minR;
+    const fdAff = AFFILIATES[fdR.tool.affiliate_slug] || {{ destination_url: '#' }};
+    const thirdR = COMPARE_MODE === 'intercom_vs_freshdesk' ? fdR : zdTeamR;
+    const thirdAff = COMPARE_MODE === 'intercom_vs_freshdesk' ? fdAff : zdAff;
+    const thirdLabel = COMPARE_MODE === 'intercom_vs_freshdesk' ? 'Freshdesk + Freddy AI (Session Packs)' : 'Zendesk AI Comparison (Same Usage)';
+    const thirdCta = COMPARE_MODE === 'intercom_vs_freshdesk'
+      ? getContextualCtaLabel(fdR.tool, fdR.year1Total, icR.year1Total, false)
+      : getVendorCtaLabel(zdTeamR.tool);
+    const thirdAuditLink = COMPARE_MODE === 'intercom_vs_freshdesk'
+      ? `<a class="summary-audit-link" href="{prefix}intercom-vs-zendesk-cost-comparison/" data-track="internal-audit">Compare Intercom vs. Zendesk →</a>`
+      : (zdAudit ? `<a class="summary-audit-link" href="${{zdAudit.url}}" data-track="internal-audit">${{zdAudit.label}}</a>` : '');
+
     const icHiddenPct = icR.year1Total > 0 ? Math.round((icR.hiddenFees / icR.year1Total) * 100) : 0;
     const savedVsIc = Math.max(0, icR.year1Total - minR.year1Total);
     const minCtaText = getContextualCtaLabel(minR.tool, minR.year1Total, icR.year1Total, false);
@@ -647,7 +661,7 @@ function renderDirectory() {{
         </div>
       </div>
       <div class="summary-card result-card card-hidden">
-        <div class="summary-label">Hidden Cost Highlight ($0.99/Resolution AI Meter)</div>
+        <div class="summary-label">Intercom + Fin AI ($0.99/Resolution Meter)</div>
         <div class="summary-metric" style="color:var(--rose);">+$${{icR.hiddenFees.toLocaleString()}} / yr (${{icHiddenPct}}% of Year-1 bill)</div>
         <div class="summary-scenario">On <strong>${{icR.tool.name}}</strong> ($${{icR.year1Total.toLocaleString()}}/yr total &middot; ${{scenarioLine.replace('Based on ', '')}})</div>
         <div class="summary-breakdown">$${{icR.annualSeatsCost.toLocaleString()}} licenses + $${{icR.onboarding.toLocaleString()}} onboarding + $${{icR.aiAnnual.toLocaleString()}} AI</div>
@@ -664,20 +678,20 @@ function renderDirectory() {{
         </div>
       </div>
       <div class="summary-card result-card card-highest">
-        <div class="summary-label">Zendesk AI Comparison (Same Usage)</div>
-        <div class="summary-metric">$${{zdTeamR.year1Total.toLocaleString()}} / yr &middot; ${{zdTeamR.tool.name}}</div>
+        <div class="summary-label">${{thirdLabel}}</div>
+        <div class="summary-metric">$${{thirdR.year1Total.toLocaleString()}} / yr &middot; ${{thirdR.tool.name}}</div>
         <div class="summary-scenario">${{scenarioLine}}</div>
-        <div class="summary-breakdown">$${{zdTeamR.annualSeatsCost.toLocaleString()}} licenses + $${{zdTeamR.onboarding.toLocaleString()}} onboarding + $${{zdTeamR.aiAnnual.toLocaleString()}} AI</div>
-        <div class="summary-caveat"><strong>Contract note:</strong> ${{zdTeamR.tool.trap_badge}}</div>
+        <div class="summary-breakdown">$${{thirdR.annualSeatsCost.toLocaleString()}} licenses + $${{thirdR.onboarding.toLocaleString()}} onboarding + $${{thirdR.aiAnnual.toLocaleString()}} AI</div>
+        <div class="summary-caveat"><strong>Contract note:</strong> ${{thirdR.tool.trap_badge}}</div>
         <details class="calc-disclosure">
           <summary class="calc-disclosure-toggle">See calculation</summary>
-          <div class="calc-disclosure-body">${{renderCalcBreakdownHtml(zdTeamR, seats, aiVol, mode)}}</div>
+          <div class="calc-disclosure-body">${{renderCalcBreakdownHtml(thirdR, seats, aiVol, mode)}}</div>
         </details>
         <div class="summary-actions">
           <div class="cta-stack">
-            <a class="btn-secondary" href="${{zdAff.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${{zdTeamR.tool.id}}" data-cta-location="summary-card">${{getVendorCtaLabel(zdTeamR.tool)}}</a>
+            <a class="btn-secondary" href="${{thirdAff.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${{thirdR.tool.id}}" data-cta-location="summary-card">${{thirdCta}}</a>
           </div>
-          ${{zdAudit ? `<a class="summary-audit-link" href="${{zdAudit.url}}" data-track="internal-audit">${{zdAudit.label}}</a>` : ''}}
+          ${{thirdAuditLink}}
         </div>
       </div>
     `;
@@ -896,6 +910,34 @@ def build_all():
         "Calculate your 2026 Intercom Fin AI true cost and Year-1 support bill at $0.99 per AI resolution plus seat licenses ($29-$132/mo), and compare AI cost against Freshdesk and Zendesk.",
         "/pricing/intercom-fin-ai-resolution-cost-calculator/",
         render_intercom_calculator_body(prefix="../../"),
+        faqs=ic_faqs,
+    )
+    render_page(
+        "intercom-vs-freshdesk-cost-comparison/index.html",
+        "Intercom vs Freshdesk Cost Comparison (2026) – saasbill.io",
+        "Compare 2026 Intercom + Fin AI ($0.99/resolution) vs Freshdesk Freddy AI ($49/100 sessions) Year-1 total cost for your exact team size and AI ticket volume.",
+        "/intercom-vs-freshdesk-cost-comparison/",
+        render_intercom_calculator_body(
+            prefix="../",
+            h1="Intercom vs Freshdesk Cost Comparison (2026): Real Year-1 Price &amp; AI Fees",
+            lead="Compare what Intercom Fin and Freshdesk Freddy AI actually cost for your support team. Adjust the agents and AI volume below to see the real Year-1 total and exact savings side by side.",
+            compare_mode="intercom_vs_freshdesk",
+            page_id="intercom-vs-freshdesk-cost-comparison",
+        ),
+        faqs=ic_faqs,
+    )
+    render_page(
+        "intercom-vs-zendesk-cost-comparison/index.html",
+        "Intercom vs Zendesk Cost Comparison (2026) – saasbill.io",
+        "Compare 2026 Intercom Fin AI ($0.99/resolution) vs Zendesk AI Agents ($1.50/resolution) Year-1 total cost for your exact agent count and monthly AI volume.",
+        "/intercom-vs-zendesk-cost-comparison/",
+        render_intercom_calculator_body(
+            prefix="../",
+            h1="Intercom vs Zendesk Cost Comparison (2026): Real Year-1 Price &amp; AI Overage",
+            lead="Compare what Intercom Fin and Zendesk AI actually cost for your support team. Adjust the agents and AI volume below to see the real Year-1 total, per-resolution overages, and lower-cost alternatives.",
+            compare_mode="intercom_vs_zendesk",
+            page_id="intercom-vs-zendesk-cost-comparison",
+        ),
         faqs=ic_faqs,
     )
 

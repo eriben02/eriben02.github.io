@@ -32,6 +32,8 @@ def render_related_links(rel_path, prefix):
         ("pricing/gong-io-platform-fee-and-seat-minimum-calculator/index.html", "Gong.io $5,000 Platform Fee & Seat Calculator", "Benchmark Gong's $5k base fee + $1,600/yr seats against Close CRM."),
         ("compare/monday-crm-vs-pipedrive-vs-hubspot-seat-minimums/index.html", "CRM Seat-Minimum & Bucket Calculator", "See where monday CRM's 3/5/10-seat buckets cost more than 1:1 CRMs."),
         ("intercom-fin-cost-calculator/index.html", "Intercom Fin Cost Calculator ($0.99/Resolution)", "Prefilled 10-agent, 1,500 AI/mo Year-1 calculator vs. Freshdesk & Zendesk."),
+        ("intercom-vs-freshdesk-cost-comparison/index.html", "Intercom vs. Freshdesk Cost Comparison (2026)", "Compare Intercom Fin ($0.99/res) vs. Freshdesk Freddy AI ($49/100 sessions) Year-1 cost."),
+        ("intercom-vs-zendesk-cost-comparison/index.html", "Intercom vs. Zendesk Cost Comparison (2026)", "Compare Intercom Fin ($0.99/res) vs. Zendesk AI ($1.50/res) Year-1 cost and overages."),
         ("pricing/intercom-fin-ai-resolution-cost-calculator/index.html", "Intercom Fin AI ($0.99/Resolution) True Cost", "Calculate monthly Fin AI resolution fees vs. Freshdesk session packs."),
         ("pricing/zendesk-ai-resolution-and-automated-outcome-cost/index.html", "Zendesk AI Automated Resolution Fee Calculator", "Model $1.50–$2.00 AI overage rates vs. Freshdesk & Help Scout."),
         ("pricing/stripe-billing-0-7-percent-recurring-tax-calculator/index.html", "Stripe Billing 0.7% Recurring Fee Calculator", "Compare Stripe 2.9% + 0.7% Billing + 0.5% Tax vs. Whop (2.7% + 30¢) & Paddle."),

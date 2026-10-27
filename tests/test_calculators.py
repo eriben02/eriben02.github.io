@@ -277,6 +277,8 @@ class TestSaaSBillCalculators(unittest.TestCase):
         pages = [
             "index.html",
             "intercom-fin-cost-calculator/index.html",
+            "intercom-vs-freshdesk-cost-comparison/index.html",
+            "intercom-vs-zendesk-cost-comparison/index.html",
             "pricing/hubspot-true-cost-and-onboarding-fees/index.html",
             "pricing/intercom-fin-ai-resolution-cost-calculator/index.html",
             "exit/stripe-shopify-paddle-frozen-funds-alternatives/index.html",
@@ -300,6 +302,8 @@ class TestSaaSBillCalculators(unittest.TestCase):
         summary_ids = {
             "index.html": "wb-result-mount",
             "intercom-fin-cost-calculator/index.html": "wb-result-mount",
+            "intercom-vs-freshdesk-cost-comparison/index.html": "wb-result-mount",
+            "intercom-vs-zendesk-cost-comparison/index.html": "wb-result-mount",
             "pricing/hubspot-true-cost-and-onboarding-fees/index.html": "hs-summary",
             "pricing/intercom-fin-ai-resolution-cost-calculator/index.html": "ic-summary",
             "exit/stripe-shopify-paddle-frozen-funds-alternatives/index.html": "hold-summary",
@@ -511,6 +515,8 @@ class TestSaaSBillCalculators(unittest.TestCase):
         pages = [
             "index.html",
             "intercom-fin-cost-calculator/index.html",
+            "intercom-vs-freshdesk-cost-comparison/index.html",
+            "intercom-vs-zendesk-cost-comparison/index.html",
             "pricing/hubspot-true-cost-and-onboarding-fees/index.html",
             "pricing/intercom-fin-ai-resolution-cost-calculator/index.html",
             "exit/stripe-shopify-paddle-frozen-funds-alternatives/index.html",
@@ -590,7 +596,7 @@ class TestSaaSBillCalculators(unittest.TestCase):
 
         with open(os.path.join(PUBLIC_DIR, "sitemap.xml"), encoding="utf-8") as f:
             sitemap = f.read()
-        self.assertEqual(sitemap.count("<url><loc>"), 21)
+        self.assertEqual(sitemap.count("<url><loc>"), 23)
 
         faq_pages = [
             "faq/does-hubspot-charge-onboarding-fees-2026/index.html",
@@ -804,6 +810,8 @@ class TestSaaSBillCalculators(unittest.TestCase):
         pages = [
             "index.html",
             "intercom-fin-cost-calculator/index.html",
+            "intercom-vs-freshdesk-cost-comparison/index.html",
+            "intercom-vs-zendesk-cost-comparison/index.html",
             "pricing/hubspot-true-cost-and-onboarding-fees/index.html",
             "pricing/intercom-fin-ai-resolution-cost-calculator/index.html",
             "exit/stripe-shopify-paddle-frozen-funds-alternatives/index.html",
@@ -892,9 +900,27 @@ class TestSaaSBillCalculators(unittest.TestCase):
 
     def test_intercom_fin_cost_calculator_dedicated_page(self):
         """Verify /intercom-fin-cost-calculator/ uses calcToolYear1, defaults to 10 agents & 1,500 AI/mo, and has full progressive disclosure."""
-        for rel, expected_canonical in [
-            ("intercom-fin-cost-calculator/index.html", "https://saasbill.io/intercom-fin-cost-calculator/"),
-            ("pricing/intercom-fin-ai-resolution-cost-calculator/index.html", "https://saasbill.io/pricing/intercom-fin-ai-resolution-cost-calculator/"),
+        for rel, expected_canonical, expected_lead in [
+            (
+                "intercom-fin-cost-calculator/index.html",
+                "https://saasbill.io/intercom-fin-cost-calculator/",
+                "See what Intercom Fin actually costs for your team. Adjust the agents and AI volume below to see your real Year-1 total and how it compares to Freshdesk and Zendesk.",
+            ),
+            (
+                "pricing/intercom-fin-ai-resolution-cost-calculator/index.html",
+                "https://saasbill.io/pricing/intercom-fin-ai-resolution-cost-calculator/",
+                "See what Intercom Fin actually costs for your team. Adjust the agents and AI volume below to see your real Year-1 total and how it compares to Freshdesk and Zendesk.",
+            ),
+            (
+                "intercom-vs-freshdesk-cost-comparison/index.html",
+                "https://saasbill.io/intercom-vs-freshdesk-cost-comparison/",
+                "Compare what Intercom Fin and Freshdesk Freddy AI actually cost for your support team. Adjust the agents and AI volume below to see the real Year-1 total and exact savings side by side.",
+            ),
+            (
+                "intercom-vs-zendesk-cost-comparison/index.html",
+                "https://saasbill.io/intercom-vs-zendesk-cost-comparison/",
+                "Compare what Intercom Fin and Zendesk AI actually cost for your support team. Adjust the agents and AI volume below to see the real Year-1 total, per-resolution overages, and lower-cost alternatives.",
+            ),
         ]:
             with open(os.path.join(PUBLIC_DIR, rel), encoding="utf-8") as f:
                 html = f.read()
@@ -902,7 +928,7 @@ class TestSaaSBillCalculators(unittest.TestCase):
             self.assertIn('id="seat-slider" min="1" max="50" value="10"', html)
             self.assertIn('id="ai-slider" min="0" max="5000" step="100" value="1500"', html)
             self.assertIn("let currentSpotlightId = 'intercom-fin-ai';", html)
-            self.assertIn("See what Intercom Fin actually costs for your team. Adjust the agents and AI volume below to see your real Year-1 total and how it compares to Freshdesk and Zendesk.", html)
+            self.assertIn(expected_lead, html)
             self.assertIn('id="wb-big-amount">$21,300</span>', html)
             self.assertIn('id="wb-best-option"', html)
             self.assertIn('id="wb-calc-details"', html)

@@ -9,6 +9,8 @@ def generate_meta_files(extra_urls=None):
     urls = [
         "/",
         "/intercom-fin-cost-calculator/",
+        "/intercom-vs-freshdesk-cost-comparison/",
+        "/intercom-vs-zendesk-cost-comparison/",
         "/pricing/hubspot-true-cost-and-onboarding-fees/",
         "/pricing/intercom-fin-ai-resolution-cost-calculator/",
         "/exit/stripe-shopify-paddle-frozen-funds-alternatives/",
@@ -132,6 +134,8 @@ Sitemap: {SITE_ORIGIN}/sitemap.xml
 - [Gong.io Platform Fee & Seat Minimum Calculator]({SITE_ORIGIN}/pricing/gong-io-platform-fee-and-seat-minimum-calculator/): $5,000 base fee + $1,600/yr seats vs. Close CRM Growth.
 - [Monday CRM vs. Pipedrive vs. HubSpot Seat-Minimum Calculator]({SITE_ORIGIN}/compare/monday-crm-vs-pipedrive-vs-hubspot-seat-minimums/): 1–15 user bucket math.
 - [Intercom Fin Cost Calculator (2026)]({SITE_ORIGIN}/intercom-fin-cost-calculator/): Dedicated prefilled 10-agent, 1,500 AI/mo Year-1 calculator vs. Freshdesk & Zendesk.
+- [Intercom vs. Freshdesk Cost Comparison (2026)]({SITE_ORIGIN}/intercom-vs-freshdesk-cost-comparison/): Side-by-side Year-1 cost comparison ($0.99/resolution vs. $49/100 sessions).
+- [Intercom vs. Zendesk Cost Comparison (2026)]({SITE_ORIGIN}/intercom-vs-zendesk-cost-comparison/): Side-by-side Year-1 cost comparison ($0.99/resolution vs. $1.50–$2.00/resolution).
 - [Intercom Fin AI $0.99/Resolution Calculator]({SITE_ORIGIN}/pricing/intercom-fin-ai-resolution-cost-calculator/): Per-resolution outcome billing calculator vs. Freshdesk.
 - [Zendesk AI Outcome Pricing Calculator]({SITE_ORIGIN}/pricing/zendesk-ai-resolution-and-automated-outcome-cost/): Per-verified-resolution overage ($1.50/$2.00) vs. Freshdesk & Help Scout.
 - [Stripe Billing 0.7% Recurring Tax Calculator]({SITE_ORIGIN}/pricing/stripe-billing-0-7-percent-recurring-tax-calculator/): Stripe 2.9% + 0.7% Billing + 0.5% Tax vs. Whop & Paddle.
