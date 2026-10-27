@@ -1,0 +1,177 @@
+[
+  {
+    "priority": 1,
+    "slug": "/pricing/zendesk-ai-resolution-and-automated-outcome-cost/",
+    "title": "Zendesk AI Outcome Pricing Calculator (2026): Per-Resolution Fees vs. Freshdesk & Help Scout",
+    "category": "Helpdesk & AI Support",
+    "primary_affiliate": "freshworks",
+    "status": "published",
+    "published_at": "2026-10-25",
+    "url": "https://saasbill.io/pricing/zendesk-ai-resolution-and-automated-outcome-cost/"
+  },
+  {
+    "priority": 2,
+    "slug": "/compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/",
+    "title": "Gumroad (10% + 50\u00a2 + 2.9% Processing) vs. Whop (2.7% + 30\u00a2) vs. Lemon Squeezy (5% + 50\u00a2) Calculator (2026): Net Payouts Compared",
+    "category": "Payment Processors & MoR",
+    "primary_affiliate": "whop",
+    "status": "published",
+    "strategic_rationale": "Hard payment infrastructure (cannot be vibe-coded) + active Whop referral link (?a=baggyprairieae) already live.",
+    "original_title": "Gumroad (10% Fee) vs. Whop (2.7%) vs. Lemon Squeezy (5%) Calculator (2026): Net Payouts Compared",
+    "published_at": "2026-10-26",
+    "url": "https://saasbill.io/compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/",
+    "title_correction_note": "Gumroad's 10% + 50c excludes 2.9% + 30c card processing (gumroad.com/help/article/66-gumroads-fees, checked 2026-10-26); fixed fees added to all three."
+  },
+  {
+    "priority": 3,
+    "slug": "/compare/typeform-vs-jotform-response-limit-and-hipaa-cost/",
+    "title": "Typeform vs. Jotform True Cost (2026): Response Overage Traps & HIPAA BAA Pricing ($99/mo vs Enterprise)",
+    "category": "Compliance, HIPAA & SOC 2",
+    "primary_affiliate": "jotform",
+    "status": "published",
+    "strategic_rationale": "Regulated HIPAA BAA legal liability cannot be self-coded; pairs with Jotform 30% recurring affiliate (1-day review).",
+    "published_date": "2026-10-26"
+  },
+  {
+    "priority": 4,
+    "slug": "/compare/close-crm-vs-hubspot-sales-hub-5-to-20-reps/",
+    "title": "Close CRM vs. HubSpot Sales Hub for 5\u201320 Sales Reps (2026): Built-In Calling & SMS vs. Paid Add-Ons",
+    "category": "CRM & Sales",
+    "primary_affiliate": "close-crm",
+    "status": "published",
+    "strategic_rationale": "Carrier telephony, A2P 10DLC SMS compliance & email deliverability rails paired with Close CRM and HubSpot affiliates.",
+    "published_date": "2026-10-26"
+  },
+  {
+    "priority": 5,
+    "slug": "/pricing/stripe-billing-0-7-percent-recurring-tax-calculator/",
+    "title": "The Stripe Billing 0.7% Recurring Revenue Tax Calculator (2026): Hidden Invoicing & FX Fees vs. Whop & Paddle",
+    "category": "Payment Processors & MoR",
+    "primary_affiliate": "whop",
+    "status": "published",
+    "strategic_rationale": "Payment processing & subscription billing rails; directly monetizes active Whop link.",
+    "published_date": "2026-10-26"
+  },
+  {
+    "priority": 6,
+    "slug": "/pricing/docusign-envelope-allowance-and-api-overage-calculator/",
+    "title": "DocuSign Envelope Limit Trap (2026): 100 Envelopes/Year Cap Explained vs. PandaDoc & Jotform Sign",
+    "category": "Compliance, HIPAA & SOC 2",
+    "primary_affiliate": "jotform",
+    "status": "published",
+    "strategic_rationale": "Legally binding e-signature audit trails & HIPAA compliance; high-converting Jotform Sign alternative.",
+    "published_date": "2026-10-26"
+  },
+  {
+    "priority": 7,
+    "slug": "/pricing/gong-io-platform-fee-and-seat-minimum-calculator/",
+    "title": "Gong.io Pricing & Hidden $5,000 Platform Fee Calculator (2026): Real Cost for 5\u201325 Reps vs. Close CRM",
+    "category": "CRM & Sales",
+    "primary_affiliate": "close-crm",
+    "status": "published",
+    "strategic_rationale": "Targets CFOs cutting bloated $5k base platform fees + $1,600/seat contracts in favor of lean integrated calling CRMs.",
+    "published_date": "2026-10-26"
+  },
+  {
+    "priority": 8,
+    "slug": "/exit/paypal-180-day-permanent-limitation-fund-recovery/",
+    "title": "PayPal 180-Day Permanent Limitation Guide (2026): How Held Funds Release Works & Multi-Processor Failover",
+    "category": "Payment Processors & MoR",
+    "primary_affiliate": "whop",
+    "status": "published",
+    "strategic_rationale": "High-urgency merchant pain point with immediate conversion intent to multi-processor orchestration.",
+    "published_date": "2026-10-26"
+  },
+  {
+    "priority": 9,
+    "slug": "/compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/",
+    "title": "Google Workspace vs. Microsoft 365 HIPAA BAA Guide (2026): Exact Minimum Editions & Form Intake Rules",
+    "category": "Compliance, HIPAA & SOC 2",
+    "primary_affiliate": "jotform",
+    "status": "published",
+    "strategic_rationale": "Healthcare & regulated SMB compliance stack where Jotform Gold BAA is the natural intake layer.",
+    "published_date": "2026-10-27",
+    "url": "https://saasbill.io/compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/"
+  },
+  {
+    "priority": 10,
+    "slug": "/exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/",
+    "title": "ZoomInfo Auto-Renewal Trap (2026): Exact 60-Day Notice Window & Lower-Cost B2B Data Alternatives",
+    "category": "CRM & Sales",
+    "primary_affiliate": "close-crm",
+    "status": "queued",
+    "strategic_rationale": "Proprietary B2B contact databases & auto-renewal contract clauses that trigger urgent CFO searches."
+  },
+  {
+    "priority": 11,
+    "slug": "/exit/shopify-payments-chargeback-threshold-and-reserve-appeal/",
+    "title": "Shopify Payments Reserve & 0.75% Dispute Threshold Calculator (2026): Preventing 90-Day Payout Holds",
+    "category": "Payment Processors & MoR",
+    "primary_affiliate": "whop",
+    "status": "queued",
+    "strategic_rationale": "Card network dispute monitoring programs (Visa VDMP / Mastercard ECM) & backup payment rails."
+  },
+  {
+    "priority": 12,
+    "slug": "/pricing/stripe-radar-and-dispute-fee-calculator-2026/",
+    "title": "Stripe Dispute Fee ($15\u2013$30) & Radar Cost Calculator (2026): True Cost of a 0.6% Chargeback Rate",
+    "category": "Payment Processors & MoR",
+    "primary_affiliate": "whop",
+    "status": "queued",
+    "strategic_rationale": "Direct card-network dispute math driving merchants to multi-PSP routing and automated dispute defense."
+  },
+  {
+    "priority": 13,
+    "slug": "/exit/intercom-to-freshdesk-ticket-and-help-center-migration/",
+    "title": "How to Migrate Off Intercom Fin AI Without Losing Ticket History (2026): True Year-1 Savings Calculator",
+    "category": "Helpdesk & AI Support",
+    "primary_affiliate": "freshworks",
+    "status": "queued",
+    "strategic_rationale": "Captures teams fleeing uncapped $0.99/resolution AI meters toward predictable session/seat tiers."
+  },
+  {
+    "priority": 14,
+    "slug": "/compare/pipedrive-vs-salesforce-starter-and-pro-suite-cost/",
+    "title": "Pipedrive vs. Salesforce Pro Suite True Cost (2026): Implementation Fees, Add-Ons & Contract Lock-In",
+    "category": "CRM & Sales",
+    "primary_affiliate": "pipedrive",
+    "status": "queued",
+    "strategic_rationale": "High-intent SMB migration from complex enterprise CRM contracts to transparent per-seat CRM."
+  },
+  {
+    "priority": 15,
+    "slug": "/compliance/okta-vs-workos-vs-1password-sso-tax-calculator/",
+    "title": "The B2B SaaS SSO Tax Calculator (2026): Vendors Charging 2x\u20134x for SAML Single Sign-On",
+    "category": "Compliance, HIPAA & SOC 2",
+    "primary_affiliate": "1password",
+    "status": "queued",
+    "strategic_rationale": "Enterprise security & identity infrastructure required by cyber insurance and SOC 2 auditors."
+  },
+  {
+    "priority": 16,
+    "slug": "/compliance/vanta-vs-drata-vs-comp-ai-soc2-negotiation-benchmarks/",
+    "title": "Vanta vs. Drata SOC 2 True Cost Calculator (2026): Platform Tiers + Mandatory External CPA Auditor Fees",
+    "category": "Compliance, HIPAA & SOC 2",
+    "primary_affiliate": "vanta",
+    "status": "queued",
+    "strategic_rationale": "Third-party SOC 2 / ISO 27001 attestation cannot be built in-house; high-ticket PartnerStack referrals."
+  },
+  {
+    "priority": 17,
+    "slug": "/compare/deel-vs-rippling-eor-hidden-fx-and-offboarding-fees/",
+    "title": "Deel vs. Rippling EOR True Cost (2026): Hidden Currency FX Spreads, Deposit Rules & Offboarding Fees",
+    "category": "Compliance, HIPAA & SOC 2",
+    "primary_affiliate": "deel",
+    "status": "queued",
+    "strategic_rationale": "Cross-border legal entity & payroll compliance that companies cannot build in-house."
+  },
+  {
+    "priority": 18,
+    "slug": "/compliance/ai-voice-and-transcription-hipaa-baa-matrix-2026/",
+    "title": "AI Voice & Meeting Transcription HIPAA BAA Matrix (2026): Enterprise BAA Tiers vs. Self-Serve Compliance",
+    "category": "Compliance, HIPAA & SOC 2",
+    "primary_affiliate": "vanta",
+    "status": "queued",
+    "strategic_rationale": "AI compliance bottleneck: every company adopting AI voice/notes needs BAA & SOC 2 vendor verification."
+  }
+]

@@ -1,0 +1,327 @@
+"""Builds /pricing/zendesk-ai-resolution-and-automated-outcome-cost/ (published 2026-10-25).
+All figures verified 2026-10-25 against the sources listed in SOURCES."""
+import math
+from layout import render_page
+
+SLUG = "/pricing/zendesk-ai-resolution-and-automated-outcome-cost/"
+REL = "pricing/zendesk-ai-resolution-and-automated-outcome-cost/index.html"
+TITLE = "Zendesk AI True Cost & Year-1 Fee Calculator – saasbill.io"
+DESC = ("Calculate your 2026 Zendesk AI true cost and Year-1 invoice: Suite includes 5–10 automated resolutions/agent/mo, then charges $1.50–$2.00 AI cost overages vs. Freshdesk and Help Scout.")
+
+ZD = {"team": {"annual": 55, "monthly": 69, "ar": 5, "usd": 2}, "pro": {"annual": 115, "monthly": 149, "ar": 10, "usd": 5}}
+FD_PRO = {"annual": 55, "monthly": 66}; FD_PACK = 49
+HS = {"plus": {"annual": 45, "monthly": 54}, "pro": {"annual": 75, "monthly": 90}}
+HS_RES = 0.75
+
+def example(agents=10, conv=5000, coverage=1.0, rate=0.40, plan="pro", billing="annual", price=2.0):
+    ai_conv = round(conv * coverage); res = round(ai_conv * rate)
+    incl = min(agents * ZD[plan]["ar"], math.floor(10000 / 12))
+    zd_seat = agents * ZD[plan][billing]; zd_ai = max(0, res - incl) * price
+    fd_seat = agents * FD_PRO[billing]; fd_ai = math.ceil(ai_conv / 100) * FD_PACK
+    fd_yr1 = fd_seat * 12 + math.ceil(max(0, ai_conv * 12 - 500) / 100) * FD_PACK
+    hs_plan = "plus" if agents <= 50 else "pro"
+    hs_seat = max(agents, 10 if hs_plan == "pro" else 1) * HS[hs_plan][billing]; hs_ai = res * HS_RES
+    return dict(res=res, incl=incl, zd_seat=zd_seat, zd_ai=zd_ai, zd=zd_seat + zd_ai, fd_seat=fd_seat, fd_ai=fd_ai, fd=fd_seat + fd_ai,
+                fd_yr1=fd_yr1, hs_seat=hs_seat, hs_ai=hs_ai, hs=hs_seat + hs_ai, ai_conv=ai_conv)
+
+E = example(); E15 = example(price=1.5)
+f = lambda n: f"{n:,.0f}"
+
+SOURCES = [
+ ("Zendesk pricing page (plans, monthly vs annual, included automated resolutions, $1.50 committed / $2.00 pay-as-you-go, Copilot $50, HIPAA on Suite Professional)", "https://www.zendesk.com/pricing/"),
+ ("Zendesk help: Managing resolution allowances ($2/$5/$10 per agent allowance, $5,000/yr cap, 'Allow overage' is the default, overage billed monthly regardless of term)", "https://support.zendesk.com/hc/en-us/articles/10479587390106-Managing-resolution-allowances"),
+ ("Zendesk help: About automated resolution tiers (Assisted escalation / Contained / Verified, introduced May 18, 2026; LLM verification; 72h email / 2h messaging conversation end)", "https://support.zendesk.com/hc/en-us/articles/9570369117338-About-automated-resolution-tiers"),
+ ("Zendesk help: Announcing changes to AI agent reporting (billed only for Verified resolutions; AR% now includes Contained)", "https://support.zendesk.com/hc/en-us/articles/10677925692698-Announcing-changes-to-AI-agent-reporting"),
+ ("Zendesk help: Managing resolution usage (80% usage warning, deleting a ticket doesn't undo consumption, CSV export with cost, dispute a tier via Customer Support)", "https://support.zendesk.com/hc/en-us/articles/10479485915290-Managing-resolution-usage"),
+ ("Zendesk Community: AI agents & automated resolutions feedback thread (customer cost example; Zendesk PM reply)", "https://community.zendesk.com/product-updates/we-are-excited-to-launch-ai-agents-and-automated-resolutions-6337/index9.html"),
+ ("Zendesk Customer Agreement §7.2 Renewals (auto-renew for equivalent term at then-current rates unless 30 days' written notice to revops@zendesk.com) and §7.4", "https://www.zendesk.com/company/agreements-and-terms/zendesk-customer-agreement/"),
+ ("Freshdesk pricing page (Growth $19 / Pro $55 / Enterprise $89 annual; $23 / $66 / $107 monthly; 500 one-time AI Agent sessions then $49 per 100; Copilot $29; SSO on all plans; no cancellation fees)", "https://www.freshworks.com/freshdesk/pricing/"),
+ ("Help Scout pricing page (Standard $25 / Plus $45 / Pro $75 per user annual; Pro minimum 10 users; AI Answers $0.75/resolution with monthly cap; HIPAA & SSO on Pro)", "https://www.helpscout.com/pricing/"),
+ ("Help Scout docs: About annual payments (16% annual discount; auto-renew is default for annual card payments)", "https://docs.helpscout.com/article/1421-about-annual-payments"),
+ ("Third-party check of Help Scout monthly-billing prices ($30 / $54 / $90), used because the official page renders the annual toggle server-side", "https://www.eesel.ai/blog/helpscout-pricing"),
+]
+
+def rows_sources():
+    return "\n".join(f'<li><a href="{u}" target="_blank" rel="noopener">{t}</a> &middot; <em>verified Oct 25, 2026</em></li>' for t, u in SOURCES)
+
+body = f"""
+<section class="hero">
+  <h1>What Zendesk’s $1.50–$2.00 AI resolution fee adds to your monthly invoice.</h1>
+  <p class="lead">Zendesk Suite includes just 5 to 10 automated resolutions per agent each month, and pay-as-you-go overage at $2.00 per verified resolution is turned on by default. Run your ticket volume below.</p>
+  <div class="geo-direct-answer">
+    <p><strong>The short version:</strong> Zendesk includes <strong>5 automated resolutions per agent/month on Suite Team ($55/agent annual, $69 monthly)</strong> and <strong>10 on Suite Professional ($115 annual, $149 monthly)</strong>, capped at 10,000 per year. Beyond that allowance, each automated resolution costs <strong>$1.50 if pre-committed or $2.00 pay-as-you-go</strong>. For 10 agents on Suite Professional handling 5,000 conversations/month with a 40% verified AI resolution rate ({f(E['res'])} resolutions), you pay <strong>${f(E['zd_seat'])} in seats + ${f(E['zd_ai'])} in AI overage = ${f(E['zd'])}/mo (${f(E['zd']*12)}/yr)</strong> at $2.00, or ${f(E15['zd'])}/mo at $1.50, compared with <strong>${f(E['fd'])}/mo (${f(E['fd_yr1'])} in Year 1 after 500 free one-time sessions) on Freshdesk Pro</strong> ($49 per 100 AI sessions) and <strong>${f(E['hs'])}/mo on Help Scout Plus</strong> ($0.75/resolution).</p>
+  </div>
+</section>
+
+<section aria-labelledby="facts-heading">
+  <h2 id="facts-heading">What we found in Zendesk’s pricing &amp; help-center terms</h2>
+  <ul class="key-list">
+    <li><strong>The included allowance is tiny:</strong> 5 automated resolutions/agent/month on Suite Team or Support Team, and 10 on Suite Professional ("up to 10k per year").</li>
+    <li><strong>Overage rate:</strong> $1.50 per committed automated resolution; $2.00 per pay-as-you-go resolution.</li>
+    <li><strong>Overage is enabled by default:</strong> Zendesk’s help center lists "Allow overage (default setting)", billed monthly regardless of subscription term. Switching to "Don't allow overage" pauses AI agents once the allowance runs out.</li>
+    <li><strong>Only LLM-verified resolutions are billed:</strong> Since May 18, 2026 Zendesk splits outcomes into Assisted escalation, Contained resolution, and Verified resolution; only Verified resolutions count against your allowance.</li>
+    <li><strong>Two allowance models exist:</strong> The public pricing page lists resolution counts, while accounts on the newer "resolution allowance" model receive a dollar pool ($2/agent/month on Team, $5 on Professional, $10 on Enterprise; max $5,000/year; unused allowance does not roll over).</li>
+    <li><strong>30-day non-renewal notice:</strong> Subscriptions auto-renew for an equivalent term at then-current rates unless you send <strong>30 days’ written notice</strong> to <code>revops@zendesk.com</code> (Customer Agreement &sect;7.2, &sect;7.4).</li>
+  </ul>
+</section>
+
+<section class="calc-box">
+  <h2 style="margin-top:0;">Calculate your monthly Zendesk AI bill vs. Freshdesk &amp; Help Scout</h2>
+  <p style="color:var(--muted); margin-bottom:20px; font-size:0.95rem;">Zendesk and Help Scout charge per AI resolution, whereas Freshdesk charges per AI session ($49 per 100 sessions after 500 one-time free sessions, whether or not the bot resolves the ticket). Adjust your volume and resolution rate to see where each model wins.</p>
+  <div class="calc-grid">
+    <div class="control-group">
+      <label for="zd-agents">Agent seats: <span class="val-pill" id="zd-agents-val">10</span></label>
+      <input type="range" id="zd-agents" min="1" max="60" value="10" />
+    </div>
+    <div class="control-group">
+      <label for="zd-plan">Zendesk plan</label>
+      <select id="zd-plan">
+        <option value="team">Suite Team ($55/seat annual &middot; 5 ARs/agent)</option>
+        <option value="pro" selected>Suite Pro ($115/seat annual &middot; 10 ARs/agent)</option>
+      </select>
+    </div>
+    <div class="control-group">
+      <label for="zd-billing">Billing term</label>
+      <select id="zd-billing">
+        <option value="annual" selected>Annual (discounted)</option>
+        <option value="monthly">Monthly</option>
+      </select>
+    </div>
+    <div class="control-group">
+      <label for="zd-conv">Conversations per month: <span class="val-pill" id="zd-conv-val">5,000</span></label>
+      <input type="range" id="zd-conv" min="100" max="30000" step="100" value="5000" />
+    </div>
+    <div class="control-group">
+      <label for="zd-cov">Routed to AI agent first: <span class="val-pill" id="zd-cov-val">100</span>%</label>
+      <input type="range" id="zd-cov" min="10" max="100" step="5" value="100" />
+    </div>
+    <div class="control-group">
+      <label for="zd-rate">Verified AI resolution rate: <span class="val-pill" id="zd-rate-val">40</span>%</label>
+      <input type="range" id="zd-rate" min="5" max="85" step="5" value="40" />
+    </div>
+    <div class="control-group">
+      <label for="zd-price">Zendesk overage rate</label>
+      <select id="zd-price">
+        <option value="2" selected>$2.00 pay-as-you-go (default overage)</option>
+        <option value="1.5">$1.50 committed (pre-purchased)</option>
+      </select>
+    </div>
+    <div class="control-group">
+      <label for="zd-model">Zendesk allowance model</label>
+      <select id="zd-model">
+        <option value="count" selected>Resolution count (5–10/agent/mo)</option>
+        <option value="usd">Dollar pool ($2–$5/agent/mo)</option>
+      </select>
+    </div>
+    <div class="control-group">
+      <label for="zd-copilot">Agent copilot add-on</label>
+      <select id="zd-copilot">
+        <option value="0" selected>No</option>
+        <option value="1">Yes (+$50 Zendesk / +$29 Freshdesk)</option>
+      </select>
+    </div>
+  </div>
+  <div id="zd-summary" class="summary-strip" aria-live="polite"></div>
+  <p class="summary-interpretation"><strong>How to read this comparison:</strong> Zendesk and Help Scout charge per AI resolution ($1.50&ndash;$2.00 vs. $0.75), while Freshdesk charges $49 per 100 AI sessions (whether resolved or escalated). Lowest cost does not automatically mean best fit. Check HIPAA, SSO, and routing requirements before switching.</p>
+  <div class="table-wrap mobile-cards">
+    <table>
+      <caption>Monthly &amp; Year-1 Cost: Zendesk AI Agents vs. Freshdesk Pro vs. Help Scout (USD, verified Oct 25, 2026)</caption>
+      <thead><tr><th>Helpdesk</th><th>Seats / mo</th><th>AI usage / mo</th><th>Total / mo</th><th>Year-1 Total</th><th>Compare</th></tr></thead>
+      <tbody id="zd-tbody"></tbody>
+    </table>
+  </div>
+  <p id="zd-note" style="font-size:0.84rem; color:var(--muted); margin-top:10px;"></p>
+</section>
+
+<section aria-labelledby="compare-heading">
+  <h2 id="compare-heading">Plan-by-plan breakdown: Zendesk vs. Freshdesk vs. Help Scout</h2>
+  <p class="section-tldr">Zendesk and Help Scout both bill only when AI resolves a conversation, but Zendesk’s list rate per resolution ($1.50–$2.00) is double Help Scout’s ($0.75). Freshdesk charges per AI session ($0.49 each in 100-packs) regardless of resolution.</p>
+  <div class="table-wrap mobile-cards">
+    <table>
+      <caption>Helpdesk Seat &amp; AI Resolution Terms Compared (verified Oct 25, 2026)</caption>
+      <thead><tr><th>Item</th><th>Zendesk Suite Team</th><th>Zendesk Suite Professional</th><th>Freshdesk Pro</th><th>Help Scout Plus</th></tr></thead>
+      <tbody>
+        <tr><td data-label="Item"><strong>Seat price (annual billing)</strong></td><td data-label="Zendesk Suite Team">$55/agent/mo</td><td data-label="Zendesk Suite Professional">$115/agent/mo</td><td data-label="Freshdesk Pro">$55/agent/mo</td><td data-label="Help Scout Plus">$45/user/mo</td></tr>
+        <tr><td data-label="Item"><strong>Seat price (monthly billing)</strong></td><td data-label="Zendesk Suite Team">$69</td><td data-label="Zendesk Suite Professional">$149</td><td data-label="Freshdesk Pro">$66</td><td data-label="Help Scout Plus">$54 <span class="badge badge-medium">third-party check</span></td></tr>
+        <tr><td data-label="Item"><strong>AI included</strong></td><td data-label="Zendesk Suite Team">5 automated resolutions/agent/mo</td><td data-label="Zendesk Suite Professional">10 automated resolutions/agent/mo</td><td data-label="Freshdesk Pro">500 AI Agent sessions once per account</td><td data-label="Help Scout Plus">3-month free AI Answers trial</td></tr>
+        <tr><td data-label="Item"><strong>AI price after allowance</strong></td><td data-label="Zendesk Suite Team">$1.50 committed / $2.00 PAYG</td><td data-label="Zendesk Suite Professional">$1.50 / $2.00 per resolution</td><td data-label="Freshdesk Pro">$49 per 100 sessions</td><td data-label="Help Scout Plus">$0.75 per resolution</td></tr>
+        <tr><td data-label="Item"><strong>Billing unit</strong></td><td data-label="Zendesk Suite Team">Verified resolution (LLM-checked)</td><td data-label="Zendesk Suite Professional">Verified resolution</td><td data-label="Freshdesk Pro">Session (72-hour email window)</td><td data-label="Help Scout Plus">Resolution (no escalation)</td></tr>
+        <tr><td data-label="Item"><strong>Spend controls</strong></td><td data-label="Zendesk Suite Team">"Don't allow overage" pauses AI (overage on by default)</td><td data-label="Zendesk Suite Professional">Same</td><td data-label="Freshdesk Pro">Buy session packs</td><td data-label="Help Scout Plus">Monthly spending cap auto-disables AI</td></tr>
+        <tr><td data-label="Item"><strong>Copilot / agent assist</strong></td><td data-label="Zendesk Suite Team">Not available on Team</td><td data-label="Zendesk Suite Professional">Copilot add-on $50/agent/mo</td><td data-label="Freshdesk Pro">Freddy AI Copilot $29/agent/mo</td><td data-label="Help Scout Plus">AI Drafts &amp; Summarize included</td></tr>
+        <tr><td data-label="Item"><strong>SSO</strong></td><td data-label="Zendesk Suite Team">SAML/JWT listed on all plans</td><td data-label="Zendesk Suite Professional">Listed</td><td data-label="Freshdesk Pro">SAML SSO on all plans</td><td data-label="Help Scout Plus">Add-on (included on Pro)</td></tr>
+        <tr><td data-label="Item"><strong>HIPAA</strong></td><td data-label="Zendesk Suite Team">No</td><td data-label="Zendesk Suite Professional">"HIPAA Enabled"</td><td data-label="Freshdesk Pro">Not listed on pricing page</td><td data-label="Help Scout Plus">Add-on (included on Pro, $75, 10-user min)</td></tr>
+        <tr><td data-label="Item"><strong>Renewal / cancellation</strong></td><td data-label="Zendesk Suite Team &amp; Pro" colspan="2">Auto-renews at then-current rates unless 30 days' written notice; early cancel = pay rest of term</td><td data-label="Freshdesk Pro">No cancellation fees; effective at end of term</td><td data-label="Help Scout Plus">Annual card prepay auto-renews by default</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section aria-labelledby="evidence-heading">
+  <h2 id="evidence-heading">What Zendesk admins &amp; official docs report</h2>
+  <p class="section-tldr">Across Zendesk’s help center and community forum, two rules drive unexpected AI overage bills: simple FAQ answers consume $1.50–$2.00 resolutions once verified, and "Allow overage" is enabled by default.</p>
+  <div class="evidence-box">
+    <strong>1. "Allow overage" is the default setting and bills monthly regardless of subscription term</strong>
+    <p style="margin-top:6px;">According to Zendesk’s official resolution allowance documentation, accounts default to "Allow overage", which bills pay-as-you-go resolutions monthly even on annual contracts. Admins must manually switch to "Don't allow overage" to pause AI agents at the limit.</p>
+    <cite>Source: <a href="https://support.zendesk.com/hc/en-us/articles/10479587390106-Managing-resolution-allowances" target="_blank" rel="noopener">Zendesk Help Center &ndash; Managing resolution allowances</a></cite>
+  </div>
+  <div class="evidence-box">
+    <strong>2. Legacy decision-tree bots vs. paid AI agent resolutions</strong>
+    <p style="margin-top:6px;">Small-team admins report monthly invoices climbing when moving from legacy decision-tree flows to generative AI agent resolutions once the 5–10 AR/agent allowance is exhausted.</p>
+    <cite>Source: <a href="https://www.reddit.com/r/Zendesk/comments/1klh1uo/zendesk_messaging_bot_without_ai/" target="_blank" rel="noopener">r/Zendesk &ndash; "Zendesk messaging bot without AI" (May 2025)</a></cite>
+  </div>
+  <div class="evidence-box">
+    <strong>3. "If a company has 8,000 tickets/month and 5,000 are resolved by AI, at $1.50–$2 each, we're talking $7,500 to $10,000/month, just for automated resolutions."</strong>
+    <p style="margin-top:6px;">Customer feedback in Zendesk’s official community thread on the AI agents launch; a Zendesk product manager replied that overage only applies above the subscription allowance.</p>
+    <cite>Source: <a href="https://community.zendesk.com/product-updates/we-are-excited-to-launch-ai-agents-and-automated-resolutions-6337/index9.html" target="_blank" rel="noopener">Zendesk Community &ndash; "We are excited to launch AI agents and automated resolutions!"</a></cite>
+  </div>
+</section>
+
+<section aria-labelledby="howto-heading">
+  <h2 id="howto-heading">Checklist to keep a Zendesk AI bill predictable</h2>
+  <ol class="key-list">
+    <li><strong>Set your overage rule on day one:</strong> Go to Admin Center &rarr; Account &rarr; Usage &rarr; Overage. "Allow overage" is the default; "Don't allow overage" pauses AI agents at the limit.</li>
+    <li><strong>Pre-commit if you know you will exceed the allowance:</strong> Committed resolutions cost $1.50 vs. $2.00 pay-as-you-go, a 25% reduction on every resolution above your allowance.</li>
+    <li><strong>Watch the 80% warning alert:</strong> Zendesk sends an in-product warning and email at 80% usage. Deleting a ticket does not refund a consumed automated resolution.</li>
+    <li><strong>Set a calendar reminder 45 days before renewal:</strong> Non-renewal requires 30 days’ written notice to <code>revops@zendesk.com</code>.</li>
+  </ol>
+</section>
+
+<section aria-labelledby="sources-heading">
+  <h2 id="sources-heading">Sources &amp; verification dates</h2>
+  <ol class="key-list" style="font-size:0.9rem;">
+    {rows_sources()}
+  </ol>
+</section>
+
+<script>
+const ZD = {{team:{{annual:55,monthly:69,ar:5,usd:2}}, pro:{{annual:115,monthly:149,ar:10,usd:5}}}};
+const FD = {{annual:55, monthly:66, pack:49, copilot:29}};
+const HS = {{plus:{{annual:45,monthly:54}}, pro:{{annual:75,monthly:90}}, res:0.75}};
+const fmt = n => '$' + Math.round(n).toLocaleString('en-US');
+function updateZd() {{
+  const agents = +document.getElementById('zd-agents').value;
+  const plan = document.getElementById('zd-plan').value;
+  const billing = document.getElementById('zd-billing').value;
+  const conv = +document.getElementById('zd-conv').value;
+  const cov = +document.getElementById('zd-cov').value / 100;
+  const rate = +document.getElementById('zd-rate').value / 100;
+  const price = +document.getElementById('zd-price').value;
+  const model = document.getElementById('zd-model').value;
+  const copilot = document.getElementById('zd-copilot').value === '1';
+  document.getElementById('zd-agents-val').textContent = agents;
+  document.getElementById('zd-conv-val').textContent = conv.toLocaleString('en-US');
+  document.getElementById('zd-cov-val').textContent = Math.round(cov*100);
+  document.getElementById('zd-rate-val').textContent = Math.round(rate*100);
+  const aiConv = Math.round(conv * cov);
+  const res = Math.round(aiConv * rate);
+  const zdSeat = agents * ZD[plan][billing];
+  const zdCop = (copilot && plan === 'pro') ? agents * 50 : 0;
+  let zdAi, inclText;
+  if (model === 'count') {{
+    const incl = Math.min(agents * ZD[plan].ar, Math.floor(10000/12));
+    zdAi = Math.max(0, res - incl) * price;
+    inclText = incl.toLocaleString('en-US') + ' resolutions included';
+  }} else {{
+    const allowance = Math.min(agents * ZD[plan].usd, 5000/12);
+    zdAi = Math.max(0, res * price - allowance);
+    inclText = '$' + Math.round(allowance) + ' allowance included';
+  }}
+  const zd = zdSeat + zdCop + zdAi;
+  const fdSeat = agents * FD[billing];
+  const fdCop = copilot ? agents * FD.copilot : 0;
+  const fdAi = Math.ceil(aiConv / 100) * FD.pack;
+  const fd = fdSeat + fdCop + fdAi;
+  const fdYr1Ai = Math.ceil(Math.max(0, aiConv * 12 - 500) / 100) * FD.pack;
+  const fdYr1 = (fdSeat + fdCop) * 12 + fdYr1Ai;
+  const hsPlan = agents <= 50 ? 'plus' : 'pro';
+  const hsSeats = hsPlan === 'pro' ? Math.max(agents, 10) : agents;
+  const hsSeat = hsSeats * HS[hsPlan][billing];
+  const hsAi = res * HS.res;
+  const hs = hsSeat + hsAi;
+  const zdYr = zd * 12;
+  const zdAiYr = zdAi * 12;
+  const zdSeatsYr = (zdSeat + zdCop) * 12;
+  const hsYr = hs * 12;
+  const zdAiPct = zdYr > 0 ? Math.round((zdAiYr / zdYr) * 100) : 0;
+  const scenarioLine = `Based on ${{agents}} agent${{agents===1?'':'s'}}, ${{billing}} billing, ${{conv.toLocaleString('en-US')}} conversations/mo (${{Math.round(rate*100)}}% AI resolution = ${{res.toLocaleString('en-US')}} verified resolutions/mo)`;
+  const rows = [
+    {{id: 'zendesk-suite', name: 'Zendesk ' + (plan==='pro'?'Suite Professional':'Suite Team') + ' + AI agents', sub: res.toLocaleString('en-US') + ' verified resolutions &middot; ' + inclText, seat: zdSeat + zdCop, seatYr: zdSeatsYr, ai: zdAi, aiYr: zdAiYr, aiText: fmt(zdAi) + ' overage @ $' + price.toFixed(2), tot: zd, yrTot: zdYr, url: 'https://www.zendesk.com/pricing/', cta: 'View Zendesk pricing →', cls: 'btn-secondary', badge: 'badge-high'}},
+    {{id: 'freshdesk-support', name: 'Freshdesk Pro + Freddy AI Agent', sub: aiConv.toLocaleString('en-US') + ' AI sessions/mo (500 1x free sessions deducted in Yr 1)', seat: fdSeat + fdCop, seatYr: (fdSeat + fdCop) * 12, ai: fdAi, aiYr: fdYr1Ai, aiText: fmt(fdAi) + ' (' + Math.ceil(aiConv/100) + ' &times; $49 packs)', tot: fd, yrTot: fdYr1, url: 'https://www.freshworks.com/freshdesk/pricing/', cta: 'View Freshdesk plans →', cls: 'btn-cta', badge: 'badge-low'}},
+    {{id: 'help-scout-plus', name: 'Help Scout ' + (hsPlan==='plus'?'Plus':'Pro (10-user min.)') + ' + AI Answers', sub: res.toLocaleString('en-US') + ' AI resolutions @ $0.75', seat: hsSeat, seatYr: hsSeat * 12, ai: hsAi, aiYr: hsAi * 12, aiText: fmt(hsAi) + ' (cap available)', tot: hs, yrTot: hsYr, url: 'https://www.helpscout.com/pricing/', cta: 'Check Help Scout plans →', cls: 'btn-cta', badge: 'badge-low'}}
+  ].sort((a,b) => a.yrTot - b.yrTot);
+  const lowR = rows[0];
+  const zdSummary = document.getElementById('zd-summary');
+  if (zdSummary) {{
+    zdSummary.innerHTML = `
+      <div class="summary-card card-hidden">
+        <div class="summary-label">Zendesk Year-1 Total</div>
+        <div class="summary-metric" style="color:var(--rose);">${{fmt(zdYr)}} / yr (${{fmt(zd)}}/mo)</div>
+        <div class="summary-scenario">${{scenarioLine}}</div>
+        <div class="summary-breakdown">${{fmt(zdSeatsYr)}} licenses + $0 onboarding + ${{fmt(zdAiYr)}} AI overage</div>
+        <div class="summary-caveat"><strong>Hidden Cost Highlight:</strong> Zendesk AI resolution overages ($${{price.toFixed(2)}}/resolution above ${{inclText}}) add ${{fmt(zdAiYr)}}/yr (${{zdAiPct}}% of the Year-1 bill). &ldquo;Allow overage&rdquo; is enabled by default.</div>
+        <div class="summary-actions">
+          <div class="cta-stack">
+            <a class="btn-secondary" href="https://www.zendesk.com/pricing/" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="zendesk-suite" data-cta-location="summary-card">View Zendesk pricing &rarr;</a>
+          </div>
+        </div>
+      </div>
+      <div class="summary-card card-lowest">
+        <div class="summary-label">Lowest Estimated Year-1 Total</div>
+        <div class="summary-metric" style="color:var(--emerald);">${{fmt(lowR.yrTot)}} / yr (${{lowR.name.split(" + ")[0]}})</div>
+        <div class="summary-scenario">${{scenarioLine}} (saves ${{fmt(Math.max(0, zdYr - lowR.yrTot))}}/yr vs. Zendesk)</div>
+        <div class="summary-breakdown">${{fmt(lowR.seatYr)}} licenses + $0 onboarding + ${{fmt(lowR.aiYr)}} AI usage</div>
+        <div class="summary-caveat"><strong>Contract note:</strong> Verify whether session-pack billing (Freshdesk) or capped $0.75 resolution billing (Help Scout) fits your ticket workflow.</div>
+        <div class="summary-actions">
+          <div class="cta-stack">
+            <a class="btn-cta" href="${{lowR.url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${{lowR.id}}" data-cta-location="summary-card">${{lowR.cta}}</a>
+          </div>
+          <a class="summary-audit-link" href="../intercom-fin-ai-resolution-cost-calculator/" data-track="internal-audit">Compare Intercom Fin ($0.99) &rarr;</a>
+        </div>
+      </div>
+    `;
+  }}
+  document.getElementById('zd-tbody').innerHTML = rows.map(r => `
+    <tr>
+      <td data-label="Helpdesk">
+        <strong>${{r.name}}</strong> <span class="status-pill status-verified">Verified</span>
+        <div style="font-size:0.78rem; color:var(--muted);">${{r.sub}}</div>
+        <div class="source-inline">Verified source: <a href="${{r.url}}" target="_blank" rel="noopener">Official pricing &nearr;</a></div>
+      </td>
+      <td data-label="Seats / mo" style="font-family:var(--sans); font-variant-numeric:tabular-nums;">${{fmt(r.seat)}}</td>
+      <td data-label="AI usage / mo"><span class="badge ${{r.badge}}">${{r.aiText}}</span></td>
+      <td data-label="Total / mo" class="price-highlight">${{fmt(r.tot)}}</td>
+      <td data-label="Year-1 Total" class="price-highlight">${{fmt(r.yrTot)}}<div class="cell-scenario">${{scenarioLine}}</div></td>
+      <td data-label="Next Step"><div class="cta-stack"><a class="btn-secondary" href="${{r.url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${{r.id}}" data-cta-location="table-row">${{r.cta}}</a></div></td>
+    </tr>`).join('');
+  let note = 'Assumptions: list prices only (no negotiated discounts, taxes, voice minutes or other add-ons). Freshdesk Year-1 total deducts the 500 one-time free AI Agent sessions ($245 value); Help Scout 3-month AI trial excluded.';
+  if (copilot && plan === 'team') note += ' Zendesk Copilot is not offered on Suite Team, so it is not added.';
+  if (copilot && billing === 'monthly') note += ' Freddy Copilot shown at its $29 annual-billing price.';
+  document.getElementById('zd-note').textContent = note;
+  if (typeof window.trackSaaSBillEvent === 'function') window.trackSaaSBillEvent('result_rendered', {{ page: 'zendesk-ai', agents: agents, conv: conv }});
+}}
+['zd-agents','zd-plan','zd-billing','zd-conv','zd-cov','zd-rate','zd-price','zd-model','zd-copilot'].forEach(id => document.getElementById(id).addEventListener('input', updateZd));
+updateZd();
+</script>
+"""
+
+faqs = [
+ ("How much does Zendesk charge per AI automated resolution in 2026?",
+  "As verified on Oct 25, 2026, Zendesk charges $1.50 per committed (pre-purchased) automated resolution and $2.00 per pay-as-you-go resolution once the included allowance is used. Suite Team includes 5 and Suite Professional 10 automated resolutions per agent per month (up to 10,000 per year)."),
+ ("Is Zendesk AI overage turned on by default?",
+  "Yes. Zendesk's help center lists 'Allow overage' as the default setting, and overage is billed monthly regardless of your subscription term. Admins can choose 'Don't allow overage' under Admin Center > Account > Usage > Overage, which pauses AI agents when the allowance is exhausted."),
+ ("What counts as a billable Zendesk automated resolution?",
+  "Since May 18, 2026 Zendesk classifies AI outcomes as Assisted escalation, Contained resolution or Verified resolution. Only Verified resolutions, which pass an LLM check that the request was satisfactorily resolved, consume your allowance. Email conversations end 72 hours after the first email; messaging conversations end after 2 hours by default."),
+ ("How much does Zendesk Suite cost per agent in 2026?",
+  "Suite Team costs $55 per agent per month billed annually ($69 monthly) and Suite Professional costs $115 annually ($149 monthly). Support Team costs $19 annually ($25 monthly). Suite Enterprise is sales-quoted. The Copilot add-on is $50 per agent per month billed annually."),
+ ("Is Freshdesk or Help Scout cheaper than Zendesk for AI support?",
+  f"At list prices for 10 agents, 5,000 conversations a month and a 40% AI resolution rate, Zendesk Suite Professional costs about ${f(E['zd'])}/month at $2.00 overage, Freshdesk Pro about ${f(E['fd'])}/month ($55 seats + $49 per 100 AI sessions, with 500 one-time sessions free in Year 1) and Help Scout Plus about ${f(E['hs'])}/month ($45 seats + $0.75 per AI resolution)."),
+ ("How do I cancel or avoid auto-renewal of a Zendesk subscription?",
+  "Under section 7.2 of the Zendesk Customer Agreement, subscriptions renew automatically for an equivalent term, possibly at then-current rates, unless either party gives at least 30 days' prior written notice. Customers notify Zendesk by emailing revops@zendesk.com."),
+]
+
+extra = {"@type": "Dataset", "name": "Zendesk, Freshdesk & Help Scout AI pricing data (verified 2026-10-25)",
+         "description": "Seat prices, included AI automated resolutions, per-resolution and per-session AI prices, renewal terms.",
+         "creator": {"@type": "Organization", "name": "SaaSBill Editorial"}, "dateModified": "2026-10-25",
+         "isBasedOn": [u for _, u in SOURCES], "license": "https://creativecommons.org/licenses/by/4.0/"}
+
+render_page(REL, TITLE, DESC, SLUG, body, faqs=faqs, extra_schema=extra, published_date="2026-10-25")

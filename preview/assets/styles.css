@@ -1752,14 +1752,16 @@ hr.editorial-rule {
 
 .gap-toolbar {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
-  margin-bottom: 18px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px 16px;
+  margin-bottom: 16px;
 }
 
 .unified-inspector-tray #sort-control-group {
-  margin-left: 28px;
+  margin-left: 0;
 }
 
 .gap-subhead {
@@ -2195,6 +2197,38 @@ hr.editorial-rule {
 /* =========================================================
    Progressive Disclosure ("See calculation") & 4-Step Result Hierarchy
    ========================================================= */
+
+.wb-best-option {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: #20231F;
+  background: #EDF3EC;
+  border-left: 3px solid #2E5A36;
+  border-radius: 4px;
+  padding: 7px 10px;
+  margin: 0 0 8px 0;
+  width: 100%;
+  max-width: 100%;
+  overflow-wrap: break-word;
+}
+
+.wb-best-option strong {
+  color: #1E3F24;
+  font-weight: 700;
+}
+
+.wb-best-option a {
+  color: #1E3F24;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.wb-best-option a:hover {
+  color: #122816;
+}
+
 .calc-disclosure {
   width: 100%;
   margin: 4px 0 12px 0;
@@ -2390,6 +2424,11 @@ hr.editorial-rule {
   font-size: 0.8rem;
   font-weight: 600;
   white-space: nowrap;
+}
+
+.full-table-disclosure:not([open]) .full-table-body,
+.calc-disclosure:not([open]) .calc-disclosure-body {
+  display: none;
 }
 
 .full-table-body {
