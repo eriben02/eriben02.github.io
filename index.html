@@ -13,14 +13,14 @@
   <meta property="og:title" content="saasbill.io – True Year-1 SaaS Cost & Fee Calculator (2026)" />
   <meta property="og:description" content="Calculate the 2026 true cost and Year-1 invoice of B2B SaaS tools including HubSpot mandatory onboarding fees ($1,500-$7,000), Intercom and Zendesk AI cost overages, CRM seat minimums, and Stripe vs. Paddle vs. Whop fees." />
   <meta property="og:url" content="https://saasbill.io/" />
-  <meta property="og:updated_time" content="2026-10-27T07:29:37+01:00" />
+  <meta property="og:updated_time" content="2026-10-27T18:34:45+01:00" />
   <meta property="article:published_time" content="2026-10-27T00:00:00+01:00" />
-  <meta property="article:modified_time" content="2026-10-27T07:29:37+01:00" />
+  <meta property="article:modified_time" content="2026-10-27T18:34:45+01:00" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="saasbill.io – True Year-1 SaaS Cost & Fee Calculator (2026)" />
   <meta name="twitter:description" content="Calculate the 2026 true cost and Year-1 invoice of B2B SaaS tools including HubSpot mandatory onboarding fees ($1,500-$7,000), Intercom and Zendesk AI cost overages, CRM seat minimums, and Stripe vs. Paddle vs. Whop fees." />
-  <meta name="last-modified" content="2026-10-27T07:29:37+01:00" />
-  <meta name="dcterms.modified" content="2026-10-27T07:29:37+01:00" />
+  <meta name="last-modified" content="2026-10-27T18:34:45+01:00" />
+  <meta name="dcterms.modified" content="2026-10-27T18:34:45+01:00" />
   <meta name="dcterms.issued" content="2026-10-27" />
   <link rel="canonical" href="https://saasbill.io/" />
   <link rel="stylesheet" href="./assets/styles.css?v=20261026y" />
@@ -29,16 +29,28 @@
   <script defer data-domain="saasbill.io" src="https://plausible.io/js/pa-VAaSVNs5XOobt9cv2UtKo.js"></script>
   <script>
     window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
-    plausible.init()
+    plausible.init();
+    window.__saasbillEvents = window.__saasbillEvents || [];
+    window.trackSaaSBillEvent = function(eventName, props) {
+      var p = props || {};
+      var entry = { event: eventName, ts: Date.now() };
+      for (var k in p) {
+        if (Object.prototype.hasOwnProperty.call(p, k)) entry[k] = p[k];
+      }
+      window.__saasbillEvents.push(entry);
+      if (typeof window.plausible === 'function') {
+        window.plausible(eventName, { props: p });
+      }
+    };
   </script>
-  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "TechArticle", "@id": "https://saasbill.io/#article", "headline": "saasbill.io \u2013 True Year-1 SaaS Cost & Fee Calculator (2026)", "description": "Calculate the 2026 true cost and Year-1 invoice of B2B SaaS tools including HubSpot mandatory onboarding fees ($1,500-$7,000), Intercom and Zendesk AI cost overages, CRM seat minimums, and Stripe vs. Paddle vs. Whop fees.", "datePublished": "2026-10-27", "dateModified": "2026-10-27T07:29:37+01:00", "author": {"@type": "Organization", "name": "SaaSBill Editorial", "url": "https://saasbill.io/"}, "publisher": {"@type": "Organization", "name": "SaaSBill", "url": "https://saasbill.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://saasbill.io/"}}, {"@type": "WebPage", "@id": "https://saasbill.io/", "url": "https://saasbill.io/", "name": "saasbill.io \u2013 True Year-1 SaaS Cost & Fee Calculator (2026)", "description": "Calculate the 2026 true cost and Year-1 invoice of B2B SaaS tools including HubSpot mandatory onboarding fees ($1,500-$7,000), Intercom and Zendesk AI cost overages, CRM seat minimums, and Stripe vs. Paddle vs. Whop fees.", "inLanguage": "en-US", "datePublished": "2026-10-27", "dateModified": "2026-10-27T07:29:37+01:00", "lastReviewed": "2026-10-27", "reviewedBy": {"@type": "Organization", "name": "SaaSBill Editorial"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "SaaSBill", "item": "https://saasbill.io/"}, {"@type": "ListItem", "position": 2, "name": "saasbill.io \u2013 True Year-1 SaaS Cost & Fee Calculator (2026)", "item": "https://saasbill.io/"}]}, {"@type": "Dataset", "name": "SaaSBill 2026 B2B SaaS True-Cost & Contract Trap Dataset", "description": "Verified 2026 pricing, mandatory onboarding fees, seat-bucket minimums, AI resolution rates, and payout reserve rules across 20 B2B SaaS and payment platforms.", "url": "https://saasbill.io/", "dateModified": "2026-10-27T07:29:37+01:00", "creator": {"@type": "Organization", "name": "SaaSBill Editorial"}, "datePublished": "2026-10-27", "temporalCoverage": "2026"}, {"@type": "FAQPage", "@id": "https://saasbill.io/#faq", "datePublished": "2026-10-27", "dateModified": "2026-10-27T07:29:37+01:00", "mainEntity": [{"@type": "Question", "name": "Which B2B SaaS tools charge mandatory onboarding fees in 2026?", "dateCreated": "2026-10-27", "dateModified": "2026-10-27T07:29:37+01:00", "acceptedAnswer": {"@type": "Answer", "text": "HubSpot charges mandatory one-time onboarding fees on its Professional and Enterprise tiers: $1,500 for Sales Hub Professional, $3,500 for Sales Hub Enterprise, $3,000 for Marketing Hub Professional, and $7,000 for Marketing Hub Enterprise (verified Oct 2026). Alternatives like Close CRM, Pipedrive, and Freshdesk charge $0 for onboarding.", "dateCreated": "2026-10-27", "dateModified": "2026-10-27T07:29:37+01:00"}}, {"@type": "Question", "name": "How does Intercom's $0.99 per Fin AI resolution pricing work?", "dateCreated": "2026-10-27", "dateModified": "2026-10-27T07:29:37+01:00", "acceptedAnswer": {"@type": "Answer", "text": "Intercom charges a per-seat monthly fee ($29 Essential, $85 Advanced, or $132 Expert billed annually) plus $0.99 for every customer conversation resolved by its Fin AI agent (and $9.99 for sales qualification). If Fin AI resolves 2,000 tickets a month, it adds $1,980/month ($23,760/year) to your seat invoice.", "dateCreated": "2026-10-27", "dateModified": "2026-10-27T07:29:37+01:00"}}, {"@type": "Question", "name": "Why does monday CRM cost more than advertised for 1 or 2 users?", "dateCreated": "2026-10-27", "dateModified": "2026-10-27T07:29:37+01:00", "acceptedAnswer": {"@type": "Answer", "text": "monday CRM enforces a 3-seat minimum and bills in fixed seat buckets (3, 5, 10, 15 seats). A solo user on the $12/seat Basic ($18/seat monthly) or $17/seat Standard ($25/seat monthly) plan must pay for 3 seats ($36/month annual or $54/month monthly on Basic). For 1\u20132 users, Pipedrive ($14\u2013$34/seat) or Close CRM Essentials ($35/user/month annual, $49/user/month monthly) is cheaper because they bill per exact seat.", "dateCreated": "2026-10-27", "dateModified": "2026-10-27T07:29:37+01:00"}}, {"@type": "Question", "name": "What happens to subscriber card tokens if Paddle or Stripe terminates my account?", "dateCreated": "2026-10-27", "dateModified": "2026-10-27T07:29:37+01:00", "acceptedAnswer": {"@type": "Answer", "text": "With Stripe (2.9% + $0.30), you are the merchant and own the customer relationship, allowing PGP-encrypted card token exports unless terminated for fraud. With a Merchant of Record like Paddle (5% + $0.50), Paddle is the legal seller of record and owns the card vault; if Paddle terminates your account on a risk review, you cannot export card tokens and every subscriber must re-enter their payment details.", "dateCreated": "2026-10-27", "dateModified": "2026-10-27T07:29:37+01:00"}}]}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "TechArticle", "@id": "https://saasbill.io/#article", "headline": "saasbill.io \u2013 True Year-1 SaaS Cost & Fee Calculator (2026)", "description": "Calculate the 2026 true cost and Year-1 invoice of B2B SaaS tools including HubSpot mandatory onboarding fees ($1,500-$7,000), Intercom and Zendesk AI cost overages, CRM seat minimums, and Stripe vs. Paddle vs. Whop fees.", "datePublished": "2026-10-27", "dateModified": "2026-10-27T18:34:45+01:00", "author": {"@type": "Organization", "name": "SaaSBill Editorial", "url": "https://saasbill.io/"}, "publisher": {"@type": "Organization", "name": "SaaSBill", "url": "https://saasbill.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://saasbill.io/"}}, {"@type": "WebPage", "@id": "https://saasbill.io/", "url": "https://saasbill.io/", "name": "saasbill.io \u2013 True Year-1 SaaS Cost & Fee Calculator (2026)", "description": "Calculate the 2026 true cost and Year-1 invoice of B2B SaaS tools including HubSpot mandatory onboarding fees ($1,500-$7,000), Intercom and Zendesk AI cost overages, CRM seat minimums, and Stripe vs. Paddle vs. Whop fees.", "inLanguage": "en-US", "datePublished": "2026-10-27", "dateModified": "2026-10-27T18:34:45+01:00", "lastReviewed": "2026-10-27", "reviewedBy": {"@type": "Organization", "name": "SaaSBill Editorial"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "SaaSBill", "item": "https://saasbill.io/"}, {"@type": "ListItem", "position": 2, "name": "saasbill.io \u2013 True Year-1 SaaS Cost & Fee Calculator (2026)", "item": "https://saasbill.io/"}]}, {"@type": "Dataset", "name": "SaaSBill 2026 B2B SaaS True-Cost & Contract Trap Dataset", "description": "Verified 2026 pricing, mandatory onboarding fees, seat-bucket minimums, AI resolution rates, and payout reserve rules across 20 B2B SaaS and payment platforms.", "url": "https://saasbill.io/", "dateModified": "2026-10-27T18:34:45+01:00", "creator": {"@type": "Organization", "name": "SaaSBill Editorial"}, "datePublished": "2026-10-27", "temporalCoverage": "2026"}, {"@type": "FAQPage", "@id": "https://saasbill.io/#faq", "datePublished": "2026-10-27", "dateModified": "2026-10-27T18:34:45+01:00", "mainEntity": [{"@type": "Question", "name": "Which B2B SaaS tools charge mandatory onboarding fees in 2026?", "dateCreated": "2026-10-27", "dateModified": "2026-10-27T18:34:45+01:00", "acceptedAnswer": {"@type": "Answer", "text": "HubSpot charges mandatory one-time onboarding fees on its Professional and Enterprise tiers: $1,500 for Sales Hub Professional, $3,500 for Sales Hub Enterprise, $3,000 for Marketing Hub Professional, and $7,000 for Marketing Hub Enterprise (verified Oct 2026). Alternatives like Close CRM, Pipedrive, and Freshdesk charge $0 for onboarding.", "dateCreated": "2026-10-27", "dateModified": "2026-10-27T18:34:45+01:00"}}, {"@type": "Question", "name": "How does Intercom's $0.99 per Fin AI resolution pricing work?", "dateCreated": "2026-10-27", "dateModified": "2026-10-27T18:34:45+01:00", "acceptedAnswer": {"@type": "Answer", "text": "Intercom charges a per-seat monthly fee ($29 Essential, $85 Advanced, or $132 Expert billed annually) plus $0.99 for every customer conversation resolved by its Fin AI agent (and $9.99 for sales qualification). If Fin AI resolves 2,000 tickets a month, it adds $1,980/month ($23,760/year) to your seat invoice.", "dateCreated": "2026-10-27", "dateModified": "2026-10-27T18:34:45+01:00"}}, {"@type": "Question", "name": "Why does monday CRM cost more than advertised for 1 or 2 users?", "dateCreated": "2026-10-27", "dateModified": "2026-10-27T18:34:45+01:00", "acceptedAnswer": {"@type": "Answer", "text": "monday CRM enforces a 3-seat minimum and bills in fixed seat buckets (3, 5, 10, 15 seats). A solo user on the $12/seat Basic ($18/seat monthly) or $17/seat Standard ($25/seat monthly) plan must pay for 3 seats ($36/month annual or $54/month monthly on Basic). For 1\u20132 users, Pipedrive ($14\u2013$34/seat) or Close CRM Essentials ($35/user/month annual, $49/user/month monthly) is cheaper because they bill per exact seat.", "dateCreated": "2026-10-27", "dateModified": "2026-10-27T18:34:45+01:00"}}, {"@type": "Question", "name": "What happens to subscriber card tokens if Paddle or Stripe terminates my account?", "dateCreated": "2026-10-27", "dateModified": "2026-10-27T18:34:45+01:00", "acceptedAnswer": {"@type": "Answer", "text": "With Stripe (2.9% + $0.30), you are the merchant and own the customer relationship, allowing PGP-encrypted card token exports unless terminated for fraud. With a Merchant of Record like Paddle (5% + $0.50), Paddle is the legal seller of record and owns the card vault; if Paddle terminates your account on a risk review, you cannot export card tokens and every subscriber must re-enter their payment details.", "dateCreated": "2026-10-27", "dateModified": "2026-10-27T18:34:45+01:00"}}]}]}</script>
 </head>
 <body>
   <header class="site-header">
     <div class="container nav-inner">
       <div class="brand-wrap">
         <a href="./index.html" class="brand">SaaSBill<span>.io</span></a>
-        <span class="brand-tagline">Independent software cost &amp; contract audits</span>
+        <span class="brand-tagline">Year-1 software cost &amp; contract calculators</span>
       </div>
       <nav class="nav-links" aria-label="Primary Navigation">
         <a href="./index.html#all-calculators">Audits &amp; Guides</a>
@@ -50,7 +62,7 @@
   <main class="container">
     <article itemscope itemtype="https://schema.org/TechArticle">
       <meta itemprop="datePublished" content="2026-10-27" />
-      <meta itemprop="dateModified" content="2026-10-27T07:29:37+01:00" />
+      <meta itemprop="dateModified" content="2026-10-27T18:34:45+01:00" />
       
 <section class="hero editorial-hero">
   <h1>Your SaaS bill is lying to you.</h1>
@@ -171,12 +183,16 @@
       </div>
     </div>
 
-    <!-- Right Column: Selected Product Header + Huge Editorial Serif Total + Fixed-Height Explanation + Primary CTA -->
+    <!-- Right Column: 1. Answer (Selected Product + Big Total) -> 2. Why + Expandable Calculation -> Contextual Primary CTA -->
     <div class="wb-result-col" id="wb-result-mount" aria-live="polite">
       <div class="wb-selected-product" id="wb-selected-product">Zendesk Suite Team + AI</div>
       <div class="wb-big-total" id="wb-big-total-wrap"><span id="wb-big-amount">$11,850</span> <span class="wb-per-year" id="wb-big-unit">/ year</span></div>
       <p class="wb-budget-quote" id="wb-budget-quote">Estimated Year-1 total including mandatory fees &amp; overages.</p>
       <p class="wb-budget-subnote" id="wb-budget-subnote"></p>
+      <details class="calc-disclosure" id="wb-calc-details">
+        <summary class="calc-disclosure-toggle" id="wb-calc-summary">See exactly how we calculated this</summary>
+        <div class="calc-disclosure-body" id="wb-calc-body"></div>
+      </details>
       <div class="cta-stack">
         <a id="wb-primary-cta" class="btn-cta wb-primary-cta" href="https://www.zendesk.com/pricing/" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="zendesk-suite-team" data-cta-location="workbench">View Zendesk pricing &rarr;</a>
       </div>
@@ -184,41 +200,70 @@
   </div>
 </section>
 
-<!-- THE HIDDEN COST GAP: Editorial Comparison Table -->
-<section class="hidden-gap-section" aria-labelledby="gap-heading">
-  <h2 id="gap-heading">Sticker Price vs. True Cost</h2>
-  <div class="gap-toolbar">
-    <p class="gap-subhead" id="gap-dynamic-subhead">All 5 tools compared for 5 seats &middot; annual billing &middot; 500 AI tickets/mo &middot; click any row to inspect its breakdown above.</p>
-    <div class="wb-quiet-field gap-sort-field" id="sort-control-group">
-      <label for="sort-mode">Sort:</label>
-      <select id="sort-mode" data-track="calculator-control" data-control="sort-mode">
-        <option value="lowest" selected>Lowest cost</option>
-        <option value="hidden_fees">Hidden gap</option>
-        <option value="highest">Highest cost</option>
-        <option value="name">A&ndash;Z</option>
-      </select>
+<!-- STEP 1 & 2: ANSWER / VERDICT CARDS + PROGRESSIVE CALCULATION DISCLOSURE -->
+<section class="verdict-section" id="verdict-card" aria-label="Category Verdict &amp; Best-Value Recommendations">
+  <div id="calc-summary-strip" class="summary-strip" aria-live="polite"></div>
+</section>
+
+<!-- STEP 3: VISUAL COMPARISON (Apples-to-Apples Year-1 Cost Proportions) -->
+<section id="calc-viz-panel" class="viz-panel" aria-labelledby="viz-panel-title">
+  <div class="viz-header">
+    <div class="viz-title" id="viz-panel-title">Apples-to-Apples Year-1 Cost Comparison</div>
+    <div class="viz-legend" id="viz-panel-legend">
+      <span class="viz-legend-item"><span class="viz-swatch" style="background:var(--bar-seats);"></span>Base Licenses</span>
+      <span class="viz-legend-item"><span class="viz-swatch" style="background:var(--bar-onboarding);"></span>Mandatory Onboarding</span>
+      <span class="viz-legend-item"><span class="viz-swatch" style="background:var(--bar-ai);"></span>AI Overages</span>
     </div>
   </div>
+  <div id="calc-viz-rows" class="viz-rows"></div>
+</section>
 
-  <div class="table-wrap editorial-gap-table mobile-cards">
-    <table>
-      <caption>2026 B2B Software Year-1 True-Cost Comparison &amp; Contract Audit (USD, verified Oct 25, 2026)</caption>
-      <thead>
-        <tr>
-          <th id="th-col-1">Scenario</th>
-          <th id="th-col-2"><span class="legend-dot dot-sticker" aria-hidden="true"></span>Sticker Price / Year</th>
-          <th id="th-col-3">True Cost / Year (Est.)</th>
-          <th id="th-col-4"><span class="legend-dot dot-hidden" aria-hidden="true"></span>Hidden Cost Gap</th>
-          <th id="th-col-5">Official Pricing</th>
-        </tr>
-      </thead>
-      <tbody id="calc-tbody"></tbody>
-    </table>
-  </div>
+<!-- STEP 4: FULL CONTRACT & RENEWAL TABLE (Progressive Disclosure) -->
+<section class="hidden-gap-section" aria-labelledby="gap-heading">
+  <details class="full-table-disclosure" id="full-table-details">
+    <summary class="full-table-summary" id="full-table-summary">
+      <div class="full-table-summary-text">
+        <h2 id="gap-heading" class="full-table-heading">Sticker Price vs. True Cost</h2>
+        <span class="full-table-summary-sub">Show full contract &amp; renewal table (all tiers, lock-in rules &amp; verified sources)</span>
+      </div>
+      <span class="full-table-toggle-pill" id="full-table-toggle-pill">Show full table &darr;</span>
+    </summary>
+    <div class="full-table-body">
+      <div class="gap-toolbar">
+        <p class="gap-subhead" id="gap-dynamic-subhead">All 5 tools compared for 5 seats &middot; annual billing &middot; 500 AI tickets/mo &middot; click any row to inspect its breakdown above.</p>
+        <div class="wb-quiet-field gap-sort-field" id="sort-control-group">
+          <label for="sort-mode">Sort:</label>
+          <select id="sort-mode" data-track="calculator-control" data-control="sort-mode">
+            <option value="lowest" selected>Lowest cost</option>
+            <option value="hidden_fees">Hidden gap</option>
+            <option value="highest">Highest cost</option>
+            <option value="name">A&ndash;Z</option>
+          </select>
+        </div>
+      </div>
 
-  <p id="calc-payment-note" style="font-size:0.8rem; color:var(--muted); margin-top:6px;">
-    <strong>Payment Processors &amp; MoR (Fees vs. Temporary Reserves):</strong> Because payment rails charge per transaction rather than per seat, selecting <em>Payment Processors</em> models a standardized benchmark of <strong>$50,000/month GMV across 1,000 transactions ($50 AOV, 30% international cards)</strong>. <strong>Estimated monthly processing fees</strong> (percentage + per-transaction + FX/billing surcharges) are shown separately from <strong>potential funds temporarily held</strong> (such as a 25% rolling reserve held for 90&ndash;180 days on a risk flag, which is a cashflow hold rather than a fee). To model your exact volume, open the <a href="./exit/stripe-shopify-paddle-frozen-funds-alternatives/">Interactive Payout Hold &amp; Reserve Simulator &rarr;</a>
-  </p>
+      <div class="table-wrap editorial-gap-table mobile-cards">
+        <table>
+          <caption>2026 B2B Software Year-1 True-Cost Comparison &amp; Contract Audit (USD, verified Oct 25, 2026)</caption>
+          <thead>
+            <tr>
+              <th id="th-col-1">Scenario</th>
+              <th id="th-col-2"><span class="legend-dot dot-sticker" aria-hidden="true"></span>Sticker Price / Year</th>
+              <th id="th-col-3">True Cost / Year (Est.)</th>
+              <th id="th-col-4"><span class="legend-dot dot-hidden" aria-hidden="true"></span>Hidden Cost Gap</th>
+              <th id="th-col-5">Official Pricing</th>
+            </tr>
+          </thead>
+          <tbody id="calc-tbody"></tbody>
+        </table>
+      </div>
+
+      <p id="calc-payment-note" style="font-size:0.8rem; color:var(--muted); margin-top:6px;">
+        <strong>Payment Processors &amp; MoR (Fees vs. Temporary Reserves):</strong> Because payment rails charge per transaction rather than per seat, selecting <em>Payment Processors</em> models a standardized benchmark of <strong>$50,000/month GMV across 1,000 transactions ($50 AOV, 30% international cards)</strong>. <strong>Estimated monthly processing fees</strong> (percentage + per-transaction + FX/billing surcharges) are shown separately from <strong>potential funds temporarily held</strong> (such as a 25% rolling reserve held for 90&ndash;180 days on a risk flag, which is a cashflow hold rather than a fee). To model your exact volume, open the <a href="./exit/stripe-shopify-paddle-frozen-funds-alternatives/">Interactive Payout Hold &amp; Reserve Simulator &rarr;</a>
+      </p>
+    </div>
+  </details>
+  <p class="calc-affiliate-disclosure">Independent calculations. Some vendor links are affiliate links. This never changes our rankings or calculations.</p>
 </section>
 </div>
 
@@ -346,8 +391,8 @@
       <span class="status-pill status-estimated">Estimated (Benchmark)</span> indicates non-public, sales-quoted pricing modeled from verified buyer contract benchmarks.
     </div>
     <div class="methodology-item">
-      <strong>Editorial Independence &amp; Sources</strong>
-      Every CTA button links directly to the vendor&rsquo;s official site (<code>rel="nofollow noopener"</code>), alongside a primary-source link for contract verification. Some outbound links are affiliate links that may earn a commission at no extra cost to you; calculations and rankings are strictly formula-driven. Spot a pricing change? Email <a href="mailto:info@saasbill.io">info@saasbill.io</a>.
+      <strong>Affiliate Disclosure &amp; Sources</strong>
+      Independent calculations. Some vendor links are affiliate links. This never changes our rankings or calculations. Every CTA button links directly to the vendor&rsquo;s official site (<code>rel="nofollow noopener"</code>), alongside a primary-source link for contract verification. Spot a pricing change? Email <a href="mailto:info@saasbill.io">info@saasbill.io</a>.
     </div>
   </div>
 </section>
@@ -370,46 +415,106 @@ function calcEffectiveSeats(tool, seats) {
 function calcToolYear1(t, seats, aiVol, mode) {
   const effSeats = calcEffectiveSeats(t, seats);
   const unitRate = mode === 'annual' ? t.advertised_monthly_price_usd : t.monthly_billing_price_usd;
+  const fmtUnit = n => Number.isInteger(n) ? n.toLocaleString() : n.toFixed(2);
   let monthlySoftware = 0;
   let seatPaddingAnnual = 0;
+  const calcSteps = [];
   if (t.id === 'hubspot-marketing-pro') {
-    monthlySoftware = unitRate + Math.max(0, seats - 3) * 45;
+    const extraSeats = Math.max(0, seats - 3);
+    const baseAnnual = Math.round(unitRate * 12);
+    const extraAnnual = Math.round(extraSeats * 45 * 12);
+    monthlySoftware = unitRate + extraSeats * 45;
+    calcSteps.push({
+      key: 'base_plan',
+      label: 'Base platform plan (3 core seats incl.)',
+      formula: `$${fmtUnit(unitRate)}/mo (${mode}) × 12 mos`,
+      amount: baseAnnual
+    });
+    if (extraSeats > 0) {
+      calcSteps.push({
+        key: 'extra_seats',
+        label: 'Additional core seats above 3',
+        formula: `${extraSeats} seat${extraSeats === 1 ? '' : 's'} × $45/mo × 12 mos`,
+        amount: extraAnnual
+      });
+    }
   } else if (t.id === 'vanta-soc2' || t.id === 'drata-soc2' || t.id === 'jotform-hipaa') {
     monthlySoftware = unitRate;
+    const flatAnnual = Math.round(monthlySoftware * 12);
+    calcSteps.push({
+      key: 'base_plan',
+      label: 'Base platform subscription (flat tier)',
+      formula: `$${fmtUnit(unitRate)}/mo (${mode}) × 12 mos`,
+      amount: flatAnnual
+    });
   } else {
     monthlySoftware = effSeats * unitRate;
-    seatPaddingAnnual = Math.max(0, effSeats - seats) * unitRate * 12;
+    seatPaddingAnnual = Math.round(Math.max(0, effSeats - seats) * unitRate * 12);
+    const activeAnnual = Math.round(monthlySoftware * 12) - seatPaddingAnnual;
+    calcSteps.push({
+      key: 'active_seats',
+      label: `Active user licenses (${seats} seat${seats === 1 ? '' : 's'})`,
+      formula: `${seats} × $${fmtUnit(unitRate)}/mo (${mode}) × 12 mos`,
+      amount: activeAnnual
+    });
+    if (seatPaddingAnnual > 0) {
+      const unused = effSeats - seats;
+      calcSteps.push({
+        key: 'seat_padding',
+        label: `Seat-bucket / minimum padding (${unused} unused seat${unused === 1 ? '' : 's'})`,
+        formula: `${unused} × $${fmtUnit(unitRate)}/mo (${effSeats}-seat min) × 12 mos`,
+        amount: seatPaddingAnnual
+      });
+    }
   }
   let aiAnnual = 0;
   let aiNote = '';
+  let aiFormula = 'No metered AI overage ($0)';
   if (t.id === 'zendesk-suite-team') {
     const incl = Math.min(seats * 5, 833);
     const overageRate = mode === 'annual' ? 1.50 : 2.00;
     const aiMonthly = Math.max(0, aiVol - incl) * overageRate;
     aiAnnual = Math.round(aiMonthly * 12);
     aiNote = `${incl} AR/mo incl., then $${overageRate.toFixed(2)}/${mode === 'annual' ? 'committed' : 'PAYG'}`;
+    aiFormula = `max(0, ${aiVol.toLocaleString()} - ${incl} incl.) × $${overageRate.toFixed(2)} × 12 mos`;
   } else if (t.id === 'zendesk-suite-professional') {
     const incl = Math.min(seats * 10, 833);
     const overageRate = mode === 'annual' ? 1.50 : 2.00;
     const aiMonthly = Math.max(0, aiVol - incl) * overageRate;
     aiAnnual = Math.round(aiMonthly * 12);
     aiNote = `${incl} AR/mo incl., then $${overageRate.toFixed(2)}/${mode === 'annual' ? 'committed' : 'PAYG'}`;
+    aiFormula = `max(0, ${aiVol.toLocaleString()} - ${incl} incl.) × $${overageRate.toFixed(2)} × 12 mos`;
   } else if (t.id === 'freshdesk-support') {
     const annualSessions = aiVol * 12;
     const billableSessions = Math.max(0, annualSessions - 500);
     const packs = Math.ceil(billableSessions / 100);
     aiAnnual = packs * 49;
     aiNote = `500 1x free sessions, then $49/100 sessions (${packs} packs/yr)`;
+    aiFormula = `ceil(max(0, ${aiVol.toLocaleString()}×12 - 500 free) / 100) = ${packs} packs × $49`;
   } else {
     const aiMonthly = (t.ai_per_resolution_usd || 0) * aiVol;
     aiAnnual = Math.round(aiMonthly * 12);
     if (t.ai_per_resolution_usd > 0) {
       aiNote = `$${t.ai_per_resolution_usd.toFixed(2)}/resolution (${aiVol.toLocaleString()}/mo)`;
+      aiFormula = `${aiVol.toLocaleString()}/mo × $${t.ai_per_resolution_usd.toFixed(2)}/res × 12 mos`;
     }
   }
   const annualSeatsCost = Math.round(monthlySoftware * 12);
   const onboarding = Math.round(t.mandatory_onboarding_fee_usd || 0);
+  calcSteps.push({
+    key: 'onboarding',
+    label: 'Mandatory Year-1 onboarding fee',
+    formula: onboarding > 0 ? `One-time required setup (${t.vendor})` : '$0 required setup fee',
+    amount: onboarding
+  });
+  calcSteps.push({
+    key: 'ai_overage',
+    label: 'Metered AI resolution / session usage',
+    formula: aiFormula,
+    amount: aiAnnual
+  });
   const year1Total = annualSeatsCost + onboarding + aiAnnual;
+  const year2Total = annualSeatsCost + aiAnnual;
   const hiddenFees = onboarding + aiAnnual + seatPaddingAnnual;
   return {
     tool: t,
@@ -422,7 +527,9 @@ function calcToolYear1(t, seats, aiVol, mode) {
     seatPaddingAnnual,
     hiddenFees,
     aiNote,
-    year1Total
+    year1Total,
+    year2Total,
+    calcSteps
   };
 }
 
@@ -472,8 +579,99 @@ const INTERNAL_AUDIT_LINKS = {
   'drata-soc2': { url: './compliance/hipaa-baa-and-soc2-pricing-tiers/', label: 'Open SOC 2 + auditor estimator →' }
 };
 
+const SHORT_VENDOR_NAMES = {
+  'hubspot-sales-pro': 'HubSpot',
+  'hubspot-marketing-pro': 'HubSpot',
+  'hubspot-service-hub': 'HubSpot',
+  'close-crm': 'Close',
+  'pipedrive-crm': 'Pipedrive',
+  'monday-crm': 'monday CRM',
+  'intercom-fin-ai': 'Intercom',
+  'freshdesk-support': 'Freshdesk',
+  'zendesk-suite-team': 'Zendesk',
+  'zendesk-suite-professional': 'Zendesk',
+  'help-scout-plus': 'Help Scout',
+  'stripe-payments': 'Stripe',
+  'paddle-mor': 'Paddle',
+  'whop-payments': 'Whop',
+  'lemon-squeezy': 'Lemon Squeezy',
+  'chargeflow': 'Chargeflow',
+  'jotform-hipaa': 'Jotform',
+  '1password-business': '1Password',
+  'vanta-soc2': 'Vanta',
+  'drata-soc2': 'Drata'
+};
+
 function getVendorCtaLabel(tool) {
   return VENDOR_CTA_LABELS[tool.id] || `View ${tool.vendor || tool.name} pricing →`;
+}
+
+function getContextualCtaLabel(tool, rowTotal, refTotal, isTrapOrHighest) {
+  const shortVendor = SHORT_VENDOR_NAMES[tool.id] || tool.vendor || tool.name;
+  if (tool.id === 'chargeflow') {
+    return 'Prevent reserve holds with Chargeflow →';
+  }
+  if (!isTrapOrHighest && typeof rowTotal === 'number' && typeof refTotal === 'number' && refTotal > rowTotal) {
+    const saved = Math.round(refTotal - rowTotal);
+    if (saved > 0) {
+      return `Save $${saved.toLocaleString()}/yr with ${shortVendor} →`;
+    }
+  }
+  return getVendorCtaLabel(tool);
+}
+
+function renderCalcBreakdownHtml(r, seats, aiVol, mode, cat) {
+  if (cat === 'Payment Processors & MoR' && PAY_PROFILES[r.tool.id]) {
+    const prof = PAY_PROFILES[r.tool.id];
+    const srcUrl = (r.tool.source_urls && r.tool.source_urls[0]) ? r.tool.source_urls[0] : '#';
+    return `
+      <div class="calc-math-list">
+        <div class="calc-math-row">
+          <span class="calc-math-label"><strong>${prof.callTitleBase}</strong><span class="calc-math-formula">${prof.callSubBase}</span></span>
+          <span class="calc-math-val">$${prof.b.toLocaleString()}/mo</span>
+        </div>
+        <div class="calc-math-row">
+          <span class="calc-math-label"><strong>${prof.callTitleSeats}</strong><span class="calc-math-formula">${prof.callSubSeats}</span></span>
+          <span class="calc-math-val">$${prof.s.toLocaleString()}/mo</span>
+        </div>
+        <div class="calc-math-row">
+          <span class="calc-math-label"><strong>${prof.callTitleHidden}</strong><span class="calc-math-formula">${prof.callSubHidden}</span></span>
+          <span class="calc-math-val">$${prof.h.toLocaleString()}/mo</span>
+        </div>
+        <div class="calc-math-total">
+          <span>Monthly Processing Fees ($50k GMV)</span>
+          <span>$${prof.total.toLocaleString()}/mo ($${(prof.total * 12).toLocaleString()}/yr)</span>
+        </div>
+        <div class="calc-math-meta">
+          <span>Potential 25% reserve holdback: <strong>$${prof.held.toLocaleString()}/mo</strong> (temporary hold, not a fee)</span>
+          <a href="${srcUrl}" target="_blank" rel="noopener">Verified source &nearr;</a>
+        </div>
+      </div>
+    `;
+  }
+  const srcUrl = (r.tool.source_urls && r.tool.source_urls[0]) ? r.tool.source_urls[0] : '#';
+  const rowsHtml = (r.calcSteps || []).map(step => `
+    <div class="calc-math-row">
+      <span class="calc-math-label"><strong>${step.label}</strong><span class="calc-math-formula">${step.formula}</span></span>
+      <span class="calc-math-val">${step.amount > 0 && (step.key === 'onboarding' || step.key === 'ai_overage' || step.key === 'seat_padding') ? '+' : ''}$${step.amount.toLocaleString()}</span>
+    </div>
+  `).join('');
+  const renewalText = r.onboarding > 0
+    ? `Year-2 renewal (after 1x onboarding): <strong>$${r.year2Total.toLocaleString()}/yr</strong>`
+    : `Year-2 recurring estimate: <strong>$${r.year2Total.toLocaleString()}/yr</strong>`;
+  return `
+    <div class="calc-math-list">
+      ${rowsHtml}
+      <div class="calc-math-total">
+        <span>True Year-1 Total (${mode} billing)</span>
+        <span>$${r.year1Total.toLocaleString()} / yr</span>
+      </div>
+      <div class="calc-math-meta">
+        <span>${renewalText}</span>
+        <a href="${srcUrl}" target="_blank" rel="noopener">Verified source &nearr;</a>
+      </div>
+    </div>
+  `;
 }
 
 function formatScenarioText(cat, seats, aiVol, mode) {
@@ -655,8 +853,15 @@ function renderDirectory() {
   document.getElementById('seat-val').textContent = seats.toLocaleString();
   document.getElementById('ai-val').textContent = aiVol.toLocaleString();
 
-  window.__saasbillEvents = window.__saasbillEvents || [];
-  window.__saasbillEvents.push({ event: 'result_rendered', category: cat, seats: seats, aiTickets: aiVol, billingMode: mode, sortMode: sortMode, ts: Date.now() });
+  if (typeof window.trackSaaSBillEvent === 'function') {
+    window.trackSaaSBillEvent('result_rendered', { category: cat, seats: seats, aiTickets: aiVol, billingMode: mode, sortMode: sortMode });
+  } else {
+    window.__saasbillEvents = window.__saasbillEvents || [];
+    window.__saasbillEvents.push({ event: 'result_rendered', category: cat, seats: seats, aiTickets: aiVol, billingMode: mode, sortMode: sortMode, ts: Date.now() });
+    if (typeof window.plausible === 'function') {
+      window.plausible('result_rendered', { props: { category: cat, seats: seats, aiTickets: aiVol, billingMode: mode, sortMode: sortMode } });
+    }
+  }
 
   document.querySelectorAll('.cat-tab').forEach(btn => {
     if (btn.getAttribute('data-cat') === cat) {
@@ -790,10 +995,15 @@ function renderDirectory() {
     }
   }
 
+  const wbCalcBody = document.getElementById('wb-calc-body');
+  const vizTitleEl = document.getElementById('viz-panel-title');
+  const vizLegendEl = document.getElementById('viz-panel-legend');
+
   if (cat === 'Payment Processors & MoR') {
     const spotPayR = rows.find(r => r.tool.id === currentSpotlightId) || rows[0];
     const spotPayAff = AFFILIATES[spotPayR.tool.affiliate_slug] || { destination_url: '#' };
     const prof = PAY_PROFILES[spotPayR.tool.id] || PAY_PROFILES['stripe-payments'];
+    const maxPayMo = 3475;
     const [s1, s2, s3] = computeSmoothBarShares(prof.b, prof.s, prof.h);
     if (rowBase && rowSeats && rowHidden) {
       applyBarRowState(rowBase, s1, prof.b);
@@ -818,11 +1028,112 @@ function renderDirectory() {
     const quoteEl = document.getElementById('wb-budget-quote');
     if (quoteEl) quoteEl.innerHTML = prof.quote;
     document.getElementById('wb-budget-subnote').textContent = prof.sub;
+    if (wbCalcBody) {
+      wbCalcBody.innerHTML = renderCalcBreakdownHtml(spotPayR, seats, aiVol, mode, cat);
+    }
     const ctaEl = document.getElementById('wb-primary-cta');
     if (ctaEl) {
       ctaEl.href = spotPayAff.destination_url;
       ctaEl.setAttribute('data-vendor', spotPayR.tool.id);
-      ctaEl.textContent = getVendorCtaLabel(spotPayR.tool);
+      const isPayWinner = spotPayR.tool.id === 'whop-payments';
+      ctaEl.textContent = isPayWinner
+        ? getContextualCtaLabel(spotPayR.tool, prof.total * 12, maxPayMo * 12, false)
+        : (spotPayR.tool.id === 'chargeflow' ? getContextualCtaLabel(spotPayR.tool, 500, 0, false) : getVendorCtaLabel(spotPayR.tool));
+    }
+
+    if (summaryEl) {
+      const whopR = rows.find(r => r.tool.id === 'whop-payments') || rows[0];
+      const paddleR = rows.find(r => r.tool.id === 'paddle-mor') || rows[0];
+      const cfR = rows.find(r => r.tool.id === 'chargeflow') || rows[0];
+      const whopAff = AFFILIATES[whopR.tool.affiliate_slug] || { destination_url: '#' };
+      const paddleAff = AFFILIATES[paddleR.tool.affiliate_slug] || { destination_url: '#' };
+      const cfAff = AFFILIATES[cfR.tool.affiliate_slug] || { destination_url: '#' };
+      summaryEl.innerHTML = `
+        <div class="summary-card result-card card-lowest">
+          <div class="summary-label">Lowest Direct Fee &amp; Failover Routing</div>
+          <div class="summary-metric" style="color:var(--emerald);">$2,275 / mo &middot; Whop Payments</div>
+          <div class="summary-scenario">Based on $50,000/mo GMV, 1,000 tx, 30% international</div>
+          <div class="summary-breakdown">$1,650 base (2.7% + 30&cent;) + $400 multi-PSP routing + $225 intl ($1,875/mo without orchestration)</div>
+          <details class="calc-disclosure">
+            <summary class="calc-disclosure-toggle">See calculation</summary>
+            <div class="calc-disclosure-body">${renderCalcBreakdownHtml(whopR, seats, aiVol, mode, cat)}</div>
+          </details>
+          <div class="summary-actions">
+            <div class="cta-stack">
+              <a class="btn-cta" href="${whopAff.destination_url}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="whop-payments" data-cta-location="summary-card">${getContextualCtaLabel(whopR.tool, 2275 * 12, 3450 * 12, false)}</a>
+            </div>
+          </div>
+        </div>
+        <div class="summary-card result-card card-hidden">
+          <div class="summary-label">Hidden Cost Highlight (MoR &amp; Reserves)</div>
+          <div class="summary-metric" style="color:var(--rose);">$12,500 / mo temporarily held</div>
+          <div class="summary-scenario">On <strong>Paddle / Stripe / Lemon Squeezy</strong> (25% rolling reserve scenario)</div>
+          <div class="summary-breakdown">$3,450/mo Paddle MoR fees ($41,400/yr) + non-exportable subscriber card vault on termination</div>
+          <div class="summary-caveat"><strong>Hidden Cost Highlight:</strong> A 25% rolling reserve locks $12,500/mo in working capital for 90&ndash;180 days.</div>
+          <details class="calc-disclosure">
+            <summary class="calc-disclosure-toggle">See calculation</summary>
+            <div class="calc-disclosure-body">${renderCalcBreakdownHtml(paddleR, seats, aiVol, mode, cat)}</div>
+          </details>
+          <div class="summary-actions">
+            <div class="cta-stack">
+              <a class="btn-secondary" href="${paddleAff.destination_url}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="paddle-mor" data-cta-location="summary-card">${getVendorCtaLabel(paddleR.tool)}</a>
+            </div>
+          </div>
+        </div>
+        <div class="summary-card result-card card-highest">
+          <div class="summary-label">Pre-Dispute Reserve Shield</div>
+          <div class="summary-metric">$500 / mo &middot; Chargeflow</div>
+          <div class="summary-scenario">Based on $2,000/mo recovered chargebacks (25% success fee)</div>
+          <div class="summary-breakdown">$0 monthly base fee &middot; keeps dispute ratio below 0.5% monitoring threshold</div>
+          <details class="calc-disclosure">
+            <summary class="calc-disclosure-toggle">See calculation</summary>
+            <div class="calc-disclosure-body">${renderCalcBreakdownHtml(cfR, seats, aiVol, mode, cat)}</div>
+          </details>
+          <div class="summary-actions">
+            <div class="cta-stack">
+              <a class="btn-secondary" href="${cfAff.destination_url}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="chargeflow" data-cta-location="summary-card">${getContextualCtaLabel(cfR.tool, 500, 0, false)}</a>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    if (vizPanel && vizRowsEl) {
+      vizPanel.style.display = 'block';
+      if (vizTitleEl) vizTitleEl.textContent = 'Apples-to-Apples Monthly Processing Fee Comparison ($50k/mo GMV)';
+      if (vizLegendEl) {
+        vizLegendEl.innerHTML = `
+          <span class="viz-legend-item"><span class="viz-swatch" style="background:var(--bar-seats);"></span>Base Rate</span>
+          <span class="viz-legend-item"><span class="viz-swatch" style="background:var(--bar-onboarding);"></span>Per-Tx / Routing</span>
+          <span class="viz-legend-item"><span class="viz-swatch" style="background:var(--bar-ai);"></span>Billing / FX / Recovery</span>
+        `;
+      }
+      vizRowsEl.innerHTML = rows.map(r => {
+        const aff = AFFILIATES[r.tool.affiliate_slug] || { destination_url: '#' };
+        const p = PAY_PROFILES[r.tool.id] || PAY_PROFILES['stripe-payments'];
+        const bPct = Math.max(0, (p.b / maxPayMo) * 100);
+        const sPct = Math.max(0, (p.s / maxPayMo) * 100);
+        const hPct = Math.max(0, (p.h / maxPayMo) * 100);
+        const isSpotViz = r.tool.id === currentSpotlightId ? 'is-spotlight-row' : '';
+        const rowCta = r.tool.id === 'whop-payments'
+          ? getContextualCtaLabel(r.tool, p.total * 12, 3450 * 12, false)
+          : (r.tool.id === 'chargeflow' ? getContextualCtaLabel(r.tool, 500, 0, false) : getVendorCtaLabel(r.tool));
+        return `
+          <div class="viz-row ${isSpotViz}" data-tool-id="${r.tool.id}" style="cursor:pointer;">
+            <div class="viz-label" title="${r.tool.name}">${r.tool.name}</div>
+            <div class="viz-bar-wrap">
+              <div class="viz-bar-track" title="$${p.total.toLocaleString()}/mo processing fees">
+                <div class="viz-seg-seats" style="width:${bPct.toFixed(2)}%"></div>
+                ${p.s > 0 ? `<div class="viz-seg-onboarding" style="width:${sPct.toFixed(2)}%"></div>` : ''}
+                ${p.h > 0 ? `<div class="viz-seg-ai" style="width:${hPct.toFixed(2)}%"></div>` : ''}
+              </div>
+              <div class="viz-breakdown-text">${p.tableFeeSub} &middot; ${p.tableHeldPill}</div>
+            </div>
+            <div class="viz-total-label">$${p.total.toLocaleString()} / mo</div>
+            <a class="viz-action-link" href="${aff.destination_url}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${r.tool.id}" data-cta-location="chart-row">${rowCta}</a>
+          </div>
+        `;
+      }).join('');
     }
   } else if (rows.length > 0) {
     const byLowest = [...rows].sort((a, b) => a.year1Total - b.year1Total);
@@ -834,6 +1145,9 @@ function renderDirectory() {
 
     const spotR = rows.find(r => r.tool.id === currentSpotlightId) || topHidden || minR;
     const spotAff = AFFILIATES[spotR.tool.affiliate_slug] || { destination_url: '#' };
+    const refBenchmarkR = (spotR.year1Total > minR.year1Total && spotR.tool.id !== minR.tool.id)
+      ? spotR
+      : (topHidden.year1Total > minR.year1Total ? topHidden : maxR);
 
     // 3 vertical stacked bar segments that sum 100% identically to spotR.year1Total:
     const baseSubYr = Math.min(spotR.annualSeatsCost, Math.round(spotR.unitRate * 12));
@@ -876,11 +1190,16 @@ function renderDirectory() {
         subNoteEl.textContent = `Matches advertised price ($0 hidden fees).`;
       }
     }
+    if (wbCalcBody) {
+      wbCalcBody.innerHTML = renderCalcBreakdownHtml(spotR, seats, aiVol, mode, cat);
+    }
     const ctaEl = document.getElementById('wb-primary-cta');
     if (ctaEl) {
       ctaEl.href = spotAff.destination_url;
       ctaEl.setAttribute('data-vendor', spotR.tool.id);
-      ctaEl.textContent = getVendorCtaLabel(spotR.tool);
+      const isSpotTrapOrHighest = spotR.tool.id === topHidden.tool.id || spotR.tool.id === maxR.tool.id || spotR.onboarding > 0;
+      const wbRefTotal = topHidden.year1Total > spotR.year1Total ? topHidden.year1Total : maxR.year1Total;
+      ctaEl.textContent = getContextualCtaLabel(spotR.tool, spotR.year1Total, wbRefTotal, isSpotTrapOrHighest);
     }
 
     const minAff = AFFILIATES[minR.tool.affiliate_slug] || { destination_url: '#' };
@@ -894,26 +1213,36 @@ function renderDirectory() {
     if (summaryEl) {
       const hiddenPct = topHidden.year1Total > 0 ? Math.round((topHidden.hiddenFees / topHidden.year1Total) * 100) : 0;
       const hiddenReasonText = formatHiddenReason(topHidden);
+      const savedVsRef = Math.max(0, refBenchmarkR.year1Total - minR.year1Total);
+      const minCtaText = getContextualCtaLabel(minR.tool, minR.year1Total, refBenchmarkR.year1Total, false);
       summaryEl.innerHTML = `
-        <div class="summary-card card-lowest">
-          <div class="summary-label">Lowest Estimated Year-1 Cost</div>
+        <div class="summary-card result-card card-lowest">
+          <div class="summary-label">Best Value &middot; Lowest Year-1 Cost</div>
           <div class="summary-metric" style="color:var(--emerald);">$${minR.year1Total.toLocaleString()} / yr &middot; ${minR.tool.name}</div>
-          <div class="summary-scenario">${scenarioLine}</div>
+          <div class="summary-scenario">${scenarioLine}${savedVsRef > 0 ? ` &middot; saves $${savedVsRef.toLocaleString()}/yr vs. ${refBenchmarkR.tool.name}` : ''}</div>
           <div class="summary-breakdown">$${minR.annualSeatsCost.toLocaleString()} licenses + $${minR.onboarding.toLocaleString()} onboarding + $${minR.aiAnnual.toLocaleString()} AI</div>
           <div class="summary-caveat"><strong>Contract note:</strong> ${minR.tool.trap_badge} (${minR.tool.billing_lock_in_type})</div>
+          <details class="calc-disclosure">
+            <summary class="calc-disclosure-toggle">See calculation</summary>
+            <div class="calc-disclosure-body">${renderCalcBreakdownHtml(minR, seats, aiVol, mode, cat)}</div>
+          </details>
           <div class="summary-actions">
             <div class="cta-stack">
-              <a class="btn-cta" href="${minAff.destination_url}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${minR.tool.id}" data-cta-location="summary-card">${getVendorCtaLabel(minR.tool)}</a>
+              <a class="btn-cta" href="${minAff.destination_url}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${minR.tool.id}" data-cta-location="summary-card">${minCtaText}</a>
             </div>
             ${minAudit ? `<a class="summary-audit-link" href="${minAudit.url}" data-track="internal-audit">${minAudit.label}</a>` : ''}
           </div>
         </div>
-        <div class="summary-card card-hidden">
+        <div class="summary-card result-card card-hidden">
           <div class="summary-label">Hidden Cost Highlight (Largest Non-Seat Add-On)</div>
           <div class="summary-metric" style="color:var(--rose);">+$${topHidden.hiddenFees.toLocaleString()} / yr (${hiddenPct}% of Year-1 bill)</div>
           <div class="summary-scenario">On <strong>${topHidden.tool.name}</strong> ($${topHidden.year1Total.toLocaleString()}/yr total &middot; ${scenarioLine.replace('Based on ', '')})</div>
           <div class="summary-breakdown">$${topHidden.annualSeatsCost.toLocaleString()} licenses + $${topHidden.onboarding.toLocaleString()} onboarding + $${topHidden.aiAnnual.toLocaleString()} AI</div>
           <div class="summary-caveat"><strong>Hidden Cost Highlight:</strong> ${hiddenReasonText}.</div>
+          <details class="calc-disclosure">
+            <summary class="calc-disclosure-toggle">See calculation</summary>
+            <div class="calc-disclosure-body">${renderCalcBreakdownHtml(topHidden, seats, aiVol, mode, cat)}</div>
+          </details>
           <div class="summary-actions">
             <div class="cta-stack">
               <a class="btn-secondary" href="${hidAff.destination_url}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${topHidden.tool.id}" data-cta-location="summary-card">${getVendorCtaLabel(topHidden.tool)}</a>
@@ -921,12 +1250,16 @@ function renderDirectory() {
             ${hidAudit ? `<a class="summary-audit-link" href="${hidAudit.url}" data-track="internal-audit">${hidAudit.label}</a>` : ''}
           </div>
         </div>
-        <div class="summary-card card-highest">
+        <div class="summary-card result-card card-highest">
           <div class="summary-label">Highest Estimated Year-1 Cost</div>
           <div class="summary-metric">$${maxR.year1Total.toLocaleString()} / yr &middot; ${maxR.tool.name}</div>
           <div class="summary-scenario">${scenarioLine}</div>
           <div class="summary-breakdown">$${maxR.annualSeatsCost.toLocaleString()} licenses + $${maxR.onboarding.toLocaleString()} onboarding + $${maxR.aiAnnual.toLocaleString()} AI</div>
           <div class="summary-caveat"><strong>Contract note:</strong> ${maxR.tool.trap_badge}</div>
+          <details class="calc-disclosure">
+            <summary class="calc-disclosure-toggle">See calculation</summary>
+            <div class="calc-disclosure-body">${renderCalcBreakdownHtml(maxR, seats, aiVol, mode, cat)}</div>
+          </details>
           <div class="summary-actions">
             <div class="cta-stack">
               <a class="btn-secondary" href="${maxAff.destination_url}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${maxR.tool.id}" data-cta-location="summary-card">${getVendorCtaLabel(maxR.tool)}</a>
@@ -939,6 +1272,14 @@ function renderDirectory() {
 
     if (vizPanel && vizRowsEl) {
       vizPanel.style.display = 'block';
+      if (vizTitleEl) vizTitleEl.textContent = 'Apples-to-Apples Year-1 Cost Comparison';
+      if (vizLegendEl) {
+        vizLegendEl.innerHTML = `
+          <span class="viz-legend-item"><span class="viz-swatch" style="background:var(--bar-seats);"></span>Base Licenses</span>
+          <span class="viz-legend-item"><span class="viz-swatch" style="background:var(--bar-onboarding);"></span>Mandatory Onboarding</span>
+          <span class="viz-legend-item"><span class="viz-swatch" style="background:var(--bar-ai);"></span>AI Overages</span>
+        `;
+      }
       vizRowsEl.innerHTML = rows.map(r => {
         const aff = AFFILIATES[r.tool.affiliate_slug] || { destination_url: '#' };
         const seatPct = Math.max(0, (r.annualSeatsCost / maxTotal) * 100);
@@ -947,8 +1288,11 @@ function renderDirectory() {
         const parts = [`$${r.annualSeatsCost.toLocaleString()} licenses`];
         if (r.onboarding > 0) parts.push(`$${r.onboarding.toLocaleString()} onboarding`);
         if (r.aiAnnual > 0) parts.push(`$${r.aiAnnual.toLocaleString()} AI overage`);
+        const isSpotViz = r.tool.id === currentSpotlightId ? 'is-spotlight-row' : '';
+        const isSavingsOption = (r.tool.id === minR.tool.id || (r.onboarding === 0 && r.hiddenFees === 0)) && r.tool.id !== topHidden.tool.id && r.tool.id !== maxR.tool.id;
+        const rowCta = getContextualCtaLabel(r.tool, r.year1Total, refBenchmarkR.year1Total, !isSavingsOption);
         return `
-          <div class="viz-row" data-tool-id="${r.tool.id}">
+          <div class="viz-row ${isSpotViz}" data-tool-id="${r.tool.id}" style="cursor:pointer;">
             <div class="viz-label" title="${r.tool.name}">${r.tool.name}</div>
             <div class="viz-bar-wrap">
               <div class="viz-bar-track" title="${parts.join(' + ')} = $${r.year1Total.toLocaleString()}/yr">
@@ -959,7 +1303,7 @@ function renderDirectory() {
               <div class="viz-breakdown-text">${parts.join(' + ')}</div>
             </div>
             <div class="viz-total-label">$${r.year1Total.toLocaleString()} / yr</div>
-            <a class="viz-action-link" href="${aff.destination_url}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${r.tool.id}" data-cta-location="chart-row">${getVendorCtaLabel(r.tool)}</a>
+            <a class="viz-action-link" href="${aff.destination_url}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${r.tool.id}" data-cta-location="chart-row">${rowCta}</a>
           </div>
         `;
       }).join('');
@@ -1100,7 +1444,10 @@ function updateInspectorRail() {
   const tray = document.getElementById('unified-inspector-tray');
   const rail = document.getElementById('inspector-left-rail');
   const wbCard = tray ? tray.querySelector('.editorial-workbench') : null;
-  const activeRow = tray ? tray.querySelector('tr.is-spotlight-row') : null;
+  const tableDetails = document.getElementById('full-table-details');
+  const activeTableRow = tray ? tray.querySelector('tr.is-spotlight-row') : null;
+  const activeVizRow = tray ? tray.querySelector('.viz-row.is-spotlight-row') : null;
+  const activeRow = (tableDetails && tableDetails.open && activeTableRow) ? activeTableRow : (activeVizRow || activeTableRow);
   if (!tray || !rail || !wbCard || !activeRow || window.innerWidth <= 960) {
     if (rail) rail.style.opacity = '0';
     return;
@@ -1248,6 +1595,22 @@ renderDirectory = function() {
   _origRenderDirectory();
   requestAnimationFrame(updateInspectorRail);
 };
+const fullTableDetailsEl = document.getElementById('full-table-details');
+if (fullTableDetailsEl) {
+  fullTableDetailsEl.addEventListener('toggle', () => {
+    const pillEl = document.getElementById('full-table-toggle-pill');
+    if (pillEl) {
+      pillEl.innerHTML = fullTableDetailsEl.open ? 'Hide full table &uarr;' : 'Show full table &darr;';
+    }
+    requestAnimationFrame(updateInspectorRail);
+  });
+}
+const wbCalcDetailsEl = document.getElementById('wb-calc-details');
+if (wbCalcDetailsEl) {
+  wbCalcDetailsEl.addEventListener('toggle', () => {
+    requestAnimationFrame(updateInspectorRail);
+  });
+}
 window.addEventListener('resize', () => requestAnimationFrame(updateInspectorRail));
 window.addEventListener('hashchange', () => {
   applyInitialContext(true);
@@ -1298,13 +1661,12 @@ renderDirectory();
   </main>
   <footer class="site-footer">
     <div class="container">
-      <p><strong>SaaSBill</strong> &middot; Independent Year-1 cost calculators for B2B software.</p>
-      <p class="footer-note">Updated <time datetime="2026-10-27">Oct 27, 2026</time> &middot; Some links are affiliate links &middot; Inquiries: <a href="mailto:info@saasbill.io">info@saasbill.io</a></p>
+      <p><strong>SaaSBill</strong> &middot; Year-1 cost &amp; contract calculators for B2B software.</p>
+      <p class="footer-note">Independent calculations. Some vendor links are affiliate links. This never changes our rankings or calculations. &middot; Updated <time datetime="2026-10-27">Oct 27, 2026</time> &middot; Inquiries: <a href="mailto:info@saasbill.io">info@saasbill.io</a></p>
     </div>
   </footer>
   <script>
-  /* Local event buffer only (no external analytics scripts loaded).
-     Prepared events: calculator_interaction, category_select, result_rendered, vendor_cta_click */
+  /* Plausible + local event dispatcher for: calculator_interaction, category_select, result_rendered, vendor_cta_click */
   window.__saasbillEvents = window.__saasbillEvents || [];
   try {
     var p = (window.location && window.location.pathname ? window.location.pathname : '').toLowerCase();
@@ -1331,46 +1693,34 @@ renderDirectory();
     }
   } catch (err) {}
   document.addEventListener('click', function(e) {
-    var cta = e.target.closest('[data-track="vendor-cta"]');
+    var cta = e.target.closest('[data-track="vendor-cta"], [data-track="vendor_cta_click"]');
     if (cta) {
       var vendor = cta.getAttribute('data-vendor') || '';
       var location = cta.getAttribute('data-cta-location') || 'subpage-result';
       var href = cta.getAttribute('href') || '';
-      window.__saasbillEvents.push({
-        event: 'vendor_cta_click',
-        vendor: vendor,
-        location: location,
-        href: href,
-        ts: Date.now()
-      });
-      if (typeof window.plausible === 'function') {
-        window.plausible('vendor_cta_click', { props: { vendor: vendor, location: location, href: href } });
+      if (typeof window.trackSaaSBillEvent === 'function') {
+        window.trackSaaSBillEvent('vendor_cta_click', { vendor: vendor, location: location, href: href });
       }
       return;
     }
-    var catBtn = e.target.closest('[data-track="category-select"]');
+    var catBtn = e.target.closest('[data-track="category-select"], [data-track="category_select"]');
     if (catBtn) {
       var cat = catBtn.getAttribute('data-cat') || '';
-      window.__saasbillEvents.push({
-        event: 'category_select',
-        category: cat,
-        ts: Date.now()
-      });
-      if (typeof window.plausible === 'function') {
-        window.plausible('category_select', { props: { category: cat } });
+      if (typeof window.trackSaaSBillEvent === 'function') {
+        window.trackSaaSBillEvent('category_select', { category: cat });
       }
     }
   });
   document.addEventListener('input', function(e) {
-    var ctrl = e.target.closest('[data-track="calculator-control"], input[type="range"], select');
+    var ctrl = e.target.closest('[data-track="calculator-control"], [data-track="calculator_interaction"], input[type="range"], select');
     if (ctrl) {
       var control = ctrl.getAttribute('data-control') || ctrl.id || '';
-      window.__saasbillEvents.push({
-        event: 'calculator_interaction',
-        control: control,
-        value: ctrl.value,
-        ts: Date.now()
-      });
+      if (typeof window.trackSaaSBillEvent === 'function') {
+        window.trackSaaSBillEvent('calculator_interaction', { control: control, value: String(ctrl.value) });
+        if (ctrl.id === 'cat-filter') {
+          window.trackSaaSBillEvent('category_select', { category: String(ctrl.value) });
+        }
+      }
     }
   });
   </script>

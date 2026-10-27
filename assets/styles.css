@@ -1581,9 +1581,9 @@ footer.site-footer {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  height: 352px;
+  height: auto;
   min-height: 352px;
-  max-height: 352px;
+  max-height: none;
   min-width: 0;
   max-width: 100%;
 }
@@ -2149,6 +2149,215 @@ hr.editorial-rule {
   color: #5A6058;
   line-height: 1.45;
   margin: 12px 0 0 0;
+}
+
+/* =========================================================
+   Progressive Disclosure ("See calculation") & 4-Step Result Hierarchy
+   ========================================================= */
+.calc-disclosure {
+  width: 100%;
+  margin: 4px 0 12px 0;
+  border: 1px solid #D5DBD3;
+  border-radius: 5px;
+  background: #F6F8F5;
+}
+
+.calc-disclosure-toggle {
+  list-style: none;
+  cursor: pointer;
+  padding: 7px 11px;
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #3D5240;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  user-select: none;
+}
+
+.calc-disclosure-toggle::-webkit-details-marker {
+  display: none;
+}
+
+.calc-disclosure-toggle::after {
+  content: "+";
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: #536B56;
+  line-height: 1;
+}
+
+.calc-disclosure[open] .calc-disclosure-toggle {
+  border-bottom: 1px solid #DCE2DA;
+  background: #EDF2EB;
+}
+
+.calc-disclosure[open] .calc-disclosure-toggle::after {
+  content: "−";
+}
+
+.calc-disclosure-body {
+  padding: 9px 11px;
+  font-size: 0.76rem;
+  color: #20231F;
+}
+
+.calc-math-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-variant-numeric: tabular-nums;
+}
+
+.calc-math-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px dashed #DCE2DA;
+}
+
+.calc-math-label {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.calc-math-label strong {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #20231F;
+}
+
+.calc-math-formula {
+  font-family: var(--mono);
+  font-size: 0.71rem;
+  color: #525850;
+}
+
+.calc-math-val {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #20231F;
+  white-space: nowrap;
+}
+
+.calc-math-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  padding-top: 4px;
+  font-weight: 700;
+  font-size: 0.80rem;
+  color: #20231F;
+}
+
+.calc-math-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  padding-top: 4px;
+  font-size: 0.72rem;
+  color: #525850;
+}
+
+.verdict-section {
+  margin: 0 0 18px 0;
+}
+
+.unified-inspector-tray .viz-panel {
+  background: #FFFFFF;
+  border: 1px solid #C5C2B8;
+  border-radius: 6px;
+  margin: 0 0 18px 0;
+}
+
+.viz-row.is-spotlight-row {
+  background: #EBF0E9;
+  border-radius: 5px;
+  padding: 6px 8px;
+  box-shadow: inset 3px 0 0 #536B56;
+}
+
+.full-table-disclosure {
+  background: #FFFFFF;
+  border: 1px solid #C5C2B8;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.full-table-summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  background: #FFFFFF;
+  transition: background 0.15s ease;
+}
+
+.full-table-summary::-webkit-details-marker {
+  display: none;
+}
+
+.full-table-summary:hover {
+  background: #F6F8F5;
+}
+
+.full-table-summary-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.hidden-gap-section .full-table-heading {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #20231F;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.full-table-summary-sub {
+  font-size: 0.83rem;
+  color: #525850;
+}
+
+.full-table-toggle-pill {
+  display: inline-flex;
+  align-items: center;
+  background: #E8EEE6;
+  color: #2E5A36;
+  border: 1px solid #B8C9BA;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.full-table-body {
+  padding: 18px 20px 20px;
+  border-top: 1px solid #E5E3DC;
+  background: #FAF9F5;
+}
+
+.calc-affiliate-disclosure {
+  font-size: 0.78rem;
+  color: #525850;
+  margin: 10px 0 0 0;
+  line-height: 1.45;
 }
 
 /* =========================================================
