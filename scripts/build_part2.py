@@ -36,6 +36,10 @@ p3_body = """
   <div id="hold-summary" class="summary-strip" aria-live="polite"></div>
   <div id="reserve-output" class="summary-strip" style="display:none;"></div>
   <p class="summary-interpretation"><strong>How to read this comparison:</strong> Payment processors do not have a single fixed-price &ldquo;winner&rdquo;. Your actual take rate and cashflow exposure depend on monthly volume, average order value, international card mix, and whether you require a Merchant of Record for global VAT/sales tax.</p>
+  <div class="card" style="margin-top:18px;">
+    <h3 style="margin-top:0;"><a href="../../chargeback-fee-and-recovery-calculator/">Chargeback fees vs. automated recovery</a></h3>
+    <p>A dispute costs the order value plus a processor fee, usually $15 on Stripe and Shopify Payments and $15 to $20 on Paddle. The <a href="../../chargeback-fee-and-recovery-calculator/">chargeback cost calculator</a> compares that loss with Chargeflow (25% only on recovered dollars, $0 monthly) and a 0.40% fee on every dollar of sales.</p>
+  </div>
 </section>
 
 <section>

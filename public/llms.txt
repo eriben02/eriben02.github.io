@@ -1,11 +1,11 @@
 # SaaSBill (2026 B2B SaaS True-Cost & Contract Trap Directory)
 
 > Independent B2B SaaS pricing, mandatory onboarding fee, seat-bucket minimum, AI resolution tax, and payment processor reserve audit directory.
-> Last Updated / Verified: Oct 28, 2026 (2026-10-28T06:42:14+00:00)
+> Last Updated / Verified: Oct 28, 2026 (2026-10-28T16:26:10+00:00)
 
 ## Freshness & Verification Metadata
 - **datePublished:** 2026-10-25
-- **dateModified:** 2026-10-28T06:42:14+00:00
+- **dateModified:** 2026-10-28T16:26:10+00:00
 - **lastReviewed:** 2026-10-28
 - **Verification Standard:** All pricing schedules, onboarding fees, seat minimums, and reserve clauses are verified against official vendor pricing pages and documented user contract reports on X and Reddit.
 
@@ -38,6 +38,7 @@
 - [Gumroad vs. Whop vs. Lemon Squeezy Net Payout Calculator](https://saasbill.io/compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/): Creator & SaaS take rates.
 - [Stripe, Shopify Payments & Paddle Payout Holds Matrix](https://saasbill.io/exit/stripe-shopify-paddle-frozen-funds-alternatives/): Rolling reserve simulator and MoR token lock-in audit.
 - [PayPal 180-Day Permanent Limitation Calculator](https://saasbill.io/exit/paypal-180-day-permanent-limitation-fund-recovery/): Frozen cashflow calculator & multi-PSP failover with Whop.
+- [Stripe and Shopify Chargeback Cost Calculator](https://saasbill.io/chargeback-fee-and-recovery-calculator/): Dispute fees plus lost order value versus Chargeflow's 25% success fee and a 0.40% fee on all GMV.
 - [ZoomInfo 60-Day Auto-Renewal Notice Calculator](https://saasbill.io/exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/): Contract-end date to written-notice deadline, and the March 6, 2024 fee + 10% + discount formula versus a negotiated renewal.
 - [Typeform vs. Jotform Response Limit & HIPAA Cost Calculator](https://saasbill.io/compare/typeform-vs-jotform-response-limit-and-hipaa-cost/): Response caps & HIPAA BAA tiers ($99/mo Jotform Gold).
 - [DocuSign 100-Envelope Allowance & Overage Calculator](https://saasbill.io/pricing/docusign-envelope-allowance-and-api-overage-calculator/): 100-envelope annual cap vs. Jotform Sign & PandaDoc.

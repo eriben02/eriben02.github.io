@@ -33,7 +33,9 @@ def generate_meta_files(extra_urls=None):
         "/faq/intercom-fin-ai-cost-calculator/",
         "/faq/stripe-vs-paddle-true-cost/",
         "/guides/jotform-wix-app-setup-and-pricing-guide/",
-        "/pricing/jotform-pricing-tier-calculator/"
+        "/pricing/jotform-pricing-tier-calculator/",
+        "/chargeback-fee-and-recovery-calculator/",
+        "/pricing/stripe-shopify-chargeback-fee-and-chargeflow-roi-calculator/"
     ]
     if extra_urls:
         for u in extra_urls:
@@ -150,6 +152,7 @@ Sitemap: {SITE_ORIGIN}/sitemap.xml
 - [Gumroad vs. Whop vs. Lemon Squeezy Net Payout Calculator]({SITE_ORIGIN}/compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/): Creator & SaaS take rates.
 - [Stripe, Shopify Payments & Paddle Payout Holds Matrix]({SITE_ORIGIN}/exit/stripe-shopify-paddle-frozen-funds-alternatives/): Rolling reserve simulator and MoR token lock-in audit.
 - [PayPal 180-Day Permanent Limitation Calculator]({SITE_ORIGIN}/exit/paypal-180-day-permanent-limitation-fund-recovery/): Frozen cashflow calculator & multi-PSP failover with Whop.
+- [Stripe and Shopify Chargeback Cost Calculator]({SITE_ORIGIN}/chargeback-fee-and-recovery-calculator/): Dispute fees plus lost order value versus Chargeflow's 25% success fee and a 0.40% fee on all GMV.
 - [ZoomInfo 60-Day Auto-Renewal Notice Calculator]({SITE_ORIGIN}/exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/): Contract-end date to written-notice deadline, and the March 6, 2024 fee + 10% + discount formula versus a negotiated renewal.
 - [Typeform vs. Jotform Response Limit & HIPAA Cost Calculator]({SITE_ORIGIN}/compare/typeform-vs-jotform-response-limit-and-hipaa-cost/): Response caps & HIPAA BAA tiers ($99/mo Jotform Gold).
 - [DocuSign 100-Envelope Allowance & Overage Calculator]({SITE_ORIGIN}/pricing/docusign-envelope-allowance-and-api-overage-calculator/): 100-envelope annual cap vs. Jotform Sign & PandaDoc.

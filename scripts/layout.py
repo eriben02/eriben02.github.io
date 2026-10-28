@@ -43,6 +43,7 @@ def render_related_links(rel_path, prefix):
         ("pricing/stripe-billing-0-7-percent-recurring-tax-calculator/index.html", "Stripe Billing 0.7% Recurring Fee Calculator", "Compare Stripe 2.9% + 0.7% Billing + 0.5% Tax vs. Whop (2.7% + 30¢) & Paddle."),
         ("compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/index.html", "Gumroad vs. Whop vs. Lemon Squeezy Net Payouts", "Compare real creator & SaaS take rates after card processing and surcharges."),
         ("exit/stripe-shopify-paddle-frozen-funds-alternatives/index.html", "Stripe, Shopify & Paddle Reserve & Hold Simulator", "Model 25% rolling reserves and compare Merchant of Record token portability."),
+        ("chargeback-fee-and-recovery-calculator/index.html", "Stripe & Shopify Chargeback Cost Calculator", "Dispute fees plus lost order value versus Chargeflow recovery and a 0.40% fee on all sales."),
         ("exit/paypal-180-day-permanent-limitation-fund-recovery/index.html", "PayPal 180-Day Hold & Working Capital Calculator", "Calculate frozen cashflow impact and multi-processor failover with Whop."),
         ("exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/index.html", "ZoomInfo 60-Day Renewal Notice Calculator", "Deadline from your contract end date, and the March 2024 +10% extension versus a negotiated fee."),
         ("compare/typeform-vs-jotform-response-limit-and-hipaa-cost/index.html", "Typeform vs. Jotform Response Limit & HIPAA Cost", "Compare Typeform response tiers & Enterprise BAA vs. Jotform Gold ($99/mo)."),

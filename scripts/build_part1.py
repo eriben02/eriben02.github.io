@@ -204,7 +204,7 @@ home_body = f"""
       </div>
 
       <p id="calc-payment-note" style="font-size:0.8rem; color:var(--muted); margin-top:6px;">
-        <strong>Payment Processors &amp; MoR (Fees vs. Temporary Reserves):</strong> Because payment rails charge per transaction rather than per seat, selecting <em>Payment Processors</em> models a standardized benchmark of <strong>$50,000/month GMV across 1,000 transactions ($50 AOV, 30% international cards)</strong>. <strong>Estimated monthly processing fees</strong> (percentage + per-transaction + FX/billing surcharges) are shown separately from <strong>potential funds temporarily held</strong> (such as a 25% rolling reserve held for 90&ndash;180 days on a risk flag, which is a cashflow hold rather than a fee). To model your exact volume, open the <a href="./exit/stripe-shopify-paddle-frozen-funds-alternatives/">Interactive Payout Hold &amp; Reserve Simulator &rarr;</a>
+        <strong>Payment Processors &amp; MoR (Fees vs. Temporary Reserves):</strong> Because payment rails charge per transaction rather than per seat, selecting <em>Payment Processors</em> models a standardized benchmark of <strong>$50,000/month GMV across 1,000 transactions ($50 AOV, 30% international cards)</strong>. <strong>Estimated monthly processing fees</strong> (percentage + per-transaction + FX/billing surcharges) are shown separately from <strong>potential funds temporarily held</strong> (such as a 25% rolling reserve held for 90&ndash;180 days on a risk flag, which is a cashflow hold rather than a fee). To model your exact volume, open the <a href="./exit/stripe-shopify-paddle-frozen-funds-alternatives/">Interactive Payout Hold &amp; Reserve Simulator &rarr;</a> A separate cost sits on top of the processing rate: each chargeback takes the order value plus a dispute fee, usually $15 on Stripe and Shopify Payments. Compare that with automated recovery on the <a href="./chargeback-fee-and-recovery-calculator/">chargeback cost calculator &rarr;</a>
       </p>
     </div>
   </details>
@@ -280,6 +280,11 @@ home_body = f"""
       <span class="badge badge-high">Payments</span>
       <h3><a href="./exit/stripe-shopify-paddle-frozen-funds-alternatives/">Stripe, Shopify &amp; Paddle payout hold simulator</a></h3>
       <p>Cashflow impact of a 25% rolling reserve or capital holdback, plus card-token export rules across payment rails.</p>
+    </div>
+    <div class="card">
+      <span class="badge badge-high">Payments</span>
+      <h3><a href="./chargeback-fee-and-recovery-calculator/">Stripe and Shopify chargeback cost calculator</a></h3>
+      <p>Lost order value plus a $15 dispute fee, compared with Chargeflow's 25% success fee and a 0.40% fee on all sales.</p>
     </div>
     <div class="card">
       <span class="badge badge-high">Payments</span>
@@ -547,7 +552,7 @@ const INTERNAL_AUDIT_LINKS = {{
   'paddle-mor': {{ url: './exit/stripe-shopify-paddle-frozen-funds-alternatives/', label: 'Read MoR token lock-in audit →' }},
   'whop-payments': {{ url: './exit/stripe-shopify-paddle-frozen-funds-alternatives/', label: 'Open reserve simulator →' }},
   'lemon-squeezy': {{ url: './exit/stripe-shopify-paddle-frozen-funds-alternatives/', label: 'Read MoR token audit →' }},
-  'chargeflow': {{ url: './exit/stripe-shopify-paddle-frozen-funds-alternatives/', label: 'Open reserve simulator →' }},
+  'chargeflow': {{ url: './chargeback-fee-and-recovery-calculator/', label: 'Open chargeback cost calculator →' }},
   'jotform-hipaa': {{ url: './compliance/hipaa-baa-and-soc2-pricing-tiers/', label: 'Read HIPAA BAA tier matrix →' }},
   '1password-business': {{ url: './compliance/hipaa-baa-and-soc2-pricing-tiers/', label: 'Read SSO & BAA audit →' }},
   'vanta-soc2': {{ url: './compliance/hipaa-baa-and-soc2-pricing-tiers/', label: 'Open SOC 2 + auditor estimator →' }},

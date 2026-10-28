@@ -115,7 +115,7 @@
     "cookie_days": 90,
     "official_program_url": "https://www.chargeflow.io/partners",
     "tracking_url": "/go/chargeflow",
-    "destination_url": "https://www.chargeflow.io/pricing",
+    "destination_url": "https://www.chargeflow.io/",
     "is_affiliate": true,
     "status": "applied (Chargeflow Partner Portal application submitted 2026-10-26 via partners.chargeflow.io/register as Affiliate)"
   },

@@ -116,7 +116,13 @@ PAGES = [
         "faqs": [
             ("How much does Stripe Billing charge for recurring subscriptions in 2026?", "Stripe Billing pay-as-you-go charges 0.7% of recurring subscription volume on top of standard 2.9% + $0.30 card processing fees. Adding Stripe Tax adds another 0.5% per transaction."),
             ("Does Whop charge an extra 0.7% fee on recurring subscriptions?", "No. Whop's domestic card processing starts at 2.7% + $0.30 without a separate 0.7% recurring billing surcharge.")
-        ]
+        ],
+        "extra_html": """
+  <div class="card" style="margin-top:18px;">
+    <h3 style="margin-top:0;"><a href="../../chargeback-fee-and-recovery-calculator/">Add dispute fees to this Year-1 picture</a></h3>
+    <p>Processing rates are only part of the bill. Each chargeback also takes the order value plus a dispute fee, usually $15 on Stripe and Shopify Payments. Open the <a href="../../chargeback-fee-and-recovery-calculator/">chargeback cost calculator</a> to compare a manual 20% win rate, Chargeflow's 25% success fee on recovered dollars, and a 0.40% fee on all sales.</p>
+  </div>
+"""
     },
     {
         "rel": "pricing/docusign-envelope-allowance-and-api-overage-calculator/index.html",
@@ -384,6 +390,7 @@ def build_all():
 
   <div class="summary-strip" id="{p["summary_id"]}"></div>
 
+  {p.get("extra_html", "")}
   <div class="table-wrap mobile-cards">
     <table>
       <thead>

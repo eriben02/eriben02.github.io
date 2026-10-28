@@ -293,6 +293,8 @@ class TestSaaSBillCalculators(unittest.TestCase):
             "pricing/gong-io-platform-fee-and-seat-minimum-calculator/index.html",
             "exit/paypal-180-day-permanent-limitation-fund-recovery/index.html",
             "exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/index.html",
+            "chargeback-fee-and-recovery-calculator/index.html",
+            "pricing/stripe-shopify-chargeback-fee-and-chargeflow-roi-calculator/index.html",
             "compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/index.html",
             "faq/does-hubspot-charge-onboarding-fees-2026/index.html",
             "faq/intercom-fin-ai-cost-calculator/index.html",
@@ -319,6 +321,8 @@ class TestSaaSBillCalculators(unittest.TestCase):
             "pricing/gong-io-platform-fee-and-seat-minimum-calculator/index.html": "gong-summary",
             "exit/paypal-180-day-permanent-limitation-fund-recovery/index.html": "pp-summary",
             "exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/index.html": "zi-summary",
+            "chargeback-fee-and-recovery-calculator/index.html": "cb-summary",
+            "pricing/stripe-shopify-chargeback-fee-and-chargeflow-roi-calculator/index.html": "cb-summary",
             "compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/index.html": "gm-summary",
             "faq/does-hubspot-charge-onboarding-fees-2026/index.html": "faq-hs-summary",
             "faq/intercom-fin-ai-cost-calculator/index.html": "faq-ic-summary",
@@ -533,6 +537,8 @@ class TestSaaSBillCalculators(unittest.TestCase):
             "pricing/gong-io-platform-fee-and-seat-minimum-calculator/index.html",
             "exit/paypal-180-day-permanent-limitation-fund-recovery/index.html",
             "exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/index.html",
+            "chargeback-fee-and-recovery-calculator/index.html",
+            "pricing/stripe-shopify-chargeback-fee-and-chargeflow-roi-calculator/index.html",
             "compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/index.html",
             "faq/does-hubspot-charge-onboarding-fees-2026/index.html",
             "faq/intercom-fin-ai-cost-calculator/index.html",
@@ -599,8 +605,10 @@ class TestSaaSBillCalculators(unittest.TestCase):
 
         with open(os.path.join(PUBLIC_DIR, "sitemap.xml"), encoding="utf-8") as f:
             sitemap = f.read()
-        self.assertEqual(sitemap.count("<url><loc>"), 27)
+        self.assertEqual(sitemap.count("<url><loc>"), 29)
         self.assertIn("https://saasbill.io/exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/", sitemap)
+        self.assertIn("https://saasbill.io/chargeback-fee-and-recovery-calculator/", sitemap)
+        self.assertIn("https://saasbill.io/pricing/stripe-shopify-chargeback-fee-and-chargeflow-roi-calculator/", sitemap)
         for loc in (
             "https://saasbill.io/zendesk-ai-cost-calculator/",
             "https://saasbill.io/zendesk-vs-freshdesk-cost-comparison/",
@@ -836,6 +844,8 @@ class TestSaaSBillCalculators(unittest.TestCase):
             "pricing/gong-io-platform-fee-and-seat-minimum-calculator/index.html",
             "exit/paypal-180-day-permanent-limitation-fund-recovery/index.html",
             "exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/index.html",
+            "chargeback-fee-and-recovery-calculator/index.html",
+            "pricing/stripe-shopify-chargeback-fee-and-chargeflow-roi-calculator/index.html",
             "compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/index.html",
             "faq/does-hubspot-charge-onboarding-fees-2026/index.html",
             "faq/intercom-fin-ai-cost-calculator/index.html",
