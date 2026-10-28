@@ -120,7 +120,7 @@ PAGES = [
         "extra_html": """
   <div class="card" style="margin-top:18px;">
     <h3 style="margin-top:0;"><a href="../../chargeback-fee-and-recovery-calculator/">Add dispute fees to this Year-1 picture</a></h3>
-    <p>Processing rates are only part of the bill. Each chargeback also takes the order value plus a dispute fee, usually $15 on Stripe and Shopify Payments. Open the <a href="../../chargeback-fee-and-recovery-calculator/">chargeback cost calculator</a> to compare a manual 20% win rate, Chargeflow's 25% success fee on recovered dollars, and a 0.40% fee on all sales.</p>
+    <p>Processing rates are only part of the bill. Each chargeback also takes the order value plus a dispute fee, usually $15 on Stripe and Shopify Payments, and about $30 of evidence prep if you fight it in house. Open the <a href="../../chargeback-fee-and-recovery-calculator/">chargeback cost calculator</a> to compare a 20% manual win rate, Chargeflow at a 65% planning win rate with a 25% success fee, and a 0.40% fee on all sales.</p>
   </div>
 """
     },
