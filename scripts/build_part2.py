@@ -22,15 +22,15 @@ p3_body = """
   <div class="calc-grid">
     <div class="control-group">
       <label for="gm-rev">Monthly gross processing volume: $<span class="val-pill" id="gm-rev-val">50,000</span></label>
-      <input type="range" id="gm-rev" min="5000" max="500000" step="5000" value="50000" />
+      <input class="wb-range" type="range" id="gm-rev" min="5000" max="500000" step="5000" value="50000" />
     </div>
     <div class="control-group">
       <label for="gm-res">Processor rolling reserve: <span class="val-pill" id="gm-res-val">25</span>%</label>
-      <input type="range" id="gm-res" min="0" max="50" step="5" value="25" />
+      <input class="wb-range" type="range" id="gm-res" min="0" max="50" step="5" value="25" />
     </div>
     <div class="control-group">
       <label for="gm-cap">Capital loan repayment deduction: <span class="val-pill" id="gm-cap-val">15</span>%</label>
-      <input type="range" id="gm-cap" min="0" max="30" step="2" value="15" />
+      <input class="wb-range" type="range" id="gm-cap" min="0" max="30" step="2" value="15" />
     </div>
   </div>
   <div id="hold-summary" class="summary-strip" aria-live="polite"></div>
@@ -226,7 +226,7 @@ p4_body = """
   <div class="calc-grid">
     <div class="control-group">
       <label for="sm-users">Actual team members needing CRM access: <span class="val-pill" id="sm-users-val">1</span> user(s)</label>
-      <input type="range" id="sm-users" min="1" max="15" value="1" />
+      <input class="wb-range" type="range" id="sm-users" min="1" max="15" value="1" />
     </div>
     <div class="control-group">
       <label for="sm-tier">Plan tier comparison</label>
@@ -421,7 +421,7 @@ p5_body = """
   <div class="calc-grid">
     <div class="control-group">
       <label for="soc-emp">Company headcount: <span class="val-pill" id="soc-emp-val">20</span> employees</label>
-      <input type="range" id="soc-emp" min="5" max="150" step="5" value="20" />
+      <input class="wb-range" type="range" id="soc-emp" min="5" max="150" step="5" value="20" />
     </div>
     <div class="control-group">
       <label for="soc-fw">Frameworks needed</label>
@@ -433,7 +433,7 @@ p5_body = """
     </div>
     <div class="control-group">
       <label for="soc-disc">Negotiated platform discount (up to 50% reported): <span class="val-pill" id="soc-disc-val">35</span>%</label>
-      <input type="range" id="soc-disc" min="0" max="50" step="5" value="35" />
+      <input class="wb-range" type="range" id="soc-disc" min="0" max="50" step="5" value="35" />
     </div>
   </div>
   <div id="soc2-summary" class="summary-strip" aria-live="polite"></div>
