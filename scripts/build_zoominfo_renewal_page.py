@@ -1,0 +1,639 @@
+"""Builds /exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/ .
+
+Prices and clauses below were read on Oct 28, 2026. ZoomInfo does not publish a
+paid list price. The dollar amounts in the calculator are the visitor's order-form
+fee. The +10% and 60-day figures apply only to the License Terms dated March 6, 2024.
+"""
+from layout import render_page
+
+SLUG = "/exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/"
+REL = "exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/index.html"
+TITLE = "ZoomInfo 60-Day Renewal Notice – saasbill.io"
+DESC = (
+    "ZoomInfo's March 6, 2024 terms require written notice 60 days before term end "
+    "or the contract extends at the annual fee plus 10% plus any discount. The May 1, 2025 terms omit that formula."
+)
+
+CLOSE = "https://refer.close.com/3k5hp07b8soi-fetl0j"
+LTC_2024 = "https://www.zoominfo.com/legal/ltc_03_06_2024"
+LTC_2025 = "https://www.zoominfo.com/legal/ltc"
+PRICING = "https://www.zoominfo.com/pricing"
+AI_INFO = "https://www.zoominfo.com/ai-information"
+COST_ARTICLE = "https://pipeline.zoominfo.com/sales/how-much-does-zoominfo-cost"
+RINGLEAD = "https://www.zoominfo.com/legal/ringlead-customer-agreement"
+CLOSE_PRICING = "https://www.close.com/pricing"
+HELP = "https://help.zoominfo.com/s/article/How-to-Opt-Out-of-the-Automatic-Renewal-of-Your-ZoomInfo-Subscription"
+
+body = """
+<style>
+.zi-field { font-size: 16px; width: 100%; max-width: 100%; box-sizing: border-box; }
+.zi-deadline { font-family: var(--serif); font-size: clamp(1.7rem, 4vw, 2.35rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; margin: 0; }
+</style>
+<section class="hero">
+  <h1>ZoomInfo auto-renewal notice (2026): the 60-day window and what the extension costs</h1>
+  <p class="lead">In 2026, send ZoomInfo written notice 60 days before the term ends or the March 6, 2024 terms extend the contract. A missed deadline renews at your annual fee plus 10% plus any discount you had negotiated.</p>
+</section>
+
+<section class="calc-box" id="zi-summary" aria-labelledby="zi-calc-heading">
+  <h2 id="zi-calc-heading" style="margin-top:0;">Notice deadline and renewal cost</h2>
+  <p style="color:var(--muted); margin-bottom:16px;">The $20,000 starting fee is an example you replace with the annual number on your order form. ZoomInfo does not publish a paid list price.</p>
+  <div class="calc-grid">
+    <div class="control-group">
+      <label for="zi-end">Contract end date</label>
+      <input class="zi-field" type="date" id="zi-end" value="2027-06-30" data-track="calculator-control" data-control="contract-end" />
+    </div>
+    <div class="control-group">
+      <label for="zi-notice">Written notice (days before end): <span class="val-pill" id="zi-notice-val">60</span></label>
+      <input type="range" id="zi-notice" min="0" max="120" value="60" data-track="calculator-control" data-control="notice-days" />
+    </div>
+    <div class="control-group">
+      <label for="zi-fee">Annual fee on your order form (USD)</label>
+      <input class="zi-field" type="number" id="zi-fee" min="0" step="500" value="20000" data-track="calculator-control" data-control="annual-fee" />
+    </div>
+    <div class="control-group">
+      <label for="zi-discount">Discount you negotiated (%): <span class="val-pill" id="zi-discount-val">0</span></label>
+      <input type="range" id="zi-discount" min="0" max="40" value="0" data-track="calculator-control" data-control="discount-pct" />
+    </div>
+    <div class="control-group">
+      <label for="zi-years">Initial term length</label>
+      <select id="zi-years" data-track="calculator-control" data-control="initial-years">
+        <option value="1" selected>1 year</option>
+        <option value="2">2 years</option>
+        <option value="3">3 years</option>
+      </select>
+    </div>
+    <div class="control-group">
+      <label for="zi-version">Which published terms match your signature</label>
+      <select id="zi-version" data-track="calculator-control" data-control="terms-version">
+        <option value="2024" selected>March 6, 2024 terms (60 days, +10% + discount)</option>
+        <option value="2025">May 1, 2025 terms (no window or uplift printed)</option>
+      </select>
+    </div>
+    <div class="control-group">
+      <label for="zi-neg">Negotiated renewal vs current fee (%): <span class="val-pill" id="zi-neg-val">0</span></label>
+      <input type="range" id="zi-neg" min="-30" max="20" value="0" data-track="calculator-control" data-control="negotiated-pct" />
+    </div>
+    <div class="control-group" id="zi-uplift-wrap">
+      <label for="zi-uplift">Uplift if your order form names one (%): <span class="val-pill" id="zi-uplift-val">0</span></label>
+      <input type="range" id="zi-uplift" min="0" max="20" value="0" data-track="calculator-control" data-control="custom-uplift" />
+    </div>
+    <div class="control-group">
+      <label for="zi-seats">Close CRM users, for the table only: <span class="val-pill" id="zi-seats-val">5</span></label>
+      <input type="range" id="zi-seats" min="1" max="25" value="5" data-track="calculator-control" data-control="close-seats" />
+    </div>
+  </div>
+
+  <p class="zi-deadline" id="zi-deadline">May 1, 2027</p>
+  <p id="zi-deadline-note" style="margin-top:6px;">Based on a contract ending June 30, 2027 and 60 days of written notice. Send notice on or before this date.</p>
+  <p id="zi-hidden" style="margin-top:8px;"><strong>Hidden Cost Highlight:</strong> On a $20,000 annual fee with no discount, the March 6, 2024 formula prices the extension at $22,000 per year ($2,000 of that is the 10%).</p>
+
+  <details class="calc-disclosure" id="zi-calc-details" style="margin-top:14px;">
+    <summary class="calc-disclosure-toggle">See exactly how we calculated this</summary>
+    <div class="calc-disclosure-body" id="zi-calc-body">
+      <div class="calc-math-list">
+        <div class="calc-math-row"><span class="calc-math-label"><strong>Annualized fee (your number)</strong><span class="calc-math-formula">$20,000 x 1 year</span></span><span class="calc-math-val">$20,000</span></div>
+        <div class="calc-math-row"><span class="calc-math-label"><strong>Plus 10% of the annualized fee</strong><span class="calc-math-formula">$2,000 x 1 year</span></span><span class="calc-math-val">$2,000</span></div>
+        <div class="calc-math-row"><span class="calc-math-label"><strong>Plus negotiated discount added back</strong><span class="calc-math-formula">$0 x 1 year</span></span><span class="calc-math-val">$0</span></div>
+        <div class="calc-math-total"><span>Extension total</span><span>$22,000</span></div>
+        <div class="calc-math-row"><span class="calc-math-label"><strong>Negotiated renewal, same length</strong><span class="calc-math-formula">$20,000/yr x 1</span></span><span class="calc-math-val">$20,000</span></div>
+        <p class="calc-math-formula">Deadline = 2027-06-30 minus 60 days = 2027-05-01. Step sum $22,000 equals the extension total.</p>
+      </div>
+    </div>
+  </details>
+
+  <div class="cta-stack" style="margin-top:16px;">
+    <a id="zi-primary-cta" class="btn-cta" href="https://www.zoominfo.com/legal/ltc_03_06_2024" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="zoominfo" data-cta-location="summary-card">Open the clause behind this $2,000 uplift &rarr;</a>
+    <a id="zi-pricing-cta" class="btn-secondary" href="https://www.zoominfo.com/pricing" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="zoominfo" data-cta-location="summary-card">View ZoomInfo pricing &rarr;</a>
+  </div>
+</section>
+
+<section class="editorial-bar-chart-card" id="zi-chart" aria-labelledby="zi-chart-title">
+  <h2 id="zi-chart-title" class="ebc-title">Renewal cost: negotiated fee versus the extension formula</h2>
+  <p id="zi-chart-sub" class="ebc-subtitle">Annual dollars. The extension bar uses the March 6, 2024 formula on your fee. It is not a ZoomInfo list price.</p>
+  <div class="ebc-rows" id="zi-bars" role="list" aria-live="polite">
+    <div class="ebc-row ebc-row-sage" role="listitem">
+      <div class="ebc-label-col"><div class="ebc-tool-name">Negotiated renewal</div><div class="ebc-tool-meta">Same as the current fee</div></div>
+      <div class="ebc-bar-col"><div class="ebc-bar-track"><div class="ebc-bar-fill ebc-fill-sage" style="width:90.9%;"></div></div></div>
+      <div class="ebc-val-col"><span class="ebc-val-main">$20,000</span><span class="ebc-val-sub">per year</span></div>
+    </div>
+    <div class="ebc-row" role="listitem">
+      <div class="ebc-label-col"><div class="ebc-tool-name">Current annual fee</div><div class="ebc-tool-meta">The number on your order form. Not a ZoomInfo list price.</div></div>
+      <div class="ebc-bar-col"><div class="ebc-bar-track"><div class="ebc-bar-fill ebc-fill-neutral" style="width:90.9%;"></div></div></div>
+      <div class="ebc-val-col"><span class="ebc-val-main">$20,000</span><span class="ebc-val-sub">per year</span></div>
+    </div>
+    <div class="ebc-row ebc-row-terracotta" role="listitem">
+      <div class="ebc-label-col"><div class="ebc-tool-name">March 2024 extension, per year</div><div class="ebc-tool-meta">Fee + 10% + discount added back</div></div>
+      <div class="ebc-bar-col"><div class="ebc-bar-track"><div class="ebc-bar-fill ebc-fill-terracotta" style="width:100%;"></div></div></div>
+      <div class="ebc-val-col"><span class="ebc-val-main">$22,000</span><span class="ebc-val-sub">per year</span></div>
+    </div>
+  </div>
+  <p id="zi-chart-note" class="ebc-footer-note" style="margin-top:12px;"></p>
+</section>
+
+<section class="hidden-gap-section" aria-labelledby="zi-table-heading">
+  <details class="full-table-disclosure" id="full-table-details">
+    <summary class="full-table-summary">
+      <div class="full-table-summary-text">
+        <h2 id="zi-table-heading" class="full-table-heading">Full renewal comparison</h2>
+        <span class="full-table-summary-sub">Extension formula, negotiated renewal, and a CRM with calling (not a data license)</span>
+      </div>
+      <span class="full-table-toggle-pill" id="zi-table-pill">Compare all rows &darr;</span>
+    </summary>
+    <div class="full-table-body">
+      <div class="table-wrap mobile-cards">
+        <table>
+          <caption>Renewal scenarios for the fee you entered, plus Close CRM list prices. Close is a sales CRM with calling. It is not a ZoomInfo contact database. Close calling and SMS are extra (about $0.02 per minute on the pricing page) and are not in these totals.</caption>
+          <thead>
+            <tr>
+              <th>Scenario</th>
+              <th>What it prices</th>
+              <th>Per year</th>
+              <th>Term the formula uses</th>
+              <th>Full-term total</th>
+              <th>Next step</th>
+            </tr>
+          </thead>
+          <tbody id="zi-tbody">
+            <tr>
+              <td data-label="Scenario"><strong>Current fee, renewed flat</strong></td>
+              <td data-label="What it prices">Your order-form annual fee, no uplift</td>
+              <td data-label="Per year">$20,000</td>
+              <td data-label="Term the formula uses">1 year</td>
+              <td data-label="Full-term total">$20,000</td>
+              <td data-label="Next step"><div class="cta-stack"><a class="btn-secondary" href="https://www.zoominfo.com/pricing" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="zoominfo" data-cta-location="table-row">View ZoomInfo pricing &rarr;</a></div></td>
+            </tr>
+            <tr>
+              <td data-label="Scenario"><strong>Negotiated renewal</strong></td>
+              <td data-label="What it prices">0% versus the current fee</td>
+              <td data-label="Per year">$20,000</td>
+              <td data-label="Term the formula uses">1 year</td>
+              <td data-label="Full-term total">$20,000</td>
+              <td data-label="Next step"><div class="cta-stack"><a class="btn-secondary" href="https://www.zoominfo.com/pricing" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="zoominfo" data-cta-location="table-row">View ZoomInfo pricing &rarr;</a></div></td>
+            </tr>
+            <tr>
+              <td data-label="Scenario"><strong>March 2024 extension formula</strong></td>
+              <td data-label="What it prices">Annual fee + 10% + discount added back</td>
+              <td data-label="Per year">$22,000</td>
+              <td data-label="Term the formula uses">Longer of initial term or 1 year (1 year)</td>
+              <td data-label="Full-term total">$22,000</td>
+              <td data-label="Next step"><div class="cta-stack"><a class="btn-secondary" href="https://www.zoominfo.com/legal/ltc_03_06_2024" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="zoominfo" data-cta-location="table-row">Read the March 6, 2024 clause &rarr;</a></div></td>
+            </tr>
+            <tr>
+              <td data-label="Scenario"><strong>Close CRM Essentials</strong></td>
+              <td data-label="What it prices">5 users x $35/mo annual. CRM, email, calling. Not a contact database.</td>
+              <td data-label="Per year">$2,100</td>
+              <td data-label="Term the formula uses">1 year of licenses</td>
+              <td data-label="Full-term total">$2,100</td>
+              <td data-label="Next step"><div class="cta-stack"><a class="btn-secondary" href="https://refer.close.com/3k5hp07b8soi-fetl0j" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="close-crm" data-cta-location="table-row">View Close pricing &rarr;</a></div></td>
+            </tr>
+            <tr>
+              <td data-label="Scenario"><strong>Close CRM Growth</strong></td>
+              <td data-label="What it prices">5 users x $99/mo annual. Adds workflows and a power dialer. Calling minutes are extra.</td>
+              <td data-label="Per year">$5,940</td>
+              <td data-label="Term the formula uses">1 year of licenses</td>
+              <td data-label="Full-term total">$5,940</td>
+              <td data-label="Next step"><div class="cta-stack"><a class="btn-secondary" href="https://refer.close.com/3k5hp07b8soi-fetl0j" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="close-crm" data-cta-location="table-row">View Close pricing &rarr;</a></div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </details>
+</section>
+
+<section aria-labelledby="zi-clause-heading">
+  <h2 id="zi-clause-heading">What the published terms actually say</h2>
+  <ul class="key-list">
+    <li><strong>March 6, 2024, section 3.2:</strong> the Extension Date is 60 days before the last day of the term. Unless either party gives written notice on or before that date, the term extends for the initial term or one year, whichever is longer.</li>
+    <li><strong>The extension price in that same sentence:</strong> the annualized subscription fee, plus 10% of that fee, plus any applied discount, multiplied by the length of the term in years. Fees are due when the term extends. ZoomInfo may invoice annually.</li>
+    <li><strong>Not cancellable mid-term:</strong> section 3.1 says the agreement is not cancellable and stays in effect until it expires or is terminated under its terms. The exit for an uncured material breach is 21 days after written notice.</li>
+    <li><strong>May 1, 2025 terms, still the live page:</strong> section 3.1 still says the agreement is not cancellable and still mentions "any period of extension," but section 3.2 is now only the 21-day breach termination. No notice window and no 10% formula are printed.</li>
+    <li><strong>Your order form can differ:</strong> the May 1, 2025 section 13.6 says the terms prevail over the ordering document unless that document expressly modifies the terms. Read the copy you signed, not only the web page.</li>
+    <li><strong>Seats are whatever the order form says:</strong> section 2.1 caps authorized users at the subscribed number. A shared login is treated as extra users. Neither the terms nor the pricing page publish a numeric seat minimum or a per-seat dollar rate.</li>
+  </ul>
+  <div class="table-wrap mobile-cards">
+    <table>
+      <caption>ZoomInfo renewal language we could read on Oct 28, 2026</caption>
+      <thead>
+        <tr><th>Document</th><th>Notice window</th><th>Extension length</th><th>Price change stated</th><th>Mid-term cancel</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="Document"><strong>License Terms, March 6, 2024</strong> <span class="status-pill status-verified">Verified</span><div class="source-inline">Verified source: <a href="https://www.zoominfo.com/legal/ltc_03_06_2024" target="_blank" rel="noopener">Section 3.2</a></div></td>
+          <td data-label="Notice window">60 days, written, on or before the Extension Date</td>
+          <td data-label="Extension length">Initial term or 1 year, whichever is longer</td>
+          <td data-label="Price change stated">Annualized fee + 10% + any applied discount, times years</td>
+          <td data-label="Mid-term cancel">No. Section 3.1: not cancellable. Breach cure is 21 days.</td>
+        </tr>
+        <tr>
+          <td data-label="Document"><strong>License Terms, May 1, 2025 (live /legal/ltc)</strong> <span class="status-pill status-verified">Verified</span><div class="source-inline">Verified source: <a href="https://www.zoominfo.com/legal/ltc" target="_blank" rel="noopener">Section 3</a></div></td>
+          <td data-label="Notice window">Not stated</td>
+          <td data-label="Extension length">"Any period of extension" is named and not defined</td>
+          <td data-label="Price change stated">Not stated</td>
+          <td data-label="Mid-term cancel">No. Same "not cancellable" sentence. Breach cure is 21 days.</td>
+        </tr>
+        <tr>
+          <td data-label="Document"><strong>RingLead master services agreement</strong> <span class="status-pill status-verified">Verified</span><div class="source-inline">Verified source: <a href="https://www.zoominfo.com/legal/ringlead-customer-agreement" target="_blank" rel="noopener">Section 2</a></div></td>
+          <td data-label="Notice window">60 days, written, before the then-current term expires</td>
+          <td data-label="Extension length">Another 12 months</td>
+          <td data-label="Price change stated">Up to 5% per year from RingLead's published list price</td>
+          <td data-label="Mid-term cancel">Payment obligations are non-cancelable. This is a different agreement from the sales license terms.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section aria-labelledby="zi-price-heading">
+  <h2 id="zi-price-heading">Pricing, credits, and seat minimums we could verify</h2>
+  <p class="section-tldr">Paid ZoomInfo pricing is quote-based. Where a dollar figure is not on an official page, it is not in this table.</p>
+  <div class="table-wrap mobile-cards">
+    <table>
+      <caption>What ZoomInfo publishes about packages and credits (checked Oct 28, 2026). Dollar prices for paid plans are not on these pages.</caption>
+      <thead>
+        <tr><th>Package named on zoominfo.com/pricing</th><th>Published price</th><th>Credits or limits that are printed</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="Package"><strong>ZoomInfo Lite</strong><div class="source-inline">Verified source: <a href="https://pipeline.zoominfo.com/sales/how-much-does-zoominfo-cost" target="_blank" rel="noopener">ZoomInfo article</a> and <a href="https://www.zoominfo.com/ai-information" target="_blank" rel="noopener">AI information page</a></div></td>
+          <td data-label="Published price">$0. No credit card and no annual commitment, per ZoomInfo's own article and the October 2026 AI information page.</td>
+          <td data-label="Credits or limits">The article says 10 monthly credits. It also says 25 with Community Edition. The AI information page renames Community Edition to ZoomInfo Lite and does not repeat 25, so we do not treat 25 as current.</td>
+          <td data-label="Status"><span class="status-pill status-verified">Verified</span></td>
+        </tr>
+        <tr>
+          <td data-label="Package"><strong>ZoomInfo Professional</strong></td>
+          <td data-label="Published price">Not published. The pricing page says "Start free trial" and the FAQ says price depends on features, licenses, and credit usage.</td>
+          <td data-label="Credits or limits">No credit count printed on the sales package card.</td>
+          <td data-label="Status"><span class="status-pill status-estimated">Quote only</span></td>
+        </tr>
+        <tr>
+          <td data-label="Package"><strong>Copilot Advanced</strong></td>
+          <td data-label="Published price">Not published.</td>
+          <td data-label="Credits or limits">Feature list only (intent, workflows, buying groups). The October 2026 AI information page says Copilot is no longer the current product name and points to GTM Workspace.</td>
+          <td data-label="Status"><span class="status-pill status-estimated">Quote only</span></td>
+        </tr>
+        <tr>
+          <td data-label="Package"><strong>Copilot Enterprise</strong></td>
+          <td data-label="Published price">Not published.</td>
+          <td data-label="Credits or limits">Feature list only, including a dedicated customer service manager and white-glove onboarding. No onboarding dollar fee is printed.</td>
+          <td data-label="Status"><span class="status-pill status-estimated">Quote only</span></td>
+        </tr>
+        <tr>
+          <td data-label="Package"><strong>Marketing Demand</strong></td>
+          <td data-label="Published price">Not published. "Get a demo."</td>
+          <td data-label="Credits or limits">75,000 included credits and 25 intent topics.</td>
+          <td data-label="Status"><span class="status-pill status-verified">Credits verified, price quote-only</span></td>
+        </tr>
+        <tr>
+          <td data-label="Package"><strong>ABM Lite</strong></td>
+          <td data-label="Published price">Not published.</td>
+          <td data-label="Credits or limits">100 intent topics. Display network: 10 active campaigns and 10,000 accounts. No credit total printed on the card.</td>
+          <td data-label="Status"><span class="status-pill status-verified">Limits verified, price quote-only</span></td>
+        </tr>
+        <tr>
+          <td data-label="Package"><strong>ABM Enterprise</strong></td>
+          <td data-label="Published price">Not published.</td>
+          <td data-label="Credits or limits">150,000 included credits and unlimited intent topics.</td>
+          <td data-label="Status"><span class="status-pill status-verified">Credits verified, price quote-only</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <ul class="key-list">
+    <li><strong>One export, one credit:</strong> the pricing FAQ says a credit is the export of one professional or company profile, including from the main platform, the ReachOut Chrome extension, or an API call from an integration.</li>
+    <li><strong>Bulk-credit minimum:</strong> the same FAQ says packaged integrations have a base cost and require a minimum purchase of bulk credits. It does not print that minimum or that base cost.</li>
+    <li><strong>No fixed seat price:</strong> the October 2026 AI information page says ZoomInfo does not use fixed seat tiers, and that third-party figures such as "$14,995 per year" and "Professional / Advanced / Elite" are estimates or out of date. The pricing page still uses the Professional and Copilot names. We show both statements and do not treat either as a dollar rate.</li>
+    <li><strong>Paid plans are described as annual:</strong> ZoomInfo's own cost article says paid plans are billed annually and that there is no standard monthly option. It also says paid plans include a minimum number of seats, without saying what that number is. Lite has no seat minimum.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="zi-reports-heading">
+  <h2 id="zi-reports-heading">What buyers report about the notice window</h2>
+  <p class="section-tldr">These are complaints and allegations, not findings that every contract uses a 60-day clause. The clause we could quote is the March 6, 2024 terms.</p>
+  <div class="evidence-box">
+    <strong>Trustpilot, Dec 30, 2025</strong>
+    <p style="margin-top:6px;">"Zoominfo's automatic renewal process is predatory. They don't tell you that you have to cancel 60 days before expiration of your current contract." The same page includes a Nov 25, 2025 review saying the writer waited out a one-year contract, was told the auto-renewal was released, and was then billed for another year and sent to a debt collector.</p>
+    <cite>Verified source: <a href="https://www.trustpilot.com/review/zoominfo.com?page=4" target="_blank" rel="noopener">Trustpilot reviews of zoominfo.com</a></cite>
+  </div>
+  <div class="evidence-box">
+    <strong>Reddit, r/legal, June 6, 2023</strong>
+    <p style="margin-top:6px;">The poster wrote that a phone conversation was not enough: "the due date to notify them had passed a month ago (it was a 60-day prior notice)" and that ZoomInfo claimed the company was locked in for another year. A direct refetch of the thread was blocked, so this quote is from the indexed post.</p>
+    <cite>Source: <a href="https://www.reddit.com/r/legal/comments/142rcsu/can_zoominfo_sue_me_for_not_notifying_of_my/" target="_blank" rel="noopener">r/legal thread</a></cite>
+  </div>
+  <div class="evidence-box">
+    <strong>Reddit, r/Recruiter_Advice, Aug 28, 2025</strong>
+    <p style="margin-top:6px;">The poster wrote that a one-year signup became two years, and "I've asked 4 times for them to cancel me. Every time, no rep contacts me." Indexed post. We could not reload the thread directly.</p>
+    <cite>Source: <a href="https://www.reddit.com/r/Recruiter_Advice/comments/1n2q3go/zooinfo_contract_is_a_nightmare_to_get_out_of_do/" target="_blank" rel="noopener">r/Recruiter_Advice thread</a></cite>
+  </div>
+  <div class="evidence-box">
+    <strong>G2 discussion, posted more than 3 years ago</strong>
+    <p style="margin-top:6px;">"Apparently ZoomInfo includes a sneaky auto renewal clause in their contract that was never mentioned in sales conversations and they seem to be railroading us into renewing another year." G2 blocked a direct refetch on Oct 28, 2026. The indexed page does not give a calendar date beyond "over 3 years ago."</p>
+    <cite>Source: <a href="https://www.g2.com/discussions/sneaky-auto-renewal-clause-in-zoominfo-contract" target="_blank" rel="noopener">G2 discussion</a></cite>
+  </div>
+  <div class="evidence-box">
+    <strong>BBB complaint, Apr 24, 2025</strong>
+    <p style="margin-top:6px;">A customer said ZoomInfo kept billing after the company was dissolved, then declined cancellation because the legal name on the dissolution papers did not exactly match the contract. ZoomInfo replied on May 2, 2025 that customer advocacy would follow up. The BBB profile, checked Oct 28, 2026, listed 62 complaints closed in the last 12 months and 258 in the last 3 years, across many issue types, not only renewals.</p>
+    <cite>Verified source: <a href="https://www.bbb.org/us/wa/vancouver/profile/digital-marketing/zoominfo-1296-22673812/complaints?page=2" target="_blank" rel="noopener">BBB complaints, ZoomInfo</a></cite>
+  </div>
+  <div class="evidence-box">
+    <strong>Bloomberg Law, Dec 3, 2024</strong>
+    <p style="margin-top:6px;">Bloomberg Law reported that a shareholder complaint alleged "manipulative and coercive" auto-renewal tactics, including a requirement to give at least 60 days' notice of non-renewal. That is an allegation in a filing, not a ruling we read.</p>
+    <cite>Source: <a href="https://news.bloomberglaw.com/securities-law/zoominfo-top-brass-sued-over-post-pandemic-client-churn-response" target="_blank" rel="noopener">Bloomberg Law, Dec 3, 2024</a></cite>
+  </div>
+</section>
+
+<section aria-labelledby="zi-method-heading">
+  <h2 id="zi-method-heading">Assumptions</h2>
+  <ul class="key-list">
+    <li><strong>Your fee, not a list price:</strong> every ZoomInfo dollar in the chart is the annual fee you type. The $20,000 default is a round example so the 10% is easy to check ($2,000). It is not a ZoomInfo price.</li>
+    <li><strong>2024 formula, our reading of section 3.2:</strong> extension per year = annualized fee + 10% of that fee + the discount that had been taken off. Full extension = that yearly rate times the longer of the initial term or one year. If you set a 20% discount on a $20,000 fee, the discount added back is $20,000 x 0.20 / 0.80 = $5,000, and the yearly extension rate is $27,000.</li>
+    <li><strong>2025 terms:</strong> the uplift slider starts at 0% because the May 1, 2025 document states no percentage. The chart then shows one year only. A multi-year order form could commit you for longer. That length is not in the published May 2025 terms.</li>
+    <li><strong>Negotiated bar:</strong> your percent change applied to the current annual fee, for the same number of years as the extension in 2024 mode (one year in 2025 mode). It is a planning number, not a quote ZoomInfo has offered.</li>
+    <li><strong>Close CRM is not a data-license substitute:</strong> Growth is $99 per user per month billed annually and Essentials is $35, from close.com/pricing on Oct 28, 2026. Those totals are seat licenses only. They do not include a ZoomInfo-scale contact database, and they do not include calling or SMS usage. We did not verify a current public price for Apollo, Cognism, or Lusha, so those products are not in the chart.</li>
+    <li><strong>Not legal advice:</strong> the ordering document you signed controls. The help-center article on opting out of automatic renewal did not return readable text without a login, so it is not quoted. We also did not find a public X post we could quote.</li>
+    <li><strong>Disclosure:</strong> Independent calculations. Some vendor links are affiliate links. This never changes our rankings or calculations.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="zi-sources-heading">
+  <h2 id="zi-sources-heading">Sources</h2>
+  <ol class="key-list" style="font-size:0.9rem;">
+    <li>Verified source: <a href="https://www.zoominfo.com/legal/ltc_03_06_2024" target="_blank" rel="noopener">ZoomInfo License Terms, version March 6, 2024, sections 2.1, 3.1, and 3.2</a>. Read Oct 28, 2026.</li>
+    <li>Verified source: <a href="https://www.zoominfo.com/legal/ltc" target="_blank" rel="noopener">ZoomInfo License Terms, version May 1, 2025, sections 3.1, 3.2, and 13.6</a>. Read Oct 28, 2026. This is the live /legal/ltc page.</li>
+    <li>Verified source: <a href="https://www.zoominfo.com/pricing" target="_blank" rel="noopener">ZoomInfo pricing and plans</a>, including the credit FAQ and the Marketing Demand (75,000 credits) and ABM Enterprise (150,000 credits) cards. Read Oct 28, 2026.</li>
+    <li>Verified source: <a href="https://www.zoominfo.com/ai-information" target="_blank" rel="noopener">ZoomInfo AI information page</a>, last updated October 2026. States that fixed seat tiers and third-party prices such as $14,995 are not current.</li>
+    <li>Verified source: <a href="https://pipeline.zoominfo.com/sales/how-much-does-zoominfo-cost" target="_blank" rel="noopener">ZoomInfo, "How Much Does ZoomInfo Cost?"</a>. Lite at 10 monthly credits, paid plans annual and quote-based, seat minimum mentioned but not numbered.</li>
+    <li>Verified source: <a href="https://www.zoominfo.com/legal/ringlead-customer-agreement" target="_blank" rel="noopener">RingLead master services agreement, section 2</a>. 60 days and up to 5% a year. A different contract.</li>
+    <li>Verified source: <a href="https://www.close.com/pricing" target="_blank" rel="noopener">Close pricing</a>. Essentials $35 per user per month annual, Growth $99. Read Oct 28, 2026.</li>
+    <li><a href="https://www.trustpilot.com/review/zoominfo.com?page=4" target="_blank" rel="noopener">Trustpilot reviews</a>, Dec 30, 2025 and Nov 25, 2025.</li>
+    <li><a href="https://www.bbb.org/us/wa/vancouver/profile/digital-marketing/zoominfo-1296-22673812/complaints?page=2" target="_blank" rel="noopener">BBB complaints</a>, including the Apr 24, 2025 dissolution complaint.</li>
+    <li><a href="https://www.reddit.com/r/legal/comments/142rcsu/can_zoominfo_sue_me_for_not_notifying_of_my/" target="_blank" rel="noopener">r/legal, June 6, 2023</a> and <a href="https://www.reddit.com/r/Recruiter_Advice/comments/1n2q3go/zooinfo_contract_is_a_nightmare_to_get_out_of_do/" target="_blank" rel="noopener">r/Recruiter_Advice, Aug 28, 2025</a>. Indexed text. Direct refetch blocked.</li>
+    <li><a href="https://www.g2.com/discussions/sneaky-auto-renewal-clause-in-zoominfo-contract" target="_blank" rel="noopener">G2 discussion</a>. Indexed text, "over 3 years ago." Direct refetch returned 403.</li>
+    <li><a href="https://news.bloomberglaw.com/securities-law/zoominfo-top-brass-sued-over-post-pandemic-client-churn-response" target="_blank" rel="noopener">Bloomberg Law, Dec 3, 2024</a>. Allegation, not a judgment.</li>
+    <li><a href="https://help.zoominfo.com/s/article/How-to-Opt-Out-of-the-Automatic-Renewal-of-Your-ZoomInfo-Subscription" target="_blank" rel="noopener">ZoomInfo help center, opt out of automatic renewal</a>. Page exists. Body did not load without a login, so it is not quoted.</li>
+  </ol>
+</section>
+
+<script>
+function calcZoomInfoRenewal(input) {
+  var annual = Math.round(Number(input.annual) || 0);
+  var discountPct = Math.min(80, Math.max(0, Number(input.discountPct) || 0));
+  var years = Math.max(1, Math.round(Number(input.initialYears) || 1));
+  var negotiatedPct = Number(input.negotiatedPct) || 0;
+  var version = input.version === '2025' ? '2025' : '2024';
+  var customUpliftPct = Number(input.customUpliftPct) || 0;
+  var discountDollars = 0;
+  var upliftDollars = 0;
+  var extensionYears = 1;
+  if (version === '2024') {
+    if (discountPct > 0) {
+      discountDollars = Math.round(annual * (discountPct / 100) / (1 - discountPct / 100));
+    }
+    upliftDollars = Math.round(annual * 0.10);
+    extensionYears = Math.max(years, 1);
+  } else {
+    upliftDollars = Math.round(annual * (customUpliftPct / 100));
+    extensionYears = 1;
+    discountDollars = 0;
+  }
+  var extensionAnnual = annual + upliftDollars + discountDollars;
+  var extensionTotal = extensionAnnual * extensionYears;
+  var negotiatedAnnual = Math.round(annual * (1 + negotiatedPct / 100));
+  var negotiatedTotal = negotiatedAnnual * extensionYears;
+  return {
+    annual: annual,
+    discountPct: discountPct,
+    discountDollars: discountDollars,
+    upliftDollars: upliftDollars,
+    extensionAnnual: extensionAnnual,
+    extensionYears: extensionYears,
+    extensionTotal: extensionTotal,
+    negotiatedAnnual: negotiatedAnnual,
+    negotiatedTotal: negotiatedTotal,
+    version: version
+  };
+}
+
+function ziShiftDays(iso, delta) {
+  var p = iso.split('-');
+  var dt = new Date(Date.UTC(Number(p[0]), Number(p[1]) - 1, Number(p[2])));
+  dt.setUTCDate(dt.getUTCDate() + delta);
+  var mm = String(dt.getUTCMonth() + 1);
+  var dd = String(dt.getUTCDate());
+  if (mm.length < 2) mm = '0' + mm;
+  if (dd.length < 2) dd = '0' + dd;
+  return dt.getUTCFullYear() + '-' + mm + '-' + dd;
+}
+
+function ziFormatLong(iso) {
+  var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var p = iso.split('-');
+  return months[Number(p[1]) - 1] + ' ' + Number(p[2]) + ', ' + p[0];
+}
+
+function ziTodayISO() {
+  var dt = new Date();
+  var mm = String(dt.getMonth() + 1);
+  var dd = String(dt.getDate());
+  if (mm.length < 2) mm = '0' + mm;
+  if (dd.length < 2) dd = '0' + dd;
+  return dt.getFullYear() + '-' + mm + '-' + dd;
+}
+
+function ziDaysBetween(a, b) {
+  var pa = a.split('-');
+  var pb = b.split('-');
+  var da = Date.UTC(Number(pa[0]), Number(pa[1]) - 1, Number(pa[2]));
+  var db = Date.UTC(Number(pb[0]), Number(pb[1]) - 1, Number(pb[2]));
+  return Math.round((db - da) / 86400000);
+}
+
+function ziMoney(n) {
+  var sign = n < 0 ? '-' : '';
+  return sign + '$' + Math.abs(Math.round(n)).toLocaleString('en-US');
+}
+
+function renderZoomInfo() {
+  var end = document.getElementById('zi-end').value || '2027-06-30';
+  var notice = parseInt(document.getElementById('zi-notice').value, 10);
+  var fee = parseFloat(document.getElementById('zi-fee').value || '0');
+  var discount = parseInt(document.getElementById('zi-discount').value, 10);
+  var years = parseInt(document.getElementById('zi-years').value, 10);
+  var version = document.getElementById('zi-version').value;
+  var neg = parseInt(document.getElementById('zi-neg').value, 10);
+  var uplift = parseInt(document.getElementById('zi-uplift').value, 10);
+  var seats = parseInt(document.getElementById('zi-seats').value, 10);
+  document.getElementById('zi-notice-val').textContent = String(notice);
+  document.getElementById('zi-discount-val').textContent = String(discount);
+  document.getElementById('zi-neg-val').textContent = (neg > 0 ? '+' : '') + String(neg);
+  document.getElementById('zi-uplift-val').textContent = String(uplift);
+  document.getElementById('zi-seats-val').textContent = String(seats);
+  document.getElementById('zi-uplift-wrap').style.display = version === '2025' ? '' : 'none';
+
+  var calc = calcZoomInfoRenewal({
+    annual: fee,
+    discountPct: discount,
+    initialYears: years,
+    negotiatedPct: neg,
+    version: version,
+    customUpliftPct: uplift
+  });
+  var deadline = ziShiftDays(end, -notice);
+  var daysLeft = ziDaysBetween(ziTodayISO(), deadline);
+  var when = daysLeft > 0
+    ? (daysLeft + ' day' + (daysLeft === 1 ? '' : 's') + ' from today')
+    : (daysLeft === 0 ? 'today' : (Math.abs(daysLeft) + ' day' + (Math.abs(daysLeft) === 1 ? '' : 's') + ' ago'));
+  document.getElementById('zi-deadline').textContent = ziFormatLong(deadline);
+  var versionNote = version === '2024'
+    ? ' This 60-day count is the March 6, 2024 Extension Date. Change the slider if your order form prints a different window.'
+    : ' The May 1, 2025 terms do not state a window. This date uses the ' + notice + ' days you entered.';
+  document.getElementById('zi-deadline-note').textContent = 'Based on a contract ending ' + ziFormatLong(end) + ' and ' + notice + ' days of written notice (' + when + '). Send notice on or before this date.' + versionNote;
+
+  var hidden = version === '2024'
+    ? 'On a ' + ziMoney(calc.annual) + ' annual fee, the March 6, 2024 formula adds ' + ziMoney(calc.upliftDollars) + ' (10%)'
+      + (calc.discountDollars ? ' and adds back ' + ziMoney(calc.discountDollars) + ' of negotiated discount' : ' and adds back $0 of discount')
+      + ', for ' + ziMoney(calc.extensionAnnual) + ' per year across ' + calc.extensionYears + ' year' + (calc.extensionYears === 1 ? '' : 's')
+      + ' (' + ziMoney(calc.extensionTotal) + ' for the full extension).'
+    : 'The May 1, 2025 terms state no uplift. The chart uses the ' + uplift + '% you entered (' + ziMoney(calc.upliftDollars) + ' on ' + ziMoney(calc.annual) + '), for one year, because the extension length is not printed.';
+  document.getElementById('zi-hidden').innerHTML = '<strong>Hidden Cost Highlight:</strong> ' + hidden;
+
+  var rows = [
+    { key: 'annual', label: 'Annualized fee (your number)', formula: ziMoney(calc.annual) + ' x ' + calc.extensionYears + ' year' + (calc.extensionYears === 1 ? '' : 's'), amount: calc.annual * calc.extensionYears },
+    { key: 'uplift', label: version === '2024' ? 'Plus 10% of the annualized fee' : 'Plus the uplift percent you entered', formula: ziMoney(calc.upliftDollars) + ' x ' + calc.extensionYears, amount: calc.upliftDollars * calc.extensionYears },
+    { key: 'discount', label: 'Plus negotiated discount added back', formula: version === '2024' ? (ziMoney(calc.discountDollars) + ' x ' + calc.extensionYears) : '$0 (not in the May 2025 text)', amount: calc.discountDollars * calc.extensionYears }
+  ];
+  var stepSum = rows[0].amount + rows[1].amount + rows[2].amount;
+  var math = '<div class="calc-math-list">';
+  rows.forEach(function(r) {
+    math += '<div class="calc-math-row"><span class="calc-math-label"><strong>' + r.label + '</strong><span class="calc-math-formula">' + r.formula + '</span></span><span class="calc-math-val">' + ziMoney(r.amount) + '</span></div>';
+  });
+  math += '<div class="calc-math-total"><span>Extension total</span><span>' + ziMoney(stepSum) + '</span></div>';
+  math += '<div class="calc-math-row"><span class="calc-math-label"><strong>Negotiated renewal, same length</strong><span class="calc-math-formula">' + ziMoney(calc.negotiatedAnnual) + '/yr x ' + calc.extensionYears + '</span></span><span class="calc-math-val">' + ziMoney(calc.negotiatedTotal) + '</span></div>';
+  math += '<p class="calc-math-formula">Deadline = ' + end + ' minus ' + notice + ' days = ' + deadline + '. Step sum ' + ziMoney(stepSum) + ' equals the extension total.</p>';
+  math += '</div>';
+  document.getElementById('zi-calc-body').innerHTML = math;
+
+  var gap = calc.extensionAnnual - calc.negotiatedAnnual;
+  var primary = document.getElementById('zi-primary-cta');
+  if (version === '2024') {
+    primary.href = 'https://www.zoominfo.com/legal/ltc_03_06_2024';
+    primary.textContent = gap > 0 ? ('Open the clause behind this ' + ziMoney(gap) + '/yr uplift →') : 'Read the March 6, 2024 clause →';
+  } else {
+    primary.href = 'https://www.zoominfo.com/legal/ltc';
+    primary.textContent = 'Read the May 1, 2025 terms →';
+  }
+
+  var bars = [
+    { name: 'Negotiated renewal', meta: (neg === 0 ? 'Same as the current fee' : (neg > 0 ? neg + '% above' : Math.abs(neg) + '% below') + ' the current fee'), amount: calc.negotiatedAnnual, cls: 'ebc-fill-sage', rowCls: 'ebc-row-sage' },
+    { name: 'Current annual fee', meta: 'The number on your order form. Not a ZoomInfo list price.', amount: calc.annual, cls: 'ebc-fill-neutral', rowCls: '' },
+    { name: version === '2024' ? 'March 2024 extension, per year' : 'Modeled renewal, per year', meta: version === '2024' ? ('Fee + 10% + discount added back' + (calc.extensionYears > 1 ? '. Full extension is ' + calc.extensionYears + ' years, ' + ziMoney(calc.extensionTotal) : '')) : ('Your fee plus the ' + uplift + '% you entered. No percentage is printed in the May 2025 terms.'), amount: calc.extensionAnnual, cls: 'ebc-fill-terracotta', rowCls: 'ebc-row-terracotta' }
+  ];
+  var maxBar = Math.max.apply(null, bars.map(function(b) { return b.amount; }).concat([1]));
+  document.getElementById('zi-bars').innerHTML = bars.map(function(b) {
+    var width = Math.max(2, Math.round(b.amount / maxBar * 1000) / 10);
+    return '<div class="ebc-row ' + b.rowCls + '" role="listitem">'
+      + '<div class="ebc-label-col"><div class="ebc-tool-name">' + b.name + '</div><div class="ebc-tool-meta">' + b.meta + '</div></div>'
+      + '<div class="ebc-bar-col"><div class="ebc-bar-track"><div class="ebc-bar-fill ' + b.cls + '" style="width:' + width + '%;"></div></div></div>'
+      + '<div class="ebc-val-col"><span class="ebc-val-main">' + ziMoney(b.amount) + '</span><span class="ebc-val-sub">per year</span></div>'
+      + '</div>';
+  }).join('');
+  document.getElementById('zi-chart-title').textContent = version === '2024'
+    ? ('Extension is ' + ziMoney(calc.extensionAnnual) + '/yr versus ' + ziMoney(calc.negotiatedAnnual) + '/yr negotiated')
+    : ('No uplift is printed in the May 2025 terms. Modeled renewal is ' + ziMoney(calc.extensionAnnual) + '/yr');
+  document.getElementById('zi-chart-sub').textContent = 'Annual dollars for a contract ending ' + ziFormatLong(end) + '. ' + (version === '2024'
+    ? 'The long bar is section 3.2 of the March 6, 2024 terms applied to your fee.'
+    : 'The long bar uses only the uplift percent you typed.');
+  document.getElementById('zi-chart-note').innerHTML = '<strong>Hidden Cost Highlight:</strong> ' + hidden + ' Negotiated renewal on the same length is ' + ziMoney(calc.negotiatedTotal) + '.';
+
+  var closeGrowth = seats * 99 * 12;
+  var closeEss = seats * 35 * 12;
+  var termLabel = calc.extensionYears + ' year' + (calc.extensionYears === 1 ? '' : 's');
+  var tableRows = [
+    { name: 'Current fee, renewed flat', what: 'Your order-form annual fee, no uplift', per: calc.annual, term: termLabel, total: calc.annual * calc.extensionYears, cta: 'View ZoomInfo pricing', href: 'https://www.zoominfo.com/pricing', vendor: 'zoominfo' },
+    { name: 'Negotiated renewal', what: (neg >= 0 ? '+' : '') + neg + '% versus the current fee', per: calc.negotiatedAnnual, term: termLabel, total: calc.negotiatedTotal, cta: 'View ZoomInfo pricing', href: 'https://www.zoominfo.com/pricing', vendor: 'zoominfo' },
+    { name: version === '2024' ? 'March 2024 extension formula' : 'May 2025 terms, your uplift %', what: version === '2024' ? 'Annual fee + 10% + discount added back' : 'No formula printed. Using your uplift slider.', per: calc.extensionAnnual, term: version === '2024' ? ('Longer of initial term or 1 year (' + termLabel + ')') : '1 year (length not stated in the May 2025 terms)', total: calc.extensionTotal, cta: version === '2024' ? 'Read the March 6, 2024 clause' : 'Read the May 1, 2025 terms', href: version === '2024' ? 'https://www.zoominfo.com/legal/ltc_03_06_2024' : 'https://www.zoominfo.com/legal/ltc', vendor: 'zoominfo' },
+    { name: 'Close CRM Essentials', what: seats + ' user' + (seats === 1 ? '' : 's') + ' x $35/mo annual. CRM, email, calling. Not a contact database.', per: closeEss, term: '1 year of licenses', total: closeEss, cta: 'View Close pricing', href: 'https://refer.close.com/3k5hp07b8soi-fetl0j', vendor: 'close-crm' },
+    { name: 'Close CRM Growth', what: seats + ' user' + (seats === 1 ? '' : 's') + ' x $99/mo annual. Adds workflows and a power dialer. Calling minutes are extra.', per: closeGrowth, term: '1 year of licenses', total: closeGrowth, cta: 'View Close pricing', href: 'https://refer.close.com/3k5hp07b8soi-fetl0j', vendor: 'close-crm' }
+  ];
+  document.getElementById('zi-tbody').innerHTML = tableRows.map(function(r) {
+    return '<tr>'
+      + '<td data-label="Scenario"><strong>' + r.name + '</strong></td>'
+      + '<td data-label="What it prices">' + r.what + '</td>'
+      + '<td data-label="Per year">' + ziMoney(r.per) + '</td>'
+      + '<td data-label="Term the formula uses">' + r.term + '</td>'
+      + '<td data-label="Full-term total">' + ziMoney(r.total) + '</td>'
+      + '<td data-label="Next step"><div class="cta-stack"><a class="btn-secondary" href="' + r.href + '" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="' + r.vendor + '" data-cta-location="table-row">' + r.cta + ' &rarr;</a></div></td>'
+      + '</tr>';
+  }).join('');
+
+  if (typeof window.trackSaaSBillEvent === 'function') {
+    window.trackSaaSBillEvent('result_rendered', {
+      page: 'zoominfo-renewal',
+      version: version,
+      noticeDays: notice,
+      annual: calc.annual,
+      extensionAnnual: calc.extensionAnnual,
+      deadline: deadline
+    });
+  }
+}
+
+['zi-end','zi-notice','zi-fee','zi-discount','zi-years','zi-version','zi-neg','zi-uplift','zi-seats'].forEach(function(id) {
+  var el = document.getElementById(id);
+  el.addEventListener('input', renderZoomInfo);
+  el.addEventListener('change', renderZoomInfo);
+});
+var ziTable = document.getElementById('full-table-details');
+if (ziTable) {
+  ziTable.addEventListener('toggle', function() {
+    var pill = document.getElementById('zi-table-pill');
+    if (pill) pill.innerHTML = ziTable.open ? 'Hide comparison &uarr;' : 'Compare all rows &darr;';
+  });
+}
+renderZoomInfo();
+</script>
+"""
+
+faqs = [
+    (
+        "Does ZoomInfo require 60 days' notice to stop a renewal?",
+        "The License Terms dated March 6, 2024 do. Section 3.2 sets an Extension Date 60 days before the last day of the term, and the term extends unless either party gives written notice on or before that date. The License Terms dated May 1, 2025, which are the live page at zoominfo.com/legal/ltc, do not state a notice window. Your ordering document can differ, and the May 2025 section 13.6 says the terms prevail unless the order form expressly modifies them.",
+    ),
+    (
+        "What does the March 6, 2024 extension cost?",
+        "Section 3.2 prices the extension at the annualized subscription fee, plus 10% of that fee, plus any applied discount, multiplied by the length of the term in years. The extension runs for the initial term or one year, whichever is longer. On a $20,000 annual fee with no discount, that is $22,000 per year. The $20,000 is an example, not a ZoomInfo list price. ZoomInfo does not publish paid prices.",
+    ),
+    (
+        "Can I cancel ZoomInfo in the middle of the term?",
+        "Not for convenience. Section 3.1 of both the March 6, 2024 and the May 1, 2025 terms says the agreement is not cancellable and remains in effect until it expires or is terminated under its terms. Either party can terminate for a material breach that is not fixed within 21 days after written notice.",
+    ),
+    (
+        "How much does ZoomInfo cost in 2026, and what is the seat minimum?",
+        "Paid plans are quote-based. The pricing page names Professional, Copilot Advanced, Copilot Enterprise, Marketing Demand (75,000 included credits), ABM Lite, and ABM Enterprise (150,000 included credits) without dollar prices. ZoomInfo Lite is free and ZoomInfo's own article says it includes 10 monthly credits and no seat minimum. That article says paid plans include a minimum number of seats but does not print the number. The October 2026 AI information page says ZoomInfo does not use fixed seat tiers and that figures such as $14,995 a year are out of date.",
+    ),
+    (
+        "Is Close CRM a lower-cost replacement for ZoomInfo?",
+        "No. Close CRM is a sales CRM with email, SMS, and calling. Growth is $99 per user per month billed annually and Essentials is $35, from the Close pricing page checked Oct 28, 2026. It does not include a ZoomInfo contact and intent database. Calling and SMS are usage-priced and are not in the license totals on this page. Use it as the CRM and dialer line in the table, not as a data-license swap.",
+    ),
+]
+
+extra = {
+    "@type": "Dataset",
+    "name": "ZoomInfo renewal notice and extension formula (checked 2026-10-28)",
+    "description": "March 6, 2024 60-day Extension Date and annualized fee plus 10% plus applied discount, compared with the May 1, 2025 terms that omit both, plus published credit counts and the free Lite plan.",
+    "creator": {"@type": "Organization", "name": "SaaSBill Editorial"},
+    "dateModified": "2026-10-28",
+    "isBasedOn": [LTC_2024, LTC_2025, PRICING, AI_INFO, COST_ARTICLE, RINGLEAD, CLOSE_PRICING, HELP],
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+}
+
+render_page(
+    REL,
+    TITLE,
+    DESC,
+    SLUG,
+    body,
+    faqs=faqs,
+    extra_schema=extra,
+    published_date="2026-10-28",
+)

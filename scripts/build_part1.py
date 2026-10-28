@@ -232,6 +232,11 @@ home_body = f"""
       <p>Gong&rsquo;s $5,000/yr base platform fee and ~$1,600/seat licenses plus a separate CRM versus Close CRM all-in-one.</p>
     </div>
     <div class="card">
+      <span class="badge badge-high">CRM</span>
+      <h3><a href="./exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/">ZoomInfo 60-day auto-renewal notice calculator</a></h3>
+      <p>Written-notice deadline from your contract end date, and the March 2024 +10% renewal versus a negotiated fee.</p>
+    </div>
+    <div class="card">
       <span class="badge badge-medium">CRM</span>
       <h3><a href="./compare/monday-crm-vs-pipedrive-vs-hubspot-seat-minimums/">monday CRM 3/5/10-seat bucket calculator</a></h3>
       <p>Where monday CRM&rsquo;s fixed 3-, 5-, and 10-seat blocks cost more than exact per-seat billing in Pipedrive or Close.</p>

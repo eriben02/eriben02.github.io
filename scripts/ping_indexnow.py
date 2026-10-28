@@ -1,4 +1,5 @@
 import json
+import os
 import re
 import urllib.request
 
@@ -7,7 +8,8 @@ HOST = "saasbill.io"
 KEY_LOCATION = f"https://{HOST}/{KEY}.txt"
 
 def main():
-    with open("/workspace/saastruth/public/sitemap.xml", "r", encoding="utf-8") as f:
+    sitemap_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "public", "sitemap.xml")
+    with open(sitemap_path, "r", encoding="utf-8") as f:
         xml = f.read()
     urls = re.findall(r"<loc>(https://saasbill\.io/[^<]*)</loc>", xml)
     payload = {

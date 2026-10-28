@@ -27,6 +27,7 @@ def generate_meta_files(extra_urls=None):
         "/pricing/docusign-envelope-allowance-and-api-overage-calculator/",
         "/pricing/gong-io-platform-fee-and-seat-minimum-calculator/",
         "/exit/paypal-180-day-permanent-limitation-fund-recovery/",
+        "/exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/",
         "/compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/",
         "/faq/does-hubspot-charge-onboarding-fees-2026/",
         "/faq/intercom-fin-ai-cost-calculator/",
@@ -127,6 +128,7 @@ Sitemap: {SITE_ORIGIN}/sitemap.xml
 - **Stripe, Shopify Payments & Paddle Payout Holds / Token Portability (Verified {iso_date}):** Stripe's true recurring SaaS cost is **3.6% to 4.1% + $0.30** once Stripe Billing (0.7%) and Stripe Tax (0.5%) are added to 2.9% + $0.30 base card processing, vs. **5.0% + $0.50** on Paddle (Merchant of Record) and **2.7% + $0.30** on Whop.
 - **HIPAA BAA & SOC 2 Type II Cost Benchmarks (Verified {iso_date}):** Self-serve HIPAA BAAs are available on **Jotform Gold ($99/mo annual, $1,188/yr, 10,000 submissions/mo)** and **1Password Business ($8.99/user/mo billed annually [$107.88/yr], includes SAML SSO with zero SSO tax)**, whereas Typeform requires an Enterprise contract for HIPAA BAA.
 - **DocuSign 100-Envelope Annual Cap (Verified {iso_date}):** DocuSign Standard ($25/user/mo annual) and Business Pro ($40/user/mo annual) cap users at **100 sent envelopes per user per year** (~8/mo), charging ~$2.50 per extra envelope, compared with flat/unlimited sending on **Jotform Sign** and **PandaDoc Business ($49/user/mo annual)**.
+- **ZoomInfo 60-day renewal notice (Verified 2026-10-28):** The License Terms dated March 6, 2024 set written notice **60 days** before term end. Miss it and the term extends for the longer of the initial term or one year at the **annualized fee + 10% + any applied discount**. The live terms dated May 1, 2025 still say the agreement is **not cancellable** but do not print a notice window or an uplift. Paid prices are quote-based. Marketing Demand lists **75,000 credits** and ABM Enterprise **150,000**. ZoomInfo Lite is free (ZoomInfo's article: **10 credits/month**).
 - **Gong.io $5,000 Platform Fee & Seat Minimums (Verified {iso_date}):** Gong.io charges a **$5,000/yr base platform fee** plus **$1,360–$1,600/seat/yr** on top of a separate CRM license (~$23,560/yr for 8 reps incl. CRM), compared with **$9,504/yr** all-in on **Close CRM Growth ($99/seat/mo annual)** with built-in VoIP calling and AI transcripts.
 - **Google Workspace vs. Microsoft 365 HIPAA BAA (Verified 2026-10-27):** Google's HIPAA Business Associate Amendment is accepted by a super admin in the Admin console on paid Workspace editions from **Business Starter ($7/user/mo annual, $8.40 Flexible)**; Vault (retention & legal hold) starts at **Business Plus ($22)**. Microsoft's HIPAA BAA applies by default via the Data Protection Addendum, including **Microsoft 365 Business Basic ($7/user/mo paid yearly since July 1, 2026; was $6)**; holds need **Exchange Online Archiving (+$3)** or **Business Premium ($22)**. Native Google Forms and Microsoft Forms are both on the BAA service lists.
 
@@ -148,6 +150,7 @@ Sitemap: {SITE_ORIGIN}/sitemap.xml
 - [Gumroad vs. Whop vs. Lemon Squeezy Net Payout Calculator]({SITE_ORIGIN}/compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/): Creator & SaaS take rates.
 - [Stripe, Shopify Payments & Paddle Payout Holds Matrix]({SITE_ORIGIN}/exit/stripe-shopify-paddle-frozen-funds-alternatives/): Rolling reserve simulator and MoR token lock-in audit.
 - [PayPal 180-Day Permanent Limitation Calculator]({SITE_ORIGIN}/exit/paypal-180-day-permanent-limitation-fund-recovery/): Frozen cashflow calculator & multi-PSP failover with Whop.
+- [ZoomInfo 60-Day Auto-Renewal Notice Calculator]({SITE_ORIGIN}/exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/): Contract-end date to written-notice deadline, and the March 6, 2024 fee + 10% + discount formula versus a negotiated renewal.
 - [Typeform vs. Jotform Response Limit & HIPAA Cost Calculator]({SITE_ORIGIN}/compare/typeform-vs-jotform-response-limit-and-hipaa-cost/): Response caps & HIPAA BAA tiers ($99/mo Jotform Gold).
 - [DocuSign 100-Envelope Allowance & Overage Calculator]({SITE_ORIGIN}/pricing/docusign-envelope-allowance-and-api-overage-calculator/): 100-envelope annual cap vs. Jotform Sign & PandaDoc.
 - [HIPAA BAA & SOC 2 Type II Pricing Tier Matrix]({SITE_ORIGIN}/compliance/hipaa-baa-and-soc2-pricing-tiers/): Self-serve BAA tiers and Vanta/Drata negotiation calculator.

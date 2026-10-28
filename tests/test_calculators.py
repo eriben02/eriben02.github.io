@@ -292,6 +292,7 @@ class TestSaaSBillCalculators(unittest.TestCase):
             "pricing/docusign-envelope-allowance-and-api-overage-calculator/index.html",
             "pricing/gong-io-platform-fee-and-seat-minimum-calculator/index.html",
             "exit/paypal-180-day-permanent-limitation-fund-recovery/index.html",
+            "exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/index.html",
             "compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/index.html",
             "faq/does-hubspot-charge-onboarding-fees-2026/index.html",
             "faq/intercom-fin-ai-cost-calculator/index.html",
@@ -317,6 +318,7 @@ class TestSaaSBillCalculators(unittest.TestCase):
             "pricing/docusign-envelope-allowance-and-api-overage-calculator/index.html": "ds-summary",
             "pricing/gong-io-platform-fee-and-seat-minimum-calculator/index.html": "gong-summary",
             "exit/paypal-180-day-permanent-limitation-fund-recovery/index.html": "pp-summary",
+            "exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/index.html": "zi-summary",
             "compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/index.html": "gm-summary",
             "faq/does-hubspot-charge-onboarding-fees-2026/index.html": "faq-hs-summary",
             "faq/intercom-fin-ai-cost-calculator/index.html": "faq-ic-summary",
@@ -530,6 +532,7 @@ class TestSaaSBillCalculators(unittest.TestCase):
             "pricing/docusign-envelope-allowance-and-api-overage-calculator/index.html",
             "pricing/gong-io-platform-fee-and-seat-minimum-calculator/index.html",
             "exit/paypal-180-day-permanent-limitation-fund-recovery/index.html",
+            "exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/index.html",
             "compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/index.html",
             "faq/does-hubspot-charge-onboarding-fees-2026/index.html",
             "faq/intercom-fin-ai-cost-calculator/index.html",
@@ -596,7 +599,8 @@ class TestSaaSBillCalculators(unittest.TestCase):
 
         with open(os.path.join(PUBLIC_DIR, "sitemap.xml"), encoding="utf-8") as f:
             sitemap = f.read()
-        self.assertEqual(sitemap.count("<url><loc>"), 26)
+        self.assertEqual(sitemap.count("<url><loc>"), 27)
+        self.assertIn("https://saasbill.io/exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/", sitemap)
         for loc in (
             "https://saasbill.io/zendesk-ai-cost-calculator/",
             "https://saasbill.io/zendesk-vs-freshdesk-cost-comparison/",
@@ -831,6 +835,7 @@ class TestSaaSBillCalculators(unittest.TestCase):
             "pricing/docusign-envelope-allowance-and-api-overage-calculator/index.html",
             "pricing/gong-io-platform-fee-and-seat-minimum-calculator/index.html",
             "exit/paypal-180-day-permanent-limitation-fund-recovery/index.html",
+            "exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/index.html",
             "compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/index.html",
             "faq/does-hubspot-charge-onboarding-fees-2026/index.html",
             "faq/intercom-fin-ai-cost-calculator/index.html",
@@ -962,6 +967,153 @@ class TestSaaSBillCalculators(unittest.TestCase):
             self.assertGreater(pos_tbody, pos_viz)
             for bad in ["—", "&mdash;", "SaaSTruth", "Erik", "Bengtsson"]:
                 self.assertNotIn(bad, html, f"Forbidden token '{bad}' in {rel}")
+
+
+    def test_zendesk_and_hubspot_high_intent_calculators(self):
+        """Zendesk spotlight pages and the HubSpot onboarding calculator: leads, disclosure, and Year-1 math."""
+        zendesk_lead = "See what Zendesk AI actually costs once the $50/agent add-on and per-resolution overages are included. Adjust the agents and AI volume below to see your real Year-1 total and how it compares to Freshdesk and Intercom."
+        zendesk_vs_lead = "Compare what Zendesk AI and Freshdesk Freddy AI actually cost for your support team. Adjust the agents and AI volume below to see the real Year-1 total and exact annual savings side by side."
+        hubspot_pricing_lead = "See what HubSpot actually costs once mandatory onboarding fees, extra seats, and contact tiers are included. Adjust your team size, contacts, and tier below to see your real Year-1 total and how it compares to Close CRM and Pipedrive."
+        hubspot_root_lead = "Calculate your real Year-1 HubSpot cost including the mandatory $1,500 to $7,000 onboarding fee. Adjust your seats, marketing contacts, and tier below to compare your total against Close CRM and Pipedrive."
+        zendesk_pages = [
+            (
+                "zendesk-ai-cost-calculator/index.html",
+                "https://saasbill.io/zendesk-ai-cost-calculator/",
+                "Zendesk AI Cost Calculator (2026): Real Per-Resolution &amp; Add-On Pricing | SaaSBill",
+                "Zendesk AI Cost Calculator: Calculate Your Real Year-1 Total ($50/Seat Add-On + $1.50/Resolution)",
+                zendesk_lead,
+            ),
+            (
+                "pricing/zendesk-ai-resolution-and-automated-outcome-cost/index.html",
+                "https://saasbill.io/pricing/zendesk-ai-resolution-and-automated-outcome-cost/",
+                "Zendesk AI Cost Calculator (2026): Real Per-Resolution &amp; Add-On Pricing | SaaSBill",
+                "Zendesk AI Cost Calculator: Calculate Your Real Year-1 Total ($50/Seat Add-On + $1.50/Resolution)",
+                zendesk_lead,
+            ),
+            (
+                "zendesk-vs-freshdesk-cost-comparison/index.html",
+                "https://saasbill.io/zendesk-vs-freshdesk-cost-comparison/",
+                "Zendesk vs Freshdesk Cost Comparison (2026): AI &amp; Seat Pricing Calculator | SaaSBill",
+                "Zendesk vs Freshdesk Cost Comparison: Real Year-1 Pricing with AI Resolutions",
+                zendesk_vs_lead,
+            ),
+        ]
+        for rel, canonical, title, h1, lead in zendesk_pages:
+            with open(os.path.join(PUBLIC_DIR, rel), encoding="utf-8") as f:
+                html = f.read()
+            self.assertIn(f'<link rel="canonical" href="{canonical}" />', html)
+            self.assertIn(f"<title>{title}</title>", html)
+            self.assertIn(f"<h1>{h1}</h1>", html)
+            self.assertIn(f'<p class="lead">{lead}</p>', html)
+            self.assertIn("let currentSpotlightId = 'zendesk-suite-team';", html)
+            self.assertIn("function calcToolYear1(t, seats, aiVol, mode)", html)
+            self.assertIn('id="wb-big-amount">$32,700</span>', html)
+            self.assertIn("Freshdesk Growth + Freddy AI ($10,855/yr)", html)
+            self.assertIn("saves $21,845/yr", html)
+            self.assertIn('id="wb-calc-details"', html)
+            self.assertIn('id="full-table-details"', html)
+            self.assertIn("See exactly how we calculated this", html)
+            for bad in ["—", "&mdash;", "SaaSTruth", "Erik Bengtsson", "Erik", "Bengtsson"]:
+                self.assertNotIn(bad, html, f"Forbidden token '{bad}' in {rel}")
+            tools_m = re.search(r"const TOOLS = (\[.*?\]);\nconst AFFILIATES", html, re.S)
+            fn_m = re.search(
+                r"(function calcEffectiveSeats\(tool, seats\) \{.*?\n\}\n\nfunction calcToolYear1\(t, seats, aiVol, mode\) \{.*?\n\})\n\nconst VENDOR_CTA_LABELS",
+                html,
+                re.S,
+            )
+            self.assertIsNotNone(tools_m, rel)
+            self.assertIsNotNone(fn_m, rel)
+            runner = "const TOOLS = " + tools_m.group(1) + ";\n" + fn_m.group(1) + """
+            const zd = calcToolYear1(TOOLS.find(t => t.id === 'zendesk-suite-team'), 10, 1500, 'annual');
+            const fd = calcToolYear1(TOOLS.find(t => t.id === 'freshdesk-support'), 10, 1500, 'annual');
+            console.log(JSON.stringify({zd: zd.year1Total, fd: fd.year1Total, saved: zd.year1Total - fd.year1Total}));
+            """
+            res = subprocess.run(["node", "-e", runner], capture_output=True, text=True, check=True)
+            out = json.loads(res.stdout)
+            self.assertEqual(out["zd"], 32700)
+            self.assertEqual(out["fd"], 10855)
+            self.assertEqual(out["saved"], 21845)
+
+        with open(os.path.join(PUBLIC_DIR, "pricing/hubspot-true-cost-and-onboarding-fees/index.html"), encoding="utf-8") as f:
+            pricing_html = f.read()
+        self.assertIn(f'<p class="lead">{hubspot_pricing_lead}</p>', pricing_html)
+        with open(os.path.join(PUBLIC_DIR, "hubspot-onboarding-fee-calculator/index.html"), encoding="utf-8") as f:
+            hs_html = f.read()
+        self.assertIn('<link rel="canonical" href="https://saasbill.io/hubspot-onboarding-fee-calculator/" />', hs_html)
+        self.assertIn("HubSpot Onboarding Fee Calculator: Mandatory Setup", hs_html)
+        self.assertIn(f'<p class="lead">{hubspot_root_lead}</p>', hs_html)
+        self.assertIn('id="hs-users"', hs_html)
+        self.assertIn('id="hs-contacts"', hs_html)
+        self.assertIn('id="hs-tier"', hs_html)
+        self.assertIn('id="full-table-details"', hs_html)
+        for bad in ["—", "&mdash;", "SaaSTruth", "Erik Bengtsson"]:
+            self.assertNotIn(bad, hs_html)
+
+
+    def test_zoominfo_renewal_notice_calculator(self):
+        """ZoomInfo page: 60-day deadline, March 2024 +10% formula, quote-based pricing, no invented list price."""
+        rel = "exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/index.html"
+        with open(os.path.join(PUBLIC_DIR, rel), encoding="utf-8") as f:
+            html = f.read()
+        title = re.search(r"<title>(.*?)</title>", html).group(1)
+        self.assertLessEqual(len(title), 60, title)
+        self.assertTrue(title.endswith("– saasbill.io"), title)
+        self.assertIn('href="https://saasbill.io/exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/"', html)
+        self.assertIn("See exactly how we calculated this", html)
+        self.assertIn('id="zi-calc-details"', html)
+        self.assertIn('id="full-table-details"', html)
+        self.assertIn("https://www.zoominfo.com/legal/ltc_03_06_2024", html)
+        self.assertIn("https://www.zoominfo.com/legal/ltc", html)
+        self.assertIn("https://refer.close.com/3k5hp07b8soi-fetl0j", html)
+        self.assertIn("Verified source", html)
+        self.assertIn("not a ZoomInfo contact database", html)
+        self.assertIn("out of date", html)
+        self.assertNotIn("Direct vendor link", html)
+        self.assertNotIn("Referral link", html)
+        for bad in ["—", "&mdash;", "SaaSTruth", "Erik", "Bengtsson"]:
+            self.assertNotIn(bad, html, bad)
+        lead = re.search(r'<p class="lead">(.*?)</p>', html, re.S).group(1)
+        self.assertEqual(lead.count(". "), 1)
+        self.assertIn("60", lead)
+        self.assertIn("10%", lead)
+        self.assertIn("2026", lead)
+        fn = re.search(r"(function calcZoomInfoRenewal\(input\) \{.*?\n\})\n\nfunction ziShiftDays", html, re.S)
+        shift = re.search(r"(function ziShiftDays\(iso, delta\) \{.*?\n\})\n\nfunction ziFormatLong", html, re.S)
+        self.assertIsNotNone(fn)
+        self.assertIsNotNone(shift)
+        runner = fn.group(1) + "\n" + shift.group(1) + """
+        const a = calcZoomInfoRenewal({annual:20000, discountPct:0, initialYears:1, negotiatedPct:0, version:'2024', customUpliftPct:0});
+        const b = calcZoomInfoRenewal({annual:20000, discountPct:20, initialYears:3, negotiatedPct:-10, version:'2024', customUpliftPct:0});
+        const c = calcZoomInfoRenewal({annual:20000, discountPct:20, initialYears:3, negotiatedPct:0, version:'2025', customUpliftPct:5});
+        const step = a.annual * a.extensionYears + a.upliftDollars * a.extensionYears + a.discountDollars * a.extensionYears;
+        console.log(JSON.stringify({
+          a: a,
+          b: b,
+          c: c,
+          step: step,
+          deadline: ziShiftDays('2027-06-30', -60)
+        }));
+        """
+        res = subprocess.run(["node", "-e", runner], capture_output=True, text=True, check=True)
+        out = json.loads(res.stdout)
+        self.assertEqual(out["a"]["extensionAnnual"], 22000)
+        self.assertEqual(out["a"]["extensionTotal"], 22000)
+        self.assertEqual(out["a"]["upliftDollars"], 2000)
+        self.assertEqual(out["step"], out["a"]["extensionTotal"])
+        self.assertEqual(out["b"]["discountDollars"], 5000)
+        self.assertEqual(out["b"]["extensionAnnual"], 27000)
+        self.assertEqual(out["b"]["extensionYears"], 3)
+        self.assertEqual(out["b"]["extensionTotal"], 81000)
+        self.assertEqual(out["b"]["negotiatedAnnual"], 18000)
+        self.assertEqual(out["c"]["extensionAnnual"], 21000)
+        self.assertEqual(out["c"]["extensionYears"], 1)
+        self.assertEqual(out["c"]["discountDollars"], 0)
+        self.assertEqual(out["deadline"], "2027-05-01")
+
+        with open(os.path.join(PUBLIC_DIR, "index.html"), encoding="utf-8") as f:
+            home = f.read()
+        self.assertIn("./exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/", home)
+        self.assertIn("ZoomInfo 60-day auto-renewal notice calculator", home)
 
 
 if __name__ == "__main__":
