@@ -59,19 +59,16 @@ def render_related_links(rel_path, prefix):
     ]
     by_rel = {rel: (label, summary) for rel, label, summary in all_links}
     chargeback_rel = "chargeback-fee-and-recovery-calculator/index.html"
+    chargeback_mirror = "pricing/stripe-shopify-chargeback-fee-and-chargeflow-roi-calculator/index.html"
     payment_rels = {
         chargeback_rel,
-        "pricing/stripe-shopify-chargeback-fee-and-chargeflow-roi-calculator/index.html",
         "exit/stripe-shopify-paddle-frozen-funds-alternatives/index.html",
         "pricing/stripe-billing-0-7-percent-recurring-tax-calculator/index.html",
         "faq/stripe-vs-paddle-true-cost/index.html",
         "compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/index.html",
         "exit/paypal-180-day-permanent-limitation-fund-recovery/index.html",
     }
-    if rel_path in (
-        chargeback_rel,
-        "pricing/stripe-shopify-chargeback-fee-and-chargeflow-roi-calculator/index.html",
-    ):
+    if rel_path in (chargeback_rel, chargeback_mirror):
         preferred = [
             "exit/stripe-shopify-paddle-frozen-funds-alternatives/index.html",
             "pricing/stripe-billing-0-7-percent-recurring-tax-calculator/index.html",
@@ -83,7 +80,7 @@ def render_related_links(rel_path, prefix):
         preferred = [rel for rel, _, _ in all_links]
     cards = []
     for target_rel in preferred:
-        if target_rel == rel_path or target_rel not in by_rel:
+        if target_rel == rel_path or target_rel == chargeback_mirror or target_rel not in by_rel:
             continue
         label, summary = by_rel[target_rel]
         href = prefix + target_rel.replace("index.html", "")

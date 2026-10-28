@@ -156,8 +156,33 @@ assert.strictEqual(td.feeYr, 180);
 assert.strictEqual(td.net, 169);
 
 const home = fs.readFileSync(path.join(root, "public/index.html"), "utf8");
-for (const token of ["$250/mo disputed", "$75/mo in $15", "0.5% to 0.75% reserve trigger", "$122/mo net"]) {
+for (const token of ["Sticker Price: Base rate", "Sticker Price: Per-tx fees", "0.65% chargeback drain", "Monthly GMV ($k)", "Monthly transactions", "$0 evidence prep", "0.5% to 0.75%"]) {
   if (!home.includes(token)) fail("homepage missing " + token);
 }
+const payStart = home.indexOf("/* QUOTE_PAY_PROFILE_START */");
+const payEnd = home.indexOf("/* QUOTE_PAY_PROFILE_END */");
+if (payStart < 0 || payEnd < 0) fail("homepage missing quotePayProfile");
+const paySandbox = { window: {} };
+paySandbox.window = paySandbox;
+vm.runInNewContext(home.slice(payStart, payEnd), paySandbox);
+const payStripe = paySandbox.quotePayProfile("stripe-payments", 50000, 1000);
+const payWhop = paySandbox.quotePayProfile("whop-payments", 50000, 1000);
+const payPaddle = paySandbox.quotePayProfile("paddle-mor", 50000, 1000);
+const payLemon = paySandbox.quotePayProfile("lemon-squeezy", 50000, 1000);
+const payCf = paySandbox.quotePayProfile("chargeflow", 50000, 1000);
+assert.strictEqual(payStripe.total, 2683);
+assert.strictEqual(payStripe.h, 933);
+assert.strictEqual(payStripe.gapLine, "+$933/mo (+$11,196/yr, +53% Hidden Cost Gap above the $1,750/mo advertised sticker rate)");
+assert.strictEqual(payWhop.total, 2275);
+assert.strictEqual(payWhop.without, 1875);
+assert.strictEqual(payWhop.held, 0);
+assert.strictEqual(payPaddle.total, 3840);
+assert.strictEqual(payPaddle.h, 840);
+assert.strictEqual(payLemon.total, 3833);
+assert.strictEqual(payLemon.h, 833);
+assert.strictEqual(payCf.netYr, 1901);
+assert.strictEqual(payCf.netMo, 158);
+assert.strictEqual(payCf.b, 0);
+assert.strictEqual(payCf.s, 0);
 
 console.log("ok payment calculators: reserve net $1,901, stripe billing net $1,170, stripe vs paddle net $1,462");

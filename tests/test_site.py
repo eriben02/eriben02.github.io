@@ -131,8 +131,44 @@ class TestChargebackCalculator(unittest.TestCase):
                 self.assertNotIn(bad, html, rel)
         with open(os.path.join(PUBLIC_DIR, "index.html"), encoding="utf-8") as f:
             home = f.read()
-        self.assertIn("$250/mo disputed", home)
-        self.assertIn("5 disputes/mo", home)
+        self.assertIn("Sticker Price: Base rate", home)
+        self.assertIn("0.65% chargeback drain", home)
+        self.assertIn("Hidden Cost Gap", home)
+        self.assertNotIn("25% of $2k recovered", home)
+
+        for rel in (
+            "chargeback-fee-and-recovery-calculator/index.html",
+            "pricing/stripe-shopify-chargeback-fee-and-chargeflow-roi-calculator/index.html",
+        ):
+            with open(os.path.join(PUBLIC_DIR, rel), encoding="utf-8") as f:
+                page = f.read()
+            grid = re.search(r'class="related-calc-grid">(.*?)</div>\s*<details', page, re.S)
+            self.assertIsNotNone(grid, rel)
+            cards = grid.group(1)
+            self.assertNotIn("stripe-shopify-chargeback-fee-and-chargeflow-roi-calculator/", cards, rel)
+            self.assertNotIn('href="../chargeback-fee-and-recovery-calculator/"', cards)
+            self.assertNotIn('href="../../chargeback-fee-and-recovery-calculator/"', cards)
+            self.assertIn("Frozen Funds", cards)
+            self.assertIn("stripe-billing-0-7-percent-recurring-tax-calculator/", cards)
+            self.assertIn("stripe-vs-paddle-true-cost/", cards)
+            self.assertIn("Hidden Cost Gap: Lost sales", page)
+            self.assertIn("Hidden Cost: Evidence prep", page)
+            self.assertIn("Sticker Fee: Processor dispute fees", page)
+
+        for rel in (
+            "exit/stripe-shopify-paddle-frozen-funds-alternatives/index.html",
+            "pricing/stripe-billing-0-7-percent-recurring-tax-calculator/index.html",
+            "faq/stripe-vs-paddle-true-cost/index.html",
+            "compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/index.html",
+            "exit/paypal-180-day-permanent-limitation-fund-recovery/index.html",
+        ):
+            with open(os.path.join(PUBLIC_DIR, rel), encoding="utf-8") as f:
+                page = f.read()
+            grid = re.search(r'class="related-calc-grid">(.*?)</div>\s*<details', page, re.S)
+            self.assertIsNotNone(grid, rel)
+            cards = grid.group(1)
+            self.assertIn("chargeback-fee-and-recovery-calculator/", cards, rel)
+            self.assertNotIn("stripe-shopify-chargeback-fee-and-chargeflow-roi-calculator/", cards, rel)
 
 
 if __name__ == "__main__":

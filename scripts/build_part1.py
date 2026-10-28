@@ -1,5 +1,17 @@
 import json
+import os
 from layout import load_data, render_page, SITE_ORIGIN
+
+def _load_quote_pay_profile_js():
+    path = os.path.join(os.path.dirname(__file__), "..", "assets", "app.js")
+    text = open(path, encoding="utf-8").read()
+    start = text.find("/* QUOTE_PAY_PROFILE_START */")
+    end = text.find("/* QUOTE_PAY_PROFILE_END */")
+    if start < 0 or end < 0:
+        raise SystemExit("quotePayProfile markers missing from assets/app.js")
+    return text[start:end + len("/* QUOTE_PAY_PROFILE_END */")]
+
+QUOTE_PAY_JS = _load_quote_pay_profile_js()
 
 TOOLS, AFFILIATES = load_data()
 tools_js = json.dumps(TOOLS)
@@ -206,7 +218,7 @@ home_body = f"""
       </div>
 
       <p id="calc-payment-note" style="font-size:0.8rem; color:var(--muted); margin-top:6px;">
-        <strong>Payment Processors &amp; MoR (Fees vs. Temporary Reserves):</strong> Because payment rails charge per transaction rather than per seat, selecting <em>Payment Processors</em> models a standardized benchmark of <strong>$50,000/month GMV across 1,000 transactions ($50 AOV, 30% international cards)</strong>. <strong>Estimated monthly processing fees</strong> (percentage + per-transaction + FX/billing surcharges) are shown separately from <strong>potential funds temporarily held</strong> (such as a 25% rolling reserve held for 90&ndash;180 days on a risk flag, which is a cashflow hold rather than a fee). To model your exact volume, open the <a href="./exit/stripe-shopify-paddle-frozen-funds-alternatives/">Interactive Payout Hold &amp; Reserve Simulator &rarr;</a> A separate cost sits on top of the processing rate: each chargeback takes the order value plus a dispute fee, usually $15 on Stripe and Shopify Payments. Compare that with automated recovery on the <a href="./chargeback-fee-and-recovery-calculator/">chargeback cost calculator &rarr;</a>
+        <strong>Payment Processors &amp; MoR (Fees vs. Temporary Reserves):</strong> Because payment rails charge per transaction rather than per seat, selecting <em>Payment Processors</em> switches the left sliders to <strong>Monthly GMV ($k)</strong> and <strong>Monthly transactions</strong>. The default is <strong>$50,000/month GMV across 1,000 transactions ($50 AOV, 30% international cards)</strong>. <strong>Estimated monthly processing fees</strong> (percentage + per-transaction + FX/billing surcharges) are shown separately from <strong>potential funds temporarily held</strong> (such as a 25% rolling reserve held for 90&ndash;180 days on a risk flag, which is a cashflow hold rather than a fee). To model your exact volume, open the <a href="./exit/stripe-shopify-paddle-frozen-funds-alternatives/">Interactive Payout Hold &amp; Reserve Simulator &rarr;</a> A separate cost sits on top of the processing rate: each chargeback takes the order value plus a dispute fee, usually $15 on Stripe and Shopify Payments. Compare that with automated recovery on the <a href="./chargeback-fee-and-recovery-calculator/">chargeback cost calculator &rarr;</a>
       </p>
     </div>
   </details>
@@ -603,30 +615,67 @@ function getContextualCtaLabel(tool, rowTotal, refTotal, isTrapOrHighest) {{
 }}
 
 function renderCalcBreakdownHtml(r, seats, aiVol, mode, cat) {{
-  if (cat === 'Payment Processors & MoR' && PAY_PROFILES[r.tool.id]) {{
-    const prof = PAY_PROFILES[r.tool.id];
+  if (cat === 'Payment Processors & MoR' && typeof window.quotePayProfile === 'function') {{
+    const gmvMo = seats * 1000;
+    const prof = window.quotePayProfile(r.tool.id, gmvMo, aiVol);
     const srcUrl = (r.tool.source_urls && r.tool.source_urls[0]) ? r.tool.source_urls[0] : '#';
+    const money = n => '$' + Math.round(n).toLocaleString('en-US');
+    if (prof.recovery && prof.bench) {{
+      const bench = prof.bench;
+      return `
+        <div class="calc-math-list">
+          <div class="calc-math-row">
+            <span class="calc-math-label"><strong>Sticker Price: Base rate</strong><span class="calc-math-formula">$0/mo base platform fee</span></span>
+            <span class="calc-math-val">$0/mo</span>
+          </div>
+          <div class="calc-math-row">
+            <span class="calc-math-label"><strong>Sticker Price: Per-tx fees</strong><span class="calc-math-formula">$0 evidence prep</span></span>
+            <span class="calc-math-val">$0/mo</span>
+          </div>
+          <div class="calc-math-row">
+            <span class="calc-math-label"><strong>Disputed sales at 0.65%</strong><span class="calc-math-formula">${{money(gmvMo)}} x 12 x 0.65%</span></span>
+            <span class="calc-math-val">${{money(bench.disputed)}}/yr</span>
+          </div>
+          <div class="calc-math-row">
+            <span class="calc-math-label"><strong>Gross recovered at 65%</strong><span class="calc-math-formula">Planning benchmark, not a guaranteed win rate</span></span>
+            <span class="calc-math-val">${{money(bench.recovered)}}/yr</span>
+          </div>
+          <div class="calc-math-row">
+            <span class="calc-math-label"><strong>Hidden Cost Gap: 25% success fee</strong><span class="calc-math-formula">25% of recovered dollars only</span></span>
+            <span class="calc-math-val">${{money(bench.fee)}}/yr</span>
+          </div>
+          <div class="calc-math-total">
+            <span>Net recovered</span>
+            <span>+${{money(bench.net)}}/yr (${{money(bench.netMo)}}/mo)</span>
+          </div>
+          <div class="calc-math-meta">
+            <span>$0/mo base platform fee. $0 evidence prep. Potential 25% reserve holdback: <strong>$0/mo</strong> on this add-on.</span>
+            <a href="${{srcUrl}}" target="_blank" rel="noopener">Verified source &nearr;</a>
+          </div>
+        </div>
+      `;
+    }}
     return `
       <div class="calc-math-list">
         <div class="calc-math-row">
           <span class="calc-math-label"><strong>${{prof.callTitleBase}}</strong><span class="calc-math-formula">${{prof.callSubBase}}</span></span>
-          <span class="calc-math-val">$${{prof.b.toLocaleString()}}/mo</span>
+          <span class="calc-math-val">${{money(prof.b)}}/mo</span>
         </div>
         <div class="calc-math-row">
           <span class="calc-math-label"><strong>${{prof.callTitleSeats}}</strong><span class="calc-math-formula">${{prof.callSubSeats}}</span></span>
-          <span class="calc-math-val">$${{prof.s.toLocaleString()}}/mo</span>
+          <span class="calc-math-val">${{money(prof.s)}}/mo</span>
         </div>
         <div class="calc-math-row">
           <span class="calc-math-label"><strong>${{prof.callTitleHidden}}</strong><span class="calc-math-formula">${{prof.callSubHidden}}</span></span>
-          <span class="calc-math-val">$${{prof.h.toLocaleString()}}/mo</span>
+          <span class="calc-math-val">${{money(prof.h)}}/mo</span>
         </div>
         <div class="calc-math-total">
-          <span>Monthly Processing Fees ($50k GMV)</span>
-          <span>$${{prof.total.toLocaleString()}}/mo ($${{(prof.total * 12).toLocaleString()}}/yr)</span>
+          <span>Monthly true cost (${{money(gmvMo)}} GMV)</span>
+          <span>${{money(prof.total)}}/mo (${{money(prof.total * 12)}}/yr)</span>
         </div>
         ${{prof.disputeLine ? `<div class="calc-math-row"><span class="calc-math-label"><strong>Dispute and chargeback exposure</strong><span class="calc-math-formula">${{prof.disputeLine}}</span></span><span class="calc-math-val">${{prof.disputeAmt}}</span></div>` : ''}}
         <div class="calc-math-meta">
-          <span>Potential 25% reserve holdback: <strong>$${{prof.held.toLocaleString()}}/mo</strong> (temporary hold, not a fee)</span>
+          <span>Potential 25% reserve holdback: <strong>${{money(prof.held)}}/mo</strong> (temporary hold, not a fee)</span>
           <a href="${{srcUrl}}" target="_blank" rel="noopener">Verified source &nearr;</a>
         </div>
       </div>
@@ -723,126 +772,64 @@ function applyBarRowState(rowEl, share, val) {{
   rowEl.classList.toggle('is-zero', val === 0);
 }}
 
-const PAY_PROFILES = {{
-  'stripe-payments': {{
-    b: 1450,
-    s: 300,
-    h: 575,
-    total: 2325,
-    held: 12500,
-    unit: '/ mo',
-    callTitleBase: 'Base card rate (2.9%)',
-    callSubBase: '2.9% on $50k/mo GMV ($1,450)',
-    callTitleSeats: 'Per-transaction fee ($0.30)',
-    callSubSeats: '$0.30 × 1,000 tx ($300/mo)',
-    callTitleHidden: 'Billing & FX surcharges',
-    callSubHidden: '+0.7% Billing + 1.5% intl ($575)',
-    quote: '<strong>Estimated monthly processing fees:</strong> $2,325/mo<br/><strong>Potential funds temporarily held:</strong> $12,500/mo (25% reserve)',
-    sub: 'Assumptions ($50k/mo GMV, 1,000 tx, 30% intl): $1,750 base + $575 Billing/FX. Dispute exposure at 0.5%: 5 disputes/mo, $250/mo disputed + $75/mo in $15 fees.',
-    disputeLine: '0.5% of 1,000 tx = 5 disputes/mo. $50 average order x 5 = $250/mo disputed. 5 x $15 = $75/mo dispute fees. Chargeflow recovers won disputes at a 25% performance fee and is the layer that keeps this rate under the 0.5% to 0.75% reserve trigger.',
-    disputeAmt: '$325/mo',
-    tableFeeSub: '$1,750 base (2.9% + $0.30) + $575 Billing/FX',
-    tableHeldPill: '$12,500 / mo temporarily held',
-    tableHeldSub: 'If 25% rolling reserve triggers (held 90–180 days, not a fee) · Portable card tokens'
-  }},
-  'paddle-mor': {{
-    b: 2500,
-    s: 500,
-    h: 450,
-    total: 3450,
-    held: 12500,
-    unit: '/ mo',
-    callTitleBase: 'Base MoR fee (5.0%)',
-    callSubBase: '5.0% on $50k/mo incl. VAT',
-    callTitleSeats: 'Per-transaction fee ($0.50)',
-    callSubSeats: '$0.50 × 1,000 tx ($500/mo)',
-    callTitleHidden: 'FX conversion spread',
-    callSubHidden: 'Est. spread on 30% intl ($450)',
-    quote: '<strong>Estimated monthly processing fees:</strong> $3,450/mo<br/><strong>Potential funds temporarily held:</strong> $12,500/mo (25% hold risk)',
-    sub: 'Assumptions ($50k/mo GMV, 1,000 tx, 30% intl): $3,000 MoR base + $450 FX spread. Dispute exposure at 0.5%: 5 disputes/mo, $250/mo disputed + $100/mo in $20 fees.',
-    disputeLine: '0.5% of 1,000 tx = 5 disputes/mo. $250/mo disputed order value + $100/mo in $20 Paddle dispute fees. Chargeflow recovers won disputes at a 25% performance fee and is the layer that keeps this rate under the 0.5% to 0.75% reserve trigger.',
-    disputeAmt: '$350/mo',
-    tableFeeSub: '$3,000 MoR base (5.0% + $0.50) + $450 est. FX spread',
-    tableHeldPill: '$12,500 / mo temporarily held',
-    tableHeldSub: 'If 25% payout hold triggers on review (not a fee) · Non-exportable MoR card vault'
-  }},
-  'whop-payments': {{
-    b: 1650,
-    s: 400,
-    h: 225,
-    total: 2275,
-    held: 0,
-    unit: '/ mo',
-    callTitleBase: 'Base processing (2.7% + 30¢)',
-    callSubBase: '2.7% ($1,350) + 30¢ × 1k tx',
-    callTitleSeats: 'Failover routing (0.8%)',
-    callSubSeats: '+0.8% multi-PSP routing ($400)',
-    callTitleHidden: 'International card surcharge',
-    callSubHidden: '+1.5% on 30% intl volume ($225)',
-    quote: '<strong>Estimated monthly processing fees:</strong> $2,275/mo<br/><strong>Potential funds temporarily held:</strong> $0/mo (multi-acquirer routing)',
-    sub: 'Assumptions ($50k/mo GMV, 1,000 tx, 30% intl): $1,875/mo without orchestration.',
-    tableBaseAmt: 1650,
-    tableFeeSub: '$1,650 base + $400 orchestration (0.8%) + $225 intl ($1,875/mo without orchestration)',
-    tableHeldPill: '$0 single-PSP hold exposure',
-    tableHeldSub: 'Multi-acquirer failover routing (+0.8% / $400/mo included in fees) avoids single-processor freezes'
-  }},
-  'lemon-squeezy': {{
-    b: 2500,
-    s: 500,
-    h: 475,
-    total: 3475,
-    held: 12500,
-    unit: '/ mo',
-    callTitleBase: 'Base MoR fee (5.0%)',
-    callSubBase: '5.0% on $50k/mo incl. tax MoR',
-    callTitleSeats: 'Per-transaction fee ($0.50)',
-    callSubSeats: '$0.50 × 1,000 tx ($500/mo)',
-    callTitleHidden: 'Subscription & intl surcharges',
-    callSubHidden: '+0.5% sub ($250) + 1.5% intl',
-    quote: '<strong>Estimated monthly processing fees:</strong> $3,475/mo<br/><strong>Potential funds temporarily held:</strong> $12,500/mo (25% reserve)',
-    sub: 'Assumptions ($50k/mo GMV, 1,000 tx, 30% intl): $3,000 MoR base + $475 surcharges. Dispute exposure at 0.5%: 5 disputes/mo, $250/mo disputed + $75/mo in $15 fees.',
-    disputeLine: '0.5% of 1,000 tx = 5 disputes/mo. $250/mo disputed order value + $75/mo in $15 dispute fees. Chargeflow recovers won disputes at a 25% performance fee and is the layer that keeps this rate under the 0.5% to 0.75% reserve trigger.',
-    disputeAmt: '$325/mo',
-    tableFeeSub: '$3,000 MoR base (5.0% + $0.50) + $475 subscription/intl fees',
-    tableHeldPill: '$12,500 / mo temporarily held',
-    tableHeldSub: 'If 25% rolling reserve triggers during onboarding review (not a fee)'
-  }},
-  'chargeflow': {{
-    b: 0,
-    s: 0,
-    h: 500,
-    total: 500,
-    held: 0,
-    unit: '/ mo',
-    callTitleBase: 'Monthly platform fee ($0)',
-    callSubBase: '$0 base fee or seat minimums',
-    callTitleSeats: 'Lost-dispute fee ($0)',
-    callSubSeats: '$0 fee on unrecovered disputes',
-    callTitleHidden: '25% recovery success fee',
-    callSubHidden: '25% of $2k recovered ($500/mo)',
-    quote: '<strong>Estimated monthly processing fees:</strong> $500/mo<br/><strong>Potential funds temporarily held:</strong> $0/mo (add-on dispute layer)',
-    sub: 'Assumptions ($50k/mo GMV, $2,000/mo recovered disputes): 25% performance fee. At a 0.5% dispute rate that is 5 disputes/mo ($250 disputed). A 65% planning win rate keeps about $122/mo net after the 25% fee and holds the rate under the 0.5% to 0.75% reserve trigger.',
-    disputeLine: 'On this $50k example, 0.5% is 5 disputes/mo and $250/mo disputed. 65% recovered is $163. The 25% success fee is $41. Net kept is $122/mo, with a $0 monthly fee. That is separate from the $500/mo illustration above. Keeping the dispute rate under 0.5% to 0.75% is what avoids the $12,500/mo reserve.',
-    disputeAmt: '$122/mo net',
-    tableBaseSub: '$0 fixed monthly base · 25% of recovered chargebacks',
-    tableFeeSub: '25% fee on $2,000/mo recovered disputes ($0 if unrecovered)',
-    tableHeldPill: 'Reduces PSP reserve risk',
-    tableHeldSub: 'Keeps dispute ratio below 0.75% threshold · 90-day ROI guarantee'
-  }}
-}};
+{QUOTE_PAY_JS}
 
 let currentSpotlightId = '';
 let lastCategory = '';
+let payControlMode = false;
+
+function applyEstimateControls(cat) {{
+  const wantPay = cat === 'Payment Processors & MoR';
+  if (wantPay === payControlMode) return;
+  payControlMode = wantPay;
+  const seatSlider = document.getElementById('seat-slider');
+  const aiSlider = document.getElementById('ai-slider');
+  const seatLabel = document.querySelector('#seat-control-group .wb-control-label');
+  const aiLabel = document.querySelector('#ai-control-group .wb-control-label');
+  if (!seatSlider || !aiSlider) return;
+  if (wantPay) {{
+    seatSlider.min = '10';
+    seatSlider.max = '250';
+    seatSlider.step = '5';
+    seatSlider.value = '50';
+    seatSlider.setAttribute('aria-label', 'Monthly GMV ($k)');
+    aiSlider.min = '100';
+    aiSlider.max = '10000';
+    aiSlider.step = '100';
+    aiSlider.value = '1000';
+    aiSlider.setAttribute('aria-label', 'Monthly transactions');
+    if (seatLabel) seatLabel.textContent = 'Monthly GMV ($k)';
+    if (aiLabel) aiLabel.textContent = 'Monthly transactions';
+  }} else {{
+    seatSlider.min = '1';
+    seatSlider.max = '50';
+    seatSlider.step = '1';
+    seatSlider.value = '5';
+    seatSlider.setAttribute('aria-label', 'Users / seats');
+    aiSlider.min = '0';
+    aiSlider.max = '5000';
+    aiSlider.step = '100';
+    aiSlider.value = '500';
+    aiSlider.setAttribute('aria-label', 'AI-resolved tickets per month');
+    if (seatLabel) seatLabel.textContent = 'Users / seats';
+    if (aiLabel) aiLabel.textContent = 'AI-resolved tickets / month';
+  }}
+}}
 
 function renderDirectory() {{
   const cat = document.getElementById('cat-filter').value;
+  applyEstimateControls(cat);
   const seats = parseInt(document.getElementById('seat-slider').value, 10);
   const aiVol = parseInt(document.getElementById('ai-slider').value, 10);
   const mode = document.getElementById('billing-mode').value;
   const sortEl = document.getElementById('sort-mode');
   const sortMode = sortEl ? sortEl.value : 'lowest';
-  document.getElementById('seat-val').textContent = seats.toLocaleString();
-  document.getElementById('ai-val').textContent = aiVol.toLocaleString();
+  const isPayCat = cat === 'Payment Processors & MoR';
+  const gmvMo = seats * 1000;
+  const txMo = aiVol;
+  const payQuote = (id) => (typeof window.quotePayProfile === 'function' ? window.quotePayProfile(id, gmvMo, txMo) : null);
+  document.getElementById('seat-val').textContent = isPayCat ? ('$' + seats.toLocaleString('en-US') + 'k') : seats.toLocaleString('en-US');
+  document.getElementById('ai-val').textContent = aiVol.toLocaleString('en-US');
 
   const _rrKey = `${{cat}}|${{seats}}|${{aiVol}}|${{mode}}|${{sortMode}}|${{currentSpotlightId}}`;
   const _rrNow = Date.now();
@@ -873,20 +860,16 @@ function renderDirectory() {{
   const seatControl = document.getElementById('seat-control-group');
   const billingControl = document.getElementById('billing-control-group');
   if (aiControl) {{
-    if (cat === 'Helpdesk & AI Support' || cat === 'ALL') {{
+    if (isPayCat || cat === 'Helpdesk & AI Support' || cat === 'ALL') {{
       aiControl.classList.remove('is-dimmed');
     }} else {{
       aiControl.classList.add('is-dimmed');
     }}
   }}
-  if (seatControl && billingControl) {{
-    if (cat === 'Payment Processors & MoR') {{
-      seatControl.classList.add('is-dimmed');
-      billingControl.classList.add('is-dimmed');
-    }} else {{
-      seatControl.classList.remove('is-dimmed');
-      billingControl.classList.remove('is-dimmed');
-    }}
+  if (seatControl) seatControl.classList.remove('is-dimmed');
+  if (billingControl) {{
+    if (isPayCat) billingControl.classList.add('is-dimmed');
+    else billingControl.classList.remove('is-dimmed');
   }}
 
   const filtered = TOOLS.filter(t => {{
@@ -895,8 +878,19 @@ function renderDirectory() {{
   }});
   const rows = filtered.map(t => calcToolYear1(t, seats, aiVol, mode));
 
-  const getRowTotal = r => (cat === 'Payment Processors & MoR' && PAY_PROFILES[r.tool.id]) ? PAY_PROFILES[r.tool.id].total : r.year1Total;
-  const getRowHidden = r => (cat === 'Payment Processors & MoR' && PAY_PROFILES[r.tool.id]) ? (PAY_PROFILES[r.tool.id].held + PAY_PROFILES[r.tool.id].h) : r.hiddenFees;
+  const getRowTotal = r => {{
+    if (!isPayCat) return r.year1Total;
+    const p = payQuote(r.tool.id);
+    if (!p) return r.year1Total;
+    if (p.recovery) return sortMode === 'highest' ? -1 : 1e15;
+    return p.total;
+  }};
+  const getRowHidden = r => {{
+    if (!isPayCat) return r.hiddenFees;
+    const p = payQuote(r.tool.id);
+    if (!p || p.recovery) return 0;
+    return p.held + p.h;
+  }};
   if (sortMode === 'highest') {{
     rows.sort((a, b) => getRowTotal(b) - getRowTotal(a));
   }} else if (sortMode === 'hidden_fees') {{
@@ -970,8 +964,8 @@ function renderDirectory() {{
   const chartColTitle = document.getElementById('wb-chart-col-title');
   const dynSubhead = document.getElementById('gap-dynamic-subhead');
   if (dynSubhead) {{
-    if (cat === 'Payment Processors & MoR') {{
-      dynSubhead.textContent = `All ${{rows.length}} tools compared for $50,000/mo GMV · 1,000 tx · 30% international · click any row to inspect its breakdown above.`;
+    if (isPayCat) {{
+      dynSubhead.textContent = `All ${{rows.length}} tools compared for $${{gmvMo.toLocaleString('en-US')}}/mo GMV · ${{txMo.toLocaleString('en-US')}} tx · 30% international · click any row to inspect its breakdown above.`;
     }} else if (cat === 'Helpdesk & AI Support' || cat === 'ALL') {{
       dynSubhead.textContent = `All ${{rows.length}} tools compared for ${{seats}} seat${{seats === 1 ? '' : 's'}} · ${{mode === 'annual' ? 'annual' : 'monthly'}} billing · ${{aiVol.toLocaleString()}} AI tickets/mo &middot; click any row to inspect its breakdown above.`;
     }} else {{
@@ -979,11 +973,11 @@ function renderDirectory() {{
     }}
   }}
   if (th2 && th3 && th4) {{
-    if (cat === 'Payment Processors & MoR') {{
-      th2.innerHTML = '<span class="legend-dot dot-sticker" aria-hidden="true"></span>Base Rate ($50k/mo Ex.)';
-      th3.textContent = 'Estimated Monthly Processing Fees';
-      th4.innerHTML = '<span class="legend-dot dot-hidden" aria-hidden="true"></span>Potential Funds Temporarily Held';
-      if (chartColTitle) chartColTitle.textContent = 'Estimated Monthly Fees';
+    if (isPayCat) {{
+      th2.innerHTML = '<span class="legend-dot dot-sticker" aria-hidden="true"></span>Sticker Price / Month';
+      th3.textContent = 'True Cost / Month (Est.)';
+      th4.innerHTML = '<span class="legend-dot dot-hidden" aria-hidden="true"></span>Hidden Cost Gap';
+      if (chartColTitle) chartColTitle.textContent = 'Your Estimated True Cost';
     }} else {{
       th2.innerHTML = '<span class="legend-dot dot-sticker" aria-hidden="true"></span>Sticker Price / Year';
       th3.textContent = 'True Cost / Year (Est.)';
@@ -999,39 +993,47 @@ function renderDirectory() {{
   if (cat === 'Payment Processors & MoR') {{
     const spotPayR = rows.find(r => r.tool.id === currentSpotlightId) || rows[0];
     const spotPayAff = AFFILIATES[spotPayR.tool.affiliate_slug] || {{ destination_url: '#' }};
-    const prof = PAY_PROFILES[spotPayR.tool.id] || PAY_PROFILES['stripe-payments'];
-    const maxPayMo = 3475;
-    const [s1, s2, s3] = computeSmoothBarShares(prof.b, prof.s, prof.h);
+    const prof = payQuote(spotPayR.tool.id);
+    const whopProf = payQuote('whop-payments');
+    const paddleProf = payQuote('paddle-mor');
+    const cfProf = payQuote('chargeflow');
+    const processorTotals = rows.map(r => payQuote(r.tool.id)).filter(p => p && !p.recovery).map(p => p.total);
+    const maxPayMo = Math.max(...processorTotals, 1);
+    const payMoney = n => '$' + Math.round(n).toLocaleString('en-US');
+    const barB = prof.recovery ? 0 : prof.b;
+    const barS = prof.recovery ? 0 : prof.s;
+    const barH = prof.recovery ? prof.feeYr : prof.h;
+    const [s1, s2, s3] = computeSmoothBarShares(barB, barS, barH);
     if (rowBase && rowSeats && rowHidden) {{
-      applyBarRowState(rowBase, s1, prof.b);
-      applyBarRowState(rowSeats, s2, prof.s);
-      applyBarRowState(rowHidden, s3, prof.h);
-      document.getElementById('wb-amt-base').textContent = `$${{prof.b.toLocaleString()}}`;
+      applyBarRowState(rowBase, s1, barB);
+      applyBarRowState(rowSeats, s2, barS);
+      applyBarRowState(rowHidden, s3, barH);
+      document.getElementById('wb-amt-base').textContent = payMoney(barB);
       document.getElementById('wb-call-title-base').textContent = prof.callTitleBase;
       document.getElementById('wb-call-sub-base').textContent = prof.callSubBase;
 
-      document.getElementById('wb-amt-seats').textContent = `$${{prof.s.toLocaleString()}}`;
+      document.getElementById('wb-amt-seats').textContent = payMoney(barS);
       document.getElementById('wb-call-title-seats').textContent = prof.callTitleSeats;
       document.getElementById('wb-call-sub-seats').textContent = prof.callSubSeats;
 
-      document.getElementById('wb-amt-hidden').textContent = `$${{prof.h.toLocaleString()}}`;
+      document.getElementById('wb-amt-hidden').textContent = payMoney(barH);
       document.getElementById('wb-call-title-hidden').textContent = prof.callTitleHidden;
       document.getElementById('wb-call-sub-hidden').textContent = prof.callSubHidden;
     }}
     const selProdEl = document.getElementById('wb-selected-product');
-    if (selProdEl) selProdEl.textContent = `${{spotPayR.tool.name}} · $50k/mo Example`;
-    document.getElementById('wb-big-amount').textContent = `$${{prof.total.toLocaleString()}}`;
-    document.getElementById('wb-big-unit').textContent = prof.unit;
+    if (selProdEl) selProdEl.textContent = `${{spotPayR.tool.name}} · $${{seats}}k/mo`;
+    document.getElementById('wb-big-amount').textContent = prof.recovery ? ('+' + payMoney(prof.netYr)) : payMoney(prof.total);
+    document.getElementById('wb-big-unit').textContent = prof.recovery ? '/ yr net' : prof.unit;
     const quoteEl = document.getElementById('wb-budget-quote');
     if (quoteEl) quoteEl.innerHTML = prof.quote;
-    document.getElementById('wb-budget-subnote').textContent = prof.sub;
+    document.getElementById('wb-budget-subnote').textContent = prof.gapLine;
     const bestOptPayEl = document.getElementById('wb-best-option');
     if (bestOptPayEl) {{
       const whopAffBest = AFFILIATES['whop'] || {{ destination_url: '#' }};
       if (spotPayR.tool.id === 'whop-payments') {{
-        bestOptPayEl.innerHTML = '<strong>Best option in category:</strong> Lowest direct fee ($2,275/mo) &amp; multi-PSP failover';
+        bestOptPayEl.innerHTML = `<strong>Best option in category:</strong> Lowest direct fee (${{payMoney(whopProf.total)}}/mo) &amp; multi-PSP failover`;
       }} else {{
-        bestOptPayEl.innerHTML = `<strong>Best option:</strong> <a href="${{whopAffBest.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="whop-payments" data-cta-location="workbench-best-option">Whop Payments ($2,275/mo)</a> &middot; $0 single-PSP reserve hold`;
+        bestOptPayEl.innerHTML = `<strong>Best option:</strong> <a href="${{whopAffBest.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="whop-payments" data-cta-location="workbench-best-option">Whop Payments (${{payMoney(whopProf.total)}}/mo)</a> &middot; $0 single-PSP reserve hold`;
       }}
     }}
     if (wbCalcBody) {{
@@ -1044,49 +1046,43 @@ function renderDirectory() {{
       const isPayWinner = spotPayR.tool.id === 'whop-payments';
       ctaEl.textContent = isPayWinner
         ? getContextualCtaLabel(spotPayR.tool, prof.total * 12, maxPayMo * 12, false)
-        : (spotPayR.tool.id === 'chargeflow' ? getContextualCtaLabel(spotPayR.tool, 500, 0, false) : getVendorCtaLabel(spotPayR.tool));
+        : (spotPayR.tool.id === 'chargeflow' ? getContextualCtaLabel(spotPayR.tool, 0, 0, false) : getVendorCtaLabel(spotPayR.tool));
     }}
 
     if (summaryEl) {{
-      const cfBench = (function() {{
-        const disputed = Math.round(50000 * 12 * 0.0065);
-        const recovered = Math.round(disputed * 0.65);
-        const fee = Math.round(recovered * 0.25);
-        return {{ disputed: disputed, recovered: recovered, fee: fee, net: recovered - fee }};
-      }})();
+      const cfBench = cfProf.bench;
+      const yearlySales = gmvMo * 12;
       const whopR = rows.find(r => r.tool.id === 'whop-payments') || rows[0];
       const paddleR = rows.find(r => r.tool.id === 'paddle-mor') || rows[0];
-      const cfR = rows.find(r => r.tool.id === 'chargeflow') || rows[0];
       const whopAff = AFFILIATES[whopR.tool.affiliate_slug] || {{ destination_url: '#' }};
       const paddleAff = AFFILIATES[paddleR.tool.affiliate_slug] || {{ destination_url: '#' }};
-      const cfAff = AFFILIATES[cfR.tool.affiliate_slug] || {{ destination_url: '#' }};
       summaryEl.innerHTML = `
         <div class="summary-card result-card card-lowest">
           <div class="summary-label">Lowest Direct Fee &amp; Failover Routing</div>
-          <div class="summary-metric" style="color:var(--emerald);">$2,275 / mo &middot; Whop Payments</div>
+          <div class="summary-metric" style="color:var(--emerald);">${{payMoney(whopProf.total)}} / mo &middot; Whop Payments</div>
           <details class="math-drawer">
             <summary>Show calculation</summary>
             <div class="math-drawer-body">${{renderCalcBreakdownHtml(whopR, seats, aiVol, mode, cat)}}</div>
           </details>
-          <div class="summary-scenario">Based on $50,000/mo GMV, 1,000 tx, 30% international</div>
-          <div class="summary-breakdown">$1,650 base (2.7% + 30&cent;) + $400 multi-PSP routing + $225 intl ($1,875/mo without orchestration)</div>
-          <div class="summary-caveat"><strong>Contract note:</strong> Direct payouts with multi-PSP failover and portable card tokens ($0 reserve hold in baseline model).</div>
+          <div class="summary-scenario">Based on ${{payMoney(gmvMo)}}/mo GMV, ${{txMo.toLocaleString('en-US')}} tx, 30% international</div>
+          <div class="summary-breakdown">${{whopProf.tableFeeSub}}</div>
+          <div class="summary-caveat"><strong>Contract note:</strong> Direct payouts with multi-PSP failover and portable card tokens ($0 reserve hold in baseline model). ${{payMoney(whopProf.total)}}/mo with failover, or ${{payMoney(whopProf.without)}}/mo without orchestration.</div>
           <div class="summary-actions">
             <div class="cta-stack">
-              <a class="btn-cta" href="${{whopAff.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="whop-payments" data-cta-location="summary-card">${{getContextualCtaLabel(whopR.tool, 2275 * 12, 3450 * 12, false)}}</a>
+              <a class="btn-cta" href="${{whopAff.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="whop-payments" data-cta-location="summary-card">${{getContextualCtaLabel(whopR.tool, whopProf.total * 12, maxPayMo * 12, false)}}</a>
             </div>
           </div>
         </div>
         <div class="summary-card result-card card-hidden">
           <div class="summary-label">Hidden Cost Highlight (MoR &amp; Reserves)</div>
-          <div class="summary-metric" style="color:var(--rose);">$12,500 / mo temporarily held</div>
+          <div class="summary-metric" style="color:var(--rose);">${{payMoney(paddleProf.held)}} / mo temporarily held</div>
           <details class="math-drawer">
             <summary>Show calculation</summary>
             <div class="math-drawer-body">${{renderCalcBreakdownHtml(paddleR, seats, aiVol, mode, cat)}}</div>
           </details>
           <div class="summary-scenario">On <strong>Paddle / Stripe / Lemon Squeezy</strong> (25% rolling reserve scenario)</div>
-          <div class="summary-breakdown">$3,450/mo Paddle MoR fees ($41,400/yr) + non-exportable subscriber card vault on termination</div>
-          <div class="summary-caveat"><strong>Hidden Cost Highlight:</strong> A 25% rolling reserve locks $12,500/mo in working capital for 90&ndash;180 days.</div>
+          <div class="summary-breakdown">${{payMoney(paddleProf.total)}}/mo Paddle true cost (${{payMoney(paddleProf.total * 12)}}/yr) including a ${{payMoney(paddleProf.h)}}/mo Hidden Cost Gap</div>
+          <div class="summary-caveat"><strong>Hidden Cost Highlight:</strong> A 25% rolling reserve locks ${{payMoney(paddleProf.held)}}/mo in working capital for 90&ndash;180 days.</div>
           <div class="summary-actions">
             <div class="cta-stack">
               <a class="btn-secondary" href="${{paddleAff.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="paddle-mor" data-cta-location="summary-card">${{getVendorCtaLabel(paddleR.tool)}}</a>
@@ -1095,17 +1091,17 @@ function renderDirectory() {{
         </div>
         <div class="summary-card result-card">
           <div class="summary-label">Add-on: post-dispute recovery</div>
-          <div class="summary-metric">+$${{cfBench.net.toLocaleString()}} / yr recovered &middot; Chargeflow</div>
+          <div class="summary-metric">+${{payMoney(cfBench.net)}} / yr recovered &middot; Chargeflow</div>
           <details class="math-drawer">
             <summary>Show calculation</summary>
-            <div class="math-drawer-body">Yearly sales = $50,000 x 12 = $600,000. Disputed sales at 0.65% = $${{cfBench.disputed.toLocaleString()}}. Gross recovered at a 65% planning win rate = $${{cfBench.recovered.toLocaleString()}}. Success fee = 25% of recovered dollars = $${{cfBench.fee.toLocaleString()}}. Net kept = $${{cfBench.net.toLocaleString()}}. Fixed fee = $0/mo. The 65% win rate is a planning benchmark, not a guaranteed Chargeflow win rate. Keeping the dispute rate under 0.5% to 0.75% is what avoids a 25% reserve ($12,500/mo on this volume).</div>
+            <div class="math-drawer-body">Yearly sales = ${{payMoney(gmvMo)}} x 12 = ${{payMoney(yearlySales)}}. Disputed sales at 0.65% = ${{payMoney(cfBench.disputed)}}. Gross recovered at a 65% planning win rate = ${{payMoney(cfBench.recovered)}}. Success fee = 25% of recovered dollars = ${{payMoney(cfBench.fee)}}. Net kept = ${{payMoney(cfBench.net)}} (${{payMoney(cfBench.netMo)}}/mo). Fixed fee = $0/mo. Evidence prep = $0. The 65% win rate is a planning benchmark, not a guaranteed Chargeflow win rate. Keeping the dispute rate under 0.5% to 0.75% is what avoids a 25% reserve (${{payMoney(paddleProf.held)}}/mo on this volume).</div>
           </details>
-          <div class="summary-scenario">Based on $50,000/mo GMV and a 0.65% dispute rate</div>
-          <div class="summary-breakdown">$0/mo fixed fee. 25% only on the $${{cfBench.recovered.toLocaleString()}} recovered. Net kept $${{cfBench.net.toLocaleString()}}/yr.</div>
+          <div class="summary-scenario">Based on ${{payMoney(gmvMo)}}/mo GMV and a 0.65% dispute rate</div>
+          <div class="summary-breakdown">$0/mo fixed fee. 25% only on the ${{payMoney(cfBench.recovered)}} recovered. Net kept ${{payMoney(cfBench.net)}}/yr.</div>
           <div class="summary-caveat"><strong>Contract note:</strong> 25% of recovered dispute dollars ($0/mo base). A 65% win rate is a planning benchmark. Actual recovery varies by dispute reason code. This card is an add-on layer. It does not replace the payment processor comparison above.</div>
           <div class="summary-actions">
             <div class="cta-stack">
-              <a class="btn-secondary" href="https://www.chargeflow.io/" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="chargeflow" data-cta-location="summary-card">Review Chargeflow on this volume ($${{cfBench.net.toLocaleString()}}/yr net) &rarr;</a>
+              <a class="btn-secondary" href="https://www.chargeflow.io/" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="chargeflow" data-cta-location="summary-card">Review Chargeflow on this volume (${{payMoney(cfBench.net)}}/yr net) &rarr;</a>
             </div>
           </div>
         </div>
@@ -1114,36 +1110,40 @@ function renderDirectory() {{
 
     if (vizPanel && vizRowsEl) {{
       vizPanel.style.display = 'block';
-      if (vizTitleEl) vizTitleEl.textContent = 'Apples-to-Apples Monthly Processing Fee Comparison ($50k/mo GMV)';
+      if (vizTitleEl) vizTitleEl.textContent = `Apples-to-Apples Monthly Processing Fee Comparison (${{payMoney(gmvMo)}}/mo GMV)`;
       if (vizLegendEl) {{
         vizLegendEl.innerHTML = `
-          <span class="viz-legend-item"><span class="viz-swatch" style="background:var(--bar-seats);"></span>Base Rate</span>
-          <span class="viz-legend-item"><span class="viz-swatch" style="background:var(--bar-onboarding);"></span>Per-Tx / Routing</span>
-          <span class="viz-legend-item"><span class="viz-swatch" style="background:var(--bar-ai);"></span>Billing / FX / Recovery</span>
+          <span class="viz-legend-item"><span class="viz-swatch" style="background:var(--bar-seats);"></span>Sticker Price: Base rate</span>
+          <span class="viz-legend-item"><span class="viz-swatch" style="background:var(--bar-onboarding);"></span>Sticker Price: Per-tx fees</span>
+          <span class="viz-legend-item"><span class="viz-swatch" style="background:var(--bar-ai);"></span>Hidden Cost Gap</span>
         `;
       }}
       vizRowsEl.innerHTML = rows.map(r => {{
         const aff = AFFILIATES[r.tool.affiliate_slug] || {{ destination_url: '#' }};
-        const p = PAY_PROFILES[r.tool.id] || PAY_PROFILES['stripe-payments'];
-        const bPct = Math.max(0, (p.b / maxPayMo) * 100);
-        const sPct = Math.max(0, (p.s / maxPayMo) * 100);
-        const hPct = Math.max(0, (p.h / maxPayMo) * 100);
+        const p = payQuote(r.tool.id);
+        const showB = p.recovery ? 0 : p.b;
+        const showS = p.recovery ? 0 : p.s;
+        const showH = p.recovery ? 0 : p.h;
+        const bPct = Math.max(0, (showB / maxPayMo) * 100);
+        const sPct = Math.max(0, (showS / maxPayMo) * 100);
+        const hPct = Math.max(0, (showH / maxPayMo) * 100);
         const isSpotViz = r.tool.id === currentSpotlightId ? 'is-spotlight-row' : '';
         const rowCta = r.tool.id === 'whop-payments'
-          ? getContextualCtaLabel(r.tool, p.total * 12, 3450 * 12, false)
-          : (r.tool.id === 'chargeflow' ? getContextualCtaLabel(r.tool, 500, 0, false) : getVendorCtaLabel(r.tool));
+          ? getContextualCtaLabel(r.tool, p.total * 12, maxPayMo * 12, false)
+          : (r.tool.id === 'chargeflow' ? getContextualCtaLabel(r.tool, 0, 0, false) : getVendorCtaLabel(r.tool));
+        const vizTotal = p.recovery ? ('+' + payMoney(p.netYr) + ' / yr') : (payMoney(p.total) + ' / mo');
         return `
           <div class="viz-row ${{isSpotViz}}" data-tool-id="${{r.tool.id}}" style="cursor:pointer;">
             <div class="viz-label" title="${{r.tool.name}}">${{r.tool.name}}</div>
             <div class="viz-bar-wrap">
-              <div class="viz-bar-track" title="$${{p.total.toLocaleString()}}/mo processing fees">
+              <div class="viz-bar-track" title="${{vizTotal}}">
                 <div class="viz-seg-seats" style="width:${{bPct.toFixed(2)}}%"></div>
-                ${{p.s > 0 ? `<div class="viz-seg-onboarding" style="width:${{sPct.toFixed(2)}}%"></div>` : ''}}
-                ${{p.h > 0 ? `<div class="viz-seg-ai" style="width:${{hPct.toFixed(2)}}%"></div>` : ''}}
+                ${{showS > 0 ? `<div class="viz-seg-onboarding" style="width:${{sPct.toFixed(2)}}%"></div>` : ''}}
+                ${{showH > 0 ? `<div class="viz-seg-ai" style="width:${{hPct.toFixed(2)}}%"></div>` : ''}}
               </div>
               <div class="viz-breakdown-text">${{p.tableFeeSub}} &middot; ${{p.tableHeldPill}}</div>
             </div>
-            <div class="viz-total-label">$${{p.total.toLocaleString()}} / mo</div>
+            <div class="viz-total-label">${{vizTotal}}</div>
             <a class="viz-action-link" href="${{aff.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${{r.tool.id}}" data-cta-location="chart-row">${{rowCta}}</a>
           </div>
         `;
@@ -1348,27 +1348,37 @@ function renderDirectory() {{
     const gapDollars = r.year1Total - stickerAnnual;
     const gapPct = stickerAnnual > 0 ? Math.round((gapDollars / stickerAnnual) * 100) : 0;
 
-    const payProf = t.category === 'Payment Processors & MoR' ? PAY_PROFILES[t.id] : null;
+    const payProf = t.category === 'Payment Processors & MoR' ? payQuote(t.id) : null;
     let stickerDisplay = '';
-    if (payProf) {{
-      const baseMo = payProf.tableBaseAmt !== undefined ? payProf.tableBaseAmt : (payProf.b + payProf.s);
-      stickerDisplay = `<div class="gap-figure">$${{baseMo.toLocaleString()}} / mo</div><div class="gap-sub-detail">${{t.transaction_fee_display}}</div>`;
+    let totalText = '';
+    if (payProf && payProf.recovery) {{
+      stickerDisplay = `<div class="gap-figure">$0 / mo</div><div class="gap-sub-detail">$0 base platform fee · $0 evidence prep</div>`;
+      totalText = `<div class="gap-figure">+$${{payProf.netYr.toLocaleString('en-US')}} / yr</div><div class="gap-sub-detail">${{payProf.tableFeeSub}}</div>`;
+    }} else if (payProf) {{
+      const baseMo = payProf.sticker;
+      stickerDisplay = `<div class="gap-figure">$${{baseMo.toLocaleString('en-US')}} / mo</div><div class="gap-sub-detail">${{t.transaction_fee_display}}</div>`;
+      totalText = `<div class="gap-figure">$${{payProf.total.toLocaleString('en-US')}} / mo</div><div class="gap-sub-detail">${{payProf.tableFeeSub}}</div>`;
     }} else if (t.transaction_fee_display) {{
       stickerDisplay = `<div class="gap-figure">${{t.transaction_fee_display}}</div>`;
+      totalText = `<div class="gap-figure">$${{r.year1Total.toLocaleString()}}</div><div class="gap-sub-detail">${{r.effSeats}} billed seat${{r.effSeats === 1 ? '' : 's'}}</div>`;
     }} else {{
       stickerDisplay = `<div class="gap-figure">$${{stickerAnnual.toLocaleString()}}</div><div class="gap-sub-detail">$${{fmtRate(r.unitRate)}}/seat/mo</div>`;
+      totalText = `<div class="gap-figure">$${{r.year1Total.toLocaleString()}}</div><div class="gap-sub-detail">${{r.effSeats}} billed seat${{r.effSeats === 1 ? '' : 's'}}</div>`;
     }}
 
-    const totalText = payProf
-      ? `<div class="gap-figure">$${{payProf.total.toLocaleString()}} / mo</div><div class="gap-sub-detail">${{payProf.tableFeeSub}}</div>`
-      : `<div class="gap-figure">$${{r.year1Total.toLocaleString()}}</div><div class="gap-sub-detail">${{r.effSeats}} billed seat${{r.effSeats === 1 ? '' : 's'}}</div>`;
-
     let gapCellHtml = '';
-    if (payProf) {{
-      const pillClass = payProf.held > 0 ? 'gap-orange-pill' : 'gap-zero-pill';
+    if (payProf && payProf.recovery) {{
       gapCellHtml = `
-        <div class="${{pillClass}}">${{payProf.tableHeldPill}}</div>
+        <div class="gap-zero-pill">${{payProf.gapLine}}</div>
         <div class="gap-sub-detail">${{payProf.tableHeldSub}} &middot; <a href="${{srcUrl}}" target="_blank" rel="noopener">Verified source &nearr;</a></div>
+      `;
+    }} else if (payProf) {{
+      const payGapPct = payProf.sticker > 0 ? Math.round((payProf.h / payProf.sticker) * 100) : 0;
+      const pillClass = payProf.h > 0 ? 'gap-orange-pill' : 'gap-zero-pill';
+      const heldNote = payProf.held > 0 ? `${{payProf.tableHeldPill}}. ` : '';
+      gapCellHtml = `
+        <div class="${{pillClass}}">+${{payGapPct}}% Hidden Cost Gap (+$${{payProf.h.toLocaleString('en-US')}}/mo)</div>
+        <div class="gap-sub-detail">${{heldNote}}${{payProf.tableHeldSub}} &middot; <a href="${{srcUrl}}" target="_blank" rel="noopener">Verified source &nearr;</a></div>
       `;
     }} else if (gapDollars > 0) {{
       const breakdownParts = [];

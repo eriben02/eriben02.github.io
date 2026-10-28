@@ -88,15 +88,15 @@ TEMPLATE = r"""
       <div id="cb-vbar" class="wb-vbar-container" aria-live="polite">
         <div class="wb-vbar-row" id="cb-row-lost" style="flex: 68 1 0px;">
           <div class="wb-vbar-block block-hidden"><span class="wb-block-amount" id="cb-amt-lost">$14,976</span></div>
-          <div class="wb-callout-item"><div class="wb-leader-line"></div><div class="wb-callout-text"><strong>Lost order value</strong><span>80% of disputed sales at a 20% manual win rate</span></div></div>
+          <div class="wb-callout-item"><div class="wb-leader-line"></div><div class="wb-callout-text"><strong>Hidden Cost Gap: Lost sales</strong><span>80% unrecovered at a 20% manual win rate</span></div></div>
         </div>
         <div class="wb-vbar-row" id="cb-row-ops" style="flex: 21 1 0px;">
           <div class="wb-vbar-block block-base"><span class="wb-block-amount" id="cb-amt-ops">$4,680</span></div>
-          <div class="wb-callout-item"><div class="wb-leader-line"></div><div class="wb-callout-text"><strong>Evidence prep</strong><span id="cb-ops-note">156 disputes x $30</span></div></div>
+          <div class="wb-callout-item"><div class="wb-leader-line"></div><div class="wb-callout-text"><strong>Hidden Cost: Evidence prep</strong><span id="cb-ops-note">156 disputes x $30 staff handling</span></div></div>
         </div>
         <div class="wb-vbar-row" id="cb-row-fees" style="flex: 11 1 0px;">
           <div class="wb-vbar-block block-seats"><span class="wb-block-amount" id="cb-amt-fees">$2,340</span></div>
-          <div class="wb-callout-item"><div class="wb-leader-line"></div><div class="wb-callout-text"><strong>Dispute fees</strong><span id="cb-fee-note">156 disputes x $15</span></div></div>
+          <div class="wb-callout-item"><div class="wb-leader-line"></div><div class="wb-callout-text"><strong>Sticker Fee: Processor dispute fees</strong><span id="cb-fee-note">156 disputes x $15</span></div></div>
         </div>
       </div>
     </div>
@@ -293,7 +293,7 @@ function renderChargeback() {
   document.getElementById('cb-amt-lost').textContent = money(c.manualLost);
   document.getElementById('cb-amt-ops').textContent = money(c.manualOps);
   document.getElementById('cb-amt-fees').textContent = money(c.fees);
-  document.getElementById('cb-ops-note').textContent = c.disputes.toLocaleString('en-US') + ' disputes x $' + c.opsPerDispute;
+  document.getElementById('cb-ops-note').textContent = c.disputes.toLocaleString('en-US') + ' disputes x $' + c.opsPerDispute + ' staff handling';
   document.getElementById('cb-fee-note').textContent = c.disputes.toLocaleString('en-US') + ' disputes x ' + money(fee);
   document.getElementById('cb-big').textContent = money(c.manualLoss);
   document.getElementById('cb-quote').textContent = 'Based on ' + orders.toLocaleString('en-US') + ' orders a month, a ' + money(aov) + ' average order, and a ' + ratePct.toFixed(2) + '% dispute rate on ' + names[processor] + '.';

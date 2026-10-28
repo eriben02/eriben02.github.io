@@ -425,17 +425,24 @@ class TestSaaSBillCalculators(unittest.TestCase):
         self.assertNotIn("often doubling", html)
         self.assertNotIn("Explore Whop Payments", html)
 
-        m = re.search(r"const PAY_PROFILES = (\{.*?\n\});", html, re.S)
-        self.assertIsNotNone(m, "Could not find PAY_PROFILES in public/index.html")
-        runner = f"const PAY_PROFILES = {m.group(1)}; console.log(JSON.stringify(PAY_PROFILES));"
+        start = html.find("/* QUOTE_PAY_PROFILE_START */")
+        end = html.find("/* QUOTE_PAY_PROFILE_END */")
+        self.assertGreater(start, 0, "Could not find quotePayProfile in public/index.html")
+        self.assertGreater(end, start)
+        runner = "global.window = global;\n" + html[start:end] + """
+        const ids = ['stripe-payments','paddle-mor','whop-payments','lemon-squeezy','chargeflow'];
+        const PAY_PROFILES = {};
+        ids.forEach(id => { PAY_PROFILES[id] = window.quotePayProfile(id, 50000, 1000); });
+        console.log(JSON.stringify(PAY_PROFILES));
+        """
         res = subprocess.run(["node", "-e", runner], capture_output=True, text=True, check=True)
         profiles = json.loads(res.stdout)
         expected_totals_and_holds = {
-            "stripe-payments": (2325, 12500),
-            "paddle-mor": (3450, 12500),
+            "stripe-payments": (2683, 12500),
+            "paddle-mor": (3840, 12500),
             "whop-payments": (2275, 0),
-            "lemon-squeezy": (3475, 12500),
-            "chargeflow": (500, 0),
+            "lemon-squeezy": (3833, 12500),
+            "chargeflow": (0, 0),
         }
         self.assertEqual(set(profiles.keys()), set(expected_totals_and_holds.keys()))
         for pid, (exp_total, exp_held) in expected_totals_and_holds.items():
@@ -450,6 +457,20 @@ class TestSaaSBillCalculators(unittest.TestCase):
             self.assertIn("Estimated monthly processing fees:", p["quote"])
             self.assertIn("Potential funds temporarily held:", p["quote"])
             self.assertIn("Assumptions ($50k/mo GMV", p["sub"])
+        stripe = profiles["stripe-payments"]
+        self.assertEqual(stripe["gapLine"], "+$933/mo (+$11,196/yr, +53% Hidden Cost Gap above the $1,750/mo advertised sticker rate)")
+        self.assertEqual(stripe["h"], 933)
+        self.assertEqual(profiles["whop-payments"]["without"], 1875)
+        self.assertEqual(profiles["whop-payments"]["h"], 625)
+        self.assertEqual(profiles["paddle-mor"]["h"], 840)
+        self.assertEqual(profiles["lemon-squeezy"]["h"], 833)
+        self.assertEqual(profiles["chargeflow"]["netYr"], 1901)
+        self.assertEqual(profiles["chargeflow"]["netMo"], 158)
+        self.assertIn("Monthly GMV ($k)", html)
+        self.assertIn("Monthly transactions", html)
+        self.assertIn("Your Estimated True Cost", html)
+        self.assertNotIn("Estimated Monthly Fees", html)
+        self.assertNotIn("25% of $2k recovered", html)
 
 
     def test_gumroad_whop_lemon_squeezy_take_rate_calculator(self):
