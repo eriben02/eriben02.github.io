@@ -9,8 +9,8 @@ TOOLS, AFFILIATES = load_data()
 # ---------------------------------------------------------
 p3_body = """
 <section class="hero">
-  <h1>What happens when Stripe, Shopify, or Paddle freezes your payouts.</h1>
-  <p class="lead">A 25% rolling reserve or 180-day hold can starve a healthy business overnight. And if a Merchant of Record drops you, you cannot take your subscribers’ card tokens with you. Here is how to protect your cashflow.</p>
+  <h1>Stripe, Shopify &amp; Paddle Frozen Funds &amp; 25% Rolling Reserve Calculator (2026)</h1>
+  <p class="lead">A chargeback rate near 0.5% to 0.75% can trigger a 25% rolling reserve or a 180-day payout hold and lock your cash. If a Merchant of Record drops you, you cannot take your subscribers' card tokens with you.</p>
   <div class="geo-direct-answer">
     <p><strong>The short version:</strong> Standard payment processors (<strong>Stripe, Shopify Payments, PayPal</strong>) can impose a <strong>25% rolling reserve for 90–180 days</strong> or a <strong>120–180 day payout hold</strong> if your dispute rate crosses ~0.5%–0.75% or volume spikes unexpectedly. With Stripe, however, you own the customer relationship and can export PGP-encrypted card tokens. With a Merchant of Record (<strong>Paddle, 5% + $0.50</strong>), Paddle is the legal seller of record and owns the card vault; if Paddle terminates your account on a risk review, <strong>card tokens cannot be exported</strong>. To protect cashflow, pair <strong>Chargeflow</strong> (keeps dispute rate &lt;0.5%) with a multi-processor failover rail like <strong>Whop Payments (2.7% + $0.30 base + 0.8% orchestration)</strong>.</p>
   </div>

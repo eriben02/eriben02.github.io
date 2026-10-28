@@ -48,29 +48,29 @@
 
   var CAT_CALCS = {
     payments: [
-      ["./chargeback-fee-and-recovery-calculator/", "Stripe & Shopify Chargeback Cost Calculator (2026)", "Dispute fees ($15–$25), manual evidence prep drain, and net recovery with Chargeflow pay-on-performance."],
-      ["./exit/stripe-shopify-paddle-frozen-funds-alternatives/", "Stripe, Shopify & Paddle Payout Hold Simulator", "25% rolling reserves, 90–180 day frozen balances, dispute exposure, and multi-PSP failover."],
-      ["./pricing/stripe-billing-0-7-percent-recurring-tax-calculator/", "Stripe Billing 0.7% Recurring Revenue Tax Calculator", "Stripe Billing (+0.7%), Automated Tax (+0.5%), subscription chargebacks, and MoR comparisons."]
+      ["./chargeback-fee-and-recovery-calculator/", "Stripe, Shopify &amp; Paddle Chargeback Cost Calculator", "Dispute fees, manual prep, and automated recovery."],
+      ["./exit/stripe-shopify-paddle-frozen-funds-alternatives/", "Stripe, Shopify &amp; Paddle Frozen Funds &amp; Reserve Calculator", "25% rolling reserves, payout holds, and the chargeback rate that triggers a freeze."],
+      ["./pricing/stripe-billing-0-7-percent-recurring-tax-calculator/", "Stripe Billing 0.7% Fee, Tax &amp; Chargeback Calculator", "Recurring revenue tax, Stripe Tax, and subscription chargebacks."]
     ],
     helpdesk: [
-      ["./intercom-fin-cost-calculator/", "Intercom Fin cost calculator", "Per-resolution Fin charges next to Freshdesk and Zendesk for the same agent count."],
-      ["./zendesk-ai-cost-calculator/", "Zendesk AI cost calculator", "Suite Team plus per-resolution overage against Freshdesk and Intercom."],
-      ["./zendesk-vs-freshdesk-cost-comparison/", "Zendesk vs Freshdesk", "The Year-1 gap between Zendesk AI and Freshdesk Freddy session packs."]
+      ["./intercom-fin-cost-calculator/", "Intercom Fin AI Cost Calculator", "Year-1 price at $0.99 per resolution versus Freshdesk and Zendesk."],
+      ["./zendesk-ai-cost-calculator/", "Zendesk AI Cost Calculator", "Suite seats plus the per-resolution add-on versus Freshdesk and Intercom."],
+      ["./zendesk-vs-freshdesk-cost-comparison/", "Zendesk vs. Freshdesk Cost Comparison", "Year-1 pricing with AI resolutions side by side."]
     ],
     crm: [
-      ["./pricing/hubspot-true-cost-and-onboarding-fees/", "HubSpot Year-1 calculator", "Mandatory onboarding fees next to Close CRM and Pipedrive."],
-      ["./compare/close-crm-vs-hubspot-sales-hub-5-to-20-reps/", "Close CRM vs HubSpot Sales Hub", "Built-in calling and $0 onboarding versus HubSpot seat fees."],
-      ["./pricing/gong-io-platform-fee-and-seat-minimum-calculator/", "Gong.io platform fee calculator", "The $5,000 base fee and per-seat licenses versus Close CRM."]
+      ["./pricing/hubspot-true-cost-and-onboarding-fees/", "HubSpot True Cost &amp; Onboarding", "What HubSpot costs in Year 1 once mandatory onboarding is included."],
+      ["./compare/close-crm-vs-hubspot-sales-hub-5-to-20-reps/", "Close CRM vs. HubSpot Sales Hub", "True Year-1 cost for 5 to 20 reps, including HubSpot onboarding."],
+      ["./pricing/gong-io-platform-fee-and-seat-minimum-calculator/", "Gong.io $5,000 Platform Fee &amp; Seat Calculator", "Platform fee plus per-seat licenses versus Close CRM."]
     ],
     compliance: [
-      ["./compliance/hipaa-baa-and-soc2-pricing-tiers/", "HIPAA BAA and SOC 2 calculator", "Minimum BAA tiers plus Vanta, Drata, and the external CPA fee."],
-      ["./compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/", "Google Workspace vs Microsoft 365 HIPAA", "The cheapest BAA-eligible edition on each suite."],
-      ["./compare/typeform-vs-jotform-response-limit-and-hipaa-cost/", "Typeform vs Jotform HIPAA", "Response caps and Enterprise-only BAA versus Jotform Gold."]
+      ["./compliance/hipaa-baa-and-soc2-pricing-tiers/", "HIPAA BAA &amp; SOC 2 Pricing Tiers", "Which plan signs a BAA, and what the CPA audit adds."],
+      ["./compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/", "Google Workspace vs. Microsoft 365 HIPAA BAA", "Minimum editions that sign a BAA, plus form intake rules."],
+      ["./compare/typeform-vs-jotform-response-limit-and-hipaa-cost/", "Typeform vs. Jotform Response &amp; HIPAA Calculator", "Response caps and which plan signs a HIPAA BAA."]
     ],
     all: [
-      ["./chargeback-fee-and-recovery-calculator/", "Stripe & Shopify Chargeback Cost Calculator (2026)", "Dispute fees, manual prep, and Chargeflow pay-on-performance recovery."],
-      ["./pricing/hubspot-true-cost-and-onboarding-fees/", "HubSpot Year-1 calculator", "Mandatory onboarding fees next to Close CRM and Pipedrive."],
-      ["./intercom-fin-cost-calculator/", "Intercom Fin cost calculator", "Per-resolution Fin charges next to Freshdesk and Zendesk."]
+      ["./chargeback-fee-and-recovery-calculator/", "Stripe, Shopify &amp; Paddle Chargeback Cost Calculator", "Dispute fees, manual prep, and automated recovery."],
+      ["./pricing/hubspot-true-cost-and-onboarding-fees/", "HubSpot True Cost &amp; Onboarding", "What HubSpot costs in Year 1 once mandatory onboarding is included."],
+      ["./intercom-fin-cost-calculator/", "Intercom Fin AI Cost Calculator", "Year-1 price at $0.99 per resolution versus Freshdesk and Zendesk."]
     ]
   };
 

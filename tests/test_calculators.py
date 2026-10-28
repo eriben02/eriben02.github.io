@@ -1124,7 +1124,7 @@ class TestSaaSBillCalculators(unittest.TestCase):
         with open(os.path.join(PUBLIC_DIR, "index.html"), encoding="utf-8") as f:
             home = f.read()
         self.assertIn("./exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/", home)
-        self.assertIn("ZoomInfo 60-day auto-renewal notice calculator", home)
+        self.assertIn("ZoomInfo 60-Day Auto-Renewal Notice", home)
 
 
 if __name__ == "__main__":

@@ -220,122 +220,122 @@ home_body = f"""
   <div class="card-grid">
     <div class="card" data-cat="crm">
       <span class="badge badge-high">CRM</span>
-      <h3><a href="./pricing/hubspot-true-cost-and-onboarding-fees/">HubSpot Year-1 calculator &amp; onboarding audit</a></h3>
+      <h3><a href="./pricing/hubspot-true-cost-and-onboarding-fees/">HubSpot True Cost &amp; Onboarding</a></h3>
       <p>Sales Pro ($1,500), Marketing Pro ($3,000), and Enterprise onboarding fees next to Close CRM and Pipedrive.</p>
     </div>
     <div class="card" data-cat="crm">
       <span class="badge badge-high">CRM</span>
-      <h3><a href="./compare/close-crm-vs-hubspot-sales-hub-5-to-20-reps/">Close CRM vs. HubSpot Sales Hub (5–20 reps)</a></h3>
+      <h3><a href="./compare/close-crm-vs-hubspot-sales-hub-5-to-20-reps/">Close CRM vs. HubSpot Sales Hub</a></h3>
       <p>Built-in VoIP calling, SMS, and $0 onboarding in Close CRM versus HubSpot Sales Pro and Pipedrive add-on stacks.</p>
     </div>
     <div class="card" data-cat="crm">
       <span class="badge badge-high">CRM</span>
-      <h3><a href="./pricing/gong-io-platform-fee-and-seat-minimum-calculator/">Gong.io $5,000 platform fee &amp; seat calculator</a></h3>
+      <h3><a href="./pricing/gong-io-platform-fee-and-seat-minimum-calculator/">Gong.io $5,000 Platform Fee &amp; Seat Calculator</a></h3>
       <p>Gong&rsquo;s $5,000/yr base platform fee and ~$1,600/seat licenses plus a separate CRM versus Close CRM all-in-one.</p>
     </div>
     <div class="card" data-cat="crm">
       <span class="badge badge-high">CRM</span>
-      <h3><a href="./exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/">ZoomInfo 60-day auto-renewal notice calculator</a></h3>
+      <h3><a href="./exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/">ZoomInfo 60-Day Auto-Renewal Notice</a></h3>
       <p>Written-notice deadline from your contract end date, and the March 2024 +10% renewal versus a negotiated fee.</p>
     </div>
     <div class="card" data-cat="crm">
       <span class="badge badge-medium">CRM</span>
-      <h3><a href="./compare/monday-crm-vs-pipedrive-vs-hubspot-seat-minimums/">monday CRM 3/5/10-seat bucket calculator</a></h3>
+      <h3><a href="./compare/monday-crm-vs-pipedrive-vs-hubspot-seat-minimums/">monday CRM 3/5/10-Seat Bucket Calculator</a></h3>
       <p>Where monday CRM&rsquo;s fixed 3-, 5-, and 10-seat blocks cost more than exact per-seat billing in Pipedrive or Close.</p>
     </div>
     <div class="card" data-cat="helpdesk">
       <span class="badge badge-high">Helpdesk</span>
-      <h3><a href="./intercom-fin-cost-calculator/">Intercom Fin ($0.99/resolution) cost calculator</a></h3>
+      <h3><a href="./intercom-fin-cost-calculator/">Intercom Fin AI Cost Calculator</a></h3>
       <p>How monthly ticket volume and AI resolution rates scale an Intercom invoice versus Freshdesk Freddy AI session packs.</p>
     </div>
     <div class="card" data-cat="helpdesk">
       <span class="badge badge-high">Helpdesk</span>
-      <h3><a href="./zendesk-ai-cost-calculator/">Zendesk AI cost calculator</a></h3>
+      <h3><a href="./zendesk-ai-cost-calculator/">Zendesk AI Cost Calculator</a></h3>
       <p>Suite Team plus per-resolution overage for 10 agents and 1,500 AI tickets a month, next to Freshdesk and Intercom.</p>
     </div>
     <div class="card" data-cat="helpdesk">
       <span class="badge badge-high">Helpdesk</span>
-      <h3><a href="./zendesk-vs-freshdesk-cost-comparison/">Zendesk vs. Freshdesk cost comparison</a></h3>
+      <h3><a href="./zendesk-vs-freshdesk-cost-comparison/">Zendesk vs. Freshdesk Cost Comparison</a></h3>
       <p>The same agent count and AI volume, with the Year-1 gap between Zendesk AI and Freshdesk Freddy session packs.</p>
     </div>
     <div class="card" data-cat="crm">
       <span class="badge badge-high">CRM</span>
-      <h3><a href="./hubspot-onboarding-fee-calculator/">HubSpot onboarding fee calculator</a></h3>
+      <h3><a href="./hubspot-onboarding-fee-calculator/">HubSpot Onboarding Fee Calculator</a></h3>
       <p>Mandatory $1,500 to $7,000 setup fees, extra seats, and marketing contact tiers versus Close CRM and Pipedrive.</p>
     </div>
     <div class="card" data-cat="helpdesk">
       <span class="badge badge-high">Helpdesk</span>
-      <h3><a href="./pricing/zendesk-ai-resolution-and-automated-outcome-cost/">Zendesk AI automated resolution overage calculator</a></h3>
+      <h3><a href="./pricing/zendesk-ai-resolution-and-automated-outcome-cost/">Zendesk AI Cost Calculator</a></h3>
       <p>Zendesk&rsquo;s 5&ndash;10 included AR/agent allowance and $1.50&ndash;$2.00 overage rates versus Help Scout and Freshdesk.</p>
     </div>
     <div class="card" data-cat="payments">
       <span class="badge badge-high">Payments</span>
-      <h3><a href="./pricing/stripe-billing-0-7-percent-recurring-tax-calculator/">Stripe Billing 0.7% recurring revenue tax calculator</a></h3>
+      <h3><a href="./pricing/stripe-billing-0-7-percent-recurring-tax-calculator/">Stripe Billing 0.7% Fee, Tax &amp; Chargeback Calculator</a></h3>
       <p>Stripe&rsquo;s 2.9% + 30&cent; base rate once 0.7% Billing, 0.5% Tax, and 0.4% Invoicing are added against Whop and Paddle.</p>
     </div>
     <div class="card" data-cat="payments">
       <span class="badge badge-high">Payments</span>
-      <h3><a href="./compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/">Gumroad vs. Whop vs. Lemon Squeezy net payout calculator</a></h3>
+      <h3><a href="./compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/">Gumroad vs. Whop vs. Lemon Squeezy Take-Rate &amp; Chargeback Calculator</a></h3>
       <p>Net creator payouts after Gumroad&rsquo;s 10% + 50&cent; (+ 2.9% + 30&cent;), Lemon Squeezy&rsquo;s 5% + 50&cent;, and Whop&rsquo;s 2.7% + 30&cent;.</p>
     </div>
     <div class="card" data-cat="payments">
       <span class="badge badge-high">Payments</span>
-      <h3><a href="./exit/stripe-shopify-paddle-frozen-funds-alternatives/">Stripe, Shopify &amp; Paddle payout hold simulator</a></h3>
-      <p>Cashflow impact of a 25% rolling reserve or capital holdback, plus card-token export rules across payment rails.</p>
+      <h3><a href="./exit/stripe-shopify-paddle-frozen-funds-alternatives/">Stripe, Shopify &amp; Paddle Frozen Funds &amp; Reserve Calculator</a></h3>
+      <p>25% rolling reserves, payout holds, and the chargeback rate that triggers a freeze.</p>
     </div>
     <div class="card" data-cat="payments">
       <span class="badge badge-high">Payments</span>
-      <h3><a href="./chargeback-fee-and-recovery-calculator/">Stripe and Shopify chargeback cost calculator</a></h3>
+      <h3><a href="./chargeback-fee-and-recovery-calculator/">Stripe, Shopify &amp; Paddle Chargeback Cost Calculator</a></h3>
       <p>Lost order value plus a $15 dispute fee, compared with Chargeflow's 25% success fee and a 0.40% fee on all sales.</p>
     </div>
     <div class="card" data-cat="payments">
       <span class="badge badge-high">Payments</span>
-      <h3><a href="./exit/paypal-180-day-permanent-limitation-fund-recovery/">PayPal 180-day limitation &amp; reserve calculator</a></h3>
+      <h3><a href="./exit/paypal-180-day-permanent-limitation-fund-recovery/">PayPal 180-Day Hold &amp; Reserve Cost Calculator</a></h3>
       <p>Working capital locked under a 180-day PayPal hold and 3.49% + 49&cent; domestic rates versus Whop multi-processor routing.</p>
     </div>
     <div class="card" data-cat="compliance">
       <span class="badge badge-low">Compliance</span>
-      <h3><a href="./compare/typeform-vs-jotform-response-limit-and-hipaa-cost/">Typeform vs. Jotform response &amp; HIPAA calculator</a></h3>
+      <h3><a href="./compare/typeform-vs-jotform-response-limit-and-hipaa-cost/">Typeform vs. Jotform Response &amp; HIPAA Calculator</a></h3>
       <p>Typeform&rsquo;s monthly response caps and Enterprise-only HIPAA BAA versus Jotform Gold ($99/mo annual with BAA included).</p>
     </div>
     <div class="card" data-cat="compliance">
       <span class="badge badge-low">Guide</span>
-      <h3><a href="./guides/jotform-wix-app-setup-and-pricing-guide/">Jotform Wix App setup &amp; B2B quote form guide</a></h3>
+      <h3><a href="./guides/jotform-wix-app-setup-and-pricing-guide/">Jotform Wix App Setup &amp; Pricing Guide</a></h3>
       <p>5-step visual and video walkthrough for embedding a B2B quote form on Wix using the official Jotform Wix App.</p>
     </div>
     <div class="card" data-cat="compliance">
       <span class="badge badge-low">Pricing</span>
-      <h3><a href="./pricing/jotform-pricing-tier-calculator/">Jotform 2026 pricing tier calculator (Starter to Gold)</a></h3>
+      <h3><a href="./pricing/jotform-pricing-tier-calculator/">Jotform 2026 Pricing Tier Calculator</a></h3>
       <p>Compare Starter (Free), Bronze ($34/mo), Silver ($39/mo), and Gold ($99/mo HIPAA BAA) submission and storage limits.</p>
     </div>
     <div class="card" data-cat="compliance">
       <span class="badge badge-medium">Compliance</span>
-      <h3><a href="./pricing/docusign-envelope-allowance-and-api-overage-calculator/">DocuSign 100-envelope cap &amp; overage calculator</a></h3>
+      <h3><a href="./pricing/docusign-envelope-allowance-and-api-overage-calculator/">DocuSign 100-Envelope Cap &amp; Overage Calculator</a></h3>
       <p>DocuSign&rsquo;s 100 envelopes/user/year cap on Standard &amp; Business Pro plans compared with PandaDoc and Jotform Sign.</p>
     </div>
     <div class="card" data-cat="compliance">
       <span class="badge badge-low">Compliance</span>
-      <h3><a href="./compliance/hipaa-baa-and-soc2-pricing-tiers/">HIPAA BAA tiers &amp; SOC 2 + CPA auditor estimator</a></h3>
+      <h3><a href="./compliance/hipaa-baa-and-soc2-pricing-tiers/">HIPAA BAA &amp; SOC 2 Pricing Tiers</a></h3>
       <p>Minimum plans for a signed HIPAA BAA or SAML SSO, plus Vanta/Drata platform quotes and external CPA audit fees.</p>
     </div>
     <div class="card" data-cat="compliance">
       <span class="badge badge-low">Compliance</span>
-      <h3><a href="./compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/">Google Workspace vs. Microsoft 365 HIPAA BAA calculator</a></h3>
+      <h3><a href="./compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/">Google Workspace vs. Microsoft 365 HIPAA BAA</a></h3>
       <p>Cheapest BAA-eligible edition on each suite ($7 entry), Vault and archiving gaps, and HIPAA form intake costs.</p>
     </div>
     <div class="card" data-cat="crm">
       <span class="badge badge-low">FAQ</span>
-      <h3><a href="./faq/does-hubspot-charge-onboarding-fees-2026/">Does HubSpot charge onboarding fees in 2026?</a></h3>
+      <h3><a href="./faq/does-hubspot-charge-onboarding-fees-2026/">Does HubSpot Charge Onboarding Fees in 2026?</a></h3>
       <p>Mandatory $1,500–$7,000 HubSpot onboarding fees by tier, Solutions Partner waivers, and $0-onboarding CRMs.</p>
     </div>
     <div class="card" data-cat="helpdesk">
       <span class="badge badge-low">FAQ</span>
-      <h3><a href="./faq/intercom-fin-ai-cost-calculator/">How much does Intercom Fin AI actually cost in 2026?</a></h3>
+      <h3><a href="./faq/intercom-fin-ai-cost-calculator/">Intercom Fin AI Cost Calculator</a></h3>
       <p>Per-seat + $0.99/resolution support math comparing Intercom against Freshdesk and Help Scout.</p>
     </div>
     <div class="card" data-cat="payments">
       <span class="badge badge-low">FAQ</span>
-      <h3><a href="./faq/stripe-vs-paddle-true-cost/">Stripe vs. Paddle vs. Whop true cost (2026)</a></h3>
+      <h3><a href="./faq/stripe-vs-paddle-true-cost/">Stripe vs. Paddle vs. Whop True Cost &amp; Chargeback Calculator</a></h3>
       <p>Effective take rates once Stripe Billing (0.7%), Stripe Tax (0.5%), and international FX surcharges are included.</p>
     </div>
   </div>

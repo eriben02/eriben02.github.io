@@ -107,7 +107,7 @@ G = E["gmv"]
 
 body = f"""
 <section class="hero">
-  <h1>Gumroad (10% + 50¢ + processing) vs. Whop (2.7% + 30¢) vs. Lemon Squeezy (5% + 50¢): what you actually keep.</h1>
+  <h1>Gumroad (10%) vs. Whop (2.7%) vs. Lemon Squeezy (5%) Take-Rate &amp; Chargeback Calculator (2026)</h1>
   <p class="lead">Headline rates hide the real take: Gumroad’s 10% excludes card processing, Lemon Squeezy adds 1.5% for international and PayPal buyers, and Whop’s 2.7% does not include tax handling. Enter your price and volume to see net payouts side by side.</p>
   <div class="geo-direct-answer">
     <p><strong>The short version:</strong> As of {CHECKED}, a $29 product selling 200 times a month (${f(G)} gross, 30% international buyers, 10% PayPal) nets <strong>${f(g['net'])} on Gumroad</strong> (${f(g['total'])} in fees, {pct(g['total'], G)}%: 10% + 50¢ plus 2.9% + 30¢ card processing), <strong>${f(l['net'])} on Lemon Squeezy</strong> (${f(l['total'])}, {pct(l['total'], G)}%: 5% + 50¢ plus surcharges and $15 per dispute) and <strong>${f(w['net'])} on Whop</strong> (${f(w['total'])}, {pct(w['total'], G)}%, including the optional 2% “Whop collects and remits” tax service; ${f(E_NOTAX['whop']['net'])} if you handle tax yourself). Over a year that is a <strong>${f((w['net'] - g['net']) * 12)}</strong> difference between Gumroad and Whop.</p>
