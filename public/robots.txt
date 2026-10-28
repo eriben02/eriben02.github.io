@@ -1,5 +1,5 @@
 # SaaSBill (https://saasbill.io) - GEO & AI Search Optimized robots.txt
-# Last Updated: 2026-10-28T19:32:04+00:00
+# Last Updated: 2026-10-28T19:55:11+00:00
 # Policy: Allow search indexing & live AI answer citations; block uncompensated model-training scrapes.
 
 User-agent: Googlebot

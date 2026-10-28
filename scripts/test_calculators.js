@@ -134,6 +134,20 @@ assert.strictEqual(sd.fees, 720);
 assert.strictEqual(sd.counter, 720);
 assert.strictEqual(sd.drain, 3840);
 assert.strictEqual(sd.net, 1170);
+for (const token of [
+  "Chargeflow (Automated Dispute Recovery)",
+  "25% of recovered disputes ($0/mo fixed)",
+  "$0/yr base fee",
+  "Pay-on-performance add-on for Stripe/Shopify: 65% benchmark recovery rate on disputed volume ($0 fee on unrecovered disputes)",
+  "Saves $' + cb.net.toLocaleString('en-US') + '/yr net",
+  "https://www.chargeflow.io/pricing",
+  'href="https://www.chargeflow.io/"',
+  'data-vendor="${r.vendor}"',
+  "ctaLocation: 'table-row'",
+  "View Chargeflow pricing"
+]) {
+  if (!stripe.text.includes(token)) fail("stripe billing table missing " + token);
+}
 
 const both = extractFn("public/faq/stripe-vs-paddle-true-cost/index.html", "calcProcessorDisputes");
 if (!both.text.includes('id="sp-dispute-rate"')) fail("missing sp-dispute-rate");
@@ -147,6 +161,14 @@ assert.strictEqual(ss.drain, 3300);
 assert.strictEqual(ss.net, 1462);
 assert.strictEqual(pp.fees, 1200);
 assert.strictEqual(pp.drain, 3600);
+for (const token of [
+  "Chargeflow (Automated Dispute Recovery)",
+  "Saves $' + stripeCb.net.toLocaleString('en-US') + '/yr net",
+  "https://www.chargeflow.io/pricing",
+  "ctaLocation: 'table-row'"
+]) {
+  if (!both.text.includes(token)) fail("stripe vs paddle table missing " + token);
+}
 
 const take = extractFn("public/compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/index.html", "calcChargeflowOnDisputes");
 if (!take.text.includes('id="tr-cf-cta"')) fail("missing take-rate chargeflow cta");
