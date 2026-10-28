@@ -1537,13 +1537,26 @@ footer.site-footer {
 }
 
 /* Center Column: Locked-Height 310px Vertical Stacked Bar Aligned to Left Controls + Leader Lines */
-.wb-vbar-container {
+.wb-col-chart {
   display: flex;
   flex-direction: column;
-  height: 310px;
-  min-height: 310px;
-  max-height: 310px;
-  overflow: hidden;
+  min-height: 0;
+}
+
+.wb-col-chart .wb-col-title {
+  text-align: center;
+}
+
+.wb-vbar-container,
+#wb-vbar-mount,
+#cb-vbar {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  height: auto;
+  min-height: 340px;
+  max-height: none;
+  overflow: visible;
 }
 
 .wb-vbar-row {
@@ -1674,11 +1687,11 @@ footer.site-footer {
   letter-spacing: 0.09em;
   color: #536B56;
   margin-bottom: 18px;
-  height: 18px;
-  line-height: 18px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  min-height: 18px;
+  line-height: 1.3;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
   max-width: 100%;
 }
 
@@ -3112,6 +3125,31 @@ input[type="date"],
   width: auto;
   border: 0;
   background: transparent;
+}
+
+.wb-result-col .math-drawer {
+  margin: 0.35rem 0 0.75rem 0;
+}
+
+.sub-strip-heading {
+  margin: 18px 0 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #536B56;
+}
+
+.active-cat-calcs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .active-cat-calcs-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .math-drawer > summary {

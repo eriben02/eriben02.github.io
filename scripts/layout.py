@@ -43,7 +43,7 @@ def render_related_links(rel_path, prefix):
         ("pricing/stripe-billing-0-7-percent-recurring-tax-calculator/index.html", "Stripe Billing 0.7% Recurring Fee Calculator", "Compare Stripe 2.9% + 0.7% Billing + 0.5% Tax vs. Whop (2.7% + 30¢) & Paddle."),
         ("compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/index.html", "Gumroad vs. Whop vs. Lemon Squeezy Net Payouts", "Compare real creator & SaaS take rates after card processing and surcharges."),
         ("exit/stripe-shopify-paddle-frozen-funds-alternatives/index.html", "Stripe, Shopify & Paddle Reserve & Hold Simulator", "Model 25% rolling reserves and compare Merchant of Record token portability."),
-        ("chargeback-fee-and-recovery-calculator/index.html", "Stripe & Shopify Chargeback Cost Calculator", "Dispute fees plus lost order value versus Chargeflow recovery and a 0.40% fee on all sales."),
+        ("chargeback-fee-and-recovery-calculator/index.html", "Stripe, Shopify & Paddle Chargeback Cost Calculator", "Dispute fees, manual prep, pay-on-performance recovery, and a 0.40% fee on all sales."),
         ("exit/paypal-180-day-permanent-limitation-fund-recovery/index.html", "PayPal 180-Day Hold & Working Capital Calculator", "Calculate frozen cashflow impact and multi-processor failover with Whop."),
         ("exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/index.html", "ZoomInfo 60-Day Renewal Notice Calculator", "Deadline from your contract end date, and the March 2024 +10% extension versus a negotiated fee."),
         ("compare/typeform-vs-jotform-response-limit-and-hipaa-cost/index.html", "Typeform vs. Jotform Response Limit & HIPAA Cost", "Compare Typeform response tiers & Enterprise BAA vs. Jotform Gold ($99/mo)."),
@@ -57,10 +57,35 @@ def render_related_links(rel_path, prefix):
         ("faq/stripe-vs-paddle-true-cost/index.html", "FAQ: Stripe vs. Paddle vs. Whop True Cost (2026)", "Side-by-side effective take rate calculator with Billing, Tax, and FX fees."),
         ("pricing/stripe-shopify-chargeback-fee-and-chargeflow-roi-calculator/index.html", "Stripe, Shopify & Chargeflow ROI Calculator", "Same chargeback math as the dedicated recovery calculator, filed with the pricing guides."),
     ]
+    by_rel = {rel: (label, summary) for rel, label, summary in all_links}
+    chargeback_rel = "chargeback-fee-and-recovery-calculator/index.html"
+    payment_rels = {
+        chargeback_rel,
+        "pricing/stripe-shopify-chargeback-fee-and-chargeflow-roi-calculator/index.html",
+        "exit/stripe-shopify-paddle-frozen-funds-alternatives/index.html",
+        "pricing/stripe-billing-0-7-percent-recurring-tax-calculator/index.html",
+        "faq/stripe-vs-paddle-true-cost/index.html",
+        "compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/index.html",
+        "exit/paypal-180-day-permanent-limitation-fund-recovery/index.html",
+    }
+    if rel_path in (
+        chargeback_rel,
+        "pricing/stripe-shopify-chargeback-fee-and-chargeflow-roi-calculator/index.html",
+    ):
+        preferred = [
+            "exit/stripe-shopify-paddle-frozen-funds-alternatives/index.html",
+            "pricing/stripe-billing-0-7-percent-recurring-tax-calculator/index.html",
+            "faq/stripe-vs-paddle-true-cost/index.html",
+        ]
+    elif rel_path in payment_rels:
+        preferred = [chargeback_rel] + [rel for rel, _, _ in all_links if rel in payment_rels and rel != chargeback_rel]
+    else:
+        preferred = [rel for rel, _, _ in all_links]
     cards = []
-    for target_rel, label, summary in all_links:
-        if target_rel == rel_path:
+    for target_rel in preferred:
+        if target_rel == rel_path or target_rel not in by_rel:
             continue
+        label, summary = by_rel[target_rel]
         href = prefix + target_rel.replace("index.html", "")
         cards.append(f"""
         <div class="card" style="padding:14px 16px;">

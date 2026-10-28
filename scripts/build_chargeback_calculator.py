@@ -26,10 +26,10 @@ inside the $30 handling line so it is not added a second time.
 """
 from layout import render_page
 
-TITLE = "Stripe &amp; Shopify Chargeback Cost Calculator (2026): Dispute Fees, Lost Revenue &amp; Chargeflow ROI"
+TITLE = "Stripe, Shopify &amp; Paddle Chargeback Cost Calculator (2026): Dispute Fees, Manual Prep vs. Automated Recovery"
 DESCRIPTION = (
-    "See what chargebacks cost on Stripe and Shopify: lost order value, a dispute fee, "
-    "and manual evidence prep, compared with Chargeflow's 25% success fee and a 0.40% fee on all sales."
+    "Compare dispute fees, manual evidence prep, a 25% pay-on-performance recovery model, "
+    "and a 0.40% fee on all sales for Stripe, Shopify, and Paddle."
 )
 LEAD = (
     "Every chargeback costs the full order value plus a non-refundable $15 to $25 processor dispute fee. "
@@ -55,10 +55,10 @@ TEMPLATE = r"""
         <div class="wb-control-item">
           <label class="wb-control-label" for="cb-processor">Payment processor</label>
           <select id="cb-processor" class="wb-tool-select" data-track="calculator-control" data-control="processor">
-            <option value="stripe" selected>Stripe ($15 dispute fee + $15 counter fee)</option>
-            <option value="shopify">Shopify Payments ($15 dispute fee)</option>
+            <option value="stripe" selected>Stripe ($15 + $15 counter fee)</option>
+            <option value="shopify">Shopify Payments ($15 fee)</option>
             <option value="paddle">Paddle ($20 dispute fee)</option>
-            <option value="highrisk">High-volume / high-risk ($25 dispute fee)</option>
+            <option value="highrisk">High-risk PSP ($25 fee)</option>
           </select>
         </div>
         <div class="wb-control-item">
@@ -84,7 +84,7 @@ TEMPLATE = r"""
     </div>
 
     <div class="wb-col-chart">
-      <div class="wb-col-title">Manual drain, split</div>
+      <div class="wb-col-title">Annual Dispute Drain Breakdown</div>
       <div id="cb-vbar" class="wb-vbar-container" aria-live="polite">
         <div class="wb-vbar-row" id="cb-row-lost" style="flex: 68 1 0px;">
           <div class="wb-vbar-block block-hidden"><span class="wb-block-amount" id="cb-amt-lost">$14,976</span></div>
@@ -104,16 +104,16 @@ TEMPLATE = r"""
     <div class="wb-result-col" id="cb-result">
       <div class="wb-selected-product">Manual annual drain</div>
       <div class="wb-big-total"><span id="cb-big">$21,996</span> <span class="wb-per-year">/ year</span></div>
-      <p class="wb-budget-quote" id="cb-quote">Based on 2,000 orders a month, a $120 average order, and a 0.65% dispute rate on Stripe.</p>
-      <p class="wb-budget-subnote" id="cb-sub">Unmanaged loss $21,060 (disputed sales + fees). Prep $4,680. A 20% win recovers $3,744, or -$936 after prep.</p>
-      <div class="wb-best-option" id="cb-best"><strong>Best option:</strong> <a href="%%CF%%" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="chargeflow" data-cta-location="workbench-best-option">Chargeflow</a> recovers $9,126/yr net after its 25% success fee and saves $10,062/yr vs. manual in-house handling ($11,520/yr for 0.40% GMV protection).</div>
-      <div class="cta-stack">
-        <a id="cb-primary" class="btn-cta wb-primary-cta" href="%%CF%%" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="chargeflow" data-cta-location="workbench">Recover $9,126/yr net with Chargeflow (save $10,062/yr vs manual) &rarr;</a>
-      </div>
       <details class="math-drawer" id="cb-calc-details">
         <summary>Show calculation</summary>
         <div class="math-drawer-body" id="cb-math"></div>
       </details>
+      <p class="wb-budget-quote" id="cb-quote">Based on 2,000 orders a month, a $120 average order, and a 0.65% dispute rate on Stripe.</p>
+      <p class="wb-budget-subnote" id="cb-sub">Unmanaged loss $21,060 (disputed sales + fees). Prep $4,680. A 20% win recovers $3,744, or -$936 after prep.</p>
+      <div class="wb-best-option" id="cb-best"><strong>Lowest modeled cost:</strong> 0.40% of all sales at $11,520/yr, if that fee replaces the disputed order value and the dispute fee. Chargeflow's modeled drain is $11,934/yr. Manual handling is $21,996/yr.</div>
+      <div class="cta-stack">
+        <a id="cb-primary" class="btn-cta wb-primary-cta" href="https://stripe.com/radar" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="stripe-payments" data-cta-location="workbench">Compare the 0.40% of sales model ($11,520/yr) &rarr;</a>
+      </div>
     </div>
   </div>
 </section>
@@ -130,7 +130,7 @@ TEMPLATE = r"""
     <summary class="full-table-summary">
       <div class="full-table-summary-text">
         <h2 id="cb-compare-heading" class="full-table-heading">Compare all tools in this category</h2>
-        <span class="full-table-summary-sub">Chargeflow, a percent-of-sales protection fee, Shopify Protect, and doing it yourself</span>
+        <span class="full-table-summary-sub">Manual handling, pay-on-performance recovery, a percent of sales, Shopify Protect, and pre-dispute alerts</span>
       </div>
       <span class="full-table-toggle-pill">Compare all tools &darr;</span>
     </summary>
@@ -162,9 +162,10 @@ TEMPLATE = r"""
     <li><strong>Paddle:</strong> public notes put the dispute fee around $15 to $20. The Paddle option uses $20.</li>
     <li><strong>High-volume or high-risk:</strong> modeled at $25 per dispute, before any monitoring program penalty.</li>
     <li><strong>Manual in-house:</strong> a 20% win rate, plus $30 per dispute for evidence prep and counter handling. At the default volume that prep is 156 x $30 = $4,680, which is more than the $3,744 gross recovered.</li>
-    <li><strong>Chargeflow:</strong> $0 monthly and $0 setup in this model, then 25% of recovered dispute dollars only, and $0 evidence prep. The 65% recovery rate is a planning benchmark so the fee is easy to audit. Ask Chargeflow for the win rate on your category before you treat the savings as a forecast.</li>
-    <li><strong>Percent of all sales:</strong> 0.40% of yearly GMV. That is the comparison for a protection product billed on every dollar, not only on disputes. Stripe Radar for Fraud Teams is a different product and is often billed per screened payment. We do not treat 0.40% as Radar's only price.</li>
-    <li><strong>Shopify Protect:</strong> covers eligible Shop Pay orders in the US. It does not cover a standard card gateway or PayPal dispute.</li>
+    <li><strong>Pay-on-performance recovery (Chargeflow in this model):</strong> 25% of recovered dispute dollars ($0/mo base). Does not refund the processor's $15 to $20 dispute fee when a dispute is lost, and a 65% win rate is a planning benchmark. Actual recovery varies by dispute reason code.</li>
+    <li><strong>Percent of all sales:</strong> 0.40% of yearly GMV. The calculator treats that fee as the lower cost only when it replaces disputed order value and dispute fees. Stripe Radar for Fraud Teams is often billed per screened payment. We do not treat 0.40% as Radar's only price.</li>
+    <li><strong>Shopify Protect:</strong> covers eligible Shop Pay orders in the US. It does not cover a standard card gateway or PayPal dispute, so it is not the dollar winner for the whole volume.</li>
+    <li><strong>Pre-dispute alert networks (Ethoca, Verifi RDR, Chargeblast):</strong> priced per alert and quoted. This model does not invent an alert fee, so they are listed beside the calculated options and are not picked as the dollar winner.</li>
   </ul>
   <p>Sources: <a href="https://docs.stripe.com/disputes" target="_blank" rel="noopener">Stripe disputes</a>, <a href="https://stripe.com/radar" target="_blank" rel="noopener">Stripe Radar</a>, <a href="https://help.shopify.com/en/manual/payments/chargebacks" target="_blank" rel="noopener">Shopify chargebacks</a>, <a href="%%CF%%" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="chargeflow" data-cta-location="sources">Chargeflow</a>.</p>
 </section>
@@ -275,10 +276,29 @@ function renderChargeback() {
   document.getElementById('cb-big').textContent = money(c.manualLoss);
   document.getElementById('cb-quote').textContent = 'Based on ' + orders.toLocaleString('en-US') + ' orders a month, a ' + money(aov) + ' average order, and a ' + ratePct.toFixed(2) + '% dispute rate on ' + names[processor] + '.';
   document.getElementById('cb-sub').textContent = 'Unmanaged loss ' + money(c.unmanaged) + ' (disputed sales + fees). Prep ' + money(c.manualOps) + '. A 20% win recovers ' + money(c.manualGross) + ', or ' + money(c.manualNetAfterOps) + ' after prep.';
+  const cfNote = '25% of recovered dispute dollars ($0/mo base). Does not refund the processor $15 to $20 dispute fee when a dispute is lost, and a 65% win rate is a planning benchmark. Actual recovery varies by dispute reason code.';
+  const paths = [
+    { id: 'manual', cost: c.manualLoss, name: 'Manual in-house handling' },
+    { id: 'chargeflow', cost: c.cfLoss, name: 'Pay-on-performance recovery' },
+    { id: 'percent', cost: c.radar, name: '0.40% of all sales' }
+  ].sort(function(a, b) { return a.cost - b.cost; });
+  const winner = paths[0];
   const saveLabel = 'Recover ' + money(c.netRecovered) + '/yr net with Chargeflow (save ' + money(c.savings) + '/yr vs manual)';
-  const callout = 'recovers ' + money(c.netRecovered) + '/yr net after its 25% success fee and saves ' + money(c.savings) + '/yr vs. manual in-house handling (' + money(c.radar) + '/yr for 0.40% GMV protection).';
-  document.getElementById('cb-best').innerHTML = '<strong>Best option:</strong> <a href="%%CF%%" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="chargeflow" data-cta-location="workbench-best-option">Chargeflow</a> ' + callout;
-  document.getElementById('cb-primary').textContent = saveLabel + ' →';
+  document.getElementById('cb-best').innerHTML = '<strong>Lowest modeled cost:</strong> ' + winner.name + ' at ' + money(winner.cost) + '/yr. Manual ' + money(c.manualLoss) + ', pay-on-performance ' + money(c.cfLoss) + ', 0.40% of sales ' + money(c.radar) + '. The 0.40% figure is lower only if that fee replaces the disputed order value and the dispute fee.';
+  const primary = document.getElementById('cb-primary');
+  if (winner.id === 'chargeflow') {
+    primary.href = '%%CF%%';
+    primary.setAttribute('data-vendor', 'chargeflow');
+    primary.textContent = saveLabel + ' →';
+  } else if (winner.id === 'percent') {
+    primary.href = 'https://stripe.com/radar';
+    primary.setAttribute('data-vendor', 'stripe-payments');
+    primary.textContent = 'Compare the 0.40% of sales model (' + money(c.radar) + '/yr) →';
+  } else {
+    primary.href = 'https://docs.stripe.com/disputes';
+    primary.setAttribute('data-vendor', 'stripe-payments');
+    primary.textContent = 'Manual handling is the lower modeled cost (' + money(c.manualLoss) + '/yr) →';
+  }
   const row = function(label, formula, val) {
     return '<div class="calc-math-row"><span class="calc-math-label"><strong>' + label + '</strong><span class="calc-math-formula">' + formula + '</span></span><span class="calc-math-val">' + val + '</span></div>';
   };
@@ -308,37 +328,40 @@ function renderChargeback() {
     row('Stripe Chargeback Protection comparison', '0.40% x ' + money(c.gmv), money(c.radar)) +
     '</div>' + counterNote(processor, c, money);
   const manualMath = 'Disputes = ' + c.disputes.toLocaleString('en-US') + '. Gross recovered at a 20% win rate = ' + money(c.manualGross) + '. Unrecovered sales = ' + money(c.manualLost) + '. Processor dispute fees = ' + money(c.fees) + '. Evidence prep = ' + c.disputes.toLocaleString('en-US') + ' x $30 = ' + money(c.manualOps) + '. Total annual drain = ' + money(c.fees) + ' + ' + money(c.manualOps) + ' + ' + money(c.manualLost) + ' = ' + money(c.manualLoss) + '. Net after prep = ' + money(c.manualGross) + ' minus ' + money(c.manualOps) + ' = ' + money(c.manualNetAfterOps) + '.';
-  const cfMath = 'Gross recovered at a 65% automated win rate = ' + money(c.recovered) + '. Success fee = 25% of ' + money(c.recovered) + ' = ' + money(c.successFee) + ', with a $0 monthly fee and a $0 setup fee. Net recovered = ' + money(c.netRecovered) + '. Unrecovered sales (35%) = ' + money(c.cfLost) + '. Processor dispute fees = ' + money(c.fees) + '. Evidence prep = $0. Total annual drain = ' + money(c.fees) + ' + ' + money(c.cfLost) + ' + ' + money(c.successFee) + ' = ' + money(c.cfLoss) + '. Savings vs manual = ' + money(c.manualLoss) + ' minus ' + money(c.cfLoss) + ' = ' + money(c.savings) + '. The 65% win rate is a planning benchmark, not a guaranteed Chargeflow win rate.';
-  const radarMath = 'Protection fee = 0.40% x ' + money(c.gmv) + ' yearly sales = ' + money(c.radar) + '. That fee is charged on every sale, including orders nobody disputes. Chargeflow success fee on this scenario is ' + money(c.successFee) + ', and only on recovered dollars. The 0.40% fee is ' + money(c.radar - c.successFee) + ' higher than that success fee. Stripe Radar for Fraud Teams is often priced per screened payment, so 0.40% is the percent-of-sales comparison, not Radar\'s only price.';
+  const cfMath = 'Gross recovered at a 65% planning win rate = ' + money(c.recovered) + '. Success fee = 25% of ' + money(c.recovered) + ' = ' + money(c.successFee) + ', with a $0 monthly fee. Net recovered = ' + money(c.netRecovered) + '. Unrecovered sales (35%) = ' + money(c.cfLost) + '. Processor dispute fees stay in the total at ' + money(c.fees) + ' because a lost dispute does not refund that fee. Evidence prep = $0. Total annual drain = ' + money(c.cfLoss) + '. ' + cfNote;
+  const radarMath = 'Fee = 0.40% x ' + money(c.gmv) + ' = ' + money(c.radar) + '. This row is the lower cost only if that fee replaces disputed order value and dispute fees. It is charged on every sale, including orders nobody disputes. Stripe Radar for Fraud Teams is often priced per screened payment, so 0.40% is a comparison, not Radar\'s only price. Shopify Protect is $0 on eligible Shop Pay orders in the US and does not cover a standard gateway or PayPal dispute.';
+  const mark = function(id) { return winner.id === id ? ' card-lowest best-card' : (id === 'percent' ? ' card-hidden' : ''); };
   const cards = document.getElementById('cb-summary');
   cards.innerHTML =
-    '<div class="summary-card result-card">' +
-      '<span class="val-pill">Baseline (20% Win Rate)</span>' +
-      '<div class="summary-scenario"><strong>Manual In-House Dispute Handling</strong></div>' +
+    '<div class="summary-card result-card' + mark('manual') + '">' +
+      '<div class="summary-label">Baseline (20% Win Rate)</div>' +
       '<div class="summary-metric">' + money(c.manualLoss) + ' / yr</div>' +
+      '<details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">' + manualMath + '</div></details>' +
+      '<div class="summary-scenario"><strong>Manual In-House Dispute Handling</strong></div>' +
       '<div class="summary-breakdown">Gross recovered ' + money(c.manualGross) + ' vs evidence prep ' + money(c.manualOps) + '. Net after prep ' + money(c.manualNetAfterOps) + '.</div>' +
       '<p class="summary-caveat"><strong>Hidden Cost Highlight:</strong> 80% of disputed sales stays lost, and the $30 per dispute prep cost is inside this drain.</p>' +
-      '<details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">' + manualMath + '</div></details>' +
     '</div>' +
-    '<div class="summary-card result-card best-card card-lowest">' +
-      '<span class="val-pill">Highest Net Recovery</span>' +
-      '<div class="summary-scenario"><strong>Chargeflow Pay-On-Performance</strong></div>' +
-      '<div class="summary-metric">' + money(c.netRecovered) + ' net</div>' +
-      '<div class="summary-breakdown">$0 a month. 25% only on recovered dollars. 65% win rate is a planning benchmark. Evidence prep $0.</div>' +
+    '<div class="summary-card result-card' + mark('chargeflow') + '">' +
+      '<div class="summary-label">25% of recovered dollars</div>' +
+      '<div class="summary-metric">' + money(c.cfLoss) + ' / yr drain</div>' +
       '<details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">' + cfMath + '</div></details>' +
-      '<div class="summary-actions"><a class="btn-cta" href="%%CF%%" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="chargeflow" data-cta-location="summary-card">' + saveLabel + ' &rarr;</a></div>' +
+      '<div class="summary-scenario"><strong>Chargeflow Pay-On-Performance</strong></div>' +
+      '<div class="summary-breakdown">Net kept ' + money(c.netRecovered) + ' after a ' + money(c.successFee) + ' success fee. ' + cfNote + '</div>' +
+      '<div class="summary-actions"><a class="btn-secondary" href="%%CF%%" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="chargeflow" data-cta-location="summary-card">View Chargeflow &rarr;</a></div>' +
     '</div>' +
-    '<div class="summary-card result-card card-hidden">' +
-      '<span class="val-pill">Flat Volume Fee</span>' +
-      '<div class="summary-scenario"><strong>Stripe Chargeback Protection (0.40% of GMV)</strong></div>' +
+    '<div class="summary-card result-card' + mark('percent') + '">' +
+      '<div class="summary-label">Flat Volume Fee</div>' +
       '<div class="summary-metric">' + money(c.radar) + ' / yr</div>' +
-      '<div class="summary-breakdown">0.40% x ' + money(c.gmv) + ', charged on every sale whether or not it is disputed.</div>' +
       '<details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">' + radarMath + '</div></details>' +
+      '<div class="summary-scenario"><strong>Stripe Chargeback Protection (0.40% of GMV)</strong></div>' +
+      '<div class="summary-breakdown">0.40% x ' + money(c.gmv) + '. Shopify Protect covers eligible Shop Pay US orders only.</div>' +
+      '<div class="summary-actions"><a class="btn-secondary" href="https://stripe.com/radar" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="stripe-payments" data-cta-location="summary-card">View Stripe Radar &rarr;</a> <a class="summary-audit-link" href="https://help.shopify.com/en/manual/payments/shopify-protect" target="_blank" rel="noopener">Shopify Protect</a></div>' +
     '</div>';
   const rows = [
     ['Chargeflow Pay-On-Performance', '$0 a month, then 25% of recovered dispute dollars', money(c.successFee) + ' success fee, ' + money(c.netRecovered) + ' net recovered', '2-click Stripe and Shopify connection. $0 evidence prep. The 65% win rate is a planning benchmark, not a promise.', '%%CF%%', 'chargeflow', 'View Chargeflow'],
     ['Stripe Chargeback Protection (0.40% of GMV)', '0.40% of yearly sales, disputes or not', money(c.radar) + ' a year', 'Charged on 100% of sales. Not a claim that Radar for Fraud Teams only has this price.', 'https://stripe.com/radar', 'stripe-payments', 'View Stripe Radar'],
-    ['Shopify Protect', '$0 on eligible Shop Pay orders in the US', 'No dollar fee in this model', 'Does not cover a standard card gateway or PayPal dispute.', 'https://help.shopify.com/en/manual/payments/shopify-protect', 'shopify', 'View Shopify Protect'],
+    ['Shopify Protect', '$0 on eligible Shop Pay orders in the US', 'No dollar fee in this model', 'Does not cover a standard card gateway or PayPal dispute, so it is not scored as the winner for the whole volume.', 'https://help.shopify.com/en/manual/payments/shopify-protect', 'shopify', 'View Shopify Protect'],
+    ['Pre-dispute alerts (Ethoca, Verifi RDR, Chargeblast)', 'Per alert, quoted', 'Not priced in this model', 'Listed so the comparison is not limited to one recovery vendor. Alert fees vary and are not used to pick the dollar winner.', 'https://www.chargeblast.com/', 'chargeblast', 'View Chargeblast'],
     ['Manual In-House Dispute Handling', 'Staff time at $30 per dispute plus about a 20% win rate', money(c.manualLoss) + ' total annual drain', 'Gross recovered ' + money(c.manualGross) + '. Evidence prep ' + money(c.manualOps) + '. Lost sales ' + money(c.manualLost) + '.', 'https://docs.stripe.com/disputes', 'stripe-payments', 'Read dispute docs']
   ];
   document.getElementById('cb-tbody').innerHTML = rows.map(function(r) {
@@ -381,7 +404,7 @@ def build():
         ),
         (
             "What does Chargeflow charge?",
-            "In this model Chargeflow has a $0 monthly fee and a $0 setup fee, then 25% of the dispute dollars it recovers, and $0 evidence prep. The 65% recovery figure is a planning benchmark so you can audit the fee. It is not a guaranteed win rate.",
+            "In this model a pay-on-performance tool such as Chargeflow has a $0 monthly fee and a $0 setup fee, then 25% of the dispute dollars it recovers. It does not refund the processor's $15 to $20 dispute fee when a dispute is lost. The 65% figure is a planning benchmark. Actual recovery varies by dispute reason code.",
         ),
         (
             "Why compare a 0.40% fee on all sales?",

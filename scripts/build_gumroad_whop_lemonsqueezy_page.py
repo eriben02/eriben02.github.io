@@ -356,14 +356,14 @@ function updateTr() {{
       <div class="summary-breakdown">${{rows.map(r => r.name + ' ' + trFmt(r.total * 12) + ' fees').join(' &middot; ')}}. Disputed sales ${{trFmt(cf.disputedYr)}}/yr, plus ${{trFmt(cf.feeYr)}}/yr in $15 dispute fees on Lemon Squeezy and Whop.</div>
       <p class="summary-caveat"><strong>Hidden Cost Highlight:</strong> The biggest fee most sellers miss here is ${{big.name}}'s ${{big.hiddenText}}: ${{trFmt(big.hidden)}}/mo (${{trFmt(big.hidden * 12)}}/yr, ${{bigPct}}% of ${{big.name}}'s fees).</p>
     </div>
-    <div class="summary-card result-card card-lowest">
-      <div class="summary-label">Dispute recovery: Chargeflow</div>
+    <div class="summary-card result-card">
+      <div class="summary-label">Add-on: dispute recovery</div>
       <div class="summary-metric">${{trFmt(cf.net)}} / yr net</div>
       <div class="summary-scenario">$0/mo, 25% only on won disputes, 65% planning win rate</div>
       <div class="summary-breakdown">Gross recovered ${{trFmt(cf.recovered)}} minus a ${{trFmt(cf.successFee)}} success fee. The 65% win rate is a planning benchmark.</div>
       <details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">Disputed sales/yr = ${{o.sales.toLocaleString('en-US')}} x ${{o.dispute.toFixed(1)}}% x $${{o.price}} x 12 = ${{trFmt(cf.disputedYr)}}. Lemon Squeezy and Whop dispute fees = ${{trFmt(cf.feeYr)}}/yr. Chargeflow net = 65% recovered, then minus 25%.</div></details>
       <div class="summary-actions">
-        <a id="tr-cf-cta" class="btn-cta" href="https://www.chargeflow.io/" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="chargeflow" data-cta-location="summary-card">Recover ${{trFmt(cf.net)}}/yr in disputes with Chargeflow &rarr;</a>
+        <a id="tr-cf-cta" class="btn-secondary" href="https://www.chargeflow.io/" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="chargeflow" data-cta-location="summary-card">Review dispute recovery (${{trFmt(cf.net)}}/yr net) &rarr;</a>
         <a class="summary-audit-link" href="../../chargeback-fee-and-recovery-calculator/">Open the full chargeback calculator &rarr;</a>
       </div>
     </div>`;

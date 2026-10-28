@@ -16,7 +16,7 @@ class TestChargebackCalculator(unittest.TestCase):
         with open(os.path.join(PUBLIC_DIR, REL), encoding="utf-8") as f:
             html = f.read()
         self.assertIn(
-            "<h1>Stripe &amp; Shopify Chargeback Cost Calculator (2026): Dispute Fees, Lost Revenue &amp; Chargeflow ROI</h1>",
+            "<h1>Stripe, Shopify &amp; Paddle Chargeback Cost Calculator (2026): Dispute Fees, Manual Prep vs. Automated Recovery</h1>",
             html,
         )
         lead = re.search(r'<p class="lead">(.*?)</p>', html, re.S).group(1)
@@ -32,15 +32,18 @@ class TestChargebackCalculator(unittest.TestCase):
         self.assertIn("best-card", html)
         self.assertIn("card-hidden", html)
         self.assertIn("Paddle ($20 dispute fee)", html)
-        self.assertIn("Stripe ($15 dispute fee + $15 counter fee)", html)
-        self.assertIn("Shopify Payments ($15 dispute fee)", html)
+        self.assertIn("Stripe ($15 + $15 counter fee)", html)
+        self.assertIn("Shopify Payments ($15 fee)", html)
+        self.assertIn("Annual Dispute Drain Breakdown", html)
         self.assertIn("Manual In-House Dispute Handling", html)
         self.assertIn("Chargeflow Pay-On-Performance", html)
         self.assertIn("Stripe Chargeback Protection (0.40% of GMV)", html)
         self.assertIn("Baseline (20% Win Rate)", html)
-        self.assertIn("Highest Net Recovery", html)
+        self.assertIn("25% of recovered dollars", html)
         self.assertIn("Flat Volume Fee", html)
-        self.assertIn("Recover $9,126/yr net with Chargeflow (save $10,062/yr vs manual)", html)
+        self.assertIn("Lowest modeled cost", html)
+        self.assertIn("planning benchmark", html)
+        self.assertIn("Chargeblast", html)
         self.assertIn('id="full-table-details"', html)
         self.assertIn("Show calculation", html)
         self.assertIn("math-drawer", html)

@@ -183,13 +183,13 @@ def render_intercom_calculator_body(
     <div class="wb-result-col" id="wb-result-mount" aria-live="polite">
       <div class="wb-selected-product" id="wb-selected-product">{static_product}</div>
       <div class="wb-big-total" id="wb-big-total-wrap"><span id="wb-big-amount">{static_total}</span> <span class="wb-per-year" id="wb-big-unit">/ year</span></div>
-      <p class="wb-budget-quote" id="wb-budget-quote">Estimated Year-1 total including mandatory fees &amp; overages.</p>
-      <p class="wb-budget-subnote" id="wb-budget-subnote">{static_subnote}</p>
-      <div class="wb-best-option" id="wb-best-option">{static_best_html}</div>
       <details class="math-drawer" id="wb-calc-details">
         <summary id="wb-calc-summary">Show calculation</summary>
         <div class="math-drawer-body" id="wb-calc-body"></div>
       </details>
+      <p class="wb-budget-quote" id="wb-budget-quote">Estimated Year-1 total including mandatory fees &amp; overages.</p>
+      <p class="wb-budget-subnote" id="wb-budget-subnote">{static_subnote}</p>
+      <div class="wb-best-option" id="wb-best-option">{static_best_html}</div>
       <div class="cta-stack">
         <a id="wb-primary-cta" class="btn-cta wb-primary-cta" href="https://www.intercom.com/pricing" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="intercom-fin-ai" data-cta-location="workbench">View Intercom pricing &rarr;</a>
       </div>
