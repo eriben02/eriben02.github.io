@@ -687,8 +687,108 @@ function renderDirectory() {{
     const primaryLabel = isZendeskFocus ? 'Zendesk Suite Team + AI ($1.50/Resolution)' : 'Intercom + Fin AI ($0.99/Resolution Meter)';
     const savedVsPrimary = Math.max(0, primaryR.year1Total - minR.year1Total);
     const minCtaText = getContextualCtaLabel(minR.tool, minR.year1Total, primaryR.year1Total, false);
+    const money = n => '$' + Math.round(n).toLocaleString();
+    let headToHeadHtml = '';
+    if (COMPARE_MODE === 'intercom_vs_freshdesk') {{
+      const gap = icR.year1Total - fdR.year1Total;
+      const save = Math.abs(gap);
+      const pct = icR.year1Total > 0 ? Math.round((save / Math.max(icR.year1Total, 1)) * 100) : 0;
+      const cheaperName = gap >= 0 ? 'Freshdesk' : 'Intercom';
+      headToHeadHtml = `
+      <div class="summary-card result-card card-lowest">
+        <div class="summary-label">Lowest Year-1 Cost: Freshdesk</div>
+        <div class="summary-metric" style="color:var(--emerald);">${{money(fdR.year1Total)}} / yr &middot; Freshdesk</div>
+        <div class="summary-scenario">${{scenarioLine}}</div>
+        <div class="summary-breakdown">${{money(fdR.annualSeatsCost)}} licenses + ${{money(fdR.aiAnnual)}} Freddy AI sessions</div>
+        <div class="summary-caveat"><strong>Contract note:</strong> Freshdesk (Freddy AI) bills $49 per 100 sessions after 500 one-time free sessions.</div>
+        <details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">${{renderCalcBreakdownHtml(fdR, seats, aiVol, mode)}}</div></details>
+        <div class="summary-actions"><div class="cta-stack"><a class="btn-cta" href="${{fdAff.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="freshdesk-support" data-cta-location="summary-card">${{getVendorCtaLabel(fdR.tool)}}</a></div></div>
+      </div>
+      <div class="summary-card result-card card-hidden">
+        <div class="summary-label">Intercom + Fin AI ($0.99/resolution)</div>
+        <div class="summary-metric" style="color:var(--rose);">${{money(icR.year1Total)}} / yr &middot; Intercom</div>
+        <div class="summary-scenario">${{scenarioLine}}</div>
+        <div class="summary-breakdown">${{money(icR.annualSeatsCost)}} licenses + ${{money(icR.aiAnnual)}} Fin AI</div>
+        <div class="summary-caveat"><strong>Contract note:</strong> Intercom (Fin AI) meters $0.99 per resolution on top of the seat price.</div>
+        <details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">${{renderCalcBreakdownHtml(icR, seats, aiVol, mode)}}</div></details>
+        <div class="summary-actions"><div class="cta-stack"><a class="btn-secondary" href="${{AFFILIATES[icR.tool.affiliate_slug].destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="intercom-fin-ai" data-cta-location="summary-card">${{getVendorCtaLabel(icR.tool)}}</a></div></div>
+      </div>
+      <div class="summary-card result-card card-highest">
+        <div class="summary-label">Head-to-Head Gap: Intercom vs. Freshdesk</div>
+        <div class="summary-metric">${{cheaperName}} saves ${{money(save)}}/yr (${{pct}}%)</div>
+        <div class="summary-scenario">${{money(icR.year1Total)}} Intercom vs. ${{money(fdR.year1Total)}} Freshdesk at these sliders</div>
+        <div class="summary-breakdown">Hidden cost gap on Intercom is ${{money(icR.hiddenFees)}}. Hidden cost gap on Freshdesk is ${{money(fdR.hiddenFees)}}.</div>
+        <div class="summary-caveat"><strong>Head-to-head:</strong> ${{cheaperName}} is the lower Year-1 bill. The table below still lists every helpdesk tool.</div>
+        <details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">${{renderCalcBreakdownHtml(gap >= 0 ? icR : fdR, seats, aiVol, mode)}}</div></details>
+        <div class="summary-actions"><div class="cta-stack"><a class="btn-secondary" href="${{fdAff.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="freshdesk-support" data-cta-location="summary-card">Compare Freshdesk pricing &rarr;</a></div></div>
+      </div>`;
+    }} else if (COMPARE_MODE === 'intercom_vs_zendesk') {{
+      const zdWins = zdTeamR.year1Total < icR.year1Total;
+      const winner = zdWins ? 'Zendesk' : 'Intercom';
+      const gap = Math.abs(zdTeamR.year1Total - icR.year1Total);
+      headToHeadHtml = `
+      <div class="summary-card result-card card-lowest">
+        <div class="summary-label">Head-to-Head Winner: ${{winner}}</div>
+        <div class="summary-metric" style="color:var(--emerald);">${{money(icR.year1Total)}}/yr vs. Zendesk ${{money(zdTeamR.year1Total)}}/yr</div>
+        <div class="summary-scenario">${{scenarioLine}} &middot; ${{winner}} saves ${{money(gap)}}/yr</div>
+        <div class="summary-breakdown">${{money(icR.annualSeatsCost)}} Intercom licenses + ${{money(icR.aiAnnual)}} Fin AI</div>
+        <div class="summary-caveat"><strong>Contract note:</strong> Intercom Fin is $0.99 per resolution on a $29/seat Essential base in this model.</div>
+        <details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">${{renderCalcBreakdownHtml(icR, seats, aiVol, mode)}}</div></details>
+        <div class="summary-actions"><div class="cta-stack"><a class="btn-cta" href="${{AFFILIATES[icR.tool.affiliate_slug].destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="intercom-fin-ai" data-cta-location="summary-card">${{getVendorCtaLabel(icR.tool)}}</a></div></div>
+      </div>
+      <div class="summary-card result-card card-hidden">
+        <div class="summary-label">Zendesk Suite + AI ($55/seat + $1.50/resolution)</div>
+        <div class="summary-metric" style="color:var(--rose);">${{money(zdTeamR.year1Total)}} / yr &middot; Zendesk</div>
+        <div class="summary-scenario">${{scenarioLine}}</div>
+        <div class="summary-breakdown">${{money(zdTeamR.annualSeatsCost)}} licenses + ${{money(zdTeamR.aiAnnual)}} resolution overage</div>
+        <div class="summary-caveat"><strong>Contract note:</strong> Suite Pro is $115/seat plus a separate $50/seat Copilot add-on, then $1.50 per resolution over the included allowance. This card is Suite Team and does not add Copilot.</div>
+        <details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">${{renderCalcBreakdownHtml(zdTeamR, seats, aiVol, mode)}}</div></details>
+        <div class="summary-actions"><div class="cta-stack"><a class="btn-secondary" href="${{zdAff.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="zendesk-suite-team" data-cta-location="summary-card">${{getVendorCtaLabel(zdTeamR.tool)}}</a></div></div>
+      </div>
+      <div class="summary-card result-card card-highest">
+        <div class="summary-label">Lowest-Cost Alternative: Freshdesk</div>
+        <div class="summary-metric">${{money(fdR.year1Total)}} / yr &middot; Freshdesk</div>
+        <div class="summary-scenario">${{scenarioLine}}</div>
+        <div class="summary-breakdown">${{money(fdR.annualSeatsCost)}} licenses + ${{money(fdR.aiAnnual)}} Freddy AI sessions</div>
+        <div class="summary-caveat"><strong>Contract note:</strong> Freshdesk stays in the table as the lower-cost helpdesk alternative.</div>
+        <details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">${{renderCalcBreakdownHtml(fdR, seats, aiVol, mode)}}</div></details>
+        <div class="summary-actions"><div class="cta-stack"><a class="btn-secondary" href="${{fdAff.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="freshdesk-support" data-cta-location="summary-card">${{getVendorCtaLabel(fdR.tool)}}</a></div></div>
+      </div>`;
+    }} else if (COMPARE_MODE === 'zendesk_vs_freshdesk') {{
+      const gap = zdTeamR.year1Total - fdR.year1Total;
+      const save = Math.abs(gap);
+      const cheaperName = gap >= 0 ? 'Freshdesk' : 'Zendesk';
+      headToHeadHtml = `
+      <div class="summary-card result-card card-lowest">
+        <div class="summary-label">Lowest Year-1 Cost: Freshdesk</div>
+        <div class="summary-metric" style="color:var(--emerald);">${{money(fdR.year1Total)}} / yr</div>
+        <div class="summary-scenario">${{scenarioLine}}</div>
+        <div class="summary-breakdown">${{money(fdR.annualSeatsCost)}} licenses + ${{money(fdR.aiAnnual)}} Freddy AI sessions</div>
+        <div class="summary-caveat"><strong>Contract note:</strong> Freshdesk (Freddy AI) uses session packs, not a per-resolution meter.</div>
+        <details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">${{renderCalcBreakdownHtml(fdR, seats, aiVol, mode)}}</div></details>
+        <div class="summary-actions"><div class="cta-stack"><a class="btn-cta" href="${{fdAff.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="freshdesk-support" data-cta-location="summary-card">${{getVendorCtaLabel(fdR.tool)}}</a></div></div>
+      </div>
+      <div class="summary-card result-card card-hidden">
+        <div class="summary-label">Zendesk Suite + AI</div>
+        <div class="summary-metric" style="color:var(--rose);">${{money(zdTeamR.year1Total)}} / yr</div>
+        <div class="summary-scenario">${{scenarioLine}}</div>
+        <div class="summary-breakdown">${{money(zdTeamR.annualSeatsCost)}} licenses + ${{money(zdTeamR.aiAnnual)}} resolution overage</div>
+        <div class="summary-caveat"><strong>Contract note:</strong> Zendesk Suite + Advanced AI bills included resolutions, then $1.50 committed or $2.00 monthly.</div>
+        <details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">${{renderCalcBreakdownHtml(zdTeamR, seats, aiVol, mode)}}</div></details>
+        <div class="summary-actions"><div class="cta-stack"><a class="btn-secondary" href="${{zdAff.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="zendesk-suite-team" data-cta-location="summary-card">${{getVendorCtaLabel(zdTeamR.tool)}}</a></div></div>
+      </div>
+      <div class="summary-card result-card card-highest">
+        <div class="summary-label">Head-to-Head Savings: Save ${{money(save)}}/yr with ${{cheaperName}}</div>
+        <div class="summary-metric">${{cheaperName}} vs. ${{gap >= 0 ? 'Zendesk' : 'Freshdesk'}}</div>
+        <div class="summary-scenario">${{money(fdR.year1Total)}} Freshdesk vs. ${{money(zdTeamR.year1Total)}} Zendesk</div>
+        <div class="summary-breakdown">Hidden cost gap: Freshdesk ${{money(fdR.hiddenFees)}}, Zendesk ${{money(zdTeamR.hiddenFees)}}.</div>
+        <div class="summary-caveat"><strong>Head-to-head:</strong> ${{cheaperName}} is lower at these sliders. Ticket history can be exported from either helpdesk.</div>
+        <details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">${{renderCalcBreakdownHtml(fdR, seats, aiVol, mode)}}</div></details>
+        <div class="summary-actions"><div class="cta-stack"><a class="btn-secondary" href="${{fdAff.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="freshdesk-support" data-cta-location="summary-card">View Freshdesk pricing &rarr;</a></div></div>
+      </div>`;
+    }}
 
-    summaryEl.innerHTML = `
+    summaryEl.innerHTML = headToHeadHtml || `
       <div class="summary-card result-card card-lowest">
         <div class="summary-label">Best Value &middot; Lowest Year-1 Cost</div>
         <div class="summary-metric" style="color:var(--emerald);">$${{minR.year1Total.toLocaleString()}} / yr &middot; ${{minR.tool.name}}</div>
@@ -969,8 +1069,10 @@ def build_all():
             lead="Compare what Intercom Fin and Freshdesk Freddy AI actually cost for your support team. Adjust the agents and AI volume below to see the real Year-1 total and exact savings side by side.",
             compare_mode="intercom_vs_freshdesk",
             page_id="intercom-vs-freshdesk-cost-comparison",
+            calc_heading="Intercom vs. Freshdesk Year-1 Cost &amp; AI Resolution Calculator (2026)",
+            editorial_html=IF_EDITORIAL,
         ),
-        faqs=ic_faqs,
+        faqs=if_faqs,
     )
     render_page(
         "intercom-vs-zendesk-cost-comparison/index.html",
@@ -983,8 +1085,10 @@ def build_all():
             lead="Compare what Intercom Fin and Zendesk AI actually cost for your support team. Adjust the agents and AI volume below to see the real Year-1 total, per-resolution overages, and lower-cost alternatives.",
             compare_mode="intercom_vs_zendesk",
             page_id="intercom-vs-zendesk-cost-comparison",
+            calc_heading="Intercom vs. Zendesk Year-1 Cost &amp; AI Resolution Calculator (2026)",
+            editorial_html=IZ_EDITORIAL,
         ),
-        faqs=ic_faqs,
+        faqs=iz_faqs,
     )
 
 
@@ -1031,7 +1135,7 @@ zd_faqs = [
 ]
 
 
-def _zendesk_body(prefix, h1, lead, compare_mode, page_id, legacy_summary_id):
+def _zendesk_body(prefix, h1, lead, compare_mode, page_id, legacy_summary_id, calc_heading=None, editorial_html=None):
     return render_intercom_calculator_body(
         prefix=prefix,
         h1=h1,
@@ -1040,8 +1144,8 @@ def _zendesk_body(prefix, h1, lead, compare_mode, page_id, legacy_summary_id):
         page_id=page_id,
         spotlight_id="zendesk-suite-team",
         legacy_summary_id=legacy_summary_id,
-        editorial_html=ZENDESK_EDITORIAL,
-        calc_heading="Interactive Zendesk AI Year-1 True-Cost Calculator (2026)",
+        editorial_html=editorial_html or ZENDESK_EDITORIAL,
+        calc_heading=calc_heading or "Interactive Zendesk AI Year-1 True-Cost Calculator (2026)",
         gap_sub="Visual Year-1 cost comparison graph &amp; full contract table (Zendesk AI vs. Freshdesk, Intercom, Help Scout &amp; HubSpot)",
         static_product="Zendesk Suite Team + AI Agents",
         static_total="$32,700",
@@ -1088,9 +1192,117 @@ def build_zendesk_cluster():
             "zendesk_vs_freshdesk",
             "zendesk-vs-freshdesk-cost-comparison",
             "zd-summary",
+            calc_heading="Zendesk vs. Freshdesk Year-1 Cost &amp; AI Resolution Calculator (2026)",
+            editorial_html=ZF_EDITORIAL,
         ),
-        faqs=zd_faqs,
+        faqs=zf_faqs,
     )
+
+
+IF_EDITORIAL = """
+<section class="editorial-below-section">
+  <h2>Why Intercom ($21,300/yr) costs nearly 2x Freshdesk ($10,855/yr) at 1,500 AI resolutions/month</h2>
+  <div class="methodology-grid fine-print-grid">
+    <div class="methodology-item">
+      <strong>1. Per resolution vs. per 100 sessions</strong>
+      Intercom Fin bills $0.99 every time a conversation counts as resolved. Freshdesk Freddy AI includes 500 one-time sessions, then $49 per 100-session pack, which is about $0.49 a session.
+    </div>
+    <div class="methodology-item">
+      <strong>2. The default 10-agent gap is $10,445</strong>
+      At 10 agents and 1,500 AI resolutions a month on annual billing, Intercom Essential plus Fin is $21,300. Freshdesk Growth plus Freddy session packs is $10,855. Move the sliders and the three cards recompute that gap.
+    </div>
+    <div class="methodology-item">
+      <strong>3. When the Intercom premium is the point</strong>
+      Teams pay it for the Fin inbox, messenger, and help center in one product. If the job is ticket deflection at a known session price, Freshdesk stays lower at this volume.
+    </div>
+  </div>
+</section>
+"""
+
+IZ_EDITORIAL = """
+<section class="editorial-below-section">
+  <h2>Why Zendesk ($32,700/yr) costs $11,400/yr more than Intercom ($21,300/yr) at 10 seats</h2>
+  <div class="methodology-grid fine-print-grid">
+    <div class="methodology-item">
+      <strong>1. Seat price plus a thin included allowance</strong>
+      This comparison uses Zendesk Suite Team at $55/agent/month annual, with 5 automated resolutions per agent each month, then $1.50 committed. Intercom Essential is $29/seat plus $0.99 per Fin resolution.
+    </div>
+    <div class="methodology-item">
+      <strong>2. The $11,400 gap at the default sliders</strong>
+      10 agents and 1,500 resolutions a month is $21,300 on Intercom and $32,700 on Suite Team. Suite Pro is a different plan at $115/seat, and the $50/seat Copilot add-on is not inside either total.
+    </div>
+    <div class="methodology-item">
+      <strong>3. Freshdesk is the lower third option</strong>
+      The same usage on Freshdesk Growth plus Freddy AI is $10,855. It stays in the table so the head-to-head is not only Intercom versus Zendesk.
+    </div>
+  </div>
+</section>
+"""
+
+ZF_EDITORIAL = """
+<section class="editorial-below-section">
+  <h2>How Freshdesk saves $21,845 in Year 1 compared to Zendesk Suite Professional + AI</h2>
+  <div class="methodology-grid fine-print-grid">
+    <div class="methodology-item">
+      <strong>1. Seat price</strong>
+      Freshdesk Growth is $19 per agent per month billed annually. Zendesk Suite Team in this calculator is $55. Suite Professional is $115, and Copilot is another $50 per agent if you add it.
+    </div>
+    <div class="methodology-item">
+      <strong>2. Freddy sessions vs. Zendesk resolutions</strong>
+      Freshdesk bills $49 per 100 Freddy sessions after 500 one-time free sessions. Zendesk includes a small monthly allowance, then $1.50 committed or $2.00 on monthly billing.
+    </div>
+    <div class="methodology-item">
+      <strong>3. The default savings are $21,845</strong>
+      At 10 agents and 1,500 AI resolutions a month, Freshdesk is $10,855 and Suite Team is $32,700. Ticket exports exist on both, so the Year-1 gap is the number to compare before a migration.
+    </div>
+  </div>
+</section>
+"""
+
+if_faqs = [
+    (
+        "How does Freshdesk's per-100-session price compare with Intercom's $0.99 resolution?",
+        "Intercom Fin bills $0.99 once per conversation that counts as resolved. Freshdesk Freddy AI Agent includes 500 one-time sessions, then $49 per 100-session pack (about $0.49 a session), and those packs are charged per session whether or not the customer marks it resolved.",
+    ),
+    (
+        "Is Freddy AI Copilot the same line item as Intercom Fin?",
+        "No. Freddy AI Copilot is an optional $29 per agent per month add-on for human agents. The $10,855 Year-1 figure at 10 agents and 1,500 resolutions is Growth seats plus Freddy session packs, not Copilot. Intercom's $21,300 figure is Essential seats plus the $0.99 Fin meter.",
+    ),
+    (
+        "When is Intercom worth the premium over Freshdesk?",
+        "At the default 10 agents and 1,500 AI resolutions a month, Intercom is $21,300 and Freshdesk is $10,855, a $10,445 gap. Intercom is the premium when you want Fin, the messenger, and the help center in one suite. Freshdesk is the lower bill when you want a known session-pack price.",
+    ),
+]
+
+iz_faqs = [
+    (
+        "What is Intercom Fin's price on a $29 seat versus Zendesk's seat plus AI add-on?",
+        "Intercom Essential is $29 per seat per month on annual billing, plus $0.99 per Fin resolution. Zendesk Suite Team in this calculator is $55 per agent with 5 included automated resolutions per agent each month, then $1.50 committed. Suite Pro is $115 per seat, and Copilot is a separate $50 per agent per month. Neither Copilot nor the Suite Pro seat price is inside the $32,700 Suite Team total.",
+    ),
+    (
+        "Why is Zendesk $11,400 a year more than Intercom at 10 seats and 1,500 resolutions?",
+        "Suite Team seats for 10 agents are $6,600. Included resolutions are 50 a month, so 1,450 resolutions at $1.50 add $26,100, for $32,700. Intercom Essential seats are $3,480 and 1,500 Fin resolutions at $0.99 add $17,820, for $21,300. The difference is $11,400.",
+    ),
+    (
+        "Does the $1.50 Zendesk overage replace the $50 Copilot add-on?",
+        "No. The $1.50 is the committed per-resolution rate after the included allowance. Copilot is listed separately at $50 per agent per month on annual billing, which would be another $6,000 a year for 10 agents and is not in the $32,700.",
+    ),
+]
+
+zf_faqs = [
+    (
+        "How do Zendesk and Freshdesk seat prices compare before AI?",
+        "Freshdesk Growth is $19 per agent per month billed annually ($2,280 a year for 10 agents). Zendesk Suite Team is $55 ($6,600). Suite Professional is $115 ($13,800) before any resolution overage or the $50 Copilot add-on.",
+    ),
+    (
+        "How do Freddy AI sessions differ from Zendesk automated resolutions?",
+        "Freddy AI Agent includes 500 one-time sessions, then $49 per 100 sessions. Zendesk includes 5 automated resolutions per Suite Team agent each month (10 on Suite Professional) and then bills $1.50 committed or $2.00 pay-as-you-go. At 1,500 resolutions a month those meters, not the seat price alone, create most of the Year-1 gap.",
+    ),
+    (
+        "Can you move tickets if you switch from Zendesk to Freshdesk?",
+        "Both products expose ticket export. Freshdesk documents ticket XML, CSV, and API export. A migration still needs a field map and a cutover window, but the Year-1 price gap at 10 agents and 1,500 resolutions is $21,845 ($10,855 on Freshdesk versus $32,700 on Suite Team) before you add that project time.",
+    ),
+]
 
 
 if __name__ == "__main__":

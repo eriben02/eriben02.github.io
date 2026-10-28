@@ -208,3 +208,4 @@ assert.strictEqual(payCf.b, 0);
 assert.strictEqual(payCf.s, 0);
 
 console.log("ok payment calculators: reserve net $1,901, stripe billing net $1,170, stripe vs paddle net $1,462");
+require(path.join(root, "tests/test_calculator_scenarios.js")).main();

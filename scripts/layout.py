@@ -76,6 +76,39 @@ def render_related_links(rel_path, prefix):
         ]
     elif rel_path in payment_rels:
         preferred = [chargeback_rel] + [rel for rel, _, _ in all_links if rel in payment_rels and rel != chargeback_rel]
+    elif rel_path in {
+        "intercom-fin-cost-calculator/index.html",
+        "pricing/intercom-fin-ai-resolution-cost-calculator/index.html",
+        "faq/intercom-fin-ai-cost-calculator/index.html",
+        "intercom-vs-freshdesk-cost-comparison/index.html",
+        "intercom-vs-zendesk-cost-comparison/index.html",
+        "zendesk-ai-cost-calculator/index.html",
+        "pricing/zendesk-ai-resolution-and-automated-outcome-cost/index.html",
+        "zendesk-vs-freshdesk-cost-comparison/index.html",
+    }:
+        helpdesk_order = [
+            "intercom-fin-cost-calculator/index.html",
+            "zendesk-ai-cost-calculator/index.html",
+            "intercom-vs-freshdesk-cost-comparison/index.html",
+            "intercom-vs-zendesk-cost-comparison/index.html",
+            "zendesk-vs-freshdesk-cost-comparison/index.html",
+        ]
+        helpdesk_same = {
+            "intercom-fin-cost-calculator/index.html": {
+                "intercom-fin-cost-calculator/index.html",
+                "pricing/intercom-fin-ai-resolution-cost-calculator/index.html",
+                "faq/intercom-fin-ai-cost-calculator/index.html",
+            },
+            "zendesk-ai-cost-calculator/index.html": {
+                "zendesk-ai-cost-calculator/index.html",
+                "pricing/zendesk-ai-resolution-and-automated-outcome-cost/index.html",
+            },
+        }
+        skip = {rel_path}
+        for group in helpdesk_same.values():
+            if rel_path in group:
+                skip = set(group)
+        preferred = [rel for rel in helpdesk_order if rel not in skip]
     else:
         preferred = [rel for rel, _, _ in all_links]
     cards = []
@@ -276,6 +309,7 @@ def render_page(rel_path, title, description, canonical_path, body_html, faqs=No
         window.plausible(eventName, {{ props: p }});
       }}
     }};
+    window.trackEvent = window.trackSaaSBillEvent;
   </script>
   {schema_block}
 </head>

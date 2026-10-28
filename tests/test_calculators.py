@@ -1147,6 +1147,17 @@ class TestSaaSBillCalculators(unittest.TestCase):
         self.assertIn("./exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/", home)
         self.assertIn("ZoomInfo 60-Day Auto-Renewal Notice", home)
 
+    def test_three_scenario_suite_and_plausible_events(self):
+        """Zero, normal, and high scenarios for every calculator, plus the Plausible dispatcher."""
+        res = subprocess.run(
+            ["node", os.path.join(BASE_DIR, "tests", "test_calculator_scenarios.js")],
+            cwd=BASE_DIR,
+            capture_output=True,
+            text=True,
+        )
+        self.assertEqual(res.returncode, 0, (res.stdout or "") + (res.stderr or ""))
+        self.assertIn("ok calculator scenarios", res.stdout)
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
