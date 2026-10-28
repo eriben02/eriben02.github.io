@@ -72,7 +72,20 @@ assert.strictEqual(c.cfLost, 6552);
 assert.strictEqual(c.cfOps, 0);
 assert.strictEqual(c.cfLoss, 11934);
 assert.strictEqual(c.savings, 10062);
-assert.strictEqual(c.radar, 11520);
+assert.strictEqual(c.radarFee, 11520);
+assert.strictEqual(c.nonFraudDisputes, 47);
+assert.strictEqual(c.fraudDisputes, 109);
+assert.strictEqual(c.nonFraudDisputed, 5640);
+assert.strictEqual(c.nonFraudLost, 4512);
+assert.strictEqual(c.nonFraudFees, 705);
+assert.strictEqual(c.nonFraudOps, 1410);
+assert.strictEqual(c.nonFraudDrain, 6627);
+assert.strictEqual(c.radarLoss, 18147);
+assert.strictEqual(c.radar, 18147);
+assert.ok(c.cfLoss < c.radar);
+
+const severe = sandbox.calcChargeback({ orders: 2000, aov: 120, rate: 0.02, fee: 15 });
+assert.ok(severe.radar < severe.cfLoss, "at a 2% dispute rate the 0.40% path should cost less than pay-on-performance");
 assert.strictEqual(c.cfWin, 0.65);
 assert.strictEqual(c.manualWin, 0.2);
 
