@@ -89,9 +89,9 @@ BODY = r"""
     </div>
   </div>
 
-  <details class="calc-disclosure" id="hs-calc-details" style="margin-top:12px;">
-    <summary class="calc-disclosure-toggle">See exactly how we calculated this</summary>
-    <div class="calc-disclosure-body" id="hs-calc-body"></div>
+  <details class="math-drawer" id="hs-calc-details">
+    <summary>Show calculation</summary>
+    <div class="math-drawer-body" id="hs-calc-body"></div>
   </details>
 
   <div id="hs-summary" class="ebc-action-strip">

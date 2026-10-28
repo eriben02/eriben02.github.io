@@ -87,9 +87,9 @@ body = """
   <p id="zi-deadline-note" style="margin-top:6px;">Based on a contract ending June 30, 2027 and 60 days of written notice. Send notice on or before this date.</p>
   <p id="zi-hidden" style="margin-top:8px;"><strong>Hidden Cost Highlight:</strong> On a $20,000 annual fee with no discount, the March 6, 2024 formula prices the extension at $22,000 per year ($2,000 of that is the 10%).</p>
 
-  <details class="calc-disclosure" id="zi-calc-details" style="margin-top:14px;">
-    <summary class="calc-disclosure-toggle">See exactly how we calculated this</summary>
-    <div class="calc-disclosure-body" id="zi-calc-body">
+  <details class="math-drawer" id="zi-calc-details">
+    <summary>Show calculation</summary>
+    <div class="math-drawer-body" id="zi-calc-body">
       <div class="calc-math-list">
         <div class="calc-math-row"><span class="calc-math-label"><strong>Annualized fee (your number)</strong><span class="calc-math-formula">$20,000 x 1 year</span></span><span class="calc-math-val">$20,000</span></div>
         <div class="calc-math-row"><span class="calc-math-label"><strong>Plus 10% of the annualized fee</strong><span class="calc-math-formula">$2,000 x 1 year</span></span><span class="calc-math-val">$2,000</span></div>
@@ -127,7 +127,7 @@ body = """
       <div class="ebc-val-col"><span class="ebc-val-main">$22,000</span><span class="ebc-val-sub">per year</span></div>
     </div>
   </div>
-  <p id="zi-chart-note" class="ebc-footer-note" style="margin-top:12px;"></p>
+  <p id="zi-chart-note" class="ebc-footer-note"></p>
 </section>
 
 <section class="hidden-gap-section" aria-labelledby="zi-table-heading">

@@ -172,9 +172,9 @@ function updateReserveSim() {
       <div class="summary-scenario">${scenarioLine}</div>
       <div class="summary-breakdown">$${frozenMo.toLocaleString()}/mo in a ${resPct}% reserve, plus $${cb.drain.toLocaleString()}/yr dispute drain (${cb.disputesYr.toLocaleString()} disputes: $${cb.disputed.toLocaleString()} disputed + $${cb.fees.toLocaleString()} fees + $${cb.prep.toLocaleString()} prep).</div>
       <p class="summary-caveat"><strong>Hidden Cost Highlight:</strong> The reserve withholds ${heldPct}% of gross payouts ($${tempHeld.toLocaleString()}/mo including the capital deduction) and is a cash hold, not a fee. ${trigger}</p>
-      <details class="calc-disclosure">
-        <summary class="calc-disclosure-toggle">See calculation</summary>
-        <div class="calc-disclosure-body">Reserve = ${resPct}% x $${rev.toLocaleString()} = $${frozenMo.toLocaleString()}/mo. Capital deduction = ${capPct}% x $${rev.toLocaleString()} = $${loanDed.toLocaleString()}/mo. Orders/mo = volume / $100. Disputes/yr = orders/mo x ${disputePct.toFixed(2)}% x 12 = ${cb.disputesYr.toLocaleString()}. Disputed sales $${cb.disputed.toLocaleString()} + fees $${cb.fees.toLocaleString()} + prep $${cb.prep.toLocaleString()} = $${cb.drain.toLocaleString()}/yr.</div>
+      <details class="math-drawer">
+        <summary>Show calculation</summary>
+        <div class="math-drawer-body">Reserve = ${resPct}% x $${rev.toLocaleString()} = $${frozenMo.toLocaleString()}/mo. Capital deduction = ${capPct}% x $${rev.toLocaleString()} = $${loanDed.toLocaleString()}/mo. Orders/mo = volume / $100. Disputes/yr = orders/mo x ${disputePct.toFixed(2)}% x 12 = ${cb.disputesYr.toLocaleString()}. Disputed sales $${cb.disputed.toLocaleString()} + fees $${cb.fees.toLocaleString()} + prep $${cb.prep.toLocaleString()} = $${cb.drain.toLocaleString()}/yr.</div>
       </details>
     </div>
     <div class="summary-card result-card card-lowest best-card">
@@ -182,9 +182,9 @@ function updateReserveSim() {
       <div class="summary-metric">$${netCash.toLocaleString()} / mo net</div>
       <div class="summary-scenario">${scenarioLine}</div>
       <div class="summary-breakdown">$${rev.toLocaleString()} gross minus $${procFee.toLocaleString()} processing (2.9%) minus $${tempHeld.toLocaleString()} temporarily held = $${netCash.toLocaleString()} net. Chargeflow keeps $${cb.netRecovered.toLocaleString()}/yr after a 25% success fee.</div>
-      <details class="calc-disclosure">
-        <summary class="calc-disclosure-toggle">See calculation</summary>
-        <div class="calc-disclosure-body">Net payout = $${rev.toLocaleString()} - $${procFee.toLocaleString()} - $${frozenMo.toLocaleString()} reserve - $${loanDed.toLocaleString()} capital = $${netCash.toLocaleString()}/mo. Chargeflow: 65% of $${cb.disputed.toLocaleString()} = $${cb.recovered.toLocaleString()} recovered, minus 25% ($${cb.successFee.toLocaleString()}) = $${cb.netRecovered.toLocaleString()} net. $0 monthly fee. The 65% win rate is a planning benchmark. Whop is the multi-processor failover if one rail freezes.</div>
+      <details class="math-drawer">
+        <summary>Show calculation</summary>
+        <div class="math-drawer-body">Net payout = $${rev.toLocaleString()} - $${procFee.toLocaleString()} - $${frozenMo.toLocaleString()} reserve - $${loanDed.toLocaleString()} capital = $${netCash.toLocaleString()}/mo. Chargeflow: 65% of $${cb.disputed.toLocaleString()} = $${cb.recovered.toLocaleString()} recovered, minus 25% ($${cb.successFee.toLocaleString()}) = $${cb.netRecovered.toLocaleString()} net. $0 monthly fee. The 65% win rate is a planning benchmark. Whop is the multi-processor failover if one rail freezes.</div>
       </details>
       <div class="summary-actions">
         <a class="btn-cta" href="https://www.chargeflow.io/" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="chargeflow" data-cta-location="summary-card">Recover $${cb.netRecovered.toLocaleString()}/yr &amp; prevent reserves with Chargeflow &rarr;</a>
@@ -197,9 +197,9 @@ function updateReserveSim() {
       <div class="summary-metric">Tokens stay with Paddle</div>
       <div class="summary-scenario">Based on Paddle as merchant of record versus Stripe token export</div>
       <div class="summary-breakdown">Stripe can export PGP-encrypted card tokens. Paddle is the seller of record, so the vault cannot move with you if the account is closed.</div>
-      <details class="calc-disclosure">
-        <summary class="calc-disclosure-toggle">See calculation</summary>
-        <div class="calc-disclosure-body">At $50,000/mo the comparison table uses about $2,325/mo in Stripe fees with portable tokens, and about $3,450/mo in Paddle fees with a non-exportable vault. A reserve or termination on the MoR does not hand the card tokens back. Stripe's export is unavailable if the account is terminated for fraud.</div>
+      <details class="math-drawer">
+        <summary>Show calculation</summary>
+        <div class="math-drawer-body">At $50,000/mo the comparison table uses about $2,325/mo in Stripe fees with portable tokens, and about $3,450/mo in Paddle fees with a non-exportable vault. A reserve or termination on the MoR does not hand the card tokens back. Stripe's export is unavailable if the account is terminated for fraud.</div>
       </details>
       <div class="summary-actions">
         <a class="btn-secondary" href="https://www.paddle.com/pricing" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="paddle-mor" data-cta-location="summary-card">View Paddle pricing &rarr;</a>

@@ -110,9 +110,9 @@ TEMPLATE = r"""
       <div class="cta-stack">
         <a id="cb-primary" class="btn-cta wb-primary-cta" href="%%CF%%" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="chargeflow" data-cta-location="workbench">Recover $9,126/yr net with Chargeflow (save $10,062/yr vs manual) &rarr;</a>
       </div>
-      <details class="calc-disclosure" id="cb-calc-details">
-        <summary class="calc-disclosure-toggle">See exactly how we calculated this</summary>
-        <div class="calc-disclosure-body" id="cb-math"></div>
+      <details class="math-drawer" id="cb-calc-details">
+        <summary>Show calculation</summary>
+        <div class="math-drawer-body" id="cb-math"></div>
       </details>
     </div>
   </div>
@@ -318,14 +318,14 @@ function renderChargeback() {
       '<div class="summary-metric">' + money(c.manualLoss) + ' / yr</div>' +
       '<div class="summary-breakdown">Gross recovered ' + money(c.manualGross) + ' vs evidence prep ' + money(c.manualOps) + '. Net after prep ' + money(c.manualNetAfterOps) + '.</div>' +
       '<p class="summary-caveat"><strong>Hidden Cost Highlight:</strong> 80% of disputed sales stays lost, and the $30 per dispute prep cost is inside this drain.</p>' +
-      '<details class="calc-disclosure"><summary class="calc-disclosure-toggle">See calculation</summary><div class="calc-disclosure-body">' + manualMath + '</div></details>' +
+      '<details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">' + manualMath + '</div></details>' +
     '</div>' +
     '<div class="summary-card result-card best-card card-lowest">' +
       '<span class="val-pill">Highest Net Recovery</span>' +
       '<div class="summary-scenario"><strong>Chargeflow Pay-On-Performance</strong></div>' +
       '<div class="summary-metric">' + money(c.netRecovered) + ' net</div>' +
       '<div class="summary-breakdown">$0 a month. 25% only on recovered dollars. 65% win rate is a planning benchmark. Evidence prep $0.</div>' +
-      '<details class="calc-disclosure"><summary class="calc-disclosure-toggle">See calculation</summary><div class="calc-disclosure-body">' + cfMath + '</div></details>' +
+      '<details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">' + cfMath + '</div></details>' +
       '<div class="summary-actions"><a class="btn-cta" href="%%CF%%" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="chargeflow" data-cta-location="summary-card">' + saveLabel + ' &rarr;</a></div>' +
     '</div>' +
     '<div class="summary-card result-card card-hidden">' +
@@ -333,7 +333,7 @@ function renderChargeback() {
       '<div class="summary-scenario"><strong>Stripe Chargeback Protection (0.40% of GMV)</strong></div>' +
       '<div class="summary-metric">' + money(c.radar) + ' / yr</div>' +
       '<div class="summary-breakdown">0.40% x ' + money(c.gmv) + ', charged on every sale whether or not it is disputed.</div>' +
-      '<details class="calc-disclosure"><summary class="calc-disclosure-toggle">See calculation</summary><div class="calc-disclosure-body">' + radarMath + '</div></details>' +
+      '<details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">' + radarMath + '</div></details>' +
     '</div>';
   const rows = [
     ['Chargeflow Pay-On-Performance', '$0 a month, then 25% of recovered dispute dollars', money(c.successFee) + ' success fee, ' + money(c.netRecovered) + ' net recovered', '2-click Stripe and Shopify connection. $0 evidence prep. The 65% win rate is a planning benchmark, not a promise.', '%%CF%%', 'chargeflow', 'View Chargeflow'],

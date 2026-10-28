@@ -135,9 +135,9 @@ home_body = f"""
       <p class="wb-budget-quote" id="wb-budget-quote">Estimated Year-1 total including mandatory fees &amp; overages.</p>
       <p class="wb-budget-subnote" id="wb-budget-subnote"></p>
       <div class="wb-best-option" id="wb-best-option"><strong>Best option:</strong> <a href="https://www.freshworks.com/freshdesk/pricing/" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="freshdesk-support" data-cta-location="workbench-best-option">Freshdesk Pro + Freddy AI ($3,835/yr)</a> &middot; saves $8,015/yr</div>
-      <details class="calc-disclosure" id="wb-calc-details">
-        <summary class="calc-disclosure-toggle" id="wb-calc-summary">See exactly how we calculated this</summary>
-        <div class="calc-disclosure-body" id="wb-calc-body"></div>
+      <details class="math-drawer" id="wb-calc-details">
+        <summary id="wb-calc-summary">Show calculation</summary>
+        <div class="math-drawer-body" id="wb-calc-body"></div>
       </details>
       <div class="cta-stack">
         <a id="wb-primary-cta" class="btn-cta wb-primary-cta" href="https://www.zendesk.com/pricing/" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="zendesk-suite-team" data-cta-location="workbench">View Zendesk pricing &rarr;</a>
@@ -1059,9 +1059,9 @@ function renderDirectory() {{
           <div class="summary-scenario">Based on $50,000/mo GMV, 1,000 tx, 30% international</div>
           <div class="summary-breakdown">$1,650 base (2.7% + 30&cent;) + $400 multi-PSP routing + $225 intl ($1,875/mo without orchestration)</div>
           <div class="summary-caveat"><strong>Contract note:</strong> Direct payouts with multi-PSP failover and portable card tokens ($0 reserve hold in baseline model).</div>
-          <details class="calc-disclosure">
-            <summary class="calc-disclosure-toggle">See calculation</summary>
-            <div class="calc-disclosure-body">${{renderCalcBreakdownHtml(whopR, seats, aiVol, mode, cat)}}</div>
+          <details class="math-drawer">
+            <summary>Show calculation</summary>
+            <div class="math-drawer-body">${{renderCalcBreakdownHtml(whopR, seats, aiVol, mode, cat)}}</div>
           </details>
           <div class="summary-actions">
             <div class="cta-stack">
@@ -1075,9 +1075,9 @@ function renderDirectory() {{
           <div class="summary-scenario">On <strong>Paddle / Stripe / Lemon Squeezy</strong> (25% rolling reserve scenario)</div>
           <div class="summary-breakdown">$3,450/mo Paddle MoR fees ($41,400/yr) + non-exportable subscriber card vault on termination</div>
           <div class="summary-caveat"><strong>Hidden Cost Highlight:</strong> A 25% rolling reserve locks $12,500/mo in working capital for 90&ndash;180 days.</div>
-          <details class="calc-disclosure">
-            <summary class="calc-disclosure-toggle">See calculation</summary>
-            <div class="calc-disclosure-body">${{renderCalcBreakdownHtml(paddleR, seats, aiVol, mode, cat)}}</div>
+          <details class="math-drawer">
+            <summary>Show calculation</summary>
+            <div class="math-drawer-body">${{renderCalcBreakdownHtml(paddleR, seats, aiVol, mode, cat)}}</div>
           </details>
           <div class="summary-actions">
             <div class="cta-stack">
@@ -1091,9 +1091,9 @@ function renderDirectory() {{
           <div class="summary-scenario">Based on $2,000/mo recovered chargebacks (25% success fee)</div>
           <div class="summary-breakdown">$0 monthly base fee &middot; keeps dispute ratio below 0.5% monitoring threshold</div>
           <div class="summary-caveat"><strong>Contract note:</strong> Performance-based fee (25% of recovered chargebacks only; $0 monthly minimum).</div>
-          <details class="calc-disclosure">
-            <summary class="calc-disclosure-toggle">See calculation</summary>
-            <div class="calc-disclosure-body">${{renderCalcBreakdownHtml(cfR, seats, aiVol, mode, cat)}}</div>
+          <details class="math-drawer">
+            <summary>Show calculation</summary>
+            <div class="math-drawer-body">${{renderCalcBreakdownHtml(cfR, seats, aiVol, mode, cat)}}</div>
           </details>
           <div class="summary-actions">
             <div class="cta-stack">
@@ -1238,9 +1238,9 @@ function renderDirectory() {{
           <div class="summary-scenario">${{scenarioLine}}${{savedVsRef > 0 ? ` &middot; saves $${{savedVsRef.toLocaleString()}}/yr vs. ${{refBenchmarkR.tool.name}}` : ''}}</div>
           <div class="summary-breakdown">$${{minR.annualSeatsCost.toLocaleString()}} licenses + $${{minR.onboarding.toLocaleString()}} onboarding + $${{minR.aiAnnual.toLocaleString()}} AI</div>
           <div class="summary-caveat"><strong>Contract note:</strong> ${{minR.tool.trap_badge}} (${{minR.tool.billing_lock_in_type}})</div>
-          <details class="calc-disclosure">
-            <summary class="calc-disclosure-toggle">See calculation</summary>
-            <div class="calc-disclosure-body">${{renderCalcBreakdownHtml(minR, seats, aiVol, mode, cat)}}</div>
+          <details class="math-drawer">
+            <summary>Show calculation</summary>
+            <div class="math-drawer-body">${{renderCalcBreakdownHtml(minR, seats, aiVol, mode, cat)}}</div>
           </details>
           <div class="summary-actions">
             <div class="cta-stack">
@@ -1255,9 +1255,9 @@ function renderDirectory() {{
           <div class="summary-scenario">On <strong>${{topHidden.tool.name}}</strong> ($${{topHidden.year1Total.toLocaleString()}}/yr total &middot; ${{scenarioLine.replace('Based on ', '')}})</div>
           <div class="summary-breakdown">$${{topHidden.annualSeatsCost.toLocaleString()}} licenses + $${{topHidden.onboarding.toLocaleString()}} onboarding + $${{topHidden.aiAnnual.toLocaleString()}} AI</div>
           <div class="summary-caveat"><strong>Hidden Cost Highlight:</strong> ${{hiddenReasonText}}.</div>
-          <details class="calc-disclosure">
-            <summary class="calc-disclosure-toggle">See calculation</summary>
-            <div class="calc-disclosure-body">${{renderCalcBreakdownHtml(topHidden, seats, aiVol, mode, cat)}}</div>
+          <details class="math-drawer">
+            <summary>Show calculation</summary>
+            <div class="math-drawer-body">${{renderCalcBreakdownHtml(topHidden, seats, aiVol, mode, cat)}}</div>
           </details>
           <div class="summary-actions">
             <div class="cta-stack">
@@ -1272,9 +1272,9 @@ function renderDirectory() {{
           <div class="summary-scenario">${{scenarioLine}}</div>
           <div class="summary-breakdown">$${{maxR.annualSeatsCost.toLocaleString()}} licenses + $${{maxR.onboarding.toLocaleString()}} onboarding + $${{maxR.aiAnnual.toLocaleString()}} AI</div>
           <div class="summary-caveat"><strong>Contract note:</strong> ${{maxR.tool.trap_badge}}</div>
-          <details class="calc-disclosure">
-            <summary class="calc-disclosure-toggle">See calculation</summary>
-            <div class="calc-disclosure-body">${{renderCalcBreakdownHtml(maxR, seats, aiVol, mode, cat)}}</div>
+          <details class="math-drawer">
+            <summary>Show calculation</summary>
+            <div class="math-drawer-body">${{renderCalcBreakdownHtml(maxR, seats, aiVol, mode, cat)}}</div>
           </details>
           <div class="summary-actions">
             <div class="cta-stack">
@@ -1407,7 +1407,7 @@ function equalizeSummaryCards(stripEl) {{
   const cards = Array.from(stripEl.querySelectorAll('.summary-card'));
   if (!cards.length) return;
   const rowSelectors = ['.summary-label', '.summary-metric', '.summary-scenario', '.summary-breakdown', '.summary-caveat', '.summary-actions'];
-  const disclosures = cards.map(c => c.querySelector('.calc-disclosure'));
+  const disclosures = cards.map(c => c.querySelector('.math-drawer'));
   rowSelectors.forEach(sel => {{
     cards.forEach(c => {{
       const el = c.querySelector(sel);
@@ -1841,9 +1841,9 @@ p1_body = """
     </div>
   </div>
 
-  <details class="calc-disclosure" id="hs-calc-details" style="margin-top:12px;">
-    <summary class="calc-disclosure-toggle">See exactly how we calculated this</summary>
-    <div class="calc-disclosure-body" id="hs-calc-body"></div>
+  <details class="math-drawer" id="hs-calc-details">
+    <summary>Show calculation</summary>
+    <div class="math-drawer-body" id="hs-calc-body"></div>
   </details>
 
   <div id="hs-summary" class="ebc-action-strip">

@@ -383,9 +383,9 @@ h3 {
   min-width: 0;
 }
 
-#calc-summary-strip:has(details[open]),
-.summary-strip:has(details[open]) {
-  align-items: start;
+#calc-summary-strip,
+.summary-strip {
+  align-items: stretch;
 }
 
 #calc-summary-strip .summary-card,
@@ -419,8 +419,7 @@ h3 {
 }
 
 .summary-card .summary-actions,
-.summary-card .calc-breakdown-details,
-.summary-card details.calc-disclosure {
+.summary-card .calc-breakdown-details {
   margin-top: auto;
 }
 
@@ -3089,5 +3088,91 @@ input[type="date"],
     background: radial-gradient(circle at 35% 35%, #FFFFFF 0%, #F4F7F4 70%);
     border: 2.5px solid #2D5A3D;
     box-shadow: 0 2px 5px rgba(20, 35, 25, 0.28), inset 0 1px 0 #FFFFFF;
+  }
+}
+
+.summary-card,
+.summary-strip,
+.wb-result-col,
+.wb-col,
+.verdict-section,
+.calc-box {
+  overflow: visible;
+  position: relative;
+}
+
+.summary-card:has(.math-drawer[open]) {
+  z-index: 40;
+}
+
+.math-drawer {
+  position: relative;
+  display: inline-block;
+  margin-top: 0.45rem;
+  width: auto;
+  border: 0;
+  background: transparent;
+}
+
+.math-drawer > summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.28rem 0.68rem;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text-secondary, #334155);
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 999px;
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+  transition: all 0.15s ease;
+}
+
+.math-drawer > summary::-webkit-details-marker {
+  display: none;
+}
+
+.math-drawer > summary::after {
+  content: "";
+  width: 0.38rem;
+  height: 0.38rem;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translateY(-1px);
+  transition: transform 0.15s ease;
+}
+
+.math-drawer[open] > summary::after {
+  transform: rotate(225deg) translateY(-1px);
+}
+
+.math-drawer > :not(summary) {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: max(270px, 100%);
+  max-width: 340px;
+  z-index: 100;
+  background: #ffffff;
+  color: #0f172a;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+  box-shadow: 0 18px 38px -8px rgba(15, 23, 42, 0.22), 0 4px 12px -2px rgba(15, 23, 42, 0.08);
+}
+
+@media (max-width: 640px) {
+  .summary-card .math-drawer {
+    position: static;
+  }
+  .summary-card .math-drawer > :not(summary) {
+    left: 0;
+    right: 0;
+    width: auto;
+    max-width: none;
   }
 }
