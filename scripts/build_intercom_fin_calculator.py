@@ -1054,6 +1054,81 @@ def _zendesk_body(prefix, h1, lead, compare_mode, page_id, legacy_summary_id):
     )
 
 
+# Page-scoped editorial button polish. Selectors match only when this marker is present.
+ZENDESK_AI_POLISH = """
+<style>
+  /* /zendesk-ai-cost-calculator/ only. Transform and shadow do not change layout size. */
+  body:has(.page-zendesk-ai) .btn-cta,
+  body:has(.page-zendesk-ai) #wb-primary-cta {
+    border: 1px solid #1E3F29;
+    box-shadow: 0 1px 2px rgba(20, 40, 26, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+    transition: transform 0.16s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.16s ease, background-color 0.16s ease;
+  }
+  body:has(.page-zendesk-ai) .btn-cta:hover,
+  body:has(.page-zendesk-ai) #wb-primary-cta:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(20, 40, 26, 0.20), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  }
+  body:has(.page-zendesk-ai) .btn-cta:active,
+  body:has(.page-zendesk-ai) #wb-primary-cta:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(20, 40, 26, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.10);
+  }
+  body:has(.page-zendesk-ai) .btn-secondary,
+  body:has(.page-zendesk-ai) summary.calc-disclosure-toggle,
+  body:has(.page-zendesk-ai) .calc-math-disclosure > summary,
+  body:has(.page-zendesk-ai) summary.full-table-summary {
+    border: 1px solid rgba(32, 35, 31, 0.16);
+    background: rgba(255, 255, 255, 0.72);
+    box-shadow: 0 1px 1px rgba(20, 24, 21, 0.04);
+    transition: transform 0.16s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.16s ease, background-color 0.16s ease, border-color 0.16s ease;
+  }
+  body:has(.page-zendesk-ai) summary.calc-disclosure-toggle,
+  body:has(.page-zendesk-ai) .calc-math-disclosure > summary,
+  body:has(.page-zendesk-ai) summary.full-table-summary {
+    /* Summaries had no border. An inset ring keeps the same box size. */
+    border: 0;
+    box-shadow: inset 0 0 0 1px rgba(32, 35, 31, 0.16), 0 1px 1px rgba(20, 24, 21, 0.04);
+  }
+  body:has(.page-zendesk-ai) .btn-secondary:hover,
+  body:has(.page-zendesk-ai) summary.calc-disclosure-toggle:hover,
+  body:has(.page-zendesk-ai) .calc-math-disclosure > summary:hover,
+  body:has(.page-zendesk-ai) summary.full-table-summary:hover {
+    background: #FFFFFF;
+    border-color: rgba(32, 35, 31, 0.32);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(20, 24, 21, 0.07);
+  }
+  body:has(.page-zendesk-ai) summary.calc-disclosure-toggle:hover,
+  body:has(.page-zendesk-ai) .calc-math-disclosure > summary:hover,
+  body:has(.page-zendesk-ai) summary.full-table-summary:hover {
+    border-color: transparent;
+    box-shadow: inset 0 0 0 1px rgba(32, 35, 31, 0.32), 0 2px 5px rgba(20, 24, 21, 0.07);
+  }
+  body:has(.page-zendesk-ai) .btn-secondary:active,
+  body:has(.page-zendesk-ai) summary.calc-disclosure-toggle:active,
+  body:has(.page-zendesk-ai) .calc-math-disclosure > summary:active,
+  body:has(.page-zendesk-ai) summary.full-table-summary:active {
+    transform: translateY(0);
+  }
+  body:has(.page-zendesk-ai) .btn-cta:focus-visible,
+  body:has(.page-zendesk-ai) #wb-primary-cta:focus-visible,
+  body:has(.page-zendesk-ai) .btn-secondary:focus-visible,
+  body:has(.page-zendesk-ai) summary.calc-disclosure-toggle:focus-visible,
+  body:has(.page-zendesk-ai) .calc-math-disclosure > summary:focus-visible,
+  body:has(.page-zendesk-ai) summary.full-table-summary:focus-visible {
+    outline: 2px solid #2D5A3D;
+    outline-offset: 2px;
+  }
+  body:has(.page-zendesk-ai) .summary-card,
+  body:has(.page-zendesk-ai) .calc-box.editorial-workbench {
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 1px 2px rgba(20, 24, 21, 0.05);
+  }
+</style>
+<div class="page-zendesk-ai" hidden></div>
+"""
+
+
 def build_zendesk_cluster():
     h1 = "Zendesk AI Cost Calculator: Calculate Your Real Year-1 Total ($50/Seat Add-On + $1.50/Resolution)"
     lead = "See what Zendesk AI actually costs once the $50/agent add-on and per-resolution overages are included. Adjust the agents and AI volume below to see your real Year-1 total and how it compares to Freshdesk and Intercom."
@@ -1064,7 +1139,7 @@ def build_zendesk_cluster():
         title,
         description,
         "/zendesk-ai-cost-calculator/",
-        _zendesk_body("../", h1, lead, "zendesk_ai", "zendesk-ai-cost-calculator", "zd-summary"),
+        ZENDESK_AI_POLISH + _zendesk_body("../", h1, lead, "zendesk_ai", "zendesk-ai-cost-calculator", "zd-summary"),
         faqs=zd_faqs,
     )
     render_page(
