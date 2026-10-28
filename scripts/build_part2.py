@@ -37,7 +37,7 @@ p3_body = """
       <input class="wb-range" type="range" id="res-dispute-rate" min="0.1" max="2.0" step="0.05" value="0.65" data-track="calculator-control" data-control="dispute-rate" />
     </div>
   </div>
-  <div id="hold-summary" class="summary-strip" aria-live="polite"></div>
+  <div id="hold-summary" class="summary-strip" aria-live="polite" hidden></div>
   <div id="reserve-output" class="summary-strip" style="display:none;"></div>
   <div id="res-output" aria-live="polite"></div>
   <p class="summary-interpretation"><strong>How to read this comparison:</strong> Payment processors do not have a single fixed-price &ldquo;winner&rdquo;. Your actual take rate and cashflow exposure depend on monthly volume, average order value, international card mix, and whether you require a Merchant of Record for global VAT/sales tax.</p>
@@ -161,87 +161,57 @@ function updateReserveSim() {
   const netCash = Math.max(0, rev - procFee - tempHeld);
   const frozen90Days = frozenMo * 3;
   const heldPct = rev > 0 ? Math.round((tempHeld / rev) * 100) : 0;
-  const scenarioLine = `Based on $${rev.toLocaleString()}/mo gross volume, ${resPct}% rolling reserve, ${capPct}% capital loan deduction`;
+  const scenarioLine = `Based on $${rev.toLocaleString()}/mo gross volume, ${resPct}% rolling reserve, ${capPct}% capital loan deduction, ${disputePct.toFixed(2)}% dispute rate`;
+  const trigger = disputePct >= 0.5
+    ? 'This ' + disputePct.toFixed(2) + '% dispute rate is at or above the 0.5% reserve trigger. A 25% rolling reserve on this volume is $' + reserveAt25.toLocaleString() + '/mo.'
+    : 'This ' + disputePct.toFixed(2) + '% dispute rate is under the 0.5% reserve trigger.';
   const cardsHtml = `
-    <div class="summary-card card-hidden">
-      <div class="summary-label">Funds Temporarily Held</div>
-      <div class="summary-metric" style="color:var(--rose);">$${frozenMo.toLocaleString()} / mo held</div>
+    <div class="summary-card result-card card-highest">
+      <div class="summary-label">Processor reserve and dispute drain</div>
+      <div class="summary-metric">$${frozenMo.toLocaleString()} / mo held</div>
       <div class="summary-scenario">${scenarioLine}</div>
-      <div class="summary-breakdown"><strong>Estimated monthly processing fees:</strong> $${procFee.toLocaleString()}/mo (2.9%) &middot; <strong>Temporarily held:</strong> $${frozenMo.toLocaleString()}/mo reserve + $${loanDed.toLocaleString()}/mo loan deduction</div>
-      <div class="summary-breakdown"><strong>Annual chargeback and dispute drain:</strong> $${cb.drain.toLocaleString()}/yr (${cb.disputesYr.toLocaleString()} disputes, $${cb.disputed.toLocaleString()} disputed + $${cb.fees.toLocaleString()} fees + $${cb.prep.toLocaleString()} prep)</div>
-      <div class="summary-caveat"><strong>Hidden Cost Highlight:</strong> A rolling reserve is a temporary cashflow holdback (90&ndash;180 days), not a permanent fee, but it withholds ${heldPct}% ($${tempHeld.toLocaleString()}/mo) of gross payouts before operating expenses. Chargebacks add another $${cb.drain.toLocaleString()}/yr on top of that hold.</div>
-      <div class="summary-actions">
-        <div class="cta-stack">
-          <a class="btn-cta" href="https://stripe.com/pricing" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="stripe-payments" data-cta-location="summary-card">View Stripe pricing &rarr;</a>
-        </div>
-      </div>
+      <div class="summary-breakdown">$${frozenMo.toLocaleString()}/mo in a ${resPct}% reserve, plus $${cb.drain.toLocaleString()}/yr dispute drain (${cb.disputesYr.toLocaleString()} disputes: $${cb.disputed.toLocaleString()} disputed + $${cb.fees.toLocaleString()} fees + $${cb.prep.toLocaleString()} prep).</div>
+      <p class="summary-caveat"><strong>Hidden Cost Highlight:</strong> The reserve withholds ${heldPct}% of gross payouts ($${tempHeld.toLocaleString()}/mo including the capital deduction) and is a cash hold, not a fee. ${trigger}</p>
+      <details class="calc-disclosure">
+        <summary class="calc-disclosure-toggle">See calculation</summary>
+        <div class="calc-disclosure-body">Reserve = ${resPct}% x $${rev.toLocaleString()} = $${frozenMo.toLocaleString()}/mo. Capital deduction = ${capPct}% x $${rev.toLocaleString()} = $${loanDed.toLocaleString()}/mo. Orders/mo = volume / $100. Disputes/yr = orders/mo x ${disputePct.toFixed(2)}% x 12 = ${cb.disputesYr.toLocaleString()}. Disputed sales $${cb.disputed.toLocaleString()} + fees $${cb.fees.toLocaleString()} + prep $${cb.prep.toLocaleString()} = $${cb.drain.toLocaleString()}/yr.</div>
+      </details>
     </div>
-    <div class="summary-card card-lowest">
-      <div class="summary-label">Net Monthly Payout</div>
-      <div class="summary-metric" style="color:var(--emerald);">$${netCash.toLocaleString()} / mo</div>
+    <div class="summary-card result-card card-lowest best-card">
+      <div class="summary-label">Chargeflow + Whop failover stack</div>
+      <div class="summary-metric">$${netCash.toLocaleString()} / mo net</div>
       <div class="summary-scenario">${scenarioLine}</div>
-      <div class="summary-breakdown">$${rev.toLocaleString()} gross &minus; $${procFee.toLocaleString()} est. processing fees &minus; $${tempHeld.toLocaleString()} temporarily held = $${netCash.toLocaleString()} net</div>
-      <div class="summary-caveat"><strong>Why failover &amp; dispute defense matter:</strong> Pairing multi-acquirer routing (<strong>Whop Payments</strong>, 2.7% + $0.30 base + 0.8% orchestration) with automated pre-dispute alerts (<strong>Chargeflow</strong>, keeps dispute rate &lt;0.5%) prevents a single processor from freezing 100% of checkout cashflow.</div>
+      <div class="summary-breakdown">$${rev.toLocaleString()} gross minus $${procFee.toLocaleString()} processing (2.9%) minus $${tempHeld.toLocaleString()} temporarily held = $${netCash.toLocaleString()} net. Chargeflow keeps $${cb.netRecovered.toLocaleString()}/yr after a 25% success fee.</div>
+      <details class="calc-disclosure">
+        <summary class="calc-disclosure-toggle">See calculation</summary>
+        <div class="calc-disclosure-body">Net payout = $${rev.toLocaleString()} - $${procFee.toLocaleString()} - $${frozenMo.toLocaleString()} reserve - $${loanDed.toLocaleString()} capital = $${netCash.toLocaleString()}/mo. Chargeflow: 65% of $${cb.disputed.toLocaleString()} = $${cb.recovered.toLocaleString()} recovered, minus 25% ($${cb.successFee.toLocaleString()}) = $${cb.netRecovered.toLocaleString()} net. $0 monthly fee. The 65% win rate is a planning benchmark. Whop is the multi-processor failover if one rail freezes.</div>
+      </details>
       <div class="summary-actions">
-        <div class="cta-stack">
-          <a class="btn-secondary" href="https://whop.com/sell?a=baggyprairieae" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="whop-payments" data-cta-location="summary-card">View Whop Payments pricing &rarr;</a>
-        </div>
         <a class="btn-cta" href="https://www.chargeflow.io/" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="chargeflow" data-cta-location="summary-card">Recover $${cb.netRecovered.toLocaleString()}/yr &amp; prevent reserves with Chargeflow &rarr;</a>
+        <a class="btn-secondary" href="https://whop.com/sell?a=baggyprairieae" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="whop-payments" data-cta-location="summary-card">View Whop Payments pricing &rarr;</a>
         <a class="summary-audit-link" href="../../chargeback-fee-and-recovery-calculator/">Open the full chargeback calculator &rarr;</a>
       </div>
     </div>
-    <div class="summary-card card-highest">
-      <div class="summary-label">Token Portability &amp; MoR Caveat</div>
-      <div class="summary-metric">Processor vs. MoR</div>
-      <div class="summary-scenario">Contract &amp; vault ownership check (Verified terms)</div>
-      <div class="summary-breakdown">Stripe: $2,325/mo est. fees at $50k/mo (portable tokens) &middot; Paddle MoR: $3,450/mo est. fees (locked vault)</div>
-      <div class="summary-caveat"><strong>Contract note:</strong> With Paddle or Lemon Squeezy MoR, the MoR is the legal seller of record, so card tokens cannot be exported if your account is terminated on a risk review.</div>
+    <div class="summary-card result-card card-trap">
+      <div class="summary-label">Paddle MoR token lock-in</div>
+      <div class="summary-metric">Tokens stay with Paddle</div>
+      <div class="summary-scenario">Based on Paddle as merchant of record versus Stripe token export</div>
+      <div class="summary-breakdown">Stripe can export PGP-encrypted card tokens. Paddle is the seller of record, so the vault cannot move with you if the account is closed.</div>
+      <details class="calc-disclosure">
+        <summary class="calc-disclosure-toggle">See calculation</summary>
+        <div class="calc-disclosure-body">At $50,000/mo the comparison table uses about $2,325/mo in Stripe fees with portable tokens, and about $3,450/mo in Paddle fees with a non-exportable vault. A reserve or termination on the MoR does not hand the card tokens back. Stripe's export is unavailable if the account is terminated for fraud.</div>
+      </details>
       <div class="summary-actions">
-        <div class="cta-stack">
-          <a class="btn-secondary" href="https://www.paddle.com/pricing" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="paddle-mor" data-cta-location="summary-card">View Paddle pricing &rarr;</a>
-        </div>
-        <a class="summary-audit-link" href="https://www.lemonsqueezy.com/pricing" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="lemon-squeezy" data-cta-location="summary-card">View Lemon Squeezy pricing &rarr;</a>
+        <a class="btn-secondary" href="https://www.paddle.com/pricing" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="paddle-mor" data-cta-location="summary-card">View Paddle pricing &rarr;</a>
       </div>
     </div>
   `;
   const holdEl = document.getElementById('hold-summary');
-  if (holdEl) holdEl.innerHTML = cardsHtml;
+  if (holdEl) holdEl.innerHTML = '';
   const resEl = document.getElementById('reserve-output');
-  if (resEl) resEl.innerHTML = cardsHtml;
-  const trigger = disputePct >= 0.5
-    ? 'This ' + disputePct.toFixed(2) + '% dispute rate is at or above the 0.5% reserve trigger. A 25% rolling reserve on this volume is $' + reserveAt25.toLocaleString() + '/mo.'
-    : 'This ' + disputePct.toFixed(2) + '% dispute rate is under the 0.5% reserve trigger.';
+  if (resEl) resEl.innerHTML = '';
   const out = document.getElementById('res-output');
-  if (out) {
-    out.innerHTML = `
-      <div class="summary-strip">
-        <div class="summary-card card-hidden">
-          <div class="summary-label">Annual chargeback and dispute drain</div>
-          <div class="summary-metric">$${cb.drain.toLocaleString()} / yr</div>
-          <div class="summary-scenario">Based on $${rev.toLocaleString()}/mo, a $100 average order, and a ${disputePct.toFixed(2)}% dispute rate</div>
-          <div class="summary-breakdown">${cb.disputesYr.toLocaleString()} disputes/yr. Disputed order value $${cb.disputed.toLocaleString()} + $${cb.fees.toLocaleString()} in $15 dispute fees + $${cb.prep.toLocaleString()} manual evidence prep.</div>
-          <p class="summary-caveat"><strong>Hidden Cost Highlight:</strong> ${trigger}</p>
-          <details class="calc-disclosure">
-            <summary class="calc-disclosure-toggle">See calculation</summary>
-            <div class="calc-disclosure-body">Orders/mo = $${rev.toLocaleString()} / $100. Disputes/yr = orders/mo x ${disputePct.toFixed(2)}% x 12 = ${cb.disputesYr.toLocaleString()}. Disputed sales = ${cb.disputesYr.toLocaleString()} x $100 = $${cb.disputed.toLocaleString()}. Dispute fees = ${cb.disputesYr.toLocaleString()} x $15 = $${cb.fees.toLocaleString()}. Evidence prep = ${cb.disputesYr.toLocaleString()} x $30 = $${cb.prep.toLocaleString()}. Annual drain = $${cb.disputed.toLocaleString()} + $${cb.fees.toLocaleString()} + $${cb.prep.toLocaleString()} = $${cb.drain.toLocaleString()}.</div>
-          </details>
-        </div>
-        <div class="summary-card best-card card-lowest">
-          <div class="summary-label">Net annual recovery with Chargeflow</div>
-          <div class="summary-metric">$${cb.netRecovered.toLocaleString()} / yr</div>
-          <div class="summary-scenario">65% planning win rate, 25% performance fee, $0/mo fixed</div>
-          <div class="summary-breakdown">Gross recovered $${cb.recovered.toLocaleString()} minus a $${cb.successFee.toLocaleString()} success fee. ${trigger} Chargeflow is modeled here as the layer that keeps the dispute ratio under 0.5%.</div>
-          <details class="calc-disclosure">
-            <summary class="calc-disclosure-toggle">See calculation</summary>
-            <div class="calc-disclosure-body">65% of $${cb.disputed.toLocaleString()} = $${cb.recovered.toLocaleString()} gross recovered. Success fee = 25% of $${cb.recovered.toLocaleString()} = $${cb.successFee.toLocaleString()}. Net kept = $${cb.netRecovered.toLocaleString()}. The 65% win rate is a planning benchmark, not a guaranteed Chargeflow win rate.</div>
-          </details>
-          <div class="summary-actions">
-            <a class="btn-cta" href="https://www.chargeflow.io/" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="chargeflow" data-cta-location="workbench">Recover $${cb.netRecovered.toLocaleString()}/yr &amp; prevent reserves with Chargeflow &rarr;</a>
-            <a class="summary-audit-link" href="../../chargeback-fee-and-recovery-calculator/">Open the full chargeback calculator &rarr;</a>
-          </div>
-        </div>
-      </div>`;
-  }
+  if (out) out.innerHTML = '<div class="summary-strip">' + cardsHtml + '</div>';
   if (typeof window.trackSaaSBillEvent === 'function') window.trackSaaSBillEvent('result_rendered', { page: 'reserve-simulator', rev: rev, resPct: resPct, disputePct: disputePct });
 }
 ['gm-rev', 'gm-res', 'gm-cap', 'res-dispute-rate'].forEach(id => document.getElementById(id).addEventListener('input', updateReserveSim));
