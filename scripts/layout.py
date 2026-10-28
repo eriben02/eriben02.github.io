@@ -2,7 +2,8 @@ import json
 import os
 from datetime import datetime
 
-BASE_DIR = "/workspace/saastruth"
+# Repo root (this file lives in scripts/). Published pages are copied from public/ to the root for GitHub Pages.
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 DATA_DIR = os.path.join(BASE_DIR, "data")
 PUBLIC_DIR = os.path.join(BASE_DIR, "public")
 SITE_ORIGIN = "https://saasbill.io"
@@ -35,6 +36,9 @@ def render_related_links(rel_path, prefix):
         ("intercom-vs-freshdesk-cost-comparison/index.html", "Intercom vs. Freshdesk Cost Comparison (2026)", "Compare Intercom Fin ($0.99/res) vs. Freshdesk Freddy AI ($49/100 sessions) Year-1 cost."),
         ("intercom-vs-zendesk-cost-comparison/index.html", "Intercom vs. Zendesk Cost Comparison (2026)", "Compare Intercom Fin ($0.99/res) vs. Zendesk AI ($1.50/res) Year-1 cost and overages."),
         ("pricing/intercom-fin-ai-resolution-cost-calculator/index.html", "Intercom Fin AI ($0.99/Resolution) True Cost", "Calculate monthly Fin AI resolution fees vs. Freshdesk session packs."),
+        ("zendesk-ai-cost-calculator/index.html", "Zendesk AI Cost Calculator (2026)", "Prefilled 10-agent, 1,500 AI/mo Year-1 calculator vs. Freshdesk & Intercom."),
+        ("zendesk-vs-freshdesk-cost-comparison/index.html", "Zendesk vs. Freshdesk Cost Comparison (2026)", "Compare Zendesk AI ($1.50/res) vs. Freshdesk Freddy AI ($49/100 sessions) Year-1 cost."),
+        ("hubspot-onboarding-fee-calculator/index.html", "HubSpot Onboarding Fee & True Cost Calculator", "Model the $1,500–$7,000 onboarding fee, extra seats, and contact tiers vs. Close CRM & Pipedrive."),
         ("pricing/zendesk-ai-resolution-and-automated-outcome-cost/index.html", "Zendesk AI Automated Resolution Fee Calculator", "Model $1.50–$2.00 AI overage rates vs. Freshdesk & Help Scout."),
         ("pricing/stripe-billing-0-7-percent-recurring-tax-calculator/index.html", "Stripe Billing 0.7% Recurring Fee Calculator", "Compare Stripe 2.9% + 0.7% Billing + 0.5% Tax vs. Whop (2.7% + 30¢) & Paddle."),
         ("compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/index.html", "Gumroad vs. Whop vs. Lemon Squeezy Net Payouts", "Compare real creator & SaaS take rates after card processing and surcharges."),

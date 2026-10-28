@@ -596,7 +596,13 @@ class TestSaaSBillCalculators(unittest.TestCase):
 
         with open(os.path.join(PUBLIC_DIR, "sitemap.xml"), encoding="utf-8") as f:
             sitemap = f.read()
-        self.assertEqual(sitemap.count("<url><loc>"), 23)
+        self.assertEqual(sitemap.count("<url><loc>"), 26)
+        for loc in (
+            "https://saasbill.io/zendesk-ai-cost-calculator/",
+            "https://saasbill.io/zendesk-vs-freshdesk-cost-comparison/",
+            "https://saasbill.io/hubspot-onboarding-fee-calculator/",
+        ):
+            self.assertIn(loc, sitemap)
 
         faq_pages = [
             "faq/does-hubspot-charge-onboarding-fees-2026/index.html",

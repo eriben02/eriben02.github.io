@@ -243,6 +243,21 @@ home_body = f"""
     </div>
     <div class="card">
       <span class="badge badge-high">Helpdesk</span>
+      <h3><a href="./zendesk-ai-cost-calculator/">Zendesk AI cost calculator</a></h3>
+      <p>Suite Team plus per-resolution overage for 10 agents and 1,500 AI tickets a month, next to Freshdesk and Intercom.</p>
+    </div>
+    <div class="card">
+      <span class="badge badge-high">Helpdesk</span>
+      <h3><a href="./zendesk-vs-freshdesk-cost-comparison/">Zendesk vs. Freshdesk cost comparison</a></h3>
+      <p>The same agent count and AI volume, with the Year-1 gap between Zendesk AI and Freshdesk Freddy session packs.</p>
+    </div>
+    <div class="card">
+      <span class="badge badge-high">CRM</span>
+      <h3><a href="./hubspot-onboarding-fee-calculator/">HubSpot onboarding fee calculator</a></h3>
+      <p>Mandatory $1,500 to $7,000 setup fees, extra seats, and marketing contact tiers versus Close CRM and Pipedrive.</p>
+    </div>
+    <div class="card">
+      <span class="badge badge-high">Helpdesk</span>
       <h3><a href="./pricing/zendesk-ai-resolution-and-automated-outcome-cost/">Zendesk AI automated resolution overage calculator</a></h3>
       <p>Zendesk&rsquo;s 5&ndash;10 included AR/agent allowance and $1.50&ndash;$2.00 overage rates versus Help Scout and Freshdesk.</p>
     </div>
@@ -1691,7 +1706,7 @@ render_page(
 p1_body = """
 <section class="hero">
   <h1>What HubSpot actually costs in Year 1 (once you add onboarding).</h1>
-  <p class="lead">In 2026, HubSpot Sales Hub Professional costs $90/seat/month billed annually plus a mandatory $1,500 onboarding fee ($6,900 in Year 1 for five reps), while Marketing Hub Professional costs $800/month plus a $3,000 onboarding fee ($12,600 in Year 1). Every Professional and Enterprise order form is a 12-month commitment that auto-renews even on monthly installments.</p>
+  <p class="lead">See what HubSpot actually costs once mandatory onboarding fees, extra seats, and contact tiers are included. Adjust your team size, contacts, and tier below to see your real Year-1 total and how it compares to Close CRM and Pipedrive.</p>
 </section>
 
 <section class="calc-box editorial-bar-chart-card" id="crm-apples-to-apples-chart" aria-labelledby="chart-dynamic-headline">

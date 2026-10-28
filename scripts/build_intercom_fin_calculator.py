@@ -14,7 +14,67 @@ tools_js = json.dumps(TOOLS)
 aff_js = json.dumps(AFFILIATES)
 
 
-def render_intercom_calculator_body(prefix="../", h1="Intercom Fin AI Cost Calculator (2026): True Year-1 Price at $0.99 per Resolution", lead="See what Intercom Fin actually costs for your team. Adjust the agents and AI volume below to see your real Year-1 total and how it compares to Freshdesk and Zendesk.", compare_mode="intercom_fin", page_id="intercom-fin-cost-calculator"):
+def render_intercom_calculator_body(
+    prefix="../",
+    h1="Intercom Fin AI Cost Calculator (2026): True Year-1 Price at $0.99 per Resolution",
+    lead="See what Intercom Fin actually costs for your team. Adjust the agents and AI volume below to see your real Year-1 total and how it compares to Freshdesk and Zendesk.",
+    compare_mode="intercom_fin",
+    page_id="intercom-fin-cost-calculator",
+    spotlight_id="intercom-fin-ai",
+    legacy_summary_id="ic-summary",
+    editorial_html=None,
+    calc_heading="Interactive Intercom Fin AI Year-1 True-Cost Calculator (2026)",
+    gap_sub="Visual Year-1 cost comparison graph &amp; full contract table (Intercom Fin vs. Freshdesk, Zendesk, Help Scout &amp; HubSpot)",
+    static_product="Intercom + Fin AI Agent",
+    static_total="$21,300",
+    static_subnote="+$17,820/yr (+512%) above the $3,480 advertised price.",
+    static_best_html=None,
+    static_base="$348",
+    static_seats="$3,132",
+    static_hidden="$17,820",
+    static_hidden_sub="Fin AI $0.99/resolution meter",
+):
+    if static_best_html is None:
+        static_best_html = '<strong>Best option:</strong> <a href="https://www.freshworks.com/freshdesk/pricing/" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="freshdesk-support" data-cta-location="workbench-best-option">Freshdesk (Freshworks) ($10,855/yr)</a> &middot; saves $10,445/yr'
+    if editorial_html is None:
+        editorial_html = """
+<section class="editorial-below-section">
+  <h2>Why Intercom&rsquo;s $0.99 Fin AI meter outgrows base seat licenses</h2>
+  <div class="methodology-grid fine-print-grid">
+    <div class="methodology-item">
+      <strong>1. Silent Exits Count as Billable $0.99 Resolutions</strong>
+      Under Intercom&rsquo;s Fin AI billing terms, a $0.99 resolution is billed whenever a customer confirms Fin&rsquo;s answer helped or closes the chat without requesting a human agent after Fin replies (at most once per conversation).
+    </div>
+    <div class="methodology-item">
+      <strong>2. Session Packs vs. Per-Resolution Meters</strong>
+      Freshdesk includes 500 complimentary one-time Freddy AI Agent sessions and then bills $49 per 100-session pack ($0.49/session), while Help Scout bills $0.75 per resolved answer with an optional hard monthly spending cap.
+    </div>
+    <div class="methodology-item">
+      <strong>3. Zendesk AI Allowance vs. $1.50&ndash;$2.00 Overage</strong>
+      Zendesk Suite Team ($55/seat/mo annual) includes only 5 automated resolutions per agent per month (50/mo for 10 agents) before billing $1.50 committed or $2.00 pay-as-you-go per resolution.
+    </div>
+  </div>
+</section>
+"""
+    spotlight_js = "'" + spotlight_id.replace("'", "") + "'"
+    if compare_mode.startswith("zendesk"):
+        audit_links_js = f"""{{
+  'intercom-fin-ai': {{ url: '{prefix}intercom-fin-cost-calculator/', label: 'Open Intercom Fin calculator →' }},
+  'freshdesk-support': {{ url: '{prefix}zendesk-vs-freshdesk-cost-comparison/', label: 'Compare Zendesk vs. Freshdesk →' }},
+  'zendesk-suite-team': {{ url: '{prefix}zendesk-ai-cost-calculator/', label: 'Open Zendesk AI calculator →' }},
+  'zendesk-suite-professional': {{ url: '{prefix}zendesk-ai-cost-calculator/', label: 'Open Zendesk AI calculator →' }},
+  'help-scout-plus': {{ url: '{prefix}zendesk-vs-freshdesk-cost-comparison/', label: 'Compare vs. Freshdesk →' }},
+  'hubspot-service-hub': {{ url: '{prefix}hubspot-onboarding-fee-calculator/', label: 'Open HubSpot onboarding calculator →' }}
+}}"""
+    else:
+        audit_links_js = f"""{{
+  'intercom-fin-ai': {{ url: '{prefix}intercom-fin-cost-calculator/', label: 'Open Intercom Fin calculator →' }},
+  'freshdesk-support': {{ url: '{prefix}intercom-vs-freshdesk-cost-comparison/', label: 'Compare Intercom vs. Freshdesk →' }},
+  'zendesk-suite-team': {{ url: '{prefix}intercom-vs-zendesk-cost-comparison/', label: 'Compare Intercom vs. Zendesk →' }},
+  'zendesk-suite-professional': {{ url: '{prefix}pricing/zendesk-ai-resolution-and-automated-outcome-cost/', label: 'Read Zendesk AI overage audit →' }},
+  'help-scout-plus': {{ url: '{prefix}pricing/zendesk-ai-resolution-and-automated-outcome-cost/', label: 'Compare vs. Zendesk AI →' }},
+  'hubspot-service-hub': {{ url: '{prefix}pricing/hubspot-true-cost-and-onboarding-fees/', label: 'Read HubSpot onboarding audit →' }}
+}}"""
     return f"""
 <section class="hero">
   <h1>{h1}</h1>
@@ -28,7 +88,7 @@ def render_intercom_calculator_body(prefix="../", h1="Intercom Fin AI Cost Calcu
     <polygon id="rail-svg-arrow" points="16,415 23,420 16,425" fill="#536B56" />
   </svg>
 <section class="calc-box editorial-workbench" aria-labelledby="calc-heading">
-  <h2 id="calc-heading" class="sr-only-control">Interactive Intercom Fin AI Year-1 True-Cost Calculator (2026)</h2>
+  <h2 id="calc-heading" class="sr-only-control">{calc_heading}</h2>
   <div class="control-group sr-only-control">
     <label for="cat-filter">Software category</label>
     <select id="cat-filter" data-track="calculator-control" data-control="category">
@@ -80,7 +140,7 @@ def render_intercom_calculator_body(prefix="../", h1="Intercom Fin AI Cost Calcu
       <div id="wb-vbar-mount" class="wb-vbar-container" aria-live="polite">
         <div class="wb-vbar-row" id="wb-row-base" style="flex: 15.5 1 0px;">
           <div class="wb-vbar-block block-base">
-            <span class="wb-block-amount" id="wb-amt-base">$348</span>
+            <span class="wb-block-amount" id="wb-amt-base">{static_base}</span>
           </div>
           <div class="wb-callout-item">
             <div class="wb-leader-line"></div>
@@ -93,7 +153,7 @@ def render_intercom_calculator_body(prefix="../", h1="Intercom Fin AI Cost Calcu
 
         <div class="wb-vbar-row" id="wb-row-seats" style="flex: 15.5 1 0px;">
           <div class="wb-vbar-block block-seats">
-            <span class="wb-block-amount" id="wb-amt-seats">$3,132</span>
+            <span class="wb-block-amount" id="wb-amt-seats">{static_seats}</span>
           </div>
           <div class="wb-callout-item">
             <div class="wb-leader-line"></div>
@@ -106,13 +166,13 @@ def render_intercom_calculator_body(prefix="../", h1="Intercom Fin AI Cost Calcu
 
         <div class="wb-vbar-row" id="wb-row-hidden" style="flex: 69.0 1 0px;">
           <div class="wb-vbar-block block-hidden">
-            <span class="wb-block-amount" id="wb-amt-hidden">$17,820</span>
+            <span class="wb-block-amount" id="wb-amt-hidden">{static_hidden}</span>
           </div>
           <div class="wb-callout-item">
             <div class="wb-leader-line"></div>
             <div class="wb-callout-text">
               <strong id="wb-call-title-hidden">Hidden Cost Gap</strong>
-              <span id="wb-call-sub-hidden">Fin AI $0.99/resolution meter</span>
+              <span id="wb-call-sub-hidden">{static_hidden_sub}</span>
             </div>
           </div>
         </div>
@@ -121,11 +181,11 @@ def render_intercom_calculator_body(prefix="../", h1="Intercom Fin AI Cost Calcu
 
     <!-- Right Column: Progressive Disclosure (1. Result & Best Option -> 2. Why + Expandable Calculation -> 3. Contextual Primary CTA) -->
     <div class="wb-result-col" id="wb-result-mount" aria-live="polite">
-      <div class="wb-selected-product" id="wb-selected-product">Intercom + Fin AI Agent</div>
-      <div class="wb-big-total" id="wb-big-total-wrap"><span id="wb-big-amount">$21,300</span> <span class="wb-per-year" id="wb-big-unit">/ year</span></div>
+      <div class="wb-selected-product" id="wb-selected-product">{static_product}</div>
+      <div class="wb-big-total" id="wb-big-total-wrap"><span id="wb-big-amount">{static_total}</span> <span class="wb-per-year" id="wb-big-unit">/ year</span></div>
       <p class="wb-budget-quote" id="wb-budget-quote">Estimated Year-1 total including mandatory fees &amp; overages.</p>
-      <p class="wb-budget-subnote" id="wb-budget-subnote">+$17,820/yr (+512%) above the $3,480 advertised price.</p>
-      <div class="wb-best-option" id="wb-best-option"><strong>Best option:</strong> <a href="https://www.freshworks.com/freshdesk/pricing/" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="freshdesk-support" data-cta-location="workbench-best-option">Freshdesk (Freshworks) ($10,855/yr)</a> &middot; saves $10,445/yr</div>
+      <p class="wb-budget-subnote" id="wb-budget-subnote">{static_subnote}</p>
+      <div class="wb-best-option" id="wb-best-option">{static_best_html}</div>
       <details class="calc-disclosure" id="wb-calc-details">
         <summary class="calc-disclosure-toggle" id="wb-calc-summary">See exactly how we calculated this</summary>
         <div class="calc-disclosure-body" id="wb-calc-body"></div>
@@ -140,7 +200,7 @@ def render_intercom_calculator_body(prefix="../", h1="Intercom Fin AI Cost Calcu
 <!-- STEP 2: CATEGORY VERDICT CARDS (Best Option Freshdesk, Intercom Fin AI Breakdown, Zendesk AI Comparison) -->
 <section class="verdict-section" id="verdict-card" aria-label="Helpdesk &amp; AI Support Verdict &amp; Comparison">
   <div id="calc-summary-strip" class="summary-strip" aria-live="polite"></div>
-  <div id="ic-summary" style="display:none;" aria-hidden="true"></div>
+  <div id="{legacy_summary_id}" style="display:none;" aria-hidden="true"></div>
 </section>
 
 <!-- STEP 3 & 4: COMPARE ALL TOOLS (Visual Comparison Graph + Full Contract & Renewal Table behind Progressive Disclosure) -->
@@ -149,7 +209,7 @@ def render_intercom_calculator_body(prefix="../", h1="Intercom Fin AI Cost Calcu
     <summary class="full-table-summary" id="full-table-summary">
       <div class="full-table-summary-text">
         <h2 id="gap-heading" class="full-table-heading">Compare all tools in this category</h2>
-        <span class="full-table-summary-sub">Visual Year-1 cost comparison graph &amp; full contract table (Intercom Fin vs. Freshdesk, Zendesk, Help Scout &amp; HubSpot)</span>
+        <span class="full-table-summary-sub">{gap_sub}</span>
       </div>
       <span class="full-table-toggle-pill" id="full-table-toggle-pill">Compare all tools &darr;</span>
     </summary>
@@ -200,23 +260,7 @@ def render_intercom_calculator_body(prefix="../", h1="Intercom Fin AI Cost Calcu
 </section>
 </div>
 
-<section class="editorial-below-section">
-  <h2>Why Intercom&rsquo;s $0.99 Fin AI meter outgrows base seat licenses</h2>
-  <div class="methodology-grid fine-print-grid">
-    <div class="methodology-item">
-      <strong>1. Silent Exits Count as Billable $0.99 Resolutions</strong>
-      Under Intercom&rsquo;s Fin AI billing terms, a $0.99 resolution is billed whenever a customer confirms Fin&rsquo;s answer helped or closes the chat without requesting a human agent after Fin replies (at most once per conversation).
-    </div>
-    <div class="methodology-item">
-      <strong>2. Session Packs vs. Per-Resolution Meters</strong>
-      Freshdesk includes 500 complimentary one-time Freddy AI Agent sessions and then bills $49 per 100-session pack ($0.49/session), while Help Scout bills $0.75 per resolved answer with an optional hard monthly spending cap.
-    </div>
-    <div class="methodology-item">
-      <strong>3. Zendesk AI Allowance vs. $1.50&ndash;$2.00 Overage</strong>
-      Zendesk Suite Team ($55/seat/mo annual) includes only 5 automated resolutions per agent per month (50/mo for 10 agents) before billing $1.50 committed or $2.00 pay-as-you-go per resolution.
-    </div>
-  </div>
-</section>
+{editorial_html}
 
 <script>
 const TOOLS = {tools_js};
@@ -365,14 +409,7 @@ const VENDOR_CTA_LABELS = {{
   'hubspot-service-hub': 'View HubSpot pricing →'
 }};
 
-const INTERNAL_AUDIT_LINKS = {{
-  'intercom-fin-ai': {{ url: '{prefix}intercom-fin-cost-calculator/', label: 'Open Intercom Fin calculator →' }},
-  'freshdesk-support': {{ url: '{prefix}intercom-vs-freshdesk-cost-comparison/', label: 'Compare Intercom vs. Freshdesk →' }},
-  'zendesk-suite-team': {{ url: '{prefix}intercom-vs-zendesk-cost-comparison/', label: 'Compare Intercom vs. Zendesk →' }},
-  'zendesk-suite-professional': {{ url: '{prefix}pricing/zendesk-ai-resolution-and-automated-outcome-cost/', label: 'Read Zendesk AI overage audit →' }},
-  'help-scout-plus': {{ url: '{prefix}pricing/zendesk-ai-resolution-and-automated-outcome-cost/', label: 'Compare vs. Zendesk AI →' }},
-  'hubspot-service-hub': {{ url: '{prefix}pricing/hubspot-true-cost-and-onboarding-fees/', label: 'Read HubSpot onboarding audit →' }}
-}};
+const INTERNAL_AUDIT_LINKS = {audit_links_js};
 
 const SHORT_VENDOR_NAMES = {{
   'intercom-fin-ai': 'Intercom',
@@ -485,7 +522,7 @@ function applyBarRowState(rowEl, share, val) {{
   rowEl.classList.toggle('is-zero', val === 0);
 }}
 
-let currentSpotlightId = 'intercom-fin-ai';
+let currentSpotlightId = {spotlight_js};
 
 function renderDirectory() {{
   const cat = 'Helpdesk & AI Support';
@@ -503,7 +540,7 @@ function renderDirectory() {{
     window._lastRrKey = _rrKey;
     window._lastRrTs = _rrNow;
     if (typeof window.trackSaaSBillEvent === 'function') {{
-      window.trackSaaSBillEvent('result_rendered', {{ page: 'intercom-fin-cost-calculator', category: cat, seats: seats, aiTickets: aiVol, billingMode: mode, sortMode: sortMode }});
+      window.trackSaaSBillEvent('result_rendered', {{ page: PAGE_ID, category: cat, seats: seats, aiTickets: aiVol, billingMode: mode, sortMode: sortMode }});
     }}
   }}
 
@@ -553,6 +590,9 @@ function renderDirectory() {{
   const maxR = byLowest[byLowest.length - 1];
   const icR = rows.find(r => r.tool.id === 'intercom-fin-ai') || maxR;
   const zdTeamR = rows.find(r => r.tool.id === 'zendesk-suite-team') || maxR;
+  const fdR = rows.find(r => r.tool.id === 'freshdesk-support') || minR;
+  const isZendeskFocus = COMPARE_MODE === 'zendesk_ai' || COMPARE_MODE === 'zendesk_vs_freshdesk';
+  const primaryR = isZendeskFocus ? zdTeamR : icR;
   const maxTotal = Math.max(...rows.map(r => r.year1Total), 1);
 
   const spotR = rows.find(r => r.tool.id === currentSpotlightId) || icR;
@@ -611,8 +651,8 @@ function renderDirectory() {{
   if (ctaEl) {{
     ctaEl.href = spotAff.destination_url;
     ctaEl.setAttribute('data-vendor', spotR.tool.id);
-    const isSpotTrapOrHighest = spotR.tool.id === icR.tool.id || spotR.tool.id === maxR.tool.id || spotR.onboarding > 0;
-    const wbRefTotal = icR.year1Total > spotR.year1Total ? icR.year1Total : maxR.year1Total;
+    const isSpotTrapOrHighest = spotR.tool.id === primaryR.tool.id || spotR.tool.id === maxR.tool.id || spotR.onboarding > 0;
+    const wbRefTotal = primaryR.year1Total > spotR.year1Total ? primaryR.year1Total : maxR.year1Total;
     ctaEl.textContent = getContextualCtaLabel(spotR.tool, spotR.year1Total, wbRefTotal, isSpotTrapOrHighest);
   }}
 
@@ -620,33 +660,39 @@ function renderDirectory() {{
   const scenarioLine = formatScenarioText(seats, aiVol, mode);
   if (summaryEl) {{
     const minAff = AFFILIATES[minR.tool.affiliate_slug] || {{ destination_url: '#' }};
-    const icAff = AFFILIATES[icR.tool.affiliate_slug] || {{ destination_url: '#' }};
+    const primaryAff = AFFILIATES[primaryR.tool.affiliate_slug] || {{ destination_url: '#' }};
     const zdAff = AFFILIATES[zdTeamR.tool.affiliate_slug] || {{ destination_url: '#' }};
     const minAudit = INTERNAL_AUDIT_LINKS[minR.tool.id];
-    const icAudit = INTERNAL_AUDIT_LINKS[icR.tool.id];
+    const primaryAudit = INTERNAL_AUDIT_LINKS[primaryR.tool.id];
     const zdAudit = INTERNAL_AUDIT_LINKS[zdTeamR.tool.id];
+    const icAudit = INTERNAL_AUDIT_LINKS[icR.tool.id];
 
-    const fdR = rows.find(r => r.tool.id === 'freshdesk-support') || minR;
     const fdAff = AFFILIATES[fdR.tool.affiliate_slug] || {{ destination_url: '#' }};
-    const thirdR = COMPARE_MODE === 'intercom_vs_freshdesk' ? fdR : zdTeamR;
-    const thirdAff = COMPARE_MODE === 'intercom_vs_freshdesk' ? fdAff : zdAff;
-    const thirdLabel = COMPARE_MODE === 'intercom_vs_freshdesk' ? 'Freshdesk + Freddy AI (Session Packs)' : 'Zendesk AI Comparison (Same Usage)';
-    const thirdCta = COMPARE_MODE === 'intercom_vs_freshdesk'
-      ? getContextualCtaLabel(fdR.tool, fdR.year1Total, icR.year1Total, false)
+    const thirdR = COMPARE_MODE === 'zendesk_ai' ? icR : ((COMPARE_MODE === 'intercom_vs_freshdesk' || COMPARE_MODE === 'zendesk_vs_freshdesk') ? fdR : zdTeamR);
+    const thirdAff = AFFILIATES[thirdR.tool.affiliate_slug] || {{ destination_url: '#' }};
+    const thirdLabel = COMPARE_MODE === 'zendesk_ai'
+      ? 'Intercom + Fin AI (Same Usage)'
+      : ((COMPARE_MODE === 'intercom_vs_freshdesk' || COMPARE_MODE === 'zendesk_vs_freshdesk') ? 'Freshdesk + Freddy AI (Session Packs)' : 'Zendesk AI Comparison (Same Usage)');
+    const thirdCta = (COMPARE_MODE === 'intercom_vs_freshdesk' || COMPARE_MODE === 'zendesk_vs_freshdesk' || COMPARE_MODE === 'zendesk_ai')
+      ? getContextualCtaLabel(thirdR.tool, thirdR.year1Total, primaryR.year1Total, thirdR.tool.id === primaryR.tool.id)
       : getVendorCtaLabel(zdTeamR.tool);
+    const thirdAudit = INTERNAL_AUDIT_LINKS[thirdR.tool.id];
     const thirdAuditLink = COMPARE_MODE === 'intercom_vs_freshdesk'
       ? `<a class="summary-audit-link" href="{prefix}intercom-vs-zendesk-cost-comparison/" data-track="internal-audit">Compare Intercom vs. Zendesk →</a>`
-      : (zdAudit ? `<a class="summary-audit-link" href="${{zdAudit.url}}" data-track="internal-audit">${{zdAudit.label}}</a>` : '');
+      : (COMPARE_MODE === 'zendesk_vs_freshdesk'
+        ? `<a class="summary-audit-link" href="{prefix}zendesk-ai-cost-calculator/" data-track="internal-audit">Open Zendesk AI calculator →</a>`
+        : (thirdAudit ? `<a class="summary-audit-link" href="${{thirdAudit.url}}" data-track="internal-audit">${{thirdAudit.label}}</a>` : ''));
 
-    const icHiddenPct = icR.year1Total > 0 ? Math.round((icR.hiddenFees / icR.year1Total) * 100) : 0;
-    const savedVsIc = Math.max(0, icR.year1Total - minR.year1Total);
-    const minCtaText = getContextualCtaLabel(minR.tool, minR.year1Total, icR.year1Total, false);
+    const primaryHiddenPct = primaryR.year1Total > 0 ? Math.round((primaryR.hiddenFees / primaryR.year1Total) * 100) : 0;
+    const primaryLabel = isZendeskFocus ? 'Zendesk Suite Team + AI ($1.50/Resolution)' : 'Intercom + Fin AI ($0.99/Resolution Meter)';
+    const savedVsPrimary = Math.max(0, primaryR.year1Total - minR.year1Total);
+    const minCtaText = getContextualCtaLabel(minR.tool, minR.year1Total, primaryR.year1Total, false);
 
     summaryEl.innerHTML = `
       <div class="summary-card result-card card-lowest">
         <div class="summary-label">Best Value &middot; Lowest Year-1 Cost</div>
         <div class="summary-metric" style="color:var(--emerald);">$${{minR.year1Total.toLocaleString()}} / yr &middot; ${{minR.tool.name}}</div>
-        <div class="summary-scenario">${{scenarioLine}}${{savedVsIc > 0 ? ` &middot; saves $${{savedVsIc.toLocaleString()}}/yr vs. ${{icR.tool.name}}` : ''}}</div>
+        <div class="summary-scenario">${{scenarioLine}}${{savedVsPrimary > 0 ? ` &middot; saves $${{savedVsPrimary.toLocaleString()}}/yr vs. ${{primaryR.tool.name}}` : ''}}</div>
         <div class="summary-breakdown">$${{minR.annualSeatsCost.toLocaleString()}} licenses + $${{minR.onboarding.toLocaleString()}} onboarding + $${{minR.aiAnnual.toLocaleString()}} AI</div>
         <div class="summary-caveat"><strong>Contract note:</strong> ${{minR.tool.trap_badge}}</div>
         <details class="calc-disclosure">
@@ -661,20 +707,20 @@ function renderDirectory() {{
         </div>
       </div>
       <div class="summary-card result-card card-hidden">
-        <div class="summary-label">Intercom + Fin AI ($0.99/Resolution Meter)</div>
-        <div class="summary-metric" style="color:var(--rose);">+$${{icR.hiddenFees.toLocaleString()}} / yr (${{icHiddenPct}}% of Year-1 bill)</div>
-        <div class="summary-scenario">On <strong>${{icR.tool.name}}</strong> ($${{icR.year1Total.toLocaleString()}}/yr total &middot; ${{scenarioLine.replace('Based on ', '')}})</div>
-        <div class="summary-breakdown">$${{icR.annualSeatsCost.toLocaleString()}} licenses + $${{icR.onboarding.toLocaleString()}} onboarding + $${{icR.aiAnnual.toLocaleString()}} AI</div>
-        <div class="summary-caveat"><strong>Hidden Cost Highlight:</strong> ${{formatHiddenReason(icR)}}.</div>
+        <div class="summary-label">${{primaryLabel}}</div>
+        <div class="summary-metric" style="color:var(--rose);">+$${{primaryR.hiddenFees.toLocaleString()}} / yr (${{primaryHiddenPct}}% of Year-1 bill)</div>
+        <div class="summary-scenario">On <strong>${{primaryR.tool.name}}</strong> ($${{primaryR.year1Total.toLocaleString()}}/yr total &middot; ${{scenarioLine.replace('Based on ', '')}})</div>
+        <div class="summary-breakdown">$${{primaryR.annualSeatsCost.toLocaleString()}} licenses + $${{primaryR.onboarding.toLocaleString()}} onboarding + $${{primaryR.aiAnnual.toLocaleString()}} AI</div>
+        <div class="summary-caveat"><strong>Hidden Cost Highlight:</strong> ${{formatHiddenReason(primaryR)}}.</div>
         <details class="calc-disclosure">
           <summary class="calc-disclosure-toggle">See calculation</summary>
-          <div class="calc-disclosure-body">${{renderCalcBreakdownHtml(icR, seats, aiVol, mode)}}</div>
+          <div class="calc-disclosure-body">${{renderCalcBreakdownHtml(primaryR, seats, aiVol, mode)}}</div>
         </details>
         <div class="summary-actions">
           <div class="cta-stack">
-            <a class="btn-secondary" href="${{icAff.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${{icR.tool.id}}" data-cta-location="summary-card">${{getVendorCtaLabel(icR.tool)}}</a>
+            <a class="btn-secondary" href="${{primaryAff.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${{primaryR.tool.id}}" data-cta-location="summary-card">${{getVendorCtaLabel(primaryR.tool)}}</a>
           </div>
-          ${{icAudit ? `<a class="summary-audit-link" href="${{icAudit.url}}" data-track="internal-audit">${{icAudit.label}}</a>` : ''}}
+          ${{primaryAudit ? `<a class="summary-audit-link" href="${{primaryAudit.url}}" data-track="internal-audit">${{primaryAudit.label}}</a>` : ''}}
         </div>
       </div>
       <div class="summary-card result-card card-highest">
@@ -708,8 +754,8 @@ function renderDirectory() {{
       if (r.onboarding > 0) parts.push(`$${{r.onboarding.toLocaleString()}} onboarding`);
       if (r.aiAnnual > 0) parts.push(`$${{r.aiAnnual.toLocaleString()}} AI overage`);
       const isSpotViz = r.tool.id === currentSpotlightId ? 'is-spotlight-row' : '';
-      const isSavingsOption = r.year1Total < icR.year1Total && r.tool.id !== icR.tool.id;
-      const rowCta = getContextualCtaLabel(r.tool, r.year1Total, icR.year1Total, !isSavingsOption);
+      const isSavingsOption = r.year1Total < primaryR.year1Total && r.tool.id !== primaryR.tool.id;
+      const rowCta = getContextualCtaLabel(r.tool, r.year1Total, primaryR.year1Total, !isSavingsOption);
       return `
         <div class="viz-row ${{isSpotViz}}" data-tool-id="${{r.tool.id}}" style="cursor:pointer;">
           <div class="viz-label" title="${{r.tool.name}}">${{r.tool.name}}</div>
@@ -759,8 +805,8 @@ function renderDirectory() {{
     }}
 
     const isSpot = t.id === currentSpotlightId ? 'is-spotlight-row' : '';
-    const isSavingsRow = r.year1Total < icR.year1Total && t.id !== icR.tool.id;
-    const tableCtaText = getContextualCtaLabel(t, r.year1Total, icR.year1Total, !isSavingsRow);
+    const isSavingsRow = r.year1Total < primaryR.year1Total && t.id !== primaryR.tool.id;
+    const tableCtaText = getContextualCtaLabel(t, r.year1Total, primaryR.year1Total, !isSavingsRow);
     return `
       <tr class="${{isSpot}}" data-row-tool="${{t.id}}" style="cursor:pointer;">
         <td data-label="Platform">
@@ -942,5 +988,111 @@ def build_all():
     )
 
 
+ZENDESK_EDITORIAL = """
+<section class="editorial-below-section">
+  <h2>Why Zendesk AI overage outgrows the seat price</h2>
+  <div class="methodology-grid fine-print-grid">
+    <div class="methodology-item">
+      <strong>1. Five included resolutions per agent, then $1.50</strong>
+      Suite Team ($55/agent/mo billed annually) includes 5 automated resolutions per agent each month. At 10 agents that is 50 included resolutions. Every resolution above that costs $1.50 committed or $2.00 pay-as-you-go, and overage is on by default.
+    </div>
+    <div class="methodology-item">
+      <strong>2. The prefilled Year-1 total is $32,700</strong>
+      10 agents on annual Suite Team are $6,600 in seats. 1,500 AI resolutions a month leave 1,450 billable at $1.50, which is $26,100 a year. Seats plus overage equal $32,700. Freshdesk Growth plus Freddy AI session packs is $10,855 for the same usage, a $21,845 gap.
+    </div>
+    <div class="methodology-item">
+      <strong>3. The $50 Copilot add-on is separate</strong>
+      Zendesk lists Copilot at $50 per agent per month on annual billing. That add-on is not inside the $32,700 Suite Team figure above. Buying it for 10 agents would add another $6,000 a year on top of seats and per-resolution overage.
+    </div>
+  </div>
+</section>
+"""
+
+ZENDESK_BEST = (
+    '<strong>Best option:</strong> <a href="https://www.freshworks.com/freshdesk/pricing/" '
+    'target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="freshdesk-support" '
+    'data-cta-location="workbench-best-option">Freshdesk Growth + Freddy AI ($10,855/yr)</a> '
+    '&middot; saves $21,845/yr'
+)
+
+zd_faqs = [
+    (
+        "How much does Zendesk AI cost for 10 agents and 1,500 resolutions a month?",
+        "On Suite Team billed annually, 10 agents cost $55 each ($6,600/year) and include 50 automated resolutions a month. The other 1,450 resolutions at the $1.50 committed rate add $26,100, for a $32,700 Year-1 total. The same usage on Freshdesk Growth plus Freddy AI session packs is $10,855.",
+    ),
+    (
+        "Does the $50 per agent Copilot add-on sit inside that $32,700?",
+        "No. The $32,700 figure is Suite Team seats plus committed per-resolution overage. Zendesk lists Copilot separately at $50 per agent per month on annual billing, which is another $6,000 a year for 10 agents.",
+    ),
+    (
+        "How does Freshdesk Freddy AI compare at the same volume?",
+        "Freshdesk Growth is $19 per agent per month billed annually. Freddy AI Agent includes 500 one-time sessions, then $49 per 100-session pack. At 1,500 AI tickets a month that is $10,855 in Year 1, which is $21,845 less than Zendesk Suite Team.",
+    ),
+]
+
+
+def _zendesk_body(prefix, h1, lead, compare_mode, page_id, legacy_summary_id):
+    return render_intercom_calculator_body(
+        prefix=prefix,
+        h1=h1,
+        lead=lead,
+        compare_mode=compare_mode,
+        page_id=page_id,
+        spotlight_id="zendesk-suite-team",
+        legacy_summary_id=legacy_summary_id,
+        editorial_html=ZENDESK_EDITORIAL,
+        calc_heading="Interactive Zendesk AI Year-1 True-Cost Calculator (2026)",
+        gap_sub="Visual Year-1 cost comparison graph &amp; full contract table (Zendesk AI vs. Freshdesk, Intercom, Help Scout &amp; HubSpot)",
+        static_product="Zendesk Suite Team + AI Agents",
+        static_total="$32,700",
+        static_subnote="+$26,100/yr (+395%) above the $6,600 advertised price.",
+        static_best_html=ZENDESK_BEST,
+        static_base="$660",
+        static_seats="$5,940",
+        static_hidden="$26,100",
+        static_hidden_sub="Zendesk AI $1.50/resolution overage",
+    )
+
+
+def build_zendesk_cluster():
+    h1 = "Zendesk AI Cost Calculator: Calculate Your Real Year-1 Total ($50/Seat Add-On + $1.50/Resolution)"
+    lead = "See what Zendesk AI actually costs once the $50/agent add-on and per-resolution overages are included. Adjust the agents and AI volume below to see your real Year-1 total and how it compares to Freshdesk and Intercom."
+    title = "Zendesk AI Cost Calculator (2026): Real Per-Resolution &amp; Add-On Pricing | SaaSBill"
+    description = "Calculate Zendesk AI Year-1 cost for 10 agents and 1,500 resolutions: Suite Team is $32,700 versus $10,855 on Freshdesk, a $21,845 gap."
+    render_page(
+        "zendesk-ai-cost-calculator/index.html",
+        title,
+        description,
+        "/zendesk-ai-cost-calculator/",
+        _zendesk_body("../", h1, lead, "zendesk_ai", "zendesk-ai-cost-calculator", "zd-summary"),
+        faqs=zd_faqs,
+    )
+    render_page(
+        "pricing/zendesk-ai-resolution-and-automated-outcome-cost/index.html",
+        title,
+        description,
+        "/pricing/zendesk-ai-resolution-and-automated-outcome-cost/",
+        _zendesk_body("../../", h1, lead, "zendesk_ai", "zendesk-ai-resolution-cost", "zd-summary"),
+        faqs=zd_faqs,
+        published_date="2026-10-25",
+    )
+    render_page(
+        "zendesk-vs-freshdesk-cost-comparison/index.html",
+        "Zendesk vs Freshdesk Cost Comparison (2026): AI &amp; Seat Pricing Calculator | SaaSBill",
+        "Compare Zendesk Suite Team AI at $32,700 with Freshdesk Freddy AI at $10,855 for 10 agents and 1,500 AI resolutions a month.",
+        "/zendesk-vs-freshdesk-cost-comparison/",
+        _zendesk_body(
+            "../",
+            "Zendesk vs Freshdesk Cost Comparison: Real Year-1 Pricing with AI Resolutions",
+            "Compare what Zendesk AI and Freshdesk Freddy AI actually cost for your support team. Adjust the agents and AI volume below to see the real Year-1 total and exact annual savings side by side.",
+            "zendesk_vs_freshdesk",
+            "zendesk-vs-freshdesk-cost-comparison",
+            "zd-summary",
+        ),
+        faqs=zd_faqs,
+    )
+
+
 if __name__ == "__main__":
     build_all()
+    build_zendesk_cluster()
