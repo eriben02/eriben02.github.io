@@ -622,6 +622,7 @@ function renderCalcBreakdownHtml(r, seats, aiVol, mode, cat) {{
           <span>Monthly Processing Fees ($50k GMV)</span>
           <span>$${{prof.total.toLocaleString()}}/mo ($${{(prof.total * 12).toLocaleString()}}/yr)</span>
         </div>
+        ${{prof.disputeLine ? `<div class="calc-math-row"><span class="calc-math-label"><strong>Dispute and chargeback exposure</strong><span class="calc-math-formula">${{prof.disputeLine}}</span></span><span class="calc-math-val">${{prof.disputeAmt}}</span></div>` : ''}}
         <div class="calc-math-meta">
           <span>Potential 25% reserve holdback: <strong>$${{prof.held.toLocaleString()}}/mo</strong> (temporary hold, not a fee)</span>
           <a href="${{srcUrl}}" target="_blank" rel="noopener">Verified source &nearr;</a>
@@ -735,7 +736,9 @@ const PAY_PROFILES = {{
     callTitleHidden: 'Billing & FX surcharges',
     callSubHidden: '+0.7% Billing + 1.5% intl ($575)',
     quote: '<strong>Estimated monthly processing fees:</strong> $2,325/mo<br/><strong>Potential funds temporarily held:</strong> $12,500/mo (25% reserve)',
-    sub: 'Assumptions ($50k/mo GMV, 1,000 tx, 30% intl): $1,750 base + $575 Billing/FX.',
+    sub: 'Assumptions ($50k/mo GMV, 1,000 tx, 30% intl): $1,750 base + $575 Billing/FX. Dispute exposure at 0.5%: 5 disputes/mo, $250/mo disputed + $75/mo in $15 fees.',
+    disputeLine: '0.5% of 1,000 tx = 5 disputes/mo. $50 average order x 5 = $250/mo disputed. 5 x $15 = $75/mo dispute fees. Chargeflow recovers won disputes at a 25% performance fee and is the layer that keeps this rate under the 0.5% to 0.75% reserve trigger.',
+    disputeAmt: '$325/mo',
     tableFeeSub: '$1,750 base (2.9% + $0.30) + $575 Billing/FX',
     tableHeldPill: '$12,500 / mo temporarily held',
     tableHeldSub: 'If 25% rolling reserve triggers (held 90–180 days, not a fee) · Portable card tokens'
@@ -754,7 +757,9 @@ const PAY_PROFILES = {{
     callTitleHidden: 'FX conversion spread',
     callSubHidden: 'Est. spread on 30% intl ($450)',
     quote: '<strong>Estimated monthly processing fees:</strong> $3,450/mo<br/><strong>Potential funds temporarily held:</strong> $12,500/mo (25% hold risk)',
-    sub: 'Assumptions ($50k/mo GMV, 1,000 tx, 30% intl): $3,000 MoR base + $450 FX spread.',
+    sub: 'Assumptions ($50k/mo GMV, 1,000 tx, 30% intl): $3,000 MoR base + $450 FX spread. Dispute exposure at 0.5%: 5 disputes/mo, $250/mo disputed + $100/mo in $20 fees.',
+    disputeLine: '0.5% of 1,000 tx = 5 disputes/mo. $250/mo disputed order value + $100/mo in $20 Paddle dispute fees. Chargeflow recovers won disputes at a 25% performance fee and is the layer that keeps this rate under the 0.5% to 0.75% reserve trigger.',
+    disputeAmt: '$350/mo',
     tableFeeSub: '$3,000 MoR base (5.0% + $0.50) + $450 est. FX spread',
     tableHeldPill: '$12,500 / mo temporarily held',
     tableHeldSub: 'If 25% payout hold triggers on review (not a fee) · Non-exportable MoR card vault'
@@ -793,7 +798,9 @@ const PAY_PROFILES = {{
     callTitleHidden: 'Subscription & intl surcharges',
     callSubHidden: '+0.5% sub ($250) + 1.5% intl',
     quote: '<strong>Estimated monthly processing fees:</strong> $3,475/mo<br/><strong>Potential funds temporarily held:</strong> $12,500/mo (25% reserve)',
-    sub: 'Assumptions ($50k/mo GMV, 1,000 tx, 30% intl): $3,000 MoR base + $475 surcharges.',
+    sub: 'Assumptions ($50k/mo GMV, 1,000 tx, 30% intl): $3,000 MoR base + $475 surcharges. Dispute exposure at 0.5%: 5 disputes/mo, $250/mo disputed + $75/mo in $15 fees.',
+    disputeLine: '0.5% of 1,000 tx = 5 disputes/mo. $250/mo disputed order value + $75/mo in $15 dispute fees. Chargeflow recovers won disputes at a 25% performance fee and is the layer that keeps this rate under the 0.5% to 0.75% reserve trigger.',
+    disputeAmt: '$325/mo',
     tableFeeSub: '$3,000 MoR base (5.0% + $0.50) + $475 subscription/intl fees',
     tableHeldPill: '$12,500 / mo temporarily held',
     tableHeldSub: 'If 25% rolling reserve triggers during onboarding review (not a fee)'
@@ -812,7 +819,9 @@ const PAY_PROFILES = {{
     callTitleHidden: '25% recovery success fee',
     callSubHidden: '25% of $2k recovered ($500/mo)',
     quote: '<strong>Estimated monthly processing fees:</strong> $500/mo<br/><strong>Potential funds temporarily held:</strong> $0/mo (add-on dispute layer)',
-    sub: 'Assumptions ($50k/mo GMV, $2,000/mo recovered disputes): 25% performance fee.',
+    sub: 'Assumptions ($50k/mo GMV, $2,000/mo recovered disputes): 25% performance fee. At a 0.5% dispute rate that is 5 disputes/mo ($250 disputed). A 65% planning win rate keeps about $122/mo net after the 25% fee and holds the rate under the 0.5% to 0.75% reserve trigger.',
+    disputeLine: 'On this $50k example, 0.5% is 5 disputes/mo and $250/mo disputed. 65% recovered is $163. The 25% success fee is $41. Net kept is $122/mo, with a $0 monthly fee. That is separate from the $500/mo illustration above. Keeping the dispute rate under 0.5% to 0.75% is what avoids the $12,500/mo reserve.',
+    disputeAmt: '$122/mo net',
     tableBaseSub: '$0 fixed monthly base · 25% of recovered chargebacks',
     tableFeeSub: '25% fee on $2,000/mo recovered disputes ($0 if unrecovered)',
     tableHeldPill: 'Reduces PSP reserve risk',

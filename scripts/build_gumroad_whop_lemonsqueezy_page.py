@@ -118,6 +118,11 @@ body = f"""
   <h2 style="margin-top:0;">Net payout calculator: Gumroad vs. Whop vs. Lemon Squeezy</h2>
   <p style="color:var(--muted); margin-bottom:16px; font-size:0.95rem;">Prefilled with a $29 digital product, 200 sales/month. Results update as you change the inputs below.</p>
   <div id="tr-summary" class="summary-strip" aria-live="polite"></div>
+  <div id="tr-cf-callout" class="wb-best-option"></div>
+  <div class="cta-stack">
+    <a id="tr-cf-cta" class="btn-cta" href="https://www.chargeflow.io/" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="chargeflow" data-cta-location="summary-card">Recover $169/yr in disputes with Chargeflow &rarr;</a>
+    <a class="summary-audit-link" href="../../chargeback-fee-and-recovery-calculator/">Open the full chargeback calculator &rarr;</a>
+  </div>
   <h3 style="margin:22px 0 10px; font-size:1rem;">Adjust your numbers</h3>
   <div class="calc-grid">
     <div class="control-group">
@@ -262,6 +267,15 @@ body = f"""
 
 <script>
 const TR_FEES = {json.dumps(FEES)};
+function calcChargeflowOnDisputes(price, sales, disputePct) {{
+  const disputesMo = sales * (disputePct / 100);
+  const disputedYr = disputesMo * price * 12;
+  const feeYr = disputesMo * 15 * 12;
+  const recovered = Math.round(disputedYr * 0.65);
+  const successFee = Math.round(recovered * 0.25);
+  const net = recovered - successFee;
+  return {{ disputesMo: disputesMo, disputedYr: disputedYr, feeYr: feeYr, recovered: recovered, successFee: successFee, net: net }};
+}}
 function calcPlatforms(o) {{
   const G = o.price * o.sales, i = o.intl / 100, pp = o.paypal / 100, disc = o.discover / 100, dr = o.dispute / 100;
   const disputes = o.sales * dr, g = TR_FEES.gumroad, l = TR_FEES.ls, w = TR_FEES.whop;
@@ -355,7 +369,12 @@ function updateTr() {{
       <td data-label="Net payout / yr" class="price-highlight">${{trFmt(r.net * 12)}}<div class="cell-scenario">${{scenarioLine}}</div></td>
       <td data-label="Next step"><div class="cta-stack"><a class="btn-secondary" href="${{r.url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${{r.id}}" data-cta-location="table-row">${{r.cta}}</a></div></td>
     </tr>`).join('');
-  let note = 'Assumptions: list prices, fees calculated on the pre-tax price (Lemon Squeezy calculates its fee on the order total including tax, so its real fee is slightly higher on taxed sales). Gumroad PayPal sales are modelled at the 2.9% + 30¢ card rate; actual PayPal fees may differ. Whop payouts assume 4 next-day ACH withdrawals/mo ($2.50 each). Lost revenue from chargebacks is the same on every platform and is not included.';
+  const cf = calcChargeflowOnDisputes(o.price, o.sales, o.dispute);
+  const cfBox = document.getElementById('tr-cf-callout');
+  if (cfBox) cfBox.innerHTML = '<strong>Chargeback recovery:</strong> disputed sales are ' + trFmt(cf.disputedYr) + '/yr at this dispute rate. Lemon Squeezy and Whop also add ' + trFmt(cf.feeYr) + '/yr in $15 dispute fees. Chargeflow is $0/mo and takes 25% only on won disputes. At a 65% planning win rate that is ' + trFmt(cf.recovered) + ' gross recovered, a ' + trFmt(cf.successFee) + ' success fee, and <strong>' + trFmt(cf.net) + '/yr net</strong>.';
+  const cfCta = document.getElementById('tr-cf-cta');
+  if (cfCta) cfCta.textContent = 'Recover ' + trFmt(cf.net) + '/yr in disputes with Chargeflow →';
+  let note = 'Assumptions: list prices, fees calculated on the pre-tax price (Lemon Squeezy calculates its fee on the order total including tax, so its real fee is slightly higher on taxed sales). Gumroad PayPal sales are modelled at the 2.9% + 30¢ card rate; actual PayPal fees may differ. Whop payouts assume 4 next-day ACH withdrawals/mo ($2.50 each). The callout above prices the disputed sale value and the $15 dispute fee. The 65% win rate is a planning benchmark.';
   if (o.payout === 'intl') note += ' Whop international local-bank payout fees vary by country and are not included.';
   document.getElementById('tr-note').textContent = note;
   if (typeof window.trackSaaSBillEvent === 'function') {{ window.trackSaaSBillEvent('result_rendered', {{ page: 'gumroad-whop-lemon-squeezy', price: o.price, sales: o.sales }}); }} else {{ (window.__saasbillEvents = window.__saasbillEvents || []).push({{event: 'result_rendered', page: 'gumroad-whop-lemon-squeezy', price: o.price, sales: o.sales, ts: Date.now()}}); }}

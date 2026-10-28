@@ -82,3 +82,68 @@ assert.strictEqual(paddle.cfLoss, 12714);
 assert.strictEqual(paddle.savings, 10062);
 
 console.log("ok chargeback calculator: net $9,126, save $10,062 vs manual drain $21,996");
+
+function extractFn(file, name) {
+  const text = fs.readFileSync(path.join(root, file), "utf8");
+  for (const bad of ["\u2014", "&mdash;", "SaaSTruth", "Erik Bengtsson"]) {
+    if (text.includes(bad)) fail(file + " banned token " + bad);
+  }
+  const re = new RegExp("function " + name + "\\([^)]*\\) \\{[\\s\\S]*?\\n\\}");
+  const m = text.match(re);
+  if (!m) fail("missing " + name + " in " + file);
+  const box = {};
+  vm.createContext(box);
+  vm.runInContext(m[0], box);
+  return { text, fn: box[name] };
+}
+
+const reserve = extractFn("public/exit/stripe-shopify-paddle-frozen-funds-alternatives/index.html", "calcReserveDisputes");
+if (!reserve.text.includes('id="res-dispute-rate"')) fail("missing res-dispute-rate");
+if (!reserve.text.includes('id="res-output"')) fail("missing res-output");
+if (!reserve.text.includes('data-vendor="chargeflow"')) fail("reserve page missing chargeflow vendor");
+if (!reserve.text.includes("https://www.chargeflow.io/")) fail("reserve page missing chargeflow url");
+const rd = reserve.fn(50000, 0.65);
+assert.strictEqual(rd.disputesYr, 39);
+assert.strictEqual(rd.disputed, 3900);
+assert.strictEqual(rd.fees, 585);
+assert.strictEqual(rd.prep, 1170);
+assert.strictEqual(rd.drain, 5655);
+assert.strictEqual(rd.netRecovered, 1901);
+
+const stripe = extractFn("public/pricing/stripe-billing-0-7-percent-recurring-tax-calculator/index.html", "calcStripeDisputes");
+if (!stripe.text.includes('id="sb-dispute-rate"')) fail("missing sb-dispute-rate");
+if (!stripe.text.includes("Annual chargeback and dispute drain")) fail("stripe billing missing drain label");
+const sd = stripe.fn(40000, 800, 0.5);
+assert.strictEqual(sd.disputes, 48);
+assert.strictEqual(sd.disputed, 2400);
+assert.strictEqual(sd.fees, 720);
+assert.strictEqual(sd.counter, 720);
+assert.strictEqual(sd.drain, 3840);
+assert.strictEqual(sd.net, 1170);
+
+const both = extractFn("public/faq/stripe-vs-paddle-true-cost/index.html", "calcProcessorDisputes");
+if (!both.text.includes('id="sp-dispute-rate"')) fail("missing sp-dispute-rate");
+const ss = both.fn(50000, 1000, 0.5, 15);
+const pp = both.fn(50000, 1000, 0.5, 20);
+assert.strictEqual(ss.disputes, 60);
+assert.strictEqual(ss.disputed, 3000);
+assert.strictEqual(ss.unrecovered, 2400);
+assert.strictEqual(ss.fees, 900);
+assert.strictEqual(ss.drain, 3300);
+assert.strictEqual(ss.net, 1462);
+assert.strictEqual(pp.fees, 1200);
+assert.strictEqual(pp.drain, 3600);
+
+const take = extractFn("public/compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/index.html", "calcChargeflowOnDisputes");
+if (!take.text.includes('id="tr-cf-cta"')) fail("missing take-rate chargeflow cta");
+const td = take.fn(29, 200, 0.5);
+assert.strictEqual(td.disputedYr, 348);
+assert.strictEqual(td.feeYr, 180);
+assert.strictEqual(td.net, 169);
+
+const home = fs.readFileSync(path.join(root, "public/index.html"), "utf8");
+for (const token of ["$250/mo disputed", "$75/mo in $15", "0.5% to 0.75% reserve trigger", "$122/mo net"]) {
+  if (!home.includes(token)) fail("homepage missing " + token);
+}
+
+console.log("ok payment calculators: reserve net $1,901, stripe billing net $1,170, stripe vs paddle net $1,462");

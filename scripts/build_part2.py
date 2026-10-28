@@ -32,14 +32,15 @@ p3_body = """
       <label for="gm-cap">Capital loan repayment deduction: <span class="val-pill" id="gm-cap-val">15</span>%</label>
       <input class="wb-range" type="range" id="gm-cap" min="0" max="30" step="2" value="15" />
     </div>
+    <div class="control-group">
+      <label for="res-dispute-rate">Dispute / chargeback rate: <span class="val-pill" id="res-dispute-rate-val">0.65</span>%</label>
+      <input class="wb-range" type="range" id="res-dispute-rate" min="0.1" max="2.0" step="0.05" value="0.65" data-track="calculator-control" data-control="dispute-rate" />
+    </div>
   </div>
   <div id="hold-summary" class="summary-strip" aria-live="polite"></div>
   <div id="reserve-output" class="summary-strip" style="display:none;"></div>
+  <div id="res-output" aria-live="polite"></div>
   <p class="summary-interpretation"><strong>How to read this comparison:</strong> Payment processors do not have a single fixed-price &ldquo;winner&rdquo;. Your actual take rate and cashflow exposure depend on monthly volume, average order value, international card mix, and whether you require a Merchant of Record for global VAT/sales tax.</p>
-  <div class="card" style="margin-top:18px;">
-    <h3 style="margin-top:0;"><a href="../../chargeback-fee-and-recovery-calculator/">Chargeback fees vs. automated recovery</a></h3>
-    <p>A dispute costs the order value plus a processor fee, usually $15 on Stripe and Shopify Payments and $15 to $20 on Paddle, plus about $30 of evidence prep if you fight it in house. The <a href="../../chargeback-fee-and-recovery-calculator/">chargeback cost calculator</a> compares a 20% manual win rate, Chargeflow at a 65% planning win rate with a 25% success fee and $0 monthly, and a 0.40% fee on every dollar of sales.</p>
-  </div>
 </section>
 
 <section>
@@ -131,13 +132,28 @@ p3_body = """
 </section>
 
 <script>
+function calcReserveDisputes(rev, disputePct) {
+  const disputesYr = Math.round((rev / 100) * (disputePct / 100) * 12);
+  const disputed = disputesYr * 100;
+  const fees = disputesYr * 15;
+  const prep = disputesYr * 30;
+  const drain = disputed + fees + prep;
+  const recovered = Math.round(disputed * 0.65);
+  const successFee = Math.round(recovered * 0.25);
+  const netRecovered = recovered - successFee;
+  return { disputesYr: disputesYr, disputed: disputed, fees: fees, prep: prep, drain: drain, recovered: recovered, successFee: successFee, netRecovered: netRecovered };
+}
 function updateReserveSim() {
   const rev = parseInt(document.getElementById('gm-rev').value, 10);
   const resPct = parseInt(document.getElementById('gm-res').value, 10);
   const capPct = parseInt(document.getElementById('gm-cap').value, 10);
+  const disputePct = parseFloat(document.getElementById('res-dispute-rate').value);
   document.getElementById('gm-rev-val').textContent = rev.toLocaleString();
   document.getElementById('gm-res-val').textContent = resPct;
   document.getElementById('gm-cap-val').textContent = capPct;
+  document.getElementById('res-dispute-rate-val').textContent = disputePct.toFixed(2);
+  const cb = calcReserveDisputes(rev, disputePct);
+  const reserveAt25 = Math.round(rev * 0.25);
   const procFee = Math.round(rev * 0.029);
   const frozenMo = Math.round(rev * (resPct / 100));
   const loanDed = Math.round(rev * (capPct / 100));
@@ -152,7 +168,8 @@ function updateReserveSim() {
       <div class="summary-metric" style="color:var(--rose);">$${frozenMo.toLocaleString()} / mo held</div>
       <div class="summary-scenario">${scenarioLine}</div>
       <div class="summary-breakdown"><strong>Estimated monthly processing fees:</strong> $${procFee.toLocaleString()}/mo (2.9%) &middot; <strong>Temporarily held:</strong> $${frozenMo.toLocaleString()}/mo reserve + $${loanDed.toLocaleString()}/mo loan deduction</div>
-      <div class="summary-caveat"><strong>Hidden Cost Highlight:</strong> A rolling reserve is a temporary cashflow holdback (90&ndash;180 days), not a permanent fee, but it withholds ${heldPct}% ($${tempHeld.toLocaleString()}/mo) of gross payouts before operating expenses.</div>
+      <div class="summary-breakdown"><strong>Annual chargeback and dispute drain:</strong> $${cb.drain.toLocaleString()}/yr (${cb.disputesYr.toLocaleString()} disputes, $${cb.disputed.toLocaleString()} disputed + $${cb.fees.toLocaleString()} fees + $${cb.prep.toLocaleString()} prep)</div>
+      <div class="summary-caveat"><strong>Hidden Cost Highlight:</strong> A rolling reserve is a temporary cashflow holdback (90&ndash;180 days), not a permanent fee, but it withholds ${heldPct}% ($${tempHeld.toLocaleString()}/mo) of gross payouts before operating expenses. Chargebacks add another $${cb.drain.toLocaleString()}/yr on top of that hold.</div>
       <div class="summary-actions">
         <div class="cta-stack">
           <a class="btn-cta" href="https://stripe.com/pricing" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="stripe-payments" data-cta-location="summary-card">View Stripe pricing &rarr;</a>
@@ -169,7 +186,8 @@ function updateReserveSim() {
         <div class="cta-stack">
           <a class="btn-secondary" href="https://whop.com/sell?a=baggyprairieae" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="whop-payments" data-cta-location="summary-card">View Whop Payments pricing &rarr;</a>
         </div>
-        <a class="summary-audit-link" href="https://www.chargeflow.io/pricing" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="chargeflow" data-cta-location="summary-card">View Chargeflow pricing &rarr;</a>
+        <a class="btn-cta" href="https://www.chargeflow.io/" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="chargeflow" data-cta-location="summary-card">Recover $${cb.netRecovered.toLocaleString()}/yr &amp; prevent reserves with Chargeflow &rarr;</a>
+        <a class="summary-audit-link" href="../../chargeback-fee-and-recovery-calculator/">Open the full chargeback calculator &rarr;</a>
       </div>
     </div>
     <div class="summary-card card-highest">
@@ -190,9 +208,43 @@ function updateReserveSim() {
   if (holdEl) holdEl.innerHTML = cardsHtml;
   const resEl = document.getElementById('reserve-output');
   if (resEl) resEl.innerHTML = cardsHtml;
-  if (typeof window.trackSaaSBillEvent === 'function') window.trackSaaSBillEvent('result_rendered', { page: 'reserve-simulator', rev: rev, resPct: resPct });
+  const trigger = disputePct >= 0.5
+    ? 'This ' + disputePct.toFixed(2) + '% dispute rate is at or above the 0.5% reserve trigger. A 25% rolling reserve on this volume is $' + reserveAt25.toLocaleString() + '/mo.'
+    : 'This ' + disputePct.toFixed(2) + '% dispute rate is under the 0.5% reserve trigger.';
+  const out = document.getElementById('res-output');
+  if (out) {
+    out.innerHTML = `
+      <div class="summary-strip">
+        <div class="summary-card card-hidden">
+          <div class="summary-label">Annual chargeback and dispute drain</div>
+          <div class="summary-metric">$${cb.drain.toLocaleString()} / yr</div>
+          <div class="summary-scenario">Based on $${rev.toLocaleString()}/mo, a $100 average order, and a ${disputePct.toFixed(2)}% dispute rate</div>
+          <div class="summary-breakdown">${cb.disputesYr.toLocaleString()} disputes/yr. Disputed order value $${cb.disputed.toLocaleString()} + $${cb.fees.toLocaleString()} in $15 dispute fees + $${cb.prep.toLocaleString()} manual evidence prep.</div>
+          <p class="summary-caveat"><strong>Hidden Cost Highlight:</strong> ${trigger}</p>
+          <details class="calc-disclosure">
+            <summary class="calc-disclosure-toggle">See calculation</summary>
+            <div class="calc-disclosure-body">Orders/mo = $${rev.toLocaleString()} / $100. Disputes/yr = orders/mo x ${disputePct.toFixed(2)}% x 12 = ${cb.disputesYr.toLocaleString()}. Disputed sales = ${cb.disputesYr.toLocaleString()} x $100 = $${cb.disputed.toLocaleString()}. Dispute fees = ${cb.disputesYr.toLocaleString()} x $15 = $${cb.fees.toLocaleString()}. Evidence prep = ${cb.disputesYr.toLocaleString()} x $30 = $${cb.prep.toLocaleString()}. Annual drain = $${cb.disputed.toLocaleString()} + $${cb.fees.toLocaleString()} + $${cb.prep.toLocaleString()} = $${cb.drain.toLocaleString()}.</div>
+          </details>
+        </div>
+        <div class="summary-card best-card card-lowest">
+          <div class="summary-label">Net annual recovery with Chargeflow</div>
+          <div class="summary-metric">$${cb.netRecovered.toLocaleString()} / yr</div>
+          <div class="summary-scenario">65% planning win rate, 25% performance fee, $0/mo fixed</div>
+          <div class="summary-breakdown">Gross recovered $${cb.recovered.toLocaleString()} minus a $${cb.successFee.toLocaleString()} success fee. ${trigger} Chargeflow is modeled here as the layer that keeps the dispute ratio under 0.5%.</div>
+          <details class="calc-disclosure">
+            <summary class="calc-disclosure-toggle">See calculation</summary>
+            <div class="calc-disclosure-body">65% of $${cb.disputed.toLocaleString()} = $${cb.recovered.toLocaleString()} gross recovered. Success fee = 25% of $${cb.recovered.toLocaleString()} = $${cb.successFee.toLocaleString()}. Net kept = $${cb.netRecovered.toLocaleString()}. The 65% win rate is a planning benchmark, not a guaranteed Chargeflow win rate.</div>
+          </details>
+          <div class="summary-actions">
+            <a class="btn-cta" href="https://www.chargeflow.io/" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="chargeflow" data-cta-location="workbench">Recover $${cb.netRecovered.toLocaleString()}/yr &amp; prevent reserves with Chargeflow &rarr;</a>
+            <a class="summary-audit-link" href="../../chargeback-fee-and-recovery-calculator/">Open the full chargeback calculator &rarr;</a>
+          </div>
+        </div>
+      </div>`;
+  }
+  if (typeof window.trackSaaSBillEvent === 'function') window.trackSaaSBillEvent('result_rendered', { page: 'reserve-simulator', rev: rev, resPct: resPct, disputePct: disputePct });
 }
-['gm-rev', 'gm-res', 'gm-cap'].forEach(id => document.getElementById(id).addEventListener('input', updateReserveSim));
+['gm-rev', 'gm-res', 'gm-cap', 'res-dispute-rate'].forEach(id => document.getElementById(id).addEventListener('input', updateReserveSim));
 updateReserveSim();
 </script>
 """

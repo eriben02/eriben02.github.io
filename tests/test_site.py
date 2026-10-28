@@ -99,6 +99,26 @@ class TestChargebackCalculator(unittest.TestCase):
             affiliates = json.load(f)
         self.assertEqual(affiliates["chargeflow"]["destination_url"], "https://www.chargeflow.io/")
 
+    def test_payment_calculators_include_live_dispute_line(self):
+        pages = {
+            "exit/stripe-shopify-paddle-frozen-funds-alternatives/index.html": "res-dispute-rate",
+            "pricing/stripe-billing-0-7-percent-recurring-tax-calculator/index.html": "sb-dispute-rate",
+            "faq/stripe-vs-paddle-true-cost/index.html": "sp-dispute-rate",
+            "compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/index.html": "tr-cf-cta",
+        }
+        for rel, token in pages.items():
+            with open(os.path.join(PUBLIC_DIR, rel), encoding="utf-8") as f:
+                html = f.read()
+            self.assertIn(token, html, rel)
+            self.assertIn('data-vendor="chargeflow"', html, rel)
+            self.assertIn("https://www.chargeflow.io/", html, rel)
+            for bad in ["—", "&mdash;", "SaaSTruth", "Erik Bengtsson"]:
+                self.assertNotIn(bad, html, rel)
+        with open(os.path.join(PUBLIC_DIR, "index.html"), encoding="utf-8") as f:
+            home = f.read()
+        self.assertIn("$250/mo disputed", home)
+        self.assertIn("5 disputes/mo", home)
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
