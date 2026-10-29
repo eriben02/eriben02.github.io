@@ -15,6 +15,8 @@ DESC = (
 )
 
 CLOSE = "https://refer.close.com/3k5hp07b8soi-fetl0j"
+APOLLO = "https://get.apollo.io/712wq4xq4p7v"
+APOLLO_PRICING = "https://www.apollo.io/pricing"
 LTC_2024 = "https://www.zoominfo.com/legal/ltc_03_06_2024"
 LTC_2025 = "https://www.zoominfo.com/legal/ltc"
 PRICING = "https://www.zoominfo.com/pricing"
@@ -131,14 +133,14 @@ body = """
     <summary class="full-table-summary">
       <div class="full-table-summary-text">
         <h2 id="zi-table-heading" class="full-table-heading">Full renewal comparison</h2>
-        <span class="full-table-summary-sub">Extension formula, negotiated renewal, and a CRM with calling (not a data license)</span>
+        <span class="full-table-summary-sub">Extension formula, negotiated renewal, a CRM with calling, and a published Apollo seat price</span>
       </div>
       <span class="full-table-toggle-pill" id="zi-table-pill">Compare all rows &darr;</span>
     </summary>
     <div class="full-table-body">
       <div class="table-wrap mobile-cards">
         <table>
-          <caption>Renewal scenarios for the fee you entered, plus Close CRM list prices. Close is a sales CRM with calling. It is not a ZoomInfo contact database. Close calling and SMS are extra (about $0.02 per minute on the pricing page) and are not in these totals.</caption>
+          <caption>Renewal scenarios for the fee you entered, plus Close CRM list prices and Apollo Professional. Close is a sales CRM with calling, not a ZoomInfo contact database. Apollo Professional is a credit-metered contact database with a published seat price. Neither row is a ZoomInfo license.</caption>
           <thead>
             <tr>
               <th>Scenario</th>
@@ -189,6 +191,14 @@ body = """
               <td data-label="Term the formula uses">1 year of licenses</td>
               <td data-label="Full-term total">$5,940</td>
               <td data-label="Next step"><div class="cta-stack"><a class="btn-secondary" href="https://refer.close.com/3k5hp07b8soi-fetl0j" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="close-crm" data-cta-location="table-row">View Close pricing &rarr;</a></div></td>
+            </tr>
+            <tr>
+              <td data-label="Scenario"><strong>Apollo Professional</strong></td>
+              <td data-label="What it prices">5 users x $79/seat/mo billed annually ($4,740). Monthly billing is $99/seat. 48,000 credits per seat per year on annual, granted upfront. A phone number costs 8 credits. Credits do not roll over. Not a ZoomInfo license.</td>
+              <td data-label="Per year">$4,740</td>
+              <td data-label="Term the formula uses">1 year of seats, annual billing</td>
+              <td data-label="Full-term total">$4,740</td>
+              <td data-label="Next step"><div class="cta-stack"><a class="btn-secondary" href="https://get.apollo.io/712wq4xq4p7v" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="apollo" data-cta-location="table-row">View Apollo pricing &rarr;</a></div></td>
             </tr>
           </tbody>
         </table>
@@ -345,7 +355,8 @@ body = """
     <li><strong>2024 formula, our reading of section 3.2:</strong> extension per year = annualized fee + 10% of that fee + the discount that had been taken off. Full extension = that yearly rate times the longer of the initial term or one year. If you set a 20% discount on a $20,000 fee, the discount added back is $20,000 x 0.20 / 0.80 = $5,000, and the yearly extension rate is $27,000.</li>
     <li><strong>2025 terms:</strong> the uplift slider starts at 0% because the May 1, 2025 document states no percentage. The chart then shows one year only. A multi-year order form could commit you for longer. That length is not in the published May 2025 terms.</li>
     <li><strong>Negotiated bar:</strong> your percent change applied to the current annual fee, for the same number of years as the extension in 2024 mode (one year in 2025 mode). It is a planning number, not a quote ZoomInfo has offered.</li>
-    <li><strong>Close CRM is not a data-license substitute:</strong> Growth is $99 per user per month billed annually and Essentials is $35, from close.com/pricing on Oct 28, 2026. Those totals are seat licenses only. They do not include a ZoomInfo-scale contact database, and they do not include calling or SMS usage. We did not verify a current public price for Apollo, Cognism, or Lusha, so those products are not in the chart.</li>
+    <li><strong>Close CRM is not a data-license substitute:</strong> Growth is $99 per user per month billed annually and Essentials is $35, from close.com/pricing on Oct 28, 2026. Those totals are seat licenses only. They do not include a ZoomInfo-scale contact database, and they do not include calling or SMS usage.</li>
+    <li><strong>Apollo Professional is a published seat price, not a ZoomInfo swap:</strong> On apollo.io/pricing, checked Oct 29, 2026, Professional is $79 per seat per month billed annually, or $99 per seat per month billed monthly. Annual billing includes 48,000 credits per seat for the year, granted upfront. Monthly billing includes 4,000 credits that month. An email costs 1 credit and a phone number costs 8. Credits are pooled and do not roll over. Basic is $49 per seat per month billed annually ($65 monthly, 2,500 credits that month, or 30,000 per seat per year on annual). Organization is $119 per seat per month billed annually with a 3-seat minimum and 72,000 credits per seat per year. The pricing page marks Organization as annual only. Every seat on an account is the same plan. The table uses Professional times the seat count you set for the Close rows. Cognism and Lusha still have no public price we checked, so they are not in the table.</li>
     <li><strong>Not legal advice:</strong> the ordering document you signed controls. The help-center article on opting out of automatic renewal did not return readable text without a login, so it is not quoted. We also did not find a public X post we could quote.</li>
     <li><strong>Disclosure:</strong> Independent calculations. Some vendor links are affiliate links. This never changes our rankings or calculations.</li>
   </ul>
@@ -361,6 +372,7 @@ body = """
     <li>Verified source: <a href="https://pipeline.zoominfo.com/sales/how-much-does-zoominfo-cost" target="_blank" rel="noopener">ZoomInfo, "How Much Does ZoomInfo Cost?"</a>. Lite at 10 monthly credits, paid plans annual and quote-based, seat minimum mentioned but not numbered.</li>
     <li>Verified source: <a href="https://www.zoominfo.com/legal/ringlead-customer-agreement" target="_blank" rel="noopener">RingLead master services agreement, section 2</a>. 60 days and up to 5% a year. A different contract.</li>
     <li>Verified source: <a href="https://www.close.com/pricing" target="_blank" rel="noopener">Close pricing</a>. Essentials $35 per user per month annual, Growth $99. Read Oct 28, 2026.</li>
+    <li>Verified source: <a href="https://www.apollo.io/pricing" target="_blank" rel="noopener">Apollo pricing</a>. Read Oct 29, 2026. Free $0 (900 credits per seat per year, granted monthly). Basic $49/seat/month billed annually (30,000 credits per seat per year) or $65 billed monthly (2,500 credits). Professional $79/seat/month billed annually (48,000 credits per seat per year, granted upfront) or $99 billed monthly (4,000 credits). Organization $119/seat/month billed annually, minimum 3 seats, 72,000 credits per seat per year. The monthly toggle labels Organization annual only. Credits do not roll over. Email is 1 credit, a phone number is 8.</li>
     <li><a href="https://www.trustpilot.com/review/zoominfo.com?page=4" target="_blank" rel="noopener">Trustpilot reviews</a>, Dec 30, 2025 and Nov 25, 2025.</li>
     <li><a href="https://www.bbb.org/us/wa/vancouver/profile/digital-marketing/zoominfo-1296-22673812/complaints?page=2" target="_blank" rel="noopener">BBB complaints</a>, including the Apr 24, 2025 dissolution complaint.</li>
     <li><a href="https://www.reddit.com/r/legal/comments/142rcsu/can_zoominfo_sue_me_for_not_notifying_of_my/" target="_blank" rel="noopener">r/legal, June 6, 2023</a> and <a href="https://www.reddit.com/r/Recruiter_Advice/comments/1n2q3go/zooinfo_contract_is_a_nightmare_to_get_out_of_do/" target="_blank" rel="noopener">r/Recruiter_Advice, Aug 28, 2025</a>. Indexed text. Direct refetch blocked.</li>
@@ -549,7 +561,8 @@ function renderZoomInfo() {
     { name: 'Negotiated renewal', what: (neg >= 0 ? '+' : '') + neg + '% versus the current fee', per: calc.negotiatedAnnual, term: termLabel, total: calc.negotiatedTotal, cta: 'View ZoomInfo pricing', href: 'https://www.zoominfo.com/pricing', vendor: 'zoominfo' },
     { name: version === '2024' ? 'March 2024 extension formula' : 'May 2025 terms, your uplift %', what: version === '2024' ? 'Annual fee + 10% + discount added back' : 'No formula printed. Using your uplift slider.', per: calc.extensionAnnual, term: version === '2024' ? ('Longer of initial term or 1 year (' + termLabel + ')') : '1 year (length not stated in the May 2025 terms)', total: calc.extensionTotal, cta: version === '2024' ? 'Read the March 6, 2024 clause' : 'Read the May 1, 2025 terms', href: version === '2024' ? 'https://www.zoominfo.com/legal/ltc_03_06_2024' : 'https://www.zoominfo.com/legal/ltc', vendor: 'zoominfo' },
     { name: 'Close CRM Essentials', what: seats + ' user' + (seats === 1 ? '' : 's') + ' x $35/mo annual. CRM, email, calling. Not a contact database.', per: closeEss, term: '1 year of licenses', total: closeEss, cta: 'View Close pricing', href: 'https://refer.close.com/3k5hp07b8soi-fetl0j', vendor: 'close-crm' },
-    { name: 'Close CRM Growth', what: seats + ' user' + (seats === 1 ? '' : 's') + ' x $99/mo annual. Adds workflows and a power dialer. Calling minutes are extra.', per: closeGrowth, term: '1 year of licenses', total: closeGrowth, cta: 'View Close pricing', href: 'https://refer.close.com/3k5hp07b8soi-fetl0j', vendor: 'close-crm' }
+    { name: 'Close CRM Growth', what: seats + ' user' + (seats === 1 ? '' : 's') + ' x $99/mo annual. Adds workflows and a power dialer. Calling minutes are extra.', per: closeGrowth, term: '1 year of licenses', total: closeGrowth, cta: 'View Close pricing', href: 'https://refer.close.com/3k5hp07b8soi-fetl0j', vendor: 'close-crm' },
+    { name: 'Apollo Professional', what: seats + ' user' + (seats === 1 ? '' : 's') + ' x $79/seat/mo billed annually ($99/seat if billed monthly). 48,000 credits per seat per year on annual, granted upfront. A phone number is 8 credits. Credits do not roll over. Not a ZoomInfo license.', per: seats * 79 * 12, term: '1 year of seats, annual billing', total: seats * 79 * 12, cta: 'View Apollo pricing', href: 'https://get.apollo.io/712wq4xq4p7v', vendor: 'apollo' }
   ];
   document.getElementById('zi-tbody').innerHTML = tableRows.map(function(r) {
     return '<tr>'
@@ -625,6 +638,10 @@ faqs = [
         "Is Close CRM a lower-cost replacement for ZoomInfo?",
         "No. Close CRM is a sales CRM with email, SMS, and calling. Growth is $99 per user per month billed annually and Essentials is $35, from the Close pricing page checked Oct 28, 2026. It does not include a ZoomInfo contact and intent database. Calling and SMS are usage-priced and are not in the license totals on this page. Use it as the CRM and dialer line in the table, not as a data-license swap.",
     ),
+    (
+        "How does Apollo Professional compare with a ZoomInfo renewal on price?",
+        "Apollo publishes a seat price. ZoomInfo paid plans do not. On apollo.io/pricing, checked Oct 29, 2026, Professional is $79 per seat per month billed annually, or $99 per seat per month billed monthly. Five seats on annual billing are $4,740 for the year. That row is lower than the $20,000 example fee on this page, and higher than Close Essentials at the same seat count. It is not the same product. Annual Professional includes 48,000 credits per seat for the year, granted upfront. A phone number costs 8 credits, unused credits expire, and every seat on the account must be the same plan. Basic is $49 per seat per month billed annually. Organization is $119 per seat per month billed annually with a 3-seat minimum. The chart still prices your ZoomInfo order form, not an Apollo quote.",
+    ),
 ]
 
 extra = {
@@ -633,7 +650,7 @@ extra = {
     "description": "March 6, 2024 60-day Extension Date and annualized fee plus 10% plus applied discount, compared with the May 1, 2025 terms that omit both, plus published credit counts and the free Lite plan.",
     "creator": {"@type": "Organization", "name": "SaaSBill Editorial"},
     "dateModified": "2026-10-28",
-    "isBasedOn": [LTC_2024, LTC_2025, PRICING, AI_INFO, COST_ARTICLE, RINGLEAD, CLOSE_PRICING, HELP],
+    "isBasedOn": [LTC_2024, LTC_2025, PRICING, AI_INFO, COST_ARTICLE, RINGLEAD, CLOSE_PRICING, APOLLO_PRICING, HELP],
     "license": "https://creativecommons.org/licenses/by/4.0/",
 }
 

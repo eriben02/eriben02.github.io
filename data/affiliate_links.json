@@ -248,12 +248,16 @@
     "signup_url": "https://dash.partnerstack.com/application?company=activecampaign"
   },
   "apollo": {
-    "vendor_name": "Apollo.io",
+    "program_name": "Apollo.io Partner Program",
     "network": "PartnerStack",
     "commission": "15% monthly / 20% annual recurring commission for 12 months",
-    "status": "applied (PartnerStack direct application submitted 2026-10-26 via dash.partnerstack.com/application?company=apollo)",
-    "destination_url": "https://www.apollo.io/pricing",
-    "signup_url": "https://dash.partnerstack.com/application?company=apollo"
+    "official_program_url": "https://dash.partnerstack.com/application?company=apollo",
+    "tracking_url": "https://get.apollo.io/712wq4xq4p7v",
+    "destination_url": "https://get.apollo.io/712wq4xq4p7v",
+    "is_affiliate": true,
+    "status": "active (PartnerStack link https://get.apollo.io/712wq4xq4p7v live on saasbill.io)",
+    "applied_date": "2026-10-26",
+    "approved_date": "2026-10-29"
   },
   "deel": {
     "vendor_name": "Deel",
