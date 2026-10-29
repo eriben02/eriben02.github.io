@@ -9,7 +9,6 @@ def run(script):
 
 run("build_part1.py")
 run("build_part2.py")
-run("build_zendesk_ai_page.py")
 run("build_gumroad_whop_lemonsqueezy_page.py")
 run("build_queued_batch1.py")
 run("build_workspace_m365_hipaa_page.py")

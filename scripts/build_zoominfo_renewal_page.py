@@ -4,7 +4,7 @@ Prices and clauses below were read on Oct 28, 2026. ZoomInfo does not publish a
 paid list price. The dollar amounts in the calculator are the visitor's order-form
 fee. The +10% and 60-day figures apply only to the License Terms dated March 6, 2024.
 """
-from layout import render_page
+from layout import render_page, wrap_calculator_shell
 
 SLUG = "/exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/"
 REL = "exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/index.html"
@@ -25,10 +25,6 @@ CLOSE_PRICING = "https://www.close.com/pricing"
 HELP = "https://help.zoominfo.com/s/article/How-to-Opt-Out-of-the-Automatic-Renewal-of-Your-ZoomInfo-Subscription"
 
 body = """
-<style>
-.zi-field { font-size: 16px; width: 100%; max-width: 100%; box-sizing: border-box; }
-.zi-deadline { font-family: var(--serif); font-size: clamp(1.7rem, 4vw, 2.35rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; margin: 0; }
-</style>
 <section class="hero">
   <h1>ZoomInfo auto-renewal notice (2026): the 60-day window and what the extension costs</h1>
   <p class="lead">In 2026, send ZoomInfo written notice 60 days before the term ends or the March 6, 2024 terms extend the contract. A missed deadline renews at your annual fee plus 10% plus any discount you had negotiated.</p>
@@ -566,6 +562,20 @@ function renderZoomInfo() {
       + '</tr>';
   }).join('');
 
+  if (typeof window.saasbillApplyWorkbench === 'function') {
+    window.saasbillApplyWorkbench({
+      product: 'ZoomInfo extension',
+      sticker: calc.annual * calc.extensionYears,
+      hidden: Math.max(0, calc.extensionTotal - calc.annual * calc.extensionYears),
+      total: calc.extensionTotal,
+      baseLabel: 'Order-form annual fee',
+      hiddenLabel: version === '2024' ? '10% uplift plus the discount added back' : 'Uplift you entered',
+      bestHtml: '<strong>Negotiated renewal:</strong> ' + ziMoney(calc.negotiatedTotal) + ' over ' + termLabel + '.',
+      ctaHref: 'https://www.zoominfo.com/pricing',
+      ctaLabel: 'View ZoomInfo pricing',
+      ctaVendor: 'zoominfo'
+    });
+  }
   if (typeof window.trackSaaSBillEvent === 'function') {
     window.trackSaaSBillEvent('result_rendered', {
       page: 'zoominfo-renewal',
@@ -632,7 +642,7 @@ render_page(
     TITLE,
     DESC,
     SLUG,
-    body,
+    wrap_calculator_shell(body),
     faqs=faqs,
     extra_schema=extra,
     published_date="2026-10-28",

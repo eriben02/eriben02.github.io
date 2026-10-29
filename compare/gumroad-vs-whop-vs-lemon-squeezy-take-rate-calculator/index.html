@@ -13,17 +13,17 @@
   <meta property="og:title" content="Gumroad vs Whop vs Lemon Squeezy Fees (2026) – saasbill.io" />
   <meta property="og:description" content="Gumroad takes 10% + 50¢ plus 2.9% + 30¢ card processing; Lemon Squeezy 5% + 50¢ (+1.5% international/PayPal); Whop 2.7% + 30¢ (+2% for managed tax). On $5,800/mo of $29 sales you net $4,892 on Gumroad vs $5,360 on Lemon Squeezy and $5,379 on Whop. Verified Oct 26, 2026." />
   <meta property="og:url" content="https://saasbill.io/compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/" />
-  <meta property="og:updated_time" content="2026-10-29T16:00:53+00:00" />
+  <meta property="og:updated_time" content="2026-10-29T17:20:01+00:00" />
   <meta property="article:published_time" content="2026-10-26T00:00:00+01:00" />
-  <meta property="article:modified_time" content="2026-10-29T16:00:53+00:00" />
+  <meta property="article:modified_time" content="2026-10-29T17:20:01+00:00" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Gumroad vs Whop vs Lemon Squeezy Fees (2026) – saasbill.io" />
   <meta name="twitter:description" content="Gumroad takes 10% + 50¢ plus 2.9% + 30¢ card processing; Lemon Squeezy 5% + 50¢ (+1.5% international/PayPal); Whop 2.7% + 30¢ (+2% for managed tax). On $5,800/mo of $29 sales you net $4,892 on Gumroad vs $5,360 on Lemon Squeezy and $5,379 on Whop. Verified Oct 26, 2026." />
-  <meta name="last-modified" content="2026-10-29T16:00:53+00:00" />
-  <meta name="dcterms.modified" content="2026-10-29T16:00:53+00:00" />
+  <meta name="last-modified" content="2026-10-29T17:20:01+00:00" />
+  <meta name="dcterms.modified" content="2026-10-29T17:20:01+00:00" />
   <meta name="dcterms.issued" content="2026-10-26" />
   <link rel="canonical" href="https://saasbill.io/compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/" />
-  <link rel="stylesheet" href="../../assets/styles.css?v=20261028c" />
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261029a" />
   <link rel="alternate" type="text/plain" href="https://saasbill.io/llms.txt" title="SaaSBill LLMs.txt Summary" />
   <!-- Privacy-friendly analytics by Plausible -->
   <script defer data-domain="saasbill.io" src="https://plausible.io/js/pa-VAaSVNs5XOobt9cv2UtKo.js"></script>
@@ -43,8 +43,74 @@
       }
     };
     window.trackEvent = window.trackSaaSBillEvent;
+
+    window.saasbillMoney = function (n) {
+      var v = Math.round(Number(n) || 0);
+      var sign = v < 0 ? '-' : '';
+      return sign + '$' + Math.abs(v).toLocaleString('en-US');
+    };
+    window.saasbillResultLine = function (hidden, sticker) {
+      var h = Math.round(Number(hidden) || 0);
+      var s = Math.round(Number(sticker) || 0);
+      if (h <= 0) return 'Matches advertised price ($0 hidden fees).';
+      var pct = s > 0 ? Math.round((h / s) * 100) : 0;
+      return '+' + window.saasbillMoney(h) + ' (+' + pct + '%) above advertised price.';
+    };
+    window.saasbillApplyWorkbench = function (opts) {
+      opts = opts || {};
+      var sticker = Math.max(0, Math.round(Number(opts.sticker) || 0));
+      var seats = Math.max(0, Math.round(Number(opts.seats) || 0));
+      var hidden = Math.max(0, Math.round(Number(opts.hidden) || 0));
+      var total = Math.round(Number(opts.total));
+      if (!isFinite(total)) total = sticker + seats + hidden;
+      var parts = Math.max(1, sticker + seats + hidden);
+      function node(id) { return document.getElementById(id); }
+      function setText(id, value) {
+        var el = node(id);
+        if (el) el.textContent = value;
+      }
+      function setFlex(id, amount) {
+        var el = node(id);
+        if (!el) return;
+        var share = amount <= 0 ? 8 : (amount / parts) * 100;
+        el.style.flex = share + ' 1 0px';
+      }
+      setText('shell-product', opts.product || '');
+      setText('shell-big', window.saasbillMoney(total));
+      setText('shell-quote', 'True Year-1 cost');
+      setText('shell-sub', window.saasbillResultLine(hidden, sticker + seats));
+      setText('shell-amt-base', window.saasbillMoney(sticker));
+      setText('shell-amt-seats', window.saasbillMoney(seats));
+      setText('shell-amt-hidden', window.saasbillMoney(hidden));
+      setText('shell-title-base', 'Sticker Price');
+      setText('shell-title-seats', opts.seatsTitle || 'Other sticker fees');
+      setText('shell-title-hidden', 'Hidden Cost Gap');
+      setText('shell-sub-base', opts.baseLabel || 'Advertised price');
+      setText('shell-sub-seats', opts.seatsLabel || 'Included in the sticker');
+      setText('shell-sub-hidden', opts.hiddenLabel || 'Fees above the advertised price');
+      setFlex('shell-row-base', sticker);
+      setFlex('shell-row-seats', seats);
+      setFlex('shell-row-hidden', hidden);
+      var seatsRow = node('shell-row-seats');
+      if (seatsRow) seatsRow.style.display = seats <= 0 ? 'none' : '';
+      var math = node('shell-math');
+      if (math && opts.mathHtml) math.innerHTML = opts.mathHtml;
+      var best = node('shell-best');
+      if (best && opts.bestHtml) best.innerHTML = opts.bestHtml;
+      var cta = node('shell-cta');
+      if (cta && opts.ctaHref) {
+        cta.href = opts.ctaHref;
+        var label = opts.ctaLabel || 'See pricing';
+        cta.textContent = /→\s*$/.test(label) ? label : label + ' \u2192';
+        if (opts.ctaVendor) cta.setAttribute('data-vendor', opts.ctaVendor);
+      }
+      setText('shell-sticker', window.saasbillMoney(sticker + seats));
+      setText('shell-gap', hidden > 0 ? '+' + window.saasbillMoney(hidden) : '$0');
+      if (opts.product) setText('shell-sticker-note', opts.product);
+    };
+
   </script>
-  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "TechArticle", "@id": "https://saasbill.io/compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/#article", "headline": "Gumroad vs Whop vs Lemon Squeezy Fees (2026) \u2013 saasbill.io", "description": "Gumroad takes 10% + 50\u00a2 plus 2.9% + 30\u00a2 card processing; Lemon Squeezy 5% + 50\u00a2 (+1.5% international/PayPal); Whop 2.7% + 30\u00a2 (+2% for managed tax). On $5,800/mo of $29 sales you net $4,892 on Gumroad vs $5,360 on Lemon Squeezy and $5,379 on Whop. Verified Oct 26, 2026.", "datePublished": "2026-10-26", "dateModified": "2026-10-29T16:00:53+00:00", "author": {"@type": "Organization", "name": "SaaSBill Editorial", "url": "https://saasbill.io/"}, "publisher": {"@type": "Organization", "name": "SaaSBill", "url": "https://saasbill.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://saasbill.io/compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/"}}, {"@type": "WebPage", "@id": "https://saasbill.io/compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/", "url": "https://saasbill.io/compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/", "name": "Gumroad vs Whop vs Lemon Squeezy Fees (2026) \u2013 saasbill.io", "description": "Gumroad takes 10% + 50\u00a2 plus 2.9% + 30\u00a2 card processing; Lemon Squeezy 5% + 50\u00a2 (+1.5% international/PayPal); Whop 2.7% + 30\u00a2 (+2% for managed tax). On $5,800/mo of $29 sales you net $4,892 on Gumroad vs $5,360 on Lemon Squeezy and $5,379 on Whop. Verified Oct 26, 2026.", "inLanguage": "en-US", "datePublished": "2026-10-26", "dateModified": "2026-10-29T16:00:53+00:00", "lastReviewed": "2026-10-29", "reviewedBy": {"@type": "Organization", "name": "SaaSBill Editorial"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "SaaSBill", "item": "https://saasbill.io/"}, {"@type": "ListItem", "position": 2, "name": "Gumroad vs Whop vs Lemon Squeezy Fees (2026) \u2013 saasbill.io", "item": "https://saasbill.io/compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/"}]}, {"@type": "Dataset", "name": "Gumroad, Whop & Lemon Squeezy seller fee data (verified 2026-10-26)", "description": "Platform take rates, card processing, international/PayPal/subscription surcharges, tax handling, dispute fees, payout fees and payout holds.", "creator": {"@type": "Organization", "name": "SaaSBill Editorial"}, "isBasedOn": ["https://gumroad.com/pricing", "https://gumroad.com/help/article/66-gumroads-fees", "https://gumroad.com/help/article/13-getting-paid", "https://gumroad.com/help/article/134-how-does-gumroad-handle-chargebacks", "https://www.lemonsqueezy.com/pricing", "https://docs.lemonsqueezy.com/help/getting-started/fees", "https://docs.lemonsqueezy.com/help/payments/refunds-chargebacks", "https://www.lemonsqueezy.com/blog/2026-update", "https://stripe.com/managed-payments", "https://docs.whop.com/fees", "https://docs.whop.com/payments-and-billing/fees/taxes", "https://docs.whop.com/trust-and-safety/account-health/reserves", "https://whop.com/seller-terms/", "https://help.whop.com/en/articles/11430710-advertising-on-whop-s-marketplace-discover"], "license": "https://creativecommons.org/licenses/by/4.0/", "dateModified": "2026-10-29T16:00:53+00:00", "datePublished": "2026-10-26", "temporalCoverage": "2026"}, {"@type": "FAQPage", "@id": "https://saasbill.io/compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/#faq", "datePublished": "2026-10-26", "dateModified": "2026-10-29T16:00:53+00:00", "mainEntity": [{"@type": "Question", "name": "How much does Gumroad take per sale in 2026?", "dateCreated": "2026-10-26", "dateModified": "2026-10-29T16:00:53+00:00", "acceptedAnswer": {"@type": "Answer", "text": "As checked on Oct 26, 2026, Gumroad charges 10% + $0.50 on sales through your profile or direct links, plus credit card processing of 2.9% + $0.30, so a card sale costs 12.9% + $0.80. Sales through the Gumroad Discover marketplace cost a flat 30% including processing. Once paid sales reach $20,000 in a calendar month, new direct sales that month pay 5% + $0.50 (plus processing).", "dateCreated": "2026-10-26", "dateModified": "2026-10-29T16:00:53+00:00"}}, {"@type": "Question", "name": "What are Whop's fees for sellers?", "dateCreated": "2026-10-26", "dateModified": "2026-10-29T16:00:53+00:00", "acceptedAnswer": {"@type": "Answer", "text": "Whop charges 2.7% + $0.30 per successful domestic card transaction, plus 1.5% for international cards and 1% when currency conversion applies. Optional add-ons are 2% for managed tax, 0.5% for Billing and 0.8% for orchestration. Disputes cost $15 each, and a next-day ACH payout costs $2.50. Marketplace (Discover) sales carry 0% commission.", "dateCreated": "2026-10-26", "dateModified": "2026-10-29T16:00:53+00:00"}}, {"@type": "Question", "name": "Does Lemon Squeezy really charge only 5% + 50\u00a2?", "dateCreated": "2026-10-26", "dateModified": "2026-10-29T16:00:53+00:00", "acceptedAnswer": {"@type": "Answer", "text": "The base platform fee is 5% + 50\u00a2, but Lemon Squeezy's docs add 1.5% for transactions outside the US, 1.5% for PayPal and 0.5% for subscription payments. Payouts to non-US bank accounts cost 1%, and each chargeback carries a $15 dispute fee.", "dateCreated": "2026-10-26", "dateModified": "2026-10-29T16:00:53+00:00"}}, {"@type": "Question", "name": "Which is cheapest: Gumroad, Whop or Lemon Squeezy?", "dateCreated": "2026-10-26", "dateModified": "2026-10-29T16:00:53+00:00", "acceptedAnswer": {"@type": "Answer", "text": "In our example ($29 product, 200 sales a month, 30% international, 10% PayPal), fees are $908/month on Gumroad, $440 on Lemon Squeezy and $421 on Whop with its 2% tax service ($305 without it). Whop is cheapest per transaction; Gumroad is the most expensive on direct sales.", "dateCreated": "2026-10-26", "dateModified": "2026-10-29T16:00:53+00:00"}}, {"@type": "Question", "name": "Are Gumroad, Lemon Squeezy and Whop merchants of record?", "dateCreated": "2026-10-26", "dateModified": "2026-10-29T16:00:53+00:00", "acceptedAnswer": {"@type": "Answer", "text": "Gumroad has been merchant of record for all sales since January 1, 2025, and Lemon Squeezy is merchant of record for every sale; both include sales tax and VAT handling in their fee. Whop handles tax on Discover marketplace sales. For direct sales you choose 'Whop collects and remits tax' (US, EU and UK, 2%), 'Whop collects tax, I remit' (2%) or handling tax yourself.", "dateCreated": "2026-10-26", "dateModified": "2026-10-29T16:00:53+00:00"}}, {"@type": "Question", "name": "Is Lemon Squeezy shutting down after the Stripe acquisition?", "dateCreated": "2026-10-26", "dateModified": "2026-10-29T16:00:53+00:00", "acceptedAnswer": {"@type": "Answer", "text": "No shutdown date has been announced. Stripe acquired Lemon Squeezy in 2024, and in a January 28, 2026 update Lemon Squeezy said its goal is to give users an easy way to migrate to Stripe Managed Payments, Stripe's merchant of record product, which adds 3.5% per transaction on top of standard Stripe processing fees.", "dateCreated": "2026-10-26", "dateModified": "2026-10-29T16:00:53+00:00"}}, {"@type": "Question", "name": "How long do Gumroad and Whop hold payouts?", "dateCreated": "2026-10-26", "dateModified": "2026-10-29T16:00:53+00:00", "acceptedAnswer": {"@type": "Answer", "text": "Gumroad requires a $100 minimum balance and holds each sale at least 7 days on weekly, monthly and quarterly schedules; new accounts go through a 1\u20133 week review. Whop makes sale proceeds withdrawable in 1\u20134 business days but can place rolling or fixed reserves on new or high-risk accounts; its Seller Terms cap reserves at 180 days.", "dateCreated": "2026-10-26", "dateModified": "2026-10-29T16:00:53+00:00"}}]}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "TechArticle", "@id": "https://saasbill.io/compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/#article", "headline": "Gumroad vs Whop vs Lemon Squeezy Fees (2026) \u2013 saasbill.io", "description": "Gumroad takes 10% + 50\u00a2 plus 2.9% + 30\u00a2 card processing; Lemon Squeezy 5% + 50\u00a2 (+1.5% international/PayPal); Whop 2.7% + 30\u00a2 (+2% for managed tax). On $5,800/mo of $29 sales you net $4,892 on Gumroad vs $5,360 on Lemon Squeezy and $5,379 on Whop. Verified Oct 26, 2026.", "datePublished": "2026-10-26", "dateModified": "2026-10-29T17:20:01+00:00", "author": {"@type": "Organization", "name": "SaaSBill Editorial", "url": "https://saasbill.io/"}, "publisher": {"@type": "Organization", "name": "SaaSBill", "url": "https://saasbill.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://saasbill.io/compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/"}}, {"@type": "WebPage", "@id": "https://saasbill.io/compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/", "url": "https://saasbill.io/compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/", "name": "Gumroad vs Whop vs Lemon Squeezy Fees (2026) \u2013 saasbill.io", "description": "Gumroad takes 10% + 50\u00a2 plus 2.9% + 30\u00a2 card processing; Lemon Squeezy 5% + 50\u00a2 (+1.5% international/PayPal); Whop 2.7% + 30\u00a2 (+2% for managed tax). On $5,800/mo of $29 sales you net $4,892 on Gumroad vs $5,360 on Lemon Squeezy and $5,379 on Whop. Verified Oct 26, 2026.", "inLanguage": "en-US", "datePublished": "2026-10-26", "dateModified": "2026-10-29T17:20:01+00:00", "lastReviewed": "2026-10-29", "reviewedBy": {"@type": "Organization", "name": "SaaSBill Editorial"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "SaaSBill", "item": "https://saasbill.io/"}, {"@type": "ListItem", "position": 2, "name": "Gumroad vs Whop vs Lemon Squeezy Fees (2026) \u2013 saasbill.io", "item": "https://saasbill.io/compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/"}]}, {"@type": "Dataset", "name": "Gumroad, Whop & Lemon Squeezy seller fee data (verified 2026-10-26)", "description": "Platform take rates, card processing, international/PayPal/subscription surcharges, tax handling, dispute fees, payout fees and payout holds.", "creator": {"@type": "Organization", "name": "SaaSBill Editorial"}, "isBasedOn": ["https://gumroad.com/pricing", "https://gumroad.com/help/article/66-gumroads-fees", "https://gumroad.com/help/article/13-getting-paid", "https://gumroad.com/help/article/134-how-does-gumroad-handle-chargebacks", "https://www.lemonsqueezy.com/pricing", "https://docs.lemonsqueezy.com/help/getting-started/fees", "https://docs.lemonsqueezy.com/help/payments/refunds-chargebacks", "https://www.lemonsqueezy.com/blog/2026-update", "https://stripe.com/managed-payments", "https://docs.whop.com/fees", "https://docs.whop.com/payments-and-billing/fees/taxes", "https://docs.whop.com/trust-and-safety/account-health/reserves", "https://whop.com/seller-terms/", "https://help.whop.com/en/articles/11430710-advertising-on-whop-s-marketplace-discover"], "license": "https://creativecommons.org/licenses/by/4.0/", "dateModified": "2026-10-29T17:20:01+00:00", "datePublished": "2026-10-26", "temporalCoverage": "2026"}, {"@type": "FAQPage", "@id": "https://saasbill.io/compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/#faq", "datePublished": "2026-10-26", "dateModified": "2026-10-29T17:20:01+00:00", "mainEntity": [{"@type": "Question", "name": "How much does Gumroad take per sale in 2026?", "dateCreated": "2026-10-26", "dateModified": "2026-10-29T17:20:01+00:00", "acceptedAnswer": {"@type": "Answer", "text": "As checked on Oct 26, 2026, Gumroad charges 10% + $0.50 on sales through your profile or direct links, plus credit card processing of 2.9% + $0.30, so a card sale costs 12.9% + $0.80. Sales through the Gumroad Discover marketplace cost a flat 30% including processing. Once paid sales reach $20,000 in a calendar month, new direct sales that month pay 5% + $0.50 (plus processing).", "dateCreated": "2026-10-26", "dateModified": "2026-10-29T17:20:01+00:00"}}, {"@type": "Question", "name": "What are Whop's fees for sellers?", "dateCreated": "2026-10-26", "dateModified": "2026-10-29T17:20:01+00:00", "acceptedAnswer": {"@type": "Answer", "text": "Whop charges 2.7% + $0.30 per successful domestic card transaction, plus 1.5% for international cards and 1% when currency conversion applies. Optional add-ons are 2% for managed tax, 0.5% for Billing and 0.8% for orchestration. Disputes cost $15 each, and a next-day ACH payout costs $2.50. Marketplace (Discover) sales carry 0% commission.", "dateCreated": "2026-10-26", "dateModified": "2026-10-29T17:20:01+00:00"}}, {"@type": "Question", "name": "Does Lemon Squeezy really charge only 5% + 50\u00a2?", "dateCreated": "2026-10-26", "dateModified": "2026-10-29T17:20:01+00:00", "acceptedAnswer": {"@type": "Answer", "text": "The base platform fee is 5% + 50\u00a2, but Lemon Squeezy's docs add 1.5% for transactions outside the US, 1.5% for PayPal and 0.5% for subscription payments. Payouts to non-US bank accounts cost 1%, and each chargeback carries a $15 dispute fee.", "dateCreated": "2026-10-26", "dateModified": "2026-10-29T17:20:01+00:00"}}, {"@type": "Question", "name": "Which is cheapest: Gumroad, Whop or Lemon Squeezy?", "dateCreated": "2026-10-26", "dateModified": "2026-10-29T17:20:01+00:00", "acceptedAnswer": {"@type": "Answer", "text": "In our example ($29 product, 200 sales a month, 30% international, 10% PayPal), fees are $908/month on Gumroad, $440 on Lemon Squeezy and $421 on Whop with its 2% tax service ($305 without it). Whop is cheapest per transaction; Gumroad is the most expensive on direct sales.", "dateCreated": "2026-10-26", "dateModified": "2026-10-29T17:20:01+00:00"}}, {"@type": "Question", "name": "Are Gumroad, Lemon Squeezy and Whop merchants of record?", "dateCreated": "2026-10-26", "dateModified": "2026-10-29T17:20:01+00:00", "acceptedAnswer": {"@type": "Answer", "text": "Gumroad has been merchant of record for all sales since January 1, 2025, and Lemon Squeezy is merchant of record for every sale; both include sales tax and VAT handling in their fee. Whop handles tax on Discover marketplace sales. For direct sales you choose 'Whop collects and remits tax' (US, EU and UK, 2%), 'Whop collects tax, I remit' (2%) or handling tax yourself.", "dateCreated": "2026-10-26", "dateModified": "2026-10-29T17:20:01+00:00"}}, {"@type": "Question", "name": "Is Lemon Squeezy shutting down after the Stripe acquisition?", "dateCreated": "2026-10-26", "dateModified": "2026-10-29T17:20:01+00:00", "acceptedAnswer": {"@type": "Answer", "text": "No shutdown date has been announced. Stripe acquired Lemon Squeezy in 2024, and in a January 28, 2026 update Lemon Squeezy said its goal is to give users an easy way to migrate to Stripe Managed Payments, Stripe's merchant of record product, which adds 3.5% per transaction on top of standard Stripe processing fees.", "dateCreated": "2026-10-26", "dateModified": "2026-10-29T17:20:01+00:00"}}, {"@type": "Question", "name": "How long do Gumroad and Whop hold payouts?", "dateCreated": "2026-10-26", "dateModified": "2026-10-29T17:20:01+00:00", "acceptedAnswer": {"@type": "Answer", "text": "Gumroad requires a $100 minimum balance and holds each sale at least 7 days on weekly, monthly and quarterly schedules; new accounts go through a 1\u20133 week review. Whop makes sale proceeds withdrawable in 1\u20134 business days but can place rolling or fixed reserves on new or high-risk accounts; its Seller Terms cap reserves at 180 days.", "dateCreated": "2026-10-26", "dateModified": "2026-10-29T17:20:01+00:00"}}]}]}</script>
 </head>
 <body>
   <header class="site-header">
@@ -63,9 +129,9 @@
   <main class="container">
     <article itemscope itemtype="https://schema.org/TechArticle">
       <meta itemprop="datePublished" content="2026-10-26" />
-      <meta itemprop="dateModified" content="2026-10-29T16:00:53+00:00" />
+      <meta itemprop="dateModified" content="2026-10-29T17:20:01+00:00" />
       
-<section class="hero">
+<section class="hero editorial-hero editorial-hero-wrap">
   <h1>Gumroad (10%) vs. Whop (2.7%) vs. Lemon Squeezy (5%) Take-Rate &amp; Chargeback Calculator (2026)</h1>
   <p class="lead">Headline rates hide the real take: Gumroad’s 10% excludes card processing, Lemon Squeezy adds 1.5% for international and PayPal buyers, and Whop’s 2.7% does not include tax handling. Enter your price and volume to see net payouts side by side.</p>
   <div class="geo-direct-answer">
@@ -73,12 +139,11 @@
   </div>
 </section>
 
-<section class="calc-box" id="calculator">
-  <h2 style="margin-top:0;">Net payout calculator: Gumroad vs. Whop vs. Lemon Squeezy</h2>
-  <p style="color:var(--muted); margin-bottom:16px; font-size:0.95rem;">Prefilled with a $29 digital product, 200 sales/month. Results update as you change the inputs below.</p>
-  <div id="tr-summary" class="summary-strip" aria-live="polite"></div>
-  <h3 style="margin:22px 0 10px; font-size:1rem;">Adjust your numbers</h3>
-  <div class="calc-grid">
+<div class="unified-inspector-tray">
+<section class="calc-box editorial-workbench" id="calculator">
+<div class="workbench-grid workbench-grid-wide">
+<div class="wb-col-controls"><div class="wb-col-title">Your numbers</div><div class="wb-controls-stack">
+<div class="calc-grid">
     <div class="control-group">
       <label for="tr-price">Price per sale (USD): <span class="val-pill" id="tr-price-val">$29</span></label>
       <input type="range" id="tr-price" min="1" max="500" step="1" value="29" data-track="calculator-control" data-control="price" />
@@ -140,6 +205,14 @@
       </select>
     </div>
   </div>
+</div></div>
+<div class="wb-col-chart"><div class="wb-col-title">Your Estimated True Cost</div>
+
+  <h2 style="margin-top:0;">Net payout calculator: Gumroad vs. Whop vs. Lemon Squeezy</h2>
+  <p style="color:var(--muted); margin-bottom:16px; font-size:0.95rem;">Prefilled with a $29 digital product, 200 sales/month. Results update as you change the inputs below.</p>
+  <div id="tr-summary" class="summary-strip" aria-live="polite"></div>
+  <h3 style="margin:22px 0 10px; font-size:1rem;">Adjust your numbers</h3>
+  
   <div class="table-wrap mobile-cards" style="margin-top:20px;">
     <table>
       <caption>Monthly fees &amp; net payout: Gumroad vs. Lemon Squeezy vs. Whop (USD, fees verified Oct 26, 2026)</caption>
@@ -148,7 +221,43 @@
     </table>
   </div>
   <p id="tr-note" style="font-size:0.84rem; color:var(--muted); margin-top:10px;"></p>
+
+</div>
+
+    <div class="wb-result-col" id="shell-result">
+      <div class="wb-selected-product" id="shell-product">Year-1 total</div>
+      <div class="wb-big-total"><span id="shell-big">$0</span> <span class="wb-per-year">/ year</span></div>
+      <details class="math-drawer" id="shell-calc">
+        <summary>Show calculation</summary>
+        <div class="math-drawer-body" id="shell-math"></div>
+      </details>
+      <p class="wb-budget-quote" id="shell-quote">True Year-1 cost</p>
+      <p class="wb-budget-subnote" id="shell-sub">Matches advertised price ($0 hidden fees).</p>
+      <div class="wb-best-option" id="shell-best"></div>
+      <div class="cta-stack">
+        <a id="shell-cta" class="btn-cta wb-primary-cta" href="#comparison" data-track="vendor-cta" data-vendor="saasbill" data-cta-location="workbench">See pricing &rarr;</a>
+      </div>
+    </div>
+
+</div>
 </section>
+</div>
+
+<section class="verdict-section" aria-label="Sticker price and hidden cost gap">
+  <div class="summary-strip" id="shell-summary">
+    <div class="summary-card result-card">
+      <div class="summary-label">Sticker Price</div>
+      <div class="summary-metric" id="shell-sticker">$0</div>
+      <div class="summary-scenario" id="shell-sticker-note">Advertised price</div>
+    </div>
+    <div class="summary-card result-card card-hidden">
+      <div class="summary-label">Hidden Cost Gap</div>
+      <div class="summary-metric" id="shell-gap">$0</div>
+      <div class="summary-scenario">Above the advertised price</div>
+    </div>
+  </div>
+</section>
+
 
 <details class="full-table-disclosure">
   <summary class="full-table-summary"><span>Compare single-sale math &amp; full feature matrix</span><span class="full-table-cta">Show full breakdown &rarr;</span></summary>
@@ -353,6 +462,20 @@ function updateTr() {
   let note = 'Assumptions: list prices, fees calculated on the pre-tax price (Lemon Squeezy calculates its fee on the order total including tax, so its real fee is slightly higher on taxed sales). Gumroad PayPal sales are modelled at the 2.9% + 30¢ card rate; actual PayPal fees may differ. Whop payouts assume 4 next-day ACH withdrawals/mo ($2.50 each). The Chargeflow card prices the disputed sale value and the $15 dispute fee. The 65% win rate is a planning benchmark.';
   if (o.payout === 'intl') note += ' Whop international local-bank payout fees vary by country and are not included.';
   document.getElementById('tr-note').textContent = note;
+  if (typeof window.saasbillApplyWorkbench === 'function') {
+    window.saasbillApplyWorkbench({
+      product: big.name,
+      sticker: Math.max(0, (big.total - big.hidden) * 12),
+      hidden: big.hidden * 12,
+      total: big.total * 12,
+      baseLabel: big.sub,
+      hiddenLabel: big.hiddenText,
+      bestHtml: '<strong>Best net payout:</strong> ' + low.name + ' keeps ' + trFmt(low.net * 12) + '/yr.',
+      ctaHref: low.url,
+      ctaLabel: low.cta,
+      ctaVendor: low.id
+    });
+  }
   if (typeof window.trackSaaSBillEvent === 'function') { window.trackSaaSBillEvent('result_rendered', { page: 'gumroad-whop-lemon-squeezy', price: o.price, sales: o.sales }); } else { (window.__saasbillEvents = window.__saasbillEvents || []).push({event: 'result_rendered', page: 'gumroad-whop-lemon-squeezy', price: o.price, sales: o.sales, ts: Date.now()}); }
 }
 ['tr-price','tr-sales','tr-intl','tr-paypal','tr-discover','tr-dispute','tr-sub','tr-tax','tr-fx','tr-risk','tr-payout'].forEach(id => document.getElementById(id).addEventListener('input', updateTr));

@@ -13,7 +13,7 @@ Sources checked 2026-10-29:
 - Mastercard ECM 100-299 and 1.5%-2.99%; HECM 300+ and 3% (Shopify help).
 The 0.75% US Plus multi-currency payout fee is a different charge.
 """
-from layout import render_page
+from layout import render_page, wrap_calculator_shell
 
 TITLE = "Shopify Reserve & Dispute Threshold – saasbill.io"
 DESCRIPTION = (
@@ -251,10 +251,11 @@ function renderShopifyReserve() {
     : '80% unrecovered at a 20% manual win rate, plus $15 on lost disputes';
   document.getElementById('sh-product').textContent = 'Shopify Payments, ' + c.plan + ', US standard cards';
   document.getElementById('sh-big').textContent = shMoney(c.trueYr);
-  const pct = c.stickerYr > 0 ? Math.round((c.hiddenYr / c.stickerYr) * 100) : 0;
-  document.getElementById('sh-sub').textContent = c.hiddenYr > 0
-    ? '+' + shMoney(c.hiddenYr) + ' (+' + pct + '%) above advertised price.'
-    : 'Matches advertised price ($0 hidden fees).';
+  document.getElementById('sh-sub').textContent = (typeof window.saasbillResultLine === 'function')
+    ? window.saasbillResultLine(c.hiddenYr, c.stickerYr)
+    : (c.hiddenYr > 0
+      ? '+' + shMoney(c.hiddenYr) + ' (+' + (c.stickerYr > 0 ? Math.round((c.hiddenYr / c.stickerYr) * 100) : 0) + '%) above advertised price.'
+      : 'Matches advertised price ($0 hidden fees).');
   const reserveLine = c.reserveMo > 0
     ? 'Cash held under the published 10% NDRP reserve: ' + shMoney(c.reserveMo) + '/mo. The length is in the Shopify email, not a published 90-day rule.'
     : 'No published reserve percent applies below the 1.5% NDRP line. A reserve can still be emailed for other risk reasons.';
@@ -314,7 +315,7 @@ def build():
         TITLE,
         DESCRIPTION,
         "/exit/shopify-payments-chargeback-threshold-and-reserve-appeal/",
-        BODY,
+        wrap_calculator_shell(BODY),
         faqs=FAQS,
         published_date="2026-10-29",
     )

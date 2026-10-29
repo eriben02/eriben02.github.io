@@ -5,7 +5,7 @@ Builds:
 2. /pricing/jotform-pricing-tier-calculator/index.html
    (Interactive 2026 Jotform Starter, Bronze, Silver & Gold HIPAA pricing calculator)
 """
-from layout import render_page, SITE_ORIGIN
+from layout import render_page, SITE_ORIGIN, wrap_calculator_shell
 
 JOTFORM_PARTNER_URL = "https://www.jotform.com/?partner=eriben02"
 JOTFORM_PRICING_PARTNER_URL = "https://www.jotform.com/pricing/?partner=eriben02"
@@ -307,6 +307,20 @@ function updateJotformWixCalc() {{
     }}
   ];
 
+  if (typeof window.saasbillApplyWorkbench === 'function') {{
+    window.saasbillApplyWorkbench({{
+      product: recTier,
+      sticker: recYr,
+      hidden: 0,
+      total: recYr,
+      baseLabel: recLimit,
+      hiddenLabel: 'This tier price is the advertised rate',
+      bestHtml: '<strong>Recommended:</strong> ' + recTier + ' at $' + recYr.toLocaleString('en-US') + '/yr.',
+      ctaHref: '{JOTFORM_PARTNER_URL}',
+      ctaLabel: 'View Jotform pricing',
+      ctaVendor: 'jotform'
+    }});
+  }}
   document.getElementById('jw-tbody').innerHTML = tableRows.map(r => `
     <tr>
       <td data-label="Plan / Platform"><strong>${{r.name}}</strong> <span class="status-pill status-verified">Verified</span></td>
@@ -355,7 +369,7 @@ updateJotformWixCalc();
         title,
         desc,
         slug,
-        body,
+        wrap_calculator_shell(body),
         faqs=faqs,
         extra_schema={
             "@type": "HowTo",
@@ -482,6 +496,20 @@ function runJfTierCalc() {{
     {{name: 'Jotform Gold (HIPAA BAA)', rate: '$' + goldMo + '/mo', quotas: '100 forms · 10,000 submissions/mo · 100 GB storage + BAA', hidden: 'Includes signed HIPAA BAA (vs. $6,000+/yr Enterprise on Typeform)', total: '$' + (goldMo * 12).toLocaleString('en-US') + '/yr', url: '{JOTFORM_HIPAA_PARTNER_URL}'}}
   ];
 
+  if (typeof window.saasbillApplyWorkbench === 'function') {{
+    window.saasbillApplyWorkbench({{
+      product: bestName,
+      sticker: bestYr,
+      hidden: 0,
+      total: bestYr,
+      baseLabel: modeDesc,
+      hiddenLabel: 'This tier price is the advertised rate',
+      bestHtml: '<strong>Recommended:</strong> ' + bestName + ' at $' + bestYr.toLocaleString('en-US') + '/yr.',
+      ctaHref: '{JOTFORM_PARTNER_URL}',
+      ctaLabel: 'View Jotform pricing',
+      ctaVendor: 'jotform'
+    }});
+  }}
   document.getElementById('jf-tier-tbody').innerHTML = rows.map(r => `
     <tr>
       <td data-label="Jotform Tier"><strong>${{r.name}}</strong> <span class="status-pill status-verified">Verified</span> &middot; <a href="https://www.jotform.com/pricing/" target="_blank" rel="noopener">Verified source</a></td>
@@ -515,7 +543,7 @@ runJfTierCalc();
         ),
     ]
 
-    render_page(rel, title, desc, slug, body, faqs=faqs)
+    render_page(rel, title, desc, slug, wrap_calculator_shell(body), faqs=faqs)
 
 
 if __name__ == "__main__":

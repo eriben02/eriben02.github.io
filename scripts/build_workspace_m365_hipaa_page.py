@@ -2,7 +2,7 @@
 All prices and BAA rules verified 2026-10-27 against the sources listed in SOURCES.
 Unverifiable figures (Google Enterprise pricing, Microsoft month-to-month premium on the
 public US page) are labelled on the page instead of guessed."""
-from layout import render_page
+from layout import render_page, wrap_calculator_shell
 
 SLUG = "/compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/"
 REL = "compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/index.html"
@@ -337,6 +337,20 @@ function updateGm() {
         </div>
       </div>`;
   }
+  if (typeof window.saasbillApplyWorkbench === 'function') {
+    window.saasbillApplyWorkbench({
+      product: high.name,
+      sticker: Math.max(0, high.yr - high.addon),
+      hidden: high.addon,
+      total: high.yr,
+      baseLabel: 'Suite licenses',
+      hiddenLabel: high.addon ? 'Jotform Gold intake' : 'No add-on on this scenario',
+      bestHtml: '<strong>Lowest modeled cost:</strong> ' + low.name + ' at $' + Math.round(low.yr).toLocaleString() + '/yr.',
+      ctaHref: low.url,
+      ctaLabel: low.cta,
+      ctaVendor: low.id
+    });
+  }
   document.getElementById('gm-tbody').innerHTML = rows.map(r => `
     <tr>
       <td data-label="Suite &amp; edition"><strong>${r.name}</strong> <span class="status-pill status-verified">${r.status}</span><div style="font-size:0.78rem; color:var(--muted);">${r.diff}</div><div class="source-inline">Verified source: <a href="${r.url}" target="_blank" rel="noopener">Official pricing &nearr;</a></div></td>
@@ -378,4 +392,4 @@ extra = {"@type": "Dataset", "name": "Google Workspace & Microsoft 365 HIPAA BAA
          "creator": {"@type": "Organization", "name": "SaaSBill Editorial"}, "dateModified": "2026-10-27",
          "isBasedOn": [u for _, u in SOURCES], "license": "https://creativecommons.org/licenses/by/4.0/"}
 
-render_page(REL, TITLE, DESC, SLUG, body + script, faqs=faqs, extra_schema=extra, published_date="2026-10-27")
+render_page(REL, TITLE, DESC, SLUG, wrap_calculator_shell(body) + script, faqs=faqs, extra_schema=extra, published_date="2026-10-27")

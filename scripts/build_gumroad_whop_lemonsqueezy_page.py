@@ -2,7 +2,7 @@
 All fee figures verified 2026-10-26 against the official pages listed in SOURCES.
 The Python calc() mirrors the JS calcPlatforms() 1:1 (tests/test_calculators.py checks both)."""
 import json
-from layout import render_page
+from layout import render_page, wrap_calculator_shell
 
 SLUG = "/compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/"
 REL = "compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/index.html"
@@ -381,6 +381,20 @@ function updateTr() {{
   let note = 'Assumptions: list prices, fees calculated on the pre-tax price (Lemon Squeezy calculates its fee on the order total including tax, so its real fee is slightly higher on taxed sales). Gumroad PayPal sales are modelled at the 2.9% + 30¢ card rate; actual PayPal fees may differ. Whop payouts assume 4 next-day ACH withdrawals/mo ($2.50 each). The Chargeflow card prices the disputed sale value and the $15 dispute fee. The 65% win rate is a planning benchmark.';
   if (o.payout === 'intl') note += ' Whop international local-bank payout fees vary by country and are not included.';
   document.getElementById('tr-note').textContent = note;
+  if (typeof window.saasbillApplyWorkbench === 'function') {{
+    window.saasbillApplyWorkbench({{
+      product: big.name,
+      sticker: Math.max(0, (big.total - big.hidden) * 12),
+      hidden: big.hidden * 12,
+      total: big.total * 12,
+      baseLabel: big.sub,
+      hiddenLabel: big.hiddenText,
+      bestHtml: '<strong>Best net payout:</strong> ' + low.name + ' keeps ' + trFmt(low.net * 12) + '/yr.',
+      ctaHref: low.url,
+      ctaLabel: low.cta,
+      ctaVendor: low.id
+    }});
+  }}
   if (typeof window.trackSaaSBillEvent === 'function') {{ window.trackSaaSBillEvent('result_rendered', {{ page: 'gumroad-whop-lemon-squeezy', price: o.price, sales: o.sales }}); }} else {{ (window.__saasbillEvents = window.__saasbillEvents || []).push({{event: 'result_rendered', page: 'gumroad-whop-lemon-squeezy', price: o.price, sales: o.sales, ts: Date.now()}}); }}
 }}
 ['tr-price','tr-sales','tr-intl','tr-paypal','tr-discover','tr-dispute','tr-sub','tr-tax','tr-fx','tr-risk','tr-payout'].forEach(id => document.getElementById(id).addEventListener('input', updateTr));
@@ -411,5 +425,5 @@ extra = {"@type": "Dataset", "name": f"Gumroad, Whop & Lemon Squeezy seller fee 
          "isBasedOn": [u for _, u in SOURCES], "license": "https://creativecommons.org/licenses/by/4.0/"}
 
 if __name__ == "__main__":
-    render_page(REL, TITLE, DESC, SLUG, body, faqs=faqs, extra_schema=extra, published_date=CHECKED_ISO)
+    render_page(REL, TITLE, DESC, SLUG, wrap_calculator_shell(body), faqs=faqs, extra_schema=extra, published_date=CHECKED_ISO)
     print(json.dumps({"example": E, "example_whop_no_tax": E_NOTAX["whop"]}, indent=1))

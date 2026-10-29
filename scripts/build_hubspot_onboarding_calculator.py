@@ -6,7 +6,7 @@ Marketing Ent $3,600 + $7,000). Marketing contact bands come from HubSpot's
 Product and Services Catalog (Professional $250 per 5,000 above 2,000;
 Enterprise $100 per 10,000 above 10,000).
 """
-from layout import render_page
+from layout import render_page, wrap_calculator_shell
 
 BODY = r"""
 <section class="hero">
@@ -263,6 +263,18 @@ function updateHs() {
   }).join('');
 
   if (typeof window.trackSaaSBillEvent === 'function') {
+    window.saasbillApplyWorkbench && window.saasbillApplyWorkbench({
+      product: hsFullName,
+      sticker: hsSeatsYr,
+      hidden: hsOnboard + contactYr,
+      total: hsYear1,
+      baseLabel: 'Advertised annual seats',
+      hiddenLabel: 'Onboarding and contact bands',
+      bestHtml: '<strong>Onboarding:</strong> $' + hsOnboard.toLocaleString() + ' is due in Year 1 on this tier.',
+      ctaHref: 'https://refer.close.com/3k5hp07b8soi-fetl0j',
+      ctaLabel: 'Check Close CRM pricing',
+      ctaVendor: 'close'
+    });
     window.trackSaaSBillEvent('result_rendered', { page: 'hubspot-onboarding-fee-calculator', seats: seats, contacts: contacts, tier: tier });
   }
 }
@@ -302,7 +314,7 @@ def build():
         "HubSpot Onboarding Fee &amp; True Cost Calculator (2026): Pro vs Enterprise | SaaSBill",
         "Calculate HubSpot Year-1 cost with the $1,500 to $7,000 onboarding fee, extra seats, and marketing contact tiers versus Close CRM and Pipedrive.",
         "/hubspot-onboarding-fee-calculator/",
-        BODY,
+        wrap_calculator_shell(BODY),
         faqs=FAQS,
     )
 

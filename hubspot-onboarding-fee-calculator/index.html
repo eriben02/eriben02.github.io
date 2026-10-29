@@ -13,17 +13,17 @@
   <meta property="og:title" content="HubSpot Onboarding Fee &amp; True Cost Calculator (2026): Pro vs Enterprise | SaaSBill" />
   <meta property="og:description" content="Calculate HubSpot Year-1 cost with the $1,500 to $7,000 onboarding fee, extra seats, and marketing contact tiers versus Close CRM and Pipedrive." />
   <meta property="og:url" content="https://saasbill.io/hubspot-onboarding-fee-calculator/" />
-  <meta property="og:updated_time" content="2026-10-29T16:00:53+00:00" />
+  <meta property="og:updated_time" content="2026-10-29T17:20:01+00:00" />
   <meta property="article:published_time" content="2026-10-29T00:00:00+01:00" />
-  <meta property="article:modified_time" content="2026-10-29T16:00:53+00:00" />
+  <meta property="article:modified_time" content="2026-10-29T17:20:01+00:00" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="HubSpot Onboarding Fee &amp; True Cost Calculator (2026): Pro vs Enterprise | SaaSBill" />
   <meta name="twitter:description" content="Calculate HubSpot Year-1 cost with the $1,500 to $7,000 onboarding fee, extra seats, and marketing contact tiers versus Close CRM and Pipedrive." />
-  <meta name="last-modified" content="2026-10-29T16:00:53+00:00" />
-  <meta name="dcterms.modified" content="2026-10-29T16:00:53+00:00" />
+  <meta name="last-modified" content="2026-10-29T17:20:01+00:00" />
+  <meta name="dcterms.modified" content="2026-10-29T17:20:01+00:00" />
   <meta name="dcterms.issued" content="2026-10-29" />
   <link rel="canonical" href="https://saasbill.io/hubspot-onboarding-fee-calculator/" />
-  <link rel="stylesheet" href="../assets/styles.css?v=20261028c" />
+  <link rel="stylesheet" href="../assets/styles.css?v=20261029a" />
   <link rel="alternate" type="text/plain" href="https://saasbill.io/llms.txt" title="SaaSBill LLMs.txt Summary" />
   <!-- Privacy-friendly analytics by Plausible -->
   <script defer data-domain="saasbill.io" src="https://plausible.io/js/pa-VAaSVNs5XOobt9cv2UtKo.js"></script>
@@ -43,8 +43,74 @@
       }
     };
     window.trackEvent = window.trackSaaSBillEvent;
+
+    window.saasbillMoney = function (n) {
+      var v = Math.round(Number(n) || 0);
+      var sign = v < 0 ? '-' : '';
+      return sign + '$' + Math.abs(v).toLocaleString('en-US');
+    };
+    window.saasbillResultLine = function (hidden, sticker) {
+      var h = Math.round(Number(hidden) || 0);
+      var s = Math.round(Number(sticker) || 0);
+      if (h <= 0) return 'Matches advertised price ($0 hidden fees).';
+      var pct = s > 0 ? Math.round((h / s) * 100) : 0;
+      return '+' + window.saasbillMoney(h) + ' (+' + pct + '%) above advertised price.';
+    };
+    window.saasbillApplyWorkbench = function (opts) {
+      opts = opts || {};
+      var sticker = Math.max(0, Math.round(Number(opts.sticker) || 0));
+      var seats = Math.max(0, Math.round(Number(opts.seats) || 0));
+      var hidden = Math.max(0, Math.round(Number(opts.hidden) || 0));
+      var total = Math.round(Number(opts.total));
+      if (!isFinite(total)) total = sticker + seats + hidden;
+      var parts = Math.max(1, sticker + seats + hidden);
+      function node(id) { return document.getElementById(id); }
+      function setText(id, value) {
+        var el = node(id);
+        if (el) el.textContent = value;
+      }
+      function setFlex(id, amount) {
+        var el = node(id);
+        if (!el) return;
+        var share = amount <= 0 ? 8 : (amount / parts) * 100;
+        el.style.flex = share + ' 1 0px';
+      }
+      setText('shell-product', opts.product || '');
+      setText('shell-big', window.saasbillMoney(total));
+      setText('shell-quote', 'True Year-1 cost');
+      setText('shell-sub', window.saasbillResultLine(hidden, sticker + seats));
+      setText('shell-amt-base', window.saasbillMoney(sticker));
+      setText('shell-amt-seats', window.saasbillMoney(seats));
+      setText('shell-amt-hidden', window.saasbillMoney(hidden));
+      setText('shell-title-base', 'Sticker Price');
+      setText('shell-title-seats', opts.seatsTitle || 'Other sticker fees');
+      setText('shell-title-hidden', 'Hidden Cost Gap');
+      setText('shell-sub-base', opts.baseLabel || 'Advertised price');
+      setText('shell-sub-seats', opts.seatsLabel || 'Included in the sticker');
+      setText('shell-sub-hidden', opts.hiddenLabel || 'Fees above the advertised price');
+      setFlex('shell-row-base', sticker);
+      setFlex('shell-row-seats', seats);
+      setFlex('shell-row-hidden', hidden);
+      var seatsRow = node('shell-row-seats');
+      if (seatsRow) seatsRow.style.display = seats <= 0 ? 'none' : '';
+      var math = node('shell-math');
+      if (math && opts.mathHtml) math.innerHTML = opts.mathHtml;
+      var best = node('shell-best');
+      if (best && opts.bestHtml) best.innerHTML = opts.bestHtml;
+      var cta = node('shell-cta');
+      if (cta && opts.ctaHref) {
+        cta.href = opts.ctaHref;
+        var label = opts.ctaLabel || 'See pricing';
+        cta.textContent = /→\s*$/.test(label) ? label : label + ' \u2192';
+        if (opts.ctaVendor) cta.setAttribute('data-vendor', opts.ctaVendor);
+      }
+      setText('shell-sticker', window.saasbillMoney(sticker + seats));
+      setText('shell-gap', hidden > 0 ? '+' + window.saasbillMoney(hidden) : '$0');
+      if (opts.product) setText('shell-sticker-note', opts.product);
+    };
+
   </script>
-  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "TechArticle", "@id": "https://saasbill.io/hubspot-onboarding-fee-calculator/#article", "headline": "HubSpot Onboarding Fee &amp; True Cost Calculator (2026): Pro vs Enterprise | SaaSBill", "description": "Calculate HubSpot Year-1 cost with the $1,500 to $7,000 onboarding fee, extra seats, and marketing contact tiers versus Close CRM and Pipedrive.", "datePublished": "2026-10-29", "dateModified": "2026-10-29T16:00:53+00:00", "author": {"@type": "Organization", "name": "SaaSBill Editorial", "url": "https://saasbill.io/"}, "publisher": {"@type": "Organization", "name": "SaaSBill", "url": "https://saasbill.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://saasbill.io/hubspot-onboarding-fee-calculator/"}}, {"@type": "WebPage", "@id": "https://saasbill.io/hubspot-onboarding-fee-calculator/", "url": "https://saasbill.io/hubspot-onboarding-fee-calculator/", "name": "HubSpot Onboarding Fee &amp; True Cost Calculator (2026): Pro vs Enterprise | SaaSBill", "description": "Calculate HubSpot Year-1 cost with the $1,500 to $7,000 onboarding fee, extra seats, and marketing contact tiers versus Close CRM and Pipedrive.", "inLanguage": "en-US", "datePublished": "2026-10-29", "dateModified": "2026-10-29T16:00:53+00:00", "lastReviewed": "2026-10-29", "reviewedBy": {"@type": "Organization", "name": "SaaSBill Editorial"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "SaaSBill", "item": "https://saasbill.io/"}, {"@type": "ListItem", "position": 2, "name": "HubSpot Onboarding Fee &amp; True Cost Calculator (2026): Pro vs Enterprise | SaaSBill", "item": "https://saasbill.io/hubspot-onboarding-fee-calculator/"}]}, {"@type": "FAQPage", "@id": "https://saasbill.io/hubspot-onboarding-fee-calculator/#faq", "datePublished": "2026-10-29", "dateModified": "2026-10-29T16:00:53+00:00", "mainEntity": [{"@type": "Question", "name": "How much is HubSpot's mandatory onboarding fee in 2026?", "dateCreated": "2026-10-29", "dateModified": "2026-10-29T16:00:53+00:00", "acceptedAnswer": {"@type": "Answer", "text": "Direct orders charge $1,500 for Sales Hub Professional, $3,500 for Sales Hub Enterprise, $3,000 for Marketing Hub Professional, and $7,000 for Marketing Hub Enterprise. Close CRM and Pipedrive charge $0 for onboarding.", "dateCreated": "2026-10-29", "dateModified": "2026-10-29T16:00:53+00:00"}}, {"@type": "Question", "name": "Do marketing contacts change the Sales Hub price?", "dateCreated": "2026-10-29", "dateModified": "2026-10-29T16:00:53+00:00", "acceptedAnswer": {"@type": "Answer", "text": "No. Sales Hub Professional and Enterprise bill seats plus the onboarding fee. Marketing contact bands apply on Marketing Hub: Professional includes 2,000 contacts, then $250 per extra 5,000 up to 22,000. Enterprise includes 10,000, then $100 per extra 10,000 up to 50,000.", "dateCreated": "2026-10-29", "dateModified": "2026-10-29T16:00:53+00:00"}}, {"@type": "Question", "name": "What does HubSpot Sales Hub Professional cost for 5 users in Year 1?", "dateCreated": "2026-10-29", "dateModified": "2026-10-29T16:00:53+00:00", "acceptedAnswer": {"@type": "Answer", "text": "Five seats at $90/month billed annually are $5,400, plus the $1,500 onboarding fee, for $6,900 in Year 1. Close CRM Startup for the same five seats is $2,820 with $0 onboarding.", "dateCreated": "2026-10-29", "dateModified": "2026-10-29T16:00:53+00:00"}}]}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "TechArticle", "@id": "https://saasbill.io/hubspot-onboarding-fee-calculator/#article", "headline": "HubSpot Onboarding Fee &amp; True Cost Calculator (2026): Pro vs Enterprise | SaaSBill", "description": "Calculate HubSpot Year-1 cost with the $1,500 to $7,000 onboarding fee, extra seats, and marketing contact tiers versus Close CRM and Pipedrive.", "datePublished": "2026-10-29", "dateModified": "2026-10-29T17:20:01+00:00", "author": {"@type": "Organization", "name": "SaaSBill Editorial", "url": "https://saasbill.io/"}, "publisher": {"@type": "Organization", "name": "SaaSBill", "url": "https://saasbill.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://saasbill.io/hubspot-onboarding-fee-calculator/"}}, {"@type": "WebPage", "@id": "https://saasbill.io/hubspot-onboarding-fee-calculator/", "url": "https://saasbill.io/hubspot-onboarding-fee-calculator/", "name": "HubSpot Onboarding Fee &amp; True Cost Calculator (2026): Pro vs Enterprise | SaaSBill", "description": "Calculate HubSpot Year-1 cost with the $1,500 to $7,000 onboarding fee, extra seats, and marketing contact tiers versus Close CRM and Pipedrive.", "inLanguage": "en-US", "datePublished": "2026-10-29", "dateModified": "2026-10-29T17:20:01+00:00", "lastReviewed": "2026-10-29", "reviewedBy": {"@type": "Organization", "name": "SaaSBill Editorial"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "SaaSBill", "item": "https://saasbill.io/"}, {"@type": "ListItem", "position": 2, "name": "HubSpot Onboarding Fee &amp; True Cost Calculator (2026): Pro vs Enterprise | SaaSBill", "item": "https://saasbill.io/hubspot-onboarding-fee-calculator/"}]}, {"@type": "FAQPage", "@id": "https://saasbill.io/hubspot-onboarding-fee-calculator/#faq", "datePublished": "2026-10-29", "dateModified": "2026-10-29T17:20:01+00:00", "mainEntity": [{"@type": "Question", "name": "How much is HubSpot's mandatory onboarding fee in 2026?", "dateCreated": "2026-10-29", "dateModified": "2026-10-29T17:20:01+00:00", "acceptedAnswer": {"@type": "Answer", "text": "Direct orders charge $1,500 for Sales Hub Professional, $3,500 for Sales Hub Enterprise, $3,000 for Marketing Hub Professional, and $7,000 for Marketing Hub Enterprise. Close CRM and Pipedrive charge $0 for onboarding.", "dateCreated": "2026-10-29", "dateModified": "2026-10-29T17:20:01+00:00"}}, {"@type": "Question", "name": "Do marketing contacts change the Sales Hub price?", "dateCreated": "2026-10-29", "dateModified": "2026-10-29T17:20:01+00:00", "acceptedAnswer": {"@type": "Answer", "text": "No. Sales Hub Professional and Enterprise bill seats plus the onboarding fee. Marketing contact bands apply on Marketing Hub: Professional includes 2,000 contacts, then $250 per extra 5,000 up to 22,000. Enterprise includes 10,000, then $100 per extra 10,000 up to 50,000.", "dateCreated": "2026-10-29", "dateModified": "2026-10-29T17:20:01+00:00"}}, {"@type": "Question", "name": "What does HubSpot Sales Hub Professional cost for 5 users in Year 1?", "dateCreated": "2026-10-29", "dateModified": "2026-10-29T17:20:01+00:00", "acceptedAnswer": {"@type": "Answer", "text": "Five seats at $90/month billed annually are $5,400, plus the $1,500 onboarding fee, for $6,900 in Year 1. Close CRM Startup for the same five seats is $2,820 with $0 onboarding.", "dateCreated": "2026-10-29", "dateModified": "2026-10-29T17:20:01+00:00"}}]}]}</script>
 </head>
 <body>
   <header class="site-header">
@@ -63,15 +129,18 @@
   <main class="container">
     <article itemscope itemtype="https://schema.org/TechArticle">
       <meta itemprop="datePublished" content="2026-10-29" />
-      <meta itemprop="dateModified" content="2026-10-29T16:00:53+00:00" />
+      <meta itemprop="dateModified" content="2026-10-29T17:20:01+00:00" />
       
-<section class="hero">
+<section class="hero editorial-hero editorial-hero-wrap">
   <h1>HubSpot Onboarding Fee Calculator: Mandatory Setup &amp; Real Year-1 Cost ($1,500–$7,000)</h1>
   <p class="lead">Calculate your real Year-1 HubSpot cost including the mandatory $1,500 to $7,000 onboarding fee. Adjust your seats, marketing contacts, and tier below to compare your total against Close CRM and Pipedrive.</p>
 </section>
 
-<section class="calc-box editorial-bar-chart-card" id="crm-apples-to-apples-chart" aria-labelledby="chart-dynamic-headline">
-  <div class="calc-grid ebc-controls-grid">
+<div class="unified-inspector-tray">
+<section class="calc-box editorial-workbench editorial-bar-chart-card" id="crm-apples-to-apples-chart" aria-labelledby="chart-dynamic-headline">
+<div class="workbench-grid workbench-grid-wide">
+<div class="wb-col-controls"><div class="wb-col-title">Your numbers</div><div class="wb-controls-stack">
+<div class="calc-grid ebc-controls-grid">
     <div class="control-group">
       <label for="hs-users">Sales team size (core seats): <span class="val-pill" id="hs-users-val">5</span> reps</label>
       <input type="range" id="hs-users" min="1" max="30" value="5" data-track="calculator-control" data-control="hs-users" />
@@ -96,6 +165,10 @@
       </select>
     </div>
   </div>
+</div></div>
+<div class="wb-col-chart"><div class="wb-col-title">Your Estimated True Cost</div>
+
+  
 
   <h2 id="chart-dynamic-headline" class="ebc-title">At 5 seats, HubSpot Sales Pro ($6,900) costs 2.4x Close Startup ($2,820) in Year 1</h2>
   <p id="chart-dynamic-subtitle" class="ebc-subtitle">Year-1 total for 5 sales reps on annual billing, including mandatory onboarding. Marketing contact bands apply only on Marketing Hub.</p>
@@ -155,7 +228,43 @@
     <a class="ebc-secondary-link" href="https://www.hubspot.com/pricing/sales" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="hubspot" data-cta-location="benchmark-cta">View official HubSpot Sales Hub pricing &nearr;</a>
   </div>
   <p id="chart-dynamic-footnote" class="ebc-footer-note"><strong>Hidden Cost Highlight:</strong> Based on 5 seats, annual billing, 2,000 marketing contacts. HubSpot Sales Pro adds a one-time $1,500 onboarding fee in Year 1. Source: <a href="https://legal.hubspot.com/hubspot-product-and-services-catalog/products" target="_blank" rel="noopener">HubSpot Product and Services Catalog</a>.</p>
+
+</div>
+
+    <div class="wb-result-col" id="shell-result">
+      <div class="wb-selected-product" id="shell-product">Year-1 total</div>
+      <div class="wb-big-total"><span id="shell-big">$0</span> <span class="wb-per-year">/ year</span></div>
+      <details class="math-drawer" id="shell-calc">
+        <summary>Show calculation</summary>
+        <div class="math-drawer-body" id="shell-math"></div>
+      </details>
+      <p class="wb-budget-quote" id="shell-quote">True Year-1 cost</p>
+      <p class="wb-budget-subnote" id="shell-sub">Matches advertised price ($0 hidden fees).</p>
+      <div class="wb-best-option" id="shell-best"></div>
+      <div class="cta-stack">
+        <a id="shell-cta" class="btn-cta wb-primary-cta" href="#comparison" data-track="vendor-cta" data-vendor="saasbill" data-cta-location="workbench">See pricing &rarr;</a>
+      </div>
+    </div>
+
+</div>
 </section>
+</div>
+
+<section class="verdict-section" aria-label="Sticker price and hidden cost gap">
+  <div class="summary-strip" id="shell-summary">
+    <div class="summary-card result-card">
+      <div class="summary-label">Sticker Price</div>
+      <div class="summary-metric" id="shell-sticker">$0</div>
+      <div class="summary-scenario" id="shell-sticker-note">Advertised price</div>
+    </div>
+    <div class="summary-card result-card card-hidden">
+      <div class="summary-label">Hidden Cost Gap</div>
+      <div class="summary-metric" id="shell-gap">$0</div>
+      <div class="summary-scenario">Above the advertised price</div>
+    </div>
+  </div>
+</section>
+
 
 <section class="hidden-gap-section" aria-labelledby="gap-heading">
   <details class="full-table-disclosure" id="full-table-details">
@@ -319,6 +428,18 @@ function updateHs() {
   }).join('');
 
   if (typeof window.trackSaaSBillEvent === 'function') {
+    window.saasbillApplyWorkbench && window.saasbillApplyWorkbench({
+      product: hsFullName,
+      sticker: hsSeatsYr,
+      hidden: hsOnboard + contactYr,
+      total: hsYear1,
+      baseLabel: 'Advertised annual seats',
+      hiddenLabel: 'Onboarding and contact bands',
+      bestHtml: '<strong>Onboarding:</strong> $' + hsOnboard.toLocaleString() + ' is due in Year 1 on this tier.',
+      ctaHref: 'https://refer.close.com/3k5hp07b8soi-fetl0j',
+      ctaLabel: 'Check Close CRM pricing',
+      ctaVendor: 'close'
+    });
     window.trackSaaSBillEvent('result_rendered', { page: 'hubspot-onboarding-fee-calculator', seats: seats, contacts: contacts, tier: tier });
   }
 }
