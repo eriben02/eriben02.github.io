@@ -2,6 +2,8 @@ import json
 import os
 from datetime import datetime
 
+from deploy_guard import DeployGuardError, check_html
+
 # Repo root (this file lives in scripts/). Published pages are copied from public/ to the root for GitHub Pages.
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 DATA_DIR = os.path.join(BASE_DIR, "data")
@@ -676,6 +678,12 @@ def render_page(rel_path, title, description, canonical_path, body_html, faqs=No
         "window.trackEvent = window.trackSaaSBillEvent;\n" + WORKBENCH_JS,
         1,
     )
+    # GitHub Pages serves the repo root of main. This write goes to public/
+    # and is copied to that root. Refuse a placeholder before either copy exists.
+    try:
+        check_html(html, rel_path, homepage=(rel_path == "index.html"))
+    except DeployGuardError as exc:
+        raise SystemExit("Refusing to write %s: %s" % (rel_path, exc)) from exc
     full_path = os.path.join(PUBLIC_DIR, rel_path)
     os.makedirs(os.path.dirname(full_path), exist_ok=True)
     with open(full_path, "w") as f:

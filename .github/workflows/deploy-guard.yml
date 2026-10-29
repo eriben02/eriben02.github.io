@@ -1,0 +1,35 @@
+name: Deploy guard
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  published-files:
+    name: Published HTML is not a placeholder
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check the files GitHub Pages publishes from the root of main
+        run: python3 -m unittest tests.test_deploy_guard -v
+
+  live-homepage:
+    name: Live homepage after Pages deploy
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: published-files
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Alert if https://saasbill.io/ is a placeholder
+        continue-on-error: true
+        run: |
+          python3 scripts/check_live_homepage.py \
+            || { sleep 45; python3 scripts/check_live_homepage.py; } \
+            || { sleep 90; python3 scripts/check_live_homepage.py; }
