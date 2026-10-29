@@ -27,7 +27,7 @@ def render_intercom_calculator_body(
     gap_sub="Visual Year-1 cost comparison graph &amp; full contract table (Intercom Fin vs. Freshdesk, Zendesk, Help Scout &amp; HubSpot)",
     static_product="Intercom + Fin AI Agent",
     static_total="$21,300",
-    static_subnote="+$17,820/yr (+512%) above the $3,480 advertised price.",
+    static_subnote="+$17,820 (+512%) above advertised price.",
     static_best_html=None,
     static_base="$348",
     static_seats="$3,132",
@@ -187,7 +187,7 @@ def render_intercom_calculator_body(
         <summary id="wb-calc-summary">Show calculation</summary>
         <div class="math-drawer-body" id="wb-calc-body"></div>
       </details>
-      <p class="wb-budget-quote" id="wb-budget-quote">Estimated Year-1 total including mandatory fees &amp; overages.</p>
+      <p class="wb-budget-quote" id="wb-budget-quote">True Year-1 cost</p>
       <p class="wb-budget-subnote" id="wb-budget-subnote">{static_subnote}</p>
       <div class="wb-best-option" id="wb-best-option">{static_best_html}</div>
       <div class="cta-stack">
@@ -625,7 +625,7 @@ function renderDirectory() {{
     const extraYr = spotR.year1Total - stickerYr;
     if (extraYr > 0) {{
       const pctOver = stickerYr > 0 ? Math.round((extraYr / stickerYr) * 100) : 0;
-      subNoteEl.textContent = `+$${{extraYr.toLocaleString()}}/yr (+${{pctOver}}%) above the $${{stickerYr.toLocaleString()}} advertised price.`;
+      subNoteEl.textContent = `+$${{extraYr.toLocaleString()}} (+${{pctOver}}%) above advertised price.`;
     }} else {{
       subNoteEl.textContent = `Matches advertised price ($0 hidden fees).`;
     }}
@@ -1149,7 +1149,7 @@ def _zendesk_body(prefix, h1, lead, compare_mode, page_id, legacy_summary_id, ca
         gap_sub="Visual Year-1 cost comparison graph &amp; full contract table (Zendesk AI vs. Freshdesk, Intercom, Help Scout &amp; HubSpot)",
         static_product="Zendesk Suite Team + AI Agents",
         static_total="$32,700",
-        static_subnote="+$26,100/yr (+395%) above the $6,600 advertised price.",
+        static_subnote="+$26,100 (+395%) above advertised price.",
         static_best_html=ZENDESK_BEST,
         static_base="$660",
         static_seats="$5,940",

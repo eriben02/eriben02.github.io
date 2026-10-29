@@ -497,6 +497,46 @@ function helpdeskCopy() {
   });
 }
 
+function shopifyReserve() {
+  const rel = "exit/shopify-payments-chargeback-threshold-and-reserve-appeal/index.html";
+  const html = read(rel);
+  const title = (html.match(/<title>(.*?)<\/title>/) || [])[1] || "";
+  check(title.length > 0 && title.length <= 60, "Shopify title length " + title.length + ": " + title);
+  check(title.indexOf("saasbill.io") !== -1, "Shopify title should end with saasbill.io");
+  check(html.indexOf("True Year-1 cost") !== -1, "Shopify page should use True Year-1 cost");
+  check(html.indexOf("above advertised price.") !== -1, "Shopify page should use the short percent line");
+  check(html.indexOf("Estimated Year-1 total including mandatory fees") === -1, "Shopify page should not use the old quote");
+  check(html.indexOf("Shopify Payments Reserve &amp; Dispute Threshold Calculator (2026)") !== -1, "missing Shopify H1");
+  check(html.indexOf("Does Shopify publish a 0.75% dispute threshold") !== -1, "missing Shopify FAQ");
+  check(html.indexOf("../chargeback-fee-and-recovery-calculator/") !== -1, "missing chargeback cross-link");
+  check(html.indexOf("../exit/stripe-shopify-paddle-frozen-funds-alternatives/") !== -1 || html.indexOf("stripe-shopify-paddle-frozen-funds-alternatives/") !== -1, "missing frozen-funds cross-link");
+  check(html.indexOf("stripe-billing-0-7-percent-recurring-tax-calculator/") !== -1, "missing Stripe Billing cross-link");
+  check(html.indexOf('class="table-wrap mobile-cards"') !== -1, "Shopify table should use mobile-cards");
+  check(html.indexOf('data-label="Path"') !== -1, "Shopify table cells need data-label");
+  check(html.indexOf("\u2014") === -1 && html.indexOf("&mdash;") === -1, "Shopify page has an em dash");
+  check(html.indexOf("referral link") === -1, "Shopify page should not label CTAs as referral links");
+  const plans = html.match(/const SH_PLANS = \{[\s\S]*?\};/);
+  const fn = extractBalanced(html, "function calcShopifyReserve");
+  check(!!plans && !!fn, "missing calcShopifyReserve");
+  const box = {};
+  vm.createContext(box);
+  vm.runInContext(plans[0] + "\n" + fn + "\nthis.fn = calcShopifyReserve;", box);
+  const zero = box.fn({ orders: 1000, aov: 50, rate: 0, plan: "basic" });
+  const normal = box.fn({ orders: 1000, aov: 50, rate: 0.0065, plan: "basic" });
+  const high = box.fn({ orders: 2000, aov: 80, rate: 0.02, plan: "basic" });
+  check(zero.disputesYr === 0 && zero.hiddenYr === 0 && zero.reserveMo === 0 && zero.stickerYr > 0, "Zero dispute rate should keep the sticker and add no dispute gap");
+  check(normal.gmvMo === 50000 && normal.stickerMo === 1750 && normal.hiddenYr > 0 && normal.ndrp === false && normal.reserveMo === 0, "Normal 0.65% case should bill the Basic sticker without an NDRP reserve");
+  check(normal.trueYr === normal.stickerYr + normal.hiddenYr, "True Year-1 cost should equal sticker plus hidden gap");
+  check(high.ndrp === true && high.reserveMo === 16000 && high.lostYr === high.disputedYr && high.trueYr > normal.trueYr, "At 2% the NDRP path should reimburse every order and hold 10% of GMV");
+  check(high.vampRatio === true && high.vampCount === false, "A 2% rate on 2,000 orders crosses the Visa ratio and not the 1,500 count");
+  const snaps = runPage(rel, "renderShopifyReserve", [
+    { "sh-orders": 0, "sh-aov": 50, "sh-rate": 0, "sh-plan": "basic" },
+    { "sh-orders": 1000, "sh-aov": 50, "sh-rate": 0.65, "sh-plan": "basic" },
+    { "sh-orders": 5000, "sh-aov": 120, "sh-rate": 2, "sh-plan": "basic" }
+  ]);
+  if (snaps.length === 3) assertGrowing(rel, snaps, "renderShopifyReserve");
+}
+
 function plausible() {
   const files = walkHtml(pub, []);
   check(files.length >= 29, "expected the built HTML pages, found " + files.length);
@@ -554,6 +594,7 @@ function main() {
   namedPaymentFns();
   pageScenarios();
   helpdeskCopy();
+  shopifyReserve();
   plausible();
   if (errors.length) {
     console.error(errors.join("\n"));

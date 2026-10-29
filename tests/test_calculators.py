@@ -626,7 +626,8 @@ class TestSaaSBillCalculators(unittest.TestCase):
 
         with open(os.path.join(PUBLIC_DIR, "sitemap.xml"), encoding="utf-8") as f:
             sitemap = f.read()
-        self.assertEqual(sitemap.count("<url><loc>"), 29)
+        self.assertEqual(sitemap.count("<url><loc>"), 30)
+        self.assertIn("https://saasbill.io/exit/shopify-payments-chargeback-threshold-and-reserve-appeal/", sitemap)
         self.assertIn("https://saasbill.io/exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/", sitemap)
         self.assertIn("https://saasbill.io/chargeback-fee-and-recovery-calculator/", sitemap)
         self.assertIn("https://saasbill.io/pricing/stripe-shopify-chargeback-fee-and-chargeflow-roi-calculator/", sitemap)
