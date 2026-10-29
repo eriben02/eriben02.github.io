@@ -1,4 +1,4 @@
-"""Checks for the Chargeflow chargeback calculator."""
+"""Checks for the Chargeflow chargeback calculator and the shared workbench shell."""
 import json
 import os
 import re
@@ -169,6 +169,47 @@ class TestChargebackCalculator(unittest.TestCase):
             cards = grid.group(1)
             self.assertIn("chargeback-fee-and-recovery-calculator/", cards, rel)
             self.assertNotIn("stripe-shopify-chargeback-fee-and-chargeflow-roi-calculator/", cards, rel)
+
+
+class TestSharedWorkbenchShell(unittest.TestCase):
+    QUEUED = [
+        "compare/typeform-vs-jotform-response-limit-and-hipaa-cost/index.html",
+        "compare/close-crm-vs-hubspot-sales-hub-5-to-20-reps/index.html",
+        "pricing/stripe-billing-0-7-percent-recurring-tax-calculator/index.html",
+        "pricing/docusign-envelope-allowance-and-api-overage-calculator/index.html",
+        "pricing/gong-io-platform-fee-and-seat-minimum-calculator/index.html",
+        "exit/paypal-180-day-permanent-limitation-fund-recovery/index.html",
+        "faq/does-hubspot-charge-onboarding-fees-2026/index.html",
+        "faq/intercom-fin-ai-cost-calculator/index.html",
+        "faq/stripe-vs-paddle-true-cost/index.html",
+    ]
+
+    def test_queued_pages_use_the_shared_shell(self):
+        for rel in self.QUEUED:
+            with open(os.path.join(PUBLIC_DIR, rel), encoding="utf-8") as f:
+                html = f.read()
+            self.assertIn("editorial-hero editorial-hero-wrap", html, rel)
+            self.assertIn("editorial-workbench", html, rel)
+            self.assertIn(">Show calculation<", html, rel)
+            self.assertIn("True Year-1 cost", html, rel)
+            self.assertIn("Sticker Price", html, rel)
+            self.assertIn("Hidden Cost Gap", html, rel)
+            self.assertIn("data-label=", html, rel)
+            self.assertNotIn("calc-card", html, rel)
+            self.assertNotIn("—", html, rel)
+            self.assertNotIn("&mdash;", html, rel)
+
+    def test_chargeback_result_line_uses_the_shared_copy(self):
+        for rel in (
+            "chargeback-fee-and-recovery-calculator/index.html",
+            "pricing/stripe-shopify-chargeback-fee-and-chargeflow-roi-calculator/index.html",
+        ):
+            with open(os.path.join(PUBLIC_DIR, rel), encoding="utf-8") as f:
+                html = f.read()
+            self.assertIn(">True Year-1 cost<", html, rel)
+            self.assertIn("above advertised price.", html, rel)
+            self.assertIn("saasbillResultLine", html, rel)
+            self.assertNotIn("Unmanaged loss", html[html.find('id="cb-sub"'):html.find('id="cb-sub"') + 180], rel)
 
 
 if __name__ == "__main__":

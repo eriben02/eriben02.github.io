@@ -24,7 +24,7 @@ The 65% recovery rate is a labeled planning benchmark, not a Chargeflow guarante
 Stripe's separate $15 counter fee is named on the processor menu and is covered
 inside the $30 handling line so it is not added a second time.
 """
-from layout import render_page
+from layout import WORKBENCH_JS, render_page
 
 TITLE = "Stripe, Shopify &amp; Paddle Chargeback Cost Calculator (2026): Dispute Fees, Manual Prep vs. Automated Recovery"
 DESCRIPTION = (
@@ -40,7 +40,7 @@ H1 = TITLE
 CF = "https://www.chargeflow.io/"
 
 TEMPLATE = r"""
-<section class="hero">
+<section class="hero editorial-hero editorial-hero-wrap">
   <h1>%%H1%%</h1>
   <p class="lead">%%LEAD%%</p>
 </section>
@@ -108,9 +108,9 @@ TEMPLATE = r"""
         <summary>Show calculation</summary>
         <div class="math-drawer-body" id="cb-math"></div>
       </details>
-      <p class="wb-budget-quote" id="cb-quote">Based on 2,000 orders a month, a $120 average order, and a 0.65% dispute rate on Stripe.</p>
-      <p class="wb-budget-subnote" id="cb-sub">Unmanaged loss $21,060 (disputed sales + fees). Prep $4,680. A 20% win recovers $3,744, or -$936 after prep.</p>
-      <div class="wb-best-option" id="cb-best"><strong>Lowest modeled cost:</strong> Pay-on-performance recovery at $11,934/yr. That is $10,062 less than manual handling and $6,213 less than 0.40% of sales plus the uncovered non-fraud disputes ($18,147).</div>
+      <p class="wb-budget-quote" id="cb-quote">True Year-1 cost</p>
+      <p class="wb-budget-subnote" id="cb-sub">+$19,656 (+840%) above advertised price.</p>
+      <div class="wb-best-option" id="cb-best">Based on 2,000 orders a month, a $120 average order, and a 0.65% dispute rate on Stripe. <strong>Lowest modeled cost:</strong> Pay-on-performance recovery at $11,934/yr. That is $10,062 less than manual handling and $6,213 less than 0.40% of sales plus the uncovered non-fraud disputes ($18,147).</div>
       <div class="cta-stack">
         <a id="cb-primary" class="btn-cta wb-primary-cta" href="%%CF%%" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="chargeflow" data-cta-location="workbench">Recover $9,126/yr net with Chargeflow (save $10,062/yr vs manual) &rarr;</a>
       </div>
@@ -296,8 +296,8 @@ function renderChargeback() {
   document.getElementById('cb-ops-note').textContent = c.disputes.toLocaleString('en-US') + ' disputes x $' + c.opsPerDispute + ' staff handling';
   document.getElementById('cb-fee-note').textContent = c.disputes.toLocaleString('en-US') + ' disputes x ' + money(fee);
   document.getElementById('cb-big').textContent = money(c.manualLoss);
-  document.getElementById('cb-quote').textContent = 'Based on ' + orders.toLocaleString('en-US') + ' orders a month, a ' + money(aov) + ' average order, and a ' + ratePct.toFixed(2) + '% dispute rate on ' + names[processor] + '.';
-  document.getElementById('cb-sub').textContent = 'Unmanaged loss ' + money(c.unmanaged) + ' (disputed sales + fees). Prep ' + money(c.manualOps) + '. A 20% win recovers ' + money(c.manualGross) + ', or ' + money(c.manualNetAfterOps) + ' after prep.';
+  document.getElementById('cb-quote').textContent = 'True Year-1 cost';
+  document.getElementById('cb-sub').textContent = window.saasbillResultLine(Math.max(0, c.manualLoss - c.fees), c.fees);
   const cfNote = '25% of recovered dispute dollars ($0/mo base). Does not refund the processor $15 to $20 dispute fee when a dispute is lost, and a 65% win rate is a planning benchmark. Actual recovery varies by dispute reason code.';
   const paths = [
     { id: 'manual', cost: c.manualLoss, name: 'Manual in-house handling' },
@@ -307,7 +307,7 @@ function renderChargeback() {
   const winner = paths[0];
   const saveLabel = 'Recover ' + money(c.netRecovered) + '/yr net with Chargeflow (save ' + money(c.savings) + '/yr vs manual)';
   const vsRadar = c.radar - c.cfLoss;
-  document.getElementById('cb-best').innerHTML = '<strong>Lowest modeled cost:</strong> ' + winner.name + ' at ' + money(winner.cost) + '/yr. Manual ' + money(c.manualLoss) + '. Pay-on-performance ' + money(c.cfLoss) + ' (net kept ' + money(c.netRecovered) + '). 0.40% of sales plus uncovered non-fraud disputes ' + money(c.radar) + '.' + (winner.id === 'chargeflow' ? ' That is ' + money(c.savings) + ' less than manual handling and ' + money(vsRadar) + ' less than the 0.40% path.' : '');
+  document.getElementById('cb-best').innerHTML = 'Based on ' + orders.toLocaleString('en-US') + ' orders a month, a ' + money(aov) + ' average order, and a ' + ratePct.toFixed(2) + '% dispute rate on ' + names[processor] + '. <strong>Lowest modeled cost:</strong> ' + winner.name + ' at ' + money(winner.cost) + '/yr. Manual ' + money(c.manualLoss) + '. Pay-on-performance ' + money(c.cfLoss) + ' (net kept ' + money(c.netRecovered) + '). 0.40% of sales plus uncovered non-fraud disputes ' + money(c.radar) + '.' + (winner.id === 'chargeflow' ? ' That is ' + money(c.savings) + ' less than manual handling and ' + money(vsRadar) + ' less than the 0.40% path.' : '');
   const primary = document.getElementById('cb-primary');
   if (winner.id === 'chargeflow') {
     primary.href = '%%CF%%';
@@ -414,11 +414,12 @@ renderChargeback();
 
 def body(prefix):
     del prefix
-    return (
+    html = (
         TEMPLATE.replace("%%H1%%", H1)
         .replace("%%LEAD%%", LEAD)
         .replace("%%CF%%", CF)
     )
+    return html.replace("<script>\n", "<script>\n" + WORKBENCH_JS + "\n", 1)
 
 
 def build():

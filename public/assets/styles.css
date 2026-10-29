@@ -189,7 +189,8 @@ h3 {
   color: var(--text);
 }
 
-.calc-box {
+.calc-box,
+.calc-card {
   background: var(--surface);
   border: 1px solid var(--border-strong);
   border-radius: 8px;
@@ -1198,6 +1199,12 @@ footer.site-footer {
   white-space: nowrap;
 }
 
+.editorial-hero.editorial-hero-wrap h1 {
+  white-space: normal;
+  overflow-wrap: break-word;
+  max-width: 18em;
+}
+
 @media (max-width: 768px) {
   .editorial-hero h1 {
     white-space: normal;
@@ -1347,6 +1354,10 @@ footer.site-footer {
 .unified-inspector-tray .wb-slider-row {
   grid-template-columns: 1fr 54px;
   gap: 10px;
+}
+
+.unified-inspector-tray .wb-slider-row.wb-slider-row-wide {
+  grid-template-columns: minmax(0, 1fr) auto;
 }
 
 .unified-inspector-tray .hidden-gap-section {

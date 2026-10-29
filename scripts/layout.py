@@ -23,6 +23,139 @@ def load_data():
         affiliates = json.load(f)
     return tools, affiliates
 
+
+# One result line for every calculator. Pages call window.saasbillResultLine
+# and window.saasbillApplyWorkbench. Homepage payment math does not call these.
+WORKBENCH_JS = r"""
+    window.saasbillMoney = function (n) {
+      var v = Math.round(Number(n) || 0);
+      var sign = v < 0 ? '-' : '';
+      return sign + '$' + Math.abs(v).toLocaleString('en-US');
+    };
+    window.saasbillResultLine = function (hidden, sticker) {
+      var h = Math.round(Number(hidden) || 0);
+      var s = Math.round(Number(sticker) || 0);
+      if (h <= 0) return 'Matches advertised price ($0 hidden fees).';
+      var pct = s > 0 ? Math.round((h / s) * 100) : 0;
+      return '+' + window.saasbillMoney(h) + ' (+' + pct + '%) above advertised price.';
+    };
+    window.saasbillApplyWorkbench = function (opts) {
+      opts = opts || {};
+      var sticker = Math.max(0, Math.round(Number(opts.sticker) || 0));
+      var seats = Math.max(0, Math.round(Number(opts.seats) || 0));
+      var hidden = Math.max(0, Math.round(Number(opts.hidden) || 0));
+      var total = Math.round(Number(opts.total));
+      if (!isFinite(total)) total = sticker + seats + hidden;
+      var parts = Math.max(1, sticker + seats + hidden);
+      function node(id) { return document.getElementById(id); }
+      function setText(id, value) {
+        var el = node(id);
+        if (el) el.textContent = value;
+      }
+      function setFlex(id, amount) {
+        var el = node(id);
+        if (!el) return;
+        var share = amount <= 0 ? 8 : (amount / parts) * 100;
+        el.style.flex = share + ' 1 0px';
+      }
+      setText('shell-product', opts.product || '');
+      setText('shell-big', window.saasbillMoney(total));
+      setText('shell-quote', 'True Year-1 cost');
+      setText('shell-sub', window.saasbillResultLine(hidden, sticker + seats));
+      setText('shell-amt-base', window.saasbillMoney(sticker));
+      setText('shell-amt-seats', window.saasbillMoney(seats));
+      setText('shell-amt-hidden', window.saasbillMoney(hidden));
+      setText('shell-title-base', 'Sticker Price');
+      setText('shell-title-seats', opts.seatsTitle || 'Other sticker fees');
+      setText('shell-title-hidden', 'Hidden Cost Gap');
+      setText('shell-sub-base', opts.baseLabel || 'Advertised price');
+      setText('shell-sub-seats', opts.seatsLabel || 'Included in the sticker');
+      setText('shell-sub-hidden', opts.hiddenLabel || 'Fees above the advertised price');
+      setFlex('shell-row-base', sticker);
+      setFlex('shell-row-seats', seats);
+      setFlex('shell-row-hidden', hidden);
+      var seatsRow = node('shell-row-seats');
+      if (seatsRow) seatsRow.style.display = seats <= 0 ? 'none' : '';
+      var math = node('shell-math');
+      if (math && opts.mathHtml) math.innerHTML = opts.mathHtml;
+      var best = node('shell-best');
+      if (best && opts.bestHtml) best.innerHTML = opts.bestHtml;
+      var cta = node('shell-cta');
+      if (cta && opts.ctaHref) {
+        cta.href = opts.ctaHref;
+        var label = opts.ctaLabel || 'See pricing';
+        cta.textContent = /→\s*$/.test(label) ? label : label + ' \u2192';
+        if (opts.ctaVendor) cta.setAttribute('data-vendor', opts.ctaVendor);
+      }
+      setText('shell-sticker', window.saasbillMoney(sticker + seats));
+      setText('shell-gap', hidden > 0 ? '+' + window.saasbillMoney(hidden) : '$0');
+      if (opts.product) setText('shell-sticker-note', opts.product);
+    };
+"""
+
+
+def render_workbench(controls_html, controls_title="Estimate Your True Cost", chart_title="Your Estimated True Cost", cta_href="#comparison", cta_label="See pricing", cta_vendor="saasbill"):
+    """Shared tactile editorial workbench: recessed controls, stacked bar, raised result column, summary cards."""
+    return f"""
+<div class="unified-inspector-tray">
+<section class="calc-box editorial-workbench" aria-label="True cost calculator">
+  <div class="workbench-grid">
+    <div class="wb-col-controls">
+      <div class="wb-col-title">{controls_title}</div>
+      <div class="wb-controls-stack">
+        {controls_html}
+      </div>
+    </div>
+    <div class="wb-col-chart">
+      <div class="wb-col-title">{chart_title}</div>
+      <div class="wb-vbar-container" aria-live="polite">
+        <div class="wb-vbar-row" id="shell-row-base" style="flex: 40 1 0px;">
+          <div class="wb-vbar-block block-base"><span class="wb-block-amount" id="shell-amt-base">$0</span></div>
+          <div class="wb-callout-item"><div class="wb-leader-line"></div><div class="wb-callout-text"><strong id="shell-title-base">Sticker Price</strong><span id="shell-sub-base">Advertised price</span></div></div>
+        </div>
+        <div class="wb-vbar-row" id="shell-row-seats" style="flex: 8 1 0px;">
+          <div class="wb-vbar-block block-seats"><span class="wb-block-amount" id="shell-amt-seats">$0</span></div>
+          <div class="wb-callout-item"><div class="wb-leader-line"></div><div class="wb-callout-text"><strong id="shell-title-seats">Other sticker fees</strong><span id="shell-sub-seats">Included in the sticker</span></div></div>
+        </div>
+        <div class="wb-vbar-row" id="shell-row-hidden" style="flex: 52 1 0px;">
+          <div class="wb-vbar-block block-hidden"><span class="wb-block-amount" id="shell-amt-hidden">$0</span></div>
+          <div class="wb-callout-item"><div class="wb-leader-line"></div><div class="wb-callout-text"><strong id="shell-title-hidden">Hidden Cost Gap</strong><span id="shell-sub-hidden">Fees above the advertised price</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="wb-result-col" id="shell-result">
+      <div class="wb-selected-product" id="shell-product">Year-1 total</div>
+      <div class="wb-big-total"><span id="shell-big">$0</span> <span class="wb-per-year">/ year</span></div>
+      <details class="math-drawer" id="shell-calc">
+        <summary>Show calculation</summary>
+        <div class="math-drawer-body" id="shell-math"></div>
+      </details>
+      <p class="wb-budget-quote" id="shell-quote">True Year-1 cost</p>
+      <p class="wb-budget-subnote" id="shell-sub">Matches advertised price ($0 hidden fees).</p>
+      <div class="wb-best-option" id="shell-best"></div>
+      <div class="cta-stack">
+        <a id="shell-cta" class="btn-cta wb-primary-cta" href="{cta_href}" data-track="vendor-cta" data-vendor="{cta_vendor}" data-cta-location="workbench">{cta_label} &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+<section class="verdict-section" aria-label="Sticker price and hidden cost gap">
+  <div class="summary-strip" id="shell-summary">
+    <div class="summary-card result-card">
+      <div class="summary-label">Sticker Price</div>
+      <div class="summary-metric" id="shell-sticker">$0</div>
+      <div class="summary-scenario" id="shell-sticker-note">Advertised price</div>
+    </div>
+    <div class="summary-card result-card card-hidden">
+      <div class="summary-label">Hidden Cost Gap</div>
+      <div class="summary-metric" id="shell-gap">$0</div>
+      <div class="summary-scenario">Above the advertised price</div>
+    </div>
+  </div>
+</section>
+"""
+
 def render_related_links(rel_path, prefix):
     if rel_path == "index.html":
         return ""
@@ -299,7 +432,7 @@ def render_page(rel_path, title, description, canonical_path, body_html, faqs=No
   <meta name="dcterms.modified" content="{iso_datetime}" />
   <meta name="dcterms.issued" content="{pub_date}" />
   <link rel="canonical" href="{SITE_ORIGIN}{canonical_path}" />
-  <link rel="stylesheet" href="{prefix}assets/styles.css?v=20261028c" />
+  <link rel="stylesheet" href="{prefix}assets/styles.css?v=20261029a" />
   <link rel="alternate" type="text/plain" href="{SITE_ORIGIN}/llms.txt" title="SaaSBill LLMs.txt Summary" />
   <!-- Privacy-friendly analytics by Plausible -->
   <script defer data-domain="saasbill.io" src="https://plausible.io/js/pa-VAaSVNs5XOobt9cv2UtKo.js"></script>
@@ -426,6 +559,11 @@ def render_page(rel_path, title, description, canonical_path, body_html, faqs=No
   <script src="{prefix}assets/app.js?v=20261028c"></script>
 </body>
 </html>"""
+    html = html.replace(
+        "window.trackEvent = window.trackSaaSBillEvent;",
+        "window.trackEvent = window.trackSaaSBillEvent;\n" + WORKBENCH_JS,
+        1,
+    )
     full_path = os.path.join(PUBLIC_DIR, rel_path)
     os.makedirs(os.path.dirname(full_path), exist_ok=True)
     with open(full_path, "w") as f:
