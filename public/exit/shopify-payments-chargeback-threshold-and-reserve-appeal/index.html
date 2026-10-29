@@ -13,17 +13,17 @@
   <meta property="og:title" content="Shopify Reserve & Dispute Threshold – saasbill.io" />
   <meta property="og:description" content="US Shopify Payments card rate, the $15 dispute fee, a 10% NDRP reserve, and Visa VAMP and Mastercard ECM thresholds. No invented 0.75% dispute line." />
   <meta property="og:url" content="https://saasbill.io/exit/shopify-payments-chargeback-threshold-and-reserve-appeal/" />
-  <meta property="og:updated_time" content="2026-10-29T16:00:53+00:00" />
+  <meta property="og:updated_time" content="2026-10-29T17:20:01+00:00" />
   <meta property="article:published_time" content="2026-10-29T00:00:00+01:00" />
-  <meta property="article:modified_time" content="2026-10-29T16:00:53+00:00" />
+  <meta property="article:modified_time" content="2026-10-29T17:20:01+00:00" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Shopify Reserve & Dispute Threshold – saasbill.io" />
   <meta name="twitter:description" content="US Shopify Payments card rate, the $15 dispute fee, a 10% NDRP reserve, and Visa VAMP and Mastercard ECM thresholds. No invented 0.75% dispute line." />
-  <meta name="last-modified" content="2026-10-29T16:00:53+00:00" />
-  <meta name="dcterms.modified" content="2026-10-29T16:00:53+00:00" />
+  <meta name="last-modified" content="2026-10-29T17:20:01+00:00" />
+  <meta name="dcterms.modified" content="2026-10-29T17:20:01+00:00" />
   <meta name="dcterms.issued" content="2026-10-29" />
   <link rel="canonical" href="https://saasbill.io/exit/shopify-payments-chargeback-threshold-and-reserve-appeal/" />
-  <link rel="stylesheet" href="../../assets/styles.css?v=20261028c" />
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261029a" />
   <link rel="alternate" type="text/plain" href="https://saasbill.io/llms.txt" title="SaaSBill LLMs.txt Summary" />
   <!-- Privacy-friendly analytics by Plausible -->
   <script defer data-domain="saasbill.io" src="https://plausible.io/js/pa-VAaSVNs5XOobt9cv2UtKo.js"></script>
@@ -43,8 +43,74 @@
       }
     };
     window.trackEvent = window.trackSaaSBillEvent;
+
+    window.saasbillMoney = function (n) {
+      var v = Math.round(Number(n) || 0);
+      var sign = v < 0 ? '-' : '';
+      return sign + '$' + Math.abs(v).toLocaleString('en-US');
+    };
+    window.saasbillResultLine = function (hidden, sticker) {
+      var h = Math.round(Number(hidden) || 0);
+      var s = Math.round(Number(sticker) || 0);
+      if (h <= 0) return 'Matches advertised price ($0 hidden fees).';
+      var pct = s > 0 ? Math.round((h / s) * 100) : 0;
+      return '+' + window.saasbillMoney(h) + ' (+' + pct + '%) above advertised price.';
+    };
+    window.saasbillApplyWorkbench = function (opts) {
+      opts = opts || {};
+      var sticker = Math.max(0, Math.round(Number(opts.sticker) || 0));
+      var seats = Math.max(0, Math.round(Number(opts.seats) || 0));
+      var hidden = Math.max(0, Math.round(Number(opts.hidden) || 0));
+      var total = Math.round(Number(opts.total));
+      if (!isFinite(total)) total = sticker + seats + hidden;
+      var parts = Math.max(1, sticker + seats + hidden);
+      function node(id) { return document.getElementById(id); }
+      function setText(id, value) {
+        var el = node(id);
+        if (el) el.textContent = value;
+      }
+      function setFlex(id, amount) {
+        var el = node(id);
+        if (!el) return;
+        var share = amount <= 0 ? 8 : (amount / parts) * 100;
+        el.style.flex = share + ' 1 0px';
+      }
+      setText('shell-product', opts.product || '');
+      setText('shell-big', window.saasbillMoney(total));
+      setText('shell-quote', 'True Year-1 cost');
+      setText('shell-sub', window.saasbillResultLine(hidden, sticker + seats));
+      setText('shell-amt-base', window.saasbillMoney(sticker));
+      setText('shell-amt-seats', window.saasbillMoney(seats));
+      setText('shell-amt-hidden', window.saasbillMoney(hidden));
+      setText('shell-title-base', 'Sticker Price');
+      setText('shell-title-seats', opts.seatsTitle || 'Other sticker fees');
+      setText('shell-title-hidden', 'Hidden Cost Gap');
+      setText('shell-sub-base', opts.baseLabel || 'Advertised price');
+      setText('shell-sub-seats', opts.seatsLabel || 'Included in the sticker');
+      setText('shell-sub-hidden', opts.hiddenLabel || 'Fees above the advertised price');
+      setFlex('shell-row-base', sticker);
+      setFlex('shell-row-seats', seats);
+      setFlex('shell-row-hidden', hidden);
+      var seatsRow = node('shell-row-seats');
+      if (seatsRow) seatsRow.style.display = seats <= 0 ? 'none' : '';
+      var math = node('shell-math');
+      if (math && opts.mathHtml) math.innerHTML = opts.mathHtml;
+      var best = node('shell-best');
+      if (best && opts.bestHtml) best.innerHTML = opts.bestHtml;
+      var cta = node('shell-cta');
+      if (cta && opts.ctaHref) {
+        cta.href = opts.ctaHref;
+        var label = opts.ctaLabel || 'See pricing';
+        cta.textContent = /→\s*$/.test(label) ? label : label + ' \u2192';
+        if (opts.ctaVendor) cta.setAttribute('data-vendor', opts.ctaVendor);
+      }
+      setText('shell-sticker', window.saasbillMoney(sticker + seats));
+      setText('shell-gap', hidden > 0 ? '+' + window.saasbillMoney(hidden) : '$0');
+      if (opts.product) setText('shell-sticker-note', opts.product);
+    };
+
   </script>
-  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "TechArticle", "@id": "https://saasbill.io/exit/shopify-payments-chargeback-threshold-and-reserve-appeal/#article", "headline": "Shopify Reserve & Dispute Threshold \u2013 saasbill.io", "description": "US Shopify Payments card rate, the $15 dispute fee, a 10% NDRP reserve, and Visa VAMP and Mastercard ECM thresholds. No invented 0.75% dispute line.", "datePublished": "2026-10-29", "dateModified": "2026-10-29T16:00:53+00:00", "author": {"@type": "Organization", "name": "SaaSBill Editorial", "url": "https://saasbill.io/"}, "publisher": {"@type": "Organization", "name": "SaaSBill", "url": "https://saasbill.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://saasbill.io/exit/shopify-payments-chargeback-threshold-and-reserve-appeal/"}}, {"@type": "WebPage", "@id": "https://saasbill.io/exit/shopify-payments-chargeback-threshold-and-reserve-appeal/", "url": "https://saasbill.io/exit/shopify-payments-chargeback-threshold-and-reserve-appeal/", "name": "Shopify Reserve & Dispute Threshold \u2013 saasbill.io", "description": "US Shopify Payments card rate, the $15 dispute fee, a 10% NDRP reserve, and Visa VAMP and Mastercard ECM thresholds. No invented 0.75% dispute line.", "inLanguage": "en-US", "datePublished": "2026-10-29", "dateModified": "2026-10-29T16:00:53+00:00", "lastReviewed": "2026-10-29", "reviewedBy": {"@type": "Organization", "name": "SaaSBill Editorial"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "SaaSBill", "item": "https://saasbill.io/"}, {"@type": "ListItem", "position": 2, "name": "Shopify Reserve & Dispute Threshold \u2013 saasbill.io", "item": "https://saasbill.io/exit/shopify-payments-chargeback-threshold-and-reserve-appeal/"}]}, {"@type": "FAQPage", "@id": "https://saasbill.io/exit/shopify-payments-chargeback-threshold-and-reserve-appeal/#faq", "datePublished": "2026-10-29", "dateModified": "2026-10-29T16:00:53+00:00", "mainEntity": [{"@type": "Question", "name": "Does Shopify publish a 0.75% dispute threshold or a 90-day payout hold?", "dateCreated": "2026-10-29", "dateModified": "2026-10-29T16:00:53+00:00", "acceptedAnswer": {"@type": "Answer", "text": "No. Shopify's help center does not print a 0.75% dispute line. The 0.75% rate on the US Shopify Plus plan is the multi-currency payout fee, which is a different charge. The 90 days in the NDRP article are the window used to measure the chargeback rate. Reserve length is sent by email. Shopify does not publish a rule that every reserve lasts 90 days.", "dateCreated": "2026-10-29", "dateModified": "2026-10-29T16:00:53+00:00"}}, {"@type": "Question", "name": "When does Shopify Payments apply a 10% reserve?", "dateCreated": "2026-10-29", "dateModified": "2026-10-29T16:00:53+00:00", "acceptedAnswer": {"@type": "Answer", "text": "If a store is enrolled in a network dispute resolution program because of a high chargeback rate, Shopify says a 10% reserve is applied to Shopify Payments payouts. Merchants with an NDRP-inclusive chargeback rate of 1.5% or higher over the last 90 days can be enrolled automatically. If the 90-day rate is still above 1% after that reserve expires, Shopify says further reserves or payout holds may follow. Other reserves can still be applied for risk reasons that are not a published percent.", "dateCreated": "2026-10-29", "dateModified": "2026-10-29T16:00:53+00:00"}}, {"@type": "Question", "name": "What are the Visa VAMP and Mastercard ECM lines?", "dateCreated": "2026-10-29", "dateModified": "2026-10-29T16:00:53+00:00", "acceptedAnswer": {"@type": "Answer", "text": "Shopify's monitoring guide lists Visa VAMP excessive thresholds of 1.5% and 1,500 combined fraud reports and disputes outside Central Europe, the Middle East, and Africa, and 2.2% with 150 events and $75,000 there. The same table lists a non-compliant column at 0.5% and a count of 5. Visa's own fact sheet says the excessive merchant ratio in AP, Canada, EU, and the US drops to 150 basis points on 1 April 2026, and that this merchant test applies when the acquirer is not already Above Standard or Excessive. Mastercard ECM needs both 100 to 299 chargebacks and a 1.5% to 2.99% ratio. HECM needs 300 or more and 3% or higher. This calculator can see your all-card dispute rate. It cannot see Visa-only or Mastercard-only counts.", "dateCreated": "2026-10-29", "dateModified": "2026-10-29T16:00:53+00:00"}}]}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "TechArticle", "@id": "https://saasbill.io/exit/shopify-payments-chargeback-threshold-and-reserve-appeal/#article", "headline": "Shopify Reserve & Dispute Threshold \u2013 saasbill.io", "description": "US Shopify Payments card rate, the $15 dispute fee, a 10% NDRP reserve, and Visa VAMP and Mastercard ECM thresholds. No invented 0.75% dispute line.", "datePublished": "2026-10-29", "dateModified": "2026-10-29T17:20:01+00:00", "author": {"@type": "Organization", "name": "SaaSBill Editorial", "url": "https://saasbill.io/"}, "publisher": {"@type": "Organization", "name": "SaaSBill", "url": "https://saasbill.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://saasbill.io/exit/shopify-payments-chargeback-threshold-and-reserve-appeal/"}}, {"@type": "WebPage", "@id": "https://saasbill.io/exit/shopify-payments-chargeback-threshold-and-reserve-appeal/", "url": "https://saasbill.io/exit/shopify-payments-chargeback-threshold-and-reserve-appeal/", "name": "Shopify Reserve & Dispute Threshold \u2013 saasbill.io", "description": "US Shopify Payments card rate, the $15 dispute fee, a 10% NDRP reserve, and Visa VAMP and Mastercard ECM thresholds. No invented 0.75% dispute line.", "inLanguage": "en-US", "datePublished": "2026-10-29", "dateModified": "2026-10-29T17:20:01+00:00", "lastReviewed": "2026-10-29", "reviewedBy": {"@type": "Organization", "name": "SaaSBill Editorial"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "SaaSBill", "item": "https://saasbill.io/"}, {"@type": "ListItem", "position": 2, "name": "Shopify Reserve & Dispute Threshold \u2013 saasbill.io", "item": "https://saasbill.io/exit/shopify-payments-chargeback-threshold-and-reserve-appeal/"}]}, {"@type": "FAQPage", "@id": "https://saasbill.io/exit/shopify-payments-chargeback-threshold-and-reserve-appeal/#faq", "datePublished": "2026-10-29", "dateModified": "2026-10-29T17:20:01+00:00", "mainEntity": [{"@type": "Question", "name": "Does Shopify publish a 0.75% dispute threshold or a 90-day payout hold?", "dateCreated": "2026-10-29", "dateModified": "2026-10-29T17:20:01+00:00", "acceptedAnswer": {"@type": "Answer", "text": "No. Shopify's help center does not print a 0.75% dispute line. The 0.75% rate on the US Shopify Plus plan is the multi-currency payout fee, which is a different charge. The 90 days in the NDRP article are the window used to measure the chargeback rate. Reserve length is sent by email. Shopify does not publish a rule that every reserve lasts 90 days.", "dateCreated": "2026-10-29", "dateModified": "2026-10-29T17:20:01+00:00"}}, {"@type": "Question", "name": "When does Shopify Payments apply a 10% reserve?", "dateCreated": "2026-10-29", "dateModified": "2026-10-29T17:20:01+00:00", "acceptedAnswer": {"@type": "Answer", "text": "If a store is enrolled in a network dispute resolution program because of a high chargeback rate, Shopify says a 10% reserve is applied to Shopify Payments payouts. Merchants with an NDRP-inclusive chargeback rate of 1.5% or higher over the last 90 days can be enrolled automatically. If the 90-day rate is still above 1% after that reserve expires, Shopify says further reserves or payout holds may follow. Other reserves can still be applied for risk reasons that are not a published percent.", "dateCreated": "2026-10-29", "dateModified": "2026-10-29T17:20:01+00:00"}}, {"@type": "Question", "name": "What are the Visa VAMP and Mastercard ECM lines?", "dateCreated": "2026-10-29", "dateModified": "2026-10-29T17:20:01+00:00", "acceptedAnswer": {"@type": "Answer", "text": "Shopify's monitoring guide lists Visa VAMP excessive thresholds of 1.5% and 1,500 combined fraud reports and disputes outside Central Europe, the Middle East, and Africa, and 2.2% with 150 events and $75,000 there. The same table lists a non-compliant column at 0.5% and a count of 5. Visa's own fact sheet says the excessive merchant ratio in AP, Canada, EU, and the US drops to 150 basis points on 1 April 2026, and that this merchant test applies when the acquirer is not already Above Standard or Excessive. Mastercard ECM needs both 100 to 299 chargebacks and a 1.5% to 2.99% ratio. HECM needs 300 or more and 3% or higher. This calculator can see your all-card dispute rate. It cannot see Visa-only or Mastercard-only counts.", "dateCreated": "2026-10-29", "dateModified": "2026-10-29T17:20:01+00:00"}}]}]}</script>
 </head>
 <body>
   <header class="site-header">
@@ -63,9 +129,9 @@
   <main class="container">
     <article itemscope itemtype="https://schema.org/TechArticle">
       <meta itemprop="datePublished" content="2026-10-29" />
-      <meta itemprop="dateModified" content="2026-10-29T16:00:53+00:00" />
+      <meta itemprop="dateModified" content="2026-10-29T17:20:01+00:00" />
       
-<section class="hero">
+<section class="hero editorial-hero editorial-hero-wrap">
   <h1>Shopify Payments Reserve &amp; Dispute Threshold Calculator (2026)</h1>
   <p class="lead">Adjust monthly orders, average order value, and dispute rate to see the published US card rate beside dispute fees and any reserve Shopify actually describes. Shopify does not publish a universal 0.75% dispute threshold or a 90-day hold length. The 0.75% figure on the US Plus plan is a multi-currency payout fee.</p>
 </section>
@@ -289,10 +355,11 @@ function renderShopifyReserve() {
     : '80% unrecovered at a 20% manual win rate, plus $15 on lost disputes';
   document.getElementById('sh-product').textContent = 'Shopify Payments, ' + c.plan + ', US standard cards';
   document.getElementById('sh-big').textContent = shMoney(c.trueYr);
-  const pct = c.stickerYr > 0 ? Math.round((c.hiddenYr / c.stickerYr) * 100) : 0;
-  document.getElementById('sh-sub').textContent = c.hiddenYr > 0
-    ? '+' + shMoney(c.hiddenYr) + ' (+' + pct + '%) above advertised price.'
-    : 'Matches advertised price ($0 hidden fees).';
+  document.getElementById('sh-sub').textContent = (typeof window.saasbillResultLine === 'function')
+    ? window.saasbillResultLine(c.hiddenYr, c.stickerYr)
+    : (c.hiddenYr > 0
+      ? '+' + shMoney(c.hiddenYr) + ' (+' + (c.stickerYr > 0 ? Math.round((c.hiddenYr / c.stickerYr) * 100) : 0) + '%) above advertised price.'
+      : 'Matches advertised price ($0 hidden fees).');
   const reserveLine = c.reserveMo > 0
     ? 'Cash held under the published 10% NDRP reserve: ' + shMoney(c.reserveMo) + '/mo. The length is in the Shopify email, not a published 90-day rule.'
     : 'No published reserve percent applies below the 1.5% NDRP line. A reserve can still be emailed for other risk reasons.';

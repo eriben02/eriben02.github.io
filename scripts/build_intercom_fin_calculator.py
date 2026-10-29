@@ -7,7 +7,7 @@ Uses the exact same TOOLS, AFFILIATES, and calcToolYear1(t, seats, aiVol, mode) 
 with zero new calculation logic, prefilled for a realistic 10-agent, 1,500 AI conversations/month scenario.
 """
 import json
-from layout import load_data, render_page, SITE_ORIGIN
+from layout import load_data, render_page, SITE_ORIGIN, wrap_calculator_shell
 
 TOOLS, AFFILIATES = load_data()
 tools_js = json.dumps(TOOLS)
@@ -75,7 +75,7 @@ def render_intercom_calculator_body(
   'help-scout-plus': {{ url: '{prefix}pricing/zendesk-ai-resolution-and-automated-outcome-cost/', label: 'Compare vs. Zendesk AI →' }},
   'hubspot-service-hub': {{ url: '{prefix}pricing/hubspot-true-cost-and-onboarding-fees/', label: 'Read HubSpot onboarding audit →' }}
 }}"""
-    return f"""
+    html = f"""
 <section class="hero">
   <h1>{h1}</h1>
   <p class="lead">{lead}</p>
@@ -1023,6 +1023,7 @@ window.addEventListener('resize', () => {{
 renderDirectory();
 </script>
 """
+    return wrap_calculator_shell(html)
 
 
 ic_faqs = [

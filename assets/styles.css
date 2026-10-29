@@ -1338,6 +1338,13 @@ footer.site-footer {
   justify-content: stretch;
 }
 
+.unified-inspector-tray .workbench-grid.workbench-grid-wide {
+  grid-template-columns: 260px minmax(320px, 1fr) minmax(250px, 300px);
+}
+
+.zi-field { font-size: 16px; width: 100%; max-width: 100%; box-sizing: border-box; }
+.zi-deadline { font-family: var(--serif); font-size: clamp(1.7rem, 4vw, 2.35rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; margin: 0; }
+
 .unified-inspector-tray .wb-vbar-row {
   grid-template-columns: 108px minmax(0, 1fr);
 }
@@ -2004,7 +2011,9 @@ hr.editorial-rule {
     display: none;
   }
   .unified-inspector-tray .workbench-grid,
-  .workbench-grid {
+  .unified-inspector-tray .workbench-grid.workbench-grid-wide,
+  .workbench-grid,
+  .workbench-grid.workbench-grid-wide {
     grid-template-columns: 1fr;
     gap: 32px;
   }

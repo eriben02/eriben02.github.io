@@ -156,6 +156,118 @@ def render_workbench(controls_html, controls_title="Estimate Your True Cost", ch
 </section>
 """
 
+def _match_tag(html, start, open_token, close_token):
+    """Return the index just after the element that starts at `start`."""
+    depth = 0
+    i = start
+    open_len = len(open_token)
+    close_len = len(close_token)
+    while i < len(html):
+        next_open = html.find(open_token, i)
+        next_close = html.find(close_token, i)
+        if next_close < 0:
+            raise ValueError("unclosed " + open_token)
+        if next_open != -1 and next_open < next_close:
+            depth += 1
+            i = next_open + open_len
+        else:
+            depth -= 1
+            i = next_close + close_len
+            if depth == 0:
+                return i
+    raise ValueError("unclosed " + open_token)
+
+
+_SHELL_RESULT = """
+    <div class="wb-result-col" id="shell-result">
+      <div class="wb-selected-product" id="shell-product">Year-1 total</div>
+      <div class="wb-big-total"><span id="shell-big">$0</span> <span class="wb-per-year">/ year</span></div>
+      <details class="math-drawer" id="shell-calc">
+        <summary>Show calculation</summary>
+        <div class="math-drawer-body" id="shell-math"></div>
+      </details>
+      <p class="wb-budget-quote" id="shell-quote">True Year-1 cost</p>
+      <p class="wb-budget-subnote" id="shell-sub">Matches advertised price ($0 hidden fees).</p>
+      <div class="wb-best-option" id="shell-best"></div>
+      <div class="cta-stack">
+        <a id="shell-cta" class="btn-cta wb-primary-cta" href="#comparison" data-track="vendor-cta" data-vendor="saasbill" data-cta-location="workbench">See pricing &rarr;</a>
+      </div>
+    </div>
+"""
+
+_SHELL_SUMMARY = """
+<section class="verdict-section" aria-label="Sticker price and hidden cost gap">
+  <div class="summary-strip" id="shell-summary">
+    <div class="summary-card result-card">
+      <div class="summary-label">Sticker Price</div>
+      <div class="summary-metric" id="shell-sticker">$0</div>
+      <div class="summary-scenario" id="shell-sticker-note">Advertised price</div>
+    </div>
+    <div class="summary-card result-card card-hidden">
+      <div class="summary-label">Hidden Cost Gap</div>
+      <div class="summary-metric" id="shell-gap">$0</div>
+      <div class="summary-scenario">Above the advertised price</div>
+    </div>
+  </div>
+</section>
+"""
+
+
+def wrap_calculator_shell(html, controls_title="Your numbers", chart_title="Your Estimated True Cost"):
+    """Put a legacy calc-box on the shared workbench. Pages that already use it are left in place, aside from the wrapping hero."""
+    html = html.replace(
+        '<section class="hero">',
+        '<section class="hero editorial-hero editorial-hero-wrap">',
+        1,
+    )
+    if 'id="shell-result"' in html or "editorial-workbench" in html:
+        return html
+    search_from = 0
+    while True:
+        start = html.find('<section class="calc-box', search_from)
+        if start < 0:
+            return html
+        tag_end = html.find(">", start)
+        section_end = _match_tag(html, start, "<section", "</section>")
+        inner = html[tag_end + 1:section_end - len("</section>")]
+        if 'type="range"' not in inner and "type='range'" not in inner:
+            search_from = section_end
+            continue
+        grid = inner.find('<div class="calc-grid')
+        if grid < 0:
+            search_from = section_end
+            continue
+        grid_end = _match_tag(inner, grid, "<div", "</div>")
+        controls = inner[grid:grid_end]
+        rest = inner[:grid] + inner[grid_end:]
+        open_tag = html[start:tag_end + 1].replace(
+            'class="calc-box',
+            'class="calc-box editorial-workbench',
+            1,
+        )
+        wrapped = (
+            '<div class="unified-inspector-tray">\n'
+            + open_tag
+            + '\n<div class="workbench-grid workbench-grid-wide">\n'
+            + '<div class="wb-col-controls"><div class="wb-col-title">'
+            + controls_title
+            + '</div><div class="wb-controls-stack">\n'
+            + controls
+            + '\n</div></div>\n'
+            + '<div class="wb-col-chart"><div class="wb-col-title">'
+            + chart_title
+            + '</div>\n'
+            + rest
+            + '\n</div>\n'
+            + _SHELL_RESULT
+            + '\n</div>\n</section>\n</div>\n'
+            + _SHELL_SUMMARY
+        )
+        html = html[:start] + wrapped + html[section_end:]
+        return html
+    return html
+
+
 def render_related_links(rel_path, prefix):
     if rel_path == "index.html":
         return ""

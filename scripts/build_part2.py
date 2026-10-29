@@ -1,6 +1,6 @@
 import os
 import json
-from layout import render_page, load_data, PUBLIC_DIR, SITE_ORIGIN
+from layout import render_page, load_data, PUBLIC_DIR, SITE_ORIGIN, wrap_calculator_shell
 
 TOOLS, AFFILIATES = load_data()
 
@@ -212,6 +212,20 @@ function updateReserveSim() {
   if (resEl) resEl.innerHTML = '';
   const out = document.getElementById('res-output');
   if (out) out.innerHTML = '<div class="summary-strip">' + cardsHtml + '</div>';
+  if (typeof window.saasbillApplyWorkbench === 'function') {
+    window.saasbillApplyWorkbench({
+      product: 'Processing plus dispute drain',
+      sticker: procFee * 12,
+      hidden: cb.drain,
+      total: procFee * 12 + cb.drain,
+      baseLabel: '2.9% card processing over 12 months',
+      hiddenLabel: 'Dispute fees, lost sales, and evidence prep',
+      bestHtml: '<strong>Cash hold:</strong> $' + tempHeld.toLocaleString() + '/mo is withheld. It is not a fee.',
+      ctaHref: 'https://www.chargeflow.io/',
+      ctaLabel: 'View Chargeflow pricing',
+      ctaVendor: 'chargeflow'
+    });
+  }
   if (typeof window.trackSaaSBillEvent === 'function') window.trackSaaSBillEvent('result_rendered', { page: 'reserve-simulator', rev: rev, resPct: resPct, disputePct: disputePct });
 }
 ['gm-rev', 'gm-res', 'gm-cap', 'res-dispute-rate'].forEach(id => document.getElementById(id).addEventListener('input', updateReserveSim));
@@ -230,7 +244,7 @@ render_page(
     "Stripe vs Paddle True Year-1 Cost & Holds – saasbill.io",
     "Calculate the 2026 true cost and Year-1 cashflow impact of Stripe, Shopify Payments, and Paddle 25% rolling reserves, payout holds, and MoR token lock-in vs. Whop and Chargeflow.",
     "/exit/stripe-shopify-paddle-frozen-funds-alternatives/",
-    p3_body,
+    wrap_calculator_shell(p3_body),
     faqs=p3_faqs
 )
 
@@ -372,6 +386,21 @@ function updateSmCalc() {
     `;
   }
 
+  if (typeof window.saasbillApplyWorkbench === 'function') {
+    window.saasbillApplyWorkbench({
+      product: 'monday CRM',
+      sticker: u * monRate * 12,
+      hidden: unusedCostYr,
+      total: monYr,
+      baseLabel: u + ' users at $' + monRate + '/seat',
+      hiddenLabel: unusedSeats + ' unused seats in the ' + monSeats + '-seat bucket',
+      bestHtml: '<strong>Lowest modeled cost:</strong> ' + (pipeYr <= monYr ? 'Pipedrive' : 'monday CRM') + ' at $' + Math.min(pipeYr, monYr).toLocaleString() + '/yr.',
+      ctaHref: pipeYr <= monYr ? 'https://www.pipedrive.com/en/pricing' : 'https://monday.com/pricing',
+      ctaLabel: pipeYr <= monYr ? 'Explore Pipedrive plans' : 'View monday CRM pricing',
+      ctaVendor: pipeYr <= monYr ? 'pipedrive-crm' : 'monday-crm'
+    });
+  }
+
   document.getElementById('sm-tbody').innerHTML = `
     <tr>
       <td data-label="CRM Platform"><strong>Pipedrive CRM</strong> <span class="status-pill status-verified">Verified</span><div class="source-inline">Source: <a href="https://www.pipedrive.com/en/pricing" target="_blank" rel="noopener">Pipedrive pricing &nearr;</a></div></td>
@@ -425,7 +454,7 @@ render_page(
     "CRM True Year-1 Cost & Seat Minimums (2026) – saasbill.io",
     "Compare the 2026 true cost and Year-1 price of monday CRM (3-seat minimum & 5-seat buckets), Pipedrive, Close CRM, and HubSpot (with mandatory onboarding fees) for 1 to 15 users.",
     "/compare/monday-crm-vs-pipedrive-vs-hubspot-seat-minimums/",
-    p4_body,
+    wrap_calculator_shell(p4_body),
     faqs=p4_faqs
 )
 
@@ -657,6 +686,20 @@ function updateSocCalc() {
       <td data-label="Next Step"><div class="cta-stack"><a class="btn-secondary" href="https://trycomp.ai/" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="comp-ai" data-cta-location="table-row">View Comp AI pricing &rarr;</a></div></td>
     </tr>
   `;
+  if (typeof window.saasbillApplyWorkbench === 'function') {
+    window.saasbillApplyWorkbench({
+      product: 'Vanta plus the CPA auditor',
+      sticker: vantaNeg,
+      hidden: auditorFee,
+      total: vantaTot,
+      baseLabel: 'Negotiated automation quote',
+      hiddenLabel: 'Separate CPA auditor fee',
+      bestHtml: '<strong>Auditor fee:</strong> $' + auditorFee.toLocaleString() + ' is billed by the CPA firm, not by the software.',
+      ctaHref: 'https://www.vanta.com/pricing',
+      ctaLabel: 'View Vanta pricing',
+      ctaVendor: 'vanta-soc2'
+    });
+  }
 }
 if (typeof window.trackSaaSBillEvent === 'function') window.trackSaaSBillEvent('result_rendered', { page: 'soc2-hipaa' });
 ['soc-emp', 'soc-fw', 'soc-disc'].forEach(id => document.getElementById(id).addEventListener('input', updateSocCalc));
@@ -675,7 +718,7 @@ render_page(
     "HIPAA & SOC 2 True Year-1 Cost Calculator – saasbill.io",
     "Calculate your 2026 SOC 2 Type II true cost and Year-1 budget (Vanta/Drata platform + mandatory CPA auditor fee) and compare self-serve HIPAA BAA tiers like Jotform Gold ($99/mo).",
     "/compliance/hipaa-baa-and-soc2-pricing-tiers/",
-    p5_body,
+    wrap_calculator_shell(p5_body),
     faqs=p5_faqs
 )
 

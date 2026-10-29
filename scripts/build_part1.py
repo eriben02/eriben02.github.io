@@ -1,6 +1,6 @@
 import json
 import os
-from layout import load_data, render_page, SITE_ORIGIN
+from layout import load_data, render_page, SITE_ORIGIN, wrap_calculator_shell
 
 def _load_quote_pay_profile_js():
     path = os.path.join(os.path.dirname(__file__), "..", "assets", "app.js")
@@ -2054,6 +2054,20 @@ function updateHs() {
   if (footEl) {
     footEl.innerHTML = `<strong>Hidden Cost Highlight:</strong> Based on ${seatWord}, annual billing. Official prices verified Oct 2026. All tiers compared include multi-stage pipelines and automated sales sequences for ${seatWord} billed annually (Close CRM (Essentials) is $${closeEssentialsYr.toLocaleString()}/yr at $35/user/mo for basic pipelines without sequences). ${hsShortName} requires a one-time $${hsOnboard.toLocaleString()} onboarding fee in Year 1; Year-2 renewal drops to $${hsSeatsYr.toLocaleString()}/yr. Source: saasbill.io`;
   }
+  if (typeof window.saasbillApplyWorkbench === 'function') {
+    window.saasbillApplyWorkbench({
+      product: hsFullName,
+      sticker: hsSeatsYr,
+      hidden: hsOnboard,
+      total: hsYear1,
+      baseLabel: 'Advertised annual seats',
+      hiddenLabel: 'Mandatory onboarding',
+      bestHtml: '<strong>Onboarding:</strong> $' + hsOnboard.toLocaleString() + ' is due in Year 1 on this tier.',
+      ctaHref: 'https://refer.close.com/3k5hp07b8soi-fetl0j',
+      ctaLabel: 'Check Close CRM pricing',
+      ctaVendor: 'close'
+    });
+  }
   if (typeof window.trackSaaSBillEvent === 'function') {
     window.trackSaaSBillEvent('result_rendered', { page: 'hubspot-true-cost', seats: seats, tier: tier });
   }
@@ -2076,7 +2090,7 @@ render_page(
     "HubSpot True Year-1 Cost & Onboarding Fees – saasbill.io",
     "Calculate the 2026 HubSpot true cost and Year-1 invoice including mandatory $1,500-$7,000 onboarding fees on Sales Hub Pro and Marketing Hub Pro vs. Close CRM ($0 onboarding) and Pipedrive.",
     "/pricing/hubspot-true-cost-and-onboarding-fees/",
-    p1_body,
+    wrap_calculator_shell(p1_body),
     faqs=p1_faqs
 )
 
@@ -2257,11 +2271,4 @@ p2_faqs = [
     ("How does Freshdesk Freddy AI pricing compare to Intercom's $0.99 per-resolution meter?", "Freshdesk (by Freshworks) charges $19 (Growth), $55 (Pro), or $89 (Enterprise) per agent/month billed annually ($23/$66/$107 monthly). For autonomous AI support, Freddy AI Agent includes 500 one-time complimentary sessions per account and then bills $49 per 100-session pack (charged per session, resolved or not), while Freddy AI Copilot for human agents is an optional $29/agent/month add-on.")
 ]
 
-render_page(
-    "pricing/intercom-fin-ai-resolution-cost-calculator/index.html",
-    "Intercom Fin AI True Cost & Year-1 Calculator – saasbill.io",
-    "Calculate your 2026 Intercom Fin AI true cost and Year-1 support bill at $0.99 per AI resolution plus seat licenses ($29-$132/mo), and compare AI cost against Freshdesk and Help Scout.",
-    "/pricing/intercom-fin-ai-resolution-cost-calculator/",
-    p2_body,
-    faqs=p2_faqs
-)
+# The Intercom pricing URL is written by build_intercom_fin_calculator.py.
