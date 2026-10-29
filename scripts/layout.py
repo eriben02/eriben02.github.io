@@ -45,6 +45,7 @@ def render_related_links(rel_path, prefix):
         ("exit/stripe-shopify-paddle-frozen-funds-alternatives/index.html", "Stripe, Shopify &amp; Paddle Frozen Funds &amp; Reserve Calculator", "25% rolling reserves, payout holds, and the chargeback rate that triggers a freeze."),
         ("chargeback-fee-and-recovery-calculator/index.html", "Stripe, Shopify &amp; Paddle Chargeback Cost Calculator", "Dispute fees, manual prep, and automated recovery."),
         ("exit/paypal-180-day-permanent-limitation-fund-recovery/index.html", "PayPal 180-Day Hold &amp; Reserve Cost Calculator", "Held cashflow, dispute fees, and a failover rail."),
+        ("exit/shopify-payments-chargeback-threshold-and-reserve-appeal/index.html", "Shopify Payments Reserve &amp; Dispute Threshold Calculator", "US card rate, $15 dispute fee, and the published reserve and network thresholds."),
         ("exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/index.html", "ZoomInfo 60-Day Auto-Renewal Notice", "The 60-day window and what the extension costs."),
         ("compare/typeform-vs-jotform-response-limit-and-hipaa-cost/index.html", "Typeform vs. Jotform Response &amp; HIPAA Calculator", "Response caps and which plan signs a HIPAA BAA."),
         ("guides/jotform-wix-app-setup-and-pricing-guide/index.html", "Jotform Wix App Setup &amp; Pricing Guide", "How to embed a B2B quote form on Wix, plus tier pricing."),
@@ -67,15 +68,23 @@ def render_related_links(rel_path, prefix):
         "faq/stripe-vs-paddle-true-cost/index.html",
         "compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/index.html",
         "exit/paypal-180-day-permanent-limitation-fund-recovery/index.html",
+        "exit/shopify-payments-chargeback-threshold-and-reserve-appeal/index.html",
     }
+    shopify_reserve_rel = "exit/shopify-payments-chargeback-threshold-and-reserve-appeal/index.html"
     if rel_path in (chargeback_rel, chargeback_mirror):
         preferred = [
             "exit/stripe-shopify-paddle-frozen-funds-alternatives/index.html",
             "pricing/stripe-billing-0-7-percent-recurring-tax-calculator/index.html",
             "faq/stripe-vs-paddle-true-cost/index.html",
         ]
+    elif rel_path == shopify_reserve_rel:
+        preferred = [
+            chargeback_rel,
+            "exit/stripe-shopify-paddle-frozen-funds-alternatives/index.html",
+            "pricing/stripe-billing-0-7-percent-recurring-tax-calculator/index.html",
+        ]
     elif rel_path in payment_rels:
-        preferred = [chargeback_rel] + [rel for rel, _, _ in all_links if rel in payment_rels and rel != chargeback_rel]
+        preferred = [chargeback_rel] + [rel for rel, _, _ in all_links if rel in payment_rels and rel != chargeback_rel and rel != shopify_reserve_rel]
     elif rel_path in {
         "intercom-fin-cost-calculator/index.html",
         "pricing/intercom-fin-ai-resolution-cost-calculator/index.html",

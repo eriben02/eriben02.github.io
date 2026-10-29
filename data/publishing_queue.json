@@ -111,8 +111,11 @@
     "title": "Shopify Payments Reserve & 0.75% Dispute Threshold Calculator (2026): Preventing 90-Day Payout Holds",
     "category": "Payment Processors & MoR",
     "primary_affiliate": "whop",
-    "status": "queued",
-    "strategic_rationale": "Card network dispute monitoring programs (Visa VDMP / Mastercard ECM) & backup payment rails."
+    "status": "published",
+    "published_at": "2026-10-29",
+    "url": "https://saasbill.io/exit/shopify-payments-chargeback-threshold-and-reserve-appeal/",
+    "strategic_rationale": "Card network dispute monitoring programs (Visa VAMP / Mastercard ECM) and Shopify Payments reserve rules.",
+    "verification_note": "Shopify publishes a 1.5% NDRP enrollment line over 90 days and a 10% reserve, not a universal 0.75% dispute threshold or a 90-day hold length. The 0.75% figure on the US Plus plan is a multi-currency payout fee."
   },
   {
     "priority": 12,

@@ -148,7 +148,7 @@ home_body = f"""
         <summary id="wb-calc-summary">Show calculation</summary>
         <div class="math-drawer-body" id="wb-calc-body"></div>
       </details>
-      <p class="wb-budget-quote" id="wb-budget-quote">Estimated Year-1 total including mandatory fees &amp; overages.</p>
+      <p class="wb-budget-quote" id="wb-budget-quote">True Year-1 cost</p>
       <p class="wb-budget-subnote" id="wb-budget-subnote"></p>
       <div class="wb-best-option" id="wb-best-option"><strong>Best option:</strong> <a href="https://www.freshworks.com/freshdesk/pricing/" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="freshdesk-support" data-cta-location="workbench-best-option">Freshdesk Pro + Freddy AI ($3,835/yr)</a> &middot; saves $8,015/yr</div>
       <div class="cta-stack">
@@ -299,6 +299,11 @@ home_body = f"""
       <span class="badge badge-high">Payments</span>
       <h3><a href="./chargeback-fee-and-recovery-calculator/">Stripe, Shopify &amp; Paddle Chargeback Cost Calculator</a></h3>
       <p>Lost order value plus a $15 dispute fee, compared with Chargeflow's 25% success fee and a 0.40% fee on all sales.</p>
+    </div>
+    <div class="card" data-cat="payments">
+      <span class="badge badge-high">Payments</span>
+      <h3><a href="./exit/shopify-payments-chargeback-threshold-and-reserve-appeal/">Shopify Payments Reserve &amp; Dispute Threshold Calculator</a></h3>
+      <p>US Shopify Payments card rate, the $15 dispute fee, and the reserve and network thresholds Shopify actually publishes.</p>
     </div>
     <div class="card" data-cat="payments">
       <span class="badge badge-high">Payments</span>
@@ -1192,14 +1197,14 @@ function renderDirectory() {{
     document.getElementById('wb-big-amount').textContent = `$${{spotR.year1Total.toLocaleString()}}`;
     document.getElementById('wb-big-unit').textContent = '/ year';
     const quoteEl = document.getElementById('wb-budget-quote');
-    if (quoteEl) quoteEl.innerHTML = 'Estimated Year-1 total including mandatory fees &amp; overages.';
+    if (quoteEl) quoteEl.innerHTML = 'True Year-1 cost';
     const subNoteEl = document.getElementById('wb-budget-subnote');
     if (subNoteEl) {{
       const stickerYr = Math.max(0, spotR.annualSeatsCost - spotR.seatPaddingAnnual);
       const extraYr = spotR.year1Total - stickerYr;
       if (extraYr > 0) {{
         const pctOver = stickerYr > 0 ? Math.round((extraYr / stickerYr) * 100) : 0;
-        subNoteEl.textContent = `+$${{extraYr.toLocaleString()}}/yr (+${{pctOver}}%) above the $${{stickerYr.toLocaleString()}} advertised price.`;
+        subNoteEl.textContent = `+$${{extraYr.toLocaleString()}} (+${{pctOver}}%) above advertised price.`;
       }} else {{
         subNoteEl.textContent = `Matches advertised price ($0 hidden fees).`;
       }}
