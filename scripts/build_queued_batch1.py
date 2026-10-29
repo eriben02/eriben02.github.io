@@ -1,5 +1,5 @@
 """Build the 6 queued calculators + 3 high-intent Answer-First FAQ pages for saasbill.io."""
-from layout import render_page
+from layout import WORKBENCH_JS, render_page, render_workbench
 
 PAGES = [
     {
@@ -422,33 +422,42 @@ def build_all():
     for p in PAGES:
         listener_ids = ["p-slider", "p-select"] + p.get("extra_listener_ids", [])
         listener_js = ", ".join("'" + i + "'" for i in listener_ids)
+        controls = f"""
+        <div class="wb-control-item">
+          <label class="wb-control-label" for="p-slider">{p["ctrl_label"]}</label>
+          <div class="wb-slider-row wb-slider-row-wide">
+            <input type="range" id="p-slider" min="{p["ctrl_min"]}" max="{p["ctrl_max"]}" step="{p["ctrl_step"]}" value="{p["ctrl_val"]}" aria-label="{p["ctrl_label"]}" data-track="calculator-control" data-control="primary-slider" />
+            <span class="wb-slider-val" id="p-slider-val">{p["ctrl_val"]} {p["ctrl_unit"]}</span>
+          </div>
+        </div>
+        <div class="wb-control-item">
+          <div class="control-group">
+            <label for="p-select">{p["opt_label"]}</label>
+            <select id="p-select" data-track="calculator-control" data-control="primary-select">
+              <option value="{p["opt1_val"]}" selected>{p["opt1_text"]}</option>
+              <option value="{p["opt2_val"]}">{p["opt2_text"]}</option>
+            </select>
+          </div>
+        </div>
+        {p.get("extra_controls", "")}
+"""
+        shell = render_workbench(
+            controls,
+            cta_href=p["winner_url"],
+            cta_label=p["winner_cta"],
+            cta_vendor=p["winner_vendor"],
+        )
         body = f"""
-<section class="hero">
+<section class="hero editorial-hero editorial-hero-wrap">
   <h1>{p["h1"]}</h1>
   <p class="lead">{p["lead"]}</p>
 </section>
-
-<section class="calc-card" aria-label="{p["title"]}">
-  <div class="calc-grid">
-    <div class="control-group">
-      <label for="p-slider">{p["ctrl_label"]}: <span class="val" id="p-slider-val">{p["ctrl_val"]} {p["ctrl_unit"]}</span></label>
-      <input type="range" id="p-slider" min="{p["ctrl_min"]}" max="{p["ctrl_max"]}" step="{p["ctrl_step"]}" value="{p["ctrl_val"]}" data-track="calculator-control" data-control="primary-slider" />
-    </div>
-    <div class="control-group">
-      <label for="p-select">{p["opt_label"]}</label>
-      <select id="p-select" data-track="calculator-control" data-control="primary-select">
-        <option value="{p["opt1_val"]}" selected>{p["opt1_text"]}</option>
-        <option value="{p["opt2_val"]}">{p["opt2_text"]}</option>
-      </select>
-    </div>
-    {p.get("extra_controls", "")}
-  </div>
-
+{shell}
+<section aria-label="Comparison">
   <div class="summary-strip" id="{p["summary_id"]}"></div>
   {p.get("after_summary_html", "")}
-
   {p.get("extra_html", "")}
-  <div class="table-wrap mobile-cards">
+  <div class="table-wrap editorial-gap-table mobile-cards">
     <table>
       <thead>
         <tr>
@@ -467,22 +476,18 @@ def build_all():
 
 <script>
 {p.get("extra_script", "")}
+{WORKBENCH_JS}
 function runPageCalc() {{
   var customSummaryHtml;
   {p["js_logic"]}
   document.getElementById('{p["summary_id"]}').innerHTML = (typeof customSummaryHtml === 'string' && customSummaryHtml) ? customSummaryHtml : `
-    <div class="summary-box">
-      <div class="lbl">Recommended Low-Friction Option</div>
-      <div class="num summary-metric">${{rows[0].total}}</div>
-      <div class="sub"><strong>${{rows[0].name}}</strong> &middot; Based on ${{document.getElementById('p-slider-val').textContent}}</div>
-      <div style="margin-top:10px;">
+    <div class="summary-card result-card card-lowest">
+      <div class="summary-label">Lowest modeled cost</div>
+      <div class="summary-metric">${{rows[0].total}}</div>
+      <div class="summary-scenario"><strong>${{rows[0].name}}</strong> &middot; Based on ${{document.getElementById('p-slider-val').textContent}}</div>
+      <div class="summary-actions">
         <a href="{p["winner_url"]}" target="_blank" rel="noopener" class="btn-cta" data-track="vendor-cta" data-vendor="{p["winner_vendor"]}" data-cta-location="subpage-summary">{p["winner_cta"]} &rarr;</a>
       </div>
-    </div>
-    <div class="summary-box">
-      <div class="lbl">Hidden Cost Highlight</div>
-      <div class="num summary-metric" style="color:var(--warn);">${{ saved > 0 ? '+$' + saved.toLocaleString('en-US') + '/yr' : rows[rows.length-1].hidden }}</div>
-      <div class="sub"><strong>Hidden Cost Highlight:</strong> ${{rows[rows.length - 1].name}} adds ${{rows[rows.length - 1].hidden}}</div>
     </div>
   `;
   document.getElementById('p-tbody').innerHTML = rows.map(r => `
@@ -495,6 +500,60 @@ function runPageCalc() {{
       <td data-label="Action"><a href="${{r.url}}" target="_blank" rel="noopener" class="btn-secondary" data-track="vendor-cta" data-vendor="${{r.vendor}}" data-cta-location="${{r.ctaLocation || 'subpage-table'}}">${{r.cta}} &rarr;</a></td>
     </tr>
   `).join('');
+  (function () {{
+    function firstMoney(s) {{
+      var m = String(s || '').replace(/,/g, '').match(/\\$([0-9]+(?:\\.[0-9]+)?)/);
+      return m ? Number(m[1]) : 0;
+    }}
+    function rowGap(r) {{
+      var sticker = firstMoney(r.base);
+      var total = firstMoney(r.total);
+      return Math.max(Math.max(0, total - sticker), firstMoney(r.hidden));
+    }}
+    var pool = rows.filter(function (r) {{ return !/^saves/i.test(String(r.total || '')); }});
+    var h1el = document.querySelector('h1');
+    var h1 = h1el ? (h1el.textContent || '') : '';
+    var named = pool.filter(function (r) {{
+      return String(r.name || '').split(/[^A-Za-z0-9]+/).some(function (w) {{
+        return w.length > 3 && h1.indexOf(w) !== -1;
+      }});
+    }});
+    var candidates = named.length ? named : pool;
+    var focus = candidates[0] || rows[0];
+    var bestGap = -1;
+    var bestTotal = -1;
+    candidates.forEach(function (r) {{
+      var g = rowGap(r);
+      var t = firstMoney(r.total);
+      if (g > bestGap || (g === bestGap && t > bestTotal)) {{
+        bestGap = g;
+        bestTotal = t;
+        focus = r;
+      }}
+    }});
+    var sticker = firstMoney(focus.base);
+    var total = firstMoney(focus.total);
+    var hidden = Math.max(Math.max(0, total - sticker), firstMoney(focus.hidden));
+    var shown = Math.max(total, sticker + hidden);
+    var math = '<div class="calc-math-list">' + rows.map(function (r) {{
+      return '<div class="calc-math-row"><span class="calc-math-label"><strong>' + r.name + '</strong><span class="calc-math-formula">' + r.plan + ' · ' + r.hidden + '</span></span><span class="calc-math-val">' + r.total + '</span></div>';
+    }}).join('') + '</div>';
+    if (typeof window.saasbillApplyWorkbench === 'function') {{
+      window.saasbillApplyWorkbench({{
+        product: focus.name,
+        sticker: sticker,
+        hidden: hidden,
+        total: shown,
+        baseLabel: String(focus.plan || ''),
+        hiddenLabel: String(focus.hidden || '').replace(/<[^>]+>/g, ''),
+        mathHtml: math,
+        bestHtml: '<strong>Lowest modeled cost:</strong> ' + rows[0].name + ' at ' + rows[0].total + '.',
+        ctaHref: rows[0].url,
+        ctaLabel: rows[0].cta,
+        ctaVendor: rows[0].vendor
+      }});
+    }}
+  }})();
   if (typeof window.trackSaaSBillEvent === 'function') window.trackSaaSBillEvent('result_rendered', {{ page: '{p["slug"]}' }});
 }}
 [{listener_js}].forEach(id => {{
