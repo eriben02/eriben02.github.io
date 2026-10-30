@@ -1069,6 +1069,13 @@ footer.site-footer {
   color: var(--text);
 }
 
+.paid-partnership-note {
+  margin: 12px 0 0;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
 /* Mobile Responsive Card View for Calculator Tables & Short Path to CTA */
 @media (max-width: 768px) {
   .container {

@@ -27,6 +27,7 @@ def build_jotform_wix_guide():
 <section class="hero">
   <h1>How to Embed a B2B Custom Quote Form on Wix Using the Jotform Wix App (2026 Step-by-Step Guide &amp; Pricing)</h1>
   <p class="lead">Installing the official Jotform Wix App from the Wix App Market lets you embed conditional B2B quote forms, file uploads, and payment flows onto any Wix page in under five minutes while syncing every submission directly to Jotform Tables. Below is our live 5-step installation walkthrough and video demo on a published Wix store, followed by an interactive 2026 cost comparison between Jotform plans (Starter Free, Bronze $34/mo, Silver $39/mo, Gold $99/mo billed annually) and Wix native form tiers.</p>
+  <p class="paid-partnership-note">Paid partnership with Jotform (#JotformPartner). Some links are affiliate links.</p>
 
   <div class="cta-stack" style="flex-direction:row; flex-wrap:wrap; gap:12px; margin-top:18px;">
     <a class="btn-cta" href="{JOTFORM_PARTNER_URL}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="jotform" data-cta-location="hero-primary">Try Jotform Free (5 Forms Included) &rarr;</a>
