@@ -629,8 +629,10 @@ class TestSaaSBillCalculators(unittest.TestCase):
 
         with open(os.path.join(PUBLIC_DIR, "sitemap.xml"), encoding="utf-8") as f:
             sitemap = f.read()
-        self.assertEqual(sitemap.count("<url><loc>"), 31)
+        self.assertEqual(sitemap.count("<url><loc>"), 33)
         self.assertIn("https://saasbill.io/compare/close-vs-pipedrive-year-1-cost-calculator/", sitemap)
+        self.assertIn("https://saasbill.io/pricing/pipedrive-true-year-1-cost-calculator/", sitemap)
+        self.assertIn("https://saasbill.io/compare/pipedrive-vs-hubspot-sales-hub-year-1-cost/", sitemap)
         self.assertNotIn("/go/", sitemap)
         self.assertIn("https://saasbill.io/exit/shopify-payments-chargeback-threshold-and-reserve-appeal/", sitemap)
         self.assertIn("https://saasbill.io/exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/", sitemap)
