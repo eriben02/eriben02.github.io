@@ -1076,6 +1076,112 @@ footer.site-footer {
   color: var(--muted);
 }
 
+.legal-note {
+  margin: 12px 0 0;
+  font-size: 0.84rem;
+  color: var(--muted);
+}
+
+.src-cluster {
+  display: inline;
+}
+
+.src-link,
+.sources-list a {
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.src-date {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.explain-on-demand {
+  margin: 14px 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  padding: 0 16px;
+}
+
+.explain-on-demand > summary {
+  cursor: pointer;
+  font-weight: 700;
+  padding: 12px 0;
+}
+
+.explain-body {
+  padding: 0 0 14px;
+  color: var(--text);
+}
+
+.explain-body p:first-child {
+  margin-top: 0;
+}
+
+.coming-soon-box {
+  border: 1px solid var(--border-strong);
+  background: var(--surface-2);
+  border-radius: 8px;
+  padding: 16px 18px;
+  margin: 22px 0;
+}
+
+.coming-soon-title {
+  margin: 0 0 6px;
+  font-weight: 700;
+}
+
+.eu-icon-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 16px 0 8px;
+}
+
+.eu-icon-card {
+  flex: 1 1 180px;
+  max-width: 100%;
+  margin: 0;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.eu-icon-card img {
+  display: block;
+  width: 140px;
+  max-width: 100%;
+  height: auto;
+}
+
+.eu-icon-card figcaption {
+  margin-top: 8px;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.ai-act-pre {
+  overflow-x: auto;
+  max-width: 100%;
+  font-size: 0.82rem;
+  background: var(--surface-subtle);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 12px;
+}
+
+.sources-block {
+  margin-top: 28px;
+}
+
+.sources-list {
+  font-size: 0.84rem;
+  color: var(--muted);
+}
+
 /* Mobile Responsive Card View for Calculator Tables & Short Path to CTA */
 @media (max-width: 768px) {
   .container {

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-site-verification" content="W7-m7km1_5pZZUG38dpallcgdGss6_Vl2qo5pjVoMdA" />
+  <!-- Bing Webmaster Tools verification: paste <meta name="msvalidate.01" content="YOUR_BING_CODE" /> here or use 1-click Google Search Console import (see BING_WEBMASTER_VERIFICATION.md) -->
+  <title>ETSI TS 104 275 explained: preventing harm from deepfakes (V1.1.1) – saasbill.io</title>
+  <meta name="description" content="ETSI TS 104 275 V1.1.1 in plain English: who it is for, the 13 principles, what it adds for deepfakes, how it relates to the EU AI Act. Free PDF from ETSI." />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+  <meta property="og:site_name" content="SaaSBill" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="ETSI TS 104 275 explained: preventing harm from deepfakes (V1.1.1) – saasbill.io" />
+  <meta property="og:description" content="ETSI TS 104 275 V1.1.1 in plain English: who it is for, the 13 principles, what it adds for deepfakes, how it relates to the EU AI Act. Free PDF from ETSI." />
+  <meta property="og:url" content="https://saasbill.io/ai-act/etsi-ts-104-275-explained/" />
+  <meta property="og:updated_time" content="2026-10-30T10:09:27+00:00" />
+  <meta property="article:published_time" content="2026-10-30T00:00:00+01:00" />
+  <meta property="article:modified_time" content="2026-10-30T10:09:27+00:00" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ETSI TS 104 275 explained: preventing harm from deepfakes (V1.1.1) – saasbill.io" />
+  <meta name="twitter:description" content="ETSI TS 104 275 V1.1.1 in plain English: who it is for, the 13 principles, what it adds for deepfakes, how it relates to the EU AI Act. Free PDF from ETSI." />
+  <meta name="last-modified" content="2026-10-30T10:09:27+00:00" />
+  <meta name="dcterms.modified" content="2026-10-30T10:09:27+00:00" />
+  <meta name="dcterms.issued" content="2026-10-30" />
+  <link rel="canonical" href="https://saasbill.io/ai-act/etsi-ts-104-275-explained/" />
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261030c" />
+  <link rel="alternate" type="text/plain" href="https://saasbill.io/llms.txt" title="SaaSBill LLMs.txt Summary" />
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script defer data-domain="saasbill.io" src="https://plausible.io/js/pa-VAaSVNs5XOobt9cv2UtKo.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init();
+    window.__saasbillEvents = window.__saasbillEvents || [];
+    window.trackSaaSBillEvent = function(eventName, props) {
+      var p = props || {};
+      var entry = { event: eventName, ts: Date.now() };
+      for (var k in p) {
+        if (Object.prototype.hasOwnProperty.call(p, k)) entry[k] = p[k];
+      }
+      window.__saasbillEvents.push(entry);
+      if (typeof window.plausible === 'function') {
+        window.plausible(eventName, { props: p });
+      }
+    };
+    window.trackEvent = window.trackSaaSBillEvent;
+
+    window.saasbillMoney = function (n) {
+      var v = Math.round(Number(n) || 0);
+      var sign = v < 0 ? '-' : '';
+      return sign + '$' + Math.abs(v).toLocaleString('en-US');
+    };
+    window.saasbillResultLine = function (hidden, sticker) {
+      var h = Math.round(Number(hidden) || 0);
+      var s = Math.round(Number(sticker) || 0);
+      if (h <= 0) return 'Matches advertised price ($0 hidden fees).';
+      var pct = s > 0 ? Math.round((h / s) * 100) : 0;
+      return '+' + window.saasbillMoney(h) + ' (+' + pct + '%) above advertised price.';
+    };
+    window.saasbillApplyWorkbench = function (opts) {
+      opts = opts || {};
+      var sticker = Math.max(0, Math.round(Number(opts.sticker) || 0));
+      var seats = Math.max(0, Math.round(Number(opts.seats) || 0));
+      var hidden = Math.max(0, Math.round(Number(opts.hidden) || 0));
+      var total = Math.round(Number(opts.total));
+      if (!isFinite(total)) total = sticker + seats + hidden;
+      var parts = Math.max(1, sticker + seats + hidden);
+      function node(id) { return document.getElementById(id); }
+      function setText(id, value) {
+        var el = node(id);
+        if (el) el.textContent = value;
+      }
+      function setFlex(id, amount) {
+        var el = node(id);
+        if (!el) return;
+        var share = amount <= 0 ? 8 : (amount / parts) * 100;
+        el.style.flex = share + ' 1 0px';
+      }
+      setText('shell-product', opts.product || '');
+      setText('shell-big', window.saasbillMoney(total));
+      setText('shell-quote', 'True Year-1 cost');
+      setText('shell-sub', window.saasbillResultLine(hidden, sticker + seats));
+      setText('shell-amt-base', window.saasbillMoney(sticker));
+      setText('shell-amt-seats', window.saasbillMoney(seats));
+      setText('shell-amt-hidden', window.saasbillMoney(hidden));
+      setText('shell-title-base', 'Sticker Price');
+      setText('shell-title-seats', opts.seatsTitle || 'Other sticker fees');
+      setText('shell-title-hidden', 'Hidden Cost Gap');
+      setText('shell-sub-base', opts.baseLabel || 'Advertised price');
+      setText('shell-sub-seats', opts.seatsLabel || 'Included in the sticker');
+      setText('shell-sub-hidden', opts.hiddenLabel || 'Fees above the advertised price');
+      setFlex('shell-row-base', sticker);
+      setFlex('shell-row-seats', seats);
+      setFlex('shell-row-hidden', hidden);
+      var seatsRow = node('shell-row-seats');
+      if (seatsRow) seatsRow.style.display = seats <= 0 ? 'none' : '';
+      var math = node('shell-math');
+      if (math && opts.mathHtml) math.innerHTML = opts.mathHtml;
+      var best = node('shell-best');
+      if (best && opts.bestHtml) best.innerHTML = opts.bestHtml;
+      var cta = node('shell-cta');
+      if (cta && opts.ctaHref) {
+        cta.href = opts.ctaHref;
+        var label = opts.ctaLabel || 'See pricing';
+        cta.textContent = /→\s*$/.test(label) ? label : label + ' \u2192';
+        if (opts.ctaVendor) cta.setAttribute('data-vendor', opts.ctaVendor);
+      }
+      setText('shell-sticker', window.saasbillMoney(sticker + seats));
+      setText('shell-gap', hidden > 0 ? '+' + window.saasbillMoney(hidden) : '$0');
+      if (opts.product) setText('shell-sticker-note', opts.product);
+    };
+
+  </script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "TechArticle", "@id": "https://saasbill.io/ai-act/etsi-ts-104-275-explained/#article", "headline": "ETSI TS 104 275 explained: preventing harm from deepfakes (V1.1.1) \u2013 saasbill.io", "description": "ETSI TS 104 275 V1.1.1 in plain English: who it is for, the 13 principles, what it adds for deepfakes, how it relates to the EU AI Act. Free PDF from ETSI.", "datePublished": "2026-10-30", "dateModified": "2026-10-30T10:09:27+00:00", "author": {"@type": "Organization", "name": "SaaSBill Editorial", "url": "https://saasbill.io/"}, "publisher": {"@type": "Organization", "name": "SaaSBill", "url": "https://saasbill.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://saasbill.io/ai-act/etsi-ts-104-275-explained/"}}, {"@type": "WebPage", "@id": "https://saasbill.io/ai-act/etsi-ts-104-275-explained/", "url": "https://saasbill.io/ai-act/etsi-ts-104-275-explained/", "name": "ETSI TS 104 275 explained: preventing harm from deepfakes (V1.1.1) \u2013 saasbill.io", "description": "ETSI TS 104 275 V1.1.1 in plain English: who it is for, the 13 principles, what it adds for deepfakes, how it relates to the EU AI Act. Free PDF from ETSI.", "inLanguage": "en-US", "datePublished": "2026-10-30", "dateModified": "2026-10-30T10:09:27+00:00", "lastReviewed": "2026-10-30", "reviewedBy": {"@type": "Organization", "name": "SaaSBill Editorial"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "SaaSBill", "item": "https://saasbill.io/"}, {"@type": "ListItem", "position": 2, "name": "ETSI TS 104 275 explained: preventing harm from deepfakes (V1.1.1)", "item": "https://saasbill.io/ai-act/etsi-ts-104-275-explained/"}]}]}</script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-inner">
+      <div class="brand-wrap">
+        <a href="../../index.html" class="brand">SaaSBill<span>.io</span></a>
+        <span class="brand-tagline">Year-1 software cost &amp; contract calculators</span>
+      </div>
+      <nav class="nav-links" aria-label="Primary Navigation">
+        <a href="../../index.html#all-calculators">Audits &amp; Guides</a>
+        <a href="../../index.html#methodology">Methodology</a>
+        <span class="byline-bar">Updated <time datetime="2026-10-30" itemprop="dateModified">Oct 30, 2026</time></span>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+    <article itemscope itemtype="https://schema.org/TechArticle">
+      <meta itemprop="datePublished" content="2026-10-30" />
+      <meta itemprop="dateModified" content="2026-10-30T10:09:27+00:00" />
+      
+<section class="hero editorial-hero editorial-hero-wrap">
+  <h1>ETSI TS 104 275 explained</h1>
+  <p class="lead"><strong>The answer first:</strong> ETSI TS 104 275 is a free technical specification from ETSI&rsquo;s committee on Securing AI. It tells <strong>developers and operators of generative AI</strong> how to reduce the chance their systems produce harmful deepfakes: risk assessment before release, human oversight, labelling and filters in the UI, training, and documented evidence, with pass/fail test cases. It is <strong>not</strong> a harmonised standard under the AI Act and does not by itself prove Article 50 compliance. <span class="src-cluster"><a class="src-link" href="https://www.etsi.org/deliver/etsi_TS/104200_104299/104275/01.01.01_60/ts_104275v010101p.pdf">ETSI TS 104 275 V1.1.1 PDF</a> &middot; <a class="src-link" href="https://www.etsi.org/newsroom/press-releases/etsi-unveils-new-standard-to-reduce-production-of-harmful-deepfakes/">ETSI press release, 29 Oct 2026</a> &middot; <a class="src-link" href="https://portal.etsi.org/webapp/WorkProgram/Report_WorkItem.asp?WKI_ID=78186">ETSI work programme, DTS/SAI-0031</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></p>
+</section>
+
+<p class="legal-note">Not legal advice.</p>
+<h2>Fact box</h2>
+
+<div class="table-wrap editorial-gap-table mobile-cards">
+  <table>
+    <caption>ETSI TS 104 275 fact box</caption>
+    <thead><tr><th>Item</th><th>Detail</th></tr></thead>
+    <tbody><tr><td data-label="Item">Full title</td><td data-label="Detail">Securing Artificial Intelligence (SAI); Application of Baseline Cyber Security Requirements for AI Models and Systems principles to Generative AI; Preventing Harm from Deepfakes. <span class="src-cluster"><a class="src-link" href="https://www.etsi.org/deliver/etsi_TS/104200_104299/104275/01.01.01_60/ts_104275v010101p.pdf">ETSI TS 104 275 V1.1.1 PDF</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></td></tr><tr><td data-label="Item">Number / version</td><td data-label="Detail">ETSI TS 104 275 <strong>V1.1.1 (2026-09)</strong>. <span class="src-cluster"><a class="src-link" href="https://www.etsi.org/deliver/etsi_TS/104200_104299/104275/01.01.01_60/ts_104275v010101p.pdf">ETSI TS 104 275 V1.1.1 PDF</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></td></tr><tr><td data-label="Item">Work item</td><td data-label="Detail">DTS/SAI-0031, Technical Committee SAI. <span class="src-cluster"><a class="src-link" href="https://www.etsi.org/deliver/etsi_TS/104200_104299/104275/01.01.01_60/ts_104275v010101p.pdf">ETSI TS 104 275 V1.1.1 PDF</a> &middot; <a class="src-link" href="https://portal.etsi.org/webapp/WorkProgram/Report_WorkItem.asp?WKI_ID=78186">ETSI work programme, DTS/SAI-0031</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></td></tr><tr><td data-label="Item">Published</td><td data-label="Detail">Cover date and publication milestone <strong>29 Sep 2026</strong>. <span class="src-cluster"><a class="src-link" href="https://portal.etsi.org/webapp/WorkProgram/Report_WorkItem.asp?WKI_ID=78186">ETSI work programme, DTS/SAI-0031</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></td></tr><tr><td data-label="Item">Announced</td><td data-label="Detail">ETSI press release dated <strong>29 Oct 2026</strong>. <span class="src-cluster"><a class="src-link" href="https://www.etsi.org/newsroom/press-releases/etsi-unveils-new-standard-to-reduce-production-of-harmful-deepfakes/">ETSI press release, 29 Oct 2026</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></td></tr><tr><td data-label="Item">Harmonised standard?</td><td data-label="Detail"><strong>No</strong> (ETSI work programme). <span class="src-cluster"><a class="src-link" href="https://portal.etsi.org/webapp/WorkProgram/Report_WorkItem.asp?WKI_ID=78186">ETSI work programme, DTS/SAI-0031</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></td></tr><tr><td data-label="Item">Length</td><td data-label="Detail">26 pages (PDF). <span class="src-cluster"><a class="src-link" href="https://www.etsi.org/deliver/etsi_TS/104200_104299/104275/01.01.01_60/ts_104275v010101p.pdf">ETSI TS 104 275 V1.1.1 PDF</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></td></tr><tr><td data-label="Item">Price</td><td data-label="Detail">Free PDF download from ETSI. <span class="src-cluster"><a class="src-link" href="https://www.etsi.org/deliver/etsi_TS/104200_104299/104275/01.01.01_60/ts_104275v010101p.pdf">ETSI TS 104 275 V1.1.1 PDF</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></td></tr><tr><td data-label="Item">Builds on</td><td data-label="Detail">ETSI EN 304 223 (V2.1.1), Baseline Cyber Security Requirements for AI Models and Systems. <span class="src-cluster"><a class="src-link" href="https://www.etsi.org/deliver/etsi_TS/104200_104299/104275/01.01.01_60/ts_104275v010101p.pdf">ETSI TS 104 275 V1.1.1 PDF</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></td></tr></tbody>
+  </table>
+</div>
+<details class="explain-on-demand">
+  <summary>Why two dates?</summary>
+  <div class="explain-body"><p>The ETSI work programme lists the publication milestone and cover date as 29 Sep 2026, and the PDF metadata is dated the same day. ETSI&rsquo;s press release &ldquo;ETSI unveils new standard to reduce production of harmful deepfakes&rdquo; is dated 29 Oct 2026. If you see &ldquo;released 29 October&rdquo;, that is the announcement; the document itself is dated September 2026. <span class="src-cluster"><a class="src-link" href="https://www.etsi.org/deliver/etsi_TS/104200_104299/104275/01.01.01_60/ts_104275v010101p.pdf">ETSI TS 104 275 V1.1.1 PDF</a> &middot; <a class="src-link" href="https://www.etsi.org/newsroom/press-releases/etsi-unveils-new-standard-to-reduce-production-of-harmful-deepfakes/">ETSI press release, 29 Oct 2026</a> &middot; <a class="src-link" href="https://portal.etsi.org/webapp/WorkProgram/Report_WorkItem.asp?WKI_ID=78186">ETSI work programme, DTS/SAI-0031</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></p></div>
+</details>
+<h2>Scope in one sentence</h2>
+<p>A deepfake-focused application of EN 304 223 to generative AI, covering misinformation, disinformation, loss of confidentiality, copyright, IPR and LLM training and source material, with more prescriptive provisions where needed. <span class="src-cluster"><a class="src-link" href="https://www.etsi.org/deliver/etsi_TS/104200_104299/104275/01.01.01_60/ts_104275v010101p.pdf">ETSI TS 104 275 V1.1.1 PDF</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></p>
+<h2>Who it is for</h2>
+<p>Mainly <strong>developers</strong> and <strong>system operators</strong> of generative AI (some provisions also name data custodians). It is not written for people who only publish AI content, though its UI provision is relevant to designers. <span class="src-cluster"><a class="src-link" href="https://www.etsi.org/deliver/etsi_TS/104200_104299/104275/01.01.01_60/ts_104275v010101p.pdf">ETSI TS 104 275 V1.1.1 PDF</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></p>
+<h2>The structure: 13 principles in 5 lifecycle phases</h2>
+
+<div class="table-wrap editorial-gap-table mobile-cards">
+  <table>
+    <caption>The structure: 13 principles in 5 lifecycle phases. Source: ETSI TS 104 275, clause 5 and table of contents.</caption>
+    <thead><tr><th>Phase</th><th>Principles</th><th>Deepfake-specific additions (summarised)</th></tr></thead>
+    <tbody><tr><td data-label="Phase">Secure design</td><td data-label="Principles">1 Awareness. 2 Design for security. 3 Threats and risks. 4 Human responsibility</td><td data-label="Deepfake-specific additions (summarised)">Training resources on deepfake risks (5.1.1-1). <strong>UI shall encourage responsible use, for example content filters, clear labelling of AI-generated content, telling users about reliability limits</strong> (5.1.2-1). Risk assessment and mitigations before deployment (5.1.3-2). Human oversight and post-deployment monitoring (5.1.4-2).</td></tr><tr><td data-label="Phase">Secure development</td><td data-label="Principles">5 Assets. 6 Infrastructure. 7 Supply chain. 8 Document data, models and prompts. 9 Testing</td><td data-label="Deepfake-specific additions (summarised)">Informed consent and opt-in/opt-out if a system trains on users&rsquo; works (5.2.1-1). Developer confirms training data was legally accessed and/or licensed (5.2.4-1). Red-teaming suggested, for example the same prompt in several languages (note to 5.2.5).</td></tr><tr><td data-label="Phase">Secure deployment</td><td data-label="Principles">10 Communication with end users</td><td data-label="Deepfake-specific additions (summarised)">A risk communication policy, able to share information with for example a national market surveillance authority under the AI Act (5.3.1-1).</td></tr><tr><td data-label="Phase">Secure maintenance</td><td data-label="Principles">11 Updates. 12 Monitoring</td><td data-label="Deepfake-specific additions (summarised)">No new provisions; notes on informing users and human oversight.</td></tr><tr><td data-label="Phase">Secure end of life</td><td data-label="Principles">13 Data and model disposal</td><td data-label="Deepfake-specific additions (summarised)">No new provisions.</td></tr></tbody>
+  </table>
+</div>
+<p><span class="src-cluster"><a class="src-link" href="https://www.etsi.org/deliver/etsi_TS/104200_104299/104275/01.01.01_60/ts_104275v010101p.pdf">ETSI TS 104 275 V1.1.1 PDF</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></p><details class="explain-on-demand">
+  <summary>Annex C: test cases with pass/fail</summary>
+  <div class="explain-body"><p>Annex C (normative) gives a test purpose, method and pass/fail verdict per extension provision. Example: for the UI provision, a <strong>pass</strong> needs design and implementation evidence of content filters, clear AI-content labelling and user information on limits, <em>and</em> test results showing they work. For training, a <strong>pass</strong> needs GenAI security topics in training material reviewed within the last 12 months. <span class="src-cluster"><a class="src-link" href="https://www.etsi.org/deliver/etsi_TS/104200_104299/104275/01.01.01_60/ts_104275v010101p.pdf">ETSI TS 104 275 V1.1.1 PDF</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></p></div>
+</details><details class="explain-on-demand">
+  <summary>How it relates to the EU AI Act</summary>
+  <div class="explain-body"><ul class="key-list"><li>ETSI says the TS &ldquo;supports objectives laid out in the EU AI Act, extending security beyond systems classified as high-risk.&rdquo; <span class="src-cluster"><a class="src-link" href="https://www.etsi.org/newsroom/press-releases/etsi-unveils-new-standard-to-reduce-production-of-harmful-deepfakes/">ETSI press release, 29 Oct 2026</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li><li>The ETSI work programme marks it as <strong>not</strong> a harmonised standard. <span class="src-cluster"><a class="src-link" href="https://portal.etsi.org/webapp/WorkProgram/Report_WorkItem.asp?WKI_ID=78186">ETSI work programme, DTS/SAI-0031</a> <span class="src-date">Accessed 30 Oct 2026.</span></span> So it does not give a presumption of conformity.</li><li>For Article 50 labelling and marking, the Commission&rsquo;s recognised tool is the <strong>Code of Practice on Transparency of AI-generated Content</strong>, which the Commission and AI Board assessed as adequate. <span class="src-cluster"><a class="src-link" href="https://ec.europa.eu/newsroom/dae/redirection/document/129555">Code of Practice on Transparency of AI-generated Content</a> &middot; <a class="src-link" href="https://digital-strategy.ec.europa.eu/en/news/strong-backing-code-practice-transparency-ai-generated-content">Commission news, strong backing for the Code of Practice</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li><li>The TS mentions labelling only at a high level (&ldquo;clearly labelling AI-generated content&rdquo;); it does not specify icons, placement or C2PA. For those, see the Code and the EU icons. <span class="src-cluster"><a class="src-link" href="https://www.etsi.org/deliver/etsi_TS/104200_104299/104275/01.01.01_60/ts_104275v010101p.pdf">ETSI TS 104 275 V1.1.1 PDF</a> &middot; <a class="src-link" href="https://digital-strategy.ec.europa.eu/en/policies/eu-icons-labelling-ai-generated-content">EU icons for labelling AI-generated content</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li></ul></div>
+</details><details class="explain-on-demand">
+  <summary>Annexes A and B</summary>
+  <div class="explain-body"><p>Annex A (informative) gives an overview of detection and prevention of GenAI deepfakes, including reporting and removal. Annex B (informative) maps GenAI to trustworthy-AI concepts. <span class="src-cluster"><a class="src-link" href="https://www.etsi.org/deliver/etsi_TS/104200_104299/104275/01.01.01_60/ts_104275v010101p.pdf">ETSI TS 104 275 V1.1.1 PDF</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></p></div>
+</details>
+<h2>What a designer can take from it</h2>
+<ol class="key-list">
+  <li>Labelling is a <strong>design requirement</strong>, not a legal footnote (5.1.2-1).</li>
+  <li>Keep evidence: design docs and test results showing the label and filters work (Annex C).</li>
+  <li>Tell users what the system can&rsquo;t do reliably (5.1.2-1).</li>
+</ol>
+<p>Related: <a href="../deepfake-labelling-patterns/">Labelling patterns</a> &middot; <a href="../c2pa-watermarking-tools-compared/">C2PA and watermarking tools</a></p>
+
+<section class="sources-block" aria-labelledby="sources-heading">
+  <h2 id="sources-heading">Sources</h2>
+  <ol class="sources-list">
+    <li id="src-E1"><a href="https://www.etsi.org/deliver/etsi_TS/104200_104299/104275/01.01.01_60/ts_104275v010101p.pdf">ETSI TS 104 275 V1.1.1 PDF</a>. <span class="src-date">Accessed 30 Oct 2026.</span></li>
+    <li id="src-E2"><a href="https://www.etsi.org/newsroom/press-releases/etsi-unveils-new-standard-to-reduce-production-of-harmful-deepfakes/">ETSI press release, 29 Oct 2026</a>. <span class="src-date">Accessed 30 Oct 2026.</span></li>
+    <li id="src-E3"><a href="https://portal.etsi.org/webapp/WorkProgram/Report_WorkItem.asp?WKI_ID=78186">ETSI work programme, DTS/SAI-0031</a>. <span class="src-date">Accessed 30 Oct 2026.</span></li>
+    <li id="src-S3"><a href="https://digital-strategy.ec.europa.eu/en/policies/eu-icons-labelling-ai-generated-content">EU icons for labelling AI-generated content</a>. <span class="src-date">Accessed 30 Oct 2026.</span></li>
+    <li id="src-S4"><a href="https://ec.europa.eu/newsroom/dae/redirection/document/129555">Code of Practice on Transparency of AI-generated Content</a>. <span class="src-date">Accessed 30 Oct 2026.</span></li>
+    <li id="src-S10"><a href="https://digital-strategy.ec.europa.eu/en/news/strong-backing-code-practice-transparency-ai-generated-content">Commission news, strong backing for the Code of Practice</a>. <span class="src-date">Accessed 30 Oct 2026.</span></li>
+  </ol>
+</section>
+
+      
+      
+    <section aria-labelledby="related-ai-act-heading" style="margin-top:36px; padding-top:24px; border-top:1px solid var(--border);">
+      <h2 id="related-ai-act-heading" style="font-size:1.2rem; margin-top:0;">Related AI Act guides</h2>
+      <div class="related-calc-grid">
+        
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../ai-act/" data-track="internal-audit">AI Act Article 50 &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">Who must label AI content, the two dates, and where to start.</p>
+        </div>
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../ai-act/article-50-deployer-checklist/" data-track="internal-audit">Article 50 deployer checklist &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">What you must disclose, the exceptions, and the dates.</p>
+        </div>
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../ai-act/deepfake-labelling-patterns/" data-track="internal-audit">Deepfake labelling patterns &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">Where to put the EU AI icon on images, video, audio and text.</p>
+        </div>
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../ai-act/c2pa-watermarking-tools-compared/" data-track="internal-audit">C2PA and watermarking tools &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">What each marking tool does. Published prices only.</p>
+        </div>
+      </div>
+    </section>
+    
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <p><strong>SaaSBill</strong> &middot; Year-1 cost &amp; contract calculators for B2B software.</p>
+      <p class="footer-note">Updated <time datetime="2026-10-30">Oct 30, 2026</time> &middot; Inquiries: <a href="mailto:info@saasbill.io">info@saasbill.io</a></p>
+    </div>
+  </footer>
+  <script>
+  /* Plausible + local event dispatcher for: calculator_interaction, category_select, result_rendered, vendor_cta_click */
+  window.__saasbillEvents = window.__saasbillEvents || [];
+  try {
+    var p = (window.location && window.location.pathname ? window.location.pathname : '').toLowerCase();
+    if (p && p !== '/' && p !== '/index.html') {
+      var ctxCat = '';
+      var ctxTool = '';
+      if (p.indexOf('zoominfo') !== -1) {
+        ctxCat = 'CRM & Sales';
+        ctxTool = 'close-crm';
+      } else if (p.indexOf('stripe') !== -1 || p.indexOf('paddle') !== -1 || p.indexOf('whop') !== -1 || p.indexOf('gumroad') !== -1 || p.indexOf('paypal') !== -1) {
+        ctxCat = 'Payment Processors & MoR';
+        ctxTool = p.indexOf('paddle') !== -1 ? 'paddle-mor' : (p.indexOf('whop') !== -1 ? 'whop-payments' : 'stripe-payments');
+      } else if (p.indexOf('hubspot') !== -1 || p.indexOf('close-crm') !== -1 || p.indexOf('pipedrive') !== -1 || p.indexOf('monday-crm') !== -1 || p.indexOf('gong') !== -1) {
+        ctxCat = 'CRM & Sales';
+        ctxTool = p.indexOf('monday') !== -1 ? 'monday-crm' : (p.indexOf('close') !== -1 ? 'close-crm' : (p.indexOf('pipedrive') !== -1 ? 'pipedrive-crm' : 'hubspot-sales-pro'));
+      } else if (p.indexOf('hipaa') !== -1 || p.indexOf('soc2') !== -1 || p.indexOf('docusign') !== -1 || p.indexOf('typeform') !== -1 || p.indexOf('jotform') !== -1) {
+        ctxCat = 'Compliance, HIPAA & SOC 2';
+        ctxTool = (p.indexOf('typeform') !== -1 || p.indexOf('jotform') !== -1) ? 'jotform-hipaa' : 'vanta-soc2';
+      } else if (p.indexOf('intercom') !== -1 || p.indexOf('zendesk') !== -1 || p.indexOf('freshdesk') !== -1) {
+        ctxCat = 'Helpdesk & AI Support';
+        ctxTool = p.indexOf('intercom') !== -1 ? 'intercom-fin-ai' : (p.indexOf('freshdesk') !== -1 ? 'freshdesk-support' : 'zendesk-suite-team');
+      }
+      if (ctxCat && window.sessionStorage) {
+        sessionStorage.setItem('saasbill_last_cat', ctxCat);
+        if (ctxTool) sessionStorage.setItem('saasbill_last_tool', ctxTool);
+      }
+    }
+  } catch (err) {}
+  document.addEventListener('click', function(e) {
+    var cta = e.target.closest('[data-track="vendor-cta"], [data-track="vendor_cta_click"]');
+    if (cta) {
+      var vendor = cta.getAttribute('data-vendor') || '';
+      var location = cta.getAttribute('data-cta-location') || 'subpage-result';
+      var href = cta.getAttribute('href') || '';
+      if (typeof window.trackSaaSBillEvent === 'function') {
+        window.trackSaaSBillEvent('vendor_cta_click', { vendor: vendor, location: location, href: href });
+      }
+      return;
+    }
+    var catBtn = e.target.closest('[data-track="category-select"], [data-track="category_select"]');
+    if (catBtn) {
+      var cat = catBtn.getAttribute('data-cat') || '';
+      if (typeof window.trackSaaSBillEvent === 'function') {
+        window.trackSaaSBillEvent('category_select', { category: cat });
+      }
+    }
+  });
+  var _lastCalcTrackKey = '';
+  var _lastCalcTrackTs = 0;
+  function handleCalcControlEvent(e) {
+    var ctrl = e.target.closest('[data-track="calculator-control"], [data-track="calculator_interaction"], input[type="range"], select');
+    if (ctrl) {
+      var control = ctrl.getAttribute('data-control') || ctrl.id || '';
+      var val = String(ctrl.value);
+      var now = Date.now();
+      var key = control + ':' + val;
+      if (key === _lastCalcTrackKey && (now - _lastCalcTrackTs) < 150) return;
+      _lastCalcTrackKey = key;
+      _lastCalcTrackTs = now;
+      if (typeof window.trackSaaSBillEvent === 'function') {
+        window.trackSaaSBillEvent('calculator_interaction', { control: control, value: val });
+        if (ctrl.id === 'cat-filter') {
+          window.trackSaaSBillEvent('category_select', { category: val });
+        }
+      }
+    }
+  }
+  document.addEventListener('input', handleCalcControlEvent);
+  document.addEventListener('change', handleCalcControlEvent);
+  </script>
+  <script src="../../assets/app.js?v=20261030a"></script>
+</body>
+</html>
