@@ -21,6 +21,7 @@ REL = "compare/close-vs-pipedrive-year-1-cost-calculator/index.html"
 URL = "https://saasbill.io/compare/close-vs-pipedrive-year-1-cost-calculator/"
 CLOSE_GO = "https://refer.close.com/3k5hp07b8soi-fetl0j"
 PIPEDRIVE_GO = "https://aff.trypipedrive.com/mlquvdui44me"
+PLAUSIBLE_EVENT = "https://plausible.io/api/event"
 CHROME = "/opt/google/chrome/chrome"
 
 # refer.close.com links per published page on main before this page existed.
@@ -84,7 +85,7 @@ def balanced(src, signature):
 def page_js(html):
     data = re.search(r"const CP_DATA = (\{.*?\});\n", html).group(0)
     names = ["calcCloseVsPipedrive", "cpMoney", "cpUnit", "cpPill", "cpTotal", "cpPart", "cpName",
-             "cpScenario", "cpLowestLine", "cpMathRows", "cpAnswerHtml", "cpWhy", "cpSourceCell", "cpTableHtml"]
+             "cpScenario", "cpMathRows", "cpBestLine", "cpCta", "cpVendorCard", "cpCardsHtml", "cpWhy", "cpTableHtml"]
     return data + "\n".join(balanced(html, "function " + n + "(") for n in names)
 
 
@@ -96,7 +97,7 @@ console.log(JSON.stringify(IN.map(function (i) {
   var r = calcCloseVsPipedrive(i);
   return %s;
 })));
-""" % (json.dumps(inputs), "{r: r, table: cpTableHtml(r), answer: cpAnswerHtml(r)}" if render else "r")
+""" % (json.dumps(inputs), "{r: r, table: cpTableHtml(r), cards: cpCardsHtml(r), best: cpBestLine(r)}" if render else "r")
     res = subprocess.run(["node", "-e", script], capture_output=True, text=True, check=True)
     return json.loads(res.stdout)
 
@@ -186,6 +187,11 @@ class TestCloseVsPipedriveMath(unittest.TestCase):
         self.assertIsNone(out["r"]["pipedrive"]["rate"])
         for secondary in ("$24", "$49/seat", "$79", "$99/seat"):
             self.assertNotIn("Pipedrive " + secondary, out["table"])
+        # Cards: Pipedrive total is a floor with a pill, and no lowest is claimed.
+        self.assertIn("&ge; ", out["cards"])
+        self.assertIn("status-unknown", out["cards"])
+        self.assertIn("Not determined", out["cards"])
+        self.assertIn("not determined", out["best"])
 
 
 class TestCloseVsPipedriveLinks(unittest.TestCase):
@@ -234,7 +240,11 @@ class TestCloseVsPipedriveLinks(unittest.TestCase):
             self.assertIn('<meta name="robots" content="noindex,nofollow">', pub)
             self.assertIn('<meta http-equiv="refresh" content="0;url=%s">' % url, pub)
             self.assertIn('location.replace("%s")' % url, pub)
-            self.assertEqual(set(re.findall(r"https://[^\"<>]+", pub)), {url})
+            self.assertEqual(set(re.findall(r"https://[^\"<>]+", pub)) - {PLAUSIBLE_EVENT}, {url})
+            # Pageview beacon before the redirect, only on the live host.
+            self.assertIn('location.hostname==="saasbill.io"&&navigator.sendBeacon', pub)
+            self.assertLess(pub.index("navigator.sendBeacon("), pub.index("location.replace("))
+            self.assertIn('domain:"saasbill.io"', pub)
 
     def test_go_not_in_sitemap_and_disallowed(self):
         for base in (ROOT, PUBLIC):
@@ -351,13 +361,19 @@ class TestCloseVsPipedriveSources(unittest.TestCase):
         allowed.add(round(r["pipedrive"]["total"] / 5 / 12))
         html = page()
         tbody = re.search(r'<tbody id="cp-tbody">(.*?)</tbody>', html, re.S).group(1)
-        answer = re.search(r'<div id="cp-answer">(.*?)</div>\s*<p class="cp-disclosure">', html, re.S).group(1)
+        allowed.add(r["close"]["usage"] + r["close"]["numbers"])
+        answer = re.search(r'<div class="summary-strip" id="cp-cards" aria-live="polite">(.*?)</div>\s*</section>', html, re.S).group(1)
+        lead = re.search(r'<p class="lead">(.*?)</p>', html, re.S).group(1)
+        best = re.search(r'<div class="wb-best-option" id="shell-best">(.*?)</div>', html, re.S).group(1)
         sources = re.search(r'id="cp-sources"(.*?)</details>', html, re.S).group(1)
-        for chunk in (tbody, answer, sources):
+        for chunk in (tbody, answer, lead, best, sources):
             for m in re.findall(r"\$(\d[\d,]*(?:\.\d+)?)", chunk):
                 self.assertIn(round(float(m.replace(",", "")), 2), allowed, "$" + m)
-        self.assertIn("$2,760", answer)
-        self.assertIn("$4,428", answer)
+        for chunk in (answer, lead):
+            self.assertIn("$2,760", chunk)
+            self.assertIn("$4,428", chunk)
+        self.assertIn("$1,668/yr less than Pipedrive", answer)
+        self.assertIn("$1,668/yr less than Pipedrive", best)
         # Secondary Pipedrive monthly prices never render as numbers.
         for v in data["pipedrive"]["plans"].values():
             self.assertNotIn("$%d/seat" % v["monthly"], tbody)
@@ -379,11 +395,25 @@ class TestCloseVsPipedrivePublishing(unittest.TestCase):
         self.assertIn("<h1>Close vs Pipedrive (2026): True Year-1 Cost for Your Sales Team, Calling Included</h1>", pub)
         lead = re.search(r'<p class="lead">(.*?)</p>', pub, re.S).group(1)
         self.assertEqual(lead.count(". "), 1)
+        self.assertIn("$2,760", lead)
+        self.assertIn("$4,428", lead)
         self.assertIn('"inLanguage": "en-US"', pub)
         self.assertIn("Lowest Year-1 cost", pub)
         for control in ("cp-users", "cp-billing", "cp-email", "cp-sequences", "cp-leadcapture", "cp-calling", "cp-minutes", "cp-exclude-dialer"):
             self.assertIn('data-control="%s"' % control, pub)
         self.assertIn('"@type": "FAQPage"', pub)
+        # Shared shell pieces, as on the other comparison pages.
+        self.assertIn('<div class="wb-col-title">Estimate Your True Cost</div>', pub)
+        self.assertIn('<div class="wb-col-title">Your Estimated True Cost</div>', pub)
+        self.assertIn('<div class="workbench-grid wb-fill-chart">', pub)
+        strip = re.search(r'<div class="summary-strip" id="cp-cards" aria-live="polite">(.*?)</div>\s*</section>', pub, re.S).group(1)
+        self.assertEqual(strip.count('class="summary-card result-card'), 3)
+        self.assertEqual(strip.count('<details class="math-drawer">'), 3)
+        self.assertEqual(pub.count('<details class="math-drawer" id="shell-calc">'), 1)
+        self.assertNotIn("cp-answer", pub)
+        self.assertNotIn("cp-seg", pub)
+        # Footer link wall is collapsed, as on every other page.
+        self.assertRegex(pub, r"<details[^>]*>\s*<summary>Browse all \d+ audited calculators")
         self.assertEqual(pub.count('class="faq-item"'), 8)
 
     def test_plausible_static(self):
@@ -471,7 +501,7 @@ class TestCloseVsPipedriveBrowser(unittest.TestCase):
             overflow = pg.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth")
             self.assertLessEqual(overflow, 0)
             small = pg.evaluate("""() => Array.from(document.querySelectorAll(
-              '.cp-check, .cp-seg-options label, .cp-num, #cp-calling, .cp-table a.btn-secondary, #shell-cta, .cp-answer .math-drawer > summary, .cp-below summary'))
+              '.cp-check, .cp-num, #cp-view, #cp-calling, #cp-billing, .cp-table a.btn-secondary, #shell-cta, .cp-below summary'))
               .filter(e => e.offsetParent !== null)
               .map(e => [e.className || e.id || e.tagName, Math.round(e.getBoundingClientRect().height)])
               .filter(x => x[1] < 44)""")
@@ -481,14 +511,131 @@ class TestCloseVsPipedriveBrowser(unittest.TestCase):
             pg.check("#cp-sequences")
             pg.fill("#cp-minutes-num", "1000")
             pg.dispatch_event("#cp-minutes-num", "change")
-            self.assertIn("$7,200", pg.inner_text("#cp-answer"))
-            self.assertIn("$5,628", pg.inner_text("#cp-answer"))
+            self.assertIn("$7,200", pg.inner_text("#cp-cards"))
+            self.assertIn("$5,628", pg.inner_text("#cp-cards"))
+            self.assertIn("$1,572/yr less than Close", pg.inner_text("#cp-cards"))
+            self.assertEqual(pg.input_value("#cp-view"), "pipedrive")
             pg.select_option("#cp-calling", "none")
             self.assertTrue(pg.evaluate("document.getElementById('cp-minutes-wrap').hidden"))
-            pg.click('label:has(input[name="cp-billing"][value="monthly"])')
-            self.assertIn("\u2265", pg.inner_text("#cp-answer"))
-            self.assertIn("unverified", pg.inner_text("#cp-answer"))
+            pg.select_option("#cp-billing", "monthly")
+            self.assertIn("\u2265", pg.inner_text("#cp-cards"))
+            self.assertIn("unverified", pg.inner_text("#cp-cards"))
+            self.assertIn("Not determined", pg.inner_text("#cp-cards"))
             ctx.browser.close()
+
+
+class TestPipedriveReferencesSitewide(unittest.TestCase):
+    """PR 7 review: old Pipedrive plan names/prices are gone, values come from data."""
+
+    PUBLISHED_SKIP = ("saastruth", "public", ".git", "node_modules", "docs")
+
+    def published_html(self):
+        for dirpath, dirnames, filenames in os.walk(ROOT):
+            rel = os.path.relpath(dirpath, ROOT)
+            if rel.split(os.sep)[0] in self.PUBLISHED_SKIP:
+                dirnames[:] = []
+                continue
+            for name in filenames:
+                if name.endswith((".html", ".txt")):
+                    yield os.path.join(dirpath, name)
+
+    def test_no_old_pipedrive_names_or_prices(self):
+        bad = re.compile(r"Pipedrive[^<\n]{0,40}?(\$14(?:–|\\u2013|-)\$34|\$34/|Basic or|\(Professional\)|Power tier)")
+        hits = []
+        for path in self.published_html():
+            for m in bad.finditer(read(path)):
+                hits.append((os.path.relpath(path, ROOT), m.group(0)))
+        self.assertEqual(hits, [])
+
+    def test_homepage_faq_range_from_data(self):
+        plans = pricing()["pipedrive"]["plans"]
+        lo, hi = plans["lite"], plans["growth"]
+        text = "Pipedrive ($%g–$%g/seat/month billed annually, %s to %s)" % (lo["annual"], hi["annual"], lo["label"], hi["label"])
+        for base in (ROOT, PUBLIC):
+            self.assertIn(text, read(os.path.join(base, "index.html")))
+
+    def test_close_vs_hubspot_pipedrive_row(self):
+        premium = pricing()["pipedrive"]["plans"]["premium"]
+        html = read(os.path.join(PUBLIC, "compare/close-crm-vs-hubspot-sales-hub-5-to-20-reps/index.html"))
+        self.assertIn("{name: 'Pipedrive CRM (%s)', plan: '$%g/seat/mo annual'" % (premium["label"], premium["annual"]), html)
+        self.assertIn("const pipeYr = vol * %g * 12;" % premium["annual"], html)
+        self.assertNotIn("Pipedrive CRM (Professional)", html)
+
+    def test_homepage_pipedrive_cta_uses_go(self):
+        html = read(os.path.join(PUBLIC, "index.html"))
+        aff = json.loads(balanced(html, "const AFFILIATES = ")[len("const AFFILIATES = "):])
+        self.assertEqual(aff["pipedrive"]["destination_url"], "/go/pipedrive")
+        self.assertEqual(aff["pipedrive"]["cta_rel"], "sponsored nofollow noopener")
+        # Everyone else keeps their link and default rel.
+        data = affiliates()
+        for slug, entry in aff.items():
+            if slug == "pipedrive":
+                continue
+            self.assertEqual(entry["destination_url"], data[slug]["destination_url"], slug)
+            self.assertNotIn("cta_rel", entry, slug)
+        self.assertNotIn('rel="nofollow noopener" data-track="vendor-cta" data-vendor="${minR', html)
+
+    def test_tools_json_sso_matches_data(self):
+        with open(os.path.join(ROOT, "data", "tools.json")) as f:
+            tools = {t["id"]: t for t in json.load(f)}
+        p = pricing()
+        self.assertEqual(p["close"]["sso"]["google_sso"], "all plans")
+        self.assertIn("Google SSO on all plans", tools["close-crm"]["sso_minimum_tier"])
+        self.assertIn("unverified", tools["close-crm"]["sso_minimum_tier"])
+        self.assertEqual(p["pipedrive"]["sso"]["status"], "unknown")
+        self.assertTrue(tools["pipedrive-crm"]["sso_minimum_tier"].startswith("Unverified"))
+        self.assertNotIn("Power", json.dumps(tools["pipedrive-crm"]))
+        self.assertEqual(tools["pipedrive-crm"]["enterprise_seat_price_usd"], p["pipedrive"]["plans"]["ultimate"]["annual"])
+
+
+class TestHomepageAndGoBrowser(unittest.TestCase):
+    """Homepage Pipedrive CTA and the /go/ pageview beacon, in Chrome."""
+
+    @classmethod
+    def setUpClass(cls):
+        _browser_or_skip()
+
+    def test_homepage_crm_ctas(self):
+        from playwright.sync_api import sync_playwright
+        url = "file://" + os.path.join(ROOT, "index.html")
+        with sync_playwright() as p:
+            b = p.chromium.launch(executable_path=CHROME, args=["--no-sandbox"])
+            pg = b.new_page(viewport={"width": 1280, "height": 900})
+            pg.route("https://plausible.io/**", lambda route: route.fulfill(status=202, body=""))
+            pg.goto(url)
+            pg.click('.cat-tab[data-cat="CRM & Sales"]')
+            pg.wait_for_timeout(300)
+            pg.select_option("#spotlight-tool-select", "pipedrive-crm")
+            pg.wait_for_timeout(300)
+            links = pg.eval_on_selector_all('a[data-track="vendor-cta"]', "els => els.map(e => [e.getAttribute('data-vendor'), e.getAttribute('href'), e.getAttribute('rel')])")
+            pd = [l for l in links if l[0] == "pipedrive-crm"]
+            close = [l for l in links if l[0] == "close-crm"]
+            self.assertTrue(pd)
+            for _, href, rel in pd:
+                self.assertEqual((href, rel), ("/go/pipedrive", "sponsored nofollow noopener"))
+            for _, href, rel in close:
+                self.assertTrue(href.startswith("https://refer.close.com/"), href)
+                self.assertEqual(rel, "nofollow noopener")
+            b.close()
+
+    def test_go_page_sends_pageview_then_redirects(self):
+        from playwright.sync_api import sync_playwright
+        page_html = read(os.path.join(ROOT, "go", "pipedrive", "index.html"))
+        beacons = []
+        with sync_playwright() as p:
+            b = p.chromium.launch(executable_path=CHROME, args=["--no-sandbox"])
+            ctx = b.new_context()
+            ctx.route("https://saasbill.io/go/pipedrive/", lambda route: route.fulfill(status=200, content_type="text/html", body=page_html))
+            ctx.route(PLAUSIBLE_EVENT, lambda route: (beacons.append(route.request.post_data), route.fulfill(status=202, body="")))
+            ctx.route("https://aff.trypipedrive.com/**", lambda route: route.fulfill(status=200, content_type="text/html", body="<p>vendor</p>"))
+            pg = ctx.new_page()
+            pg.goto("https://saasbill.io/go/pipedrive/")
+            pg.wait_for_url(PIPEDRIVE_GO + "*", timeout=5000)
+            pg.wait_for_timeout(300)
+            self.assertEqual(len(beacons), 1)
+            body = json.loads(beacons[0])
+            self.assertEqual((body["name"], body["domain"], body["url"]), ("pageview", "saasbill.io", "https://saasbill.io/go/pipedrive/"))
+            b.close()
 
 
 if __name__ == "__main__":

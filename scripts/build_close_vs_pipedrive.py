@@ -125,7 +125,7 @@ const SC = %s;
 const out = {};
 for (const k of Object.keys(SC)) {
   const r = calcCloseVsPipedrive(SC[k]);
-  out[k] = {r: r, answer: cpAnswerHtml(r), table: cpTableHtml(r), math: cpMathRows(r, 'both')};
+  out[k] = {r: r, cards: cpCardsHtml(r), best: cpBestLine(r), scenario: cpScenario(r), table: cpTableHtml(r), math: cpMathRows(r, 'both')};
 }
 console.log(JSON.stringify(out));
 """ % json.dumps(scenarios)
@@ -238,52 +238,57 @@ def sources_rows(pricing):
 
 
 def controls_html(policy):
+    """Same control vocabulary as the homepage workbench: a platform select on
+    top, sliders with a value box, wb-tool-select selects and the quiet billing
+    field at the bottom. Checkboxes are the only page-specific control."""
     minutes = policy["default_minutes_per_rep_month"]
     return f"""
         <div class="wb-control-item">
-          <label class="wb-control-label" for="cp-users">Sales reps who need a CRM seat</label>
+          <label class="wb-control-label" for="cp-view">Platform to inspect</label>
+          <select id="cp-view" class="wb-tool-select" data-track="calculator-control" data-control="cp-view">
+            <option value="close" selected>Close</option>
+            <option value="pipedrive">Pipedrive</option>
+          </select>
+        </div>
+        <div class="wb-control-item">
+          <label class="wb-control-label" for="cp-users">Sales reps (seats)</label>
           <div class="wb-slider-row cp-slider-row">
             <input type="range" id="cp-users" min="1" max="50" step="1" value="5" aria-label="Sales reps who need a CRM seat" data-track="calculator-control" data-control="cp-users" />
-            <input type="number" class="cp-num" id="cp-users-num" min="1" max="50" step="1" value="5" inputmode="numeric" aria-label="Sales reps (number)" data-track="calculator-control" data-control="cp-users" />
+            <input type="number" class="wb-slider-val cp-num" id="cp-users-num" min="1" max="50" step="1" value="5" inputmode="numeric" aria-label="Sales reps (number)" data-track="calculator-control" data-control="cp-users" />
           </div>
         </div>
-        <fieldset class="wb-control-item cp-seg" id="cp-billing">
-          <legend class="wb-control-label">Billing</legend>
-          <div class="cp-seg-options">
-            <label><input type="radio" name="cp-billing" value="annual" checked data-track="calculator-control" data-control="cp-billing" /><span>Annual</span></label>
-            <label><input type="radio" name="cp-billing" value="monthly" data-track="calculator-control" data-control="cp-billing" /><span>Monthly</span></label>
-          </div>
-        </fieldset>
         <fieldset class="wb-control-item cp-checks">
-          <legend class="wb-control-label">What your team needs</legend>
-          <label class="cp-check"><input type="checkbox" id="cp-email" checked data-track="calculator-control" data-control="cp-email" /><span>Email sync with open tracking</span></label>
-          <label class="cp-check"><input type="checkbox" id="cp-sequences" data-track="calculator-control" data-control="cp-sequences" /><span>Automated follow-up sequences / workflows</span></label>
-          <label class="cp-check"><input type="checkbox" id="cp-leadcapture" data-track="calculator-control" data-control="cp-leadcapture" /><span>Website lead capture (forms/chat)</span></label>
+          <legend class="wb-control-label">Your team needs</legend>
+          <label class="cp-check"><input type="checkbox" id="cp-email" checked data-track="calculator-control" data-control="cp-email" /><span>Email open tracking</span></label>
+          <label class="cp-check"><input type="checkbox" id="cp-sequences" data-track="calculator-control" data-control="cp-sequences" /><span>Follow-up sequences</span></label>
+          <label class="cp-check"><input type="checkbox" id="cp-leadcapture" data-track="calculator-control" data-control="cp-leadcapture" /><span>Website lead capture</span></label>
         </fieldset>
-        <div class="wb-control-item control-group">
-          <label class="wb-control-label" for="cp-calling">How will reps call?</label>
-          <select id="cp-calling" data-track="calculator-control" data-control="cp-calling">
+        <div class="wb-control-item">
+          <label class="wb-control-label" for="cp-calling">How reps call</label>
+          <select id="cp-calling" class="wb-tool-select" data-track="calculator-control" data-control="cp-calling">
             <option value="none">No calling in the CRM</option>
-            <option value="click" selected>Click-to-call + call logging</option>
+            <option value="click" selected>Click-to-call</option>
             <option value="power">Power dialer</option>
           </select>
         </div>
         <div class="wb-control-item" id="cp-minutes-wrap">
-          <label class="wb-control-label" for="cp-minutes">Billed call minutes per rep per month</label>
+          <label class="wb-control-label" for="cp-minutes">Billed minutes / rep / month</label>
           <div class="wb-slider-row cp-slider-row">
             <input type="range" id="cp-minutes" min="0" max="3000" step="50" value="{minutes}" aria-label="Billed call minutes per rep per month" data-track="calculator-control" data-control="cp-minutes" />
-            <input type="number" class="cp-num" id="cp-minutes-num" min="0" max="3000" step="50" value="{minutes}" inputmode="numeric" aria-label="Billed call minutes (number)" data-track="calculator-control" data-control="cp-minutes" />
+            <input type="number" class="wb-slider-val cp-num" id="cp-minutes-num" min="0" max="3000" step="50" value="{minutes}" inputmode="numeric" aria-label="Billed call minutes (number)" data-track="calculator-control" data-control="cp-minutes" />
           </div>
-          <p class="cp-hint">{minutes} is an example assumption, not a benchmark.</p>
-          <label class="cp-check"><input type="checkbox" id="cp-exclude-dialer" data-track="calculator-control" data-control="cp-exclude-dialer" /><span>Already pay for a dialer: exclude it from Pipedrive ($0)</span></label>
+          <p class="cp-hint">{minutes} is an example assumption.</p>
+          <label class="cp-check"><input type="checkbox" id="cp-exclude-dialer" data-track="calculator-control" data-control="cp-exclude-dialer" /><span>Already have a dialer (exclude it)</span></label>
         </div>
-        <fieldset class="wb-control-item cp-seg" id="cp-view">
-          <legend class="wb-control-label">Show in the chart</legend>
-          <div class="cp-seg-options">
-            <label><input type="radio" name="cp-view" value="close" checked data-track="calculator-control" data-control="cp-view" /><span>Close</span></label>
-            <label><input type="radio" name="cp-view" value="pipedrive" data-track="calculator-control" data-control="cp-view" /><span>Pipedrive</span></label>
+        <div class="wb-quiet-options">
+          <div class="wb-quiet-field">
+            <label for="cp-billing">Billing:</label>
+            <select id="cp-billing" data-track="calculator-control" data-control="cp-billing">
+              <option value="annual" selected>Annual</option>
+              <option value="monthly">Monthly</option>
+            </select>
           </div>
-        </fieldset>
+        </div>
 """
 
 
@@ -291,14 +296,6 @@ PAGE_JS = r"""
 (function () {
   var viewTouched = false;
   function el(id) { return document.getElementById(id); }
-  function radio(name) {
-    var r = document.querySelector('input[name="' + name + '"]:checked');
-    return r ? r.value : '';
-  }
-  function setRadio(name, value) {
-    var r = document.querySelector('input[name="' + name + '"][value="' + value + '"]');
-    if (r) r.checked = true;
-  }
   function clampInt(v, lo, hi, fallback) {
     var n = Math.round(Number(v));
     if (!isFinite(n)) n = fallback;
@@ -307,7 +304,7 @@ PAGE_JS = r"""
   function readInput() {
     return {
       users: clampInt(el('cp-users').value, 1, 50, 5),
-      billing: radio('cp-billing') || 'annual',
+      billing: el('cp-billing').value || 'annual',
       email: el('cp-email').checked,
       sequences: el('cp-sequences').checked,
       leadcapture: el('cp-leadcapture').checked,
@@ -321,15 +318,7 @@ PAGE_JS = r"""
     var v = view === 'pipedrive' ? r.pipedrive : r.close;
     var isPd = view === 'pipedrive';
     var hidden = isPd ? v.dialer : (v.usage + v.numbers);
-    var best;
-    if (r.lowest === 'close' || r.lowest === 'pipedrive') {
-      var t = r.lowest === 'close' ? r.close.total : r.pipedrive.total;
-      best = '<strong>Lowest Year-1 cost for your needs:</strong> ' + cpName(r, r.lowest) + ' (' + cpMoney(t) + '/yr).' + (r.difference !== null ? ' Difference: ' + cpMoney(r.difference) + '/yr.' : '');
-    } else if (r.lowest === 'tie') {
-      best = '<strong>Same Year-1 cost:</strong> ' + cpMoney(r.close.total) + '/yr.';
-    } else {
-      best = '<strong>Lowest Year-1 cost:</strong> not determined, because some prices are unverified.';
-    }
+    var best = cpBestLine(r);
     window.saasbillApplyWorkbench({
       product: cpName(r, view),
       sticker: v.seat || 0,
@@ -370,10 +359,11 @@ PAGE_JS = r"""
     var wrap = el('cp-minutes-wrap');
     if (wrap) wrap.hidden = !calling;
     var r = calcCloseVsPipedrive(input);
-    if (!viewTouched) setRadio('cp-view', r.lowest === 'pipedrive' ? 'pipedrive' : 'close');
-    el('cp-answer').innerHTML = cpAnswerHtml(r);
+    if (!viewTouched) el('cp-view').value = r.lowest === 'pipedrive' ? 'pipedrive' : 'close';
+    el('cp-cards').innerHTML = cpCardsHtml(r);
+    el('cp-scenario').innerHTML = 'Based on ' + cpScenario(r);
     el('cp-tbody').innerHTML = cpTableHtml(r);
-    applyWorkbench(r, radio('cp-view') || 'close');
+    applyWorkbench(r, el('cp-view').value || 'close');
     if (typeof window.trackSaaSBillEvent === 'function') window.trackSaaSBillEvent('result_rendered', { page: '/compare/close-vs-pipedrive-year-1-cost-calculator/' });
   }
   function pair(rangeId, numId, lo, hi) {
@@ -391,13 +381,10 @@ PAGE_JS = r"""
   }
   pair('cp-users', 'cp-users-num', 1, 50);
   pair('cp-minutes', 'cp-minutes-num', 0, 3000);
-  ['cp-email', 'cp-sequences', 'cp-leadcapture', 'cp-calling', 'cp-exclude-dialer'].forEach(function (id) {
+  ['cp-email', 'cp-sequences', 'cp-leadcapture', 'cp-calling', 'cp-exclude-dialer', 'cp-billing'].forEach(function (id) {
     el(id).addEventListener('change', render);
   });
-  Array.prototype.forEach.call(document.querySelectorAll('input[name="cp-billing"]'), function (n) { n.addEventListener('change', render); });
-  Array.prototype.forEach.call(document.querySelectorAll('input[name="cp-view"]'), function (n) {
-    n.addEventListener('change', function () { viewTouched = true; render(); });
-  });
+  el('cp-view').addEventListener('change', function () { viewTouched = true; render(); });
   render();
 })();
 """
@@ -414,24 +401,36 @@ def body_html(pricing, affiliates, runs, data, core):
 
     shell = render_workbench(
         controls_html(policy),
-        controls_title="Your team",
-        chart_title="Year-1 cost breakdown",
         cta_href="/go/close",
         cta_label=data["close"]["ctaLabel"],
         cta_vendor="close-crm",
     ).replace('<a id="shell-cta" ', '<a id="shell-cta" target="_blank" rel="sponsored nofollow noopener" ', 1)
+    # The chart column fills the height of the (taller) controls column.
+    shell = shell.replace('<div class="workbench-grid">', '<div class="workbench-grid wb-fill-chart">', 1)
+    shell = shell.replace('<div class="wb-best-option" id="shell-best"></div>',
+                          '<div class="wb-best-option" id="shell-best">%s</div>' % d["best"], 1)
+    # Same verdict-section as the shared shell, with the three equal cards this
+    # comparison needs instead of the generic sticker / gap pair.
+    v_start = shell.index('<section class="verdict-section"')
+    shell = shell[:v_start] + f"""<section class="verdict-section" aria-label="Year-1 cost summary">
+  <p class="summary-scenario summary-shared-scenario" id="cp-scenario">Based on {d["scenario"]}</p>
+  <div class="summary-strip" id="cp-cards" aria-live="polite">{d["cards"]}</div>
+</section>
+"""
 
     disclosure = "SaaSBill may earn a commission if you sign up via these links. It does not change the calculation; both vendors get the same button."
+    dc, dp = d["r"]["close"], d["r"]["pipedrive"]
+    lead = (
+        "Pipedrive has no built-in calling, so a team that calls from its CRM also pays for a dialer. "
+        "For %d reps, Close %s comes to %s in Year 1 and Pipedrive %s + Aircall to %s (example: %s billed min/rep/mo)."
+        % (d["r"]["seats"], dc["planLabel"], money(dc["total"]), dp["planLabel"], money(dp["total"]), policy["default_minutes_per_rep_month"])
+    )
 
     return f"""
 <section class="hero editorial-hero editorial-hero-wrap">
   <h1>Close vs Pipedrive (2026): True Year-1 Cost for Your Sales Team, Calling Included</h1>
-  <p class="lead">Pipedrive has no built-in calling, so a team that phones from its CRM also pays for a dialer. Pick what your team needs and see the cheapest plan on each side, with every price sourced and dated.</p>
-</section>
-
-<section class="cp-answer" aria-label="Short answer" aria-live="polite">
-  <div id="cp-answer">{d["answer"]}</div>
-  <p class="cp-disclosure">{disclosure}</p>
+  <p class="lead">{lead}</p>
+  <p class="calc-affiliate-disclosure">{disclosure}</p>
 </section>
 
 {shell}
@@ -442,8 +441,7 @@ def body_html(pricing, affiliates, runs, data, core):
     <table>
       <thead>
         <tr>
-          <th>Vendor</th><th>Plan chosen</th><th>Why (needs met)</th><th>Seats</th><th>Add-ons</th>
-          <th>Calling / dialer</th><th>Year-1 total</th><th>Per rep / month</th><th>Source</th><th>Try it</th>
+          <th>Platform</th><th>Plan chosen</th><th>Seats &amp; add-ons</th><th>Calling / dialer</th><th>True Year-1 cost</th><th>Action</th>
         </tr>
       </thead>
       <tbody id="cp-tbody">{d["table"]}</tbody>
@@ -516,7 +514,7 @@ def body_html(pricing, affiliates, runs, data, core):
     </div>
   </details>
 
-  <p class="cp-related">Seat buckets instead? See the <a href="../monday-crm-vs-pipedrive-vs-hubspot-seat-minimums/" data-track="internal-audit">monday CRM vs Pipedrive vs HubSpot seat calculator &rarr;</a></p>
+  <p class="summary-interpretation"><a href="../monday-crm-vs-pipedrive-vs-hubspot-seat-minimums/" data-track="internal-audit">Seat buckets instead? monday CRM vs Pipedrive vs HubSpot &rarr;</a></p>
 </section>
 
 <script>

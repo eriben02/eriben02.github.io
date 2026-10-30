@@ -164,14 +164,6 @@ function cpScenario(r) {
   }
   return s;
 }
-function cpLowestLine(r) {
-  if (r.lowest === 'tie') return 'Same Year-1 cost on both: <strong>' + cpMoney(r.close.total) + '</strong>';
-  if (r.lowest === null) return 'Lowest Year-1 cost: <strong>not determined</strong> (some prices are unverified)';
-  var other = r.lowest === 'close' ? 'Pipedrive' : 'Close';
-  var vendor = r.lowest === 'close' ? 'Close' : 'Pipedrive';
-  if (r.difference === null) return 'Lowest Year-1 cost: <strong>' + vendor + '</strong>';
-  return 'Lowest Year-1 cost: <strong>' + vendor + '</strong>, ' + cpMoney(r.difference) + '/yr less than ' + other;
-}
 function cpMathRows(r, which) {
   var c = r.close, p = r.pipedrive, out = [];
   function row(label, formula, val) {
@@ -199,14 +191,58 @@ function cpMathRows(r, which) {
   }
   return '<div class="calc-math-list">' + out.join('') + '</div>';
 }
-function cpAnswerHtml(r) {
-  return '<p class="cp-answer-lowest">' + cpLowestLine(r) + '</p>' +
-    '<ul class="cp-answer-rows">' +
-    '<li><span>' + cpName(r, 'close') + '</span><strong>' + cpTotal(r.close.total, r.close.floor) + '</strong></li>' +
-    '<li><span>' + cpName(r, 'pipedrive') + '</span><strong>' + cpTotal(r.pipedrive.total, r.pipedrive.floor) + '</strong></li>' +
-    '</ul>' +
-    '<p class="cp-answer-scenario">' + cpScenario(r) + '</p>' +
-    '<details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">' + cpMathRows(r, 'both') + '</div></details>';
+function cpBestLine(r) {
+  if (r.lowest === 'tie') return '<strong>Same Year-1 cost:</strong> ' + cpMoney(r.close.total) + '/yr on both.';
+  if (r.lowest === null) return '<strong>Lowest Year-1 cost:</strong> not determined, because some prices are unverified.';
+  var o = r.lowest === 'close' ? 'pipedrive' : 'close';
+  var t = r.lowest === 'close' ? r.close.total : r.pipedrive.total;
+  return '<strong>Lowest Year-1 cost:</strong> ' + cpName(r, r.lowest) + ' (' + cpMoney(t) + '/yr)' +
+    (r.difference !== null ? ' &middot; ' + cpMoney(r.difference) + '/yr less than ' + (o === 'close' ? 'Close' : 'Pipedrive') : '');
+}
+function cpCta(v, location) {
+  var D = CP_DATA;
+  var isPd = v === 'pipedrive';
+  return '<a class="btn-secondary" href="' + (isPd ? '/go/pipedrive' : '/go/close') + '" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="' +
+    (isPd ? 'pipedrive-crm' : 'close-crm') + '" data-cta-location="' + location + '">' + (isPd ? D.pipedrive.ctaLabel : D.close.ctaLabel) + ' &rarr;</a>';
+}
+function cpVendorCard(r, v) {
+  var x = v === 'close' ? r.close : r.pipedrive;
+  var vendor = v === 'close' ? 'Close' : 'Pipedrive';
+  var driver;
+  if (r.calling === 'none') driver = 'No calling';
+  else if (v === 'close') driver = 'Calling built in: ' + cpMoney(x.usage + x.numbers) + '/yr usage';
+  else if (x.excludeDialer) driver = 'Dialer excluded ($0)';
+  else driver = 'Aircall dialer: ' + (x.dialer === null ? '&ge; ' + cpMoney(x.dialerNumbers) + cpPill('unverified') : cpMoney(x.dialer) + '/yr');
+  return '<div class="summary-card result-card" data-cp-card="' + v + '">' +
+    '<div class="summary-label">' + vendor + ' Year-1 cost</div>' +
+    '<div class="summary-metric">' + cpTotal(x.total, x.floor) + ' / yr</div>' +
+    '<details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">' +
+    '<div class="summary-scenario">' + cpName(r, v) + ': ' + cpWhy(r, v) + '.</div>' + cpMathRows(r, v) + '</div></details>' +
+    '<div class="summary-driver">' + cpName(r, v) + '</div>' +
+    '<div class="summary-scenario">' + driver + '</div>' +
+    '<div class="summary-actions"><div class="cta-stack">' + cpCta(v, 'summary-card') + '</div></div>' +
+    '</div>';
+}
+function cpCardsHtml(r) {
+  var metric, driver;
+  if (r.lowest === 'close' || r.lowest === 'pipedrive') {
+    metric = r.lowest === 'close' ? 'Close' : 'Pipedrive';
+    driver = r.difference !== null ? cpMoney(r.difference) + '/yr less than ' + (r.lowest === 'close' ? 'Pipedrive' : 'Close') : 'Lower even at the minimum of the unverified side';
+  } else if (r.lowest === 'tie') {
+    metric = 'Same cost';
+    driver = cpMoney(r.close.total) + '/yr on both';
+  } else {
+    metric = 'Not determined';
+    driver = 'Some prices are unverified, so no total is compared';
+  }
+  return '<div class="summary-card result-card card-lowest" data-cp-card="lowest">' +
+    '<div class="summary-label">Lowest Year-1 cost</div>' +
+    '<div class="summary-metric" style="color:var(--emerald);">' + metric + '</div>' +
+    '<details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">' + cpMathRows(r, 'both') + '</div></details>' +
+    '<div class="summary-driver">' + driver + '</div>' +
+    '<div class="summary-scenario">Prices verified ' + CP_DATA.close.verified + '</div>' +
+    '<div class="summary-actions"><a class="summary-audit-link" href="#cp-compare-heading" data-track="internal-audit">Compare side by side &darr;</a></div>' +
+    '</div>' + cpVendorCard(r, 'close') + cpVendorCard(r, 'pipedrive');
 }
 function cpWhy(r, v) {
   if (v === 'close') {
@@ -221,38 +257,31 @@ function cpWhy(r, v) {
   else if (p.leadbooster) why += '; LeadBooster for lead capture';
   return why;
 }
-function cpSourceCell(url, label, verified, pill) {
-  return '<a href="' + url + '" target="_blank" rel="noopener">' + label + ' &nearr;</a><div class="cp-verified">Verified ' + verified + (pill ? cpPill(pill) : '') + '</div>';
-}
 function cpTableHtml(r) {
   var c = r.close, p = r.pipedrive, D = CP_DATA;
   var perC = c.total === null ? '&ge; ' + cpMoney(c.floor / r.seats / 12) : cpMoney(c.total / r.seats / 12);
-  var perP = p.total === null ? '&ge; ' + cpMoney(p.floor / r.seats / 12) + cpPill('unverified') : cpMoney(p.total / r.seats / 12);
+  var perP = p.total === null ? '&ge; ' + cpMoney(p.floor / r.seats / 12) : cpMoney(p.total / r.seats / 12);
   var cCall = r.calling === 'none' ? 'No calling' : 'Built in: ' + cpMoney(c.usage) + ' minutes + ' + cpMoney(c.numbers) + ' numbers';
   var pCall = r.calling === 'none' ? 'No calling' : (p.excludeDialer ? 'Dialer excluded ($0)' :
     'Aircall ' + p.dialerLabel + ': ' + cpPart(p.dialerLicenses) + ' (' + p.licenses + ' licenses) + ' + cpMoney(p.dialerNumbers) + ' (' + p.extraNumbers + ' extra numbers)');
-  var pAdd = p.plan === 'premium' && r.leadcapture ? 'LeadBooster included' : (p.leadbooster ? 'LeadBooster ' + cpPart(p.addons) : '$0');
+  var pAdd = p.plan === 'premium' && r.leadcapture ? ' &middot; LeadBooster included' : (p.leadbooster ? ' + LeadBooster ' + cpPart(p.addons) : '');
   var pRate = p.rate === null ? 'unverified' + cpPill('unverified') : cpUnit(p.rate) + '/seat/mo';
   var pPill = r.billing === 'monthly' && !D.allowSecondary ? 'monthly unverified' : '';
+  function platform(name, url, label, pill) {
+    return '<td data-label="Platform"><strong>' + name + '</strong><br><span class="status-pill status-verified">Verified</span> &middot; <a href="' + url +
+      '" target="_blank" rel="noopener" class="source-link">' + label + '</a><div class="cp-verified">Verified ' + (name === 'Close' ? D.close.verified : D.pipedrive.verified) + (pill ? cpPill(pill) : '') + '</div></td>';
+  }
   return '' +
-    '<tr><td data-label="Vendor"><strong>Close</strong></td>' +
-    '<td data-label="Plan chosen">' + c.planLabel + ' &middot; ' + (c.rate === null ? 'unknown' : cpUnit(c.rate) + '/seat/mo') + '</td>' +
-    '<td data-label="Why">' + cpWhy(r, 'close') + '</td>' +
-    '<td data-label="Seats">' + r.seats + '</td>' +
-    '<td data-label="Add-ons">$0</td>' +
+    '<tr>' + platform('Close', D.close.sourceUrl, 'close.com/pricing', '') +
+    '<td data-label="Plan chosen">' + c.planLabel + ' &middot; ' + (c.rate === null ? 'unknown' : cpUnit(c.rate) + '/seat/mo') + '<div class="cp-verified">' + cpWhy(r, 'close') + '</div></td>' +
+    '<td data-label="Seats &amp; add-ons">' + r.seats + ' seats: ' + cpPart(c.seat) + '</td>' +
     '<td data-label="Calling / dialer">' + cCall + '</td>' +
-    '<td data-label="Year-1 total"><strong>' + cpTotal(c.total, c.floor) + '</strong></td>' +
-    '<td data-label="Per rep / month">' + perC + '</td>' +
-    '<td data-label="Source">' + cpSourceCell(D.close.sourceUrl, 'close.com/pricing', D.close.verified, '') + '</td>' +
-    '<td data-label="Try it"><a class="btn-secondary" href="/go/close" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="close-crm" data-cta-location="comparison-table">' + D.close.ctaLabel + ' &rarr;</a></td></tr>' +
-    '<tr><td data-label="Vendor"><strong>Pipedrive</strong></td>' +
-    '<td data-label="Plan chosen">' + p.planLabel + ' &middot; ' + pRate + '</td>' +
-    '<td data-label="Why">' + cpWhy(r, 'pipedrive') + '</td>' +
-    '<td data-label="Seats">' + r.seats + '</td>' +
-    '<td data-label="Add-ons">' + pAdd + '</td>' +
+    '<td data-label="Year-1 total"><strong>' + cpTotal(c.total, c.floor) + '</strong><div class="cp-verified">' + perC + ' per rep / month</div></td>' +
+    '<td data-label="Action">' + cpCta('close', 'comparison-table') + '</td></tr>' +
+    '<tr>' + platform('Pipedrive', D.pipedrive.sourceUrl, 'pipedrive.com/pricing', pPill) +
+    '<td data-label="Plan chosen">' + p.planLabel + ' &middot; ' + pRate + '<div class="cp-verified">' + cpWhy(r, 'pipedrive') + '</div></td>' +
+    '<td data-label="Seats &amp; add-ons">' + r.seats + ' seats: ' + cpPart(p.seat) + pAdd + '</td>' +
     '<td data-label="Calling / dialer">' + pCall + '</td>' +
-    '<td data-label="Year-1 total"><strong>' + cpTotal(p.total, p.floor) + '</strong></td>' +
-    '<td data-label="Per rep / month">' + perP + '</td>' +
-    '<td data-label="Source">' + cpSourceCell(D.pipedrive.sourceUrl, 'pipedrive.com/pricing', D.pipedrive.verified, pPill) + '</td>' +
-    '<td data-label="Try it"><a class="btn-secondary" href="/go/pipedrive" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="pipedrive-crm" data-cta-location="comparison-table">' + D.pipedrive.ctaLabel + ' &rarr;</a></td></tr>';
+    '<td data-label="Year-1 total"><strong>' + cpTotal(p.total, p.floor) + '</strong><div class="cp-verified">' + perP + ' per rep / month</div></td>' +
+    '<td data-label="Action">' + cpCta('pipedrive', 'comparison-table') + '</td></tr>';
 }
