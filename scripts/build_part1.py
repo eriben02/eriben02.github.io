@@ -23,7 +23,7 @@ aff_js = json.dumps(AFFILIATES)
 home_body = f"""
 <section class="hero editorial-hero">
   <h1>Your SaaS bill is lying to you.</h1>
-  <p class="lead">Most teams only look at the sticker price. But mandatory onboarding fees, seat-bucket minimums, and metered AI overages compound quietly and can significantly increase the real Year-1 cost of your tools.</p>
+  <p class="lead">Mandatory onboarding fees, seat-bucket minimums, and metered AI overages can significantly increase the real Year-1 cost of your tools.</p>
 </section>
 
 <div class="editorial-cat-bar">
@@ -140,7 +140,7 @@ home_body = f"""
       </div>
     </div>
 
-    <!-- Right Column: Progressive Disclosure (1. Result & Best Option -> 2. Why + Expandable Calculation -> 3. Contextual Primary CTA) -->
+    <!-- Right Column: Progressive Disclosure (1. Result & Lowest-Cost Option -> 2. Why + Expandable Calculation -> 3. Contextual Primary CTA) -->
     <div class="wb-result-col" id="wb-result-mount" aria-live="polite">
       <div class="wb-selected-product" id="wb-selected-product">Zendesk Suite Team + AI</div>
       <div class="wb-big-total" id="wb-big-total-wrap"><span id="wb-big-amount">$11,850</span> <span class="wb-per-year" id="wb-big-unit">/ year</span></div>
@@ -150,7 +150,7 @@ home_body = f"""
       </details>
       <p class="wb-budget-quote" id="wb-budget-quote">True Year-1 cost</p>
       <p class="wb-budget-subnote" id="wb-budget-subnote"></p>
-      <div class="wb-best-option" id="wb-best-option"><strong>Best option:</strong> <a href="https://www.freshworks.com/freshdesk/pricing/" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="freshdesk-support" data-cta-location="workbench-best-option">Freshdesk Pro + Freddy AI ($3,835/yr)</a> &middot; saves $8,015/yr</div>
+      <div class="wb-best-option" id="wb-best-option"><strong>Lowest Year-1 cost:</strong> <a href="https://www.freshworks.com/freshdesk/pricing/" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="freshdesk-support" data-cta-location="workbench-best-option">Freshdesk Pro + Freddy AI ($3,835/yr)</a> &middot; saves $8,015/yr</div>
       <div class="cta-stack">
         <a id="wb-primary-cta" class="btn-cta wb-primary-cta" href="https://www.zendesk.com/pricing/" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="zendesk-suite-team" data-cta-location="workbench">View Zendesk pricing &rarr;</a>
       </div>
@@ -158,8 +158,9 @@ home_body = f"""
   </div>
 </section>
 
-<!-- STEP 2: CATEGORY VERDICT CARDS (Best Option, Hidden Cost Highlight, Highest Cost) -->
+<!-- STEP 2: CATEGORY VERDICT CARDS (Lowest Cost, Hidden Cost Highlight, Highest Cost) -->
 <section class="verdict-section" id="verdict-card" aria-label="Category Verdict &amp; Best-Value Recommendations">
+  <p class="summary-scenario summary-shared-scenario" id="verdict-scenario"></p>
   <div id="calc-summary-strip" class="summary-strip" aria-live="polite"></div>
   <div class="sub-strip-heading" id="active-cat-calcs-title">Dedicated Calculators in This Category</div>
   <div id="active-cat-calcs" class="card-grid active-cat-calcs-grid"></div>
@@ -229,7 +230,7 @@ home_body = f"""
 <section id="all-calculators" class="editorial-below-section">
   <h2>Calculators &amp; contract audits</h2>
   <p class="gap-subhead">Dedicated models for onboarding tiers, AI resolution packs, payout reserve holds, and SOC 2 audit quotes.</p>
-  <div class="card-grid">
+  <div class="card-grid compact-cards">
     <div class="card" data-cat="crm">
       <span class="badge badge-high">CRM</span>
       <h3><a href="./pricing/hubspot-true-cost-and-onboarding-fees/">HubSpot True Cost &amp; Onboarding</a></h3>
@@ -359,7 +360,12 @@ home_body = f"""
 </section>
 
 <section class="editorial-below-section">
-  <h2>Contract clauses that rarely show up on a pricing page</h2>
+  <details class="full-table-disclosure below-disclosure">
+  <summary class="full-table-summary">
+    <h2 class="below-disclosure-heading">Contract clauses that rarely show up on a pricing page</h2>
+    <span class="full-table-toggle-pill" aria-hidden="true">&darr;</span>
+  </summary>
+  <div class="full-table-body">
   <div class="methodology-grid fine-print-grid">
     <div class="methodology-item">
       <strong>30–60 Day Auto-Renewal Locks</strong>
@@ -374,6 +380,8 @@ home_body = f"""
       Compliance automation quotes (Vanta, Drata) are routinely negotiated down 30%&ndash;50% from list price, but never include the mandatory $6,500&ndash;$15,000+ independent CPA penetration and audit fee.
     </div>
   </div>
+  </div>
+  </details>
 </section>
 
 <section id="methodology" class="methodology-box" aria-labelledby="methodology-heading">
@@ -384,6 +392,15 @@ home_body = f"""
       <strong>Year-1 Total Formula</strong>
       <code>Year-1 Total = (12 &times; Billed Monthly Seats) + Mandatory Onboarding + (12 &times; Net AI Overage)</code>. Seat minimums and included AI allowances are applied automatically based on your slider inputs.
     </div>
+  </div>
+  <p class="methodology-note"><span class="status-pill status-verified">Verified</span> indicates published self-serve pricing and contract terms checked directly against official vendor docs on Oct 25, 2026. Independent calculations. Some vendor links are affiliate links. This never changes our rankings or calculations.</p>
+  <details class="full-table-disclosure below-disclosure">
+  <summary class="full-table-summary">
+    <span class="below-disclosure-title">How we verify &amp; sources</span>
+    <span class="full-table-toggle-pill" aria-hidden="true">&darr;</span>
+  </summary>
+  <div class="full-table-body">
+  <div class="methodology-grid">
     <div class="methodology-item">
       <strong>Verification Status Badges</strong>
       <span class="status-pill status-verified">Verified</span> indicates published self-serve pricing and contract terms checked directly against official vendor docs on Oct 25, 2026.<br/>
@@ -394,6 +411,8 @@ home_body = f"""
       Independent calculations. Some vendor links are affiliate links. This never changes our rankings or calculations. Every CTA button links directly to the vendor&rsquo;s official site (<code>rel="nofollow noopener"</code>), alongside a primary-source link for contract verification. Spot a pricing change? Email <a href="mailto:info@saasbill.io">info@saasbill.io</a>.
     </div>
   </div>
+  </div>
+  </details>
 </section>
 
 <script>
@@ -961,6 +980,12 @@ function renderDirectory() {{
   const vizPanel = document.getElementById('calc-viz-panel');
   const vizRowsEl = document.getElementById('calc-viz-rows');
   const scenarioLine = formatScenarioText(cat, seats, aiVol, mode);
+  const sharedScenarioEl = document.getElementById('verdict-scenario');
+  if (sharedScenarioEl) {{
+    sharedScenarioEl.textContent = cat === 'Payment Processors & MoR'
+      ? `Based on $${{gmvMo.toLocaleString('en-US')}}/mo GMV, ${{txMo.toLocaleString('en-US')}} tx, 30% international`
+      : scenarioLine;
+  }}
 
 
   const th2 = document.getElementById('th-col-2');
@@ -1036,9 +1061,9 @@ function renderDirectory() {{
     if (bestOptPayEl) {{
       const whopAffBest = AFFILIATES['whop'] || {{ destination_url: '#' }};
       if (spotPayR.tool.id === 'whop-payments') {{
-        bestOptPayEl.innerHTML = `<strong>Best option in category:</strong> Lowest direct fee (${{payMoney(whopProf.total)}}/mo) &amp; multi-PSP failover`;
+        bestOptPayEl.innerHTML = `<strong>Lowest direct fee in this category</strong> (${{payMoney(whopProf.total)}}/mo) &amp; multi-PSP failover`;
       }} else {{
-        bestOptPayEl.innerHTML = `<strong>Best option:</strong> <a href="${{whopAffBest.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="whop-payments" data-cta-location="workbench-best-option">Whop Payments (${{payMoney(whopProf.total)}}/mo)</a> &middot; $0 single-PSP reserve hold`;
+        bestOptPayEl.innerHTML = `<strong>Lowest direct fee:</strong> <a href="${{whopAffBest.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="whop-payments" data-cta-location="workbench-best-option">Whop Payments (${{payMoney(whopProf.total)}}/mo)</a> &middot; $0 single-PSP reserve hold`;
       }}
     }}
     if (wbCalcBody) {{
@@ -1063,15 +1088,12 @@ function renderDirectory() {{
       const paddleAff = AFFILIATES[paddleR.tool.affiliate_slug] || {{ destination_url: '#' }};
       summaryEl.innerHTML = `
         <div class="summary-card result-card card-lowest">
-          <div class="summary-label">Lowest Direct Fee &amp; Failover Routing</div>
+          <div class="summary-label">Lowest direct fee</div>
           <div class="summary-metric" style="color:var(--emerald);">${{payMoney(whopProf.total)}} / mo &middot; Whop Payments</div>
           <details class="math-drawer">
             <summary>Show calculation</summary>
-            <div class="math-drawer-body">${{renderCalcBreakdownHtml(whopR, seats, aiVol, mode, cat)}}</div>
+            <div class="math-drawer-body"><div class="summary-scenario">Based on ${{payMoney(gmvMo)}}/mo GMV, ${{txMo.toLocaleString('en-US')}} tx, 30% international</div><div class="summary-breakdown">${{whopProf.tableFeeSub}}</div><div class="summary-caveat"><strong>Contract note:</strong> Direct payouts with multi-PSP failover and portable card tokens ($0 reserve hold in baseline model). ${{payMoney(whopProf.total)}}/mo with failover, or ${{payMoney(whopProf.without)}}/mo without orchestration.</div>${{renderCalcBreakdownHtml(whopR, seats, aiVol, mode, cat)}}</div>
           </details>
-          <div class="summary-scenario">Based on ${{payMoney(gmvMo)}}/mo GMV, ${{txMo.toLocaleString('en-US')}} tx, 30% international</div>
-          <div class="summary-breakdown">${{whopProf.tableFeeSub}}</div>
-          <div class="summary-caveat"><strong>Contract note:</strong> Direct payouts with multi-PSP failover and portable card tokens ($0 reserve hold in baseline model). ${{payMoney(whopProf.total)}}/mo with failover, or ${{payMoney(whopProf.without)}}/mo without orchestration.</div>
           <div class="summary-actions">
             <div class="cta-stack">
               <a class="btn-cta" href="${{whopAff.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="whop-payments" data-cta-location="summary-card">${{getContextualCtaLabel(whopR.tool, whopProf.total * 12, maxPayMo * 12, false)}}</a>
@@ -1079,15 +1101,13 @@ function renderDirectory() {{
           </div>
         </div>
         <div class="summary-card result-card card-hidden">
-          <div class="summary-label">Hidden Cost Highlight (MoR &amp; Reserves)</div>
+          <div class="summary-label">Largest hidden cost (reserves)</div>
           <div class="summary-metric" style="color:var(--rose);">${{payMoney(paddleProf.held)}} / mo temporarily held</div>
           <details class="math-drawer">
             <summary>Show calculation</summary>
-            <div class="math-drawer-body">${{renderCalcBreakdownHtml(paddleR, seats, aiVol, mode, cat)}}</div>
+            <div class="math-drawer-body"><div class="summary-scenario">On <strong>Paddle / Stripe / Lemon Squeezy</strong> (25% rolling reserve scenario)</div><div class="summary-breakdown">${{payMoney(paddleProf.total)}}/mo Paddle true cost (${{payMoney(paddleProf.total * 12)}}/yr) including a ${{payMoney(paddleProf.h)}}/mo Hidden Cost Gap</div><div class="summary-caveat"><strong>Hidden Cost Highlight:</strong> A 25% rolling reserve locks ${{payMoney(paddleProf.held)}}/mo in working capital for 90&ndash;180 days.</div>${{renderCalcBreakdownHtml(paddleR, seats, aiVol, mode, cat)}}</div>
           </details>
-          <div class="summary-scenario">On <strong>Paddle / Stripe / Lemon Squeezy</strong> (25% rolling reserve scenario)</div>
-          <div class="summary-breakdown">${{payMoney(paddleProf.total)}}/mo Paddle true cost (${{payMoney(paddleProf.total * 12)}}/yr) including a ${{payMoney(paddleProf.h)}}/mo Hidden Cost Gap</div>
-          <div class="summary-caveat"><strong>Hidden Cost Highlight:</strong> A 25% rolling reserve locks ${{payMoney(paddleProf.held)}}/mo in working capital for 90&ndash;180 days.</div>
+          <div class="summary-driver">On <strong>Paddle / Stripe / Lemon Squeezy</strong></div>
           <div class="summary-actions">
             <div class="cta-stack">
               <a class="btn-secondary" href="${{paddleAff.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="paddle-mor" data-cta-location="summary-card">${{getVendorCtaLabel(paddleR.tool)}}</a>
@@ -1099,11 +1119,8 @@ function renderDirectory() {{
           <div class="summary-metric">+${{payMoney(cfBench.net)}} / yr recovered &middot; Chargeflow</div>
           <details class="math-drawer">
             <summary>Show calculation</summary>
-            <div class="math-drawer-body">Yearly sales = ${{payMoney(gmvMo)}} x 12 = ${{payMoney(yearlySales)}}. Disputed sales at 0.65% = ${{payMoney(cfBench.disputed)}}. Gross recovered at a 65% planning win rate = ${{payMoney(cfBench.recovered)}}. Success fee = 25% of recovered dollars = ${{payMoney(cfBench.fee)}}. Net kept = ${{payMoney(cfBench.net)}} (${{payMoney(cfBench.netMo)}}/mo). Fixed fee = $0/mo. Evidence prep = $0. The 65% win rate is a planning benchmark, not a guaranteed Chargeflow win rate. Keeping the dispute rate under 0.5% to 0.75% is what avoids a 25% reserve (${{payMoney(paddleProf.held)}}/mo on this volume).</div>
+            <div class="math-drawer-body"><div class="summary-scenario">Based on ${{payMoney(gmvMo)}}/mo GMV and a 0.65% dispute rate</div><div class="summary-breakdown">$0/mo fixed fee. 25% only on the ${{payMoney(cfBench.recovered)}} recovered. Net kept ${{payMoney(cfBench.net)}}/yr.</div><div class="summary-caveat"><strong>Contract note:</strong> 25% of recovered dispute dollars ($0/mo base). A 65% win rate is a planning benchmark. Actual recovery varies by dispute reason code. This card is an add-on layer. It does not replace the payment processor comparison above.</div><p>Yearly sales = ${{payMoney(gmvMo)}} x 12 = ${{payMoney(yearlySales)}}. Disputed sales at 0.65% = ${{payMoney(cfBench.disputed)}}. Gross recovered at a 65% planning win rate = ${{payMoney(cfBench.recovered)}}. Success fee = 25% of recovered dollars = ${{payMoney(cfBench.fee)}}. Net kept = ${{payMoney(cfBench.net)}} (${{payMoney(cfBench.netMo)}}/mo). Fixed fee = $0/mo. Evidence prep = $0. The 65% win rate is a planning benchmark, not a guaranteed Chargeflow win rate. Keeping the dispute rate under 0.5% to 0.75% is what avoids a 25% reserve (${{payMoney(paddleProf.held)}}/mo on this volume).</p></div>
           </details>
-          <div class="summary-scenario">Based on ${{payMoney(gmvMo)}}/mo GMV and a 0.65% dispute rate</div>
-          <div class="summary-breakdown">$0/mo fixed fee. 25% only on the ${{payMoney(cfBench.recovered)}} recovered. Net kept ${{payMoney(cfBench.net)}}/yr.</div>
-          <div class="summary-caveat"><strong>Contract note:</strong> 25% of recovered dispute dollars ($0/mo base). A 65% win rate is a planning benchmark. Actual recovery varies by dispute reason code. This card is an add-on layer. It does not replace the payment processor comparison above.</div>
           <div class="summary-actions">
             <div class="cta-stack">
               <a class="btn-secondary" href="https://www.chargeflow.io/" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="chargeflow" data-cta-location="summary-card">Review Chargeflow on this volume (${{payMoney(cfBench.net)}}/yr net) &rarr;</a>
@@ -1214,9 +1231,9 @@ function renderDirectory() {{
       const minAffBest = AFFILIATES[minR.tool.affiliate_slug] || {{ destination_url: '#' }};
       const diffBest = Math.max(0, spotR.year1Total - minR.year1Total);
       if (spotR.tool.id === minR.tool.id || diffBest === 0) {{
-        bestOptEl.innerHTML = `<strong>Best option in category:</strong> Lowest Year-1 true cost ($${{minR.year1Total.toLocaleString()}}/yr)`;
+        bestOptEl.innerHTML = `<strong>Lowest Year-1 cost in this category</strong> ($${{minR.year1Total.toLocaleString()}}/yr)`;
       }} else {{
-        bestOptEl.innerHTML = `<strong>Best option:</strong> <a href="${{minAffBest.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${{minR.tool.id}}" data-cta-location="workbench-best-option">${{minR.tool.name}} ($${{minR.year1Total.toLocaleString()}}/yr)</a> &middot; saves $${{diffBest.toLocaleString()}}/yr`;
+        bestOptEl.innerHTML = `<strong>Lowest Year-1 cost:</strong> <a href="${{minAffBest.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${{minR.tool.id}}" data-cta-location="workbench-best-option">${{minR.tool.name}} ($${{minR.year1Total.toLocaleString()}}/yr)</a> &middot; saves $${{diffBest.toLocaleString()}}/yr`;
       }}
     }}
     if (wbCalcBody) {{
@@ -1246,15 +1263,13 @@ function renderDirectory() {{
       const minCtaText = getContextualCtaLabel(minR.tool, minR.year1Total, refBenchmarkR.year1Total, false);
       summaryEl.innerHTML = `
         <div class="summary-card result-card card-lowest">
-          <div class="summary-label">Best Value &middot; Lowest Year-1 Cost</div>
+          <div class="summary-label">Lowest Year-1 cost</div>
           <div class="summary-metric" style="color:var(--emerald);">$${{minR.year1Total.toLocaleString()}} / yr &middot; ${{minR.tool.name}}</div>
-          <div class="summary-scenario">${{scenarioLine}}${{savedVsRef > 0 ? ` &middot; saves $${{savedVsRef.toLocaleString()}}/yr vs. ${{refBenchmarkR.tool.name}}` : ''}}</div>
-          <div class="summary-breakdown">$${{minR.annualSeatsCost.toLocaleString()}} licenses + $${{minR.onboarding.toLocaleString()}} onboarding + $${{minR.aiAnnual.toLocaleString()}} AI</div>
-          <div class="summary-caveat"><strong>Contract note:</strong> ${{minR.tool.trap_badge}} (${{minR.tool.billing_lock_in_type}})</div>
           <details class="math-drawer">
             <summary>Show calculation</summary>
-            <div class="math-drawer-body">${{renderCalcBreakdownHtml(minR, seats, aiVol, mode, cat)}}</div>
+            <div class="math-drawer-body"><div class="summary-scenario">${{scenarioLine}}${{savedVsRef > 0 ? ` &middot; saves $${{savedVsRef.toLocaleString()}}/yr vs. ${{refBenchmarkR.tool.name}}` : ''}}</div><div class="summary-breakdown">$${{minR.annualSeatsCost.toLocaleString()}} licenses + $${{minR.onboarding.toLocaleString()}} onboarding + $${{minR.aiAnnual.toLocaleString()}} AI</div><div class="summary-caveat"><strong>Contract note:</strong> ${{minR.tool.trap_badge}} (${{minR.tool.billing_lock_in_type}})</div>${{renderCalcBreakdownHtml(minR, seats, aiVol, mode, cat)}}</div>
           </details>
+          ${{savedVsRef > 0 ? `<div class="summary-driver">Saves $${{savedVsRef.toLocaleString()}}/yr vs. ${{refBenchmarkR.tool.name}}</div>` : ''}}
           <div class="summary-actions">
             <div class="cta-stack">
               <a class="btn-cta" href="${{minAff.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${{minR.tool.id}}" data-cta-location="summary-card">${{minCtaText}}</a>
@@ -1263,15 +1278,13 @@ function renderDirectory() {{
           </div>
         </div>
         <div class="summary-card result-card card-hidden">
-          <div class="summary-label">Hidden Cost Highlight (Largest Non-Seat Add-On)</div>
+          <div class="summary-label">Largest hidden cost</div>
           <div class="summary-metric" style="color:var(--rose);">+$${{topHidden.hiddenFees.toLocaleString()}} / yr (${{hiddenPct}}% of Year-1 bill)</div>
-          <div class="summary-scenario">On <strong>${{topHidden.tool.name}}</strong> ($${{topHidden.year1Total.toLocaleString()}}/yr total &middot; ${{scenarioLine.replace('Based on ', '')}})</div>
-          <div class="summary-breakdown">$${{topHidden.annualSeatsCost.toLocaleString()}} licenses + $${{topHidden.onboarding.toLocaleString()}} onboarding + $${{topHidden.aiAnnual.toLocaleString()}} AI</div>
-          <div class="summary-caveat"><strong>Hidden Cost Highlight:</strong> ${{hiddenReasonText}}.</div>
           <details class="math-drawer">
             <summary>Show calculation</summary>
-            <div class="math-drawer-body">${{renderCalcBreakdownHtml(topHidden, seats, aiVol, mode, cat)}}</div>
+            <div class="math-drawer-body"><div class="summary-scenario">On <strong>${{topHidden.tool.name}}</strong> ($${{topHidden.year1Total.toLocaleString()}}/yr total &middot; ${{scenarioLine.replace('Based on ', '')}})</div><div class="summary-breakdown">$${{topHidden.annualSeatsCost.toLocaleString()}} licenses + $${{topHidden.onboarding.toLocaleString()}} onboarding + $${{topHidden.aiAnnual.toLocaleString()}} AI</div><div class="summary-caveat"><strong>Hidden Cost Highlight:</strong> ${{hiddenReasonText}}.</div>${{renderCalcBreakdownHtml(topHidden, seats, aiVol, mode, cat)}}</div>
           </details>
+          <div class="summary-driver">On <strong>${{topHidden.tool.name}}</strong></div>
           <div class="summary-actions">
             <div class="cta-stack">
               <a class="btn-secondary" href="${{hidAff.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${{topHidden.tool.id}}" data-cta-location="summary-card">${{getVendorCtaLabel(topHidden.tool)}}</a>
@@ -1280,14 +1293,11 @@ function renderDirectory() {{
           </div>
         </div>
         <div class="summary-card result-card card-highest">
-          <div class="summary-label">Highest Estimated Year-1 Cost</div>
+          <div class="summary-label">Highest Year-1 cost (est.)</div>
           <div class="summary-metric">$${{maxR.year1Total.toLocaleString()}} / yr &middot; ${{maxR.tool.name}}</div>
-          <div class="summary-scenario">${{scenarioLine}}</div>
-          <div class="summary-breakdown">$${{maxR.annualSeatsCost.toLocaleString()}} licenses + $${{maxR.onboarding.toLocaleString()}} onboarding + $${{maxR.aiAnnual.toLocaleString()}} AI</div>
-          <div class="summary-caveat"><strong>Contract note:</strong> ${{maxR.tool.trap_badge}}</div>
           <details class="math-drawer">
             <summary>Show calculation</summary>
-            <div class="math-drawer-body">${{renderCalcBreakdownHtml(maxR, seats, aiVol, mode, cat)}}</div>
+            <div class="math-drawer-body"><div class="summary-scenario">${{scenarioLine}}</div><div class="summary-breakdown">$${{maxR.annualSeatsCost.toLocaleString()}} licenses + $${{maxR.onboarding.toLocaleString()}} onboarding + $${{maxR.aiAnnual.toLocaleString()}} AI</div><div class="summary-caveat"><strong>Contract note:</strong> ${{maxR.tool.trap_badge}}</div>${{renderCalcBreakdownHtml(maxR, seats, aiVol, mode, cat)}}</div>
           </details>
           <div class="summary-actions">
             <div class="cta-stack">
@@ -1429,11 +1439,12 @@ function equalizeSummaryCards(stripEl) {{
   if (!stripEl) return;
   const cards = Array.from(stripEl.querySelectorAll('.summary-card'));
   if (!cards.length) return;
-  const rowSelectors = ['.summary-label', '.summary-metric', '.summary-scenario', '.summary-breakdown', '.summary-caveat', '.summary-actions'];
+  const rowSelectors = ['.summary-label', '.summary-metric', '.summary-driver', '.summary-scenario', '.summary-breakdown', '.summary-caveat', '.summary-actions'];
+  const rowEl = (c, sel) => Array.from(c.querySelectorAll(sel)).find(el => !el.closest('details')) || null;
   const disclosures = cards.map(c => c.querySelector('.math-drawer'));
   rowSelectors.forEach(sel => {{
     cards.forEach(c => {{
-      const el = c.querySelector(sel);
+      const el = rowEl(c, sel);
       if (el) el.style.minHeight = '';
     }});
   }});
@@ -1443,7 +1454,7 @@ function equalizeSummaryCards(stripEl) {{
   const sameRow = cards.every(c => Math.abs(c.getBoundingClientRect().top - firstTop) < 5);
   if (!sameRow) return;
   rowSelectors.forEach(sel => {{
-    const els = cards.map(c => c.querySelector(sel));
+    const els = cards.map(c => rowEl(c, sel));
     const maxH = Math.max(...els.map(el => el ? el.getBoundingClientRect().height : 0));
     if (maxH > 0) {{
       els.forEach(el => {{ if (el) el.style.minHeight = `${{maxH}}px`; }});
