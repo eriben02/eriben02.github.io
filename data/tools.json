@@ -88,7 +88,7 @@
     "data_and_token_portability": "1-Click Full JSON/CSV Export & Full REST API",
     "hipaa_baa_minimum_tier": "Not HIPAA BAA eligible by default",
     "soc2_report_tier": "SOC 2 Type II Available",
-    "sso_minimum_tier": "Enterprise / Custom",
+    "sso_minimum_tier": "Google SSO on all plans (SAML SSO tier unverified)",
     "trap_badge": "$0 Onboarding Fee · $35/User Annual ($49 Monthly) · 1-Seat Minimum",
     "trap_severity": "low",
     "verified_date": "2026-10-25",
@@ -101,7 +101,7 @@
     "sources": [
       "https://close.com/pricing"
     ],
-    "notes": "Plans verified 2026-10-25 on close.com/pricing: Solo $9/user/mo annual ($19 monthly, 1-user max, 10k leads); Essentials $35/user/mo annual ($49 monthly, multi-user team plan); Growth $99/user/mo annual ($109 monthly); Scale $139/user/mo annual ($149 monthly)."
+    "notes": "Plans verified 2026-10-25 on close.com/pricing: Solo $9/user/mo annual ($19 monthly, 1-user max, 10k leads); Essentials $35/user/mo annual ($49 monthly, multi-user team plan); Growth $99/user/mo annual ($109 monthly); Scale $139/user/mo annual ($149 monthly). SSO checked 2026-10-30 on close.com/pricing: Google SSO on all plans; a SAML SSO tier is not stated."
   },
   {
     "id": "pipedrive-crm",
@@ -114,15 +114,15 @@
     "actual_minimum_monthly_spend_usd": 14,
     "mandatory_onboarding_fee_usd": 0,
     "enterprise_onboarding_fee_usd": 0,
-    "enterprise_seat_price_usd": 99,
-    "ai_usage_tax_model": "Add-on modules (LeadBooster, Smart Docs) charged per company",
+    "enterprise_seat_price_usd": 79,
+    "ai_usage_tax_model": "Add-ons: LeadBooster from $32.50/mo per company; Smart Docs, Projects, Campaigns and Web Visitors priced separately (price basis unverified)",
     "ai_per_resolution_usd": 0.0,
     "billing_lock_in_type": "True Monthly or Annual (Clear self-serve cancellation)",
     "cancellation_notice_days": 1,
     "data_and_token_portability": "Full CSV/Excel Export + Open API",
     "hipaa_baa_minimum_tier": "No standard HIPAA BAA",
     "soc2_report_tier": "SOC 2 & ISO 27001 Certified",
-    "sso_minimum_tier": "Enterprise / Power tiers",
+    "sso_minimum_tier": "Unverified (no SSO tier confirmed on pipedrive.com/en/pricing, 2026-10-30)",
     "trap_badge": "$0 Onboarding · True 1-User Pricing",
     "trap_severity": "low",
     "verified_date": "2026-10-25",
@@ -134,7 +134,8 @@
     ],
     "sources": [
       "https://www.pipedrive.com/en/pricing"
-    ]
+    ],
+    "notes": "Plans verified 2026-10-30 on pipedrive.com/en/pricing (USD, billed annually): Lite $14, Growth $39, Premium $59, Ultimate $79 per seat/month. enterprise_seat_price_usd is Ultimate billed annually. monthly_billing_price_usd ($24, Lite) comes from secondary sources and is not verified on the official page."
   },
   {
     "id": "monday-crm",

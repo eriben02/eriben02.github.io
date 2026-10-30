@@ -347,8 +347,11 @@ class TestSaaSBillCalculators(unittest.TestCase):
             full_path = os.path.join(PUBLIC_DIR, rel)
             with open(full_path) as f:
                 html = f.read()
+            # rel="sponsored nofollow noopener" on /go/ affiliate links is the
+            # required attribute, not a visible "Sponsored" label.
+            html_no_rel = html.replace("sponsored nofollow noopener", "")
             for phrase in forbidden_phrases:
-                self.assertNotIn(phrase, html, f"Forbidden phrase '{phrase}' found in {rel}")
+                self.assertNotIn(phrase, html_no_rel, f"Forbidden phrase '{phrase}' found in {rel}")
             self.assertIn(f'id="{summary_ids[rel]}"', html, f"Missing summary strip #{summary_ids[rel]} in {rel}")
             self.assertIn("Based on ", html, f"Missing scenario description ('Based on ...') in {rel}")
             self.assertIn("Hidden Cost Highlight:", html, f"Missing 'Hidden Cost Highlight:' in {rel}")

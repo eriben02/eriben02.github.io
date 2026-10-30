@@ -5,6 +5,13 @@ with meta refresh + location.replace. The target URL comes from
 data/affiliate_links.json (go_url). These pages are noindex, are not in the
 sitemap, are disallowed in robots.txt, and do NOT go through render_page (the
 deploy guard's 20 KiB page minimum is for content pages).
+
+Pageview: one navigator.sendBeacon to Plausible's Events API
+(https://plausible.io/docs/events-api, text/plain JSON body) right before
+location.replace. A beacon is queued by the browser and survives the
+navigation, so the redirect is not delayed; it is skipped off saasbill.io
+(local previews, tests) and when sendBeacon is missing or blocked. The meta
+refresh stays as the no-JS fallback.
 """
 import html
 import json
@@ -26,7 +33,7 @@ TEMPLATE = """<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta http-equiv="refresh" content="0;url={attr}">
 <link rel="canonical" href="{attr}">
 <title>Redirecting…</title>
-<script>location.replace({js});</script>
+<script>try{{if(location.hostname==="saasbill.io"&&navigator.sendBeacon)navigator.sendBeacon("https://plausible.io/api/event",JSON.stringify({{name:"pageview",url:location.href,domain:"saasbill.io",referrer:document.referrer||null}}));}}catch(e){{}}location.replace({js});</script>
 </head><body><a href="{attr}" rel="sponsored nofollow">Continue</a></body></html>
 """
 

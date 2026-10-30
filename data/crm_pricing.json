@@ -41,6 +41,7 @@
       "verified_date": "2026-10-30"
     },
     "seat_minimum": {"value": null, "note": "None stated; Solo is limited to 1 user", "source_url": "https://www.close.com/pricing", "status": "verified", "verified_date": "2026-10-30"},
+    "sso": {"google_sso": "all plans", "saml_sso": null, "saml_sso_status": "unknown", "note": "Google SSO is listed on all plans; a SAML SSO tier is not stated", "source_url": "https://www.close.com/pricing", "status": "verified", "verified_date": "2026-10-30"},
     "vat": {"value": null, "status": "unknown"}
   },
   "pipedrive": {
@@ -73,6 +74,7 @@
       "verified_date": "2026-10-30"
     },
     "seat_billing": {"value": "charged per seat whether assigned or not", "source_url": "https://support.pipedrive.com/en/article/how-does-pricing-work-in-pipedrive", "status": "verified", "verified_date": "2026-10-30"},
+    "sso": {"value": null, "note": "No SSO tier confirmed on the pricing page; the old Power/Enterprise plan names no longer exist", "source_url": "https://www.pipedrive.com/en/pricing", "status": "unknown", "verified_date": "2026-10-30"},
     "vat": {"value": "exclusive", "source_url": "https://www.pipedrive.com/en/pricing", "status": "verified", "verified_date": "2026-10-30"}
   },
   "dialer_reference_aircall": {
