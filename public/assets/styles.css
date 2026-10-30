@@ -3234,3 +3234,121 @@ input[type="date"],
     max-width: none;
   }
 }
+
+/* =========================================================
+   Progressive disclosure: the answer first, the explanation on demand.
+   Shared shell rules (summary cards, below-the-fold disclosures, sources).
+   ========================================================= */
+.summary-driver {
+  font-size: 0.82rem;
+  color: var(--text);
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.summary-shared-scenario {
+  margin: 0 0 10px 0;
+}
+
+.summary-shared-scenario:empty {
+  display: none;
+}
+
+.math-drawer-body .summary-scenario,
+.math-drawer-body .summary-breakdown,
+.math-drawer-body .summary-caveat {
+  margin-bottom: 8px;
+}
+
+.below-disclosure .full-table-summary .below-disclosure-heading,
+.below-disclosure-title {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #20231F;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.methodology-box .below-disclosure {
+  margin-top: 4px;
+}
+
+.methodology-box .below-disclosure-title {
+  font-size: 1.05rem;
+}
+
+.methodology-note {
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.5;
+  margin: 14px 0;
+}
+
+.calc-math-meta a,
+.gap-sub-detail a {
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.calc-math-meta a:hover,
+.calc-math-meta a:focus-visible,
+.gap-sub-detail a:hover,
+.gap-sub-detail a:focus-visible {
+  text-decoration: underline;
+}
+
+.calc-affiliate-disclosure {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+@media (max-width: 960px) {
+  .workbench-grid .wb-col-controls {
+    order: 1;
+  }
+  .workbench-grid .wb-result-col {
+    order: 2;
+  }
+  .workbench-grid .wb-col-chart {
+    order: 3;
+  }
+}
+
+@media (max-width: 768px) {
+  .editorial-hero {
+    padding: 18px 0 12px;
+  }
+  .editorial-hero .lead {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  .editorial-cat-bar {
+    margin: 0 0 16px;
+    padding-top: 12px;
+  }
+  .editorial-cat-top {
+    flex-wrap: nowrap;
+    min-width: 0;
+  }
+  .cat-tabs,
+  .editorial-cat-bar .cat-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    min-width: 0;
+    max-width: 100%;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .cat-tabs::-webkit-scrollbar {
+    display: none;
+  }
+  .cat-tab {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+  .card-grid.compact-cards .card p {
+    display: none;
+  }
+}
