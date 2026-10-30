@@ -685,7 +685,7 @@ def render_page(rel_path, title, description, canonical_path, body_html, faqs=No
   document.addEventListener('input', handleCalcControlEvent);
   document.addEventListener('change', handleCalcControlEvent);
   </script>
-  <script src="{prefix}assets/app.js?v=20261028c"></script>
+  <script src="{prefix}assets/app.js?v=20261030a"></script>
 </body>
 </html>"""
     html = html.replace(

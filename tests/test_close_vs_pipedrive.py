@@ -575,6 +575,17 @@ class TestPipedriveReferencesSitewide(unittest.TestCase):
             self.assertNotIn("cta_rel", entry, slug)
         self.assertNotIn('rel="nofollow noopener" data-track="vendor-cta" data-vendor="${minR', html)
 
+    def test_homepage_crm_category_cards(self):
+        app = read(os.path.join(PUBLIC, "assets", "app.js"))
+        crm = re.search(r"crm: \[(.*?)\n    \]", app, re.S).group(1)
+        self.assertEqual(crm.count('["./'), 3)
+        self.assertIn('"./compare/close-vs-pipedrive-year-1-cost-calculator/", "Close vs. Pipedrive Year-1 Cost (Calling Included)"', crm)
+        self.assertNotIn("gong-io", crm)
+        # Gong stays reachable from the homepage directory.
+        index = read(os.path.join(PUBLIC, "index.html"))
+        directory = index[index.index('id="all-calculators"'):]
+        self.assertIn("./pricing/gong-io-platform-fee-and-seat-minimum-calculator/", directory)
+
     def test_tools_json_sso_matches_data(self):
         with open(os.path.join(ROOT, "data", "tools.json")) as f:
             tools = {t["id"]: t for t in json.load(f)}

@@ -1,11 +1,11 @@
 # SaaSBill (2026 B2B SaaS True-Cost & Contract Trap Directory)
 
 > Independent B2B SaaS pricing, mandatory onboarding fee, seat-bucket minimum, AI resolution tax, and payment processor reserve audit directory.
-> Last Updated / Verified: Oct 30, 2026 (2026-10-30T08:40:40+01:00)
+> Last Updated / Verified: Oct 30, 2026 (2026-10-30T08:45:27+01:00)
 
 ## Freshness & Verification Metadata
 - **datePublished:** 2026-10-25
-- **dateModified:** 2026-10-30T08:40:40+01:00
+- **dateModified:** 2026-10-30T08:45:27+01:00
 - **lastReviewed:** 2026-10-30
 - **Verification Standard:** All pricing schedules, onboarding fees, seat minimums, and reserve clauses are verified against official vendor pricing pages and documented user contract reports on X and Reddit.
 

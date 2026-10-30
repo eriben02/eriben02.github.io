@@ -223,7 +223,7 @@ if (typeof window !== "undefined") window.quotePayProfile = quotePayProfile;
     crm: [
       ["./pricing/hubspot-true-cost-and-onboarding-fees/", "HubSpot True Cost &amp; Onboarding", "What HubSpot costs in Year 1 once mandatory onboarding is included."],
       ["./compare/close-crm-vs-hubspot-sales-hub-5-to-20-reps/", "Close CRM vs. HubSpot Sales Hub", "True Year-1 cost for 5 to 20 reps, including HubSpot onboarding."],
-      ["./pricing/gong-io-platform-fee-and-seat-minimum-calculator/", "Gong.io $5,000 Platform Fee &amp; Seat Calculator", "Platform fee plus per-seat licenses versus Close CRM."]
+      ["./compare/close-vs-pipedrive-year-1-cost-calculator/", "Close vs. Pipedrive Year-1 Cost (Calling Included)", "Seats, call minutes, and the dialer Pipedrive needs."]
     ],
     compliance: [
       ["./compliance/hipaa-baa-and-soc2-pricing-tiers/", "HIPAA BAA &amp; SOC 2 Pricing Tiers", "Which plan signs a BAA, and what the CPA audit adds."],
