@@ -490,7 +490,6 @@ def build():
     core = js_core(data)
     pd_run = run_node(core, "pd", {"default": DEFAULT})["default"]
     hs_run = run_node(core, "hs", {"default": DEFAULT})["default"]
-    disclosure = "SaaSBill may earn a commission if you sign up for Pipedrive via the link. It does not change the calculation."
     pd_row = pd_run["r"]["current"]
     pd_lead = (
         "Pipedrive %s for %d seats, billed annually, is %s in Year 1 before add-ons. "
@@ -509,7 +508,6 @@ def build():
 <section class="hero editorial-hero editorial-hero-wrap">
   <h1>Pipedrive true Year-1 cost (2026): seats, plan and add-ons</h1>
   <p class="lead">{pd_lead}</p>
-  <p class="calc-affiliate-disclosure">{disclosure}</p>
 </section>
 {shell_for(pd_controls(data), "/go/pipedrive", data["pipedrive"]["ctaLabel"], "pipedrive-crm", pd_run["best"], pd_run["scenario"], pd_run["cards"], "py-cards")}
 {table_section(pd_run["table"], fine)}
@@ -523,7 +521,6 @@ def build():
 <section class="hero editorial-hero editorial-hero-wrap">
   <h1>Pipedrive vs HubSpot Sales Hub (2026): true Year-1 cost</h1>
   <p class="lead">{hs_lead}</p>
-  <p class="calc-affiliate-disclosure">{disclosure}</p>
 </section>
 {shell_for(hs_controls(data), "/go/pipedrive", data["pipedrive"]["ctaLabel"], "pipedrive-crm", hs_run["best"], hs_run["scenario"], hs_run["cards"], "py-cards")}
 {table_section(hs_run["table"], fine)}

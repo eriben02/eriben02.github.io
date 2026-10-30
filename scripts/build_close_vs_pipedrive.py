@@ -418,7 +418,6 @@ def body_html(pricing, affiliates, runs, data, core):
 </section>
 """
 
-    disclosure = "SaaSBill may earn a commission if you sign up via these links. It does not change the calculation; both vendors get the same button."
     dc, dp = d["r"]["close"], d["r"]["pipedrive"]
     lead = (
         "Pipedrive has no built-in calling, so a team that calls from its CRM also pays for a dialer. "
@@ -430,7 +429,6 @@ def body_html(pricing, affiliates, runs, data, core):
 <section class="hero editorial-hero editorial-hero-wrap">
   <h1>Close vs Pipedrive (2026): True Year-1 Cost for Your Sales Team, Calling Included</h1>
   <p class="lead">{lead}</p>
-  <p class="calc-affiliate-disclosure">{disclosure}</p>
 </section>
 
 {shell}

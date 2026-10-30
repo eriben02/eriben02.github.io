@@ -356,7 +356,8 @@ class TestSaaSBillCalculators(unittest.TestCase):
             self.assertIn("Based on ", html, f"Missing scenario description ('Based on ...') in {rel}")
             self.assertIn("Hidden Cost Highlight:", html, f"Missing 'Hidden Cost Highlight:' in {rel}")
             self.assertIn('data-track="vendor-cta"', html, f"Missing data-track='vendor-cta' in {rel}")
-            self.assertIn("Independent calculations. Some vendor links are affiliate links. This never changes our rankings or calculations.", html, f"Missing footer affiliate disclosure in {rel}")
+            self.assertEqual(html.count("Some links are affiliate links. They never change the math."), 1, f"Footer disclosure should appear once in {rel}")
+            self.assertIn('class="footer-disclosure"', html, f"Missing footer disclosure link in {rel}")
             self.assertNotIn('<span class="direct-link-tag">', html, f"Per-button .direct-link-tag should be removed in {rel}")
             self.assertIn("window.__saasbillEvents", html, f"Missing local __saasbillEvents instrumentation in {rel}")
             # Verify Plausible Analytics is present in <head> and no heavy third-party trackers are loaded
@@ -852,8 +853,8 @@ class TestSaaSBillCalculators(unittest.TestCase):
         self.assertEqual(out["cf_cta"], "Prevent reserve holds with Chargeflow →")
 
     def test_priority5_clear_affiliate_disclosure_and_no_em_dashes(self):
-        """Priority 5: Clear affiliate disclosure across all 18 pages, no contradictory claims, no em-dashes."""
-        expected_disclosure = "Independent calculations. Some vendor links are affiliate links. This never changes our rankings or calculations."
+        """Priority 5: One footer affiliate line on every listed page, no contradictory claims, no em-dashes."""
+        expected_disclosure = "Some links are affiliate links. They never change the math."
         pages = [
             "index.html",
             "intercom-fin-cost-calculator/index.html",
@@ -885,11 +886,51 @@ class TestSaaSBillCalculators(unittest.TestCase):
         for rel in pages:
             with open(os.path.join(PUBLIC_DIR, rel), encoding="utf-8") as f:
                 html = f.read()
-            self.assertIn(expected_disclosure, html, f"Missing updated affiliate disclosure in {rel}")
+            self.assertEqual(html.count(expected_disclosure), 1, f"Footer disclosure should appear once in {rel}")
+            self.assertIn('class="footer-disclosure"', html, f"Missing footer disclosure link in {rel}")
+            self.assertNotIn("calc-affiliate-disclosure", html, f"Body affiliate line still present in {rel}")
+            self.assertNotIn("may earn a commission", html, f"Commission sentence still present in {rel}")
             self.assertNotIn("100% independent", html.lower(), f"Contradictory claim in {rel}")
             self.assertNotIn("no sponsors", html.lower(), f"Contradictory claim in {rel}")
             self.assertNotIn("—", html, f"Em-dash character found in {rel}")
             self.assertNotIn("&mdash;", html, f"HTML entity &mdash; found in {rel}")
+
+    def test_every_affiliate_page_has_one_footer_disclosure(self):
+        """Sitemap pages keep one footer line. Affiliate pages are included. The long disclosure stays only in methodology."""
+        footer = "Some links are affiliate links. They never change the math."
+        full = "Independent calculations. Some vendor links are affiliate links. This never changes our rankings or calculations."
+        markers = (
+            'rel="sponsored',
+            "/go/",
+            "refer.close.com",
+            "get.apollo.io",
+            "partner=",
+            "aff.trypipedrive.com",
+        )
+        with open(os.path.join(PUBLIC_DIR, "sitemap.xml"), encoding="utf-8") as f:
+            locs = re.findall(r"<loc>https://saasbill\.io([^<]*)</loc>", f.read())
+        self.assertGreaterEqual(len(locs), 33)
+        affiliate_pages = []
+        for loc in locs:
+            rel = "index.html" if loc in ("", "/") else loc.strip("/") + "/index.html"
+            with open(os.path.join(PUBLIC_DIR, rel), encoding="utf-8") as f:
+                html = f.read()
+            self.assertEqual(html.count(footer), 1, rel)
+            self.assertIn('class="footer-disclosure"', html, rel)
+            self.assertIn("index.html#methodology", html, rel)
+            self.assertNotIn("may earn a commission", html, rel)
+            self.assertNotIn("calc-affiliate-disclosure", html, rel)
+            self.assertNotIn("Paid Partnership", html, rel)
+            if any(marker in html for marker in markers):
+                affiliate_pages.append(rel)
+            if loc in ("", "/"):
+                self.assertEqual(html.count(full), 1, rel)
+                self.assertIn("<strong>Affiliate Disclosure &amp; Sources</strong>", html)
+            else:
+                self.assertNotIn(full, html, rel)
+        self.assertGreaterEqual(len(affiliate_pages), 10)
+        self.assertIn("compare/close-vs-pipedrive-year-1-cost-calculator/index.html", affiliate_pages)
+        self.assertIn("index.html", affiliate_pages)
 
 
     def test_workbench_big_total_and_summary_card_alignment(self):

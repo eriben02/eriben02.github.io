@@ -234,7 +234,6 @@ home_body = f"""
       </p>
     </div>
   </details>
-  <p class="calc-affiliate-disclosure">Independent calculations. Some vendor links are affiliate links. This never changes our rankings or calculations.</p>
 </section>
 </div>
 
@@ -409,7 +408,7 @@ home_body = f"""
       <code>Year-1 Total = (12 &times; Billed Monthly Seats) + Mandatory Onboarding + (12 &times; Net AI Overage)</code>. Seat minimums and included AI allowances are applied automatically based on your slider inputs.
     </div>
   </div>
-  <p class="methodology-note"><span class="status-pill status-verified">Verified</span> indicates published self-serve pricing and contract terms checked directly against official vendor docs on Oct 25, 2026. Independent calculations. Some vendor links are affiliate links. This never changes our rankings or calculations.</p>
+  <p class="methodology-note"><span class="status-pill status-verified">Verified</span> indicates published self-serve pricing and contract terms checked directly against official vendor docs on Oct 25, 2026.</p>
   <details class="full-table-disclosure below-disclosure">
   <summary class="full-table-summary">
     <span class="below-disclosure-title">How we verify &amp; sources</span>

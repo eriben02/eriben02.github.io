@@ -256,7 +256,6 @@ def render_intercom_calculator_body(
       </div>
     </div>
   </details>
-  <p class="calc-affiliate-disclosure">Independent calculations. Some vendor links are affiliate links. This never changes our rankings or calculations.</p>
 </section>
 </div>
 

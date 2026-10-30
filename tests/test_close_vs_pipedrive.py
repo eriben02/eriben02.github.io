@@ -217,9 +217,10 @@ class TestCloseVsPipedriveLinks(unittest.TestCase):
         self.assertIn('id="shell-cta" target="_blank" rel="sponsored nofollow noopener"', html)
         self.assertIn("Try Close (14-day trial) &rarr;", html)
         self.assertIn("Try Pipedrive (14-day trial) &rarr;", html)
-        # Disclosure sits above the first vendor CTA.
-        first_cta = html.index('data-track="vendor-cta" data-vendor=')
-        self.assertLess(html.index("SaaSBill may earn a commission if you sign up via these links."), first_cta)
+        self.assertEqual(html.count("Some links are affiliate links. They never change the math."), 1)
+        self.assertIn('class="footer-disclosure" href="../../index.html#methodology"', html)
+        self.assertNotIn("SaaSBill may earn a commission", html)
+        self.assertNotIn("calc-affiliate-disclosure", html)
         # Source links to vendor pricing pages are not affiliate links.
         for src in ("https://www.close.com/pricing", "https://www.pipedrive.com/en/pricing", "https://aircall.io/pricing/"):
             for tag in re.findall(r'<a href="' + re.escape(src) + r'"[^>]*>', html):

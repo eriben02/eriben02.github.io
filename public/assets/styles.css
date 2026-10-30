@@ -1060,6 +1060,15 @@ footer.site-footer {
   color: var(--muted);
 }
 
+.footer-note a.footer-disclosure {
+  color: var(--muted);
+  text-decoration-color: var(--border-strong);
+}
+
+.footer-note a.footer-disclosure:hover {
+  color: var(--text);
+}
+
 /* Mobile Responsive Card View for Calculator Tables & Short Path to CTA */
 @media (max-width: 768px) {
   .container {

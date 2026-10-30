@@ -28,16 +28,6 @@ def build_jotform_wix_guide():
   <h1>How to Embed a B2B Custom Quote Form on Wix Using the Jotform Wix App (2026 Step-by-Step Guide &amp; Pricing)</h1>
   <p class="lead">Installing the official Jotform Wix App from the Wix App Market lets you embed conditional B2B quote forms, file uploads, and payment flows onto any Wix page in under five minutes while syncing every submission directly to Jotform Tables. Below is our live 5-step installation walkthrough and video demo on a published Wix store, followed by an interactive 2026 cost comparison between Jotform plans (Starter Free, Bronze $34/mo, Silver $39/mo, Gold $99/mo billed annually) and Wix native form tiers.</p>
 
-  <div class="partnership-disclosure-box" role="note" aria-label="Paid Partnership and Affiliate Disclosure">
-    <div class="partnership-badge-row">
-      <span class="hashtag-pill">#JotformPartner</span>
-      <span class="partnership-label">Paid Partnership &amp; Affiliate Disclosure</span>
-    </div>
-    <p style="margin:6px 0 0 0; font-size:0.86rem; color:#2A2E29; line-height:1.5;">
-      <strong>Disclosure (#JotformPartner):</strong> This tutorial and pricing guide is published as part of a paid creator partnership with Jotform and contains affiliate partner links (<a href="{JOTFORM_PARTNER_URL}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="jotform" data-cta-location="disclosure-top">jotform.com/?partner=eriben02</a>). If you sign up through our links, we may earn a commission at no extra cost to you. All pricing figures, plan limits, and live Wix installation screenshots were independently tested and verified on October 27, 2026.
-    </p>
-  </div>
-
   <div class="cta-stack" style="flex-direction:row; flex-wrap:wrap; gap:12px; margin-top:18px;">
     <a class="btn-cta" href="{JOTFORM_PARTNER_URL}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="jotform" data-cta-location="hero-primary">Try Jotform Free (5 Forms Included) &rarr;</a>
     <a class="btn-secondary" href="{WIX_APP_MARKET_URL}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="jotform" data-cta-location="hero-wix-market">Open Jotform in Wix App Market &nearr;</a>
@@ -75,7 +65,7 @@ def build_jotform_wix_guide():
 
 <section aria-labelledby="steps-heading" style="margin:36px 0;">
   <h2 id="steps-heading">Step-by-Step Visual Walkthrough: Setting Up the Jotform Wix App</h2>
-  <p style="color:var(--muted); margin-bottom:20px;">Every screenshot below was captured during our live setup of the <strong>B2B Custom Quote &amp; Bulk Order Inquiry</strong> form on Wix.</p>
+  <p style="color:var(--muted); margin-bottom:20px;">Every screenshot below was captured during our live setup of the <strong>B2B Custom Quote &amp; Bulk Order Inquiry</strong> form on Wix on October 27, 2026.</p>
 
   <div class="guide-step-card">
     <div class="guide-step-header">
@@ -341,12 +331,6 @@ function updateJotformWixCalc() {{
 }});
 updateJotformWixCalc();
 </script>
-
-<section class="partnership-disclosure-box" style="margin-top:28px;" aria-label="Campaign Footer Disclosure">
-  <p style="margin:0; font-size:0.84rem; color:#2A2E29;">
-    <strong>Campaign &amp; Affiliate Disclosure (#JotformPartner):</strong> Created in paid partnership with Jotform. Try Jotform on your Wix site via our partner link: <a href="{JOTFORM_PARTNER_URL}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="jotform" data-cta-location="disclosure-bottom">https://www.jotform.com/?partner=eriben02</a> or install the <a href="{WIX_APP_MARKET_URL}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="jotform" data-cta-location="disclosure-wix">Jotform Wix App in the Wix App Market</a>.
-  </p>
-</section>
 """
 
     faqs = [
