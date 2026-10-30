@@ -1,0 +1,55 @@
+{
+  "scan": {
+    "case_insensitive": true,
+    "strip_comments": true,
+    "strip_script_and_style_from_visible_text": true,
+    "ignore_attributes": true,
+    "visible_attributes": ["alt", "title", "aria-label", "placeholder"],
+    "note": "Visible text is text nodes plus alt, title, aria-label, and placeholder. HTML comments and other attributes are ignored. Editorial phrases are also checked inside quoted script strings, because those strings are shown after the page runs. Code tokens are not checked inside scripts."
+  },
+  "phrases": [
+    {"phrase": "answer first", "scan_script_strings": true},
+    {"phrase": "explanation on demand", "scan_script_strings": true},
+    {"phrase": "30-day test", "scan_script_strings": true},
+    {"phrase": "test section", "scan_script_strings": true},
+    {"phrase": "sprint", "word_boundary": true, "scan_script_strings": true},
+    {"phrase": "TODO", "word_boundary": true, "scan_script_strings": true},
+    {"phrase": "FIXME", "word_boundary": true, "scan_script_strings": true},
+    {"phrase": "lorem ipsum", "scan_script_strings": true},
+    {"phrase": "TBD", "word_boundary": true, "scan_script_strings": true},
+    {"phrase": "DARS", "word_boundary": true, "scan_script_strings": true},
+    {"phrase": "Cursor agent", "scan_script_strings": true},
+    {"phrase": "may earn a commission", "scan_script_strings": true},
+    {"phrase": "Best option", "scan_script_strings": true},
+    {"phrase": "Best choice", "scan_script_strings": true},
+    {"phrase": "Winner", "word_boundary": true, "scan_script_strings": true},
+    {"phrase": "undefined", "word_boundary": true},
+    {"phrase": "NaN", "word_boundary": true},
+    {"phrase": "null", "word_boundary": true},
+    {"phrase": "{{"},
+    {"phrase": "}}"},
+    {"phrase": "$0.00"}
+  ],
+  "whitelist": [
+    {
+      "path": "ai-act/article-50-deployer-checklist/index.html",
+      "phrase": "undefined",
+      "reason": "Ordinary English in the Commission guidelines summary: a published text is open to a large, undefined audience. Not an unset template value."
+    },
+    {
+      "path": "chargeback-fee-and-recovery-calculator/index.html",
+      "phrase": "Winner",
+      "reason": "Ordinary English: Shopify Protect is not the dollar winner for the whole dispute volume. Not a result label."
+    },
+    {
+      "path": "pricing/stripe-shopify-chargeback-fee-and-chargeflow-roi-calculator/index.html",
+      "phrase": "Winner",
+      "reason": "Same sentence as the chargeback calculator: not the dollar winner for the whole volume."
+    },
+    {
+      "path": "exit/stripe-shopify-paddle-frozen-funds-alternatives/index.html",
+      "phrase": "Winner",
+      "reason": "Ordinary English: payment processors do not have a single fixed-price winner. Not a result label."
+    }
+  ]
+}

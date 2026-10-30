@@ -116,7 +116,7 @@ def hero(h1, lead):
 
 def page_index():
     lead = (
-        "<strong>The answer first:</strong> Since <strong>2 August 2026</strong>, organisations that publish deepfakes, "
+        "Since <strong>2 August 2026</strong>, organisations that publish deepfakes, "
         "run emotion recognition or biometric categorisation on people, or publish unreviewed AI text on public-interest "
         "topics must disclose it, clearly and at first exposure. The EU offers free icons to do it. "
         + cite("S1", "S2", "S3")
@@ -150,7 +150,7 @@ def page_index():
     )
     why = details(
         "Why is this on a SaaS cost site?",
-        "<p>Labelling is now part of what AI tools cost to run properly. This is a 30-day test section. The same rule as the calculators: the answer first, the explanation on demand, sources with dates.</p>",
+        "<p>Labelling is now part of what AI tools cost to run properly.</p>",
     )
     checklist_preview = details(
         "What the 2-page checklist covers",
@@ -180,7 +180,7 @@ def page_index():
 
 def page_checklist():
     lead = (
-        "<strong>The answer first:</strong> If your organisation <em>uses</em> AI (you are a &ldquo;deployer&rdquo;) and it "
+        "If your organisation <em>uses</em> AI (you are a &ldquo;deployer&rdquo;) and it "
         "(a) runs emotion recognition or biometric categorisation on people, (b) publishes deepfakes, or (c) publishes "
         "AI-written text meant to inform the public on matters of public interest without human editorial review, you must tell people. "
         "You must do it clearly, at the latest at first exposure, and in an accessible way. This applies from <strong>2 August 2026</strong>. "
@@ -267,7 +267,7 @@ def icon_src(filename):
 
 def page_patterns():
     lead = (
-        "<strong>The answer first:</strong> Put an &ldquo;AI&rdquo; mark where people see it <strong>before or as</strong> they first see the content: "
+        "Put an &ldquo;AI&rdquo; mark where people see it <strong>before or as</strong> they first see the content: "
         "top-right of an image or video, at the start of a video and again after breaks, a short spoken disclaimer at the start of audio, "
         "and above or near the headline of text. The EU publishes free icons for this. Using them is optional; disclosing is not. "
         + cite("S3", "S4")
@@ -407,7 +407,7 @@ def page_patterns():
 
 def page_tools():
     lead = (
-        "<strong>The answer first:</strong> Under the EU Code of Practice, providers of generative AI are expected to use <strong>two layers</strong> of machine-readable marking: "
+        "Under the EU Code of Practice, providers of generative AI are expected to use <strong>two layers</strong> of machine-readable marking: "
         "<strong>digitally signed metadata</strong> (what C2PA / Content Credentials does) <strong>plus an imperceptible watermark</strong> (what SynthID or Digimarc do). "
         "Free-form text cannot carry metadata, so a watermark alone is considered sufficient there. Neither layer replaces the visible label a deployer must show. "
         + cite("S4", "S1")
@@ -491,7 +491,7 @@ def page_tools():
 
 def page_etsi():
     lead = (
-        "<strong>The answer first:</strong> ETSI TS 104 275 is a free technical specification from ETSI&rsquo;s committee on Securing AI. "
+        "ETSI TS 104 275 is a free technical specification from ETSI&rsquo;s committee on Securing AI. "
         "It tells <strong>developers and operators of generative AI</strong> how to reduce the chance their systems produce harmful deepfakes: "
         "risk assessment before release, human oversight, labelling and filters in the UI, training, and documented evidence, with pass/fail test cases. "
         "It is <strong>not</strong> a harmonised standard under the AI Act and does not by itself prove Article 50 compliance. "

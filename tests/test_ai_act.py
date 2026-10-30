@@ -102,3 +102,24 @@ class TestAiActSection(unittest.TestCase):
         self.assertIn("Accessed 30 Oct 2026", llms)
         home = read(os.path.join(PUBLIC, "index.html"))
         self.assertIn("Some links are affiliate links. They never change the math.", home)
+
+    def test_design_principle_is_not_visible_copy(self):
+        """'Answer first' and 'explanation on demand' stay off every published page."""
+        forbidden = ("answer first", "explanation on demand")
+        pages = []
+        for base in (ROOT, PUBLIC):
+            for dirpath, dirnames, filenames in os.walk(base):
+                dirnames[:] = [name for name in dirnames if name not in (".git", "node_modules", "saastruth", "scripts", "tests")]
+                for name in filenames:
+                    if name.endswith(".html"):
+                        pages.append(os.path.join(dirpath, name))
+        self.assertGreaterEqual(len(pages), 30)
+        for path in pages:
+            html = read(path)
+            html = re.sub(r"<script\b[^>]*>.*?</script>", " ", html, flags=re.S | re.I)
+            html = re.sub(r"<style\b[^>]*>.*?</style>", " ", html, flags=re.S | re.I)
+            html = re.sub(r"<!--.*?-->", " ", html, flags=re.S)
+            text = re.sub(r"<[^>]+>", " ", html).lower()
+            rel = os.path.relpath(path, ROOT)
+            for phrase in forbidden:
+                self.assertNotIn(phrase, text, "%s shows %r" % (rel, phrase))
