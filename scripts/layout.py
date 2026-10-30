@@ -567,7 +567,7 @@ def render_page(rel_path, title, description, canonical_path, body_html, faqs=No
   <meta name="dcterms.modified" content="{iso_datetime}" />
   <meta name="dcterms.issued" content="{pub_date}" />
   <link rel="canonical" href="{SITE_ORIGIN}{canonical_path}" />
-  <link rel="stylesheet" href="{prefix}assets/styles.css?v=20261030b" />
+  <link rel="stylesheet" href="{prefix}assets/styles.css?v=20261030c" />
   <link rel="alternate" type="text/plain" href="{SITE_ORIGIN}/llms.txt" title="SaaSBill LLMs.txt Summary" />
   <!-- Privacy-friendly analytics by Plausible -->
   <script defer data-domain="saasbill.io" src="https://plausible.io/js/pa-VAaSVNs5XOobt9cv2UtKo.js"></script>
@@ -616,7 +616,7 @@ def render_page(rel_path, title, description, canonical_path, body_html, faqs=No
   <footer class="site-footer">
     <div class="container">
       <p><strong>SaaSBill</strong> &middot; Year-1 cost &amp; contract calculators for B2B software.</p>
-      <p class="footer-note">Independent calculations. Some vendor links are affiliate links. This never changes our rankings or calculations. &middot; Updated <time datetime="{iso_date}">{human_date}</time> &middot; Inquiries: <a href="mailto:info@saasbill.io">info@saasbill.io</a></p>
+      <p class="footer-note"><a class="footer-disclosure" href="{prefix}index.html#methodology">Some links are affiliate links. They never change the math.</a> &middot; Updated <time datetime="{iso_date}">{human_date}</time> &middot; Inquiries: <a href="mailto:info@saasbill.io">info@saasbill.io</a></p>
     </div>
   </footer>
   <script>

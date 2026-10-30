@@ -329,11 +329,11 @@ function updateTr() {{
      total: R.gumroad.total, net: R.gumroad.net, url: '{GUMROAD_URL}', cta: 'View Gumroad pricing →', tag: 'Direct vendor link', badge: 'badge-high'}},
     {{id: 'lemon-squeezy', name: 'Lemon Squeezy', sub: '5% + 50¢ · merchant of record', base: R.ls.platform, addon: R.ls.surcharges + R.ls.disputes + R.ls.payout,
      addonText: trFmt(R.ls.surcharges) + ' surcharges + ' + trFmt(R.ls.disputes) + ' disputes' + (R.ls.payout ? ' + ' + trFmt(R.ls.payout) + ' payout' : ''), hidden: R.ls.surcharges, hiddenText: 'international / PayPal / subscription surcharges (+1.5% / +1.5% / +0.5%)',
-     total: R.ls.total, net: R.ls.net, url: '{LS_URL}', cta: 'View Lemon Squeezy pricing →', tag: 'Direct vendor link', badge: 'badge-medium'}},
+     total: R.ls.total, net: R.ls.net, url: '{LS_URL}', cta: 'View Lemon Squeezy pricing →', tag: 'Vendor pricing page', badge: 'badge-medium'}},
     {{id: 'whop-payments', name: 'Whop', sub: '2.7% + 30¢' + (o.whop_tax !== 'none' ? ' · +2% managed tax' : ' · tax not included'), base: R.whop.platform, addon: R.whop.surcharges + R.whop.tax + R.whop.billing + R.whop.disputes + R.whop.payout,
      addonText: trFmt(R.whop.surcharges) + ' intl/FX/fraud + ' + trFmt(R.whop.tax) + ' tax + ' + trFmt(R.whop.disputes + R.whop.payout + R.whop.billing) + ' disputes/payouts' + (o.sub ? '/billing' : ''), hidden: R.whop.tax > R.whop.surcharges ? R.whop.tax : R.whop.surcharges,
      hiddenText: R.whop.tax > R.whop.surcharges ? 'the 2% managed tax option (tax is not included in 2.7% + 30¢)' : 'international card (+1.5%), currency conversion (+1%) and Radar/3DS fees',
-     total: R.whop.total, net: R.whop.net, url: '{WHOP_URL}', cta: 'Start selling on Whop →', tag: 'Referral link · we may earn a commission', badge: 'badge-low'}}
+     total: R.whop.total, net: R.whop.net, url: '{WHOP_URL}', cta: 'Start selling on Whop →', tag: 'Referral link', badge: 'badge-low'}}
   ].sort((a, b) => a.total - b.total);
   const low = rows[0], high = rows[rows.length - 1];
   const big = rows.slice().sort((a, b) => b.hidden - a.hidden)[0];

@@ -356,7 +356,8 @@ class TestSaaSBillCalculators(unittest.TestCase):
             self.assertIn("Based on ", html, f"Missing scenario description ('Based on ...') in {rel}")
             self.assertIn("Hidden Cost Highlight:", html, f"Missing 'Hidden Cost Highlight:' in {rel}")
             self.assertIn('data-track="vendor-cta"', html, f"Missing data-track='vendor-cta' in {rel}")
-            self.assertIn("Independent calculations. Some vendor links are affiliate links. This never changes our rankings or calculations.", html, f"Missing footer affiliate disclosure in {rel}")
+            self.assertEqual(html.count("Some links are affiliate links. They never change the math."), 1, f"Footer disclosure should appear once in {rel}")
+            self.assertIn('class="footer-disclosure"', html, f"Missing footer disclosure link in {rel}")
             self.assertNotIn('<span class="direct-link-tag">', html, f"Per-button .direct-link-tag should be removed in {rel}")
             self.assertIn("window.__saasbillEvents", html, f"Missing local __saasbillEvents instrumentation in {rel}")
             # Verify Plausible Analytics is present in <head> and no heavy third-party trackers are loaded
@@ -852,8 +853,8 @@ class TestSaaSBillCalculators(unittest.TestCase):
         self.assertEqual(out["cf_cta"], "Prevent reserve holds with Chargeflow →")
 
     def test_priority5_clear_affiliate_disclosure_and_no_em_dashes(self):
-        """Priority 5: Clear affiliate disclosure across all 18 pages, no contradictory claims, no em-dashes."""
-        expected_disclosure = "Independent calculations. Some vendor links are affiliate links. This never changes our rankings or calculations."
+        """Priority 5: One footer affiliate line on every listed page, no contradictory claims, no em-dashes."""
+        expected_disclosure = "Some links are affiliate links. They never change the math."
         pages = [
             "index.html",
             "intercom-fin-cost-calculator/index.html",
@@ -885,11 +886,138 @@ class TestSaaSBillCalculators(unittest.TestCase):
         for rel in pages:
             with open(os.path.join(PUBLIC_DIR, rel), encoding="utf-8") as f:
                 html = f.read()
-            self.assertIn(expected_disclosure, html, f"Missing updated affiliate disclosure in {rel}")
+            self.assertEqual(html.count(expected_disclosure), 1, f"Footer disclosure should appear once in {rel}")
+            self.assertIn('class="footer-disclosure"', html, f"Missing footer disclosure link in {rel}")
+            self.assertNotIn("calc-affiliate-disclosure", html, f"Body affiliate line still present in {rel}")
+            self.assertNotIn("may earn a commission", html, f"Commission sentence still present in {rel}")
             self.assertNotIn("100% independent", html.lower(), f"Contradictory claim in {rel}")
             self.assertNotIn("no sponsors", html.lower(), f"Contradictory claim in {rel}")
             self.assertNotIn("—", html, f"Em-dash character found in {rel}")
             self.assertNotIn("&mdash;", html, f"HTML entity &mdash; found in {rel}")
+
+    def test_every_affiliate_page_has_one_footer_disclosure(self):
+        """Sitemap pages keep one footer line. Affiliate pages are included. The long disclosure stays only in methodology."""
+        footer = "Some links are affiliate links. They never change the math."
+        full = "Independent calculations. Some vendor links are affiliate links. This never changes our rankings or calculations."
+        markers = (
+            'rel="sponsored',
+            "/go/",
+            "refer.close.com",
+            "get.apollo.io",
+            "partner=",
+            "aff.trypipedrive.com",
+        )
+        with open(os.path.join(PUBLIC_DIR, "sitemap.xml"), encoding="utf-8") as f:
+            locs = re.findall(r"<loc>https://saasbill\.io([^<]*)</loc>", f.read())
+        self.assertGreaterEqual(len(locs), 33)
+        affiliate_pages = []
+        for loc in locs:
+            rel = "index.html" if loc in ("", "/") else loc.strip("/") + "/index.html"
+            with open(os.path.join(PUBLIC_DIR, rel), encoding="utf-8") as f:
+                html = f.read()
+            self.assertEqual(html.count(footer), 1, rel)
+            self.assertIn('class="footer-disclosure"', html, rel)
+            self.assertIn("index.html#methodology", html, rel)
+            self.assertNotIn("may earn a commission", html, rel)
+            self.assertNotIn("calc-affiliate-disclosure", html, rel)
+            self.assertNotIn("Paid Partnership", html, rel)
+            if any(marker in html for marker in markers):
+                affiliate_pages.append(rel)
+            if loc in ("", "/"):
+                self.assertEqual(html.count(full), 1, rel)
+                self.assertIn("<strong>Affiliate Disclosure &amp; Sources</strong>", html)
+            else:
+                self.assertNotIn(full, html, rel)
+        self.assertGreaterEqual(len(affiliate_pages), 10)
+        self.assertIn("compare/close-vs-pipedrive-year-1-cost-calculator/index.html", affiliate_pages)
+        self.assertIn("index.html", affiliate_pages)
+
+    def test_affiliate_urls_are_not_labeled_direct_vendor_links(self):
+        """A link whose URL is in affiliate_links.json, or whose path is /go/, is never labeled a direct vendor link."""
+        label = "Direct vendor link"
+        with open(os.path.join(DATA_DIR, "affiliate_links.json"), encoding="utf-8") as f:
+            affiliate_data = json.load(f)
+        urls = set()
+
+        def walk(node):
+            if isinstance(node, dict):
+                for value in node.values():
+                    walk(value)
+            elif isinstance(node, list):
+                for value in node:
+                    walk(value)
+            elif isinstance(node, str):
+                value = node.strip()
+                if value.startswith(("http://", "https://", "/go/")):
+                    urls.add(value.split("#")[0].rstrip("/"))
+
+        walk(affiliate_data)
+        self.assertIn("https://whop.com/sell?a=baggyprairieae", urls)
+        self.assertTrue(any(url.startswith("/go/") for url in urls))
+
+        def is_affiliate_href(href):
+            bare = href.split("#")[0].rstrip("/")
+            path = urlparse(bare).path if "://" in bare else bare
+            if path.startswith("/go/") or "/go/" in path:
+                return True
+            return bare in urls
+
+        def context_for(html, pos):
+            anchor_start = html.rfind("<a", 0, pos)
+            if anchor_start != -1:
+                close = html.find("</a>", anchor_start)
+                if close != -1 and pos < close:
+                    return html[anchor_start:close + 4]
+            start = html.rfind("{", 0, pos)
+            end = html.find("}", pos)
+            if start != -1 and end != -1:
+                return html[start:end + 1]
+            return html[max(0, pos - 120):pos + 120]
+
+        for dirpath, dirnames, filenames in os.walk(PUBLIC_DIR):
+            dirnames[:] = [name for name in dirnames if name not in ("preview", "go")]
+            if "index.html" not in filenames:
+                continue
+            rel = os.path.relpath(os.path.join(dirpath, "index.html"), PUBLIC_DIR)
+            with open(os.path.join(dirpath, "index.html"), encoding="utf-8") as f:
+                html = f.read()
+            seen = set()
+            for match in re.finditer(r'href="([^"]+)"', html):
+                href = match.group(1)
+                if not is_affiliate_href(href):
+                    continue
+                key = (rel, href, match.start())
+                if key in seen:
+                    continue
+                seen.add(key)
+                context = context_for(html, match.start())
+                self.assertNotIn(label, context, f"{rel} labels {href} as a direct vendor link")
+            for url in urls:
+                start = 0
+                while True:
+                    found = html.find(url, start)
+                    if found < 0:
+                        break
+                    context = context_for(html, found)
+                    self.assertNotIn(label, context, f"{rel} labels {url} as a direct vendor link")
+                    start = found + len(url)
+
+    def test_jotform_guide_paid_partnership_above_first_link(self):
+        """The Jotform guide keeps one short paid-partnership line above the first Jotform link."""
+        rel = "guides/jotform-wix-app-setup-and-pricing-guide/index.html"
+        with open(os.path.join(PUBLIC_DIR, rel), encoding="utf-8") as f:
+            html = f.read()
+        note = "Paid partnership with Jotform (#JotformPartner). Some links are affiliate links."
+        self.assertIn(note, html)
+        first_jotform = None
+        for match in re.finditer(r'<a\b[^>]*href="([^"]+)"', html):
+            if "jotform" in match.group(1).lower():
+                first_jotform = match
+                break
+        self.assertIsNotNone(first_jotform, "Jotform guide has no Jotform link")
+        self.assertLess(html.index("Paid partnership"), first_jotform.start(), rel)
+        self.assertEqual(html.count("Some links are affiliate links. They never change the math."), 1)
+        self.assertNotIn("partnership-disclosure-box", html)
 
 
     def test_workbench_big_total_and_summary_card_alignment(self):
