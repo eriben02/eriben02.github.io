@@ -175,6 +175,7 @@ class TestSharedWorkbenchShell(unittest.TestCase):
     QUEUED = [
         "compare/typeform-vs-jotform-response-limit-and-hipaa-cost/index.html",
         "compare/close-crm-vs-hubspot-sales-hub-5-to-20-reps/index.html",
+        "compare/close-vs-pipedrive-year-1-cost-calculator/index.html",
         "pricing/stripe-billing-0-7-percent-recurring-tax-calculator/index.html",
         "pricing/docusign-envelope-allowance-and-api-overage-calculator/index.html",
         "pricing/gong-io-platform-fee-and-seat-minimum-calculator/index.html",

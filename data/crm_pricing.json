@@ -1,0 +1,92 @@
+{
+  "_about": "Close vs Pipedrive pricing data for /compare/close-vs-pipedrive-year-1-cost-calculator/. USD, per seat per month unless stated. status: verified (read on source_url on verified_date), secondary (third-party only, never used in totals unless calc_policy.allow_secondary is true), unknown (not published or not verifiable). Unknown values are never counted as $0.",
+  "calc_policy": {
+    "allow_secondary": false,
+    "default_billing": "annual",
+    "numbers_per_rep": 1,
+    "default_minutes_per_rep_month": 500,
+    "default_minutes_label": "example assumption",
+    "stale_warn_days": 30,
+    "stale_fail_days": 60
+  },
+  "close": {
+    "name": "Close",
+    "source_url": "https://www.close.com/pricing",
+    "trial": {"value": "14-day free trial, no credit card", "source_url": "https://www.close.com/pricing", "status": "verified", "verified_date": "2026-10-30"},
+    "plans": {
+      "solo":       {"label": "Solo",       "annual": 9,   "monthly": 19,  "max_users": 1, "source_url": "https://www.close.com/pricing", "status": "verified", "verified_date": "2026-10-30"},
+      "essentials": {"label": "Essentials", "annual": 35,  "monthly": 49,  "source_url": "https://www.close.com/pricing", "status": "verified", "verified_date": "2026-10-30"},
+      "growth":     {"label": "Growth",     "annual": 99,  "monthly": 109, "source_url": "https://www.close.com/pricing", "status": "verified", "verified_date": "2026-10-30"},
+      "scale":      {"label": "Scale",      "annual": 139, "monthly": 149, "source_url": "https://www.close.com/pricing", "status": "verified", "verified_date": "2026-10-30"}
+    },
+    "usage": {
+      "call_per_min_usd": {"value": 0.02, "qualifier": "around; most outbound calls; varies by country and number type", "source_url": "https://www.close.com/pricing", "status": "verified", "verified_date": "2026-10-30"},
+      "number_per_month_usd": {"value": 1, "qualifier": "starting at about", "source_url": "https://www.close.com/pricing", "status": "verified", "verified_date": "2026-10-30"},
+      "call_rounding": {"value": "per call, rounded up to the next full minute", "source_url": "https://help.close.com/account-management/variable-usage-costs-calling-sms-phone-numbers-ai-tools", "status": "verified", "verified_date": "2026-10-30"},
+      "sms_per_unit_usd": {"value": null, "source_url": "https://help.close.com/account-management/variable-usage-costs-calling-sms-phone-numbers-ai-tools", "status": "unknown", "note": "Twilio price per SMS unit; amount not stated"},
+      "call_assistant": {"monthly_usd": 50, "per_min_usd": 0.02, "per": "billing account", "source_url": "https://www.close.com/pricing", "status": "verified", "verified_date": "2026-10-30"},
+      "extra_org_monthly_usd": {"value": 50, "source_url": "https://www.close.com/pricing", "status": "verified", "verified_date": "2026-10-30"}
+    },
+    "volume_discount": {"value": null, "note": "Discounts exist for 10+ seats and 12+ month terms; amount not stated", "source_url": "https://help.close.com/account-management/plans-and-billing", "status": "unknown", "verified_date": "2026-10-30"},
+    "features": {
+      "email_open_tracking": ["essentials", "growth", "scale"],
+      "workflows_bulk_email": ["growth", "scale"],
+      "power_dialer": ["growth", "scale"],
+      "predictive_dialer": ["scale"],
+      "forms": ["solo", "essentials", "growth", "scale"],
+      "calling_sms": ["solo", "essentials", "growth", "scale"],
+      "call_recording_retention_days": {"solo": 30, "essentials": 30, "growth": 90, "scale": "unlimited"},
+      "source_url": "https://www.close.com/pricing",
+      "status": "verified",
+      "verified_date": "2026-10-30"
+    },
+    "seat_minimum": {"value": null, "note": "None stated; Solo is limited to 1 user", "source_url": "https://www.close.com/pricing", "status": "verified", "verified_date": "2026-10-30"},
+    "vat": {"value": null, "status": "unknown"}
+  },
+  "pipedrive": {
+    "name": "Pipedrive",
+    "source_url": "https://www.pipedrive.com/en/pricing",
+    "trial": {"value": "14-day free trial, no credit card", "source_url": "https://www.pipedrive.com/en/pricing", "status": "verified", "verified_date": "2026-10-30"},
+    "annual_savings_claim": {"value": "up to 42%", "source_url": "https://www.pipedrive.com/en/pricing", "status": "verified", "verified_date": "2026-10-30"},
+    "plans": {
+      "lite":     {"label": "Lite",     "annual": 14, "monthly": 24, "annual_status": "verified", "monthly_status": "secondary", "status": "verified", "source_url": "https://www.pipedrive.com/en/pricing", "verified_date": "2026-10-30"},
+      "growth":   {"label": "Growth",   "annual": 39, "monthly": 49, "annual_status": "verified", "monthly_status": "secondary", "status": "verified", "source_url": "https://www.pipedrive.com/en/pricing", "verified_date": "2026-10-30"},
+      "premium":  {"label": "Premium",  "annual": 59, "monthly": 79, "annual_status": "verified", "monthly_status": "secondary", "status": "verified", "source_url": "https://www.pipedrive.com/en/pricing", "verified_date": "2026-10-30"},
+      "ultimate": {"label": "Ultimate", "annual": 79, "monthly": 99, "annual_status": "verified", "monthly_status": "secondary", "status": "verified", "source_url": "https://www.pipedrive.com/en/pricing", "verified_date": "2026-10-30"}
+    },
+    "monthly_secondary_sources": ["https://saasswapper.com/pipedrive-pricing.html", "https://saaspricealerts.com/guides/pipedrive-pricing-per-user/", "https://reachkit.ai/compare/pipedrive-vs-close"],
+    "addons": {
+      "leadbooster": {"annual": 32.50, "monthly": null, "monthly_status": "unknown", "per": "company", "included_in": ["premium", "ultimate"], "source_url": "https://www.pipedrive.com/en/features/leadbooster", "status": "verified", "verified_date": "2026-10-30"},
+      "smart_docs":  {"from": 32.50, "per": null, "included_in": ["premium", "ultimate"], "source_url": "https://www.pipedrive.com/en/pricing", "status": "verified_from_price_only", "verified_date": "2026-10-30"},
+      "projects":    {"from": 16,    "per": null, "included_in": ["premium", "ultimate"], "source_url": "https://www.pipedrive.com/en/pricing", "status": "verified_from_price_only", "verified_date": "2026-10-30"},
+      "campaigns":   {"from": 13.33, "per": null, "included_in": [], "source_url": "https://www.pipedrive.com/en/pricing", "status": "verified_from_price_only", "verified_date": "2026-10-30"},
+      "web_visitors":{"from": 41,    "per": null, "included_in": [], "source_url": "https://www.pipedrive.com/en/pricing", "status": "verified_from_price_only", "verified_date": "2026-10-30"},
+      "inclusion_source": "https://support.pipedrive.com/en/article/how-does-pricing-work-in-pipedrive"
+    },
+    "features": {
+      "email_sync_tracking": ["growth", "premium", "ultimate"],
+      "sequences_automations": ["growth", "premium", "ultimate"],
+      "built_in_calling": [],
+      "calling_source": "https://support.pipedrive.com/en/article/how-can-i-make-calls-in-pipedrive",
+      "source_url": "https://www.pipedrive.com/en/pricing",
+      "status": "verified",
+      "verified_date": "2026-10-30"
+    },
+    "seat_billing": {"value": "charged per seat whether assigned or not", "source_url": "https://support.pipedrive.com/en/article/how-does-pricing-work-in-pipedrive", "status": "verified", "verified_date": "2026-10-30"},
+    "vat": {"value": "exclusive", "source_url": "https://www.pipedrive.com/en/pricing", "status": "verified", "verified_date": "2026-10-30"}
+  },
+  "dialer_reference_aircall": {
+    "name": "Aircall",
+    "source_url": "https://aircall.io/pricing/",
+    "essentials":   {"label": "Essentials",   "annual": 30, "monthly": null, "monthly_status": "unknown", "power_dialer": false, "status": "verified", "source_url": "https://aircall.io/pricing/", "verified_date": "2026-10-30"},
+    "professional": {"label": "Professional", "annual": 50, "monthly": null, "monthly_status": "unknown", "power_dialer": true,  "status": "verified", "source_url": "https://aircall.io/pricing/", "verified_date": "2026-10-30"},
+    "min_licenses": 3,
+    "extra_number_monthly_usd": 6,
+    "included_numbers": 1,
+    "domestic_outbound": "unlimited in US and Canada (terms apply)",
+    "monthly_note": "annual = 25% discount vs monthly; monthly price not shown",
+    "is_affiliate": false,
+    "status": "verified",
+    "verified_date": "2026-10-30"
+  }
+}

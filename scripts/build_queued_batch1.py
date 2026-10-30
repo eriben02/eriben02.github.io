@@ -55,6 +55,7 @@ PAGES = [
         "winner_url": "https://refer.close.com/3k5hp07b8soi-fetl0j",
         "winner_cta": "View Close pricing",
         "winner_vendor": "close-crm",
+        "after_summary_html": '<p class="summary-interpretation"><a href="../close-vs-pipedrive-year-1-cost-calculator/" data-track="internal-audit">Comparing Close with Pipedrive instead? Include calling costs &rarr;</a></p>',
         "js_logic": """
         const vol = parseInt(document.getElementById('p-slider').value, 10);
         const mode = document.getElementById('p-select').value;

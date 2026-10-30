@@ -277,6 +277,7 @@ def render_related_links(rel_path, prefix):
         ("index.html", "Year-1 SaaS True-Cost Directory", "Compare 20+ B2B tools across CRM, Helpdesk AI, Payments, and Compliance."),
         ("pricing/hubspot-true-cost-and-onboarding-fees/index.html", "HubSpot True Cost &amp; Onboarding", "What HubSpot costs in Year 1 once mandatory onboarding is included."),
         ("compare/close-crm-vs-hubspot-sales-hub-5-to-20-reps/index.html", "Close CRM vs. HubSpot Sales Hub", "True Year-1 cost for 5 to 20 reps, including HubSpot onboarding."),
+        ("compare/close-vs-pipedrive-year-1-cost-calculator/index.html", "Close vs. Pipedrive Year-1 Cost (Calling Included)", "Seats, call minutes, and the dialer Pipedrive needs, for your team."),
         ("pricing/gong-io-platform-fee-and-seat-minimum-calculator/index.html", "Gong.io $5,000 Platform Fee &amp; Seat Calculator", "Platform fee plus per-seat licenses versus Close CRM."),
         ("compare/monday-crm-vs-pipedrive-vs-hubspot-seat-minimums/index.html", "monday CRM 3/5/10-Seat Bucket Calculator", "Where fixed seat buckets cost more than one seat at a time."),
         ("intercom-fin-cost-calculator/index.html", "Intercom Fin AI Cost Calculator", "Year-1 price at $0.99 per resolution versus Freshdesk and Zendesk."),
@@ -318,7 +319,21 @@ def render_related_links(rel_path, prefix):
         "exit/shopify-payments-chargeback-threshold-and-reserve-appeal/index.html",
     }
     shopify_reserve_rel = "exit/shopify-payments-chargeback-threshold-and-reserve-appeal/index.html"
-    if rel_path in (chargeback_rel, chargeback_mirror):
+    # CRM pages show each other first. The Close vs Pipedrive page leads with
+    # the seat-bucket and Close vs HubSpot pages, then HubSpot and Gong.
+    close_pipedrive_rel = "compare/close-vs-pipedrive-year-1-cost-calculator/index.html"
+    crm_order = [
+        close_pipedrive_rel,
+        "compare/monday-crm-vs-pipedrive-vs-hubspot-seat-minimums/index.html",
+        "compare/close-crm-vs-hubspot-sales-hub-5-to-20-reps/index.html",
+        "pricing/hubspot-true-cost-and-onboarding-fees/index.html",
+        "pricing/gong-io-platform-fee-and-seat-minimum-calculator/index.html",
+        "hubspot-onboarding-fee-calculator/index.html",
+        "faq/does-hubspot-charge-onboarding-fees-2026/index.html",
+    ]
+    if rel_path in crm_order:
+        preferred = [rel for rel in crm_order if rel != rel_path]
+    elif rel_path in (chargeback_rel, chargeback_mirror):
         preferred = [
             "exit/stripe-shopify-paddle-frozen-funds-alternatives/index.html",
             "pricing/stripe-billing-0-7-percent-recurring-tax-calculator/index.html",
@@ -546,7 +561,7 @@ def render_page(rel_path, title, description, canonical_path, body_html, faqs=No
   <meta name="dcterms.modified" content="{iso_datetime}" />
   <meta name="dcterms.issued" content="{pub_date}" />
   <link rel="canonical" href="{SITE_ORIGIN}{canonical_path}" />
-  <link rel="stylesheet" href="{prefix}assets/styles.css?v=20261030a" />
+  <link rel="stylesheet" href="{prefix}assets/styles.css?v=20261030b" />
   <link rel="alternate" type="text/plain" href="{SITE_ORIGIN}/llms.txt" title="SaaSBill LLMs.txt Summary" />
   <!-- Privacy-friendly analytics by Plausible -->
   <script defer data-domain="saasbill.io" src="https://plausible.io/js/pa-VAaSVNs5XOobt9cv2UtKo.js"></script>

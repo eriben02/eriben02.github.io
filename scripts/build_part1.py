@@ -243,6 +243,11 @@ home_body = f"""
     </div>
     <div class="card" data-cat="crm">
       <span class="badge badge-high">CRM</span>
+      <h3><a href="./compare/close-vs-pipedrive-year-1-cost-calculator/">Close vs. Pipedrive Year-1 Cost (Calling Included)</a></h3>
+      <p>Close call minutes and numbers versus the separate dialer Pipedrive needs, on the cheapest plan that covers your team.</p>
+    </div>
+    <div class="card" data-cat="crm">
+      <span class="badge badge-high">CRM</span>
       <h3><a href="./pricing/gong-io-platform-fee-and-seat-minimum-calculator/">Gong.io $5,000 Platform Fee &amp; Seat Calculator</a></h3>
       <p>Gong&rsquo;s $5,000/yr base platform fee and ~$1,600/seat licenses plus a separate CRM versus Close CRM all-in-one.</p>
     </div>

@@ -30,7 +30,9 @@
       "discount_20pct": "https://refer.close.com/lt6p61c61z57-stack"
     },
     "promo_code": "STACK20 (20% discount Oct-Dec 2026)",
-    "approved_date": "2026-10-26"
+    "approved_date": "2026-10-26",
+    "go_path": "/go/close",
+    "go_url": "https://refer.close.com/3k5hp07b8soi-fetl0j"
   },
   "pipedrive": {
     "program_name": "Pipedrive Affiliate Partnership",
@@ -41,9 +43,13 @@
     "tracking_url": "/go/pipedrive",
     "destination_url": "https://www.pipedrive.com/en/pricing",
     "is_affiliate": true,
-    "status": "applied (PartnerStack pending approval, est. 1-5 days: Oct 26-30, 2026)",
+    "status": "active (PartnerStack link https://aff.trypipedrive.com/mlquvdui44me via /go/pipedrive, approved 2026-10-30)",
     "applied_date": "2026-10-25",
-    "expected_response_window": "2026-10-26 to 2026-10-30 (1-5 business days)"
+    "expected_response_window": "2026-10-26 to 2026-10-30 (1-5 business days)",
+    "affiliate_url": "https://aff.trypipedrive.com/mlquvdui44me",
+    "go_path": "/go/pipedrive",
+    "go_url": "https://aff.trypipedrive.com/mlquvdui44me",
+    "approved_date": "2026-10-30"
   },
   "monday": {
     "program_name": "monday.com Affiliate Program",

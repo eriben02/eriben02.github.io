@@ -251,12 +251,32 @@ render_page(
 # ---------------------------------------------------------
 # Page 4: Monday CRM vs Pipedrive vs HubSpot (3-Seat Minimum Math)
 # ---------------------------------------------------------
+# Pipedrive prices come from data/crm_pricing.json (annual billing, verified
+# on pipedrive.com/en/pricing). Tokens like __PD_GROWTH__ are filled below.
+with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data", "crm_pricing.json")) as _f:
+    _PD = json.load(_f)["pipedrive"]
+PD_LITE = _PD["plans"]["lite"]["annual"]
+PD_GROWTH = _PD["plans"]["growth"]["annual"]
+PD_LITE_LABEL = _PD["plans"]["lite"]["label"]
+PD_VERIFIED = _PD["plans"]["growth"]["verified_date"]
+_pd_month, _pd_day, _pd_year = __import__("datetime").date.fromisoformat(PD_VERIFIED).strftime("%b %d %Y").split()
+PD_VERIFIED_HUMAN = "%s %d, %s" % (_pd_month, int(_pd_day), _pd_year)
+
+
+def _fill_pd(text):
+    return (text.replace("__PD_LITE_LABEL__", PD_LITE_LABEL)
+                .replace("__PD_LITE__", str(PD_LITE))
+                .replace("__PD_GROWTH_3__", str(3 * PD_GROWTH))
+                .replace("__PD_GROWTH__", str(PD_GROWTH))
+                .replace("__PD_VERIFIED__", PD_VERIFIED_HUMAN))
+
+
 p4_body = """
 <section class="hero">
   <h1>Why a "$12/seat" CRM costs $36 a month for a solo founder.</h1>
   <p class="lead">monday CRM bills in fixed buckets starting at three seats, while Pipedrive and Close bill per actual user. Use the calculator below to see where the math flips.</p>
   <div class="geo-direct-answer">
-    <p><strong>The short version:</strong> For <strong>1 user</strong>, <strong>Pipedrive</strong> ($14/mo Basic or $34/mo Growth) is up to <strong>60% cheaper</strong> than <strong>monday CRM</strong> because monday CRM enforces a <strong>3-seat minimum</strong> ($36/mo Basic [$12/seat annual, $18/seat monthly] or $51/mo Standard [$17/seat annual, $25/seat monthly] minimum). For <strong>2 users</strong>, monday CRM still bills for 3 seats ($25.50/user/mo effective rate on Standard). At <strong>exactly 3, 5, or 10 users</strong>, however, monday CRM becomes the lowest-cost full-featured CRM at $51/mo (3 users) vs. $102/mo on Pipedrive Growth and $270/mo (+ $1,500 onboarding) on HubSpot Sales Pro.</p>
+    <p><strong>The short version:</strong> For <strong>1 user</strong>, <strong>Pipedrive</strong> ($__PD_LITE__/mo __PD_LITE_LABEL__ or $__PD_GROWTH__/mo Growth, billed annually) is up to <strong>60% cheaper</strong> than <strong>monday CRM</strong> because monday CRM enforces a <strong>3-seat minimum</strong> ($36/mo Basic [$12/seat annual, $18/seat monthly] or $51/mo Standard [$17/seat annual, $25/seat monthly] minimum). For <strong>2 users</strong>, monday CRM still bills for 3 seats ($25.50/user/mo effective rate on Standard). At <strong>exactly 3, 5, or 10 users</strong>, however, monday CRM becomes the lowest-cost full-featured CRM at $51/mo (3 users) vs. $__PD_GROWTH_3__/mo on Pipedrive Growth and $270/mo (+ $1,500 onboarding) on HubSpot Sales Pro.</p>
   </div>
 </section>
 
@@ -278,9 +298,10 @@ p4_body = """
   </div>
   <div id="sm-summary" class="summary-strip" aria-live="polite"></div>
   <p class="summary-interpretation"><strong>How to read this comparison:</strong> Lowest cost depends on whether your team size lands on a 1:1 seat count (1, 2, 4, 6&ndash;9 users) or cleanly matches monday CRM&rsquo;s 3, 5, 10, or 15-seat buckets.</p>
+  <p class="summary-interpretation"><a href="../close-vs-pipedrive-year-1-cost-calculator/" data-track="internal-audit">Comparing only Close and Pipedrive? Include calling costs &rarr;</a></p>
   <div class="table-wrap mobile-cards">
     <table>
-      <caption>Effective Per-User CRM Cost After Seat Minimums &amp; Seat Buckets (USD, verified Oct 25, 2026)</caption>
+      <caption>Effective Per-User CRM Cost After Seat Minimums &amp; Seat Buckets (USD, verified Oct 25, 2026; Pipedrive verified __PD_VERIFIED__)</caption>
       <thead>
         <tr>
           <th>CRM Platform</th>
@@ -318,7 +339,7 @@ function updateSmCalc() {
   const tier = document.getElementById('sm-tier').value;
   document.getElementById('sm-users-val').textContent = u;
   const monRate = tier === 'entry' ? 12 : 17;
-  const pipeRate = tier === 'entry' ? 14 : 34;
+  const pipeRate = tier === 'entry' ? __PD_LITE__ : __PD_GROWTH__;
   const closeRate = tier === 'entry' ? 35 : 99;
   const hsRate = tier === 'entry' ? 15 : 90;
   const hsOnboard = tier === 'entry' ? 0 : 1500;
@@ -403,7 +424,7 @@ function updateSmCalc() {
 
   document.getElementById('sm-tbody').innerHTML = `
     <tr>
-      <td data-label="CRM Platform"><strong>Pipedrive CRM</strong> <span class="status-pill status-verified">Verified</span><div class="source-inline">Source: <a href="https://www.pipedrive.com/en/pricing" target="_blank" rel="noopener">Pipedrive pricing &nearr;</a></div></td>
+      <td data-label="CRM Platform"><strong>Pipedrive CRM</strong> <span class="status-pill status-verified">Verified</span><div class="source-inline">Source: <a href="https://www.pipedrive.com/en/pricing" target="_blank" rel="noopener">Pipedrive pricing &nearr;</a> &middot; ${tier === 'entry' ? '__PD_LITE_LABEL__' : 'Growth'}, annual, verified __PD_VERIFIED__</div></td>
       <td data-label="Advertised Price" style="font-family:var(--sans); font-variant-numeric:tabular-nums;">$${pipeRate}/seat/mo</td>
       <td data-label="Billed Seats"><span class="badge badge-low">${u} seat(s) (exact 1:1)</span></td>
       <td data-label="Effective Cost / User" style="font-family:var(--sans); font-variant-numeric:tabular-nums;">$${pipeRate.toFixed(2)} / user / mo</td>
@@ -446,7 +467,7 @@ updateSmCalc();
 p4_faqs = [
     ("Can you buy 1 seat of monday CRM in 2026?", "No. monday CRM enforces a mandatory 3-seat minimum on all paid plans. If you are a solo user on the $12/seat Basic plan ($18/seat billed monthly) or $17/seat Standard plan ($25/seat billed monthly), you must pay for 3 seats ($36/month annual or $54/month monthly on Basic; $51/month annual or $75/month monthly on Standard)."),
     ("How do monday CRM seat buckets work when adding a 4th or 6th user?", "monday CRM bills in fixed seat buckets of 3, 5, 10, and 15 seats. If you have 4 active users, you must pay for the 5-seat bucket; if you have 6 active users, you must pay for the 10-seat bucket."),
-    ("Which CRM is best for a 1-person or 2-person sales team?", "Pipedrive ($14–$34/user/month) and Close CRM Essentials ($35/user/month billed annually, $49/user/month billed monthly; or Solo at $9/month for 1 user) bill strictly 1:1 per active user with $0 mandatory onboarding fees, making them significantly more cost-effective than monday CRM or HubSpot Professional for 1–2 users.")
+    ("Which CRM is best for a 1-person or 2-person sales team?", "Pipedrive ($" + str(PD_LITE) + "–$" + str(PD_GROWTH) + "/user/month billed annually, " + PD_LITE_LABEL + " to Growth) and Close CRM Essentials ($35/user/month billed annually, $49/user/month billed monthly; or Solo at $9/month for 1 user) bill strictly 1:1 per active user with $0 mandatory onboarding fees, making them significantly more cost-effective than monday CRM or HubSpot Professional for 1–2 users.")
 ]
 
 render_page(
@@ -454,7 +475,7 @@ render_page(
     "CRM True Year-1 Cost & Seat Minimums (2026) – saasbill.io",
     "Compare the 2026 true cost and Year-1 price of monday CRM (3-seat minimum & 5-seat buckets), Pipedrive, Close CRM, and HubSpot (with mandatory onboarding fees) for 1 to 15 users.",
     "/compare/monday-crm-vs-pipedrive-vs-hubspot-seat-minimums/",
-    wrap_calculator_shell(p4_body),
+    wrap_calculator_shell(_fill_pd(p4_body)),
     faqs=p4_faqs
 )
 
