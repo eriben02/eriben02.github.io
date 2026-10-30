@@ -30,7 +30,9 @@ function walkHtml(dir, out) {
     const full = path.join(dir, name);
     const stat = fs.statSync(full);
     if (stat.isDirectory()) {
-      if (name === "preview" || name === "saastruth" || name === "node_modules") continue;
+      // go/ holds the static affiliate redirect stubs (no analytics, noindex);
+      // tests/test_close_vs_pipedrive.py checks them.
+      if (name === "preview" || name === "saastruth" || name === "node_modules" || (name === "go" && dir === pub)) continue;
       walkHtml(full, out);
     } else if (name.endsWith(".html") && name !== "preview.html" && !/^google[0-9a-f]+\.html$/.test(name)) {
       out.push(full);

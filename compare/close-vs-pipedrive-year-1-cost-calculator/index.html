@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-site-verification" content="W7-m7km1_5pZZUG38dpallcgdGss6_Vl2qo5pjVoMdA" />
+  <!-- Bing Webmaster Tools verification: paste <meta name="msvalidate.01" content="YOUR_BING_CODE" /> here or use 1-click Google Search Console import (see BING_WEBMASTER_VERIFICATION.md) -->
+  <title>Close vs Pipedrive True Year-1 Cost (2026) – saasbill.io</title>
+  <meta name="description" content="Close vs Pipedrive Year-1 cost with calling included: seats, Close call minutes and numbers, or a third-party dialer for Pipedrive. Example: $2,760 vs $4,428 for 5 reps. Prices verified Oct 30, 2026." />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+  <meta property="og:site_name" content="SaaSBill" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Close vs Pipedrive True Year-1 Cost (2026) – saasbill.io" />
+  <meta property="og:description" content="Close vs Pipedrive Year-1 cost with calling included: seats, Close call minutes and numbers, or a third-party dialer for Pipedrive. Example: $2,760 vs $4,428 for 5 reps. Prices verified Oct 30, 2026." />
+  <meta property="og:url" content="https://saasbill.io/compare/close-vs-pipedrive-year-1-cost-calculator/" />
+  <meta property="og:updated_time" content="2026-10-30T08:45:27+01:00" />
+  <meta property="article:published_time" content="2026-10-30T00:00:00+01:00" />
+  <meta property="article:modified_time" content="2026-10-30T08:45:27+01:00" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Close vs Pipedrive True Year-1 Cost (2026) – saasbill.io" />
+  <meta name="twitter:description" content="Close vs Pipedrive Year-1 cost with calling included: seats, Close call minutes and numbers, or a third-party dialer for Pipedrive. Example: $2,760 vs $4,428 for 5 reps. Prices verified Oct 30, 2026." />
+  <meta name="last-modified" content="2026-10-30T08:45:27+01:00" />
+  <meta name="dcterms.modified" content="2026-10-30T08:45:27+01:00" />
+  <meta name="dcterms.issued" content="2026-10-30" />
+  <link rel="canonical" href="https://saasbill.io/compare/close-vs-pipedrive-year-1-cost-calculator/" />
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261030b" />
+  <link rel="alternate" type="text/plain" href="https://saasbill.io/llms.txt" title="SaaSBill LLMs.txt Summary" />
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script defer data-domain="saasbill.io" src="https://plausible.io/js/pa-VAaSVNs5XOobt9cv2UtKo.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init();
+    window.__saasbillEvents = window.__saasbillEvents || [];
+    window.trackSaaSBillEvent = function(eventName, props) {
+      var p = props || {};
+      var entry = { event: eventName, ts: Date.now() };
+      for (var k in p) {
+        if (Object.prototype.hasOwnProperty.call(p, k)) entry[k] = p[k];
+      }
+      window.__saasbillEvents.push(entry);
+      if (typeof window.plausible === 'function') {
+        window.plausible(eventName, { props: p });
+      }
+    };
+    window.trackEvent = window.trackSaaSBillEvent;
+
+    window.saasbillMoney = function (n) {
+      var v = Math.round(Number(n) || 0);
+      var sign = v < 0 ? '-' : '';
+      return sign + '$' + Math.abs(v).toLocaleString('en-US');
+    };
+    window.saasbillResultLine = function (hidden, sticker) {
+      var h = Math.round(Number(hidden) || 0);
+      var s = Math.round(Number(sticker) || 0);
+      if (h <= 0) return 'Matches advertised price ($0 hidden fees).';
+      var pct = s > 0 ? Math.round((h / s) * 100) : 0;
+      return '+' + window.saasbillMoney(h) + ' (+' + pct + '%) above advertised price.';
+    };
+    window.saasbillApplyWorkbench = function (opts) {
+      opts = opts || {};
+      var sticker = Math.max(0, Math.round(Number(opts.sticker) || 0));
+      var seats = Math.max(0, Math.round(Number(opts.seats) || 0));
+      var hidden = Math.max(0, Math.round(Number(opts.hidden) || 0));
+      var total = Math.round(Number(opts.total));
+      if (!isFinite(total)) total = sticker + seats + hidden;
+      var parts = Math.max(1, sticker + seats + hidden);
+      function node(id) { return document.getElementById(id); }
+      function setText(id, value) {
+        var el = node(id);
+        if (el) el.textContent = value;
+      }
+      function setFlex(id, amount) {
+        var el = node(id);
+        if (!el) return;
+        var share = amount <= 0 ? 8 : (amount / parts) * 100;
+        el.style.flex = share + ' 1 0px';
+      }
+      setText('shell-product', opts.product || '');
+      setText('shell-big', window.saasbillMoney(total));
+      setText('shell-quote', 'True Year-1 cost');
+      setText('shell-sub', window.saasbillResultLine(hidden, sticker + seats));
+      setText('shell-amt-base', window.saasbillMoney(sticker));
+      setText('shell-amt-seats', window.saasbillMoney(seats));
+      setText('shell-amt-hidden', window.saasbillMoney(hidden));
+      setText('shell-title-base', 'Sticker Price');
+      setText('shell-title-seats', opts.seatsTitle || 'Other sticker fees');
+      setText('shell-title-hidden', 'Hidden Cost Gap');
+      setText('shell-sub-base', opts.baseLabel || 'Advertised price');
+      setText('shell-sub-seats', opts.seatsLabel || 'Included in the sticker');
+      setText('shell-sub-hidden', opts.hiddenLabel || 'Fees above the advertised price');
+      setFlex('shell-row-base', sticker);
+      setFlex('shell-row-seats', seats);
+      setFlex('shell-row-hidden', hidden);
+      var seatsRow = node('shell-row-seats');
+      if (seatsRow) seatsRow.style.display = seats <= 0 ? 'none' : '';
+      var math = node('shell-math');
+      if (math && opts.mathHtml) math.innerHTML = opts.mathHtml;
+      var best = node('shell-best');
+      if (best && opts.bestHtml) best.innerHTML = opts.bestHtml;
+      var cta = node('shell-cta');
+      if (cta && opts.ctaHref) {
+        cta.href = opts.ctaHref;
+        var label = opts.ctaLabel || 'See pricing';
+        cta.textContent = /→\s*$/.test(label) ? label : label + ' \u2192';
+        if (opts.ctaVendor) cta.setAttribute('data-vendor', opts.ctaVendor);
+      }
+      setText('shell-sticker', window.saasbillMoney(sticker + seats));
+      setText('shell-gap', hidden > 0 ? '+' + window.saasbillMoney(hidden) : '$0');
+      if (opts.product) setText('shell-sticker-note', opts.product);
+    };
+
+  </script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "TechArticle", "@id": "https://saasbill.io/compare/close-vs-pipedrive-year-1-cost-calculator/#article", "headline": "Close vs Pipedrive True Year-1 Cost (2026) \u2013 saasbill.io", "description": "Close vs Pipedrive Year-1 cost with calling included: seats, Close call minutes and numbers, or a third-party dialer for Pipedrive. Example: $2,760 vs $4,428 for 5 reps. Prices verified Oct 30, 2026.", "datePublished": "2026-10-30", "dateModified": "2026-10-30T08:45:27+01:00", "author": {"@type": "Organization", "name": "SaaSBill Editorial", "url": "https://saasbill.io/"}, "publisher": {"@type": "Organization", "name": "SaaSBill", "url": "https://saasbill.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://saasbill.io/compare/close-vs-pipedrive-year-1-cost-calculator/"}}, {"@type": "WebPage", "@id": "https://saasbill.io/compare/close-vs-pipedrive-year-1-cost-calculator/", "url": "https://saasbill.io/compare/close-vs-pipedrive-year-1-cost-calculator/", "name": "Close vs Pipedrive True Year-1 Cost (2026) \u2013 saasbill.io", "description": "Close vs Pipedrive Year-1 cost with calling included: seats, Close call minutes and numbers, or a third-party dialer for Pipedrive. Example: $2,760 vs $4,428 for 5 reps. Prices verified Oct 30, 2026.", "inLanguage": "en-US", "datePublished": "2026-10-30", "dateModified": "2026-10-30T08:45:27+01:00", "lastReviewed": "2026-10-30", "reviewedBy": {"@type": "Organization", "name": "SaaSBill Editorial"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "SaaSBill", "item": "https://saasbill.io/"}, {"@type": "ListItem", "position": 2, "name": "Close vs Pipedrive True Year-1 Cost (2026) \u2013 saasbill.io", "item": "https://saasbill.io/compare/close-vs-pipedrive-year-1-cost-calculator/"}]}, {"@type": "FAQPage", "@id": "https://saasbill.io/compare/close-vs-pipedrive-year-1-cost-calculator/#faq", "datePublished": "2026-10-30", "dateModified": "2026-10-30T08:45:27+01:00", "mainEntity": [{"@type": "Question", "name": "Is Close or Pipedrive cheaper for a team that makes calls?", "dateCreated": "2026-10-30", "dateModified": "2026-10-30T08:45:27+01:00", "acceptedAnswer": {"@type": "Answer", "text": "It depends on plan needs and call volume. For 5 reps on annual billing with email tracking, click-to-call and 500 billed minutes per rep per month (an example assumption), Close Essentials comes to $2,760 and Pipedrive Growth + Aircall Essentials to $4,428 in Year 1. With sequences, a power dialer and 1,000 minutes, Close Growth comes to $7,200 and Pipedrive Growth + Aircall Professional to $5,628.", "dateCreated": "2026-10-30", "dateModified": "2026-10-30T08:45:27+01:00"}}, {"@type": "Question", "name": "Does Pipedrive have a built-in dialer?", "dateCreated": "2026-10-30", "dateModified": "2026-10-30T08:45:27+01:00", "acceptedAnswer": {"@type": "Answer", "text": "No. Pipedrive's help center says it doesn't have a built-in calling integration and that calls are made through a calling app from its Marketplace, such as Aircall, CloudTalk, Kixie, JustCall or CallHippo. This calculator prices Aircall as the reference dialer: Essentials at $30 and Professional at $50 per license per month billed annually, with a minimum of 3 licenses.", "dateCreated": "2026-10-30", "dateModified": "2026-10-30T08:45:27+01:00"}}, {"@type": "Question", "name": "How much do calls cost in Close?", "dateCreated": "2026-10-30", "dateModified": "2026-10-30T08:45:27+01:00", "acceptedAnswer": {"@type": "Answer", "text": "Close says most outbound calls cost around $0.02 per minute, varying by country and number type. Each call is rounded up to the next full minute, so billed minutes are at least your talk time. Phone numbers start at about $1 per month.", "dateCreated": "2026-10-30", "dateModified": "2026-10-30T08:45:27+01:00"}}, {"@type": "Question", "name": "Do Close or Pipedrive have a seat minimum?", "dateCreated": "2026-10-30", "dateModified": "2026-10-30T08:45:27+01:00", "acceptedAnswer": {"@type": "Answer", "text": "Neither states a seat minimum, and Close Solo is limited to 1 user. Pipedrive charges per seat whether the seat is assigned to a user or not. The Aircall dialer requires at least 3 licenses, so a 1-rep Pipedrive team pays for 3.", "dateCreated": "2026-10-30", "dateModified": "2026-10-30T08:45:27+01:00"}}, {"@type": "Question", "name": "Annual vs monthly billing: how much do you save?", "dateCreated": "2026-10-30", "dateModified": "2026-10-30T08:45:27+01:00", "acceptedAnswer": {"@type": "Answer", "text": "On Close, annual billing saves 7% to 53% depending on the plan (Scale $139 vs $149 per seat per month; Solo $9 vs $19). Pipedrive's pricing page says annual billing saves up to 42%. Pipedrive's monthly prices are not verified here, so monthly totals for Pipedrive are shown as a minimum and marked unverified.", "dateCreated": "2026-10-30", "dateModified": "2026-10-30T08:45:27+01:00"}}, {"@type": "Question", "name": "When is Pipedrive Premium cheaper than Growth + LeadBooster?", "dateCreated": "2026-10-30", "dateModified": "2026-10-30T08:45:27+01:00", "acceptedAnswer": {"@type": "Answer", "text": "Only at 1 seat on annual billing: Premium costs $708 a year and Growth + LeadBooster $858. At 2 seats Growth + LeadBooster is lower ($1,326 vs $1,416), because LeadBooster is priced per company (from $32.50 per month) while Premium adds $20 per seat per month.", "dateCreated": "2026-10-30", "dateModified": "2026-10-30T08:45:27+01:00"}}, {"@type": "Question", "name": "Which Close plan includes the power dialer?", "dateCreated": "2026-10-30", "dateModified": "2026-10-30T08:45:27+01:00", "acceptedAnswer": {"@type": "Answer", "text": "Growth and Scale ($99 and $139 per seat per month billed annually). The predictive dialer is Scale only.", "dateCreated": "2026-10-30", "dateModified": "2026-10-30T08:45:27+01:00"}}, {"@type": "Question", "name": "Are prices in USD and do they include VAT?", "dateCreated": "2026-10-30", "dateModified": "2026-10-30T08:45:27+01:00", "acceptedAnswer": {"@type": "Answer", "text": "All prices are in USD from the vendors' US pricing pages. Pipedrive states its prices are VAT exclusive. Close's VAT treatment is unknown here. Pipedrive may show localized prices outside the US.", "dateCreated": "2026-10-30", "dateModified": "2026-10-30T08:45:27+01:00"}}]}]}</script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-inner">
+      <div class="brand-wrap">
+        <a href="../../index.html" class="brand">SaaSBill<span>.io</span></a>
+        <span class="brand-tagline">Year-1 software cost &amp; contract calculators</span>
+      </div>
+      <nav class="nav-links" aria-label="Primary Navigation">
+        <a href="../../index.html#all-calculators">Audits &amp; Guides</a>
+        <a href="../../index.html#methodology">Methodology</a>
+        <span class="byline-bar">Updated <time datetime="2026-10-30" itemprop="dateModified">Oct 30, 2026</time></span>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+    <article itemscope itemtype="https://schema.org/TechArticle">
+      <meta itemprop="datePublished" content="2026-10-30" />
+      <meta itemprop="dateModified" content="2026-10-30T08:45:27+01:00" />
+      
+<section class="hero editorial-hero editorial-hero-wrap">
+  <h1>Close vs Pipedrive (2026): True Year-1 Cost for Your Sales Team, Calling Included</h1>
+  <p class="lead">Pipedrive has no built-in calling, so a team that calls from its CRM also pays for a dialer. For 5 reps, Close Essentials comes to $2,760 in Year 1 and Pipedrive Growth + Aircall to $4,428 (example: 500 billed min/rep/mo).</p>
+  <p class="calc-affiliate-disclosure">SaaSBill may earn a commission if you sign up via these links. It does not change the calculation; both vendors get the same button.</p>
+</section>
+
+
+<div class="unified-inspector-tray">
+<section class="calc-box editorial-workbench" aria-label="True cost calculator">
+  <div class="workbench-grid wb-fill-chart">
+    <div class="wb-col-controls">
+      <div class="wb-col-title">Estimate Your True Cost</div>
+      <div class="wb-controls-stack">
+        
+        <div class="wb-control-item">
+          <label class="wb-control-label" for="cp-view">Platform to inspect</label>
+          <select id="cp-view" class="wb-tool-select" data-track="calculator-control" data-control="cp-view">
+            <option value="close" selected>Close</option>
+            <option value="pipedrive">Pipedrive</option>
+          </select>
+        </div>
+        <div class="wb-control-item">
+          <label class="wb-control-label" for="cp-users">Sales reps (seats)</label>
+          <div class="wb-slider-row cp-slider-row">
+            <input type="range" id="cp-users" min="1" max="50" step="1" value="5" aria-label="Sales reps who need a CRM seat" data-track="calculator-control" data-control="cp-users" />
+            <input type="number" class="wb-slider-val cp-num" id="cp-users-num" min="1" max="50" step="1" value="5" inputmode="numeric" aria-label="Sales reps (number)" data-track="calculator-control" data-control="cp-users" />
+          </div>
+        </div>
+        <fieldset class="wb-control-item cp-checks">
+          <legend class="wb-control-label">Your team needs</legend>
+          <label class="cp-check"><input type="checkbox" id="cp-email" checked data-track="calculator-control" data-control="cp-email" /><span>Email open tracking</span></label>
+          <label class="cp-check"><input type="checkbox" id="cp-sequences" data-track="calculator-control" data-control="cp-sequences" /><span>Follow-up sequences</span></label>
+          <label class="cp-check"><input type="checkbox" id="cp-leadcapture" data-track="calculator-control" data-control="cp-leadcapture" /><span>Website lead capture</span></label>
+        </fieldset>
+        <div class="wb-control-item">
+          <label class="wb-control-label" for="cp-calling">How reps call</label>
+          <select id="cp-calling" class="wb-tool-select" data-track="calculator-control" data-control="cp-calling">
+            <option value="none">No calling in the CRM</option>
+            <option value="click" selected>Click-to-call</option>
+            <option value="power">Power dialer</option>
+          </select>
+        </div>
+        <div class="wb-control-item" id="cp-minutes-wrap">
+          <label class="wb-control-label" for="cp-minutes">Billed minutes / rep / month</label>
+          <div class="wb-slider-row cp-slider-row">
+            <input type="range" id="cp-minutes" min="0" max="3000" step="50" value="500" aria-label="Billed call minutes per rep per month" data-track="calculator-control" data-control="cp-minutes" />
+            <input type="number" class="wb-slider-val cp-num" id="cp-minutes-num" min="0" max="3000" step="50" value="500" inputmode="numeric" aria-label="Billed call minutes (number)" data-track="calculator-control" data-control="cp-minutes" />
+          </div>
+          <p class="cp-hint">500 is an example assumption.</p>
+          <label class="cp-check"><input type="checkbox" id="cp-exclude-dialer" data-track="calculator-control" data-control="cp-exclude-dialer" /><span>Already have a dialer (exclude it)</span></label>
+        </div>
+        <div class="wb-quiet-options">
+          <div class="wb-quiet-field">
+            <label for="cp-billing">Billing:</label>
+            <select id="cp-billing" data-track="calculator-control" data-control="cp-billing">
+              <option value="annual" selected>Annual</option>
+              <option value="monthly">Monthly</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="wb-col-chart">
+      <div class="wb-col-title">Your Estimated True Cost</div>
+      <div class="wb-vbar-container" aria-live="polite">
+        <div class="wb-vbar-row" id="shell-row-base" style="flex: 40 1 0px;">
+          <div class="wb-vbar-block block-base"><span class="wb-block-amount" id="shell-amt-base">$0</span></div>
+          <div class="wb-callout-item"><div class="wb-leader-line"></div><div class="wb-callout-text"><strong id="shell-title-base">Sticker Price</strong><span id="shell-sub-base">Advertised price</span></div></div>
+        </div>
+        <div class="wb-vbar-row" id="shell-row-seats" style="flex: 8 1 0px;">
+          <div class="wb-vbar-block block-seats"><span class="wb-block-amount" id="shell-amt-seats">$0</span></div>
+          <div class="wb-callout-item"><div class="wb-leader-line"></div><div class="wb-callout-text"><strong id="shell-title-seats">Other sticker fees</strong><span id="shell-sub-seats">Included in the sticker</span></div></div>
+        </div>
+        <div class="wb-vbar-row" id="shell-row-hidden" style="flex: 52 1 0px;">
+          <div class="wb-vbar-block block-hidden"><span class="wb-block-amount" id="shell-amt-hidden">$0</span></div>
+          <div class="wb-callout-item"><div class="wb-leader-line"></div><div class="wb-callout-text"><strong id="shell-title-hidden">Hidden Cost Gap</strong><span id="shell-sub-hidden">Fees above the advertised price</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="wb-result-col" id="shell-result">
+      <div class="wb-selected-product" id="shell-product">Year-1 total</div>
+      <div class="wb-big-total"><span id="shell-big">$0</span> <span class="wb-per-year">/ year</span></div>
+      <details class="math-drawer" id="shell-calc">
+        <summary>Show calculation</summary>
+        <div class="math-drawer-body" id="shell-math"></div>
+      </details>
+      <p class="wb-budget-quote" id="shell-quote">True Year-1 cost</p>
+      <p class="wb-budget-subnote" id="shell-sub">Matches advertised price ($0 hidden fees).</p>
+      <div class="wb-best-option" id="shell-best"><strong>Lowest Year-1 cost:</strong> Close Essentials ($2,760/yr) &middot; $1,668/yr less than Pipedrive</div>
+      <div class="cta-stack">
+        <a id="shell-cta" target="_blank" rel="sponsored nofollow noopener" class="btn-cta wb-primary-cta" href="/go/close" data-track="vendor-cta" data-vendor="close-crm" data-cta-location="workbench">Try Close (14-day trial) &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+<section class="verdict-section" aria-label="Year-1 cost summary">
+  <p class="summary-scenario summary-shared-scenario" id="cp-scenario">Based on 5 reps &middot; annual billing &middot; email tracking &middot; click-to-call &middot; 500 billed min/rep/mo (example assumption)</p>
+  <div class="summary-strip" id="cp-cards" aria-live="polite"><div class="summary-card result-card card-lowest" data-cp-card="lowest"><div class="summary-label">Lowest Year-1 cost</div><div class="summary-metric" style="color:var(--emerald);">Close</div><details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body"><div class="calc-math-list"><div class="calc-math-row"><span class="calc-math-label"><strong>Close Essentials seats</strong><span class="calc-math-formula">5 &times; $35 &times; 12</span></span><span class="calc-math-val">$2,100</span></div><div class="calc-math-row"><span class="calc-math-label"><strong>Close call minutes</strong><span class="calc-math-formula">5 &times; 500 min &times; 12 &times; $0.02 (approx.)</span></span><span class="calc-math-val">$600</span></div><div class="calc-math-row"><span class="calc-math-label"><strong>Close phone numbers</strong><span class="calc-math-formula">5 &times; $1 &times; 12 (from)</span></span><span class="calc-math-val">$60</span></div><div class="calc-math-row"><span class="calc-math-label"><strong>Close Year-1 total</strong><span class="calc-math-formula">seats + minutes + numbers</span></span><span class="calc-math-val">$2,760</span></div><div class="calc-math-row"><span class="calc-math-label"><strong>Pipedrive Growth seats</strong><span class="calc-math-formula">5 &times; $39 &times; 12</span></span><span class="calc-math-val">$2,340</span></div><div class="calc-math-row"><span class="calc-math-label"><strong>Aircall Essentials licenses</strong><span class="calc-math-formula">5 (min 3) &times; $30 &times; 12</span></span><span class="calc-math-val">$1,800</span></div><div class="calc-math-row"><span class="calc-math-label"><strong>Aircall extra numbers</strong><span class="calc-math-formula">4 &times; $6 &times; 12</span></span><span class="calc-math-val">$288</span></div><div class="calc-math-row"><span class="calc-math-label"><strong>Pipedrive Year-1 total</strong><span class="calc-math-formula">seats + add-ons + dialer</span></span><span class="calc-math-val">$4,428</span></div></div></div></details><div class="summary-driver">$1,668/yr less than Pipedrive</div><div class="summary-scenario">Prices verified Oct 30, 2026</div><div class="summary-actions"><a class="summary-audit-link" href="#cp-compare-heading" data-track="internal-audit">Compare side by side &darr;</a></div></div><div class="summary-card result-card" data-cp-card="close"><div class="summary-label">Close Year-1 cost</div><div class="summary-metric">$2,760 / yr</div><details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body"><div class="summary-scenario">Close Essentials: Email open tracking is Essentials and up.</div><div class="calc-math-list"><div class="calc-math-row"><span class="calc-math-label"><strong>Close Essentials seats</strong><span class="calc-math-formula">5 &times; $35 &times; 12</span></span><span class="calc-math-val">$2,100</span></div><div class="calc-math-row"><span class="calc-math-label"><strong>Close call minutes</strong><span class="calc-math-formula">5 &times; 500 min &times; 12 &times; $0.02 (approx.)</span></span><span class="calc-math-val">$600</span></div><div class="calc-math-row"><span class="calc-math-label"><strong>Close phone numbers</strong><span class="calc-math-formula">5 &times; $1 &times; 12 (from)</span></span><span class="calc-math-val">$60</span></div><div class="calc-math-row"><span class="calc-math-label"><strong>Close Year-1 total</strong><span class="calc-math-formula">seats + minutes + numbers</span></span><span class="calc-math-val">$2,760</span></div></div></div></details><div class="summary-driver">Close Essentials</div><div class="summary-scenario">Calling built in: $660/yr usage</div><div class="summary-actions"><div class="cta-stack"><a class="btn-secondary" href="/go/close" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="close-crm" data-cta-location="summary-card">Try Close (14-day trial) &rarr;</a></div></div></div><div class="summary-card result-card" data-cp-card="pipedrive"><div class="summary-label">Pipedrive Year-1 cost</div><div class="summary-metric">$4,428 / yr</div><details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body"><div class="summary-scenario">Pipedrive Growth + Aircall Essentials: Email sync with tracking is Growth and up.</div><div class="calc-math-list"><div class="calc-math-row"><span class="calc-math-label"><strong>Pipedrive Growth seats</strong><span class="calc-math-formula">5 &times; $39 &times; 12</span></span><span class="calc-math-val">$2,340</span></div><div class="calc-math-row"><span class="calc-math-label"><strong>Aircall Essentials licenses</strong><span class="calc-math-formula">5 (min 3) &times; $30 &times; 12</span></span><span class="calc-math-val">$1,800</span></div><div class="calc-math-row"><span class="calc-math-label"><strong>Aircall extra numbers</strong><span class="calc-math-formula">4 &times; $6 &times; 12</span></span><span class="calc-math-val">$288</span></div><div class="calc-math-row"><span class="calc-math-label"><strong>Pipedrive Year-1 total</strong><span class="calc-math-formula">seats + add-ons + dialer</span></span><span class="calc-math-val">$4,428</span></div></div></div></details><div class="summary-driver">Pipedrive Growth + Aircall Essentials</div><div class="summary-scenario">Aircall dialer: $2,088/yr</div><div class="summary-actions"><div class="cta-stack"><a class="btn-secondary" href="/go/pipedrive" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="pipedrive-crm" data-cta-location="summary-card">Try Pipedrive (14-day trial) &rarr;</a></div></div></div></div>
+</section>
+
+
+<section aria-labelledby="cp-compare-heading" class="cp-compare">
+  <h2 id="cp-compare-heading">Side by side for your inputs</h2>
+  <div class="table-wrap editorial-gap-table mobile-cards cp-table">
+    <table>
+      <thead>
+        <tr>
+          <th>Platform</th><th>Plan chosen</th><th>Seats &amp; add-ons</th><th>Calling / dialer</th><th>True Year-1 cost</th><th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="cp-tbody"><tr><td data-label="Platform"><strong>Close</strong><br><span class="status-pill status-verified">Verified</span> &middot; <a href="https://www.close.com/pricing" target="_blank" rel="noopener" class="source-link">close.com/pricing</a><div class="cp-verified">Verified Oct 30, 2026</div></td><td data-label="Plan chosen">Essentials &middot; $35/seat/mo<div class="cp-verified">Email open tracking is Essentials and up</div></td><td data-label="Seats &amp; add-ons">5 seats: $2,100</td><td data-label="Calling / dialer">Built in: $600 minutes + $60 numbers</td><td data-label="Year-1 total"><strong>$2,760</strong><div class="cp-verified">$46 per rep / month</div></td><td data-label="Action"><a class="btn-secondary" href="/go/close" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="close-crm" data-cta-location="comparison-table">Try Close (14-day trial) &rarr;</a></td></tr><tr><td data-label="Platform"><strong>Pipedrive</strong><br><span class="status-pill status-verified">Verified</span> &middot; <a href="https://www.pipedrive.com/en/pricing" target="_blank" rel="noopener" class="source-link">pipedrive.com/pricing</a><div class="cp-verified">Verified Oct 30, 2026</div></td><td data-label="Plan chosen">Growth &middot; $39/seat/mo<div class="cp-verified">Email sync with tracking is Growth and up</div></td><td data-label="Seats &amp; add-ons">5 seats: $2,340</td><td data-label="Calling / dialer">Aircall Essentials: $1,800 (5 licenses) + $288 (4 extra numbers)</td><td data-label="Year-1 total"><strong>$4,428</strong><div class="cp-verified">$74 per rep / month</div></td><td data-label="Action"><a class="btn-secondary" href="/go/pipedrive" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="pipedrive-crm" data-cta-location="comparison-table">Try Pipedrive (14-day trial) &rarr;</a></td></tr></tbody>
+    </table>
+  </div>
+  <p class="cp-fineprint">Prices last verified: <time datetime="2026-10-30">Oct 30, 2026</time> &middot; USD, excl. VAT &middot; Aircall is a reference dialer, not an affiliate.</p>
+</section>
+
+<section class="editorial-below-section cp-below">
+  <details class="full-table-disclosure below-disclosure">
+    <summary class="full-table-summary">
+      <span class="below-disclosure-title">What is not like-for-like</span>
+      <span class="full-table-toggle-pill" aria-hidden="true">&darr;</span>
+    </summary>
+    <div class="full-table-body">
+      <ul class="cp-list">
+        <li>Close Forms (all plans) is a form builder. Pipedrive LeadBooster adds chatbot, live chat and Prospector, so lead capture is not the same product on both sides.</li>
+        <li>The Close power dialer is built in on Growth and Scale. Pipedrive needs a Marketplace app; this page prices Aircall Professional, the Aircall plan with a power dialer.</li>
+        <li>Close Solo does not include email open tracking, so email tracking moves Close to Essentials.</li>
+        <li>Aircall outbound calls are unlimited in US and Canada (terms apply). Close bills call minutes on top of seats.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="full-table-disclosure below-disclosure">
+    <summary class="full-table-summary">
+      <span class="below-disclosure-title">Assumptions</span>
+      <span class="full-table-toggle-pill" aria-hidden="true">&darr;</span>
+    </summary>
+    <div class="full-table-body">
+      <ul class="cp-list">
+        <li>USD, excluding VAT. Year 1 = 12 months at the selected billing.</li>
+        <li>One phone number per rep, on both sides.</li>
+        <li>$0.02 per minute is Close's approximate rate for most outbound calls; it varies by country. Each call is rounded up to the next full minute, so billed minutes are at least talk time.</li>
+        <li>500 billed minutes per rep per month is an example assumption. Set your own.</li>
+        <li>Aircall is the only priced dialer, chosen because its prices are published (other Marketplace dialers are not priced here). Aircall requires at least 3 licenses and includes 1 number; extra numbers are $6 per month.</li>
+        <li>No discounts. Close offers a discount for 10+ seats on 12+ month terms, but the amount is not published.</li>
+        <li>Pipedrive monthly prices, the LeadBooster monthly price and Aircall monthly prices are not verified. Totals that need them are shown as a minimum (&ge;) with an unverified label, never as $0.</li>
+        <li>Pipedrive may show localized prices outside the US.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="full-table-disclosure below-disclosure">
+    <summary class="full-table-summary">
+      <span class="below-disclosure-title">Optional add-ons not in the total</span>
+      <span class="full-table-toggle-pill" aria-hidden="true">&darr;</span>
+    </summary>
+    <div class="full-table-body">
+      <ul class="cp-list">
+        <li>Close Call Assistant: $50 per month per billing account + $0.02 per transcribed minute.</li>
+        <li>Close extra organization: $50 per month. Close SMS: price per unit unknown.</li>
+        <li>Pipedrive Campaigns from $13.33, Web Visitors from $41, Projects from $16, Smart Docs from $32.50 per month. Price basis (per company or per seat) unknown; Projects and Smart Docs are included in Premium and Ultimate.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="full-table-disclosure below-disclosure" id="cp-sources">
+    <summary class="full-table-summary">
+      <span class="below-disclosure-title">Sources &amp; last verified</span>
+      <span class="full-table-toggle-pill" aria-hidden="true">&darr;</span>
+    </summary>
+    <div class="full-table-body">
+      <div class="table-wrap mobile-cards">
+        <table>
+          <thead><tr><th>Source</th><th>What was checked</th><th>Verified</th><th>Status</th></tr></thead>
+          <tbody><tr><td data-label="Source"><a href="https://www.close.com/pricing" target="_blank" rel="noopener">www.close.com/pricing</a></td><td data-label="What">Close plans per seat per month: Solo $9 annual / $19 monthly, Essentials $35 annual / $49 monthly, Growth $99 annual / $109 monthly, Scale $139 annual / $149 monthly. Features by plan, ~$0.02/min calls, numbers from ~$1/mo, Call Assistant, extra org.</td><td data-label="Verified"><time datetime="2026-10-30">Oct 30, 2026</time></td><td data-label="Status"><span class="status-pill status-verified">verified</span></td></tr><tr><td data-label="Source"><a href="https://help.close.com/account-management/variable-usage-costs-calling-sms-phone-numbers-ai-tools" target="_blank" rel="noopener">help.close.com/account-management/variable-usage-costs-calling-sms-phone-numbers-ai-tools</a></td><td data-label="What">Close call rounding: per call, up to the next full minute. SMS price per unit: unknown.</td><td data-label="Verified"><time datetime="2026-10-30">Oct 30, 2026</time></td><td data-label="Status"><span class="status-pill status-verified">verified</span></td></tr><tr><td data-label="Source"><a href="https://help.close.com/account-management/plans-and-billing" target="_blank" rel="noopener">help.close.com/account-management/plans-and-billing</a></td><td data-label="What">Close discount for 10+ seats and 12+ months exists; amount not stated.</td><td data-label="Verified"><time datetime="2026-10-30">Oct 30, 2026</time></td><td data-label="Status"><span class="status-pill status-unknown">unknown</span></td></tr><tr><td data-label="Source"><a href="https://www.pipedrive.com/en/pricing" target="_blank" rel="noopener">www.pipedrive.com/en/pricing</a></td><td data-label="What">Pipedrive plans per seat per month billed annually: Lite $14, Growth $39, Premium $59, Ultimate $79. VAT exclusive. 14-day trial.</td><td data-label="Verified"><time datetime="2026-10-30">Oct 30, 2026</time></td><td data-label="Status"><span class="status-pill status-verified">verified</span></td></tr><tr><td data-label="Source"><a href="https://www.pipedrive.com/en/pricing" target="_blank" rel="noopener">www.pipedrive.com/en/pricing</a></td><td data-label="What">Pipedrive monthly prices: not verified on the vendor page, not used in totals.</td><td data-label="Verified"><time datetime="2026-10-30">Oct 30, 2026</time></td><td data-label="Status"><span class="status-pill status-unknown">unverified</span></td></tr><tr><td data-label="Source"><a href="https://www.pipedrive.com/en/features/leadbooster" target="_blank" rel="noopener">www.pipedrive.com/en/features/leadbooster</a></td><td data-label="What">LeadBooster from $32.50 per month per company (annual). Monthly price unknown.</td><td data-label="Verified"><time datetime="2026-10-30">Oct 30, 2026</time></td><td data-label="Status"><span class="status-pill status-verified">verified</span></td></tr><tr><td data-label="Source"><a href="https://support.pipedrive.com/en/article/how-does-pricing-work-in-pipedrive" target="_blank" rel="noopener">support.pipedrive.com/en/article/how-does-pricing-work-in-pipedrive</a></td><td data-label="What">LeadBooster, Projects and Smart Docs included in Premium and Ultimate. Seats charged whether assigned or not.</td><td data-label="Verified"><time datetime="2026-10-30">Oct 30, 2026</time></td><td data-label="Status"><span class="status-pill status-verified">verified</span></td></tr><tr><td data-label="Source"><a href="https://support.pipedrive.com/en/article/how-can-i-make-calls-in-pipedrive" target="_blank" rel="noopener">support.pipedrive.com/en/article/how-can-i-make-calls-in-pipedrive</a></td><td data-label="What">Pipedrive has no built-in calling; calls via Marketplace apps.</td><td data-label="Verified"><time datetime="2026-10-30">Oct 30, 2026</time></td><td data-label="Status"><span class="status-pill status-verified">verified</span></td></tr><tr><td data-label="Source"><a href="https://aircall.io/pricing/" target="_blank" rel="noopener">aircall.io/pricing</a></td><td data-label="What">Aircall (reference dialer, not an affiliate): Essentials $30, Professional $50 per license per month billed annually, minimum 3 licenses, 1 number included, extra numbers $6/mo. Monthly prices unknown.</td><td data-label="Verified"><time datetime="2026-10-30">Oct 30, 2026</time></td><td data-label="Status"><span class="status-pill status-verified">verified</span></td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </details>
+
+  <p class="summary-interpretation"><a href="../monday-crm-vs-pipedrive-vs-hubspot-seat-minimums/" data-track="internal-audit">Seat buckets instead? monday CRM vs Pipedrive vs HubSpot &rarr;</a></p>
+</section>
+
+<script>
+const CP_DATA = {"allowSecondary":false,"numbersPerRep":1,"defaultMinutes":500,"close":{"plans":{"solo":{"label":"Solo","annual":9,"monthly":19},"essentials":{"label":"Essentials","annual":35,"monthly":49},"growth":{"label":"Growth","annual":99,"monthly":109},"scale":{"label":"Scale","annual":139,"monthly":149}},"callPerMin":0.02,"numberPerMonth":1,"sourceUrl":"https://www.close.com/pricing","verified":"Oct 30, 2026","ctaLabel":"Try Close (14-day trial)"},"pipedrive":{"plans":{"lite":{"label":"Lite","annual":14,"monthly":null},"growth":{"label":"Growth","annual":39,"monthly":null},"premium":{"label":"Premium","annual":59,"monthly":null},"ultimate":{"label":"Ultimate","annual":79,"monthly":null}},"leadbooster":{"annual":32.5,"monthly":null},"sourceUrl":"https://www.pipedrive.com/en/pricing","verified":"Oct 30, 2026","ctaLabel":"Try Pipedrive (14-day trial)"},"aircall":{"essentials":{"label":"Essentials","annual":30,"monthly":null},"professional":{"label":"Professional","annual":50,"monthly":null},"minLicenses":3,"extraNumber":6,"includedNumbers":1}};
+// Close vs Pipedrive Year-1 math and HTML renderers.
+// Pure functions: the browser runs them on every input change, and
+// scripts/build_close_vs_pipedrive.py runs them in Node to prerender the
+// default scenario. CP_DATA is injected from data/crm_pricing.json.
+// A null price means "unknown/unverified": the term becomes null and is
+// never counted as $0. Totals with a null term are shown as ">= known part".
+
+function calcCloseVsPipedrive(input) {
+  var D = CP_DATA;
+  input = input || {};
+  function num(v, lo, hi) {
+    var n = Math.round(Number(v));
+    if (!isFinite(n)) n = lo;
+    return Math.min(hi, Math.max(lo, n));
+  }
+  function cents(v) { return Math.round(v * 100) / 100; }
+  function add(list) {
+    var sum = 0;
+    for (var i = 0; i < list.length; i++) {
+      if (list[i] === null) return null;
+      sum += list[i];
+    }
+    return cents(sum);
+  }
+  function known(list) {
+    var sum = 0;
+    for (var i = 0; i < list.length; i++) if (list[i] !== null) sum += list[i];
+    return cents(sum);
+  }
+  var seats = num(input.users, 1, 50);
+  var billing = input.billing === 'monthly' ? 'monthly' : 'annual';
+  var calling = (input.calling === 'none' || input.calling === 'power') ? input.calling : 'click';
+  var minutes = calling === 'none' ? 0 : num(input.minutes, 0, 3000);
+  var email = !!input.email;
+  var sequences = !!input.sequences;
+  var leadcapture = !!input.leadcapture;
+  var excludeDialer = !!input.excludeDialer;
+  var unknown = [];
+  function flag(key) { if (unknown.indexOf(key) === -1) unknown.push(key); }
+
+  // Close: cheapest plan that covers the needs.
+  var cPlan = (calling === 'power' || sequences) ? 'growth' : ((seats === 1 && !email) ? 'solo' : 'essentials');
+  var cRate = D.close.plans[cPlan][billing];
+  if (cRate === null) flag('close_' + billing);
+  var cSeat = cRate === null ? null : cents(seats * cRate * 12);
+  var cUsage = calling === 'none' ? 0 : cents(seats * minutes * 12 * D.close.callPerMin);
+  var cNumbers = calling === 'none' ? 0 : cents(seats * D.numbersPerRep * D.close.numberPerMonth * 12);
+  var close = {
+    plan: cPlan, planLabel: D.close.plans[cPlan].label, rate: cRate,
+    seat: cSeat, usage: cUsage, numbers: cNumbers,
+    total: add([cSeat, cUsage, cNumbers]), floor: known([cSeat, cUsage, cNumbers])
+  };
+
+  // Pipedrive: base plan by needs, LeadBooster vs Premium, third-party dialer.
+  function pdRate(plan) {
+    var p = D.pipedrive.plans[plan];
+    var v = p[billing];
+    if (v === null) flag('pipedrive_' + billing);
+    return v;
+  }
+  var base = (email || sequences) ? 'growth' : 'lite';
+  var pPlan = base;
+  var useLB = false;
+  var premiumCompared = false;
+  var lbMonthly = D.pipedrive.leadbooster[billing];
+  if (leadcapture) {
+    if (lbMonthly === null) flag('leadbooster_' + billing);
+    var baseRate = pdRate(base);
+    var premRate = pdRate('premium');
+    if (baseRate !== null && premRate !== null && lbMonthly !== null) {
+      premiumCompared = true;
+      var withLB = seats * baseRate * 12 + lbMonthly * 12;
+      var prem = seats * premRate * 12;
+      if (prem < withLB) pPlan = 'premium'; else useLB = true;
+    } else {
+      useLB = true;
+    }
+  }
+  var pRate = pdRate(pPlan);
+  var pSeat = pRate === null ? null : cents(seats * pRate * 12);
+  var pAddons = useLB ? (lbMonthly === null ? null : cents(lbMonthly * 12)) : 0;
+  var tier = null, licenses = 0, extraNumbers = 0, dLicenses = 0, dNumbers = 0;
+  if (calling !== 'none' && !excludeDialer) {
+    var A = D.aircall;
+    tier = calling === 'power' ? 'professional' : 'essentials';
+    var acRate = A[tier][billing];
+    if (acRate === null) flag('aircall_' + billing);
+    licenses = Math.max(seats, A.minLicenses);
+    extraNumbers = Math.max(seats * D.numbersPerRep - A.includedNumbers, 0);
+    dLicenses = acRate === null ? null : cents(licenses * acRate * 12);
+    dNumbers = cents(extraNumbers * A.extraNumber * 12);
+  }
+  var pDialer = tier === null ? 0 : (dLicenses === null ? null : cents(dLicenses + dNumbers));
+  var pTerms = [pSeat, pAddons, dLicenses, dNumbers];
+  var pipedrive = {
+    plan: pPlan, planLabel: D.pipedrive.plans[pPlan].label, basePlan: base, rate: pRate,
+    leadbooster: useLB, premiumCompared: premiumCompared,
+    seat: pSeat, addons: pAddons, dialer: pDialer,
+    dialerTier: tier, dialerLabel: tier ? D.aircall[tier].label : '',
+    licenses: licenses, extraNumbers: extraNumbers,
+    dialerLicenses: dLicenses, dialerNumbers: dNumbers,
+    excludeDialer: excludeDialer && calling !== 'none',
+    total: add(pTerms), floor: known(pTerms)
+  };
+  if (leadcapture && premiumCompared) {
+    var altPlan = pPlan === 'premium' ? base : 'premium';
+    var altSeat = seats * D.pipedrive.plans[altPlan][billing] * 12;
+    pipedrive.altPlan = altPlan;
+    pipedrive.altTotal = cents(altSeat + (altPlan === 'premium' ? 0 : lbMonthly * 12) + (pDialer || 0));
+  }
+
+  var lowest = null;
+  var difference = null;
+  if (close.total !== null && pipedrive.total !== null) {
+    lowest = close.total < pipedrive.total ? 'close' : (pipedrive.total < close.total ? 'pipedrive' : 'tie');
+    difference = cents(Math.abs(close.total - pipedrive.total));
+  } else if (close.total !== null && close.total < pipedrive.floor) {
+    lowest = 'close';
+  } else if (pipedrive.total !== null && pipedrive.total < close.floor) {
+    lowest = 'pipedrive';
+  }
+  return {
+    seats: seats, billing: billing, calling: calling, minutes: minutes,
+    email: email, sequences: sequences, leadcapture: leadcapture, excludeDialer: excludeDialer,
+    close: close, pipedrive: pipedrive, unknown: unknown, lowest: lowest, difference: difference
+  };
+}
+
+function cpMoney(n) {
+  var v = Math.round(Number(n) || 0);
+  return '$' + v.toLocaleString('en-US');
+}
+function cpUnit(n) {
+  return Number(n) % 1 === 0 ? '$' + Number(n).toLocaleString('en-US') : '$' + Number(n).toFixed(2);
+}
+function cpPill(text) {
+  return ' <span class="status-pill status-unknown">' + (text || 'unverified') + '</span>';
+}
+function cpTotal(total, floor) {
+  return total === null ? '&ge; ' + cpMoney(floor) + cpPill('unverified') : cpMoney(total);
+}
+function cpPart(v) {
+  return v === null ? 'unknown' + cpPill('unverified') : cpMoney(v);
+}
+function cpName(r, v) {
+  if (v === 'close') return 'Close ' + r.close.planLabel;
+  var p = r.pipedrive;
+  var s = 'Pipedrive ' + p.planLabel;
+  if (p.leadbooster) s += ' + LeadBooster';
+  if (p.dialerTier) s += ' + Aircall ' + p.dialerLabel;
+  return s;
+}
+function cpScenario(r) {
+  var needs = [];
+  if (r.email) needs.push('email tracking');
+  if (r.sequences) needs.push('sequences');
+  if (r.leadcapture) needs.push('lead capture');
+  var callText = r.calling === 'none' ? 'no calling' : (r.calling === 'power' ? 'power dialer' : 'click-to-call');
+  var s = r.seats + (r.seats === 1 ? ' rep' : ' reps') + ' &middot; ' + r.billing + ' billing &middot; ' +
+    (needs.length ? needs.join(', ') : 'no extra needs') + ' &middot; ' + callText;
+  if (r.calling !== 'none') {
+    s += ' &middot; ' + r.minutes.toLocaleString('en-US') + ' billed min/rep/mo';
+    if (r.minutes === CP_DATA.defaultMinutes) s += ' (example assumption)';
+  }
+  return s;
+}
+function cpMathRows(r, which) {
+  var c = r.close, p = r.pipedrive, out = [];
+  function row(label, formula, val) {
+    out.push('<div class="calc-math-row"><span class="calc-math-label"><strong>' + label + '</strong><span class="calc-math-formula">' + formula + '</span></span><span class="calc-math-val">' + val + '</span></div>');
+  }
+  if (which !== 'pipedrive') {
+    row('Close ' + c.planLabel + ' seats', r.seats + ' &times; ' + (c.rate === null ? 'unknown' : cpUnit(c.rate)) + ' &times; 12', cpPart(c.seat));
+    if (r.calling !== 'none') {
+      row('Close call minutes', r.seats + ' &times; ' + r.minutes.toLocaleString('en-US') + ' min &times; 12 &times; ' + cpUnit(CP_DATA.close.callPerMin) + ' (approx.)', cpMoney(c.usage));
+      row('Close phone numbers', r.seats + ' &times; ' + cpUnit(CP_DATA.close.numberPerMonth) + ' &times; 12 (from)', cpMoney(c.numbers));
+    }
+    row('Close Year-1 total', 'seats + minutes + numbers', cpTotal(c.total, c.floor));
+  }
+  if (which !== 'close') {
+    row('Pipedrive ' + p.planLabel + ' seats', r.seats + ' &times; ' + (p.rate === null ? 'unverified' : cpUnit(p.rate)) + ' &times; 12', cpPart(p.seat));
+    if (p.leadbooster) row('LeadBooster', (CP_DATA.pipedrive.leadbooster[r.billing] === null ? 'unknown' : cpUnit(CP_DATA.pipedrive.leadbooster[r.billing])) + ' per company &times; 12', cpPart(p.addons));
+    if (p.dialerTier) {
+      var ac = CP_DATA.aircall[p.dialerTier][r.billing];
+      row('Aircall ' + p.dialerLabel + ' licenses', p.licenses + ' (min ' + CP_DATA.aircall.minLicenses + ') &times; ' + (ac === null ? 'unknown' : cpUnit(ac)) + ' &times; 12', cpPart(p.dialerLicenses));
+      row('Aircall extra numbers', p.extraNumbers + ' &times; ' + cpUnit(CP_DATA.aircall.extraNumber) + ' &times; 12', cpMoney(p.dialerNumbers));
+    } else if (p.excludeDialer) {
+      row('Dialer', 'excluded (you already pay for one)', '$0');
+    }
+    row('Pipedrive Year-1 total', 'seats + add-ons + dialer', cpTotal(p.total, p.floor));
+  }
+  return '<div class="calc-math-list">' + out.join('') + '</div>';
+}
+function cpBestLine(r) {
+  if (r.lowest === 'tie') return '<strong>Same Year-1 cost:</strong> ' + cpMoney(r.close.total) + '/yr on both.';
+  if (r.lowest === null) return '<strong>Lowest Year-1 cost:</strong> not determined, because some prices are unverified.';
+  var o = r.lowest === 'close' ? 'pipedrive' : 'close';
+  var t = r.lowest === 'close' ? r.close.total : r.pipedrive.total;
+  return '<strong>Lowest Year-1 cost:</strong> ' + cpName(r, r.lowest) + ' (' + cpMoney(t) + '/yr)' +
+    (r.difference !== null ? ' &middot; ' + cpMoney(r.difference) + '/yr less than ' + (o === 'close' ? 'Close' : 'Pipedrive') : '');
+}
+function cpCta(v, location) {
+  var D = CP_DATA;
+  var isPd = v === 'pipedrive';
+  return '<a class="btn-secondary" href="' + (isPd ? '/go/pipedrive' : '/go/close') + '" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="' +
+    (isPd ? 'pipedrive-crm' : 'close-crm') + '" data-cta-location="' + location + '">' + (isPd ? D.pipedrive.ctaLabel : D.close.ctaLabel) + ' &rarr;</a>';
+}
+function cpVendorCard(r, v) {
+  var x = v === 'close' ? r.close : r.pipedrive;
+  var vendor = v === 'close' ? 'Close' : 'Pipedrive';
+  var driver;
+  if (r.calling === 'none') driver = 'No calling';
+  else if (v === 'close') driver = 'Calling built in: ' + cpMoney(x.usage + x.numbers) + '/yr usage';
+  else if (x.excludeDialer) driver = 'Dialer excluded ($0)';
+  else driver = 'Aircall dialer: ' + (x.dialer === null ? '&ge; ' + cpMoney(x.dialerNumbers) + cpPill('unverified') : cpMoney(x.dialer) + '/yr');
+  return '<div class="summary-card result-card" data-cp-card="' + v + '">' +
+    '<div class="summary-label">' + vendor + ' Year-1 cost</div>' +
+    '<div class="summary-metric">' + cpTotal(x.total, x.floor) + ' / yr</div>' +
+    '<details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">' +
+    '<div class="summary-scenario">' + cpName(r, v) + ': ' + cpWhy(r, v) + '.</div>' + cpMathRows(r, v) + '</div></details>' +
+    '<div class="summary-driver">' + cpName(r, v) + '</div>' +
+    '<div class="summary-scenario">' + driver + '</div>' +
+    '<div class="summary-actions"><div class="cta-stack">' + cpCta(v, 'summary-card') + '</div></div>' +
+    '</div>';
+}
+function cpCardsHtml(r) {
+  var metric, driver;
+  if (r.lowest === 'close' || r.lowest === 'pipedrive') {
+    metric = r.lowest === 'close' ? 'Close' : 'Pipedrive';
+    driver = r.difference !== null ? cpMoney(r.difference) + '/yr less than ' + (r.lowest === 'close' ? 'Pipedrive' : 'Close') : 'Lower even at the minimum of the unverified side';
+  } else if (r.lowest === 'tie') {
+    metric = 'Same cost';
+    driver = cpMoney(r.close.total) + '/yr on both';
+  } else {
+    metric = 'Not determined';
+    driver = 'Some prices are unverified, so no total is compared';
+  }
+  return '<div class="summary-card result-card card-lowest" data-cp-card="lowest">' +
+    '<div class="summary-label">Lowest Year-1 cost</div>' +
+    '<div class="summary-metric" style="color:var(--emerald);">' + metric + '</div>' +
+    '<details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">' + cpMathRows(r, 'both') + '</div></details>' +
+    '<div class="summary-driver">' + driver + '</div>' +
+    '<div class="summary-scenario">Prices verified ' + CP_DATA.close.verified + '</div>' +
+    '<div class="summary-actions"><a class="summary-audit-link" href="#cp-compare-heading" data-track="internal-audit">Compare side by side &darr;</a></div>' +
+    '</div>' + cpVendorCard(r, 'close') + cpVendorCard(r, 'pipedrive');
+}
+function cpWhy(r, v) {
+  if (v === 'close') {
+    var plan = r.close.plan;
+    if (plan === 'growth') return r.calling === 'power' ? 'Power dialer is Growth and up' : 'Workflows are Growth and up';
+    if (plan === 'solo') return '1 user, no open tracking needed';
+    return r.email ? 'Email open tracking is Essentials and up' : 'Solo is limited to 1 user';
+  }
+  var p = r.pipedrive;
+  var why = r.sequences ? 'Sequences are Growth and up' : (r.email ? 'Email sync with tracking is Growth and up' : 'Lowest plan covers your needs');
+  if (p.plan === 'premium') why = 'Premium includes LeadBooster and costs less than ' + (p.basePlan === 'growth' ? 'Growth' : 'Lite') + ' + LeadBooster here';
+  else if (p.leadbooster) why += '; LeadBooster for lead capture';
+  return why;
+}
+function cpTableHtml(r) {
+  var c = r.close, p = r.pipedrive, D = CP_DATA;
+  var perC = c.total === null ? '&ge; ' + cpMoney(c.floor / r.seats / 12) : cpMoney(c.total / r.seats / 12);
+  var perP = p.total === null ? '&ge; ' + cpMoney(p.floor / r.seats / 12) : cpMoney(p.total / r.seats / 12);
+  var cCall = r.calling === 'none' ? 'No calling' : 'Built in: ' + cpMoney(c.usage) + ' minutes + ' + cpMoney(c.numbers) + ' numbers';
+  var pCall = r.calling === 'none' ? 'No calling' : (p.excludeDialer ? 'Dialer excluded ($0)' :
+    'Aircall ' + p.dialerLabel + ': ' + cpPart(p.dialerLicenses) + ' (' + p.licenses + ' licenses) + ' + cpMoney(p.dialerNumbers) + ' (' + p.extraNumbers + ' extra numbers)');
+  var pAdd = p.plan === 'premium' && r.leadcapture ? ' &middot; LeadBooster included' : (p.leadbooster ? ' + LeadBooster ' + cpPart(p.addons) : '');
+  var pRate = p.rate === null ? 'unverified' + cpPill('unverified') : cpUnit(p.rate) + '/seat/mo';
+  var pPill = r.billing === 'monthly' && !D.allowSecondary ? 'monthly unverified' : '';
+  function platform(name, url, label, pill) {
+    return '<td data-label="Platform"><strong>' + name + '</strong><br><span class="status-pill status-verified">Verified</span> &middot; <a href="' + url +
+      '" target="_blank" rel="noopener" class="source-link">' + label + '</a><div class="cp-verified">Verified ' + (name === 'Close' ? D.close.verified : D.pipedrive.verified) + (pill ? cpPill(pill) : '') + '</div></td>';
+  }
+  return '' +
+    '<tr>' + platform('Close', D.close.sourceUrl, 'close.com/pricing', '') +
+    '<td data-label="Plan chosen">' + c.planLabel + ' &middot; ' + (c.rate === null ? 'unknown' : cpUnit(c.rate) + '/seat/mo') + '<div class="cp-verified">' + cpWhy(r, 'close') + '</div></td>' +
+    '<td data-label="Seats &amp; add-ons">' + r.seats + ' seats: ' + cpPart(c.seat) + '</td>' +
+    '<td data-label="Calling / dialer">' + cCall + '</td>' +
+    '<td data-label="Year-1 total"><strong>' + cpTotal(c.total, c.floor) + '</strong><div class="cp-verified">' + perC + ' per rep / month</div></td>' +
+    '<td data-label="Action">' + cpCta('close', 'comparison-table') + '</td></tr>' +
+    '<tr>' + platform('Pipedrive', D.pipedrive.sourceUrl, 'pipedrive.com/pricing', pPill) +
+    '<td data-label="Plan chosen">' + p.planLabel + ' &middot; ' + pRate + '<div class="cp-verified">' + cpWhy(r, 'pipedrive') + '</div></td>' +
+    '<td data-label="Seats &amp; add-ons">' + r.seats + ' seats: ' + cpPart(p.seat) + pAdd + '</td>' +
+    '<td data-label="Calling / dialer">' + pCall + '</td>' +
+    '<td data-label="Year-1 total"><strong>' + cpTotal(p.total, p.floor) + '</strong><div class="cp-verified">' + perP + ' per rep / month</div></td>' +
+    '<td data-label="Action">' + cpCta('pipedrive', 'comparison-table') + '</td></tr>';
+}
+
+
+(function () {
+  var viewTouched = false;
+  function el(id) { return document.getElementById(id); }
+  function clampInt(v, lo, hi, fallback) {
+    var n = Math.round(Number(v));
+    if (!isFinite(n)) n = fallback;
+    return Math.min(hi, Math.max(lo, n));
+  }
+  function readInput() {
+    return {
+      users: clampInt(el('cp-users').value, 1, 50, 5),
+      billing: el('cp-billing').value || 'annual',
+      email: el('cp-email').checked,
+      sequences: el('cp-sequences').checked,
+      leadcapture: el('cp-leadcapture').checked,
+      calling: el('cp-calling').value,
+      minutes: clampInt(el('cp-minutes').value, 0, 3000, CP_DATA.defaultMinutes),
+      excludeDialer: el('cp-exclude-dialer').checked
+    };
+  }
+  function applyWorkbench(r, view) {
+    if (typeof window.saasbillApplyWorkbench !== 'function') return;
+    var v = view === 'pipedrive' ? r.pipedrive : r.close;
+    var isPd = view === 'pipedrive';
+    var hidden = isPd ? v.dialer : (v.usage + v.numbers);
+    var best = cpBestLine(r);
+    window.saasbillApplyWorkbench({
+      product: cpName(r, view),
+      sticker: v.seat || 0,
+      seats: isPd ? (v.addons || 0) : 0,
+      hidden: hidden || 0,
+      total: v.total === null ? v.floor : v.total,
+      baseLabel: r.seats + ' seats &times; ' + (v.rate === null ? 'unverified' : cpUnit(v.rate)) + ' &times; 12 (' + v.planLabel + ', ' + r.billing + ')',
+      seatsTitle: 'Add-ons',
+      seatsLabel: 'LeadBooster below Premium',
+      hiddenLabel: isPd ? 'Third-party dialer (Pipedrive has no built-in calling)' : 'Call minutes &amp; numbers (usage)',
+      mathHtml: cpMathRows(r, view),
+      bestHtml: best,
+      ctaHref: isPd ? '/go/pipedrive' : '/go/close',
+      ctaLabel: isPd ? CP_DATA.pipedrive.ctaLabel : CP_DATA.close.ctaLabel,
+      ctaVendor: isPd ? 'pipedrive-crm' : 'close-crm'
+    });
+    ['shell-sub-base', 'shell-sub-seats', 'shell-sub-hidden'].forEach(function (id) {
+      var n = el(id);
+      if (n) n.innerHTML = n.textContent;
+    });
+    if (isPd && v.leadbooster && v.addons === null) {
+      var row = el('shell-row-seats');
+      if (row) row.style.display = '';
+      el('shell-amt-seats').textContent = 'unknown';
+    }
+    if (isPd && v.seat === null) el('shell-amt-base').textContent = 'unverified';
+    if (isPd && v.dialer === null) el('shell-amt-hidden').textContent = '\u2265 ' + cpMoney(v.dialerNumbers);
+    if (v.total === null) {
+      el('shell-big').innerHTML = '&ge; ' + cpMoney(v.floor) + cpPill('unverified');
+      el('shell-sub').textContent = 'Includes unverified prices, which are not counted as $0.';
+    }
+  }
+  function render() {
+    var input = readInput();
+    el('cp-users-num').value = input.users;
+    el('cp-minutes-num').value = input.minutes;
+    var calling = input.calling !== 'none';
+    var wrap = el('cp-minutes-wrap');
+    if (wrap) wrap.hidden = !calling;
+    var r = calcCloseVsPipedrive(input);
+    if (!viewTouched) el('cp-view').value = r.lowest === 'pipedrive' ? 'pipedrive' : 'close';
+    el('cp-cards').innerHTML = cpCardsHtml(r);
+    el('cp-scenario').innerHTML = 'Based on ' + cpScenario(r);
+    el('cp-tbody').innerHTML = cpTableHtml(r);
+    applyWorkbench(r, el('cp-view').value || 'close');
+    if (typeof window.trackSaaSBillEvent === 'function') window.trackSaaSBillEvent('result_rendered', { page: '/compare/close-vs-pipedrive-year-1-cost-calculator/' });
+  }
+  function pair(rangeId, numId, lo, hi) {
+    var range = el(rangeId), box = el(numId);
+    range.addEventListener('input', render);
+    box.addEventListener('input', function () {
+      if (box.value === '') return;
+      range.value = clampInt(box.value, lo, hi, lo);
+      render();
+    });
+    box.addEventListener('change', function () {
+      range.value = clampInt(box.value, lo, hi, lo);
+      render();
+    });
+  }
+  pair('cp-users', 'cp-users-num', 1, 50);
+  pair('cp-minutes', 'cp-minutes-num', 0, 3000);
+  ['cp-email', 'cp-sequences', 'cp-leadcapture', 'cp-calling', 'cp-exclude-dialer', 'cp-billing'].forEach(function (id) {
+    el(id).addEventListener('change', render);
+  });
+  el('cp-view').addEventListener('change', function () { viewTouched = true; render(); });
+  render();
+})();
+
+</script>
+
+      
+        <section aria-labelledby="faq-heading">
+          <h2 id="faq-heading">Common questions</h2>
+          <div class="faq-list">
+            
+            <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+              <h3 itemprop="name">Is Close or Pipedrive cheaper for a team that makes calls?</h3>
+              <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                <p itemprop="text">It depends on plan needs and call volume. For 5 reps on annual billing with email tracking, click-to-call and 500 billed minutes per rep per month (an example assumption), Close Essentials comes to $2,760 and Pipedrive Growth + Aircall Essentials to $4,428 in Year 1. With sequences, a power dialer and 1,000 minutes, Close Growth comes to $7,200 and Pipedrive Growth + Aircall Professional to $5,628.</p>
+              </div>
+            </div>
+            
+            <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+              <h3 itemprop="name">Does Pipedrive have a built-in dialer?</h3>
+              <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                <p itemprop="text">No. Pipedrive's help center says it doesn't have a built-in calling integration and that calls are made through a calling app from its Marketplace, such as Aircall, CloudTalk, Kixie, JustCall or CallHippo. This calculator prices Aircall as the reference dialer: Essentials at $30 and Professional at $50 per license per month billed annually, with a minimum of 3 licenses.</p>
+              </div>
+            </div>
+            
+            <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+              <h3 itemprop="name">How much do calls cost in Close?</h3>
+              <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                <p itemprop="text">Close says most outbound calls cost around $0.02 per minute, varying by country and number type. Each call is rounded up to the next full minute, so billed minutes are at least your talk time. Phone numbers start at about $1 per month.</p>
+              </div>
+            </div>
+            
+            <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+              <h3 itemprop="name">Do Close or Pipedrive have a seat minimum?</h3>
+              <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                <p itemprop="text">Neither states a seat minimum, and Close Solo is limited to 1 user. Pipedrive charges per seat whether the seat is assigned to a user or not. The Aircall dialer requires at least 3 licenses, so a 1-rep Pipedrive team pays for 3.</p>
+              </div>
+            </div>
+            
+            <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+              <h3 itemprop="name">Annual vs monthly billing: how much do you save?</h3>
+              <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                <p itemprop="text">On Close, annual billing saves 7% to 53% depending on the plan (Scale $139 vs $149 per seat per month; Solo $9 vs $19). Pipedrive's pricing page says annual billing saves up to 42%. Pipedrive's monthly prices are not verified here, so monthly totals for Pipedrive are shown as a minimum and marked unverified.</p>
+              </div>
+            </div>
+            
+            <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+              <h3 itemprop="name">When is Pipedrive Premium cheaper than Growth + LeadBooster?</h3>
+              <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                <p itemprop="text">Only at 1 seat on annual billing: Premium costs $708 a year and Growth + LeadBooster $858. At 2 seats Growth + LeadBooster is lower ($1,326 vs $1,416), because LeadBooster is priced per company (from $32.50 per month) while Premium adds $20 per seat per month.</p>
+              </div>
+            </div>
+            
+            <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+              <h3 itemprop="name">Which Close plan includes the power dialer?</h3>
+              <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                <p itemprop="text">Growth and Scale ($99 and $139 per seat per month billed annually). The predictive dialer is Scale only.</p>
+              </div>
+            </div>
+            
+            <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+              <h3 itemprop="name">Are prices in USD and do they include VAT?</h3>
+              <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                <p itemprop="text">All prices are in USD from the vendors' US pricing pages. Pipedrive states its prices are VAT exclusive. Close's VAT treatment is unknown here. Pipedrive may show localized prices outside the US.</p>
+              </div>
+            </div>
+            
+          </div>
+        </section>
+        
+      
+    <section aria-labelledby="related-calculators-heading" style="margin-top:36px; padding-top:24px; border-top:1px solid var(--border);">
+      <h2 id="related-calculators-heading" style="font-size:1.2rem; margin-top:0;">Related Year-1 True-Cost Calculators &amp; Contract Audits</h2>
+      <div class="related-calc-grid">
+        
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../compare/monday-crm-vs-pipedrive-vs-hubspot-seat-minimums/" data-track="internal-audit">monday CRM 3/5/10-Seat Bucket Calculator &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">Where fixed seat buckets cost more than one seat at a time.</p>
+        </div>
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../compare/close-crm-vs-hubspot-sales-hub-5-to-20-reps/" data-track="internal-audit">Close CRM vs. HubSpot Sales Hub &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">True Year-1 cost for 5 to 20 reps, including HubSpot onboarding.</p>
+        </div>
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../pricing/hubspot-true-cost-and-onboarding-fees/" data-track="internal-audit">HubSpot True Cost &amp; Onboarding &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">What HubSpot costs in Year 1 once mandatory onboarding is included.</p>
+        </div>
+      </div>
+      <details class="footer-directory-details">
+        <summary>Browse all 31 audited calculators &amp; guides</summary>
+        <div class="footer-directory-links">
+          <a href="../../" data-track="internal-audit">Year-1 SaaS True-Cost Directory &rarr;</a><a href="../../pricing/hubspot-true-cost-and-onboarding-fees/" data-track="internal-audit">HubSpot True Cost &amp; Onboarding &rarr;</a><a href="../../compare/close-crm-vs-hubspot-sales-hub-5-to-20-reps/" data-track="internal-audit">Close CRM vs. HubSpot Sales Hub &rarr;</a><a href="../../compare/close-vs-pipedrive-year-1-cost-calculator/" data-track="internal-audit">Close vs. Pipedrive Year-1 Cost (Calling Included) &rarr;</a><a href="../../pricing/gong-io-platform-fee-and-seat-minimum-calculator/" data-track="internal-audit">Gong.io $5,000 Platform Fee &amp; Seat Calculator &rarr;</a><a href="../../compare/monday-crm-vs-pipedrive-vs-hubspot-seat-minimums/" data-track="internal-audit">monday CRM 3/5/10-Seat Bucket Calculator &rarr;</a><a href="../../intercom-fin-cost-calculator/" data-track="internal-audit">Intercom Fin AI Cost Calculator &rarr;</a><a href="../../intercom-vs-freshdesk-cost-comparison/" data-track="internal-audit">Intercom vs. Freshdesk Cost Comparison &rarr;</a><a href="../../intercom-vs-zendesk-cost-comparison/" data-track="internal-audit">Intercom vs. Zendesk Cost Comparison &rarr;</a><a href="../../pricing/intercom-fin-ai-resolution-cost-calculator/" data-track="internal-audit">Intercom Fin AI Cost Calculator &rarr;</a><a href="../../zendesk-ai-cost-calculator/" data-track="internal-audit">Zendesk AI Cost Calculator &rarr;</a><a href="../../zendesk-vs-freshdesk-cost-comparison/" data-track="internal-audit">Zendesk vs. Freshdesk Cost Comparison &rarr;</a><a href="../../hubspot-onboarding-fee-calculator/" data-track="internal-audit">HubSpot Onboarding Fee Calculator &rarr;</a><a href="../../pricing/zendesk-ai-resolution-and-automated-outcome-cost/" data-track="internal-audit">Zendesk AI Cost Calculator &rarr;</a><a href="../../pricing/stripe-billing-0-7-percent-recurring-tax-calculator/" data-track="internal-audit">Stripe Billing 0.7% Fee, Tax &amp; Chargeback Calculator &rarr;</a><a href="../../compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/" data-track="internal-audit">Gumroad vs. Whop vs. Lemon Squeezy Take-Rate &amp; Chargeback Calculator &rarr;</a><a href="../../exit/stripe-shopify-paddle-frozen-funds-alternatives/" data-track="internal-audit">Stripe, Shopify &amp; Paddle Frozen Funds &amp; Reserve Calculator &rarr;</a><a href="../../chargeback-fee-and-recovery-calculator/" data-track="internal-audit">Stripe, Shopify &amp; Paddle Chargeback Cost Calculator &rarr;</a><a href="../../exit/paypal-180-day-permanent-limitation-fund-recovery/" data-track="internal-audit">PayPal 180-Day Hold &amp; Reserve Cost Calculator &rarr;</a><a href="../../exit/shopify-payments-chargeback-threshold-and-reserve-appeal/" data-track="internal-audit">Shopify Payments Reserve &amp; Dispute Threshold Calculator &rarr;</a><a href="../../exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/" data-track="internal-audit">ZoomInfo 60-Day Auto-Renewal Notice &rarr;</a><a href="../../compare/typeform-vs-jotform-response-limit-and-hipaa-cost/" data-track="internal-audit">Typeform vs. Jotform Response &amp; HIPAA Calculator &rarr;</a><a href="../../guides/jotform-wix-app-setup-and-pricing-guide/" data-track="internal-audit">Jotform Wix App Setup &amp; Pricing Guide &rarr;</a><a href="../../pricing/jotform-pricing-tier-calculator/" data-track="internal-audit">Jotform 2026 Pricing Tier Calculator &rarr;</a><a href="../../pricing/docusign-envelope-allowance-and-api-overage-calculator/" data-track="internal-audit">DocuSign 100-Envelope Cap &amp; Overage Calculator &rarr;</a><a href="../../compliance/hipaa-baa-and-soc2-pricing-tiers/" data-track="internal-audit">HIPAA BAA &amp; SOC 2 Pricing Tiers &rarr;</a><a href="../../compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/" data-track="internal-audit">Google Workspace vs. Microsoft 365 HIPAA BAA &rarr;</a><a href="../../faq/does-hubspot-charge-onboarding-fees-2026/" data-track="internal-audit">Does HubSpot Charge Onboarding Fees in 2026? &rarr;</a><a href="../../faq/intercom-fin-ai-cost-calculator/" data-track="internal-audit">Intercom Fin AI Cost Calculator &rarr;</a><a href="../../faq/stripe-vs-paddle-true-cost/" data-track="internal-audit">Stripe vs. Paddle vs. Whop True Cost &amp; Chargeback Calculator &rarr;</a><a href="../../pricing/stripe-shopify-chargeback-fee-and-chargeflow-roi-calculator/" data-track="internal-audit">Stripe, Shopify &amp; Paddle Chargeback Cost Calculator &rarr;</a>
+        </div>
+      </details>
+    </section>
+    
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <p><strong>SaaSBill</strong> &middot; Year-1 cost &amp; contract calculators for B2B software.</p>
+      <p class="footer-note">Independent calculations. Some vendor links are affiliate links. This never changes our rankings or calculations. &middot; Updated <time datetime="2026-10-30">Oct 30, 2026</time> &middot; Inquiries: <a href="mailto:info@saasbill.io">info@saasbill.io</a></p>
+    </div>
+  </footer>
+  <script>
+  /* Plausible + local event dispatcher for: calculator_interaction, category_select, result_rendered, vendor_cta_click */
+  window.__saasbillEvents = window.__saasbillEvents || [];
+  try {
+    var p = (window.location && window.location.pathname ? window.location.pathname : '').toLowerCase();
+    if (p && p !== '/' && p !== '/index.html') {
+      var ctxCat = '';
+      var ctxTool = '';
+      if (p.indexOf('zoominfo') !== -1) {
+        ctxCat = 'CRM & Sales';
+        ctxTool = 'close-crm';
+      } else if (p.indexOf('stripe') !== -1 || p.indexOf('paddle') !== -1 || p.indexOf('whop') !== -1 || p.indexOf('gumroad') !== -1 || p.indexOf('paypal') !== -1) {
+        ctxCat = 'Payment Processors & MoR';
+        ctxTool = p.indexOf('paddle') !== -1 ? 'paddle-mor' : (p.indexOf('whop') !== -1 ? 'whop-payments' : 'stripe-payments');
+      } else if (p.indexOf('hubspot') !== -1 || p.indexOf('close-crm') !== -1 || p.indexOf('pipedrive') !== -1 || p.indexOf('monday-crm') !== -1 || p.indexOf('gong') !== -1) {
+        ctxCat = 'CRM & Sales';
+        ctxTool = p.indexOf('monday') !== -1 ? 'monday-crm' : (p.indexOf('close') !== -1 ? 'close-crm' : (p.indexOf('pipedrive') !== -1 ? 'pipedrive-crm' : 'hubspot-sales-pro'));
+      } else if (p.indexOf('hipaa') !== -1 || p.indexOf('soc2') !== -1 || p.indexOf('docusign') !== -1 || p.indexOf('typeform') !== -1 || p.indexOf('jotform') !== -1) {
+        ctxCat = 'Compliance, HIPAA & SOC 2';
+        ctxTool = (p.indexOf('typeform') !== -1 || p.indexOf('jotform') !== -1) ? 'jotform-hipaa' : 'vanta-soc2';
+      } else if (p.indexOf('intercom') !== -1 || p.indexOf('zendesk') !== -1 || p.indexOf('freshdesk') !== -1) {
+        ctxCat = 'Helpdesk & AI Support';
+        ctxTool = p.indexOf('intercom') !== -1 ? 'intercom-fin-ai' : (p.indexOf('freshdesk') !== -1 ? 'freshdesk-support' : 'zendesk-suite-team');
+      }
+      if (ctxCat && window.sessionStorage) {
+        sessionStorage.setItem('saasbill_last_cat', ctxCat);
+        if (ctxTool) sessionStorage.setItem('saasbill_last_tool', ctxTool);
+      }
+    }
+  } catch (err) {}
+  document.addEventListener('click', function(e) {
+    var cta = e.target.closest('[data-track="vendor-cta"], [data-track="vendor_cta_click"]');
+    if (cta) {
+      var vendor = cta.getAttribute('data-vendor') || '';
+      var location = cta.getAttribute('data-cta-location') || 'subpage-result';
+      var href = cta.getAttribute('href') || '';
+      if (typeof window.trackSaaSBillEvent === 'function') {
+        window.trackSaaSBillEvent('vendor_cta_click', { vendor: vendor, location: location, href: href });
+      }
+      return;
+    }
+    var catBtn = e.target.closest('[data-track="category-select"], [data-track="category_select"]');
+    if (catBtn) {
+      var cat = catBtn.getAttribute('data-cat') || '';
+      if (typeof window.trackSaaSBillEvent === 'function') {
+        window.trackSaaSBillEvent('category_select', { category: cat });
+      }
+    }
+  });
+  var _lastCalcTrackKey = '';
+  var _lastCalcTrackTs = 0;
+  function handleCalcControlEvent(e) {
+    var ctrl = e.target.closest('[data-track="calculator-control"], [data-track="calculator_interaction"], input[type="range"], select');
+    if (ctrl) {
+      var control = ctrl.getAttribute('data-control') || ctrl.id || '';
+      var val = String(ctrl.value);
+      var now = Date.now();
+      var key = control + ':' + val;
+      if (key === _lastCalcTrackKey && (now - _lastCalcTrackTs) < 150) return;
+      _lastCalcTrackKey = key;
+      _lastCalcTrackTs = now;
+      if (typeof window.trackSaaSBillEvent === 'function') {
+        window.trackSaaSBillEvent('calculator_interaction', { control: control, value: val });
+        if (ctrl.id === 'cat-filter') {
+          window.trackSaaSBillEvent('category_select', { category: val });
+        }
+      }
+    }
+  }
+  document.addEventListener('input', handleCalcControlEvent);
+  document.addEventListener('change', handleCalcControlEvent);
+  </script>
+  <script src="../../assets/app.js?v=20261030a"></script>
+</body>
+</html>

@@ -1,5 +1,16 @@
 """Build the 6 queued calculators + 3 high-intent Answer-First FAQ pages for saasbill.io."""
-from layout import WORKBENCH_JS, render_page, render_workbench
+import json
+import os
+
+from layout import DATA_DIR, WORKBENCH_JS, render_page, render_workbench
+
+# Pipedrive row on the Close vs HubSpot page: Premium is the current name of the
+# tier that used to be "Professional". Annual price from data/crm_pricing.json.
+with open(os.path.join(DATA_DIR, "crm_pricing.json")) as _f:
+    _PD_PREMIUM = json.load(_f)["pipedrive"]["plans"]["premium"]
+assert _PD_PREMIUM["annual_status"] == "verified"
+PD_PREMIUM_LABEL = _PD_PREMIUM["label"]
+PD_PREMIUM_ANNUAL = "%g" % _PD_PREMIUM["annual"]
 
 PAGES = [
     {
@@ -55,6 +66,7 @@ PAGES = [
         "winner_url": "https://refer.close.com/3k5hp07b8soi-fetl0j",
         "winner_cta": "View Close pricing",
         "winner_vendor": "close-crm",
+        "after_summary_html": '<p class="summary-interpretation"><a href="../close-vs-pipedrive-year-1-cost-calculator/" data-track="internal-audit">Comparing Close with Pipedrive instead? Include calling costs &rarr;</a></p>',
         "js_logic": """
         const vol = parseInt(document.getElementById('p-slider').value, 10);
         const mode = document.getElementById('p-select').value;
@@ -63,11 +75,11 @@ PAGES = [
         const closeYr = vol * closeRate * 12;
         const hsSeatsYr = vol * 90 * 12;
         const hsYr = hsSeatsYr + 1500;
-        const pipeYr = vol * 49 * 12;
+        const pipeYr = vol * __PD_PREMIUM_ANNUAL__ * 12;
         const saved = Math.max(0, hsYr - closeYr);
         const rows = [
           {name: mode === 'essentials' ? 'Close CRM (Essentials)' : 'Close CRM (Growth)', plan: '$' + closeRate + '/seat/mo annual', base: '$' + closeYr.toLocaleString('en-US') + '/yr', hidden: '$0 mandatory onboarding', total: '$' + closeYr.toLocaleString('en-US') + '/yr', url: 'https://refer.close.com/3k5hp07b8soi-fetl0j', cta: 'View Close pricing', vendor: 'close-crm', status: 'Verified', src: 'https://www.close.com/pricing'},
-          {name: 'Pipedrive CRM (Professional)', plan: '$49/seat/mo annual', base: '$' + pipeYr.toLocaleString('en-US') + '/yr', hidden: '$0 onboarding (add-ons extra)', total: '$' + pipeYr.toLocaleString('en-US') + '/yr', url: 'https://www.pipedrive.com/en/pricing', cta: 'View Pipedrive pricing', vendor: 'pipedrive-crm', status: 'Verified', src: 'https://www.pipedrive.com/en/pricing'},
+          {name: 'Pipedrive CRM (__PD_PREMIUM_LABEL__)', plan: '$__PD_PREMIUM_ANNUAL__/seat/mo annual', base: '$' + pipeYr.toLocaleString('en-US') + '/yr', hidden: '$0 onboarding (add-ons extra)', total: '$' + pipeYr.toLocaleString('en-US') + '/yr', url: 'https://www.pipedrive.com/en/pricing', cta: 'View Pipedrive pricing', vendor: 'pipedrive-crm', status: 'Verified', src: 'https://www.pipedrive.com/en/pricing'},
           {name: 'HubSpot Sales Hub Professional', plan: '$90/seat/mo annual', base: '$' + hsSeatsYr.toLocaleString('en-US') + '/yr', hidden: '+$1,500 mandatory onboarding fee', total: '$' + hsYr.toLocaleString('en-US') + '/yr', url: 'https://www.hubspot.com/pricing/sales', cta: 'View HubSpot pricing', vendor: 'hubspot-sales-pro', status: 'Verified', src: 'https://www.hubspot.com/pricing/sales'}
         ];
         """,
@@ -479,7 +491,7 @@ def build_all():
 {WORKBENCH_JS}
 function runPageCalc() {{
   var customSummaryHtml;
-  {p["js_logic"]}
+  {p["js_logic"].replace("__PD_PREMIUM_ANNUAL__", PD_PREMIUM_ANNUAL).replace("__PD_PREMIUM_LABEL__", PD_PREMIUM_LABEL)}
   document.getElementById('{p["summary_id"]}').innerHTML = (typeof customSummaryHtml === 'string' && customSummaryHtml) ? customSummaryHtml : `
     <div class="summary-card result-card card-lowest">
       <div class="summary-label">Lowest modeled cost</div>

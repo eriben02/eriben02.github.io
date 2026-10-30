@@ -1,30 +1,38 @@
 # SaaSBill (https://saasbill.io) - GEO & AI Search Optimized robots.txt
-# Last Updated: 2026-10-30T06:50:32+01:00
+# Last Updated: 2026-10-30T08:45:27+01:00
 # Policy: Allow search indexing & live AI answer citations; block uncompensated model-training scrapes.
 
 User-agent: Googlebot
 Allow: /
+Disallow: /go/
 
 User-agent: Bingbot
 Allow: /
+Disallow: /go/
 
 User-agent: OAI-SearchBot
 Allow: /
+Disallow: /go/
 
 User-agent: ChatGPT-User
 Allow: /
+Disallow: /go/
 
 User-agent: PerplexityBot
 Allow: /
+Disallow: /go/
 
 User-agent: Perplexity-User
 Allow: /
+Disallow: /go/
 
 User-agent: Claude-SearchBot
 Allow: /
+Disallow: /go/
 
 User-agent: Claude-User
 Allow: /
+Disallow: /go/
 
 # Block pure AI training crawlers (protect content while remaining visible in AI search)
 User-agent: GPTBot
@@ -47,5 +55,6 @@ Disallow: /
 
 User-agent: *
 Allow: /
+Disallow: /go/
 
 Sitemap: https://saasbill.io/sitemap.xml

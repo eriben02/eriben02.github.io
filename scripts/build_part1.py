@@ -15,7 +15,18 @@ QUOTE_PAY_JS = _load_quote_pay_profile_js()
 
 TOOLS, AFFILIATES = load_data()
 tools_js = json.dumps(TOOLS)
-aff_js = json.dumps(AFFILIATES)
+# Homepage CTAs for programs that run through a /go/ redirect point at that
+# redirect and carry rel="sponsored nofollow noopener". Other vendors keep
+# their existing destination_url and rel unchanged.
+HOME_GO_SLUGS = ("pipedrive",)
+_home_aff = {}
+for _slug, _aff in AFFILIATES.items():
+    _aff = dict(_aff)
+    if _slug in HOME_GO_SLUGS and _aff.get("go_path"):
+        _aff["destination_url"] = _aff["go_path"]
+        _aff["cta_rel"] = "sponsored nofollow noopener"
+    _home_aff[_slug] = _aff
+aff_js = json.dumps(_home_aff)
 
 # ---------------------------------------------------------
 # 1. Homepage: /index.html
@@ -243,6 +254,11 @@ home_body = f"""
     </div>
     <div class="card" data-cat="crm">
       <span class="badge badge-high">CRM</span>
+      <h3><a href="./compare/close-vs-pipedrive-year-1-cost-calculator/">Close vs. Pipedrive Year-1 Cost (Calling Included)</a></h3>
+      <p>Close call minutes and numbers versus the separate dialer Pipedrive needs, on the cheapest plan that covers your team.</p>
+    </div>
+    <div class="card" data-cat="crm">
+      <span class="badge badge-high">CRM</span>
       <h3><a href="./pricing/gong-io-platform-fee-and-seat-minimum-calculator/">Gong.io $5,000 Platform Fee &amp; Seat Calculator</a></h3>
       <p>Gong&rsquo;s $5,000/yr base platform fee and ~$1,600/seat licenses plus a separate CRM versus Close CRM all-in-one.</p>
     </div>
@@ -408,7 +424,7 @@ home_body = f"""
     </div>
     <div class="methodology-item">
       <strong>Affiliate Disclosure &amp; Sources</strong>
-      Independent calculations. Some vendor links are affiliate links. This never changes our rankings or calculations. Every CTA button links directly to the vendor&rsquo;s official site (<code>rel="nofollow noopener"</code>), alongside a primary-source link for contract verification. Spot a pricing change? Email <a href="mailto:info@saasbill.io">info@saasbill.io</a>.
+      Independent calculations. Some vendor links are affiliate links. This never changes our rankings or calculations. Every CTA button goes to the vendor&rsquo;s official site (<code>rel="nofollow noopener"</code>); affiliate links that pass through a saasbill.io/go/ redirect carry <code>rel="sponsored nofollow noopener"</code>. Each sits alongside a primary-source link for contract verification. Spot a pricing change? Email <a href="mailto:info@saasbill.io">info@saasbill.io</a>.
     </div>
   </div>
   </div>
@@ -1063,7 +1079,7 @@ function renderDirectory() {{
       if (spotPayR.tool.id === 'whop-payments') {{
         bestOptPayEl.innerHTML = `<strong>Lowest direct fee in this category</strong> (${{payMoney(whopProf.total)}}/mo) &amp; multi-PSP failover`;
       }} else {{
-        bestOptPayEl.innerHTML = `<strong>Lowest direct fee:</strong> <a href="${{whopAffBest.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="whop-payments" data-cta-location="workbench-best-option">Whop Payments (${{payMoney(whopProf.total)}}/mo)</a> &middot; $0 single-PSP reserve hold`;
+        bestOptPayEl.innerHTML = `<strong>Lowest direct fee:</strong> <a href="${{whopAffBest.destination_url}}" target="_blank" rel="${{whopAffBest.cta_rel || 'nofollow noopener'}}" data-track="vendor-cta" data-vendor="whop-payments" data-cta-location="workbench-best-option">Whop Payments (${{payMoney(whopProf.total)}}/mo)</a> &middot; $0 single-PSP reserve hold`;
       }}
     }}
     if (wbCalcBody) {{
@@ -1072,6 +1088,7 @@ function renderDirectory() {{
     const ctaEl = document.getElementById('wb-primary-cta');
     if (ctaEl) {{
       ctaEl.href = spotPayAff.destination_url;
+      ctaEl.rel = spotPayAff.cta_rel || 'nofollow noopener';
       ctaEl.setAttribute('data-vendor', spotPayR.tool.id);
       const isPayWinner = spotPayR.tool.id === 'whop-payments';
       ctaEl.textContent = isPayWinner
@@ -1096,7 +1113,7 @@ function renderDirectory() {{
           </details>
           <div class="summary-actions">
             <div class="cta-stack">
-              <a class="btn-cta" href="${{whopAff.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="whop-payments" data-cta-location="summary-card">${{getContextualCtaLabel(whopR.tool, whopProf.total * 12, maxPayMo * 12, false)}}</a>
+              <a class="btn-cta" href="${{whopAff.destination_url}}" target="_blank" rel="${{whopAff.cta_rel || 'nofollow noopener'}}" data-track="vendor-cta" data-vendor="whop-payments" data-cta-location="summary-card">${{getContextualCtaLabel(whopR.tool, whopProf.total * 12, maxPayMo * 12, false)}}</a>
             </div>
           </div>
         </div>
@@ -1110,7 +1127,7 @@ function renderDirectory() {{
           <div class="summary-driver">On <strong>Paddle / Stripe / Lemon Squeezy</strong></div>
           <div class="summary-actions">
             <div class="cta-stack">
-              <a class="btn-secondary" href="${{paddleAff.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="paddle-mor" data-cta-location="summary-card">${{getVendorCtaLabel(paddleR.tool)}}</a>
+              <a class="btn-secondary" href="${{paddleAff.destination_url}}" target="_blank" rel="${{paddleAff.cta_rel || 'nofollow noopener'}}" data-track="vendor-cta" data-vendor="paddle-mor" data-cta-location="summary-card">${{getVendorCtaLabel(paddleR.tool)}}</a>
             </div>
           </div>
         </div>
@@ -1166,7 +1183,7 @@ function renderDirectory() {{
               <div class="viz-breakdown-text">${{p.tableFeeSub}} &middot; ${{p.tableHeldPill}}</div>
             </div>
             <div class="viz-total-label">${{vizTotal}}</div>
-            <a class="viz-action-link" href="${{aff.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${{r.tool.id}}" data-cta-location="chart-row">${{rowCta}}</a>
+            <a class="viz-action-link" href="${{aff.destination_url}}" target="_blank" rel="${{aff.cta_rel || 'nofollow noopener'}}" data-track="vendor-cta" data-vendor="${{r.tool.id}}" data-cta-location="chart-row">${{rowCta}}</a>
           </div>
         `;
       }}).join('');
@@ -1233,7 +1250,7 @@ function renderDirectory() {{
       if (spotR.tool.id === minR.tool.id || diffBest === 0) {{
         bestOptEl.innerHTML = `<strong>Lowest Year-1 cost in this category</strong> ($${{minR.year1Total.toLocaleString()}}/yr)`;
       }} else {{
-        bestOptEl.innerHTML = `<strong>Lowest Year-1 cost:</strong> <a href="${{minAffBest.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${{minR.tool.id}}" data-cta-location="workbench-best-option">${{minR.tool.name}} ($${{minR.year1Total.toLocaleString()}}/yr)</a> &middot; saves $${{diffBest.toLocaleString()}}/yr`;
+        bestOptEl.innerHTML = `<strong>Lowest Year-1 cost:</strong> <a href="${{minAffBest.destination_url}}" target="_blank" rel="${{minAffBest.cta_rel || 'nofollow noopener'}}" data-track="vendor-cta" data-vendor="${{minR.tool.id}}" data-cta-location="workbench-best-option">${{minR.tool.name}} ($${{minR.year1Total.toLocaleString()}}/yr)</a> &middot; saves $${{diffBest.toLocaleString()}}/yr`;
       }}
     }}
     if (wbCalcBody) {{
@@ -1242,6 +1259,7 @@ function renderDirectory() {{
     const ctaEl = document.getElementById('wb-primary-cta');
     if (ctaEl) {{
       ctaEl.href = spotAff.destination_url;
+      ctaEl.rel = spotAff.cta_rel || 'nofollow noopener';
       ctaEl.setAttribute('data-vendor', spotR.tool.id);
       const isSpotTrapOrHighest = spotR.tool.id === topHidden.tool.id || spotR.tool.id === maxR.tool.id || spotR.onboarding > 0;
       const wbRefTotal = topHidden.year1Total > spotR.year1Total ? topHidden.year1Total : maxR.year1Total;
@@ -1272,7 +1290,7 @@ function renderDirectory() {{
           ${{savedVsRef > 0 ? `<div class="summary-driver">Saves $${{savedVsRef.toLocaleString()}}/yr vs. ${{refBenchmarkR.tool.name}}</div>` : ''}}
           <div class="summary-actions">
             <div class="cta-stack">
-              <a class="btn-cta" href="${{minAff.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${{minR.tool.id}}" data-cta-location="summary-card">${{minCtaText}}</a>
+              <a class="btn-cta" href="${{minAff.destination_url}}" target="_blank" rel="${{minAff.cta_rel || 'nofollow noopener'}}" data-track="vendor-cta" data-vendor="${{minR.tool.id}}" data-cta-location="summary-card">${{minCtaText}}</a>
             </div>
             ${{minAudit ? `<a class="summary-audit-link" href="${{minAudit.url}}" data-track="internal-audit">${{minAudit.label}}</a>` : ''}}
           </div>
@@ -1287,7 +1305,7 @@ function renderDirectory() {{
           <div class="summary-driver">On <strong>${{topHidden.tool.name}}</strong></div>
           <div class="summary-actions">
             <div class="cta-stack">
-              <a class="btn-secondary" href="${{hidAff.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${{topHidden.tool.id}}" data-cta-location="summary-card">${{getVendorCtaLabel(topHidden.tool)}}</a>
+              <a class="btn-secondary" href="${{hidAff.destination_url}}" target="_blank" rel="${{hidAff.cta_rel || 'nofollow noopener'}}" data-track="vendor-cta" data-vendor="${{topHidden.tool.id}}" data-cta-location="summary-card">${{getVendorCtaLabel(topHidden.tool)}}</a>
             </div>
             ${{hidAudit ? `<a class="summary-audit-link" href="${{hidAudit.url}}" data-track="internal-audit">${{hidAudit.label}}</a>` : ''}}
           </div>
@@ -1301,7 +1319,7 @@ function renderDirectory() {{
           </details>
           <div class="summary-actions">
             <div class="cta-stack">
-              <a class="btn-secondary" href="${{maxAff.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${{maxR.tool.id}}" data-cta-location="summary-card">${{getVendorCtaLabel(maxR.tool)}}</a>
+              <a class="btn-secondary" href="${{maxAff.destination_url}}" target="_blank" rel="${{maxAff.cta_rel || 'nofollow noopener'}}" data-track="vendor-cta" data-vendor="${{maxR.tool.id}}" data-cta-location="summary-card">${{getVendorCtaLabel(maxR.tool)}}</a>
             </div>
             ${{maxAudit ? `<a class="summary-audit-link" href="${{maxAudit.url}}" data-track="internal-audit">${{maxAudit.label}}</a>` : ''}}
           </div>
@@ -1342,7 +1360,7 @@ function renderDirectory() {{
               <div class="viz-breakdown-text">${{parts.join(' + ')}}</div>
             </div>
             <div class="viz-total-label">$${{r.year1Total.toLocaleString()}} / yr</div>
-            <a class="viz-action-link" href="${{aff.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${{r.tool.id}}" data-cta-location="chart-row">${{rowCta}}</a>
+            <a class="viz-action-link" href="${{aff.destination_url}}" target="_blank" rel="${{aff.cta_rel || 'nofollow noopener'}}" data-track="vendor-cta" data-vendor="${{r.tool.id}}" data-cta-location="chart-row">${{rowCta}}</a>
           </div>
         `;
       }}).join('');
@@ -1426,7 +1444,7 @@ function renderDirectory() {{
         <td data-label="Hidden Cost Gap">${{gapCellHtml}}</td>
         <td data-label="Official Pricing">
           <div class="cta-stack">
-            <a class="btn-secondary" href="${{aff.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${{t.id}}" data-cta-location="table-row">${{getVendorCtaLabel(t)}}</a>
+            <a class="btn-secondary" href="${{aff.destination_url}}" target="_blank" rel="${{aff.cta_rel || 'nofollow noopener'}}" data-track="vendor-cta" data-vendor="${{t.id}}" data-cta-location="table-row">${{getVendorCtaLabel(t)}}</a>
           </div>
         </td>
       </tr>
@@ -1729,10 +1747,19 @@ renderDirectory();
 </script>
 """
 
+# Pipedrive seat range from data/crm_pricing.json (verified annual prices).
+# Lite to Growth: the tiers this FAQ compares with monday CRM Basic/Standard,
+# the same range the monday CRM page uses.
+with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data", "crm_pricing.json")) as _f:
+    _pd_plans = json.load(_f)["pipedrive"]["plans"]
+_pd_lo, _pd_hi = _pd_plans["lite"], _pd_plans["growth"]
+assert _pd_lo["annual_status"] == "verified" and _pd_hi["annual_status"] == "verified"
+PD_RANGE = "$%g–$%g/seat/month billed annually, %s to %s" % (_pd_lo["annual"], _pd_hi["annual"], _pd_lo["label"], _pd_hi["label"])
+
 home_faqs = [
     ("Which B2B SaaS tools charge mandatory onboarding fees in 2026?", "HubSpot charges mandatory one-time onboarding fees on its Professional and Enterprise tiers: $1,500 for Sales Hub Professional, $3,500 for Sales Hub Enterprise, $3,000 for Marketing Hub Professional, and $7,000 for Marketing Hub Enterprise (verified Oct 2026). Alternatives like Close CRM, Pipedrive, and Freshdesk charge $0 for onboarding."),
     ("How does Intercom's $0.99 per Fin AI resolution pricing work?", "Intercom charges a per-seat monthly fee ($29 Essential, $85 Advanced, or $132 Expert billed annually) plus $0.99 for every customer conversation resolved by its Fin AI agent (and $9.99 for sales qualification). If Fin AI resolves 2,000 tickets a month, it adds $1,980/month ($23,760/year) to your seat invoice."),
-    ("Why does monday CRM cost more than advertised for 1 or 2 users?", "monday CRM enforces a 3-seat minimum and bills in fixed seat buckets (3, 5, 10, 15 seats). A solo user on the $12/seat Basic ($18/seat monthly) or $17/seat Standard ($25/seat monthly) plan must pay for 3 seats ($36/month annual or $54/month monthly on Basic). For 1–2 users, Pipedrive ($14–$34/seat) or Close CRM Essentials ($35/user/month annual, $49/user/month monthly) is cheaper because they bill per exact seat."),
+    ("Why does monday CRM cost more than advertised for 1 or 2 users?", "monday CRM enforces a 3-seat minimum and bills in fixed seat buckets (3, 5, 10, 15 seats). A solo user on the $12/seat Basic ($18/seat monthly) or $17/seat Standard ($25/seat monthly) plan must pay for 3 seats ($36/month annual or $54/month monthly on Basic). For 1–2 users, Pipedrive (" + PD_RANGE + ") or Close CRM Essentials ($35/user/month annual, $49/user/month monthly) is cheaper because they bill per exact seat."),
     ("What happens to subscriber card tokens if Paddle or Stripe terminates my account?", "With Stripe (2.9% + $0.30), you are the merchant and own the customer relationship, allowing PGP-encrypted card token exports unless terminated for fraud. With a Merchant of Record like Paddle (5% + $0.50), Paddle is the legal seller of record and owns the card vault; if Paddle terminates your account on a risk review, you cannot export card tokens and every subscriber must re-enter their payment details.")
 ]
 
