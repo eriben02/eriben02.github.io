@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-site-verification" content="W7-m7km1_5pZZUG38dpallcgdGss6_Vl2qo5pjVoMdA" />
+  <!-- Bing Webmaster Tools verification: paste <meta name="msvalidate.01" content="YOUR_BING_CODE" /> here or use 1-click Google Search Console import (see BING_WEBMASTER_VERIFICATION.md) -->
+  <title>Pipedrive True Year-1 Cost Calculator (2026) – saasbill.io</title>
+  <meta name="description" content="Pipedrive Year-1 cost from published annual seat prices and add-ons. Unknown price bases are a floor, not $0. Example: $2,340 for 5 Growth seats." />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+  <meta property="og:site_name" content="SaaSBill" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Pipedrive True Year-1 Cost Calculator (2026) – saasbill.io" />
+  <meta property="og:description" content="Pipedrive Year-1 cost from published annual seat prices and add-ons. Unknown price bases are a floor, not $0. Example: $2,340 for 5 Growth seats." />
+  <meta property="og:url" content="https://saasbill.io/pricing/pipedrive-true-year-1-cost-calculator/" />
+  <meta property="og:updated_time" content="2026-10-30T08:10:32+00:00" />
+  <meta property="article:published_time" content="2026-10-30T00:00:00+01:00" />
+  <meta property="article:modified_time" content="2026-10-30T08:10:32+00:00" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Pipedrive True Year-1 Cost Calculator (2026) – saasbill.io" />
+  <meta name="twitter:description" content="Pipedrive Year-1 cost from published annual seat prices and add-ons. Unknown price bases are a floor, not $0. Example: $2,340 for 5 Growth seats." />
+  <meta name="last-modified" content="2026-10-30T08:10:32+00:00" />
+  <meta name="dcterms.modified" content="2026-10-30T08:10:32+00:00" />
+  <meta name="dcterms.issued" content="2026-10-30" />
+  <link rel="canonical" href="https://saasbill.io/pricing/pipedrive-true-year-1-cost-calculator/" />
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261030b" />
+  <link rel="alternate" type="text/plain" href="https://saasbill.io/llms.txt" title="SaaSBill LLMs.txt Summary" />
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script defer data-domain="saasbill.io" src="https://plausible.io/js/pa-VAaSVNs5XOobt9cv2UtKo.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init();
+    window.__saasbillEvents = window.__saasbillEvents || [];
+    window.trackSaaSBillEvent = function(eventName, props) {
+      var p = props || {};
+      var entry = { event: eventName, ts: Date.now() };
+      for (var k in p) {
+        if (Object.prototype.hasOwnProperty.call(p, k)) entry[k] = p[k];
+      }
+      window.__saasbillEvents.push(entry);
+      if (typeof window.plausible === 'function') {
+        window.plausible(eventName, { props: p });
+      }
+    };
+    window.trackEvent = window.trackSaaSBillEvent;
+
+    window.saasbillMoney = function (n) {
+      var v = Math.round(Number(n) || 0);
+      var sign = v < 0 ? '-' : '';
+      return sign + '$' + Math.abs(v).toLocaleString('en-US');
+    };
+    window.saasbillResultLine = function (hidden, sticker) {
+      var h = Math.round(Number(hidden) || 0);
+      var s = Math.round(Number(sticker) || 0);
+      if (h <= 0) return 'Matches advertised price ($0 hidden fees).';
+      var pct = s > 0 ? Math.round((h / s) * 100) : 0;
+      return '+' + window.saasbillMoney(h) + ' (+' + pct + '%) above advertised price.';
+    };
+    window.saasbillApplyWorkbench = function (opts) {
+      opts = opts || {};
+      var sticker = Math.max(0, Math.round(Number(opts.sticker) || 0));
+      var seats = Math.max(0, Math.round(Number(opts.seats) || 0));
+      var hidden = Math.max(0, Math.round(Number(opts.hidden) || 0));
+      var total = Math.round(Number(opts.total));
+      if (!isFinite(total)) total = sticker + seats + hidden;
+      var parts = Math.max(1, sticker + seats + hidden);
+      function node(id) { return document.getElementById(id); }
+      function setText(id, value) {
+        var el = node(id);
+        if (el) el.textContent = value;
+      }
+      function setFlex(id, amount) {
+        var el = node(id);
+        if (!el) return;
+        var share = amount <= 0 ? 8 : (amount / parts) * 100;
+        el.style.flex = share + ' 1 0px';
+      }
+      setText('shell-product', opts.product || '');
+      setText('shell-big', window.saasbillMoney(total));
+      setText('shell-quote', 'True Year-1 cost');
+      setText('shell-sub', window.saasbillResultLine(hidden, sticker + seats));
+      setText('shell-amt-base', window.saasbillMoney(sticker));
+      setText('shell-amt-seats', window.saasbillMoney(seats));
+      setText('shell-amt-hidden', window.saasbillMoney(hidden));
+      setText('shell-title-base', 'Sticker Price');
+      setText('shell-title-seats', opts.seatsTitle || 'Other sticker fees');
+      setText('shell-title-hidden', 'Hidden Cost Gap');
+      setText('shell-sub-base', opts.baseLabel || 'Advertised price');
+      setText('shell-sub-seats', opts.seatsLabel || 'Included in the sticker');
+      setText('shell-sub-hidden', opts.hiddenLabel || 'Fees above the advertised price');
+      setFlex('shell-row-base', sticker);
+      setFlex('shell-row-seats', seats);
+      setFlex('shell-row-hidden', hidden);
+      var seatsRow = node('shell-row-seats');
+      if (seatsRow) seatsRow.style.display = seats <= 0 ? 'none' : '';
+      var math = node('shell-math');
+      if (math && opts.mathHtml) math.innerHTML = opts.mathHtml;
+      var best = node('shell-best');
+      if (best && opts.bestHtml) best.innerHTML = opts.bestHtml;
+      var cta = node('shell-cta');
+      if (cta && opts.ctaHref) {
+        cta.href = opts.ctaHref;
+        var label = opts.ctaLabel || 'See pricing';
+        cta.textContent = /→\s*$/.test(label) ? label : label + ' \u2192';
+        if (opts.ctaVendor) cta.setAttribute('data-vendor', opts.ctaVendor);
+      }
+      setText('shell-sticker', window.saasbillMoney(sticker + seats));
+      setText('shell-gap', hidden > 0 ? '+' + window.saasbillMoney(hidden) : '$0');
+      if (opts.product) setText('shell-sticker-note', opts.product);
+    };
+
+  </script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "TechArticle", "@id": "https://saasbill.io/pricing/pipedrive-true-year-1-cost-calculator/#article", "headline": "Pipedrive True Year-1 Cost Calculator (2026) \u2013 saasbill.io", "description": "Pipedrive Year-1 cost from published annual seat prices and add-ons. Unknown price bases are a floor, not $0. Example: $2,340 for 5 Growth seats.", "datePublished": "2026-10-30", "dateModified": "2026-10-30T08:10:32+00:00", "author": {"@type": "Organization", "name": "SaaSBill Editorial", "url": "https://saasbill.io/"}, "publisher": {"@type": "Organization", "name": "SaaSBill", "url": "https://saasbill.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://saasbill.io/pricing/pipedrive-true-year-1-cost-calculator/"}}, {"@type": "WebPage", "@id": "https://saasbill.io/pricing/pipedrive-true-year-1-cost-calculator/", "url": "https://saasbill.io/pricing/pipedrive-true-year-1-cost-calculator/", "name": "Pipedrive True Year-1 Cost Calculator (2026) \u2013 saasbill.io", "description": "Pipedrive Year-1 cost from published annual seat prices and add-ons. Unknown price bases are a floor, not $0. Example: $2,340 for 5 Growth seats.", "inLanguage": "en-US", "datePublished": "2026-10-30", "dateModified": "2026-10-30T08:10:32+00:00", "lastReviewed": "2026-10-30", "reviewedBy": {"@type": "Organization", "name": "SaaSBill Editorial"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "SaaSBill", "item": "https://saasbill.io/"}, {"@type": "ListItem", "position": 2, "name": "Pipedrive True Year-1 Cost Calculator (2026) \u2013 saasbill.io", "item": "https://saasbill.io/pricing/pipedrive-true-year-1-cost-calculator/"}]}, {"@type": "FAQPage", "@id": "https://saasbill.io/pricing/pipedrive-true-year-1-cost-calculator/#faq", "datePublished": "2026-10-30", "dateModified": "2026-10-30T08:10:32+00:00", "mainEntity": [{"@type": "Question", "name": "What does Pipedrive Growth cost for 5 seats in Year 1?", "dateCreated": "2026-10-30", "dateModified": "2026-10-30T08:10:32+00:00", "acceptedAnswer": {"@type": "Answer", "text": "On annual billing, Growth is $39 per seat per month, so 5 seats are $2,340 in Year 1 before add-ons. Lite at the same seat count is $840. Prices were checked Oct 30, 2026.", "dateCreated": "2026-10-30", "dateModified": "2026-10-30T08:10:32+00:00"}}, {"@type": "Question", "name": "Which Pipedrive add-ons have a published price basis?", "dateCreated": "2026-10-30", "dateModified": "2026-10-30T08:10:32+00:00", "acceptedAnswer": {"@type": "Answer", "text": "LeadBooster is $32.50 per month per company on annual billing, and it is included in Premium and Ultimate. Smart Docs (from $32.50), Projects (from $16), Campaigns (from $13.33) and Web Visitors (from $41) publish a starting price only. Per seat versus per company is not stated, so those add-ons are a floor, not a $0 line.", "dateCreated": "2026-10-30", "dateModified": "2026-10-30T08:10:32+00:00"}}, {"@type": "Question", "name": "Does this total include a dialer?", "dateCreated": "2026-10-30", "dateModified": "2026-10-30T08:10:32+00:00", "acceptedAnswer": {"@type": "Answer", "text": "No. Pipedrive has no built-in calling. This calculator does not add a Marketplace dialer, and it does not enter that missing price as $0.", "dateCreated": "2026-10-30", "dateModified": "2026-10-30T08:10:32+00:00"}}]}]}</script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-inner">
+      <div class="brand-wrap">
+        <a href="../../index.html" class="brand">SaaSBill<span>.io</span></a>
+        <span class="brand-tagline">Year-1 software cost &amp; contract calculators</span>
+      </div>
+      <nav class="nav-links" aria-label="Primary Navigation">
+        <a href="../../index.html#all-calculators">Audits &amp; Guides</a>
+        <a href="../../index.html#methodology">Methodology</a>
+        <span class="byline-bar">Updated <time datetime="2026-10-30" itemprop="dateModified">Oct 30, 2026</time></span>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+    <article itemscope itemtype="https://schema.org/TechArticle">
+      <meta itemprop="datePublished" content="2026-10-30" />
+      <meta itemprop="dateModified" content="2026-10-30T08:10:32+00:00" />
+      
+<section class="hero editorial-hero editorial-hero-wrap">
+  <h1>Pipedrive true Year-1 cost (2026): seats, plan and add-ons</h1>
+  <p class="lead">Pipedrive Growth for 5 seats, billed annually, is $2,340 in Year 1 before add-ons. Lite at the same seat count is $840. Add-ons whose price basis is unpublished are shown as at least the published starting price, never as $0.</p>
+  <p class="calc-affiliate-disclosure">SaaSBill may earn a commission if you sign up for Pipedrive via the link. It does not change the calculation.</p>
+</section>
+
+<div class="unified-inspector-tray">
+<section class="calc-box editorial-workbench" aria-label="True cost calculator">
+  <div class="workbench-grid wb-fill-chart">
+    <div class="wb-col-controls">
+      <div class="wb-col-title">Estimate Your True Cost</div>
+      <div class="wb-controls-stack">
+        
+        <div class="wb-control-item">
+          <label class="wb-control-label" for="py-seats">Sales seats</label>
+          <div class="wb-slider-row cp-slider-row">
+            <input type="range" id="py-seats" min="1" max="50" step="1" value="5" aria-label="Sales seats" data-track="calculator-control" data-control="py-seats" />
+            <input type="number" class="wb-slider-val cp-num" id="py-seats-num" min="1" max="50" step="1" value="5" inputmode="numeric" aria-label="Sales seats (number)" data-track="calculator-control" data-control="py-seats" />
+          </div>
+        </div>
+
+        <div class="wb-control-item">
+          <label class="wb-control-label" for="py-plan">Pipedrive plan</label>
+          <select id="py-plan" class="wb-tool-select" data-track="calculator-control" data-control="py-plan"><option value="lite">Lite ($14/seat/mo annual)</option><option value="growth" selected>Growth ($39/seat/mo annual)</option><option value="premium">Premium ($59/seat/mo annual)</option><option value="ultimate">Ultimate ($79/seat/mo annual)</option></select>
+        </div>
+        <fieldset class="wb-control-item cp-checks">
+          <legend class="wb-control-label">Add-ons</legend>
+          <label class="cp-check"><input type="checkbox" id="py-leadbooster" data-track="calculator-control" data-control="py-leadbooster" /><span>LeadBooster</span></label>
+<label class="cp-check"><input type="checkbox" id="py-smart_docs" data-track="calculator-control" data-control="py-smart_docs" /><span>Smart Docs</span></label>
+<label class="cp-check"><input type="checkbox" id="py-projects" data-track="calculator-control" data-control="py-projects" /><span>Projects</span></label>
+<label class="cp-check"><input type="checkbox" id="py-campaigns" data-track="calculator-control" data-control="py-campaigns" /><span>Campaigns</span></label>
+<label class="cp-check"><input type="checkbox" id="py-web_visitors" data-track="calculator-control" data-control="py-web_visitors" /><span>Web Visitors</span></label>
+        </fieldset>
+        <div class="wb-quiet-options"><div class="wb-quiet-field"><label>Billing:</label><span>Annual</span></div></div>
+
+      </div>
+    </div>
+    <div class="wb-col-chart">
+      <div class="wb-col-title">Your Estimated True Cost</div>
+      <div class="wb-vbar-container" aria-live="polite">
+        <div class="wb-vbar-row" id="shell-row-base" style="flex: 40 1 0px;">
+          <div class="wb-vbar-block block-base"><span class="wb-block-amount" id="shell-amt-base">$0</span></div>
+          <div class="wb-callout-item"><div class="wb-leader-line"></div><div class="wb-callout-text"><strong id="shell-title-base">Sticker Price</strong><span id="shell-sub-base">Advertised price</span></div></div>
+        </div>
+        <div class="wb-vbar-row" id="shell-row-seats" style="flex: 8 1 0px;">
+          <div class="wb-vbar-block block-seats"><span class="wb-block-amount" id="shell-amt-seats">$0</span></div>
+          <div class="wb-callout-item"><div class="wb-leader-line"></div><div class="wb-callout-text"><strong id="shell-title-seats">Other sticker fees</strong><span id="shell-sub-seats">Included in the sticker</span></div></div>
+        </div>
+        <div class="wb-vbar-row" id="shell-row-hidden" style="flex: 52 1 0px;">
+          <div class="wb-vbar-block block-hidden"><span class="wb-block-amount" id="shell-amt-hidden">$0</span></div>
+          <div class="wb-callout-item"><div class="wb-leader-line"></div><div class="wb-callout-text"><strong id="shell-title-hidden">Hidden Cost Gap</strong><span id="shell-sub-hidden">Fees above the advertised price</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="wb-result-col" id="shell-result">
+      <div class="wb-selected-product" id="shell-product">Year-1 total</div>
+      <div class="wb-big-total"><span id="shell-big">$0</span> <span class="wb-per-year">/ year</span></div>
+      <details class="math-drawer" id="shell-calc">
+        <summary>Show calculation</summary>
+        <div class="math-drawer-body" id="shell-math"></div>
+      </details>
+      <p class="wb-budget-quote" id="shell-quote">True Year-1 cost</p>
+      <p class="wb-budget-subnote" id="shell-sub">Matches advertised price ($0 hidden fees).</p>
+      <div class="wb-best-option" id="shell-best"><strong>Lowest Year-1 cost:</strong> Pipedrive Lite ($840/yr).</div>
+      <div class="cta-stack">
+        <a id="shell-cta" target="_blank" rel="sponsored nofollow noopener" class="btn-cta wb-primary-cta" href="/go/pipedrive" data-track="vendor-cta" data-vendor="pipedrive-crm" data-cta-location="workbench">Try Pipedrive (14-day trial) &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+<section class="verdict-section" aria-label="Year-1 cost summary">
+  <p class="summary-scenario summary-shared-scenario" id="py-scenario">Based on 5 seats &middot; annual billing &middot; Growth</p>
+  <div class="summary-strip" id="py-cards" aria-live="polite"><div class="summary-card result-card card-lowest"><div class="summary-label">Lowest Year-1 cost</div><div class="summary-metric" style="color:var(--emerald);">Lite</div><details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body"><div class="calc-math-list"><div class="calc-math-row"><span class="calc-math-label"><strong>Pipedrive Growth seats</strong><span class="calc-math-formula">5 &times; $39 &times; 12</span></span><span class="calc-math-val">$2,340</span></div><div class="calc-math-row"><span class="calc-math-label"><strong>Year-1 cost</strong><span class="calc-math-formula">Seats + add-ons</span></span><span class="calc-math-val">$2,340</span></div></div></div></details><div class="summary-driver">$840/yr on annual billing</div><div class="summary-scenario">Prices verified Oct 30, 2026</div><div class="summary-actions"><a class="summary-audit-link" href="#py-compare-heading" data-track="internal-audit">Compare side by side &darr;</a></div></div><div class="summary-card result-card"><div class="summary-label">Your plan</div><div class="summary-metric">$2,340 / yr</div><details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body"><div class="calc-math-list"><div class="calc-math-row"><span class="calc-math-label"><strong>Pipedrive Growth seats</strong><span class="calc-math-formula">5 &times; $39 &times; 12</span></span><span class="calc-math-val">$2,340</span></div><div class="calc-math-row"><span class="calc-math-label"><strong>Year-1 cost</strong><span class="calc-math-formula">Seats + add-ons</span></span><span class="calc-math-val">$2,340</span></div></div></div></details><div class="summary-driver">Growth</div><div class="summary-scenario">No add-ons</div><div class="summary-actions"><div class="cta-stack"><a class="btn-secondary" href="/go/pipedrive" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="pipedrive-crm" data-cta-location="summary-card">Try Pipedrive (14-day trial) &rarr;</a></div></div></div><div class="summary-card result-card"><div class="summary-label">Add-ons on this plan</div><div class="summary-metric">$0 / yr</div><details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body"><div class="calc-math-list"><div class="calc-math-row"><span class="calc-math-label"><strong>Add-ons</strong><span class="calc-math-formula">None selected</span></span><span class="calc-math-val">$0</span></div><div class="calc-math-row"><span class="calc-math-label"><strong>Add-on Year-1</strong><span class="calc-math-formula">Known add-ons</span></span><span class="calc-math-val">$0</span></div></div></div></details><div class="summary-driver">No add-ons</div><div class="summary-scenario">Included add-ons are not an extra charge</div></div></div>
+</section>
+
+
+<section aria-labelledby="py-compare-heading" class="cp-compare">
+  <h2 id="py-compare-heading">Side by side for your inputs</h2>
+  <div class="table-wrap editorial-gap-table mobile-cards cp-table">
+    <table>
+      <thead><tr><th>Platform</th><th>Plan chosen</th><th>Seats &amp; add-ons</th><th>Calling / dialer</th><th>True Year-1 cost</th><th>Action</th></tr></thead>
+      <tbody id="py-tbody"><tr><td data-label="Platform"><strong>Pipedrive</strong><br><span class="status-pill status-verified">Verified</span> &middot; <a href="https://www.pipedrive.com/en/pricing" target="_blank" rel="noopener" class="source-link">pipedrive.com/pricing</a><div class="cp-verified">Verified Oct 30, 2026</div></td><td data-label="Plan chosen">Lite &middot; $14/seat/mo<div class="cp-verified">Annual billing</div></td><td data-label="Seats &amp; add-ons">5 seats: $840</td><td data-label="Calling / dialer">Not in this total. Pipedrive has no built-in dialer.</td><td data-label="True Year-1 cost"><strong>$840</strong></td><td data-label="Action"><a class="btn-secondary" href="/go/pipedrive" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="pipedrive-crm" data-cta-location="comparison-table">Try Pipedrive (14-day trial) &rarr;</a></td></tr><tr><td data-label="Platform"><strong>Pipedrive</strong><br><span class="status-pill status-verified">Verified</span> &middot; <a href="https://www.pipedrive.com/en/pricing" target="_blank" rel="noopener" class="source-link">pipedrive.com/pricing</a><div class="cp-verified">Verified Oct 30, 2026</div></td><td data-label="Plan chosen">Growth &middot; $39/seat/mo<div class="cp-verified">Annual billing</div></td><td data-label="Seats &amp; add-ons">5 seats: $2,340</td><td data-label="Calling / dialer">Not in this total. Pipedrive has no built-in dialer.</td><td data-label="True Year-1 cost"><strong>$2,340</strong></td><td data-label="Action"><a class="btn-secondary" href="/go/pipedrive" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="pipedrive-crm" data-cta-location="comparison-table">Try Pipedrive (14-day trial) &rarr;</a></td></tr><tr><td data-label="Platform"><strong>Pipedrive</strong><br><span class="status-pill status-verified">Verified</span> &middot; <a href="https://www.pipedrive.com/en/pricing" target="_blank" rel="noopener" class="source-link">pipedrive.com/pricing</a><div class="cp-verified">Verified Oct 30, 2026</div></td><td data-label="Plan chosen">Premium &middot; $59/seat/mo<div class="cp-verified">Annual billing</div></td><td data-label="Seats &amp; add-ons">5 seats: $3,540</td><td data-label="Calling / dialer">Not in this total. Pipedrive has no built-in dialer.</td><td data-label="True Year-1 cost"><strong>$3,540</strong></td><td data-label="Action"><a class="btn-secondary" href="/go/pipedrive" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="pipedrive-crm" data-cta-location="comparison-table">Try Pipedrive (14-day trial) &rarr;</a></td></tr><tr><td data-label="Platform"><strong>Pipedrive</strong><br><span class="status-pill status-verified">Verified</span> &middot; <a href="https://www.pipedrive.com/en/pricing" target="_blank" rel="noopener" class="source-link">pipedrive.com/pricing</a><div class="cp-verified">Verified Oct 30, 2026</div></td><td data-label="Plan chosen">Ultimate &middot; $79/seat/mo<div class="cp-verified">Annual billing</div></td><td data-label="Seats &amp; add-ons">5 seats: $4,740</td><td data-label="Calling / dialer">Not in this total. Pipedrive has no built-in dialer.</td><td data-label="True Year-1 cost"><strong>$4,740</strong></td><td data-label="Action"><a class="btn-secondary" href="/go/pipedrive" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="pipedrive-crm" data-cta-location="comparison-table">Try Pipedrive (14-day trial) &rarr;</a></td></tr></tbody>
+    </table>
+  </div>
+  <p class="cp-fineprint">Prices last verified: Pipedrive <time datetime="2026-10-30">Oct 30, 2026</time>, HubSpot <time datetime="2026-10-25">Oct 25, 2026</time> &middot; USD, annual billing</p>
+</section>
+
+
+<section class="editorial-below-section cp-below">
+  <details class="full-table-disclosure below-disclosure">
+    <summary class="full-table-summary"><span class="below-disclosure-title">Assumptions</span><span class="full-table-toggle-pill" aria-hidden="true">&darr;</span></summary>
+    <div class="full-table-body"><ul class="cp-list">
+      <li>USD, excluding VAT. Year 1 = 12 months of annual billing. Pipedrive monthly prices are not verified, so this page does not total them.</li>
+      <li>LeadBooster's annual price is per company. Smart Docs, Projects, Campaigns and Web Visitors publish a from-price only. Whether that price is per seat or per company is unknown, so a selected add-on is a floor (at least the from-price times 12), never $0.</li>
+      <li>LeadBooster, Smart Docs and Projects are included in Premium and Ultimate. That inclusion is a verified extra of $0, labeled Included.</li>
+      <li>Pipedrive has no built-in dialer. A Marketplace dialer is not added on these pages, and it is not entered as $0.</li>
+      <li>HubSpot Sales Hub Professional is $90/seat/month annual plus $1,500 onboarding. Enterprise is $150/seat/month annual plus $3,500 onboarding. Starter is $15/seat/month annual and $0 onboarding, from the onboarding FAQ already published on this site. Calling credits are not in the HubSpot total.</li>
+    </ul></div>
+  </details>
+  <details class="full-table-disclosure below-disclosure" id="py-sources">
+    <summary class="full-table-summary"><span class="below-disclosure-title">Sources &amp; last verified</span><span class="full-table-toggle-pill" aria-hidden="true">&darr;</span></summary>
+    <div class="full-table-body"><div class="table-wrap mobile-cards"><table>
+      <thead><tr><th>Source</th><th>What was checked</th><th>Verified</th><th>Status</th></tr></thead>
+      <tbody><tr><td data-label="Source"><a href="https://www.pipedrive.com/en/pricing" target="_blank" rel="noopener">www.pipedrive.com/en/pricing</a></td><td data-label="What">Pipedrive annual seat prices: Lite $14, Growth $39, Premium $59, Ultimate $79. Monthly prices are not verified and are not used.</td><td data-label="Verified"><time datetime="2026-10-30">Oct 30, 2026</time></td><td data-label="Status"><span class="status-pill status-verified">verified</span></td></tr><tr><td data-label="Source"><a href="https://www.pipedrive.com/en/features/leadbooster" target="_blank" rel="noopener">www.pipedrive.com/en/features/leadbooster</a></td><td data-label="What">LeadBooster from $32.50 per month (company). Included in: premium, ultimate.</td><td data-label="Verified"><time datetime="2026-10-30">Oct 30, 2026</time></td><td data-label="Status"><span class="status-pill status-verified">verified</span></td></tr><tr><td data-label="Source"><a href="https://www.pipedrive.com/en/pricing" target="_blank" rel="noopener">www.pipedrive.com/en/pricing</a></td><td data-label="What">Smart Docs from $32.50 per month (per seat or per company is not stated). Included in: premium, ultimate.</td><td data-label="Verified"><time datetime="2026-10-30">Oct 30, 2026</time></td><td data-label="Status"><span class="status-pill status-verified">verified</span></td></tr><tr><td data-label="Source"><a href="https://www.pipedrive.com/en/pricing" target="_blank" rel="noopener">www.pipedrive.com/en/pricing</a></td><td data-label="What">Projects from $16 per month (per seat or per company is not stated). Included in: premium, ultimate.</td><td data-label="Verified"><time datetime="2026-10-30">Oct 30, 2026</time></td><td data-label="Status"><span class="status-pill status-verified">verified</span></td></tr><tr><td data-label="Source"><a href="https://www.pipedrive.com/en/pricing" target="_blank" rel="noopener">www.pipedrive.com/en/pricing</a></td><td data-label="What">Campaigns from $13.33 per month (per seat or per company is not stated). Included in: no plan.</td><td data-label="Verified"><time datetime="2026-10-30">Oct 30, 2026</time></td><td data-label="Status"><span class="status-pill status-verified">verified</span></td></tr><tr><td data-label="Source"><a href="https://www.pipedrive.com/en/pricing" target="_blank" rel="noopener">www.pipedrive.com/en/pricing</a></td><td data-label="What">Web Visitors from $41 per month (per seat or per company is not stated). Included in: no plan.</td><td data-label="Verified"><time datetime="2026-10-30">Oct 30, 2026</time></td><td data-label="Status"><span class="status-pill status-verified">verified</span></td></tr><tr><td data-label="Source"><a href="https://www.hubspot.com/pricing/sales" target="_blank" rel="noopener">www.hubspot.com/pricing/sales</a></td><td data-label="What">HubSpot Sales Hub annual: Starter $15/seat and $0 onboarding (existing onboarding FAQ), Professional $90/seat plus $1,500 onboarding, Enterprise $150/seat plus $3,500 onboarding.</td><td data-label="Verified"><time datetime="2026-10-25">Oct 25, 2026</time></td><td data-label="Status"><span class="status-pill status-verified">verified</span></td></tr></tbody>
+    </table></div></div>
+  </details>
+  <p class="summary-interpretation"><a href="../compare/pipedrive-vs-hubspot-sales-hub-year-1-cost/" data-track="internal-audit">Compare Pipedrive with HubSpot Sales Hub &rarr;</a></p>
+</section>
+
+<script>
+const PY_DATA = {"pipedrive":{"plans":{"lite":{"label":"Lite","annual":14},"growth":{"label":"Growth","annual":39},"premium":{"label":"Premium","annual":59},"ultimate":{"label":"Ultimate","annual":79}},"addons":{"leadbooster":{"label":"LeadBooster","annual":32.5,"from":null,"per":"company","includedIn":["premium","ultimate"]},"smart_docs":{"label":"Smart Docs","annual":null,"from":32.5,"per":null,"includedIn":["premium","ultimate"]},"projects":{"label":"Projects","annual":null,"from":16,"per":null,"includedIn":["premium","ultimate"]},"campaigns":{"label":"Campaigns","annual":null,"from":13.33,"per":null,"includedIn":[]},"web_visitors":{"label":"Web Visitors","annual":null,"from":41,"per":null,"includedIn":[]}},"addonOrder":["leadbooster","smart_docs","projects","campaigns","web_visitors"],"sourceUrl":"https://www.pipedrive.com/en/pricing","verified":"Oct 30, 2026","ctaLabel":"Try Pipedrive (14-day trial)"},"hubspot":{"plans":{"starter":{"label":"Sales Hub Starter","annual":15,"onboarding":0},"professional":{"label":"Sales Hub Professional","annual":90,"onboarding":1500},"enterprise":{"label":"Sales Hub Enterprise","annual":150,"onboarding":3500}},"sourceUrl":"https://www.hubspot.com/pricing/sales","verified":"Oct 25, 2026"}};
+// Pipedrive Year-1 math, shared by the Pipedrive calculator and the
+// Pipedrive vs HubSpot comparison. PY_DATA is injected from
+// data/crm_pricing.json plus HubSpot fields already published on this site.
+// A null amount is unknown. It is never stored or displayed as $0.
+// Unknown add-on price bases contribute only a floor (the published
+// "from" price times 12). A lowest option is named only when one exact
+// total is strictly below every other option's floor.
+
+function pyCents(v) { return Math.round(Number(v) * 100) / 100; }
+
+function pyAddonLine(data, id, planKey, on) {
+  var a = data.pipedrive.addons[id];
+  var base = { id: id, label: a.label, on: !!on, included: false, unknown: false, amount: 0, floor: 0, basis: a.per || '' };
+  if (!on) return base;
+  var included = (a.includedIn || []).indexOf(planKey) !== -1;
+  if (included) {
+    base.included = true;
+    base.amount = 0;
+    base.floor = 0;
+    base.basis = 'included';
+    return base;
+  }
+  if (a.per === 'company' && a.annual !== null && a.annual !== undefined) {
+    var company = pyCents(a.annual * 12);
+    base.amount = company;
+    base.floor = company;
+    base.basis = 'company';
+    return base;
+  }
+  if (a.from !== null && a.from !== undefined) {
+    base.amount = null;
+    base.floor = pyCents(a.from * 12);
+    base.unknown = true;
+    base.basis = 'unknown';
+    return base;
+  }
+  base.amount = null;
+  base.floor = null;
+  base.unknown = true;
+  base.basis = 'unknown';
+  return base;
+}
+
+function pyOnePlan(data, seats, planKey, selected) {
+  var plan = data.pipedrive.plans[planKey];
+  var rate = plan.annual;
+  var seat = rate === null || rate === undefined ? null : pyCents(seats * rate * 12);
+  var ids = data.pipedrive.addonOrder;
+  var lines = [];
+  for (var i = 0; i < ids.length; i++) lines.push(pyAddonLine(data, ids[i], planKey, !!(selected && selected[ids[i]])));
+  var unknown = false;
+  var unpriced = false;
+  var exact = seat;
+  var floor = seat;
+  if (seat === null) { unknown = true; unpriced = true; }
+  for (var j = 0; j < lines.length; j++) {
+    var line = lines[j];
+    if (!line.on) continue;
+    if (line.unknown) {
+      unknown = true;
+      if (line.floor === null) unpriced = true;
+      else if (floor !== null) floor = pyCents(floor + line.floor);
+    } else if (exact !== null) {
+      exact = pyCents(exact + line.amount);
+      floor = pyCents(floor + line.amount);
+    }
+  }
+  return {
+    seats: seats,
+    plan: planKey,
+    planLabel: plan.label,
+    rate: rate,
+    seat: seat,
+    lines: lines,
+    total: (unknown || unpriced) ? null : exact,
+    floor: unpriced ? null : floor,
+    unknown: unknown
+  };
+}
+
+function pyLowest(rows) {
+  var winners = [];
+  for (var i = 0; i < rows.length; i++) {
+    var row = rows[i];
+    if (row.total === null) continue;
+    var beats = true;
+    for (var j = 0; j < rows.length; j++) {
+      if (i === j) continue;
+      var other = rows[j].total === null ? rows[j].floor : rows[j].total;
+      if (other === null || !(row.total < other)) beats = false;
+    }
+    if (beats) winners.push(row);
+  }
+  if (winners.length === 1) return { id: winners[0].id, total: winners[0].total, tie: false };
+  if (winners.length > 1) return { id: null, total: winners[0].total, tie: true };
+  return null;
+}
+
+function calcPipedriveYear1(input) {
+  var D = PY_DATA;
+  input = input || {};
+  var seats = Math.round(Number(input.seats));
+  if (!isFinite(seats)) seats = 5;
+  seats = Math.min(50, Math.max(1, seats));
+  var plan = D.pipedrive.plans[input.plan] ? input.plan : 'growth';
+  var selected = input.addons || {};
+  var keys = Object.keys(D.pipedrive.plans);
+  var rows = [];
+  for (var i = 0; i < keys.length; i++) {
+    var one = pyOnePlan(D, seats, keys[i], selected);
+    one.id = keys[i];
+    rows.push(one);
+  }
+  var current = null;
+  for (var k = 0; k < rows.length; k++) if (rows[k].id === plan) current = rows[k];
+  return { seats: seats, plan: plan, billing: 'annual', rows: rows, current: current, lowest: pyLowest(rows) };
+}
+
+function calcHubspotYear1(input) {
+  var D = PY_DATA;
+  input = input || {};
+  var seats = Math.round(Number(input.seats));
+  if (!isFinite(seats)) seats = 5;
+  seats = Math.min(50, Math.max(1, seats));
+  var tier = D.hubspot.plans[input.tier] ? input.tier : 'professional';
+  var p = D.hubspot.plans[tier];
+  var seat = pyCents(seats * p.annual * 12);
+  var onboarding = p.onboarding;
+  return {
+    seats: seats,
+    tier: tier,
+    planLabel: p.label,
+    rate: p.annual,
+    seat: seat,
+    onboarding: onboarding,
+    total: pyCents(seat + onboarding),
+    floor: pyCents(seat + onboarding)
+  };
+}
+
+function calcPipedriveVsHubspot(input) {
+  input = input || {};
+  var pd = calcPipedriveYear1(input);
+  var hs = calcHubspotYear1({ seats: pd.seats, tier: input.tier });
+  var current = pd.current;
+  var lowest = null;
+  var difference = null;
+  if (current.total !== null) {
+    if (current.total < hs.total) lowest = 'pipedrive';
+    else if (hs.total < current.total) lowest = 'hubspot';
+    else lowest = 'tie';
+    difference = pyCents(Math.abs(current.total - hs.total));
+  } else if (current.floor !== null && hs.total < current.floor) {
+    lowest = 'hubspot';
+    difference = null;
+  }
+  return { seats: pd.seats, billing: 'annual', pipedrive: current, plans: pd.rows, hubspot: hs, lowest: lowest, difference: difference };
+}
+
+function pyMoney(n) {
+  var v = Math.round(Number(n) || 0);
+  return '$' + v.toLocaleString('en-US');
+}
+function pyUnit(n) {
+  return Number(n) % 1 === 0 ? '$' + Number(n).toLocaleString('en-US') : '$' + Number(n).toFixed(2);
+}
+function pyPill() {
+  return ' <span class="status-pill status-unknown">unverified</span>';
+}
+function pyTotal(row) {
+  if (!row) return '';
+  if (row.total === null) {
+    return row.floor === null ? 'unknown' + pyPill() : '&ge; ' + pyMoney(row.floor) + pyPill();
+  }
+  return pyMoney(row.total);
+}
+function pyAddonPhrase(line) {
+  if (!line.on) return '';
+  if (line.included) return line.label + ' included';
+  if (line.basis === 'company') return line.label + ' ' + pyMoney(line.amount) + ' (per company)';
+  if (line.unknown) return line.label + ' at least ' + (line.floor === null ? 'unknown' : pyMoney(line.floor)) + ' (price basis unpublished)';
+  return line.label + ' ' + pyMoney(line.amount);
+}
+function pyMathRows(row) {
+  var out = [];
+  function add(label, formula, val) {
+    out.push('<div class="calc-math-row"><span class="calc-math-label"><strong>' + label + '</strong><span class="calc-math-formula">' + formula + '</span></span><span class="calc-math-val">' + val + '</span></div>');
+  }
+  add('Pipedrive ' + row.planLabel + ' seats', row.rate === null ? 'unverified rate' : (row.seats + ' &times; ' + pyUnit(row.rate) + ' &times; 12'), row.seat === null ? 'unknown' + pyPill() : pyMoney(row.seat));
+  var lines = row.lines || [];
+  for (var i = 0; i < lines.length; i++) {
+    var line = lines[i];
+    if (!line.on) continue;
+    if (line.included) add(line.label, 'Included in ' + row.planLabel + '. Not an extra charge.', 'Included');
+    else if (line.basis === 'company') add(line.label, pyUnit(PY_DATA.pipedrive.addons[line.id].annual) + ' per company &times; 12', pyMoney(line.amount));
+    else add(line.label, 'Published from-price &times; 12. Per seat or per company is not stated, so this is a floor, not a total.', line.floor === null ? 'unknown' + pyPill() : '&ge; ' + pyMoney(line.floor) + pyPill());
+  }
+  add('Year-1 cost', row.unknown ? 'At least the known seats plus published starting add-on prices' : 'Seats + add-ons', pyTotal(row));
+  return '<div class="calc-math-list">' + out.join('') + '</div>';
+}
+function pyHsMath(hs) {
+  return '<div class="calc-math-list">' +
+    '<div class="calc-math-row"><span class="calc-math-label"><strong>' + hs.planLabel + ' seats</strong><span class="calc-math-formula">' + hs.seats + ' &times; ' + pyUnit(hs.rate) + ' &times; 12</span></span><span class="calc-math-val">' + pyMoney(hs.seat) + '</span></div>' +
+    '<div class="calc-math-row"><span class="calc-math-label"><strong>Onboarding</strong><span class="calc-math-formula">One-time, Year 1</span></span><span class="calc-math-val">' + pyMoney(hs.onboarding) + '</span></div>' +
+    '<div class="calc-math-row"><span class="calc-math-label"><strong>Year-1 cost</strong><span class="calc-math-formula">Seats + onboarding. Calling credits are not in this total.</span></span><span class="calc-math-val">' + pyMoney(hs.total) + '</span></div>' +
+    '</div>';
+}
+function pyCta(location) {
+  return '<a class="btn-secondary" href="/go/pipedrive" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="pipedrive-crm" data-cta-location="' + location + '">' + PY_DATA.pipedrive.ctaLabel + ' &rarr;</a>';
+}
+function pyHsCta(location) {
+  return '<a class="btn-secondary" href="' + PY_DATA.hubspot.sourceUrl + '" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="hubspot" data-cta-location="' + location + '">View HubSpot pricing &rarr;</a>';
+}
+function pyOnSummary(lines) {
+  var parts = [];
+  for (var i = 0; i < lines.length; i++) {
+    var phrase = pyAddonPhrase(lines[i]);
+    if (phrase) parts.push(phrase);
+  }
+  return parts.length ? parts.join('; ') : 'No add-ons';
+}
+function pyPdCard(row, label) {
+  return '<div class="summary-card result-card">' +
+    '<div class="summary-label">' + label + '</div>' +
+    '<div class="summary-metric">' + pyTotal(row) + (row.total === null ? '' : ' / yr') + '</div>' +
+    '<details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">' + pyMathRows(row) + '</div></details>' +
+    '<div class="summary-driver">' + row.planLabel + '</div>' +
+    '<div class="summary-scenario">' + pyOnSummary(row.lines) + '</div>' +
+    '<div class="summary-actions"><div class="cta-stack">' + pyCta('summary-card') + '</div></div></div>';
+}
+function pyLowestCard(result) {
+  var metric, driver;
+  if (!result.lowest) {
+    metric = 'Not determined';
+    driver = 'An add-on price basis is unpublished, so no plan is marked lowest';
+  } else if (result.lowest.tie) {
+    metric = 'Same cost';
+    driver = pyMoney(result.lowest.total) + '/yr on more than one plan';
+  } else {
+    var row = null;
+    for (var i = 0; i < result.rows.length; i++) if (result.rows[i].id === result.lowest.id) row = result.rows[i];
+    metric = row.planLabel;
+    driver = pyMoney(result.lowest.total) + '/yr on annual billing';
+  }
+  return '<div class="summary-card result-card card-lowest">' +
+    '<div class="summary-label">Lowest Year-1 cost</div>' +
+    '<div class="summary-metric" style="color:var(--emerald);">' + metric + '</div>' +
+    '<details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">' + pyMathRows(result.current) + '</div></details>' +
+    '<div class="summary-driver">' + driver + '</div>' +
+    '<div class="summary-scenario">Prices verified ' + PY_DATA.pipedrive.verified + '</div>' +
+    '<div class="summary-actions"><a class="summary-audit-link" href="#py-compare-heading" data-track="internal-audit">Compare side by side &darr;</a></div></div>';
+}
+function pyAddonCard(result) {
+  var lines = result.current.lines;
+  var extra = 0, floor = 0, unknown = false, unpriced = false, on = false;
+  var body = '<div class="calc-math-list">';
+  for (var i = 0; i < lines.length; i++) {
+    var line = lines[i];
+    if (!line.on) continue;
+    on = true;
+    var val;
+    if (line.included) {
+      val = 'Included';
+      extra += 0;
+      floor += 0;
+    } else if (line.unknown) {
+      unknown = true;
+      if (line.floor === null) { unpriced = true; val = 'unknown' + pyPill(); }
+      else { floor += line.floor; val = '&ge; ' + pyMoney(line.floor) + pyPill(); }
+    } else {
+      extra += line.amount;
+      floor += line.amount;
+      val = pyMoney(line.amount);
+    }
+    body += '<div class="calc-math-row"><span class="calc-math-label"><strong>' + line.label + '</strong><span class="calc-math-formula">' + pyAddonPhrase(line) + '</span></span><span class="calc-math-val">' + val + '</span></div>';
+  }
+  if (!on) body += '<div class="calc-math-row"><span class="calc-math-label"><strong>Add-ons</strong><span class="calc-math-formula">None selected</span></span><span class="calc-math-val">' + pyMoney(0) + '</span></div>';
+  var row = { total: (unknown || unpriced) ? null : pyCents(extra), floor: unpriced ? null : pyCents(floor) };
+  body += '<div class="calc-math-row"><span class="calc-math-label"><strong>Add-on Year-1</strong><span class="calc-math-formula">' + (unknown ? 'Floor only where the price basis is unpublished' : 'Known add-ons') + '</span></span><span class="calc-math-val">' + (on ? pyTotal(row) : pyMoney(0)) + '</span></div></div>';
+  return '<div class="summary-card result-card"><div class="summary-label">Add-ons on this plan</div>' +
+    '<div class="summary-metric">' + (on ? pyTotal(row) : pyMoney(0)) + (row.total === null ? '' : ' / yr') + '</div>' +
+    '<details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">' + body + '</div></details>' +
+    '<div class="summary-driver">' + pyOnSummary(lines) + '</div>' +
+    '<div class="summary-scenario">Included add-ons are not an extra charge</div></div>';
+}
+function pyCardsHtml(result) {
+  return pyLowestCard(result) + pyPdCard(result.current, 'Your plan') + pyAddonCard(result);
+}
+function pyTableHtml(result) {
+  var rows = result.rows;
+  var html = '';
+  for (var i = 0; i < rows.length; i++) {
+    var row = rows[i];
+    var add = pyOnSummary(row.lines);
+    html += '<tr><td data-label="Platform"><strong>Pipedrive</strong><br><span class="status-pill status-verified">Verified</span> &middot; <a href="' + PY_DATA.pipedrive.sourceUrl + '" target="_blank" rel="noopener" class="source-link">pipedrive.com/pricing</a><div class="cp-verified">Verified ' + PY_DATA.pipedrive.verified + '</div></td>' +
+      '<td data-label="Plan chosen">' + row.planLabel + ' &middot; ' + pyUnit(row.rate) + '/seat/mo<div class="cp-verified">Annual billing</div></td>' +
+      '<td data-label="Seats &amp; add-ons">' + row.seats + ' seats: ' + pyMoney(row.seat) + (add === 'No add-ons' ? '' : ' &middot; ' + add) + '</td>' +
+      '<td data-label="Calling / dialer">Not in this total. Pipedrive has no built-in dialer.</td>' +
+      '<td data-label="True Year-1 cost"><strong>' + pyTotal(row) + '</strong></td>' +
+      '<td data-label="Action">' + pyCta('comparison-table') + '</td></tr>';
+  }
+  return html;
+}
+function pyBestLine(result) {
+  if (!result.lowest) return '<strong>Lowest Year-1 cost:</strong> not determined, because an add-on price basis is unpublished.';
+  if (result.lowest.tie) return '<strong>Lowest Year-1 cost:</strong> ' + pyMoney(result.lowest.total) + '/yr on more than one plan.';
+  var row = null;
+  for (var i = 0; i < result.rows.length; i++) if (result.rows[i].id === result.lowest.id) row = result.rows[i];
+  return '<strong>Lowest Year-1 cost:</strong> Pipedrive ' + row.planLabel + ' (' + pyMoney(result.lowest.total) + '/yr).';
+}
+function pyScenario(result) {
+  return result.seats + (result.seats === 1 ? ' seat' : ' seats') + ' &middot; annual billing &middot; ' + result.current.planLabel;
+}
+function pyCompareCards(r) {
+  var pd = r.pipedrive, hs = r.hubspot;
+  var metric, driver;
+  if (r.lowest === 'pipedrive' || r.lowest === 'hubspot') {
+    metric = r.lowest === 'pipedrive' ? 'Pipedrive' : 'HubSpot';
+    driver = r.difference !== null ? pyMoney(r.difference) + '/yr less than ' + (r.lowest === 'pipedrive' ? 'HubSpot' : 'Pipedrive') : 'Lower even at the minimum of the unverified side';
+  } else if (r.lowest === 'tie') {
+    metric = 'Same cost';
+    driver = pyMoney(pd.total) + '/yr on both';
+  } else {
+    metric = 'Not determined';
+    driver = 'An add-on price basis is unpublished, so the two totals are not ranked';
+  }
+  var lowest = '<div class="summary-card result-card card-lowest"><div class="summary-label">Lowest Year-1 cost</div>' +
+    '<div class="summary-metric" style="color:var(--emerald);">' + metric + '</div>' +
+    '<details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">' + pyMathRows(pd) + pyHsMath(hs) + '</div></details>' +
+    '<div class="summary-driver">' + driver + '</div>' +
+    '<div class="summary-scenario">Pipedrive prices verified ' + PY_DATA.pipedrive.verified + '</div>' +
+    '<div class="summary-actions"><a class="summary-audit-link" href="#py-compare-heading" data-track="internal-audit">Compare side by side &darr;</a></div></div>';
+  var pdCard = '<div class="summary-card result-card"><div class="summary-label">Pipedrive Year-1 cost</div>' +
+    '<div class="summary-metric">' + pyTotal(pd) + (pd.total === null ? '' : ' / yr') + '</div>' +
+    '<details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">' + pyMathRows(pd) + '</div></details>' +
+    '<div class="summary-driver">Pipedrive ' + pd.planLabel + '</div>' +
+    '<div class="summary-scenario">' + pyOnSummary(pd.lines) + '</div>' +
+    '<div class="summary-actions"><div class="cta-stack">' + pyCta('summary-card') + '</div></div></div>';
+  var hsCard = '<div class="summary-card result-card"><div class="summary-label">HubSpot Year-1 cost</div>' +
+    '<div class="summary-metric">' + pyMoney(hs.total) + ' / yr</div>' +
+    '<details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">' + pyHsMath(hs) + '</div></details>' +
+    '<div class="summary-driver">' + hs.planLabel + '</div>' +
+    '<div class="summary-scenario">' + pyMoney(hs.seat) + ' seats + ' + pyMoney(hs.onboarding) + ' onboarding</div>' +
+    '<div class="summary-actions"><div class="cta-stack">' + pyHsCta('summary-card') + '</div></div></div>';
+  return lowest + pdCard + hsCard;
+}
+function pyCompareTable(r) {
+  var pd = r.pipedrive, hs = r.hubspot;
+  var add = pyOnSummary(pd.lines);
+  return '<tr><td data-label="Platform"><strong>Pipedrive</strong><br><span class="status-pill status-verified">Verified</span> &middot; <a href="' + PY_DATA.pipedrive.sourceUrl + '" target="_blank" rel="noopener" class="source-link">pipedrive.com/pricing</a><div class="cp-verified">Verified ' + PY_DATA.pipedrive.verified + '</div></td>' +
+    '<td data-label="Plan chosen">' + pd.planLabel + ' &middot; ' + pyUnit(pd.rate) + '/seat/mo</td>' +
+    '<td data-label="Seats &amp; add-ons">' + pd.seats + ' seats: ' + pyMoney(pd.seat) + (add === 'No add-ons' ? '' : ' &middot; ' + add) + '</td>' +
+    '<td data-label="Calling / dialer">Not priced. Pipedrive has no built-in dialer, and a Marketplace dialer is not added here.</td>' +
+    '<td data-label="True Year-1 cost"><strong>' + pyTotal(pd) + '</strong></td>' +
+    '<td data-label="Action">' + pyCta('comparison-table') + '</td></tr>' +
+    '<tr><td data-label="Platform"><strong>HubSpot</strong><br><span class="status-pill status-verified">Verified</span> &middot; <a href="' + PY_DATA.hubspot.sourceUrl + '" target="_blank" rel="noopener" class="source-link">hubspot.com/pricing/sales</a><div class="cp-verified">Verified ' + PY_DATA.hubspot.verified + '</div></td>' +
+    '<td data-label="Plan chosen">' + hs.planLabel + ' &middot; ' + pyUnit(hs.rate) + '/seat/mo</td>' +
+    '<td data-label="Seats &amp; add-ons">' + hs.seats + ' seats: ' + pyMoney(hs.seat) + ' + ' + pyMoney(hs.onboarding) + ' onboarding</td>' +
+    '<td data-label="Calling / dialer">Calling credits are not in this total.</td>' +
+    '<td data-label="True Year-1 cost"><strong>' + pyMoney(hs.total) + '</strong></td>' +
+    '<td data-label="Action">' + pyHsCta('comparison-table') + '</td></tr>';
+}
+function pyCompareBest(r) {
+  if (r.lowest === null) return '<strong>Lowest Year-1 cost:</strong> not determined, because an add-on price basis is unpublished.';
+  if (r.lowest === 'tie') return '<strong>Lowest Year-1 cost:</strong> ' + pyMoney(r.pipedrive.total) + '/yr on both.';
+  var name = r.lowest === 'pipedrive' ? ('Pipedrive ' + r.pipedrive.planLabel) : r.hubspot.planLabel;
+  var total = r.lowest === 'pipedrive' ? r.pipedrive.total : r.hubspot.total;
+  var other = r.lowest === 'pipedrive' ? 'HubSpot' : 'Pipedrive';
+  return '<strong>Lowest Year-1 cost:</strong> ' + name + ' (' + pyMoney(total) + '/yr)' +
+    (r.difference !== null ? ' &middot; ' + pyMoney(r.difference) + '/yr less than ' + other : '') + '.';
+}
+function pyCompareScenario(r) {
+  return r.seats + (r.seats === 1 ? ' seat' : ' seats') + ' &middot; annual billing &middot; Pipedrive ' + r.pipedrive.planLabel + ' &middot; ' + r.hubspot.planLabel;
+}
+
+
+(function () {
+  function el(id) { return document.getElementById(id); }
+  function clamp(v) { var n = Math.round(Number(v)); if (!isFinite(n)) n = 5; return Math.min(50, Math.max(1, n)); }
+  function read() {
+    var addons = {};
+    PY_DATA.pipedrive.addonOrder.forEach(function (id) { addons[id] = el('py-' + id).checked; });
+    return { seats: clamp(el('py-seats').value), plan: el('py-plan').value, addons: addons };
+  }
+  function apply(r) {
+    if (typeof window.saasbillApplyWorkbench !== 'function') return;
+    var row = r.current, known = 0, floor = 0;
+    row.lines.forEach(function (line) {
+      if (!line.on || line.included) return;
+      if (line.unknown) floor += line.floor || 0;
+      else known += line.amount || 0;
+    });
+    window.saasbillApplyWorkbench({
+      product: 'Pipedrive ' + row.planLabel,
+      sticker: row.seat || 0,
+      seats: known,
+      hidden: floor,
+      total: row.total === null ? (row.floor || 0) : row.total,
+      seatsTitle: 'Known add-ons',
+      seatsLabel: 'Priced per company, or included',
+      hiddenLabel: floor > 0 ? 'Add-ons with an unpublished price basis (floor)' : 'No unpublished add-on on this plan',
+      baseLabel: row.seats + ' seats x ' + (row.rate === null ? 'unverified' : ('$' + row.rate)) + ' x 12',
+      mathHtml: pyMathRows(row),
+      bestHtml: pyBestLine(r),
+      ctaHref: '/go/pipedrive',
+      ctaLabel: PY_DATA.pipedrive.ctaLabel,
+      ctaVendor: 'pipedrive-crm'
+    });
+    if (row.total === null) {
+      el('shell-big').innerHTML = row.floor === null ? 'unknown' : '&ge; ' + pyMoney(row.floor);
+      el('shell-sub').textContent = 'Includes an unpublished add-on price basis, which is not counted as $0.';
+    }
+  }
+  function render() {
+    var input = read();
+    el('py-seats-num').value = input.seats;
+    var r = calcPipedriveYear1(input);
+    el('py-cards').innerHTML = pyCardsHtml(r);
+    el('py-scenario').innerHTML = 'Based on ' + pyScenario(r);
+    el('py-tbody').innerHTML = pyTableHtml(r);
+    apply(r);
+    if (typeof window.trackSaaSBillEvent === 'function') window.trackSaaSBillEvent('result_rendered', { page: '/pricing/pipedrive-true-year-1-cost-calculator/' });
+  }
+  var range = el('py-seats'), box = el('py-seats-num');
+  range.addEventListener('input', render);
+  box.addEventListener('change', function () { range.value = clamp(box.value); render(); });
+  el('py-plan').addEventListener('change', render);
+  PY_DATA.pipedrive.addonOrder.forEach(function (id) { el('py-' + id).addEventListener('change', render); });
+  render();
+})();
+
+</script>
+
+      
+        <section aria-labelledby="faq-heading">
+          <h2 id="faq-heading">Common questions</h2>
+          <div class="faq-list">
+            
+            <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+              <h3 itemprop="name">What does Pipedrive Growth cost for 5 seats in Year 1?</h3>
+              <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                <p itemprop="text">On annual billing, Growth is $39 per seat per month, so 5 seats are $2,340 in Year 1 before add-ons. Lite at the same seat count is $840. Prices were checked Oct 30, 2026.</p>
+              </div>
+            </div>
+            
+            <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+              <h3 itemprop="name">Which Pipedrive add-ons have a published price basis?</h3>
+              <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                <p itemprop="text">LeadBooster is $32.50 per month per company on annual billing, and it is included in Premium and Ultimate. Smart Docs (from $32.50), Projects (from $16), Campaigns (from $13.33) and Web Visitors (from $41) publish a starting price only. Per seat versus per company is not stated, so those add-ons are a floor, not a $0 line.</p>
+              </div>
+            </div>
+            
+            <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+              <h3 itemprop="name">Does this total include a dialer?</h3>
+              <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                <p itemprop="text">No. Pipedrive has no built-in calling. This calculator does not add a Marketplace dialer, and it does not enter that missing price as $0.</p>
+              </div>
+            </div>
+            
+          </div>
+        </section>
+        
+      
+    <section aria-labelledby="related-calculators-heading" style="margin-top:36px; padding-top:24px; border-top:1px solid var(--border);">
+      <h2 id="related-calculators-heading" style="font-size:1.2rem; margin-top:0;">Related Year-1 True-Cost Calculators &amp; Contract Audits</h2>
+      <div class="related-calc-grid">
+        
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../compare/close-vs-pipedrive-year-1-cost-calculator/" data-track="internal-audit">Close vs. Pipedrive Year-1 Cost (Calling Included) &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">Seats, call minutes, and the dialer Pipedrive needs, for your team.</p>
+        </div>
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../compare/pipedrive-vs-hubspot-sales-hub-year-1-cost/" data-track="internal-audit">Pipedrive vs. HubSpot Sales Hub Year-1 Cost &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">Same seats, Pipedrive add-ons, and HubSpot onboarding.</p>
+        </div>
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../compare/monday-crm-vs-pipedrive-vs-hubspot-seat-minimums/" data-track="internal-audit">monday CRM 3/5/10-Seat Bucket Calculator &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">Where fixed seat buckets cost more than one seat at a time.</p>
+        </div>
+      </div>
+      <details class="footer-directory-details">
+        <summary>Browse all 33 audited calculators &amp; guides</summary>
+        <div class="footer-directory-links">
+          <a href="../../" data-track="internal-audit">Year-1 SaaS True-Cost Directory &rarr;</a><a href="../../pricing/hubspot-true-cost-and-onboarding-fees/" data-track="internal-audit">HubSpot True Cost &amp; Onboarding &rarr;</a><a href="../../compare/close-crm-vs-hubspot-sales-hub-5-to-20-reps/" data-track="internal-audit">Close CRM vs. HubSpot Sales Hub &rarr;</a><a href="../../compare/close-vs-pipedrive-year-1-cost-calculator/" data-track="internal-audit">Close vs. Pipedrive Year-1 Cost (Calling Included) &rarr;</a><a href="../../pricing/pipedrive-true-year-1-cost-calculator/" data-track="internal-audit">Pipedrive True Year-1 Cost &rarr;</a><a href="../../compare/pipedrive-vs-hubspot-sales-hub-year-1-cost/" data-track="internal-audit">Pipedrive vs. HubSpot Sales Hub Year-1 Cost &rarr;</a><a href="../../pricing/gong-io-platform-fee-and-seat-minimum-calculator/" data-track="internal-audit">Gong.io $5,000 Platform Fee &amp; Seat Calculator &rarr;</a><a href="../../compare/monday-crm-vs-pipedrive-vs-hubspot-seat-minimums/" data-track="internal-audit">monday CRM 3/5/10-Seat Bucket Calculator &rarr;</a><a href="../../intercom-fin-cost-calculator/" data-track="internal-audit">Intercom Fin AI Cost Calculator &rarr;</a><a href="../../intercom-vs-freshdesk-cost-comparison/" data-track="internal-audit">Intercom vs. Freshdesk Cost Comparison &rarr;</a><a href="../../intercom-vs-zendesk-cost-comparison/" data-track="internal-audit">Intercom vs. Zendesk Cost Comparison &rarr;</a><a href="../../pricing/intercom-fin-ai-resolution-cost-calculator/" data-track="internal-audit">Intercom Fin AI Cost Calculator &rarr;</a><a href="../../zendesk-ai-cost-calculator/" data-track="internal-audit">Zendesk AI Cost Calculator &rarr;</a><a href="../../zendesk-vs-freshdesk-cost-comparison/" data-track="internal-audit">Zendesk vs. Freshdesk Cost Comparison &rarr;</a><a href="../../hubspot-onboarding-fee-calculator/" data-track="internal-audit">HubSpot Onboarding Fee Calculator &rarr;</a><a href="../../pricing/zendesk-ai-resolution-and-automated-outcome-cost/" data-track="internal-audit">Zendesk AI Cost Calculator &rarr;</a><a href="../../pricing/stripe-billing-0-7-percent-recurring-tax-calculator/" data-track="internal-audit">Stripe Billing 0.7% Fee, Tax &amp; Chargeback Calculator &rarr;</a><a href="../../compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/" data-track="internal-audit">Gumroad vs. Whop vs. Lemon Squeezy Take-Rate &amp; Chargeback Calculator &rarr;</a><a href="../../exit/stripe-shopify-paddle-frozen-funds-alternatives/" data-track="internal-audit">Stripe, Shopify &amp; Paddle Frozen Funds &amp; Reserve Calculator &rarr;</a><a href="../../chargeback-fee-and-recovery-calculator/" data-track="internal-audit">Stripe, Shopify &amp; Paddle Chargeback Cost Calculator &rarr;</a><a href="../../exit/paypal-180-day-permanent-limitation-fund-recovery/" data-track="internal-audit">PayPal 180-Day Hold &amp; Reserve Cost Calculator &rarr;</a><a href="../../exit/shopify-payments-chargeback-threshold-and-reserve-appeal/" data-track="internal-audit">Shopify Payments Reserve &amp; Dispute Threshold Calculator &rarr;</a><a href="../../exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/" data-track="internal-audit">ZoomInfo 60-Day Auto-Renewal Notice &rarr;</a><a href="../../compare/typeform-vs-jotform-response-limit-and-hipaa-cost/" data-track="internal-audit">Typeform vs. Jotform Response &amp; HIPAA Calculator &rarr;</a><a href="../../guides/jotform-wix-app-setup-and-pricing-guide/" data-track="internal-audit">Jotform Wix App Setup &amp; Pricing Guide &rarr;</a><a href="../../pricing/jotform-pricing-tier-calculator/" data-track="internal-audit">Jotform 2026 Pricing Tier Calculator &rarr;</a><a href="../../pricing/docusign-envelope-allowance-and-api-overage-calculator/" data-track="internal-audit">DocuSign 100-Envelope Cap &amp; Overage Calculator &rarr;</a><a href="../../compliance/hipaa-baa-and-soc2-pricing-tiers/" data-track="internal-audit">HIPAA BAA &amp; SOC 2 Pricing Tiers &rarr;</a><a href="../../compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/" data-track="internal-audit">Google Workspace vs. Microsoft 365 HIPAA BAA &rarr;</a><a href="../../faq/does-hubspot-charge-onboarding-fees-2026/" data-track="internal-audit">Does HubSpot Charge Onboarding Fees in 2026? &rarr;</a><a href="../../faq/intercom-fin-ai-cost-calculator/" data-track="internal-audit">Intercom Fin AI Cost Calculator &rarr;</a><a href="../../faq/stripe-vs-paddle-true-cost/" data-track="internal-audit">Stripe vs. Paddle vs. Whop True Cost &amp; Chargeback Calculator &rarr;</a><a href="../../pricing/stripe-shopify-chargeback-fee-and-chargeflow-roi-calculator/" data-track="internal-audit">Stripe, Shopify &amp; Paddle Chargeback Cost Calculator &rarr;</a>
+        </div>
+      </details>
+    </section>
+    
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <p><strong>SaaSBill</strong> &middot; Year-1 cost &amp; contract calculators for B2B software.</p>
+      <p class="footer-note">Independent calculations. Some vendor links are affiliate links. This never changes our rankings or calculations. &middot; Updated <time datetime="2026-10-30">Oct 30, 2026</time> &middot; Inquiries: <a href="mailto:info@saasbill.io">info@saasbill.io</a></p>
+    </div>
+  </footer>
+  <script>
+  /* Plausible + local event dispatcher for: calculator_interaction, category_select, result_rendered, vendor_cta_click */
+  window.__saasbillEvents = window.__saasbillEvents || [];
+  try {
+    var p = (window.location && window.location.pathname ? window.location.pathname : '').toLowerCase();
+    if (p && p !== '/' && p !== '/index.html') {
+      var ctxCat = '';
+      var ctxTool = '';
+      if (p.indexOf('zoominfo') !== -1) {
+        ctxCat = 'CRM & Sales';
+        ctxTool = 'close-crm';
+      } else if (p.indexOf('stripe') !== -1 || p.indexOf('paddle') !== -1 || p.indexOf('whop') !== -1 || p.indexOf('gumroad') !== -1 || p.indexOf('paypal') !== -1) {
+        ctxCat = 'Payment Processors & MoR';
+        ctxTool = p.indexOf('paddle') !== -1 ? 'paddle-mor' : (p.indexOf('whop') !== -1 ? 'whop-payments' : 'stripe-payments');
+      } else if (p.indexOf('hubspot') !== -1 || p.indexOf('close-crm') !== -1 || p.indexOf('pipedrive') !== -1 || p.indexOf('monday-crm') !== -1 || p.indexOf('gong') !== -1) {
+        ctxCat = 'CRM & Sales';
+        ctxTool = p.indexOf('monday') !== -1 ? 'monday-crm' : (p.indexOf('close') !== -1 ? 'close-crm' : (p.indexOf('pipedrive') !== -1 ? 'pipedrive-crm' : 'hubspot-sales-pro'));
+      } else if (p.indexOf('hipaa') !== -1 || p.indexOf('soc2') !== -1 || p.indexOf('docusign') !== -1 || p.indexOf('typeform') !== -1 || p.indexOf('jotform') !== -1) {
+        ctxCat = 'Compliance, HIPAA & SOC 2';
+        ctxTool = (p.indexOf('typeform') !== -1 || p.indexOf('jotform') !== -1) ? 'jotform-hipaa' : 'vanta-soc2';
+      } else if (p.indexOf('intercom') !== -1 || p.indexOf('zendesk') !== -1 || p.indexOf('freshdesk') !== -1) {
+        ctxCat = 'Helpdesk & AI Support';
+        ctxTool = p.indexOf('intercom') !== -1 ? 'intercom-fin-ai' : (p.indexOf('freshdesk') !== -1 ? 'freshdesk-support' : 'zendesk-suite-team');
+      }
+      if (ctxCat && window.sessionStorage) {
+        sessionStorage.setItem('saasbill_last_cat', ctxCat);
+        if (ctxTool) sessionStorage.setItem('saasbill_last_tool', ctxTool);
+      }
+    }
+  } catch (err) {}
+  document.addEventListener('click', function(e) {
+    var cta = e.target.closest('[data-track="vendor-cta"], [data-track="vendor_cta_click"]');
+    if (cta) {
+      var vendor = cta.getAttribute('data-vendor') || '';
+      var location = cta.getAttribute('data-cta-location') || 'subpage-result';
+      var href = cta.getAttribute('href') || '';
+      if (typeof window.trackSaaSBillEvent === 'function') {
+        window.trackSaaSBillEvent('vendor_cta_click', { vendor: vendor, location: location, href: href });
+      }
+      return;
+    }
+    var catBtn = e.target.closest('[data-track="category-select"], [data-track="category_select"]');
+    if (catBtn) {
+      var cat = catBtn.getAttribute('data-cat') || '';
+      if (typeof window.trackSaaSBillEvent === 'function') {
+        window.trackSaaSBillEvent('category_select', { category: cat });
+      }
+    }
+  });
+  var _lastCalcTrackKey = '';
+  var _lastCalcTrackTs = 0;
+  function handleCalcControlEvent(e) {
+    var ctrl = e.target.closest('[data-track="calculator-control"], [data-track="calculator_interaction"], input[type="range"], select');
+    if (ctrl) {
+      var control = ctrl.getAttribute('data-control') || ctrl.id || '';
+      var val = String(ctrl.value);
+      var now = Date.now();
+      var key = control + ':' + val;
+      if (key === _lastCalcTrackKey && (now - _lastCalcTrackTs) < 150) return;
+      _lastCalcTrackKey = key;
+      _lastCalcTrackTs = now;
+      if (typeof window.trackSaaSBillEvent === 'function') {
+        window.trackSaaSBillEvent('calculator_interaction', { control: control, value: val });
+        if (ctrl.id === 'cat-filter') {
+          window.trackSaaSBillEvent('category_select', { category: val });
+        }
+      }
+    }
+  }
+  document.addEventListener('input', handleCalcControlEvent);
+  document.addEventListener('change', handleCalcControlEvent);
+  </script>
+  <script src="../../assets/app.js?v=20261030a"></script>
+</body>
+</html>
