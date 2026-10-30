@@ -35,7 +35,7 @@ def render_intercom_calculator_body(
     static_hidden_sub="Fin AI $0.99/resolution meter",
 ):
     if static_best_html is None:
-        static_best_html = '<strong>Best option:</strong> <a href="https://www.freshworks.com/freshdesk/pricing/" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="freshdesk-support" data-cta-location="workbench-best-option">Freshdesk (Freshworks) ($10,855/yr)</a> &middot; saves $10,445/yr'
+        static_best_html = '<strong>Lowest cost:</strong> <a href="https://www.freshworks.com/freshdesk/pricing/" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="freshdesk-support" data-cta-location="workbench-best-option">Freshdesk (Freshworks) ($10,855/yr)</a> &middot; saves $10,445/yr'
     if editorial_html is None:
         editorial_html = """
 <section class="editorial-below-section">
@@ -635,9 +635,9 @@ function renderDirectory() {{
     const minAffBest = AFFILIATES[minR.tool.affiliate_slug] || {{ destination_url: '#' }};
     const diffBest = Math.max(0, spotR.year1Total - minR.year1Total);
     if (spotR.tool.id === minR.tool.id || diffBest === 0) {{
-      bestOptEl.innerHTML = `<strong>Best option in category:</strong> Lowest Year-1 true cost ($${{minR.year1Total.toLocaleString()}}/yr)`;
+      bestOptEl.innerHTML = `<strong>Lowest cost:</strong> Lowest Year-1 true cost ($${{minR.year1Total.toLocaleString()}}/yr)`;
     }} else {{
-      bestOptEl.innerHTML = `<strong>Best option:</strong> <a href="${{minAffBest.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${{minR.tool.id}}" data-cta-location="workbench-best-option">${{minR.tool.name}} ($${{minR.year1Total.toLocaleString()}}/yr)</a> &middot; saves $${{diffBest.toLocaleString()}}/yr`;
+      bestOptEl.innerHTML = `<strong>Lowest cost:</strong> <a href="${{minAffBest.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${{minR.tool.id}}" data-cta-location="workbench-best-option">${{minR.tool.name}} ($${{minR.year1Total.toLocaleString()}}/yr)</a> &middot; saves $${{diffBest.toLocaleString()}}/yr`;
     }}
   }}
 
@@ -723,13 +723,13 @@ function renderDirectory() {{
       </div>`;
     }} else if (COMPARE_MODE === 'intercom_vs_zendesk') {{
       const zdWins = zdTeamR.year1Total < icR.year1Total;
-      const winner = zdWins ? 'Zendesk' : 'Intercom';
+      const lowerName = zdWins ? 'Zendesk' : 'Intercom';
       const gap = Math.abs(zdTeamR.year1Total - icR.year1Total);
       headToHeadHtml = `
       <div class="summary-card result-card card-lowest">
-        <div class="summary-label">Head-to-Head Winner: ${{winner}}</div>
+        <div class="summary-label">Lower cost: ${{lowerName}}</div>
         <div class="summary-metric" style="color:var(--emerald);">${{money(icR.year1Total)}}/yr vs. Zendesk ${{money(zdTeamR.year1Total)}}/yr</div>
-        <div class="summary-scenario">${{scenarioLine}} &middot; ${{winner}} saves ${{money(gap)}}/yr</div>
+        <div class="summary-scenario">${{scenarioLine}} &middot; ${{lowerName}} saves ${{money(gap)}}/yr</div>
         <div class="summary-breakdown">${{money(icR.annualSeatsCost)}} Intercom licenses + ${{money(icR.aiAnnual)}} Fin AI</div>
         <div class="summary-caveat"><strong>Contract note:</strong> Intercom Fin is $0.99 per resolution on a $29/seat Essential base in this model.</div>
         <details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">${{renderCalcBreakdownHtml(icR, seats, aiVol, mode)}}</div></details>
@@ -1113,7 +1113,7 @@ ZENDESK_EDITORIAL = """
 """
 
 ZENDESK_BEST = (
-    '<strong>Best option:</strong> <a href="https://www.freshworks.com/freshdesk/pricing/" '
+    '<strong>Lowest cost:</strong> <a href="https://www.freshworks.com/freshdesk/pricing/" '
     'target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="freshdesk-support" '
     'data-cta-location="workbench-best-option">Freshdesk Growth + Freddy AI ($10,855/yr)</a> '
     '&middot; saves $21,845/yr'

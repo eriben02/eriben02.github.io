@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-site-verification" content="W7-m7km1_5pZZUG38dpallcgdGss6_Vl2qo5pjVoMdA" />
+  <!-- Bing Webmaster Tools verification: paste <meta name="msvalidate.01" content="YOUR_BING_CODE" /> here or use 1-click Google Search Console import (see BING_WEBMASTER_VERIFICATION.md) -->
+  <title>EU AI Act Article 50 checklist for deployers (2026) – saasbill.io</title>
+  <meta name="description" content="What deployers must disclose under Article 50: emotion recognition, biometric categorisation, deepfakes and AI text on public-interest topics. Exceptions and dates, with sources." />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+  <meta property="og:site_name" content="SaaSBill" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="EU AI Act Article 50 checklist for deployers (2026) – saasbill.io" />
+  <meta property="og:description" content="What deployers must disclose under Article 50: emotion recognition, biometric categorisation, deepfakes and AI text on public-interest topics. Exceptions and dates, with sources." />
+  <meta property="og:url" content="https://saasbill.io/ai-act/article-50-deployer-checklist/" />
+  <meta property="og:updated_time" content="2026-10-30T10:15:19+00:00" />
+  <meta property="article:published_time" content="2026-10-30T00:00:00+01:00" />
+  <meta property="article:modified_time" content="2026-10-30T10:15:19+00:00" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="EU AI Act Article 50 checklist for deployers (2026) – saasbill.io" />
+  <meta name="twitter:description" content="What deployers must disclose under Article 50: emotion recognition, biometric categorisation, deepfakes and AI text on public-interest topics. Exceptions and dates, with sources." />
+  <meta name="last-modified" content="2026-10-30T10:15:19+00:00" />
+  <meta name="dcterms.modified" content="2026-10-30T10:15:19+00:00" />
+  <meta name="dcterms.issued" content="2026-10-30" />
+  <link rel="canonical" href="https://saasbill.io/ai-act/article-50-deployer-checklist/" />
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261030c" />
+  <link rel="alternate" type="text/plain" href="https://saasbill.io/llms.txt" title="SaaSBill LLMs.txt Summary" />
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script defer data-domain="saasbill.io" src="https://plausible.io/js/pa-VAaSVNs5XOobt9cv2UtKo.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init();
+    window.__saasbillEvents = window.__saasbillEvents || [];
+    window.trackSaaSBillEvent = function(eventName, props) {
+      var p = props || {};
+      var entry = { event: eventName, ts: Date.now() };
+      for (var k in p) {
+        if (Object.prototype.hasOwnProperty.call(p, k)) entry[k] = p[k];
+      }
+      window.__saasbillEvents.push(entry);
+      if (typeof window.plausible === 'function') {
+        window.plausible(eventName, { props: p });
+      }
+    };
+    window.trackEvent = window.trackSaaSBillEvent;
+
+    window.saasbillMoney = function (n) {
+      var v = Math.round(Number(n) || 0);
+      var sign = v < 0 ? '-' : '';
+      return sign + '$' + Math.abs(v).toLocaleString('en-US');
+    };
+    window.saasbillResultLine = function (hidden, sticker) {
+      var h = Math.round(Number(hidden) || 0);
+      var s = Math.round(Number(sticker) || 0);
+      if (h <= 0) return 'Matches advertised price ($0 hidden fees).';
+      var pct = s > 0 ? Math.round((h / s) * 100) : 0;
+      return '+' + window.saasbillMoney(h) + ' (+' + pct + '%) above advertised price.';
+    };
+    window.saasbillApplyWorkbench = function (opts) {
+      opts = opts || {};
+      var sticker = Math.max(0, Math.round(Number(opts.sticker) || 0));
+      var seats = Math.max(0, Math.round(Number(opts.seats) || 0));
+      var hidden = Math.max(0, Math.round(Number(opts.hidden) || 0));
+      var total = Math.round(Number(opts.total));
+      if (!isFinite(total)) total = sticker + seats + hidden;
+      var parts = Math.max(1, sticker + seats + hidden);
+      function node(id) { return document.getElementById(id); }
+      function setText(id, value) {
+        var el = node(id);
+        if (el) el.textContent = value;
+      }
+      function setFlex(id, amount) {
+        var el = node(id);
+        if (!el) return;
+        var share = amount <= 0 ? 8 : (amount / parts) * 100;
+        el.style.flex = share + ' 1 0px';
+      }
+      setText('shell-product', opts.product || '');
+      setText('shell-big', window.saasbillMoney(total));
+      setText('shell-quote', 'True Year-1 cost');
+      setText('shell-sub', window.saasbillResultLine(hidden, sticker + seats));
+      setText('shell-amt-base', window.saasbillMoney(sticker));
+      setText('shell-amt-seats', window.saasbillMoney(seats));
+      setText('shell-amt-hidden', window.saasbillMoney(hidden));
+      setText('shell-title-base', 'Sticker Price');
+      setText('shell-title-seats', opts.seatsTitle || 'Other sticker fees');
+      setText('shell-title-hidden', 'Hidden Cost Gap');
+      setText('shell-sub-base', opts.baseLabel || 'Advertised price');
+      setText('shell-sub-seats', opts.seatsLabel || 'Included in the sticker');
+      setText('shell-sub-hidden', opts.hiddenLabel || 'Fees above the advertised price');
+      setFlex('shell-row-base', sticker);
+      setFlex('shell-row-seats', seats);
+      setFlex('shell-row-hidden', hidden);
+      var seatsRow = node('shell-row-seats');
+      if (seatsRow) seatsRow.style.display = seats <= 0 ? 'none' : '';
+      var math = node('shell-math');
+      if (math && opts.mathHtml) math.innerHTML = opts.mathHtml;
+      var best = node('shell-best');
+      if (best && opts.bestHtml) best.innerHTML = opts.bestHtml;
+      var cta = node('shell-cta');
+      if (cta && opts.ctaHref) {
+        cta.href = opts.ctaHref;
+        var label = opts.ctaLabel || 'See pricing';
+        cta.textContent = /→\s*$/.test(label) ? label : label + ' \u2192';
+        if (opts.ctaVendor) cta.setAttribute('data-vendor', opts.ctaVendor);
+      }
+      setText('shell-sticker', window.saasbillMoney(sticker + seats));
+      setText('shell-gap', hidden > 0 ? '+' + window.saasbillMoney(hidden) : '$0');
+      if (opts.product) setText('shell-sticker-note', opts.product);
+    };
+
+  </script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "TechArticle", "@id": "https://saasbill.io/ai-act/article-50-deployer-checklist/#article", "headline": "EU AI Act Article 50 checklist for deployers (2026) \u2013 saasbill.io", "description": "What deployers must disclose under Article 50: emotion recognition, biometric categorisation, deepfakes and AI text on public-interest topics. Exceptions and dates, with sources.", "datePublished": "2026-10-30", "dateModified": "2026-10-30T10:15:19+00:00", "author": {"@type": "Organization", "name": "SaaSBill Editorial", "url": "https://saasbill.io/"}, "publisher": {"@type": "Organization", "name": "SaaSBill", "url": "https://saasbill.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://saasbill.io/ai-act/article-50-deployer-checklist/"}}, {"@type": "WebPage", "@id": "https://saasbill.io/ai-act/article-50-deployer-checklist/", "url": "https://saasbill.io/ai-act/article-50-deployer-checklist/", "name": "EU AI Act Article 50 checklist for deployers (2026) \u2013 saasbill.io", "description": "What deployers must disclose under Article 50: emotion recognition, biometric categorisation, deepfakes and AI text on public-interest topics. Exceptions and dates, with sources.", "inLanguage": "en-US", "datePublished": "2026-10-30", "dateModified": "2026-10-30T10:15:19+00:00", "lastReviewed": "2026-10-30", "reviewedBy": {"@type": "Organization", "name": "SaaSBill Editorial"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "SaaSBill", "item": "https://saasbill.io/"}, {"@type": "ListItem", "position": 2, "name": "EU AI Act Article 50 checklist for deployers (2026)", "item": "https://saasbill.io/ai-act/article-50-deployer-checklist/"}]}]}</script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-inner">
+      <div class="brand-wrap">
+        <a href="../../index.html" class="brand">SaaSBill<span>.io</span></a>
+        <span class="brand-tagline">Year-1 software cost &amp; contract calculators</span>
+      </div>
+      <nav class="nav-links" aria-label="Primary Navigation">
+        <a href="../../index.html#all-calculators">Audits &amp; Guides</a>
+        <a href="../../index.html#methodology">Methodology</a>
+        <span class="byline-bar">Updated <time datetime="2026-10-30" itemprop="dateModified">Oct 30, 2026</time></span>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+    <article itemscope itemtype="https://schema.org/TechArticle">
+      <meta itemprop="datePublished" content="2026-10-30" />
+      <meta itemprop="dateModified" content="2026-10-30T10:15:19+00:00" />
+      
+<section class="hero editorial-hero editorial-hero-wrap">
+  <h1>Article 50 checklist for deployers</h1>
+  <p class="lead">If your organisation <em>uses</em> AI (you are a &ldquo;deployer&rdquo;) and it (a) runs emotion recognition or biometric categorisation on people, (b) publishes deepfakes, or (c) publishes AI-written text meant to inform the public on matters of public interest without human editorial review, you must tell people. You must do it clearly, at the latest at first exposure, and in an accessible way. This applies from <strong>2 August 2026</strong>. <span class="src-cluster"><a class="src-link" href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50">AI Act Art. 50, Service Desk</a> &middot; <a class="src-link" href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/faq/when-does-enforcement-start">AI Act Service Desk FAQ, when enforcement starts</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></p>
+</section>
+
+<p class="legal-note">Not legal advice. This page summarises official EU sources. Check the text of the law for your own case.</p>
+<h2>The 5-line checklist</h2>
+
+<div class="table-wrap editorial-gap-table mobile-cards">
+  <table>
+    <caption>The 5-line checklist</caption>
+    <thead><tr><th>#</th><th>Do you...</th><th>Then you must...</th><th>Source</th></tr></thead>
+    <tbody><tr><td data-label="#">1</td><td data-label="Do you...">Use an emotion recognition or biometric categorisation system on people?</td><td data-label="Then you must...">Inform the people exposed to it that the system is operating (and process personal data under the GDPR).</td><td data-label="Source">Art. 50(3). <span class="src-cluster"><a class="src-link" href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50">AI Act Art. 50, Service Desk</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></td></tr><tr><td data-label="#">2</td><td data-label="Do you...">Publish image, audio or video that is a deepfake made or changed with AI?</td><td data-label="Then you must...">Disclose that the content is AI-generated or manipulated.</td><td data-label="Source">Art. 50(4), 1st subpara. <span class="src-cluster"><a class="src-link" href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50">AI Act Art. 50, Service Desk</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></td></tr><tr><td data-label="#">3</td><td data-label="Do you...">Publish AI-generated or AI-changed text to inform the public on matters of public interest?</td><td data-label="Then you must...">Disclose that the text is AI-generated or manipulated, <strong>unless</strong> a human reviewed it and a person holds editorial responsibility.</td><td data-label="Source">Art. 50(4), 2nd subpara. <span class="src-cluster"><a class="src-link" href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50">AI Act Art. 50, Service Desk</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></td></tr><tr><td data-label="#">4</td><td data-label="Do you...">Show any of the above to people?</td><td data-label="Then you must...">Make the notice clear and distinguishable, <strong>at the latest at first interaction or exposure</strong>, and meet accessibility rules.</td><td data-label="Source">Art. 50(5). <span class="src-cluster"><a class="src-link" href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50">AI Act Art. 50, Service Desk</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></td></tr><tr><td data-label="#">5</td><td data-label="Do you...">Want a ready-made method?</td><td data-label="Then you must...">You <em>may</em> use the EU icons and the Code of Practice. Both are voluntary. The duty to disclose is not.</td><td data-label="Source"><span class="src-cluster"><a class="src-link" href="https://digital-strategy.ec.europa.eu/en/policies/eu-icons-labelling-ai-generated-content">EU icons for labelling AI-generated content</a> &middot; <a class="src-link" href="https://ec.europa.eu/newsroom/dae/redirection/document/129555">Code of Practice on Transparency of AI-generated Content</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></td></tr></tbody>
+  </table>
+</div>
+<details class="explain-on-demand">
+  <summary>Who counts as a deployer?</summary>
+  <div class="explain-body"><p>A deployer is the organisation or person <em>using</em> an AI system under its authority. A natural person using AI for a <strong>purely personal, non-professional</strong> activity is outside the deployer duties. The Commission&rsquo;s guidelines give examples (deepfakes of your own household, students&rsquo; homework, personal social media posts). Anyone gaining an economic benefit on a regular basis, or acting in a business, trade or freelance capacity, counts as professional. <span class="src-cluster"><a class="src-link" href="https://ai-act-service-desk.ec.europa.eu/sites/default/files/2026-07/guidelines_on_the_implementation_of_the_transparency_obligations_for_certain_ai_systems_under_article_50_of_the_ai_act_bzptwqhk0ikg1dtlddap41psfy_131215.pdf">Commission Guidelines on Art. 50, C(2026) 5054 final</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></p><p>The <em>provider</em> of the tool still has its own duties (for example machine-readable marking under Art. 50(2)), even when the user is a private person. <span class="src-cluster"><a class="src-link" href="https://ai-act-service-desk.ec.europa.eu/sites/default/files/2026-07/guidelines_on_the_implementation_of_the_transparency_obligations_for_certain_ai_systems_under_article_50_of_the_ai_act_bzptwqhk0ikg1dtlddap41psfy_131215.pdf">Commission Guidelines on Art. 50, C(2026) 5054 final</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></p></div>
+</details><details class="explain-on-demand">
+  <summary>What is a deepfake here?</summary>
+  <div class="explain-body"><p>AI-generated or manipulated image, audio or video that resembles existing persons, objects, places, entities or events and would falsely appear to a person to be authentic or truthful. <span class="src-cluster"><a class="src-link" href="https://digital-strategy.ec.europa.eu/en/policies/eu-icons-labelling-ai-generated-content">EU icons for labelling AI-generated content</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></p></div>
+</details><details class="explain-on-demand">
+  <summary>What counts as text on matters of public interest?</summary>
+  <div class="explain-body"><p>The guidelines test three things: the text is <strong>published</strong> (open to a large, undefined audience, not a closed group or internal memo), it aims to <strong>inform the public</strong>, and it covers a <strong>matter of public interest</strong> (politics, public services, justice, public health, safety, environment, economic or scientific developments, etc.). <span class="src-cluster"><a class="src-link" href="https://ai-act-service-desk.ec.europa.eu/sites/default/files/2026-07/guidelines_on_the_implementation_of_the_transparency_obligations_for_certain_ai_systems_under_article_50_of_the_ai_act_bzptwqhk0ikg1dtlddap41psfy_131215.pdf">Commission Guidelines on Art. 50, C(2026) 5054 final</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></p><p>Examples the Commission says <strong>are in scope</strong>: an AI summary of a town-council article on a newspaper site; AI-manipulated investor information in a listed company&rsquo;s report; an AI-written storm warning on a weather institute&rsquo;s social profile. Examples <strong>out of scope</strong>: AI-generated fantasy novels; ad copy and product descriptions (unless they make health, safety or sustainability claims); a chatbot news summary only the prompting user sees. <span class="src-cluster"><a class="src-link" href="https://ai-act-service-desk.ec.europa.eu/sites/default/files/2026-07/guidelines_on_the_implementation_of_the_transparency_obligations_for_certain_ai_systems_under_article_50_of_the_ai_act_bzptwqhk0ikg1dtlddap41psfy_131215.pdf">Commission Guidelines on Art. 50, C(2026) 5054 final</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></p></div>
+</details>
+<h2>Exceptions (short version)</h2>
+
+<div class="table-wrap editorial-gap-table mobile-cards">
+  <table>
+    <caption>Exceptions (short version)</caption>
+    <thead><tr><th>Exception</th><th>Applies to</th><th>What it means</th><th>Source</th></tr></thead>
+    <tbody><tr><td data-label="Exception"><strong>Evidently artistic, creative, satirical, fictional or analogous work</strong></td><td data-label="Applies to">Deepfakes</td><td data-label="What it means">Not exempt, but a lighter duty: disclose that generated or manipulated content exists, in a way that does not hamper the display or enjoyment of the work.</td><td data-label="Source">Art. 50(4). <span class="src-cluster"><a class="src-link" href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50">AI Act Art. 50, Service Desk</a> &middot; <a class="src-link" href="https://ec.europa.eu/newsroom/dae/redirection/document/129555">Code of Practice on Transparency of AI-generated Content</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></td></tr><tr><td data-label="Exception"><strong>Authorised by law to detect, prevent, investigate or prosecute criminal offences</strong></td><td data-label="Applies to">Deepfakes, public-interest text</td><td data-label="What it means">No disclosure duty.</td><td data-label="Source">Art. 50(4). <span class="src-cluster"><a class="src-link" href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50">AI Act Art. 50, Service Desk</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></td></tr><tr><td data-label="Exception"><strong>Permitted by law to detect, prevent or investigate criminal offences</strong></td><td data-label="Applies to">Emotion recognition, biometric categorisation</td><td data-label="What it means">No information duty, subject to safeguards and Union law.</td><td data-label="Source">Art. 50(3). <span class="src-cluster"><a class="src-link" href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50">AI Act Art. 50, Service Desk</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></td></tr><tr><td data-label="Exception"><strong>Human review or editorial control + someone holds editorial responsibility</strong></td><td data-label="Applies to">Public-interest text only</td><td data-label="What it means">No disclosure duty for that text. Does <strong>not</strong> apply to deepfakes.</td><td data-label="Source">Art. 50(4). <span class="src-cluster"><a class="src-link" href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50">AI Act Art. 50, Service Desk</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></td></tr></tbody>
+  </table>
+</div>
+<details class="explain-on-demand">
+  <summary>What human review looks like in the Code of Practice</summary>
+  <div class="explain-body"><p>Signatories that rely on the editorial exception commit to a written policy that names the person with editorial responsibility (name, role, contact details) and describes the organisational measures and people who do the review before publication. They do not have to log each individual review. Media service providers already under editorial standards can use their existing procedures. <span class="src-cluster"><a class="src-link" href="https://ec.europa.eu/newsroom/dae/redirection/document/129555">Code of Practice on Transparency of AI-generated Content</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></p></div>
+</details><details class="explain-on-demand">
+  <summary>A note on emotion recognition</summary>
+  <div class="explain-body"><p>Emotion recognition in the workplace and in education is prohibited under Art. 5(1)(f) (subject to the narrow exceptions in that article), so the Art. 50(3) notice is not a way to make it legal there. Outside those settings, the Commission notes emotion recognition systems are also high-risk, so Art. 50(3) applies alongside the high-risk rules. <span class="src-cluster"><a class="src-link" href="https://ai-act-service-desk.ec.europa.eu/sites/default/files/2026-07/guidelines_on_the_implementation_of_the_transparency_obligations_for_certain_ai_systems_under_article_50_of_the_ai_act_bzptwqhk0ikg1dtlddap41psfy_131215.pdf">Commission Guidelines on Art. 50, C(2026) 5054 final</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></p></div>
+</details>
+<h2>Key dates</h2>
+
+<div class="table-wrap editorial-gap-table mobile-cards">
+  <table>
+    <caption>Key dates</caption>
+    <thead><tr><th>Date</th><th>What happens</th><th>Source</th></tr></thead>
+    <tbody><tr><td data-label="Date">2 Aug 2026</td><td data-label="What happens">Article 50 transparency obligations apply and are enforceable.</td><td data-label="Source"><span class="src-cluster"><a class="src-link" href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/faq/when-does-enforcement-start">AI Act Service Desk FAQ, when enforcement starts</a> &middot; <a class="src-link" href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-113">AI Act Art. 113, Service Desk</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></td></tr><tr><td data-label="Date">2 Dec 2026</td><td data-label="What happens">Deadline for <strong>providers</strong> of generative AI systems placed on the market <strong>before</strong> 2 Aug 2026 to meet <strong>Art. 50(2)</strong> (machine-readable marking). It does <strong>not</strong> move any deployer disclosure duty.</td><td data-label="Source">Art. 111(4). <span class="src-cluster"><a class="src-link" href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-111">AI Act Art. 111, Service Desk</a> &middot; <a class="src-link" href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/faq/when-does-enforcement-start">AI Act Service Desk FAQ, when enforcement starts</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></td></tr></tbody>
+  </table>
+</div>
+<details class="explain-on-demand">
+  <summary>Why there is a December date</summary>
+  <div class="explain-body"><p>The Digital Omnibus on AI, Regulation (EU) 2026/1744 (published 24 July 2026), inserted Art. 111(4). Its recital 38 explains the four-month transition for providers already on the market. <span class="src-cluster"><a class="src-link" href="https://eur-lex.europa.eu/eli/reg/2026/1744/oj/eng">Regulation (EU) 2026/1744, EUR-Lex</a> &middot; <a class="src-link" href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-111">AI Act Art. 111, Service Desk</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></p></div>
+</details><details class="explain-on-demand">
+  <summary>What happens if you get it wrong</summary>
+  <div class="explain-body"><p>Breaches of Article 50 can lead to fines of up to EUR 15 000 000 or 3% of total worldwide annual turnover, whichever is higher. Member States set the actual penalty rules and must consider the interests of SMEs. <span class="src-cluster"><a class="src-link" href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-99">AI Act Art. 99, Service Desk</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></p></div>
+</details>
+<h2>Next steps</h2>
+<ul class="key-list">
+  <li>See how to show the label: <a href="../deepfake-labelling-patterns/">Deepfake labelling patterns</a></li>
+  <li>Machine-readable marking tools: <a href="../c2pa-watermarking-tools-compared/">C2PA and watermarking tools compared</a></li>
+</ul>
+
+<aside class="coming-soon-box" aria-label="Free checklist">
+  <p class="coming-soon-title">Free checklist (PDF) coming soon</p>
+  <p>AI Act Article 50: the 2-page labelling checklist for teams that publish AI content.</p>
+</aside>
+
+<section class="sources-block" aria-labelledby="sources-heading">
+  <h2 id="sources-heading">Sources</h2>
+  <ol class="sources-list">
+    <li id="src-S1"><a href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50">AI Act Art. 50, Service Desk</a>. <span class="src-date">Accessed 30 Oct 2026.</span></li>
+    <li id="src-S2"><a href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/faq/when-does-enforcement-start">AI Act Service Desk FAQ, when enforcement starts</a>. <span class="src-date">Accessed 30 Oct 2026.</span></li>
+    <li id="src-S3"><a href="https://digital-strategy.ec.europa.eu/en/policies/eu-icons-labelling-ai-generated-content">EU icons for labelling AI-generated content</a>. <span class="src-date">Accessed 30 Oct 2026.</span></li>
+    <li id="src-S4"><a href="https://ec.europa.eu/newsroom/dae/redirection/document/129555">Code of Practice on Transparency of AI-generated Content</a>. <span class="src-date">Accessed 30 Oct 2026.</span></li>
+    <li id="src-S5"><a href="https://ai-act-service-desk.ec.europa.eu/sites/default/files/2026-07/guidelines_on_the_implementation_of_the_transparency_obligations_for_certain_ai_systems_under_article_50_of_the_ai_act_bzptwqhk0ikg1dtlddap41psfy_131215.pdf">Commission Guidelines on Art. 50, C(2026) 5054 final</a>. <span class="src-date">Accessed 30 Oct 2026.</span></li>
+    <li id="src-S6"><a href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-113">AI Act Art. 113, Service Desk</a>. <span class="src-date">Accessed 30 Oct 2026.</span></li>
+    <li id="src-S7"><a href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-111">AI Act Art. 111, Service Desk</a>. <span class="src-date">Accessed 30 Oct 2026.</span></li>
+    <li id="src-S8"><a href="https://eur-lex.europa.eu/eli/reg/2026/1744/oj/eng">Regulation (EU) 2026/1744, EUR-Lex</a>. <span class="src-date">Accessed 30 Oct 2026.</span></li>
+    <li id="src-S9"><a href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-99">AI Act Art. 99, Service Desk</a>. <span class="src-date">Accessed 30 Oct 2026.</span></li>
+  </ol>
+</section>
+
+      
+      
+    <section aria-labelledby="related-ai-act-heading" style="margin-top:36px; padding-top:24px; border-top:1px solid var(--border);">
+      <h2 id="related-ai-act-heading" style="font-size:1.2rem; margin-top:0;">Related AI Act guides</h2>
+      <div class="related-calc-grid">
+        
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../ai-act/" data-track="internal-audit">AI Act Article 50 &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">Who must label AI content, the two dates, and where to start.</p>
+        </div>
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../ai-act/deepfake-labelling-patterns/" data-track="internal-audit">Deepfake labelling patterns &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">Where to put the EU AI icon on images, video, audio and text.</p>
+        </div>
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../ai-act/c2pa-watermarking-tools-compared/" data-track="internal-audit">C2PA and watermarking tools &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">What each marking tool does. Published prices only.</p>
+        </div>
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../ai-act/etsi-ts-104-275-explained/" data-track="internal-audit">ETSI TS 104 275 explained &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">The deepfake-prevention spec for AI developers, in plain English.</p>
+        </div>
+      </div>
+    </section>
+    
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <p><strong>SaaSBill</strong> &middot; Year-1 cost &amp; contract calculators for B2B software.</p>
+      <p class="footer-note">Updated <time datetime="2026-10-30">Oct 30, 2026</time> &middot; Inquiries: <a href="mailto:info@saasbill.io">info@saasbill.io</a></p>
+    </div>
+  </footer>
+  <script>
+  /* Plausible + local event dispatcher for: calculator_interaction, category_select, result_rendered, vendor_cta_click */
+  window.__saasbillEvents = window.__saasbillEvents || [];
+  try {
+    var p = (window.location && window.location.pathname ? window.location.pathname : '').toLowerCase();
+    if (p && p !== '/' && p !== '/index.html') {
+      var ctxCat = '';
+      var ctxTool = '';
+      if (p.indexOf('zoominfo') !== -1) {
+        ctxCat = 'CRM & Sales';
+        ctxTool = 'close-crm';
+      } else if (p.indexOf('stripe') !== -1 || p.indexOf('paddle') !== -1 || p.indexOf('whop') !== -1 || p.indexOf('gumroad') !== -1 || p.indexOf('paypal') !== -1) {
+        ctxCat = 'Payment Processors & MoR';
+        ctxTool = p.indexOf('paddle') !== -1 ? 'paddle-mor' : (p.indexOf('whop') !== -1 ? 'whop-payments' : 'stripe-payments');
+      } else if (p.indexOf('hubspot') !== -1 || p.indexOf('close-crm') !== -1 || p.indexOf('pipedrive') !== -1 || p.indexOf('monday-crm') !== -1 || p.indexOf('gong') !== -1) {
+        ctxCat = 'CRM & Sales';
+        ctxTool = p.indexOf('monday') !== -1 ? 'monday-crm' : (p.indexOf('close') !== -1 ? 'close-crm' : (p.indexOf('pipedrive') !== -1 ? 'pipedrive-crm' : 'hubspot-sales-pro'));
+      } else if (p.indexOf('hipaa') !== -1 || p.indexOf('soc2') !== -1 || p.indexOf('docusign') !== -1 || p.indexOf('typeform') !== -1 || p.indexOf('jotform') !== -1) {
+        ctxCat = 'Compliance, HIPAA & SOC 2';
+        ctxTool = (p.indexOf('typeform') !== -1 || p.indexOf('jotform') !== -1) ? 'jotform-hipaa' : 'vanta-soc2';
+      } else if (p.indexOf('intercom') !== -1 || p.indexOf('zendesk') !== -1 || p.indexOf('freshdesk') !== -1) {
+        ctxCat = 'Helpdesk & AI Support';
+        ctxTool = p.indexOf('intercom') !== -1 ? 'intercom-fin-ai' : (p.indexOf('freshdesk') !== -1 ? 'freshdesk-support' : 'zendesk-suite-team');
+      }
+      if (ctxCat && window.sessionStorage) {
+        sessionStorage.setItem('saasbill_last_cat', ctxCat);
+        if (ctxTool) sessionStorage.setItem('saasbill_last_tool', ctxTool);
+      }
+    }
+  } catch (err) {}
+  document.addEventListener('click', function(e) {
+    var cta = e.target.closest('[data-track="vendor-cta"], [data-track="vendor_cta_click"]');
+    if (cta) {
+      var vendor = cta.getAttribute('data-vendor') || '';
+      var location = cta.getAttribute('data-cta-location') || 'subpage-result';
+      var href = cta.getAttribute('href') || '';
+      if (typeof window.trackSaaSBillEvent === 'function') {
+        window.trackSaaSBillEvent('vendor_cta_click', { vendor: vendor, location: location, href: href });
+      }
+      return;
+    }
+    var catBtn = e.target.closest('[data-track="category-select"], [data-track="category_select"]');
+    if (catBtn) {
+      var cat = catBtn.getAttribute('data-cat') || '';
+      if (typeof window.trackSaaSBillEvent === 'function') {
+        window.trackSaaSBillEvent('category_select', { category: cat });
+      }
+    }
+  });
+  var _lastCalcTrackKey = '';
+  var _lastCalcTrackTs = 0;
+  function handleCalcControlEvent(e) {
+    var ctrl = e.target.closest('[data-track="calculator-control"], [data-track="calculator_interaction"], input[type="range"], select');
+    if (ctrl) {
+      var control = ctrl.getAttribute('data-control') || ctrl.id || '';
+      var val = String(ctrl.value);
+      var now = Date.now();
+      var key = control + ':' + val;
+      if (key === _lastCalcTrackKey && (now - _lastCalcTrackTs) < 150) return;
+      _lastCalcTrackKey = key;
+      _lastCalcTrackTs = now;
+      if (typeof window.trackSaaSBillEvent === 'function') {
+        window.trackSaaSBillEvent('calculator_interaction', { control: control, value: val });
+        if (ctrl.id === 'cat-filter') {
+          window.trackSaaSBillEvent('category_select', { category: val });
+        }
+      }
+    }
+  }
+  document.addEventListener('input', handleCalcControlEvent);
+  document.addEventListener('change', handleCalcControlEvent);
+  </script>
+  <script src="../../assets/app.js?v=20261030a"></script>
+</body>
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-site-verification" content="W7-m7km1_5pZZUG38dpallcgdGss6_Vl2qo5pjVoMdA" />
+  <!-- Bing Webmaster Tools verification: paste <meta name="msvalidate.01" content="YOUR_BING_CODE" /> here or use 1-click Google Search Console import (see BING_WEBMASTER_VERIFICATION.md) -->
+  <title>Deepfake labelling patterns with the EU AI icons (UI, video, audio, text) – saasbill.io</title>
+  <meta name="description" content="How to place the EU's official AI icons on images, video, audio and text under AI Act Article 50(4). Placement rules, accessibility and licence, with sources." />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+  <meta property="og:site_name" content="SaaSBill" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Deepfake labelling patterns with the EU AI icons (UI, video, audio, text) – saasbill.io" />
+  <meta property="og:description" content="How to place the EU's official AI icons on images, video, audio and text under AI Act Article 50(4). Placement rules, accessibility and licence, with sources." />
+  <meta property="og:url" content="https://saasbill.io/ai-act/deepfake-labelling-patterns/" />
+  <meta property="og:updated_time" content="2026-10-30T10:15:19+00:00" />
+  <meta property="article:published_time" content="2026-10-30T00:00:00+01:00" />
+  <meta property="article:modified_time" content="2026-10-30T10:15:19+00:00" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Deepfake labelling patterns with the EU AI icons (UI, video, audio, text) – saasbill.io" />
+  <meta name="twitter:description" content="How to place the EU's official AI icons on images, video, audio and text under AI Act Article 50(4). Placement rules, accessibility and licence, with sources." />
+  <meta name="last-modified" content="2026-10-30T10:15:19+00:00" />
+  <meta name="dcterms.modified" content="2026-10-30T10:15:19+00:00" />
+  <meta name="dcterms.issued" content="2026-10-30" />
+  <link rel="canonical" href="https://saasbill.io/ai-act/deepfake-labelling-patterns/" />
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261030c" />
+  <link rel="alternate" type="text/plain" href="https://saasbill.io/llms.txt" title="SaaSBill LLMs.txt Summary" />
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script defer data-domain="saasbill.io" src="https://plausible.io/js/pa-VAaSVNs5XOobt9cv2UtKo.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init();
+    window.__saasbillEvents = window.__saasbillEvents || [];
+    window.trackSaaSBillEvent = function(eventName, props) {
+      var p = props || {};
+      var entry = { event: eventName, ts: Date.now() };
+      for (var k in p) {
+        if (Object.prototype.hasOwnProperty.call(p, k)) entry[k] = p[k];
+      }
+      window.__saasbillEvents.push(entry);
+      if (typeof window.plausible === 'function') {
+        window.plausible(eventName, { props: p });
+      }
+    };
+    window.trackEvent = window.trackSaaSBillEvent;
+
+    window.saasbillMoney = function (n) {
+      var v = Math.round(Number(n) || 0);
+      var sign = v < 0 ? '-' : '';
+      return sign + '$' + Math.abs(v).toLocaleString('en-US');
+    };
+    window.saasbillResultLine = function (hidden, sticker) {
+      var h = Math.round(Number(hidden) || 0);
+      var s = Math.round(Number(sticker) || 0);
+      if (h <= 0) return 'Matches advertised price ($0 hidden fees).';
+      var pct = s > 0 ? Math.round((h / s) * 100) : 0;
+      return '+' + window.saasbillMoney(h) + ' (+' + pct + '%) above advertised price.';
+    };
+    window.saasbillApplyWorkbench = function (opts) {
+      opts = opts || {};
+      var sticker = Math.max(0, Math.round(Number(opts.sticker) || 0));
+      var seats = Math.max(0, Math.round(Number(opts.seats) || 0));
+      var hidden = Math.max(0, Math.round(Number(opts.hidden) || 0));
+      var total = Math.round(Number(opts.total));
+      if (!isFinite(total)) total = sticker + seats + hidden;
+      var parts = Math.max(1, sticker + seats + hidden);
+      function node(id) { return document.getElementById(id); }
+      function setText(id, value) {
+        var el = node(id);
+        if (el) el.textContent = value;
+      }
+      function setFlex(id, amount) {
+        var el = node(id);
+        if (!el) return;
+        var share = amount <= 0 ? 8 : (amount / parts) * 100;
+        el.style.flex = share + ' 1 0px';
+      }
+      setText('shell-product', opts.product || '');
+      setText('shell-big', window.saasbillMoney(total));
+      setText('shell-quote', 'True Year-1 cost');
+      setText('shell-sub', window.saasbillResultLine(hidden, sticker + seats));
+      setText('shell-amt-base', window.saasbillMoney(sticker));
+      setText('shell-amt-seats', window.saasbillMoney(seats));
+      setText('shell-amt-hidden', window.saasbillMoney(hidden));
+      setText('shell-title-base', 'Sticker Price');
+      setText('shell-title-seats', opts.seatsTitle || 'Other sticker fees');
+      setText('shell-title-hidden', 'Hidden Cost Gap');
+      setText('shell-sub-base', opts.baseLabel || 'Advertised price');
+      setText('shell-sub-seats', opts.seatsLabel || 'Included in the sticker');
+      setText('shell-sub-hidden', opts.hiddenLabel || 'Fees above the advertised price');
+      setFlex('shell-row-base', sticker);
+      setFlex('shell-row-seats', seats);
+      setFlex('shell-row-hidden', hidden);
+      var seatsRow = node('shell-row-seats');
+      if (seatsRow) seatsRow.style.display = seats <= 0 ? 'none' : '';
+      var math = node('shell-math');
+      if (math && opts.mathHtml) math.innerHTML = opts.mathHtml;
+      var best = node('shell-best');
+      if (best && opts.bestHtml) best.innerHTML = opts.bestHtml;
+      var cta = node('shell-cta');
+      if (cta && opts.ctaHref) {
+        cta.href = opts.ctaHref;
+        var label = opts.ctaLabel || 'See pricing';
+        cta.textContent = /→\s*$/.test(label) ? label : label + ' \u2192';
+        if (opts.ctaVendor) cta.setAttribute('data-vendor', opts.ctaVendor);
+      }
+      setText('shell-sticker', window.saasbillMoney(sticker + seats));
+      setText('shell-gap', hidden > 0 ? '+' + window.saasbillMoney(hidden) : '$0');
+      if (opts.product) setText('shell-sticker-note', opts.product);
+    };
+
+  </script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "TechArticle", "@id": "https://saasbill.io/ai-act/deepfake-labelling-patterns/#article", "headline": "Deepfake labelling patterns with the EU AI icons (UI, video, audio, text) \u2013 saasbill.io", "description": "How to place the EU's official AI icons on images, video, audio and text under AI Act Article 50(4). Placement rules, accessibility and licence, with sources.", "datePublished": "2026-10-30", "dateModified": "2026-10-30T10:15:19+00:00", "author": {"@type": "Organization", "name": "SaaSBill Editorial", "url": "https://saasbill.io/"}, "publisher": {"@type": "Organization", "name": "SaaSBill", "url": "https://saasbill.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://saasbill.io/ai-act/deepfake-labelling-patterns/"}}, {"@type": "WebPage", "@id": "https://saasbill.io/ai-act/deepfake-labelling-patterns/", "url": "https://saasbill.io/ai-act/deepfake-labelling-patterns/", "name": "Deepfake labelling patterns with the EU AI icons (UI, video, audio, text) \u2013 saasbill.io", "description": "How to place the EU's official AI icons on images, video, audio and text under AI Act Article 50(4). Placement rules, accessibility and licence, with sources.", "inLanguage": "en-US", "datePublished": "2026-10-30", "dateModified": "2026-10-30T10:15:19+00:00", "lastReviewed": "2026-10-30", "reviewedBy": {"@type": "Organization", "name": "SaaSBill Editorial"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "SaaSBill", "item": "https://saasbill.io/"}, {"@type": "ListItem", "position": 2, "name": "Deepfake labelling patterns with the EU AI icons (UI, video, audio, text)", "item": "https://saasbill.io/ai-act/deepfake-labelling-patterns/"}]}]}</script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-inner">
+      <div class="brand-wrap">
+        <a href="../../index.html" class="brand">SaaSBill<span>.io</span></a>
+        <span class="brand-tagline">Year-1 software cost &amp; contract calculators</span>
+      </div>
+      <nav class="nav-links" aria-label="Primary Navigation">
+        <a href="../../index.html#all-calculators">Audits &amp; Guides</a>
+        <a href="../../index.html#methodology">Methodology</a>
+        <span class="byline-bar">Updated <time datetime="2026-10-30" itemprop="dateModified">Oct 30, 2026</time></span>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+    <article itemscope itemtype="https://schema.org/TechArticle">
+      <meta itemprop="datePublished" content="2026-10-30" />
+      <meta itemprop="dateModified" content="2026-10-30T10:15:19+00:00" />
+      
+<section class="hero editorial-hero editorial-hero-wrap">
+  <h1>Deepfake labelling patterns</h1>
+  <p class="lead">Put an &ldquo;AI&rdquo; mark where people see it <strong>before or as</strong> they first see the content: top-right of an image or video, at the start of a video and again after breaks, a short spoken disclaimer at the start of audio, and above or near the headline of text. The EU publishes free icons for this. Using them is optional; disclosing is not. <span class="src-cluster"><a class="src-link" href="https://digital-strategy.ec.europa.eu/en/policies/eu-icons-labelling-ai-generated-content">EU icons for labelling AI-generated content</a> &middot; <a class="src-link" href="https://ec.europa.eu/newsroom/dae/redirection/document/129555">Code of Practice on Transparency of AI-generated Content</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></p>
+</section>
+
+<p class="legal-note">Not legal advice. The patterns below summarise Section 2 of the EU Code of Practice and the EU icons page.</p>
+<h2>The official EU icons (what actually exists)</h2>
+<p>The European Commission publishes <strong>three icons</strong>, each in <strong>four variants</strong> (black, white, black 50 % transparent, white 50 % transparent), as SVG and PNG downloads. <span class="src-cluster"><a class="src-link" href="https://digital-strategy.ec.europa.eu/en/policies/eu-icons-labelling-ai-generated-content">EU icons for labelling AI-generated content</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></p>
+
+<div class="eu-icon-row">
+  <figure class="eu-icon-card">
+    <img src="../../assets/eu-ai-icons/LABEL_AI_black.svg" alt="EU basic AI icon, black" width="140" height="70">
+    <figcaption><strong>Basic icon.</strong> File name in the EU SVG download: LABEL_AI_black.svg. Use it when AI was involved, or you add your own text label or an interactive second layer. EU example: deepfake video with the label &ldquo;voices generated with&rdquo; followed by the icon.</figcaption>
+  </figure>
+  <figure class="eu-icon-card">
+    <img src="../../assets/eu-ai-icons/LABEL_AI%20GENERATED_black.svg" alt="EU fully AI-generated icon, black" width="140" height="70">
+    <figcaption><strong>Fully AI-Generated.</strong> File name: LABEL_AI GENERATED_black.svg. Use it when the whole deepfake or text is AI-generated, no human-made elements or editorial control (apart from prompting). EU example: fully AI-generated videos of politicians; AI-generated news summaries.</figcaption>
+  </figure>
+  <figure class="eu-icon-card">
+    <img src="../../assets/eu-ai-icons/LABEL_AI%20MODIFIED_black.svg" alt="EU partially AI-modified icon, black" width="140" height="70">
+    <figcaption><strong>Partially AI-Modified.</strong> File name: LABEL_AI MODIFIED_black.svg. Use it when existing human-made content was partly changed with AI. EU example: a face swapped in a real photo; an empty-flat photo furnished with AI.</figcaption>
+  </figure>
+</div>
+<p>Each icon also comes in white, and in black and white at 50% transparency, as SVG and PNG. <span class="src-cluster"><a class="src-link" href="https://digital-strategy.ec.europa.eu/en/policies/eu-icons-labelling-ai-generated-content">EU icons for labelling AI-generated content</a> &middot; <a class="src-link" href="https://ec.europa.eu/newsroom/dae/redirection/document/129546">EU icons SVG download</a> &middot; <a class="src-link" href="https://ec.europa.eu/newsroom/dae/redirection/document/129547">EU icons PNG download</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></p>
+<details class="explain-on-demand">
+  <summary>Design rules behind the icons</summary>
+  <div class="explain-body"><ul class="key-list"><li>The main element is the capitalised acronym <strong>&ldquo;AI&rdquo;</strong> in English (a national-language acronym is allowed where national language law requires it). Letters have the same height; keep proportions when resizing. <span class="src-cluster"><a class="src-link" href="https://ec.europa.eu/newsroom/dae/redirection/document/129555">Code of Practice on Transparency of AI-generated Content</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li><li>You may add &ldquo;generated&rdquo; or &ldquo;modified&rdquo; next to the icon or in a second layer, and say <em>what</em> was changed (for example &ldquo;face altered&rdquo;). <span class="src-cluster"><a class="src-link" href="https://ec.europa.eu/newsroom/dae/redirection/document/129555">Code of Practice on Transparency of AI-generated Content</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li><li>Size, contrast, colour and typography can vary as long as the label stays clear and recognisable. <span class="src-cluster"><a class="src-link" href="https://ec.europa.eu/newsroom/dae/redirection/document/129555">Code of Practice on Transparency of AI-generated Content</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li><li>The EU says user testing showed better results across all measures when the icon was paired with a text label (for example &ldquo;modified&rdquo;). <span class="src-cluster"><a class="src-link" href="https://digital-strategy.ec.europa.eu/en/policies/eu-icons-labelling-ai-generated-content">EU icons for labelling AI-generated content</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li></ul></div>
+</details><details class="explain-on-demand">
+  <summary>Licence and usage terms</summary>
+  <div class="explain-body"><p>The icons are &ldquo;publicly available for everyone to use freely, without the need for attribution to the Commission or the AI Office.&rdquo; Code signatories must follow the placement specifications. Non-signatories using the icons must not present that as adherence to the Code. Using the icon does not by itself establish legal compliance. <span class="src-cluster"><a class="src-link" href="https://digital-strategy.ec.europa.eu/en/policies/eu-icons-labelling-ai-generated-content">EU icons for labelling AI-generated content</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></p><p>Official page: <a href="https://digital-strategy.ec.europa.eu/en/policies/eu-icons-labelling-ai-generated-content">EU icons for labelling AI-generated content</a>.</p></div>
+</details>
+<h2>Patterns by format</h2>
+<h3>1. Image</h3>
+<p><strong>Pattern:</strong> icon in the <strong>top-right corner</strong>, embedded in the image, clear of other overlays, readable on any background. <span class="src-cluster"><a class="src-link" href="https://ec.europa.eu/newsroom/dae/redirection/document/129555">Code of Practice on Transparency of AI-generated Content</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></p>
+<ul class="key-list">
+  <li>Embed it in the file so it survives reshares and downloads. A UI overlay is acceptable only if it <em>appears to be on the content</em>. <span class="src-cluster"><a class="src-link" href="https://digital-strategy.ec.europa.eu/en/policies/eu-icons-labelling-ai-generated-content">EU icons for labelling AI-generated content</a> &middot; <a class="src-link" href="https://ec.europa.eu/newsroom/dae/redirection/document/129555">Code of Practice on Transparency of AI-generated Content</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li>
+  <li>Prefer the labelled variant (&ldquo;AI GENERATED&rdquo; / &ldquo;AI MODIFIED&rdquo;) over the bare &ldquo;AI&rdquo;. <span class="src-cluster"><a class="src-link" href="https://digital-strategy.ec.europa.eu/en/policies/eu-icons-labelling-ai-generated-content">EU icons for labelling AI-generated content</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li>
+</ul>
+<h3>2. Video</h3>
+<p><strong>Pattern:</strong> icon <strong>at the start</strong>, where possible <strong>at regular intervals</strong>, and <strong>at minimum after every interruption</strong> (for example ad breaks). <span class="src-cluster"><a class="src-link" href="https://ec.europa.eu/newsroom/dae/redirection/document/129555">Code of Practice on Transparency of AI-generated Content</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></p>
+<ul class="key-list">
+  <li>If only a segment is a deepfake, the Code encourages showing the icon during that segment. <span class="src-cluster"><a class="src-link" href="https://ec.europa.eu/newsroom/dae/redirection/document/129555">Code of Practice on Transparency of AI-generated Content</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li>
+  <li>Audio cues alone are not enough for visual deepfakes; they can only be added on top of a visual label. <span class="src-cluster"><a class="src-link" href="https://ec.europa.eu/newsroom/dae/redirection/document/129555">Code of Practice on Transparency of AI-generated Content</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li>
+  <li>Live streams: people join late, so repeat the icon. <span class="src-cluster"><a class="src-link" href="https://ec.europa.eu/newsroom/dae/redirection/document/129555">Code of Practice on Transparency of AI-generated Content</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li>
+</ul>
+<h3>3. Audio-only</h3>
+<p><strong>Pattern:</strong> a <strong>short spoken disclaimer at the beginning</strong>, in plain language (same language as the content, or English). <span class="src-cluster"><a class="src-link" href="https://ec.europa.eu/newsroom/dae/redirection/document/129555">Code of Practice on Transparency of AI-generated Content</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></p>
+<ul class="key-list">
+  <li>Long-form or live audio: add reminders at regular intervals and after interruptions. <span class="src-cluster"><a class="src-link" href="https://ec.europa.eu/newsroom/dae/redirection/document/129555">Code of Practice on Transparency of AI-generated Content</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li>
+  <li>If a screen is available (car display, phone), <strong>also</strong> show the visual icon. <span class="src-cluster"><a class="src-link" href="https://ec.europa.eu/newsroom/dae/redirection/document/129555">Code of Practice on Transparency of AI-generated Content</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li>
+  <li>An earcon (sound logo) is allowed only with awareness measures, pending a common EU audio solution. <span class="src-cluster"><a class="src-link" href="https://ec.europa.eu/newsroom/dae/redirection/document/129555">Code of Practice on Transparency of AI-generated Content</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li>
+</ul>
+<h3>4. Published text (public-interest topics)</h3>
+<p><strong>Pattern:</strong> icon <strong>above or at the top of the text</strong>, near the headline, or in the colophon at the start. You may label only the AI-generated part. <span class="src-cluster"><a class="src-link" href="https://ec.europa.eu/newsroom/dae/redirection/document/129555">Code of Practice on Transparency of AI-generated Content</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></p>
+<ul class="key-list">
+  <li>Very short text (single words, brief phrases): a contextual notice in the UI is acceptable, for example an indicator next to the output. <span class="src-cluster"><a class="src-link" href="https://ec.europa.eu/newsroom/dae/redirection/document/129555">Code of Practice on Transparency of AI-generated Content</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li>
+  <li>No label needed if a human reviewed it and someone holds editorial responsibility. <span class="src-cluster"><a class="src-link" href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50">AI Act Art. 50, Service Desk</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li>
+</ul>
+<h3>5. Artistic, satirical, fictional works</h3>
+<p><strong>Pattern:</strong> a lighter disclosure that does not spoil the work: in credits, description, accompanying notes, or adjacent to the frame in the UI; for exhibitions, at the point of entry or on the leaflet or ticket. <span class="src-cluster"><a class="src-link" href="https://ec.europa.eu/newsroom/dae/redirection/document/129555">Code of Practice on Transparency of AI-generated Content</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></p>
+<h3>6. Internal-only content (training videos and similar)</h3>
+<p><strong>Pattern:</strong> disclosure may sit in the UI or physical setting <strong>before</strong> exposure, if it is clear to the people involved. <span class="src-cluster"><a class="src-link" href="https://ec.europa.eu/newsroom/dae/redirection/document/129555">Code of Practice on Transparency of AI-generated Content</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></p>
+<h2>Accessibility checklist for the label</h2>
+<ul class="key-list">
+  <li>Icon is large enough to see. <span class="src-cluster"><a class="src-link" href="https://digital-strategy.ec.europa.eu/en/policies/eu-icons-labelling-ai-generated-content">EU icons for labelling AI-generated content</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li>
+  <li>Plain-language text, no jargon or abbreviations except &ldquo;AI&rdquo;. <span class="src-cluster"><a class="src-link" href="https://digital-strategy.ec.europa.eu/en/policies/eu-icons-labelling-ai-generated-content">EU icons for labelling AI-generated content</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li>
+  <li>alt text or aria-label saying the content is AI-generated or manipulated. <span class="src-cluster"><a class="src-link" href="https://digital-strategy.ec.europa.eu/en/policies/eu-icons-labelling-ai-generated-content">EU icons for labelling AI-generated content</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li>
+  <li>Timed labels stay up long enough for people with cognitive or processing difficulties. <span class="src-cluster"><a class="src-link" href="https://digital-strategy.ec.europa.eu/en/policies/eu-icons-labelling-ai-generated-content">EU icons for labelling AI-generated content</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li>
+  <li>Second layer (hover or click info) is signalled by the icon and keyboard and screen-reader navigable. <span class="src-cluster"><a class="src-link" href="https://digital-strategy.ec.europa.eu/en/policies/eu-icons-labelling-ai-generated-content">EU icons for labelling AI-generated content</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li>
+  <li>High contrast; works for colour-vision deficiencies. <span class="src-cluster"><a class="src-link" href="https://ec.europa.eu/newsroom/dae/redirection/document/129555">Code of Practice on Transparency of AI-generated Content</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li>
+</ul>
+<details class="explain-on-demand">
+  <summary>Example HTML pattern (illustrative, not an official EU snippet)</summary>
+  <div class="explain-body"><pre class="ai-act-pre"><code>&lt;figure class=&quot;ai-labelled&quot;&gt;
+  &lt;img src=&quot;campaign.jpg&quot; alt=&quot;Product photo. Background generated with AI.&quot;&gt;
+  &lt;img class=&quot;ai-icon&quot; src=&quot;/assets/eu-ai-icons/LABEL_AI MODIFIED_white.svg&quot;
+       alt=&quot;AI-modified content&quot; width=&quot;64&quot;&gt;
+  &lt;figcaption&gt;Background modified with AI.&lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre><p>Position the icon top-right with clear spacing from other overlays. A CSS overlay is lost when the image is downloaded, so also bake the icon into the exported file. <span class="src-cluster"><a class="src-link" href="https://digital-strategy.ec.europa.eu/en/policies/eu-icons-labelling-ai-generated-content">EU icons for labelling AI-generated content</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></p></div>
+</details>
+<h2>Common mistakes</h2>
+<ul class="key-list">
+  <li>Label only in the footer or &ldquo;About&rdquo; page: not at first exposure. <span class="src-cluster"><a class="src-link" href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50">AI Act Art. 50, Service Desk</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li>
+  <li>Label only on hover: the Code says recognition should not require user action. <span class="src-cluster"><a class="src-link" href="https://ec.europa.eu/newsroom/dae/redirection/document/129555">Code of Practice on Transparency of AI-generated Content</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li>
+  <li>Label only in metadata: machine-readable marks are the <strong>provider&rsquo;s</strong> Art. 50(2) duty; deployers still need a visible disclosure. <span class="src-cluster"><a class="src-link" href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50">AI Act Art. 50, Service Desk</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li>
+</ul>
+<p>Related: <a href="../article-50-deployer-checklist/">Article 50 deployer checklist</a> &middot; <a href="../c2pa-watermarking-tools-compared/">C2PA and watermarking tools</a></p>
+
+<section class="sources-block" aria-labelledby="sources-heading">
+  <h2 id="sources-heading">Sources</h2>
+  <ol class="sources-list">
+    <li id="src-S1"><a href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50">AI Act Art. 50, Service Desk</a>. <span class="src-date">Accessed 30 Oct 2026.</span></li>
+    <li id="src-S3"><a href="https://digital-strategy.ec.europa.eu/en/policies/eu-icons-labelling-ai-generated-content">EU icons for labelling AI-generated content</a>. <span class="src-date">Accessed 30 Oct 2026.</span></li>
+    <li id="src-S3a"><a href="https://ec.europa.eu/newsroom/dae/redirection/document/129546">EU icons SVG download</a>. <span class="src-date">Accessed 30 Oct 2026.</span></li>
+    <li id="src-S3b"><a href="https://ec.europa.eu/newsroom/dae/redirection/document/129547">EU icons PNG download</a>. <span class="src-date">Accessed 30 Oct 2026.</span></li>
+    <li id="src-S4"><a href="https://ec.europa.eu/newsroom/dae/redirection/document/129555">Code of Practice on Transparency of AI-generated Content</a>. <span class="src-date">Accessed 30 Oct 2026.</span></li>
+  </ol>
+</section>
+
+      
+      
+    <section aria-labelledby="related-ai-act-heading" style="margin-top:36px; padding-top:24px; border-top:1px solid var(--border);">
+      <h2 id="related-ai-act-heading" style="font-size:1.2rem; margin-top:0;">Related AI Act guides</h2>
+      <div class="related-calc-grid">
+        
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../ai-act/" data-track="internal-audit">AI Act Article 50 &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">Who must label AI content, the two dates, and where to start.</p>
+        </div>
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../ai-act/article-50-deployer-checklist/" data-track="internal-audit">Article 50 deployer checklist &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">What you must disclose, the exceptions, and the dates.</p>
+        </div>
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../ai-act/c2pa-watermarking-tools-compared/" data-track="internal-audit">C2PA and watermarking tools &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">What each marking tool does. Published prices only.</p>
+        </div>
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../ai-act/etsi-ts-104-275-explained/" data-track="internal-audit">ETSI TS 104 275 explained &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">The deepfake-prevention spec for AI developers, in plain English.</p>
+        </div>
+      </div>
+    </section>
+    
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <p><strong>SaaSBill</strong> &middot; Year-1 cost &amp; contract calculators for B2B software.</p>
+      <p class="footer-note">Updated <time datetime="2026-10-30">Oct 30, 2026</time> &middot; Inquiries: <a href="mailto:info@saasbill.io">info@saasbill.io</a></p>
+    </div>
+  </footer>
+  <script>
+  /* Plausible + local event dispatcher for: calculator_interaction, category_select, result_rendered, vendor_cta_click */
+  window.__saasbillEvents = window.__saasbillEvents || [];
+  try {
+    var p = (window.location && window.location.pathname ? window.location.pathname : '').toLowerCase();
+    if (p && p !== '/' && p !== '/index.html') {
+      var ctxCat = '';
+      var ctxTool = '';
+      if (p.indexOf('zoominfo') !== -1) {
+        ctxCat = 'CRM & Sales';
+        ctxTool = 'close-crm';
+      } else if (p.indexOf('stripe') !== -1 || p.indexOf('paddle') !== -1 || p.indexOf('whop') !== -1 || p.indexOf('gumroad') !== -1 || p.indexOf('paypal') !== -1) {
+        ctxCat = 'Payment Processors & MoR';
+        ctxTool = p.indexOf('paddle') !== -1 ? 'paddle-mor' : (p.indexOf('whop') !== -1 ? 'whop-payments' : 'stripe-payments');
+      } else if (p.indexOf('hubspot') !== -1 || p.indexOf('close-crm') !== -1 || p.indexOf('pipedrive') !== -1 || p.indexOf('monday-crm') !== -1 || p.indexOf('gong') !== -1) {
+        ctxCat = 'CRM & Sales';
+        ctxTool = p.indexOf('monday') !== -1 ? 'monday-crm' : (p.indexOf('close') !== -1 ? 'close-crm' : (p.indexOf('pipedrive') !== -1 ? 'pipedrive-crm' : 'hubspot-sales-pro'));
+      } else if (p.indexOf('hipaa') !== -1 || p.indexOf('soc2') !== -1 || p.indexOf('docusign') !== -1 || p.indexOf('typeform') !== -1 || p.indexOf('jotform') !== -1) {
+        ctxCat = 'Compliance, HIPAA & SOC 2';
+        ctxTool = (p.indexOf('typeform') !== -1 || p.indexOf('jotform') !== -1) ? 'jotform-hipaa' : 'vanta-soc2';
+      } else if (p.indexOf('intercom') !== -1 || p.indexOf('zendesk') !== -1 || p.indexOf('freshdesk') !== -1) {
+        ctxCat = 'Helpdesk & AI Support';
+        ctxTool = p.indexOf('intercom') !== -1 ? 'intercom-fin-ai' : (p.indexOf('freshdesk') !== -1 ? 'freshdesk-support' : 'zendesk-suite-team');
+      }
+      if (ctxCat && window.sessionStorage) {
+        sessionStorage.setItem('saasbill_last_cat', ctxCat);
+        if (ctxTool) sessionStorage.setItem('saasbill_last_tool', ctxTool);
+      }
+    }
+  } catch (err) {}
+  document.addEventListener('click', function(e) {
+    var cta = e.target.closest('[data-track="vendor-cta"], [data-track="vendor_cta_click"]');
+    if (cta) {
+      var vendor = cta.getAttribute('data-vendor') || '';
+      var location = cta.getAttribute('data-cta-location') || 'subpage-result';
+      var href = cta.getAttribute('href') || '';
+      if (typeof window.trackSaaSBillEvent === 'function') {
+        window.trackSaaSBillEvent('vendor_cta_click', { vendor: vendor, location: location, href: href });
+      }
+      return;
+    }
+    var catBtn = e.target.closest('[data-track="category-select"], [data-track="category_select"]');
+    if (catBtn) {
+      var cat = catBtn.getAttribute('data-cat') || '';
+      if (typeof window.trackSaaSBillEvent === 'function') {
+        window.trackSaaSBillEvent('category_select', { category: cat });
+      }
+    }
+  });
+  var _lastCalcTrackKey = '';
+  var _lastCalcTrackTs = 0;
+  function handleCalcControlEvent(e) {
+    var ctrl = e.target.closest('[data-track="calculator-control"], [data-track="calculator_interaction"], input[type="range"], select');
+    if (ctrl) {
+      var control = ctrl.getAttribute('data-control') || ctrl.id || '';
+      var val = String(ctrl.value);
+      var now = Date.now();
+      var key = control + ':' + val;
+      if (key === _lastCalcTrackKey && (now - _lastCalcTrackTs) < 150) return;
+      _lastCalcTrackKey = key;
+      _lastCalcTrackTs = now;
+      if (typeof window.trackSaaSBillEvent === 'function') {
+        window.trackSaaSBillEvent('calculator_interaction', { control: control, value: val });
+        if (ctrl.id === 'cat-filter') {
+          window.trackSaaSBillEvent('category_select', { category: val });
+        }
+      }
+    }
+  }
+  document.addEventListener('input', handleCalcControlEvent);
+  document.addEventListener('change', handleCalcControlEvent);
+  </script>
+  <script src="../../assets/app.js?v=20261030a"></script>
+</body>
+</html>

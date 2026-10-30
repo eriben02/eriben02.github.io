@@ -46,7 +46,12 @@ def generate_meta_files(extra_urls=None):
         "/pricing/jotform-pricing-tier-calculator/",
         "/chargeback-fee-and-recovery-calculator/",
         "/pricing/stripe-shopify-chargeback-fee-and-chargeflow-roi-calculator/",
-        "/exit/shopify-payments-chargeback-threshold-and-reserve-appeal/"
+        "/exit/shopify-payments-chargeback-threshold-and-reserve-appeal/",
+        "/ai-act/",
+        "/ai-act/article-50-deployer-checklist/",
+        "/ai-act/deepfake-labelling-patterns/",
+        "/ai-act/c2pa-watermarking-tools-compared/",
+        "/ai-act/etsi-ts-104-275-explained/",
     ]
     if extra_urls:
         for u in extra_urls:
@@ -188,6 +193,16 @@ Sitemap: {SITE_ORIGIN}/sitemap.xml
 - [FAQ: Stripe vs. Paddle vs. Whop True Cost (2026)]({SITE_ORIGIN}/faq/stripe-vs-paddle-true-cost/): Answer-first guide & calculator.
 - [Jotform Wix App Setup & Pricing Guide (2026)]({SITE_ORIGIN}/guides/jotform-wix-app-setup-and-pricing-guide/): Step-by-step Wix App installation walkthrough, live B2B quote demo, and tier calculator.
 - [Jotform Pricing Tier Calculator (2026)]({SITE_ORIGIN}/pricing/jotform-pricing-tier-calculator/): Starter (Free), Bronze ($34/mo), Silver ($39/mo), and Gold ($99/mo HIPAA BAA) Year-1 calculator.
+
+## AI Act Article 50 (test section)
+Article 50 applies and is enforceable from 2 Aug 2026. The 2 Dec 2026 date covers only Art. 50(2) machine-readable marking, for providers whose systems were on the market before 2 Aug 2026. Accessed 30 Oct 2026.
+- Source, 2 Aug 2026: [AI Act Service Desk FAQ, when enforcement starts](https://ai-act-service-desk.ec.europa.eu/en/ai-act/faq/when-does-enforcement-start)
+- Source, 2 Dec 2026: [AI Act Art. 111](https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-111)
+- [AI Act Article 50, for people who design and publish]({SITE_ORIGIN}/ai-act/): Hub for the labelling duty, the EU icons, marking tools, and ETSI TS 104 275.
+- [Article 50 deployer checklist]({SITE_ORIGIN}/ai-act/article-50-deployer-checklist/): What deployers must disclose, the exceptions, and the dates.
+- [Deepfake labelling patterns]({SITE_ORIGIN}/ai-act/deepfake-labelling-patterns/): Where to put the EU AI icon on images, video, audio and text.
+- [C2PA and watermarking tools compared]({SITE_ORIGIN}/ai-act/c2pa-watermarking-tools-compared/): Content Credentials, SynthID, Digimarc, Truepic and the open-source SDK. Published prices only.
+- [ETSI TS 104 275 explained]({SITE_ORIGIN}/ai-act/etsi-ts-104-275-explained/): ETSI's deepfake-prevention spec (V1.1.1, Sep 2026) in plain English.
 - [Full Machine-Readable Dataset (llms-full.txt)]({SITE_ORIGIN}/llms-full.txt): Complete JSON/Markdown dump of all audited tools, rates, and sources.
 """
     with open(os.path.join(PUBLIC_DIR, "llms.txt"), "w") as f:

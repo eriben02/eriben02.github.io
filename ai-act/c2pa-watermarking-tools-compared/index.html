@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-site-verification" content="W7-m7km1_5pZZUG38dpallcgdGss6_Vl2qo5pjVoMdA" />
+  <!-- Bing Webmaster Tools verification: paste <meta name="msvalidate.01" content="YOUR_BING_CODE" /> here or use 1-click Google Search Console import (see BING_WEBMASTER_VERIFICATION.md) -->
+  <title>C2PA, Content Credentials and AI watermarking tools compared (2026) – saasbill.io</title>
+  <meta name="description" content="C2PA / Content Credentials, CAI open-source SDK, Adobe Content Authenticity, Google SynthID, Digimarc and Truepic: what each does, media types, pricing as published. Unknown means unknown." />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+  <meta property="og:site_name" content="SaaSBill" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="C2PA, Content Credentials and AI watermarking tools compared (2026) – saasbill.io" />
+  <meta property="og:description" content="C2PA / Content Credentials, CAI open-source SDK, Adobe Content Authenticity, Google SynthID, Digimarc and Truepic: what each does, media types, pricing as published. Unknown means unknown." />
+  <meta property="og:url" content="https://saasbill.io/ai-act/c2pa-watermarking-tools-compared/" />
+  <meta property="og:updated_time" content="2026-10-30T10:15:19+00:00" />
+  <meta property="article:published_time" content="2026-10-30T00:00:00+01:00" />
+  <meta property="article:modified_time" content="2026-10-30T10:15:19+00:00" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="C2PA, Content Credentials and AI watermarking tools compared (2026) – saasbill.io" />
+  <meta name="twitter:description" content="C2PA / Content Credentials, CAI open-source SDK, Adobe Content Authenticity, Google SynthID, Digimarc and Truepic: what each does, media types, pricing as published. Unknown means unknown." />
+  <meta name="last-modified" content="2026-10-30T10:15:19+00:00" />
+  <meta name="dcterms.modified" content="2026-10-30T10:15:19+00:00" />
+  <meta name="dcterms.issued" content="2026-10-30" />
+  <link rel="canonical" href="https://saasbill.io/ai-act/c2pa-watermarking-tools-compared/" />
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261030c" />
+  <link rel="alternate" type="text/plain" href="https://saasbill.io/llms.txt" title="SaaSBill LLMs.txt Summary" />
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script defer data-domain="saasbill.io" src="https://plausible.io/js/pa-VAaSVNs5XOobt9cv2UtKo.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init();
+    window.__saasbillEvents = window.__saasbillEvents || [];
+    window.trackSaaSBillEvent = function(eventName, props) {
+      var p = props || {};
+      var entry = { event: eventName, ts: Date.now() };
+      for (var k in p) {
+        if (Object.prototype.hasOwnProperty.call(p, k)) entry[k] = p[k];
+      }
+      window.__saasbillEvents.push(entry);
+      if (typeof window.plausible === 'function') {
+        window.plausible(eventName, { props: p });
+      }
+    };
+    window.trackEvent = window.trackSaaSBillEvent;
+
+    window.saasbillMoney = function (n) {
+      var v = Math.round(Number(n) || 0);
+      var sign = v < 0 ? '-' : '';
+      return sign + '$' + Math.abs(v).toLocaleString('en-US');
+    };
+    window.saasbillResultLine = function (hidden, sticker) {
+      var h = Math.round(Number(hidden) || 0);
+      var s = Math.round(Number(sticker) || 0);
+      if (h <= 0) return 'Matches advertised price ($0 hidden fees).';
+      var pct = s > 0 ? Math.round((h / s) * 100) : 0;
+      return '+' + window.saasbillMoney(h) + ' (+' + pct + '%) above advertised price.';
+    };
+    window.saasbillApplyWorkbench = function (opts) {
+      opts = opts || {};
+      var sticker = Math.max(0, Math.round(Number(opts.sticker) || 0));
+      var seats = Math.max(0, Math.round(Number(opts.seats) || 0));
+      var hidden = Math.max(0, Math.round(Number(opts.hidden) || 0));
+      var total = Math.round(Number(opts.total));
+      if (!isFinite(total)) total = sticker + seats + hidden;
+      var parts = Math.max(1, sticker + seats + hidden);
+      function node(id) { return document.getElementById(id); }
+      function setText(id, value) {
+        var el = node(id);
+        if (el) el.textContent = value;
+      }
+      function setFlex(id, amount) {
+        var el = node(id);
+        if (!el) return;
+        var share = amount <= 0 ? 8 : (amount / parts) * 100;
+        el.style.flex = share + ' 1 0px';
+      }
+      setText('shell-product', opts.product || '');
+      setText('shell-big', window.saasbillMoney(total));
+      setText('shell-quote', 'True Year-1 cost');
+      setText('shell-sub', window.saasbillResultLine(hidden, sticker + seats));
+      setText('shell-amt-base', window.saasbillMoney(sticker));
+      setText('shell-amt-seats', window.saasbillMoney(seats));
+      setText('shell-amt-hidden', window.saasbillMoney(hidden));
+      setText('shell-title-base', 'Sticker Price');
+      setText('shell-title-seats', opts.seatsTitle || 'Other sticker fees');
+      setText('shell-title-hidden', 'Hidden Cost Gap');
+      setText('shell-sub-base', opts.baseLabel || 'Advertised price');
+      setText('shell-sub-seats', opts.seatsLabel || 'Included in the sticker');
+      setText('shell-sub-hidden', opts.hiddenLabel || 'Fees above the advertised price');
+      setFlex('shell-row-base', sticker);
+      setFlex('shell-row-seats', seats);
+      setFlex('shell-row-hidden', hidden);
+      var seatsRow = node('shell-row-seats');
+      if (seatsRow) seatsRow.style.display = seats <= 0 ? 'none' : '';
+      var math = node('shell-math');
+      if (math && opts.mathHtml) math.innerHTML = opts.mathHtml;
+      var best = node('shell-best');
+      if (best && opts.bestHtml) best.innerHTML = opts.bestHtml;
+      var cta = node('shell-cta');
+      if (cta && opts.ctaHref) {
+        cta.href = opts.ctaHref;
+        var label = opts.ctaLabel || 'See pricing';
+        cta.textContent = /→\s*$/.test(label) ? label : label + ' \u2192';
+        if (opts.ctaVendor) cta.setAttribute('data-vendor', opts.ctaVendor);
+      }
+      setText('shell-sticker', window.saasbillMoney(sticker + seats));
+      setText('shell-gap', hidden > 0 ? '+' + window.saasbillMoney(hidden) : '$0');
+      if (opts.product) setText('shell-sticker-note', opts.product);
+    };
+
+  </script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "TechArticle", "@id": "https://saasbill.io/ai-act/c2pa-watermarking-tools-compared/#article", "headline": "C2PA, Content Credentials and AI watermarking tools compared (2026) \u2013 saasbill.io", "description": "C2PA / Content Credentials, CAI open-source SDK, Adobe Content Authenticity, Google SynthID, Digimarc and Truepic: what each does, media types, pricing as published. Unknown means unknown.", "datePublished": "2026-10-30", "dateModified": "2026-10-30T10:15:19+00:00", "author": {"@type": "Organization", "name": "SaaSBill Editorial", "url": "https://saasbill.io/"}, "publisher": {"@type": "Organization", "name": "SaaSBill", "url": "https://saasbill.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://saasbill.io/ai-act/c2pa-watermarking-tools-compared/"}}, {"@type": "WebPage", "@id": "https://saasbill.io/ai-act/c2pa-watermarking-tools-compared/", "url": "https://saasbill.io/ai-act/c2pa-watermarking-tools-compared/", "name": "C2PA, Content Credentials and AI watermarking tools compared (2026) \u2013 saasbill.io", "description": "C2PA / Content Credentials, CAI open-source SDK, Adobe Content Authenticity, Google SynthID, Digimarc and Truepic: what each does, media types, pricing as published. Unknown means unknown.", "inLanguage": "en-US", "datePublished": "2026-10-30", "dateModified": "2026-10-30T10:15:19+00:00", "lastReviewed": "2026-10-30", "reviewedBy": {"@type": "Organization", "name": "SaaSBill Editorial"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "SaaSBill", "item": "https://saasbill.io/"}, {"@type": "ListItem", "position": 2, "name": "C2PA, Content Credentials and AI watermarking tools compared (2026)", "item": "https://saasbill.io/ai-act/c2pa-watermarking-tools-compared/"}]}]}</script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-inner">
+      <div class="brand-wrap">
+        <a href="../../index.html" class="brand">SaaSBill<span>.io</span></a>
+        <span class="brand-tagline">Year-1 software cost &amp; contract calculators</span>
+      </div>
+      <nav class="nav-links" aria-label="Primary Navigation">
+        <a href="../../index.html#all-calculators">Audits &amp; Guides</a>
+        <a href="../../index.html#methodology">Methodology</a>
+        <span class="byline-bar">Updated <time datetime="2026-10-30" itemprop="dateModified">Oct 30, 2026</time></span>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+    <article itemscope itemtype="https://schema.org/TechArticle">
+      <meta itemprop="datePublished" content="2026-10-30" />
+      <meta itemprop="dateModified" content="2026-10-30T10:15:19+00:00" />
+      
+<section class="hero editorial-hero editorial-hero-wrap">
+  <h1>C2PA and watermarking tools compared</h1>
+  <p class="lead">Under the EU Code of Practice, providers of generative AI are expected to use <strong>two layers</strong> of machine-readable marking: <strong>digitally signed metadata</strong> (what C2PA / Content Credentials does) <strong>plus an imperceptible watermark</strong> (what SynthID or Digimarc do). Free-form text cannot carry metadata, so a watermark alone is considered sufficient there. Neither layer replaces the visible label a deployer must show. <span class="src-cluster"><a class="src-link" href="https://ec.europa.eu/newsroom/dae/redirection/document/129555">Code of Practice on Transparency of AI-generated Content</a> &middot; <a class="src-link" href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50">AI Act Art. 50, Service Desk</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></p>
+</section>
+
+<p class="legal-note">Not legal advice. Prices are shown only where the vendor publishes them. &ldquo;Unknown&rdquo; means we could not find it on an official page.</p>
+<h2>Comparison table</h2>
+
+<div class="table-wrap editorial-gap-table mobile-cards">
+  <table>
+    <caption>Comparison of marking tools. Published prices only. Unknown means unknown.</caption>
+    <thead><tr><th>Tool</th><th>What it is</th><th>Layer</th><th>Media (as stated)</th><th>Open / free?</th><th>Published price</th><th>Source</th></tr></thead>
+    <tbody><tr><td data-label="Tool"><strong>C2PA / Content Credentials</strong></td><td data-label="What it is">Open technical standard for provenance (&ldquo;Content Credentials&rdquo;). Latest spec listed: 2.5.</td><td data-label="Layer">Signed metadata (plus soft-binding API for watermarks)</td><td data-label="Media (as stated)">Standard, format support depends on implementation</td><td data-label="Open / free?">Open standard</td><td data-label="Published price">n/a (standard)</td><td data-label="Source"><span class="src-cluster"><a class="src-link" href="https://c2pa.org/">C2PA</a> &middot; <a class="src-link" href="https://spec.c2pa.org/specifications/specifications/2.5/index.html">C2PA specifications, 2.5</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></td></tr><tr><td data-label="Tool"><strong>CAI open-source SDK</strong> (c2pa-rs, c2patool, c2pa-web, c2pa-node, Python, Swift, Android, C/C++)</td><td data-label="What it is">Libraries to read, validate, create and sign C2PA manifests</td><td data-label="Layer">Signed metadata</td><td data-label="Media (as stated)">Supported formats vary by library and release</td><td data-label="Open / free?">Open source</td><td data-label="Published price">Free to use; you need your own signing certificate</td><td data-label="Source"><span class="src-cluster"><a class="src-link" href="https://opensource.contentauthenticity.org/">CAI open-source SDK</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></td></tr><tr><td data-label="Tool"><strong>Adobe Content Authenticity (Beta)</strong></td><td data-label="What it is">Free web app to apply and inspect Content Credentials; Chrome extension to view them</td><td data-label="Layer">Metadata + invisible watermark + fingerprint (Adobe states all three)</td><td data-label="Media (as stated)">Apply: JPG/PNG, up to 50 files, 20 MB each</td><td data-label="Open / free?">Free (public beta)</td><td data-label="Published price">Free</td><td data-label="Source"><span class="src-cluster"><a class="src-link" href="https://helpx.adobe.com/creative-cloud/apps/adobe-content-authenticity/beta-overview.html">Adobe Content Authenticity (Beta)</a> &middot; <a class="src-link" href="https://blog.adobe.com/en/publish/2025/04/24/adobe-content-authenticity-now-public-beta-helps-creators-secure-attribution">Adobe blog, public beta, 24 Apr 2025</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></td></tr><tr><td data-label="Tool"><strong>Google SynthID</strong></td><td data-label="What it is">Google DeepMind imperceptible watermark + public detector</td><td data-label="Layer">Watermark</td><td data-label="Media (as stated)">Images, video, audio (detector); text via open-source SynthID Text</td><td data-label="Open / free?">SynthID Text open-sourced (Hugging Face Transformers v4.46.0+)</td><td data-label="Published price">Detector: unknown / not stated; SynthID Text: open source</td><td data-label="Source"><span class="src-cluster"><a class="src-link" href="https://blog.google/innovation-and-ai/models-and-research/google-deepmind/synth-id-ai-content/">Google blog, SynthID Detector</a> &middot; <a class="src-link" href="https://ai.google.dev/responsible/docs/safeguards/synthid">Google SynthID Text</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></td></tr><tr><td data-label="Tool"><strong>Digimarc (C2PA solution)</strong></td><td data-label="What it is">Imperceptible watermark that links content to its C2PA Content Credentials, even after metadata is stripped</td><td data-label="Layer">Watermark linked to C2PA</td><td data-label="Media (as stated)">Images, video, audio</td><td data-label="Open / free?">Commercial</td><td data-label="Published price">Unknown (demo / contact sales)</td><td data-label="Source"><span class="src-cluster"><a class="src-link" href="https://www.digimarc.com/solutions/provenance-authenticity">Digimarc provenance and authenticity</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></td></tr><tr><td data-label="Tool"><strong>Truepic (Lens / Vision)</strong></td><td data-label="What it is">Authenticated capture: photos and videos signed at capture with Truepic PKI; reports content credentials (C2PA)</td><td data-label="Layer">Signed metadata at capture</td><td data-label="Media (as stated)">Photos, video</td><td data-label="Open / free?">Commercial</td><td data-label="Published price">Inspection product: from $1,000/mo (Flex). This is for inspections, not AI labelling. C2PA-only pricing unknown.</td><td data-label="Source"><span class="src-cluster"><a class="src-link" href="https://www.truepic.com/">Truepic</a> &middot; <a class="src-link" href="https://vision.truepic.dev/docs/lens-api">Truepic Lens API</a> &middot; <a class="src-link" href="https://www.truepic.com/pricing">Truepic pricing</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></td></tr></tbody>
+  </table>
+</div>
+<details class="explain-on-demand">
+  <summary>Which do I need? (provider vs deployer)</summary>
+  <div class="explain-body"><ul class="key-list"><li><strong>You build or sell a generative AI system (provider):</strong> Art. 50(2) applies to you. The Code expects signed metadata <strong>and</strong> a watermark for audio, image, video and containerised text. Systems already on the market before 2 Aug 2026 have until <strong>2 Dec 2026</strong>. <span class="src-cluster"><a class="src-link" href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50">AI Act Art. 50, Service Desk</a> &middot; <a class="src-link" href="https://ec.europa.eu/newsroom/dae/redirection/document/129555">Code of Practice on Transparency of AI-generated Content</a> &middot; <a class="src-link" href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-111">AI Act Art. 111, Service Desk</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li><li><strong>You only use AI to make content (deployer):</strong> your legal duty is the <strong>visible</strong> disclosure under Art. 50(4). C2PA and watermarks are useful (they survive sharing and back up your label), but they are not the label. See <a href="../deepfake-labelling-patterns/">labelling patterns</a>. <span class="src-cluster"><a class="src-link" href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50">AI Act Art. 50, Service Desk</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li></ul></div>
+</details><details class="explain-on-demand">
+  <summary>C2PA / Content Credentials, details</summary>
+  <div class="explain-body"><ul class="key-list"><li>C2PA describes itself as &ldquo;an open technical standard for publishers, creators and consumers to establish the origin and edits of digital content. It&rsquo;s called Content Credentials.&rdquo; <span class="src-cluster"><a class="src-link" href="https://c2pa.org/">C2PA</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li><li>The spec index lists versions up to <strong>2.5</strong>, plus a Soft Binding API (the hook that lets a watermark point back to a manifest). <span class="src-cluster"><a class="src-link" href="https://spec.c2pa.org/specifications/specifications/2.5/index.html">C2PA specifications, 2.5</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li><li>The &ldquo;cr&rdquo; pin is a C2PA trademark used by conforming products. <span class="src-cluster"><a class="src-link" href="https://opensource.contentauthenticity.org/">CAI open-source SDK</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li><li>The C2PA is a standards body under the Linux Foundation&rsquo;s Joint Development Foundation; the CAI is an Adobe-led consortium that maintains the open-source SDK. <span class="src-cluster"><a class="src-link" href="https://opensource.contentauthenticity.org/">CAI open-source SDK</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li></ul></div>
+</details><details class="explain-on-demand">
+  <summary>Adobe Content Authenticity, details</summary>
+  <div class="explain-body"><ul class="key-list"><li>Free web app at contentauthenticity.adobe.com, in public beta. <span class="src-cluster"><a class="src-link" href="https://helpx.adobe.com/creative-cloud/apps/adobe-content-authenticity/beta-overview.html">Adobe Content Authenticity (Beta)</a> &middot; <a class="src-link" href="https://blog.adobe.com/en/publish/2025/04/24/adobe-content-authenticity-now-public-beta-helps-creators-secure-attribution">Adobe blog, public beta, 24 Apr 2025</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li><li>Upload up to 50 JPG/PNG files at a time, max 20 MB each; credentials cannot be edited after applying. <span class="src-cluster"><a class="src-link" href="https://helpx.adobe.com/creative-cloud/apps/adobe-content-authenticity/beta-overview.html">Adobe Content Authenticity (Beta)</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li><li>Adobe states credentials are stored in the file and in Adobe&rsquo;s public Content Credentials cloud, linked through embedded metadata, invisible watermarking and digital fingerprinting. <span class="src-cluster"><a class="src-link" href="https://helpx.adobe.com/creative-cloud/apps/adobe-content-authenticity/beta-overview.html">Adobe Content Authenticity (Beta)</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li><li>Support for video and audio was announced as &ldquo;coming soon&rdquo; in April 2025; we did not find a confirmation of availability. <strong>Unknown.</strong> <span class="src-cluster"><a class="src-link" href="https://blog.adobe.com/en/publish/2025/04/24/adobe-content-authenticity-now-public-beta-helps-creators-secure-attribution">Adobe blog, public beta, 24 Apr 2025</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li></ul></div>
+</details><details class="explain-on-demand">
+  <summary>Google SynthID, details</summary>
+  <div class="explain-body"><ul class="key-list"><li>Google says SynthID has watermarked over 180 billion images and videos and 240,000 years of audio, and that the SynthID Detector became available globally in English on 7 Oct 2026 (post updated 29 Oct 2026). <span class="src-cluster"><a class="src-link" href="https://blog.google/innovation-and-ai/models-and-research/google-deepmind/synth-id-ai-content/">Google blog, SynthID Detector</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li><li>The detector checks images, video and audio made with AI from Google or partners named as OpenAI, NVIDIA, Kakao and Apple. <span class="src-cluster"><a class="src-link" href="https://blog.google/innovation-and-ai/models-and-research/google-deepmind/synth-id-ai-content/">Google blog, SynthID Detector</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li><li>SynthID Text is open source; detection is probabilistic (watermarked / not watermarked / uncertain). Thorough rewriting or translation can greatly reduce detector confidence. <span class="src-cluster"><a class="src-link" href="https://ai.google.dev/responsible/docs/safeguards/synthid">Google SynthID Text</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li><li>Pricing for the detector or for third-party image, audio or video watermarking: <strong>unknown</strong>.</li></ul></div>
+</details><details class="explain-on-demand">
+  <summary>Digimarc, details</summary>
+  <div class="explain-body"><ul class="key-list"><li>Digimarc says it built &ldquo;the first implementation of invisible watermarking for C2PA purposes&rdquo; and that its watermark keeps a link to Content Credentials even if media is manipulated or stripped of metadata. <span class="src-cluster"><a class="src-link" href="https://www.digimarc.com/solutions/provenance-authenticity">Digimarc provenance and authenticity</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li><li>It positions the product for the EU AI Act among other regulations. <span class="src-cluster"><a class="src-link" href="https://www.digimarc.com/solutions/provenance-authenticity">Digimarc provenance and authenticity</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li><li>Pricing: <strong>unknown</strong> (request a demo). <span class="src-cluster"><a class="src-link" href="https://www.digimarc.com/solutions/provenance-authenticity">Digimarc provenance and authenticity</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li></ul></div>
+</details><details class="explain-on-demand">
+  <summary>Truepic, details</summary>
+  <div class="explain-body"><ul class="key-list"><li>Truepic&rsquo;s current site focuses on authenticated photo and video inspections (insurance, lending, warranty). <span class="src-cluster"><a class="src-link" href="https://www.truepic.com/">Truepic</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li><li>Its Lens API docs describe signing captures with a key and certificate from Truepic&rsquo;s Certificate Authority and returning a JSON report of the content credentials; sample output shows C2PA manifest data. <span class="src-cluster"><a class="src-link" href="https://vision.truepic.dev/docs/lens-api">Truepic Lens API</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li><li>Public pricing exists for the inspection product (Flex: $1,000/month minimum; Standard shown at $1,450/month for a selected tier). <span class="src-cluster"><a class="src-link" href="https://www.truepic.com/pricing">Truepic pricing</a> <span class="src-date">Accessed 30 Oct 2026.</span></span> Truepic is a capture-provenance tool, not an AI-output labelling tool.</li></ul></div>
+</details>
+<h2>What none of these do</h2>
+<ul class="key-list">
+  <li>They do not decide whether your content is a &ldquo;deepfake&rdquo; or &ldquo;public-interest text&rdquo;. That is a judgment under Art. 50(4). <span class="src-cluster"><a class="src-link" href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50">AI Act Art. 50, Service Desk</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li>
+  <li>Watermark detection is probabilistic; metadata can be stripped. That is why the Code asks for layers. <span class="src-cluster"><a class="src-link" href="https://ec.europa.eu/newsroom/dae/redirection/document/129555">Code of Practice on Transparency of AI-generated Content</a> &middot; <a class="src-link" href="https://ai.google.dev/responsible/docs/safeguards/synthid">Google SynthID Text</a> <span class="src-date">Accessed 30 Oct 2026.</span></span></li>
+</ul>
+<p>Related: <a href="../article-50-deployer-checklist/">Article 50 deployer checklist</a> &middot; <a href="../etsi-ts-104-275-explained/">ETSI TS 104 275 explained</a></p>
+
+<section class="sources-block" aria-labelledby="sources-heading">
+  <h2 id="sources-heading">Sources</h2>
+  <ol class="sources-list">
+    <li id="src-S1"><a href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50">AI Act Art. 50, Service Desk</a>. <span class="src-date">Accessed 30 Oct 2026.</span></li>
+    <li id="src-S4"><a href="https://ec.europa.eu/newsroom/dae/redirection/document/129555">Code of Practice on Transparency of AI-generated Content</a>. <span class="src-date">Accessed 30 Oct 2026.</span></li>
+    <li id="src-S7"><a href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-111">AI Act Art. 111, Service Desk</a>. <span class="src-date">Accessed 30 Oct 2026.</span></li>
+    <li id="src-T1"><a href="https://c2pa.org/">C2PA</a>. <span class="src-date">Accessed 30 Oct 2026.</span></li>
+    <li id="src-T2"><a href="https://spec.c2pa.org/specifications/specifications/2.5/index.html">C2PA specifications, 2.5</a>. <span class="src-date">Accessed 30 Oct 2026.</span></li>
+    <li id="src-T3"><a href="https://opensource.contentauthenticity.org/">CAI open-source SDK</a>. <span class="src-date">Accessed 30 Oct 2026.</span></li>
+    <li id="src-T4"><a href="https://helpx.adobe.com/creative-cloud/apps/adobe-content-authenticity/beta-overview.html">Adobe Content Authenticity (Beta)</a>. <span class="src-date">Accessed 30 Oct 2026.</span></li>
+    <li id="src-T5"><a href="https://blog.adobe.com/en/publish/2025/04/24/adobe-content-authenticity-now-public-beta-helps-creators-secure-attribution">Adobe blog, public beta, 24 Apr 2025</a>. <span class="src-date">Accessed 30 Oct 2026.</span></li>
+    <li id="src-T6"><a href="https://blog.google/innovation-and-ai/models-and-research/google-deepmind/synth-id-ai-content/">Google blog, SynthID Detector</a>. <span class="src-date">Accessed 30 Oct 2026.</span></li>
+    <li id="src-T7"><a href="https://ai.google.dev/responsible/docs/safeguards/synthid">Google SynthID Text</a>. <span class="src-date">Accessed 30 Oct 2026.</span></li>
+    <li id="src-T8"><a href="https://www.digimarc.com/solutions/provenance-authenticity">Digimarc provenance and authenticity</a>. <span class="src-date">Accessed 30 Oct 2026.</span></li>
+    <li id="src-T9"><a href="https://www.truepic.com/">Truepic</a>. <span class="src-date">Accessed 30 Oct 2026.</span></li>
+    <li id="src-T10"><a href="https://vision.truepic.dev/docs/lens-api">Truepic Lens API</a>. <span class="src-date">Accessed 30 Oct 2026.</span></li>
+    <li id="src-T11"><a href="https://www.truepic.com/pricing">Truepic pricing</a>. <span class="src-date">Accessed 30 Oct 2026.</span></li>
+  </ol>
+</section>
+
+      
+      
+    <section aria-labelledby="related-ai-act-heading" style="margin-top:36px; padding-top:24px; border-top:1px solid var(--border);">
+      <h2 id="related-ai-act-heading" style="font-size:1.2rem; margin-top:0;">Related AI Act guides</h2>
+      <div class="related-calc-grid">
+        
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../ai-act/" data-track="internal-audit">AI Act Article 50 &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">Who must label AI content, the two dates, and where to start.</p>
+        </div>
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../ai-act/article-50-deployer-checklist/" data-track="internal-audit">Article 50 deployer checklist &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">What you must disclose, the exceptions, and the dates.</p>
+        </div>
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../ai-act/deepfake-labelling-patterns/" data-track="internal-audit">Deepfake labelling patterns &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">Where to put the EU AI icon on images, video, audio and text.</p>
+        </div>
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../ai-act/etsi-ts-104-275-explained/" data-track="internal-audit">ETSI TS 104 275 explained &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">The deepfake-prevention spec for AI developers, in plain English.</p>
+        </div>
+      </div>
+    </section>
+    
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <p><strong>SaaSBill</strong> &middot; Year-1 cost &amp; contract calculators for B2B software.</p>
+      <p class="footer-note">Updated <time datetime="2026-10-30">Oct 30, 2026</time> &middot; Inquiries: <a href="mailto:info@saasbill.io">info@saasbill.io</a></p>
+    </div>
+  </footer>
+  <script>
+  /* Plausible + local event dispatcher for: calculator_interaction, category_select, result_rendered, vendor_cta_click */
+  window.__saasbillEvents = window.__saasbillEvents || [];
+  try {
+    var p = (window.location && window.location.pathname ? window.location.pathname : '').toLowerCase();
+    if (p && p !== '/' && p !== '/index.html') {
+      var ctxCat = '';
+      var ctxTool = '';
+      if (p.indexOf('zoominfo') !== -1) {
+        ctxCat = 'CRM & Sales';
+        ctxTool = 'close-crm';
+      } else if (p.indexOf('stripe') !== -1 || p.indexOf('paddle') !== -1 || p.indexOf('whop') !== -1 || p.indexOf('gumroad') !== -1 || p.indexOf('paypal') !== -1) {
+        ctxCat = 'Payment Processors & MoR';
+        ctxTool = p.indexOf('paddle') !== -1 ? 'paddle-mor' : (p.indexOf('whop') !== -1 ? 'whop-payments' : 'stripe-payments');
+      } else if (p.indexOf('hubspot') !== -1 || p.indexOf('close-crm') !== -1 || p.indexOf('pipedrive') !== -1 || p.indexOf('monday-crm') !== -1 || p.indexOf('gong') !== -1) {
+        ctxCat = 'CRM & Sales';
+        ctxTool = p.indexOf('monday') !== -1 ? 'monday-crm' : (p.indexOf('close') !== -1 ? 'close-crm' : (p.indexOf('pipedrive') !== -1 ? 'pipedrive-crm' : 'hubspot-sales-pro'));
+      } else if (p.indexOf('hipaa') !== -1 || p.indexOf('soc2') !== -1 || p.indexOf('docusign') !== -1 || p.indexOf('typeform') !== -1 || p.indexOf('jotform') !== -1) {
+        ctxCat = 'Compliance, HIPAA & SOC 2';
+        ctxTool = (p.indexOf('typeform') !== -1 || p.indexOf('jotform') !== -1) ? 'jotform-hipaa' : 'vanta-soc2';
+      } else if (p.indexOf('intercom') !== -1 || p.indexOf('zendesk') !== -1 || p.indexOf('freshdesk') !== -1) {
+        ctxCat = 'Helpdesk & AI Support';
+        ctxTool = p.indexOf('intercom') !== -1 ? 'intercom-fin-ai' : (p.indexOf('freshdesk') !== -1 ? 'freshdesk-support' : 'zendesk-suite-team');
+      }
+      if (ctxCat && window.sessionStorage) {
+        sessionStorage.setItem('saasbill_last_cat', ctxCat);
+        if (ctxTool) sessionStorage.setItem('saasbill_last_tool', ctxTool);
+      }
+    }
+  } catch (err) {}
+  document.addEventListener('click', function(e) {
+    var cta = e.target.closest('[data-track="vendor-cta"], [data-track="vendor_cta_click"]');
+    if (cta) {
+      var vendor = cta.getAttribute('data-vendor') || '';
+      var location = cta.getAttribute('data-cta-location') || 'subpage-result';
+      var href = cta.getAttribute('href') || '';
+      if (typeof window.trackSaaSBillEvent === 'function') {
+        window.trackSaaSBillEvent('vendor_cta_click', { vendor: vendor, location: location, href: href });
+      }
+      return;
+    }
+    var catBtn = e.target.closest('[data-track="category-select"], [data-track="category_select"]');
+    if (catBtn) {
+      var cat = catBtn.getAttribute('data-cat') || '';
+      if (typeof window.trackSaaSBillEvent === 'function') {
+        window.trackSaaSBillEvent('category_select', { category: cat });
+      }
+    }
+  });
+  var _lastCalcTrackKey = '';
+  var _lastCalcTrackTs = 0;
+  function handleCalcControlEvent(e) {
+    var ctrl = e.target.closest('[data-track="calculator-control"], [data-track="calculator_interaction"], input[type="range"], select');
+    if (ctrl) {
+      var control = ctrl.getAttribute('data-control') || ctrl.id || '';
+      var val = String(ctrl.value);
+      var now = Date.now();
+      var key = control + ':' + val;
+      if (key === _lastCalcTrackKey && (now - _lastCalcTrackTs) < 150) return;
+      _lastCalcTrackKey = key;
+      _lastCalcTrackTs = now;
+      if (typeof window.trackSaaSBillEvent === 'function') {
+        window.trackSaaSBillEvent('calculator_interaction', { control: control, value: val });
+        if (ctrl.id === 'cat-filter') {
+          window.trackSaaSBillEvent('category_select', { category: val });
+        }
+      }
+    }
+  }
+  document.addEventListener('input', handleCalcControlEvent);
+  document.addEventListener('change', handleCalcControlEvent);
+  </script>
+  <script src="../../assets/app.js?v=20261030a"></script>
+</body>
+</html>
