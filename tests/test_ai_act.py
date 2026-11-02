@@ -103,6 +103,16 @@ class TestAiActSection(unittest.TestCase):
         home = read(os.path.join(PUBLIC, "index.html"))
         self.assertIn("Some links are affiliate links. They never change the math.", home)
 
+    def test_ai_act_titles_are_at_most_60_characters(self):
+        for rel in PAGES:
+            for base in (PUBLIC, ROOT):
+                html = read(os.path.join(base, rel))
+                title = re.search(r"<title>(.*?)</title>", html).group(1)
+                og = re.search(r'<meta property="og:title" content="([^"]*)"', html).group(1)
+                self.assertEqual(og, title, rel)
+                self.assertLessEqual(len(title), 60, title)
+                self.assertTrue(title.endswith(" – saasbill.io"), title)
+
     def test_design_principle_is_not_visible_copy(self):
         """'Answer first' and 'explanation on demand' stay off every published page."""
         forbidden = ("answer first", "explanation on demand")
