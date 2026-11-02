@@ -58,13 +58,13 @@ def sources_section(keys):
     for key in keys:
         url, label = SOURCES[key]
         items.append(
-            '<li id="src-%s"><a href="%s">%s</a>. <span class="src-date">%s</span></li>'
+            '<li id="src-%s"><a class="src-link" href="%s">%s</a>. <span class="src-date">%s</span></li>'
             % (key, url, escape(label), ACCESSED)
         )
     return """
-<section class="sources-block" aria-labelledby="sources-heading">
+<section aria-labelledby="sources-heading">
   <h2 id="sources-heading">Sources</h2>
-  <ol class="sources-list">
+  <ol class="key-list">
     %s
   </ol>
 </section>
@@ -72,9 +72,12 @@ def sources_section(keys):
 
 
 def details(summary, body):
-    return """<details class="explain-on-demand">
-  <summary>%s</summary>
-  <div class="explain-body">%s</div>
+    return """<details class="full-table-disclosure below-disclosure">
+  <summary class="full-table-summary">
+    <span class="below-disclosure-title">%s</span>
+    <span class="full-table-toggle-pill" aria-hidden="true">&darr;</span>
+  </summary>
+  <div class="full-table-body">%s</div>
 </details>""" % (summary, body)
 
 
@@ -98,10 +101,10 @@ def table(caption, headers, rows):
 
 
 COMING = """
-<aside class="coming-soon-box" aria-label="Free checklist">
-  <p class="coming-soon-title">Free checklist (PDF) coming soon</p>
+<div class="card">
+  <h3>Free checklist (PDF) coming soon</h3>
   <p>AI Act Article 50: the 2-page labelling checklist for teams that publish AI content.</p>
-</aside>
+</div>
 """
 
 
@@ -172,7 +175,7 @@ def page_index():
         "AI Act Article 50, for people who design and publish",
         lead,
     ) + """
-<p class="legal-note">Not legal advice. Every claim links to an official source with the date we checked it.</p>
+<p class="summary-caveat">Not legal advice. Every claim links to an official source with the date we checked it.</p>
 <h2>Start here</h2>
 """ + cards + COMING + dates + why + checklist_preview + sources_section(["S1", "S2", "S3", "S4", "S5", "S7"])
     return body
@@ -245,7 +248,7 @@ def page_checklist():
         "<p>Breaches of Article 50 can lead to fines of up to EUR 15 000 000 or 3%% of total worldwide annual turnover, whichever is higher. Member States set the actual penalty rules and must consider the interests of SMEs. %s</p>" % cite("S9"),
     )
     body = hero("Article 50 checklist for deployers", lead) + """
-<p class="legal-note">Not legal advice. This page summarises official EU sources. Check the text of the law for your own case.</p>
+<p class="summary-caveat">Not legal advice. This page summarises official EU sources. Check the text of the law for your own case.</p>
 <h2>The 5-line checklist</h2>
 """ + checklist + who + deepfake + public_interest + """
 <h2>Exceptions (short version)</h2>
@@ -273,19 +276,19 @@ def page_patterns():
         + cite("S3", "S4")
     )
     icons = """
-<div class="eu-icon-row">
-  <figure class="eu-icon-card">
+<div class="card-grid">
+  <div class="card">
     <img src="%s" alt="EU basic AI icon, black" width="140" height="70">
-    <figcaption><strong>Basic icon.</strong> File name in the EU SVG download: LABEL_AI_black.svg. Use it when AI was involved, or you add your own text label or an interactive second layer. EU example: deepfake video with the label &ldquo;voices generated with&rdquo; followed by the icon.</figcaption>
-  </figure>
-  <figure class="eu-icon-card">
+    <p><strong>Basic icon.</strong> File name in the EU SVG download: LABEL_AI_black.svg. Use it when AI was involved, or you add your own text label or an interactive second layer. EU example: deepfake video with the label &ldquo;voices generated with&rdquo; followed by the icon.</p>
+  </div>
+  <div class="card">
     <img src="%s" alt="EU fully AI-generated icon, black" width="140" height="70">
-    <figcaption><strong>Fully AI-Generated.</strong> File name: LABEL_AI GENERATED_black.svg. Use it when the whole deepfake or text is AI-generated, no human-made elements or editorial control (apart from prompting). EU example: fully AI-generated videos of politicians; AI-generated news summaries.</figcaption>
-  </figure>
-  <figure class="eu-icon-card">
+    <p><strong>Fully AI-Generated.</strong> File name: LABEL_AI GENERATED_black.svg. Use it when the whole deepfake or text is AI-generated, no human-made elements or editorial control (apart from prompting). EU example: fully AI-generated videos of politicians; AI-generated news summaries.</p>
+  </div>
+  <div class="card">
     <img src="%s" alt="EU partially AI-modified icon, black" width="140" height="70">
-    <figcaption><strong>Partially AI-Modified.</strong> File name: LABEL_AI MODIFIED_black.svg. Use it when existing human-made content was partly changed with AI. EU example: a face swapped in a real photo; an empty-flat photo furnished with AI.</figcaption>
-  </figure>
+    <p><strong>Partially AI-Modified.</strong> File name: LABEL_AI MODIFIED_black.svg. Use it when existing human-made content was partly changed with AI. EU example: a face swapped in a real photo; an empty-flat photo furnished with AI.</p>
+  </div>
 </div>
 <p>Each icon also comes in white, and in black and white at 50%% transparency, as SVG and PNG. %s</p>
 """ % (
@@ -326,7 +329,7 @@ def page_patterns():
         ),
     )
     body = hero("Deepfake labelling patterns", lead) + """
-<p class="legal-note">Not legal advice. The patterns below summarise Section 2 of the EU Code of Practice and the EU icons page.</p>
+<p class="summary-caveat">Not legal advice. The patterns below summarise Section 2 of the EU Code of Practice and the EU icons page.</p>
 <h2>The official EU icons (what actually exists)</h2>
 <p>The European Commission publishes <strong>three icons</strong>, each in <strong>four variants</strong> (black, white, black 50 %% transparent, white 50 %% transparent), as SVG and PNG downloads. %s</p>
 """ % cite("S3") + icons + design + licence + """
@@ -476,7 +479,7 @@ def page_tools():
         "</ul>" % (cite("T9"), cite("T10"), cite("T11")),
     )
     body = hero("C2PA and watermarking tools compared", lead) + """
-<p class="legal-note">Not legal advice. Prices are shown only where the vendor publishes them. &ldquo;Unknown&rdquo; means we could not find it on an official page.</p>
+<p class="summary-caveat">Not legal advice. Prices are shown only where the vendor publishes them. &ldquo;Unknown&rdquo; means we could not find it on an official page.</p>
 <h2>Comparison table</h2>
 """ + comparison + who + c2pa + adobe + synth + digimarc + truepic + """
 <h2>What none of these do</h2>
@@ -545,7 +548,7 @@ def page_etsi():
         ],
     )
     body = hero("ETSI TS 104 275 explained", lead) + """
-<p class="legal-note">Not legal advice.</p>
+<p class="summary-caveat">Not legal advice.</p>
 <h2>Fact box</h2>
 """ + facts + dates + """
 <h2>Scope in one sentence</h2>
