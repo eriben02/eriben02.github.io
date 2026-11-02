@@ -62,8 +62,6 @@ def generate_meta_files(extra_urls=None):
         f.write(sitemap_xml)
     with open(os.path.join(PUBLIC_DIR, "CNAME"), "w") as f:
         f.write("saasbill.io\n")
-    with open("/workspace/saastruth/CNAME", "w") as f:
-        f.write("saasbill.io\n")
 
     # GEO-optimized robots.txt:
     # - ALLOW AI search & citation bots (OAI-SearchBot, ChatGPT-User, PerplexityBot, Googlebot, Bingbot, Claude-SearchBot)

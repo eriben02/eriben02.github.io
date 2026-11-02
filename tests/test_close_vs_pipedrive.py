@@ -528,7 +528,7 @@ class TestCloseVsPipedriveBrowser(unittest.TestCase):
 class TestPipedriveReferencesSitewide(unittest.TestCase):
     """PR 7 review: old Pipedrive plan names/prices are gone, values come from data."""
 
-    PUBLISHED_SKIP = ("saastruth", "public", ".git", "node_modules", "docs")
+    PUBLISHED_SKIP = ("public", ".git", "node_modules", "docs")
 
     def published_html(self):
         for dirpath, dirnames, filenames in os.walk(ROOT):

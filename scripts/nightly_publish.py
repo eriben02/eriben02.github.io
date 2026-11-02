@@ -1,8 +1,8 @@
 """
-Nightly Publisher Engine for SaaSBill (/workspace/saastruth/scripts/nightly_publish.py)
-Pops the next queued topic from /workspace/saastruth/data/publishing_queue.json,
-builds a light-editorial calculator page with natural answer-first copy (no robotic labels),
-dynamic freshness signals, and refreshes sitemap.xml (<lastmod>), llms.txt, and llms-full.txt.
+Nightly publisher for saasbill.io.
+Pops the next queued topic from data/publishing_queue.json,
+builds a light-editorial calculator page, and refreshes sitemap.xml,
+llms.txt, and llms-full.txt.
 """
 import json
 import os
