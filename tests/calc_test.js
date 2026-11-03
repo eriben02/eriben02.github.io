@@ -7,7 +7,7 @@ const root = path.resolve(__dirname, "..");
 const pages = [];
 function walk(dir) {
   for (const name of fs.readdirSync(dir)) {
-    if (name === "node_modules" || name === "preview" || name === "saastruth" || name === "preview.html") continue;
+    if (name === "node_modules" || name === "preview" || name === "preview.html") continue;
     const full = path.join(dir, name);
     const stat = fs.statSync(full);
     if (stat.isDirectory()) walk(full);
