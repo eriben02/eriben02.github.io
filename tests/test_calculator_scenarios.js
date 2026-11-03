@@ -559,6 +559,12 @@ function stripeRadar() {
   check(normal.manual.lostMo === 600 && normal.manual.totalMo === 870 && normal.manual.totalYr === 10440, "Default manual Year-1 total should be $10,440");
   check(normal.smart.totalYr === 11520 && normal.accept.totalYr === 16560, "Smart Disputes $11,520 and accept $16,560 at the default");
   check(normal.lowestKeys.length === 1 && normal.lowestKeys[0] === "manual" && normal.threshold === "below", "Manual counter is the lowest cost and 0.60% is below 0.75%");
+  const sentenceFn = extractBalanced(html, "function rdLowestSentence");
+  check(!!sentenceFn, "missing rdLowestSentence");
+  vm.runInContext(sentenceFn + "\nfunction rdMoney(n){return '$'+Math.round(n).toLocaleString('en-US');}\nfunction rdRadarName(){return 'Radar Lite, included';}\nthis.line = rdLowestSentence;", box);
+  const line = box.line(normal);
+  check(line === "Lowest Year-1 cost: Manual counter, $10,440. Smart Disputes $11,520. Accept all disputes $16,560. The win rate is the one you entered, not a Stripe figure. Radar Lite is included at no extra charge.", "default lowest line should name Manual counter once, got " + line);
+  check(line.indexOf("Manual counter") === line.lastIndexOf("Manual counter"), "Manual counter should appear once");
   const at = box.fn({ payments: 2000, aov: 100, rate: 0.75, counter: 0, win: 0, smart: false, radar: "lite" });
   check(at.threshold === "at" && at.disputes === 15, "0.75% should sit on the industry threshold");
   const high = box.fn({ payments: 2000, aov: 80, rate: 2, counter: 100, win: 20, smart: true, radar: "pro" });

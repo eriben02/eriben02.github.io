@@ -92,15 +92,15 @@ BODY = r"""
               <option value="yes">On</option>
             </select>
           </div>
-          <div class="wb-quiet-field">
-            <label for="rd-radar">Radar plan, pay monthly</label>
-            <select id="rd-radar" data-track="calculator-control" data-control="radar-plan">
-              <option value="lite" selected>Lite, included</option>
-              <option value="standard">Standard, $10</option>
-              <option value="plus">Plus, $14</option>
-              <option value="pro">Pro, $20</option>
-            </select>
-          </div>
+        </div>
+        <div class="wb-control-item">
+          <label class="wb-control-label" for="rd-radar">Radar plan, pay monthly</label>
+          <select id="rd-radar" class="wb-tool-select" data-track="calculator-control" data-control="radar-plan">
+            <option value="lite" selected>Lite (incl.)</option>
+            <option value="standard">Standard $10</option>
+            <option value="plus">Plus $14</option>
+            <option value="pro">Pro $20</option>
+          </select>
         </div>
         <p id="rd-status" class="wb-budget-subnote">Below the 0.75% industry threshold Stripe cites for excessive dispute activity. Won and lost disputes both count. Early fraud warnings also count toward Visa VAMP, and that count is unknown here.</p>
       </div>
@@ -133,7 +133,7 @@ BODY = r"""
       </details>
       <p class="wb-budget-quote" id="rd-quote">True Year-1 cost</p>
       <p class="wb-budget-subnote" id="rd-sub">$870 / month, before appeal fees, network fees, and 3D Secure.</p>
-      <div class="wb-best-option" id="rd-best"><strong>Lowest Year-1 cost:</strong> Manual counter, $10,440. Smart Disputes is $11,520. Accepting every dispute is $16,560.</div>
+      <div class="wb-best-option" id="rd-best"><strong>Lowest Year-1 cost:</strong> Manual counter, $10,440. Smart Disputes $11,520. Accept all disputes $16,560. The win rate is the one you entered, not a Stripe figure. Radar Lite is included at no extra charge.</div>
       <div class="cta-stack">
         <a id="rd-primary" class="btn-cta wb-primary-cta" href="__WHOP_URL__" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="whop" data-cta-location="workbench">See Whop Payments</a>
       </div>
@@ -411,6 +411,24 @@ function rdRadarName(key) {
   return "Radar Lite, included";
 }
 
+function rdLowestSentence(c) {
+  var order = ["manual", "smart", "accept"];
+  var amounts = { manual: c.manual.totalYr, smart: c.smart.totalYr, accept: c.accept.totalYr };
+  var names = { manual: "Manual counter", smart: "Smart Disputes", accept: "Accept all disputes" };
+  var lows = [];
+  var rest = [];
+  order.forEach(function (key) {
+    if (c.lowestKeys.indexOf(key) !== -1) lows.push(names[key]);
+    else rest.push(names[key] + " " + rdMoney(amounts[key]));
+  });
+  var radarNote = c.radarKey === "lite"
+    ? "Radar Lite is included at no extra charge."
+    : rdRadarName(c.radarKey) + ". Stripe does not publish the volume tier, so this Radar line is a starting price.";
+  var line = "Lowest Year-1 cost: " + lows.join(" and ") + ", " + rdMoney(c.lowestYr) + ".";
+  if (rest.length) line += " " + rest.join(". ") + ".";
+  return line + " The win rate is the one you entered, not a Stripe figure. " + radarNote;
+}
+
 function renderStripeRadar() {
   var input = rdRead();
   var c = calcStripeRadar(input);
@@ -438,9 +456,9 @@ function renderStripeRadar() {
   document.getElementById("rd-product").textContent = rdPathName(c.selectedKey) + ", " + rdRadarName(c.radarKey);
   document.getElementById("rd-big").textContent = rdMoney(s.totalYr);
   document.getElementById("rd-sub").textContent = rdMoney(s.totalMo) + " / month. Appeal fees, extra network fees, and 3D Secure attempts are unknown and are not in this total.";
-  var lowNames = c.lowestKeys.map(rdPathName).join(" and ");
-  var radarNote = c.radarKey === "lite" ? " Radar Lite is included at no extra charge." : " " + rdRadarName(c.radarKey) + ". Stripe does not publish the volume tier, so this Radar line is a starting price.";
-  document.getElementById("rd-best").innerHTML = "<strong>Lowest Year-1 cost:</strong> " + lowNames + ", " + rdMoney(c.lowestYr) + ". Accept disputes " + rdMoney(c.accept.totalYr) + ". Manual counter " + rdMoney(c.manual.totalYr) + ". Smart Disputes " + rdMoney(c.smart.totalYr) + ". The win rate is the one you entered, not a Stripe figure." + radarNote;
+  var lowestLine = rdLowestSentence(c);
+  var lowestLabel = "Lowest Year-1 cost:";
+  document.getElementById("rd-best").innerHTML = "<strong>" + lowestLabel + "</strong>" + lowestLine.slice(lowestLabel.length);
   document.getElementById("rd-sum-fees").textContent = rdMoney(s.disputeFeesYr) + " / yr";
   document.getElementById("rd-sum-fees-mo").textContent = rdMoney(s.disputeFeesMo) + " / month";
   document.getElementById("rd-sum-lost").textContent = rdMoney(s.lostYr) + " / yr";
