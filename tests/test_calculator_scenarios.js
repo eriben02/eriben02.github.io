@@ -539,6 +539,34 @@ function shopifyReserve() {
   if (snaps.length === 3) assertGrowing(rel, snaps, "renderShopifyReserve");
 }
 
+function stripeRadar() {
+  const rel = "pricing/stripe-radar-and-dispute-fee-calculator-2026/index.html";
+  const html = read(rel);
+  const fn = extractBalanced(html, "function calcStripeRadar");
+  check(!!fn, "missing calcStripeRadar");
+  check(html.indexOf("chargeflow.io") === -1 && html.indexOf('data-vendor="chargeflow"') === -1, "Stripe Radar page must not link Chargeflow");
+  check(html.indexOf("Lowest Year-1 cost:") !== -1, "Stripe Radar page should label the lowest Year-1 cost");
+  check(html.indexOf("https://stripe.com/pricing") !== -1, "missing Stripe pricing source");
+  check(html.indexOf("https://stripe.com/radar/pricing") !== -1, "missing Radar pricing source");
+  check(html.indexOf("https://docs.stripe.com/disputes/measuring") !== -1, "missing dispute measurement source");
+  check(html.indexOf("2 Nov 2026") !== -1, "missing 2 Nov 2026 check date");
+  const box = {};
+  vm.createContext(box);
+  vm.runInContext(fn + "\nthis.fn = calcStripeRadar;", box);
+  const normal = box.fn({ payments: 2000, aov: 100, rate: 0.6, counter: 100, win: 50, smart: false, radar: "lite" });
+  check(normal.disputes === 12 && normal.won === 6 && normal.lostFought === 6, "Default 0.60% case should be 12 disputes and 6 losses");
+  check(normal.receivedMo === 180 && normal.manual.counterMo === 90 && normal.manual.disputeFeesMo === 270, "Default dispute fees should be $180 received plus $90 kept");
+  check(normal.manual.lostMo === 600 && normal.manual.totalMo === 870 && normal.manual.totalYr === 10440, "Default manual Year-1 total should be $10,440");
+  check(normal.smart.totalYr === 11520 && normal.accept.totalYr === 16560, "Smart Disputes $11,520 and accept $16,560 at the default");
+  check(normal.lowestKeys.length === 1 && normal.lowestKeys[0] === "manual" && normal.threshold === "below", "Manual counter is the lowest cost and 0.60% is below 0.75%");
+  const at = box.fn({ payments: 2000, aov: 100, rate: 0.75, counter: 0, win: 0, smart: false, radar: "lite" });
+  check(at.threshold === "at" && at.disputes === 15, "0.75% should sit on the industry threshold");
+  const high = box.fn({ payments: 2000, aov: 80, rate: 2, counter: 100, win: 20, smart: true, radar: "pro" });
+  check(high.threshold === "above" && high.selectedKey === "smart" && high.radarMo === 20 && high.selected.totalYr > normal.manual.totalYr, "2% with Radar Pro should be above the threshold and above the default");
+  const zero = box.fn({ payments: 0, aov: 100, rate: 0.6, counter: 100, win: 50, smart: false, radar: "standard" });
+  check(zero.disputes === 0 && zero.selected.disputeFeesMo === 0 && zero.selected.radarMo === 10 && zero.selected.totalYr === 120, "Zero payments should keep the Radar Standard starting price only");
+}
+
 function plausible() {
   const files = walkHtml(pub, []);
   check(files.length >= 29, "expected the built HTML pages, found " + files.length);
@@ -597,6 +625,7 @@ function main() {
   pageScenarios();
   helpdeskCopy();
   shopifyReserve();
+  stripeRadar();
   plausible();
   if (errors.length) {
     console.error(errors.join("\n"));
