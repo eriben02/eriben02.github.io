@@ -323,6 +323,11 @@ home_body = f"""
     </div>
     <div class="card" data-cat="payments">
       <span class="badge badge-high">Payments</span>
+      <h3><a href="./pricing/stripe-radar-and-dispute-fee-calculator-2026/">Stripe dispute and Radar cost calculator</a></h3>
+      <p>Dispute fees, lost order value, Smart Disputes, and Radar starting prices at the dispute rate you enter.</p>
+    </div>
+    <div class="card" data-cat="payments">
+      <span class="badge badge-high">Payments</span>
       <h3><a href="./exit/paypal-180-day-permanent-limitation-fund-recovery/">PayPal 180-Day Hold &amp; Reserve Cost Calculator</a></h3>
       <p>Working capital locked under a 180-day PayPal hold and 3.49% + 49&cent; domestic rates versus Whop multi-processor routing.</p>
     </div>

@@ -52,6 +52,7 @@ def generate_meta_files(extra_urls=None):
         "/ai-act/deepfake-labelling-patterns/",
         "/ai-act/c2pa-watermarking-tools-compared/",
         "/ai-act/etsi-ts-104-275-explained/",
+        "/pricing/stripe-radar-and-dispute-fee-calculator-2026/"
     ]
     if extra_urls:
         for u in extra_urls:
@@ -182,6 +183,7 @@ Sitemap: {SITE_ORIGIN}/sitemap.xml
 - [Stripe and Shopify Chargeback Cost Calculator]({SITE_ORIGIN}/chargeback-fee-and-recovery-calculator/): Dispute fees plus lost order value versus Chargeflow's 25% success fee and a 0.40% fee on all GMV.
 - [ZoomInfo 60-Day Auto-Renewal Notice Calculator]({SITE_ORIGIN}/exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/): Contract-end date to written-notice deadline, and the March 6, 2024 fee + 10% + discount formula versus a negotiated renewal.
 - [Shopify Payments Reserve & Dispute Threshold Calculator]({SITE_ORIGIN}/exit/shopify-payments-chargeback-threshold-and-reserve-appeal/): US card rate, $15 dispute fee, 10% NDRP reserve, and Visa VAMP / Mastercard ECM lines. Shopify does not publish a universal 0.75% dispute threshold or a 90-day hold length.
+- [Stripe dispute and Radar cost calculator]({SITE_ORIGIN}/pricing/stripe-radar-and-dispute-fee-calculator-2026/): $15 dispute received fee, $15 manual counter fee refunded on a win, Smart Disputes at 30% of the amount won, and Radar starting prices. Checked 2026-11-02.
 - [Typeform vs. Jotform Response Limit & HIPAA Cost Calculator]({SITE_ORIGIN}/compare/typeform-vs-jotform-response-limit-and-hipaa-cost/): Response caps & HIPAA BAA tiers ($99/mo Jotform Gold).
 - [DocuSign 100-Envelope Allowance & Overage Calculator]({SITE_ORIGIN}/pricing/docusign-envelope-allowance-and-api-overage-calculator/): 100-envelope annual cap vs. Jotform Sign & PandaDoc.
 - [HIPAA BAA & SOC 2 Type II Pricing Tier Matrix]({SITE_ORIGIN}/compliance/hipaa-baa-and-soc2-pricing-tiers/): Self-serve BAA tiers and Vanta/Drata negotiation calculator.

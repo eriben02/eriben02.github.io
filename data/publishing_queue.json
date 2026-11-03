@@ -123,8 +123,11 @@
     "title": "Stripe Dispute Fee ($15\u2013$30) & Radar Cost Calculator (2026): True Cost of a 0.6% Chargeback Rate",
     "category": "Payment Processors & MoR",
     "primary_affiliate": "whop",
-    "status": "queued",
-    "strategic_rationale": "Direct card-network dispute math driving merchants to multi-PSP routing and automated dispute defense."
+    "status": "published",
+    "published_at": "2026-11-03",
+    "url": "https://saasbill.io/pricing/stripe-radar-and-dispute-fee-calculator-2026/",
+    "strategic_rationale": "Direct card-network dispute math driving merchants to multi-PSP routing and automated dispute defense.",
+    "verification_note": "Stripe pricing, Radar pricing, and the dispute measurement guide checked 2026-11-02. Radar monthly figures are starting prices. Appeal count, network fees, 3D Secure attempts, and early fraud warnings are unknown."
   },
   {
     "priority": 13,
