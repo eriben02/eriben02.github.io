@@ -8,6 +8,7 @@ import unittest
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
 
+from copy_lint import check_copy, lint_tree  # noqa: E402
 from deploy_guard import (  # noqa: E402
     MIN_HOMEPAGE_BYTES,
     MIN_PAGE_BYTES,
@@ -69,6 +70,24 @@ class TestDeployGuard(unittest.TestCase):
         big += " placeholder "
         with self.assertRaises(DeployGuardError):
             check_html(big, "index.html", homepage=True)
+
+    def test_published_pages_pass_the_copy_lint(self):
+        hits = lint_tree()
+        self.assertEqual(
+            hits,
+            [],
+            "\n".join("%s: %r in %s" % (hit["path"], hit["phrase"], hit["snippet"]) for hit in hits),
+        )
+
+    def test_copy_lint_names_the_page_phrase_and_snippet(self):
+        hits = check_copy("<p>TODO ship the draft.</p>", "example/index.html")
+        self.assertEqual(len(hits), 1)
+        self.assertEqual(hits[0]["phrase"], "TODO")
+        self.assertEqual(hits[0]["path"], "example/index.html")
+        self.assertIn("TODO", hits[0]["snippet"])
+        html = "<p>The text is open to a large, undefined audience.</p>"
+        self.assertEqual(check_copy(html, "ai-act/article-50-deployer-checklist/index.html"), [])
+        self.assertTrue(check_copy(html, "other/index.html"))
 
     def test_guard_rejects_a_tiny_inner_page(self):
         with tempfile.TemporaryDirectory() as tmp:

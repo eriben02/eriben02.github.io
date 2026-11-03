@@ -1,0 +1,6 @@
+---
+description: SaaSBill design and copy rules for every page and UI change
+alwaysApply: true
+---
+
+Read DESIGN.md at the repo root before any page or UI change. Reuse existing components. New pages must not stand out from existing ones.

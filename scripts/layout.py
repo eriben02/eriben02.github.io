@@ -270,9 +270,40 @@ def wrap_calculator_shell(html, controls_title="Your numbers", chart_title="Your
     return html
 
 
+AI_ACT_LINKS = [
+    ("ai-act/index.html", "AI Act Article 50", "Who must label AI content, the two dates, and where to start."),
+    ("ai-act/article-50-deployer-checklist/index.html", "Article 50 deployer checklist", "What you must disclose, the exceptions, and the dates."),
+    ("ai-act/deepfake-labelling-patterns/index.html", "Deepfake labelling patterns", "Where to put the EU AI icon on images, video, audio and text."),
+    ("ai-act/c2pa-watermarking-tools-compared/index.html", "C2PA and watermarking tools", "What each marking tool does. Published prices only."),
+    ("ai-act/etsi-ts-104-275-explained/index.html", "ETSI TS 104 275 explained", "The deepfake-prevention spec for AI developers, in plain English."),
+]
+
+
 def render_related_links(rel_path, prefix):
     if rel_path == "index.html":
         return ""
+    if rel_path.startswith("ai-act/"):
+        cards = []
+        for target_rel, label, summary in AI_ACT_LINKS:
+            if target_rel == rel_path:
+                continue
+            href = prefix + target_rel.replace("index.html", "")
+            cards.append(
+                """
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="%s" data-track="internal-audit">%s &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">%s</p>
+        </div>"""
+                % (href, label, summary)
+            )
+        return """
+    <section aria-labelledby="related-ai-act-heading" style="margin-top:36px; padding-top:24px; border-top:1px solid var(--border);">
+      <h2 id="related-ai-act-heading" style="font-size:1.2rem; margin-top:0;">Related AI Act guides</h2>
+      <div class="related-calc-grid">
+        %s
+      </div>
+    </section>
+    """ % "".join(cards)
     all_links = [
         ("index.html", "Year-1 SaaS True-Cost Directory", "Compare 20+ B2B tools across CRM, Helpdesk AI, Payments, and Compliance."),
         ("pricing/hubspot-true-cost-and-onboarding-fees/index.html", "HubSpot True Cost &amp; Onboarding", "What HubSpot costs in Year 1 once mandatory onboarding is included."),
@@ -420,7 +451,7 @@ def render_related_links(rel_path, prefix):
     </section>
     """
 
-def render_page(rel_path, title, description, canonical_path, body_html, faqs=None, extra_schema=None, published_date=None):
+def render_page(rel_path, title, description, canonical_path, body_html, faqs=None, extra_schema=None, published_date=None, show_affiliate_note=True):
     iso_date, iso_datetime, human_date = get_freshness_timestamps()
     pub_date = published_date or iso_date
     full_title = title if ("saasbill" in title.lower()) else f"{title} – saasbill.io"
@@ -541,6 +572,10 @@ def render_page(rel_path, title, description, canonical_path, body_html, faqs=No
     related_html = render_related_links(rel_path, prefix)
 
     byline_bar = f'<span class="byline-bar">Updated <time datetime="{iso_date}" itemprop="dateModified">{human_date}</time></span>'
+    if show_affiliate_note:
+        affiliate_note = f'<a class="footer-disclosure" href="{prefix}index.html#methodology">Some links are affiliate links. They never change the math.</a> &middot; '
+    else:
+        affiliate_note = ""
 
     html = f"""<!DOCTYPE html>
 <html lang="en">
@@ -616,7 +651,7 @@ def render_page(rel_path, title, description, canonical_path, body_html, faqs=No
   <footer class="site-footer">
     <div class="container">
       <p><strong>SaaSBill</strong> &middot; Year-1 cost &amp; contract calculators for B2B software.</p>
-      <p class="footer-note"><a class="footer-disclosure" href="{prefix}index.html#methodology">Some links are affiliate links. They never change the math.</a> &middot; Updated <time datetime="{iso_date}">{human_date}</time> &middot; Inquiries: <a href="mailto:info@saasbill.io">info@saasbill.io</a></p>
+      <p class="footer-note">{affiliate_note}Updated <time datetime="{iso_date}">{human_date}</time> &middot; Inquiries: <a href="mailto:info@saasbill.io">info@saasbill.io</a></p>
     </div>
   </footer>
   <script>

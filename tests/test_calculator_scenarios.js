@@ -461,7 +461,7 @@ function helpdeskCopy() {
     "intercom-vs-zendesk-cost-comparison/index.html": [
       "Intercom vs. Zendesk Year-1 Cost &amp; AI Resolution Calculator (2026)",
       "Why Zendesk ($32,700/yr) costs $11,400/yr more than Intercom ($21,300/yr) at 10 seats",
-      "Head-to-Head Winner:",
+      "Lower cost:",
       "Lowest-Cost Alternative: Freshdesk"
     ],
     "zendesk-vs-freshdesk-cost-comparison/index.html": [

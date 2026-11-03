@@ -189,7 +189,7 @@
       <div class="wb-big-total" id="wb-big-total-wrap"><span id="wb-big-amount">$11,850</span> <span class="wb-per-year" id="wb-big-unit">/ year</span></div>
       <p class="wb-budget-quote" id="wb-budget-quote">Estimated Year-1 total including mandatory fees &amp; overages.</p>
       <p class="wb-budget-subnote" id="wb-budget-subnote"></p>
-      <div class="wb-best-option" id="wb-best-option"><strong>Best option:</strong> <a href="https://www.freshworks.com/freshdesk/pricing/" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="freshdesk-support" data-cta-location="workbench-best-option">Freshdesk Pro + Freddy AI ($3,835/yr)</a> &middot; saves $8,015/yr</div>
+      <div class="wb-best-option" id="wb-best-option"><strong>Lowest cost:</strong> <a href="https://www.freshworks.com/freshdesk/pricing/" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="freshdesk-support" data-cta-location="workbench-best-option">Freshdesk Pro + Freddy AI ($3,835/yr)</a> &middot; saves $8,015/yr</div>
       <details class="calc-disclosure" id="wb-calc-details">
         <summary class="calc-disclosure-toggle" id="wb-calc-summary">See exactly how we calculated this</summary>
         <div class="calc-disclosure-body" id="wb-calc-body"></div>
@@ -1047,9 +1047,9 @@ function renderDirectory() {
     if (bestOptPayEl) {
       const whopAffBest = AFFILIATES['whop'] || { destination_url: '#' };
       if (spotPayR.tool.id === 'whop-payments') {
-        bestOptPayEl.innerHTML = '<strong>Best option in category:</strong> Lowest direct fee ($2,275/mo) &amp; multi-PSP failover';
+        bestOptPayEl.innerHTML = '<strong>Lowest cost:</strong> Lowest direct fee ($2,275/mo) &amp; multi-PSP failover';
       } else {
-        bestOptPayEl.innerHTML = `<strong>Best option:</strong> <a href="${whopAffBest.destination_url}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="whop-payments" data-cta-location="workbench-best-option">Whop Payments ($2,275/mo)</a> &middot; $0 single-PSP reserve hold`;
+        bestOptPayEl.innerHTML = `<strong>Lowest cost:</strong> <a href="${whopAffBest.destination_url}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="whop-payments" data-cta-location="workbench-best-option">Whop Payments ($2,275/mo)</a> &middot; $0 single-PSP reserve hold`;
       }
     }
     if (wbCalcBody) {
@@ -1221,9 +1221,9 @@ function renderDirectory() {
       const minAffBest = AFFILIATES[minR.tool.affiliate_slug] || { destination_url: '#' };
       const diffBest = Math.max(0, spotR.year1Total - minR.year1Total);
       if (spotR.tool.id === minR.tool.id || diffBest === 0) {
-        bestOptEl.innerHTML = `<strong>Best option in category:</strong> Lowest Year-1 true cost ($${minR.year1Total.toLocaleString()}/yr)`;
+        bestOptEl.innerHTML = `<strong>Lowest cost:</strong> Lowest Year-1 true cost ($${minR.year1Total.toLocaleString()}/yr)`;
       } else {
-        bestOptEl.innerHTML = `<strong>Best option:</strong> <a href="${minAffBest.destination_url}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${minR.tool.id}" data-cta-location="workbench-best-option">${minR.tool.name} ($${minR.year1Total.toLocaleString()}/yr)</a> &middot; saves $${diffBest.toLocaleString()}/yr`;
+        bestOptEl.innerHTML = `<strong>Lowest cost:</strong> <a href="${minAffBest.destination_url}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${minR.tool.id}" data-cta-location="workbench-best-option">${minR.tool.name} ($${minR.year1Total.toLocaleString()}/yr)</a> &middot; saves $${diffBest.toLocaleString()}/yr`;
       }
     }
     if (wbCalcBody) {

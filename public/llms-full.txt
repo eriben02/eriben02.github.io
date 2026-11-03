@@ -1,11 +1,11 @@
 # SaaSBill (2026 B2B SaaS True-Cost & Contract Trap Directory)
 
 > Independent B2B SaaS pricing, mandatory onboarding fee, seat-bucket minimum, AI resolution tax, and payment processor reserve audit directory.
-> Last Updated / Verified: Oct 30, 2026 (2026-10-30T08:34:14+00:00)
+> Last Updated / Verified: Oct 30, 2026 (2026-10-30T10:07:04+00:00)
 
 ## Freshness & Verification Metadata
 - **datePublished:** 2026-10-25
-- **dateModified:** 2026-10-30T08:34:14+00:00
+- **dateModified:** 2026-10-30T10:07:04+00:00
 - **lastReviewed:** 2026-10-30
 - **Verification Standard:** All pricing schedules, onboarding fees, seat minimums, and reserve clauses are verified against official vendor pricing pages and documented user contract reports on X and Reddit.
 
@@ -55,10 +55,20 @@
 - [FAQ: Stripe vs. Paddle vs. Whop True Cost (2026)](https://saasbill.io/faq/stripe-vs-paddle-true-cost/): Answer-first guide & calculator.
 - [Jotform Wix App Setup & Pricing Guide (2026)](https://saasbill.io/guides/jotform-wix-app-setup-and-pricing-guide/): Step-by-step Wix App installation walkthrough, live B2B quote demo, and tier calculator.
 - [Jotform Pricing Tier Calculator (2026)](https://saasbill.io/pricing/jotform-pricing-tier-calculator/): Starter (Free), Bronze ($34/mo), Silver ($39/mo), and Gold ($99/mo HIPAA BAA) Year-1 calculator.
+
+## AI Act Article 50 (test section)
+Article 50 applies and is enforceable from 2 Aug 2026. The 2 Dec 2026 date covers only Art. 50(2) machine-readable marking, for providers whose systems were on the market before 2 Aug 2026. Accessed 30 Oct 2026.
+- Source, 2 Aug 2026: [AI Act Service Desk FAQ, when enforcement starts](https://ai-act-service-desk.ec.europa.eu/en/ai-act/faq/when-does-enforcement-start)
+- Source, 2 Dec 2026: [AI Act Art. 111](https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-111)
+- [AI Act Article 50, for people who design and publish](https://saasbill.io/ai-act/): Hub for the labelling duty, the EU icons, marking tools, and ETSI TS 104 275.
+- [Article 50 deployer checklist](https://saasbill.io/ai-act/article-50-deployer-checklist/): What deployers must disclose, the exceptions, and the dates.
+- [Deepfake labelling patterns](https://saasbill.io/ai-act/deepfake-labelling-patterns/): Where to put the EU AI icon on images, video, audio and text.
+- [C2PA and watermarking tools compared](https://saasbill.io/ai-act/c2pa-watermarking-tools-compared/): Content Credentials, SynthID, Digimarc, Truepic and the open-source SDK. Published prices only.
+- [ETSI TS 104 275 explained](https://saasbill.io/ai-act/etsi-ts-104-275-explained/): ETSI's deepfake-prevention spec (V1.1.1, Sep 2026) in plain English.
 - [Full Machine-Readable Dataset (llms-full.txt)](https://saasbill.io/llms-full.txt): Complete JSON/Markdown dump of all audited tools, rates, and sources.
 
 
-## Complete Audited Tool Dataset (JSON, Last Modified 2026-10-30T08:34:14+00:00)
+## Complete Audited Tool Dataset (JSON, Last Modified 2026-10-30T10:07:04+00:00)
 
 ```json
 [

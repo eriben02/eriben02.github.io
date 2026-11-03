@@ -630,7 +630,7 @@ class TestSaaSBillCalculators(unittest.TestCase):
 
         with open(os.path.join(PUBLIC_DIR, "sitemap.xml"), encoding="utf-8") as f:
             sitemap = f.read()
-        self.assertEqual(sitemap.count("<url><loc>"), 33)
+        self.assertEqual(sitemap.count("<url><loc>"), 38)
         self.assertIn("https://saasbill.io/compare/close-vs-pipedrive-year-1-cost-calculator/", sitemap)
         self.assertIn("https://saasbill.io/pricing/pipedrive-true-year-1-cost-calculator/", sitemap)
         self.assertIn("https://saasbill.io/compare/pipedrive-vs-hubspot-sales-hub-year-1-cost/", sitemap)
@@ -915,12 +915,16 @@ class TestSaaSBillCalculators(unittest.TestCase):
             rel = "index.html" if loc in ("", "/") else loc.strip("/") + "/index.html"
             with open(os.path.join(PUBLIC_DIR, rel), encoding="utf-8") as f:
                 html = f.read()
-            self.assertEqual(html.count(footer), 1, rel)
-            self.assertIn('class="footer-disclosure"', html, rel)
-            self.assertIn("index.html#methodology", html, rel)
             self.assertNotIn("may earn a commission", html, rel)
             self.assertNotIn("calc-affiliate-disclosure", html, rel)
             self.assertNotIn("Paid Partnership", html, rel)
+            if loc.startswith("/ai-act"):
+                self.assertNotIn(footer, html, rel)
+                self.assertNotIn('class="footer-disclosure"', html, rel)
+                continue
+            self.assertEqual(html.count(footer), 1, rel)
+            self.assertIn('class="footer-disclosure"', html, rel)
+            self.assertIn("index.html#methodology", html, rel)
             if any(marker in html for marker in markers):
                 affiliate_pages.append(rel)
             if loc in ("", "/"):

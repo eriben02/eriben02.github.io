@@ -1076,6 +1076,30 @@ footer.site-footer {
   color: var(--muted);
 }
 
+.src-cluster {
+  display: inline;
+}
+
+.src-link {
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.src-date {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.ai-act-pre {
+  overflow-x: auto;
+  max-width: 100%;
+  font-size: 0.82rem;
+  background: var(--surface-subtle);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 12px;
+}
+
 /* Mobile Responsive Card View for Calculator Tables & Short Path to CTA */
 @media (max-width: 768px) {
   .container {
