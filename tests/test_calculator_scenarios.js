@@ -539,6 +539,43 @@ function shopifyReserve() {
   if (snaps.length === 3) assertGrowing(rel, snaps, "renderShopifyReserve");
 }
 
+function intercomFreshdesk() {
+  const rel = "exit/intercom-to-freshdesk-ticket-and-help-center-migration/index.html";
+  const html = read(rel);
+  const fn = ["calcIntercomFreshdesk", "imMoney", "imPlanName", "imLowerSentence"].map(function (name) {
+    return extractBalanced(html, "function " + name);
+  }).join("\n");
+  check(fn.indexOf("null") === -1 || !!extractBalanced(html, "function calcIntercomFreshdesk"), "missing calcIntercomFreshdesk");
+  check(html.indexOf("/go/fresh") === -1, "Freshworks affiliate path must stay off this page");
+  check(html.indexOf('rel="sponsored') === -1, "this page has no sponsored link");
+  check(html.indexOf("Lower Year-1 cost:") !== -1, "page should label the lower Year-1 cost");
+  check(html.indexOf("Those units are not the same") !== -1, "the outcome and session assumption should be visible");
+  check(html.indexOf("https://www.intercom.com/pricing") !== -1, "missing Intercom pricing source");
+  check(html.indexOf("https://www.freshworks.com/freshdesk/pricing/") !== -1, "missing Freshdesk pricing source");
+  check(html.indexOf("4 Nov 2026") !== -1, "missing 4 Nov 2026 check date");
+  const title = (html.match(/<title>(.*?)<\/title>/) || [])[1] || "";
+  check(title.length > 0 && title.length <= 60, "migration title length " + title.length + ": " + title);
+  const box = {};
+  vm.createContext(box);
+  vm.runInContext(fn + "\nthis.fn = calcIntercomFreshdesk;\nthis.line = imLowerSentence;", box);
+  const normal = box.fn({ agents: 5, outcomes: 1000, records: 10000, intercom: "essential", freshdesk: "growth", billing: "annual", copilot: false });
+  check(normal.icYear === 1362000 && normal.fdYear === 728900 && normal.diff === 633100 && normal.packs === 115 && normal.lower === "freshdesk", "default 5 seats and 1,000 outcomes should be $13,620 vs $7,289");
+  const line = box.line(normal);
+  check(line.indexOf("Lower Year-1 cost: Freshdesk, $7,289.") === 0 && line.indexOf("Difference $6,331.") !== -1, "default lower line should name Freshdesk once, got " + line);
+  const unknown = box.fn({ agents: 5, outcomes: 1000, records: 2500, intercom: "essential", freshdesk: "growth", billing: "annual", copilot: false });
+  check(unknown.migration === null && unknown.fdYear === null && unknown.diff === null && unknown.icYear === 1362000, "2,500 records should leave migration and the Freshdesk total unknown");
+  check(box.line(unknown).indexOf("Difference: unknown.") !== -1, "unknown migration should not be priced as zero");
+  const monthly = box.fn({ agents: 1, outcomes: 50, records: 0, intercom: "essential", freshdesk: "growth", billing: "monthly", copilot: false });
+  const annual = box.fn({ agents: 1, outcomes: 50, records: 0, intercom: "essential", freshdesk: "growth", billing: "annual", copilot: false });
+  check(annual.packs === 1 && monthly.packs === 2 && monthly.fdRate === 23, "monthly billing should buy a wasted Freddy pack the annual pool does not");
+  const copilot = box.fn({ agents: 5, outcomes: 1000, records: 10000, intercom: "essential", freshdesk: "growth", billing: "annual", copilot: true });
+  check(copilot.copilotState === "not-on-growth" && copilot.copilot === 0 && copilot.fdYear === normal.fdYear, "Copilot on Growth should not be priced as $0 or as $29");
+  const pro = box.fn({ agents: 5, outcomes: 1000, records: 10000, intercom: "essential", freshdesk: "pro", billing: "annual", copilot: true });
+  check(pro.copilot === 174000 && pro.fdYear === 1118900, "Pro Copilot for 5 agents should add $1,740");
+  const tiny = box.fn({ agents: 1, outcomes: 1, records: 0, intercom: "essential", freshdesk: "growth", billing: "annual", copilot: false });
+  check(tiny.fin === 1188 && tiny.packs === 0, "one outcome should bill $11.88 and should not jump to a 50-outcome minimum");
+}
+
 function stripeRadar() {
   const rel = "pricing/stripe-radar-and-dispute-fee-calculator-2026/index.html";
   const html = read(rel);
@@ -631,6 +668,7 @@ function main() {
   pageScenarios();
   helpdeskCopy();
   shopifyReserve();
+  intercomFreshdesk();
   stripeRadar();
   plausible();
   if (errors.length) {

@@ -135,8 +135,11 @@
     "title": "How to Migrate Off Intercom Fin AI Without Losing Ticket History (2026): True Year-1 Savings Calculator",
     "category": "Helpdesk & AI Support",
     "primary_affiliate": "freshworks",
-    "status": "queued",
-    "strategic_rationale": "Captures teams fleeing uncapped $0.99/resolution AI meters toward predictable session/seat tiers."
+    "status": "published",
+    "published_at": "2026-11-04",
+    "url": "https://saasbill.io/exit/intercom-to-freshdesk-ticket-and-help-center-migration/",
+    "strategic_rationale": "Captures teams fleeing uncapped $0.99/resolution AI meters toward predictable session/seat tiers.",
+    "verification_note": "Intercom pricing, the pricing guide, and the Fin outcomes article, plus Freshdesk pricing and the Freddy add-on article, checked 2026-11-04. Essential $19 is a new-customer promo, not the baseline. Freshdesk monthly seat rates are a secondary source dated 19 Oct 2026. Help Desk Migration quotes for 1,000 and 10,000 records are third-party. The Fin standalone monthly minimum is unverified. No Freshworks affiliate link was added because that program is not approved."
   },
   {
     "priority": 14,
