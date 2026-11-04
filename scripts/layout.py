@@ -315,6 +315,7 @@ def render_related_links(rel_path, prefix):
         ("compare/monday-crm-vs-pipedrive-vs-hubspot-seat-minimums/index.html", "monday CRM 3/5/10-Seat Bucket Calculator", "Where fixed seat buckets cost more than one seat at a time."),
         ("intercom-fin-cost-calculator/index.html", "Intercom Fin AI Cost Calculator", "Year-1 price at $0.99 per resolution versus Freshdesk and Zendesk."),
         ("intercom-vs-freshdesk-cost-comparison/index.html", "Intercom vs. Freshdesk Cost Comparison", "Real Year-1 price and AI fees for the same team."),
+        ("exit/intercom-to-freshdesk-ticket-and-help-center-migration/index.html", "Intercom to Freshdesk migration Year-1", "Fin outcomes versus Freddy sessions, plus a one-time record migration quote."),
         ("intercom-vs-zendesk-cost-comparison/index.html", "Intercom vs. Zendesk Cost Comparison", "Real Year-1 price and per-resolution overage."),
         ("pricing/intercom-fin-ai-resolution-cost-calculator/index.html", "Intercom Fin AI Cost Calculator", "The pricing-page copy of the $0.99 per resolution Year-1 calculator."),
         ("zendesk-ai-cost-calculator/index.html", "Zendesk AI Cost Calculator", "Suite seats plus the per-resolution add-on versus Freshdesk and Intercom."),
@@ -402,6 +403,7 @@ def render_related_links(rel_path, prefix):
         "zendesk-ai-cost-calculator/index.html",
         "pricing/zendesk-ai-resolution-and-automated-outcome-cost/index.html",
         "zendesk-vs-freshdesk-cost-comparison/index.html",
+        "exit/intercom-to-freshdesk-ticket-and-help-center-migration/index.html",
     }:
         helpdesk_order = [
             "intercom-fin-cost-calculator/index.html",
