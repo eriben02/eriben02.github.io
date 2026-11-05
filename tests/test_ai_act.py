@@ -66,7 +66,8 @@ class TestAiActSection(unittest.TestCase):
                 self.assertNotIn(marker, html, "%s contains %s" % (rel, marker))
             self.assertIsNone(re.search(r'<a\b[^>]*data-track="vendor-cta"', html), rel)
             nav = re.search(r'<nav class="nav-links".*?</nav>', html, re.S).group(0)
-            self.assertNotIn("/ai-act/", nav, rel)
+            self.assertIn(">AI Act</a>", nav, rel)
+            self.assertIn("ai-act/", nav, rel)
 
     def test_sources_and_offer(self):
         index = read(os.path.join(PUBLIC, "ai-act/index.html"))

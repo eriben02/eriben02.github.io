@@ -230,6 +230,13 @@ if (typeof window !== "undefined") window.quotePayProfile = quotePayProfile;
       ["./compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/", "Google Workspace vs. Microsoft 365 HIPAA BAA", "Minimum editions that sign a BAA, plus form intake rules."],
       ["./compare/typeform-vs-jotform-response-limit-and-hipaa-cost/", "Typeform vs. Jotform Response &amp; HIPAA Calculator", "Response caps and which plan signs a HIPAA BAA."]
     ],
+    "ai-act": [
+      ["./ai-act/", "AI Act Article 50, for people who design and publish", "Who must label AI content, the two dates, and where to start."],
+      ["./ai-act/article-50-deployer-checklist/", "Article 50 checklist for deployers", "What you must disclose, the exceptions, and the dates."],
+      ["./ai-act/deepfake-labelling-patterns/", "Deepfake labelling patterns", "Where to put the EU AI icon on images, video, audio, and text."],
+      ["./ai-act/c2pa-watermarking-tools-compared/", "C2PA and watermarking tools compared", "What each marking tool does. Published prices only."],
+      ["./ai-act/etsi-ts-104-275-explained/", "ETSI TS 104 275 explained", "The deepfake-prevention spec, in plain English."]
+    ],
     all: [
       ["./chargeback-fee-and-recovery-calculator/", "Stripe, Shopify &amp; Paddle Chargeback Cost Calculator", "Dispute fees, manual prep, and automated recovery."],
       ["./pricing/hubspot-true-cost-and-onboarding-fees/", "HubSpot True Cost &amp; Onboarding", "What HubSpot costs in Year 1 once mandatory onboarding is included."],
@@ -244,6 +251,7 @@ if (typeof window !== "undefined") window.quotePayProfile = quotePayProfile;
     if (v.indexOf("helpdesk") !== -1) return "helpdesk";
     if (v.indexOf("crm") !== -1) return "crm";
     if (v.indexOf("compliance") !== -1 || v.indexOf("hipaa") !== -1) return "compliance";
+    if (v.indexOf("ai act") !== -1 || v.indexOf("ai-act") !== -1) return "ai-act";
     return "all";
   }
   function renderActiveCatCalcs(key) {
@@ -267,11 +275,17 @@ if (typeof window !== "undefined") window.quotePayProfile = quotePayProfile;
     cards.forEach(function (card) { grid.appendChild(card); });
   }
   function syncCategorySurfaces() {
-    var select = document.getElementById("cat-filter");
     var active = document.querySelector(".cat-tab.active");
-    var value = (select && select.value) || (active && active.getAttribute("data-cat")) || "";
+    var activeCat = active && active.getAttribute("data-cat");
+    if (activeCat === "AI Act") {
+      renderActiveCatCalcs("ai-act");
+      return;
+    }
+    var select = document.getElementById("cat-filter");
+    var value = (select && select.value) || activeCat || "";
     renderActiveCatCalcs(categoryKey(value));
   }
+  window.renderActiveCatCalcs = renderActiveCatCalcs;
   document.addEventListener("click", function (event) {
     if (event.target.closest && event.target.closest(".cat-tab")) setTimeout(syncCategorySurfaces, 0);
   });
