@@ -610,6 +610,31 @@ function stripeRadar() {
   check(zero.disputes === 0 && zero.selected.disputeFeesMo === 0 && zero.selected.radarMo === 10 && zero.selected.totalYr === 120, "Zero payments should keep the Radar Standard starting price only");
 }
 
+function pipedriveSalesforce() {
+  const rel = "compare/pipedrive-vs-salesforce-starter-and-pro-suite-cost/index.html";
+  const html = read(rel);
+  const fn = extractBalanced(html, "function calcPipedriveSalesforce");
+  const lineFn = extractBalanced(html, "function psLowestSentence");
+  check(!!fn && !!lineFn, "missing pipedrive salesforce math");
+  check(html.indexOf('href="../../go/pipedrive/"') !== -1, "Pipedrive CTA should use /go/pipedrive");
+  check(html.indexOf("salesforce.com") !== -1, "Salesforce pricing sources should be linked");
+  check(!/btn-cta[^>]*salesforce\.com|salesforce\.com[^<]*btn-cta/.test(html), "no Salesforce affiliate button");
+  const box = {};
+  vm.createContext(box);
+  vm.runInContext(fn + "\n" + lineFn + "\nfunction psMoney(n){return '$'+Math.round(n).toLocaleString('en-US');}\nthis.fn = calcPipedriveSalesforce;\nthis.line = psLowestSentence;", box);
+  const five = box.fn({ seats: 5, leadbooster: false, engagement: false, premier: false });
+  check(five.growth === 2340 && five.premium === 3540 && five.starter === 1500 && five.pro === 6000 && five.proApi === 7500, "5-seat headline license totals");
+  check(five.lite === 840 && five.ultimate === 4740, "5-seat Lite and Ultimate");
+  const line = box.line(five);
+  check(line.indexOf("Lowest Year-1 cost: Salesforce Starter, $1,500.") === 0, "5 seats, Starter is the lowest of the five paths: " + line);
+  check(line.indexOf("Pipedrive Growth $2,340") !== -1 && line.indexOf("Pro plus API $7,500") !== -1, "five-path amounts stay in the sentence");
+  check(line.indexOf("implementation is unknown") !== -1, "implementation stays unknown");
+  const ten = box.fn({ seats: 10, leadbooster: false, engagement: false, premier: false });
+  check(ten.growth === 4680 && ten.premium === 7080 && ten.starter === 3000 && ten.pro === 12000 && ten.proApi === 15000, "10-seat headline license totals");
+  const add = box.fn({ seats: 5, leadbooster: true, engagement: true, premier: true });
+  check(add.growthTotal === 2730 && add.leadYr === 390 && add.engageYr === 3000 && add.proBill === 11700 && add.proApiBill === 13650, "LeadBooster, Sales Engagement, and Premier Success at 5 seats");
+}
+
 function plausible() {
   const files = walkHtml(pub, []);
   check(files.length >= 29, "expected the built HTML pages, found " + files.length);
@@ -670,6 +695,7 @@ function main() {
   shopifyReserve();
   intercomFreshdesk();
   stripeRadar();
+  pipedriveSalesforce();
   plausible();
   if (errors.length) {
     console.error(errors.join("\n"));

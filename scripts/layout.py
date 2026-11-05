@@ -309,6 +309,7 @@ def render_related_links(rel_path, prefix):
         ("pricing/hubspot-true-cost-and-onboarding-fees/index.html", "HubSpot True Cost &amp; Onboarding", "What HubSpot costs in Year 1 once mandatory onboarding is included."),
         ("compare/close-crm-vs-hubspot-sales-hub-5-to-20-reps/index.html", "Close CRM vs. HubSpot Sales Hub", "True Year-1 cost for 5 to 20 reps, including HubSpot onboarding."),
         ("compare/close-vs-pipedrive-year-1-cost-calculator/index.html", "Close vs. Pipedrive Year-1 Cost (Calling Included)", "Seats, call minutes, and the dialer Pipedrive needs, for your team."),
+        ("compare/pipedrive-vs-salesforce-starter-and-pro-suite-cost/index.html", "Pipedrive vs Salesforce Year-1 cost", "Starter, Pro, Growth, and Premium annual list prices. Implementation stays unknown."),
         ("pricing/pipedrive-true-year-1-cost-calculator/index.html", "Pipedrive True Year-1 Cost", "Annual seats and add-ons. Unpublished price bases stay a floor, not $0."),
         ("compare/pipedrive-vs-hubspot-sales-hub-year-1-cost/index.html", "Pipedrive vs. HubSpot Sales Hub Year-1 Cost", "Same seats, Pipedrive add-ons, and HubSpot onboarding."),
         ("pricing/gong-io-platform-fee-and-seat-minimum-calculator/index.html", "Gong.io $5,000 Platform Fee &amp; Seat Calculator", "Platform fee plus per-seat licenses versus Close CRM."),
@@ -371,6 +372,7 @@ def render_related_links(rel_path, prefix):
         "pricing/gong-io-platform-fee-and-seat-minimum-calculator/index.html",
         "hubspot-onboarding-fee-calculator/index.html",
         "faq/does-hubspot-charge-onboarding-fees-2026/index.html",
+        "compare/pipedrive-vs-salesforce-starter-and-pro-suite-cost/index.html",
     ]
     if rel_path in crm_order:
         preferred = [rel for rel in crm_order if rel != rel_path]

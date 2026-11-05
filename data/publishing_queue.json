@@ -147,8 +147,9 @@
     "title": "Pipedrive vs. Salesforce Pro Suite True Cost (2026): Implementation Fees, Add-Ons & Contract Lock-In",
     "category": "CRM & Sales",
     "primary_affiliate": "pipedrive",
-    "status": "queued",
-    "strategic_rationale": "High-intent SMB migration from complex enterprise CRM contracts to transparent per-seat CRM."
+    "status": "in_progress",
+    "strategic_rationale": "High-intent SMB migration from complex enterprise CRM contracts to transparent per-seat CRM.",
+    "verification_note": "Pipedrive pricing and the plan-rename article, plus Salesforce Sales Cloud editions and sales pricing, checked 2026-11-05. Monthly Pipedrive rates are secondary and are not in the total. Implementation, Einstein availability on Pro Suite, and several add-on billing units stay unknown."
   },
   {
     "priority": 15,
