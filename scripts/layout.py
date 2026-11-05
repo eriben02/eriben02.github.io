@@ -647,6 +647,7 @@ def render_page(rel_path, title, description, canonical_path, body_html, faqs=No
       </div>
       <nav class="nav-links" aria-label="Primary Navigation">
         <a href="{prefix}index.html#all-calculators">Audits &amp; Guides</a>
+        <a href="{prefix}ai-act/">AI Act</a>
         <a href="{prefix}index.html#methodology">Methodology</a>
         {byline_bar}
       </nav>
