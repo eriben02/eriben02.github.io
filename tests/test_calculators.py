@@ -630,7 +630,8 @@ class TestSaaSBillCalculators(unittest.TestCase):
 
         with open(os.path.join(PUBLIC_DIR, "sitemap.xml"), encoding="utf-8") as f:
             sitemap = f.read()
-        self.assertEqual(sitemap.count("<url><loc>"), 41)
+        self.assertEqual(sitemap.count("<url><loc>"), 42)
+        self.assertIn("https://saasbill.io/compliance/okta-vs-workos-vs-1password-sso-tax-calculator/", sitemap)
         self.assertIn("https://saasbill.io/compare/pipedrive-vs-salesforce-starter-and-pro-suite-cost/", sitemap)
         self.assertIn("https://saasbill.io/compare/close-vs-pipedrive-year-1-cost-calculator/", sitemap)
         self.assertIn("https://saasbill.io/pricing/pipedrive-true-year-1-cost-calculator/", sitemap)
@@ -921,9 +922,10 @@ class TestSaaSBillCalculators(unittest.TestCase):
             self.assertNotIn("may earn a commission", html, rel)
             self.assertNotIn("calc-affiliate-disclosure", html, rel)
             self.assertNotIn("Paid Partnership", html, rel)
-            if loc.startswith("/ai-act"):
+            if loc.startswith("/ai-act") or loc.startswith("/compliance/okta-vs-workos-vs-1password-sso-tax-calculator"):
                 self.assertNotIn(footer, html, rel)
                 self.assertNotIn('class="footer-disclosure"', html, rel)
+                self.assertNotIn("/go/1password", html, rel)
                 continue
             self.assertEqual(html.count(footer), 1, rel)
             self.assertIn('class="footer-disclosure"', html, rel)

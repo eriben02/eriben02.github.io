@@ -635,6 +635,33 @@ function pipedriveSalesforce() {
   check(add.growthTotal === 2730 && add.leadYr === 390 && add.engageYr === 3000 && add.proBill === 11700 && add.proApiBill === 13650, "LeadBooster, Sales Engagement, and Premier Success at 5 seats");
 }
 
+function ssoTax() {
+  const rel = "compliance/okta-vs-workos-vs-1password-sso-tax-calculator/index.html";
+  const html = read(rel);
+  const fn = extractBalanced(html, "function calcSsoTax");
+  const lineFn = extractBalanced(html, "function ssLowestApps");
+  check(!!fn && !!lineFn, "missing sso tax math");
+  check(html.indexOf("/go/1password") === -1, "no 1Password affiliate redirect");
+  check(html.indexOf("https://1password.com/pricing/business") !== -1, "plain 1Password pricing link");
+  check(html.indexOf("OIDC") !== -1 && html.indexOf("HIPAA BAA") !== -1, "1Password OIDC and BAA notes");
+  check(html.indexOf("2x") === -1, "do not claim a 2x SSO multiple");
+  const box = {};
+  vm.createContext(box);
+  vm.runInContext("var SS_USERS = [10, 25, 50, 100];\n" + extractBalanced(html, "function ssWorkosRate") + "\n" + extractBalanced(html, "function ssYearFloor") + "\n" + fn + "\n" + lineFn + "\nfunction ssMoney(cents){var v=Math.abs(Math.round(cents));var d=Math.floor(v/100);var r=v%100;var t='$'+d.toLocaleString('en-US');if(r)t+='.'+(r<10?'0':'')+r;return t;}\nthis.fn=calcSsoTax;\nthis.line=ssLowestApps;", box);
+  const def = box.fn({ usersIndex: 1, connections: 5 });
+  check(def.users === 25 && def.oktaStarter === 180000 && def.password === 269700 && def.workos === 750000, "default 25 people: Okta $1,800, 1Password $2,697, WorkOS $7,500");
+  check(def.zoomDelta === 125100 && def.notionDelta === 300000 && def.githubDelta === 510000 && def.figmaDelta === 1170000, "app step-ups at 25 people");
+  const line = box.line(def);
+  check(line.indexOf("Lowest Year-1 cost: Zoom, $1,251.") === 0, "Zoom is the lowest published step-up: " + line);
+  check(line.indexOf("unknown") !== -1, "Slack USD step-up stays unknown");
+  const small = box.fn({ usersIndex: 0, connections: 5 });
+  check(small.users === 10 && small.oktaStarter === 150000, "10 people hit the $1,500 Okta floor");
+  const mid = box.fn({ usersIndex: 1, connections: 20 });
+  check(mid.rate === 100 && mid.workos === 2400000, "20 connections use the $100 rung");
+  const custom = box.fn({ usersIndex: 1, connections: 120 });
+  check(custom.workos === -1, "101 or more connections stay unknown");
+}
+
 function plausible() {
   const files = walkHtml(pub, []);
   check(files.length >= 29, "expected the built HTML pages, found " + files.length);
@@ -696,6 +723,7 @@ function main() {
   intercomFreshdesk();
   stripeRadar();
   pipedriveSalesforce();
+  ssoTax();
   plausible();
   if (errors.length) {
     console.error(errors.join("\n"));

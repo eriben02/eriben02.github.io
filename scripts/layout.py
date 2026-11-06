@@ -337,6 +337,7 @@ def render_related_links(rel_path, prefix):
         ("pricing/docusign-envelope-allowance-and-api-overage-calculator/index.html", "DocuSign 100-Envelope Cap &amp; Overage Calculator", "The 100-envelope allowance versus Jotform Sign and PandaDoc."),
         ("compliance/hipaa-baa-and-soc2-pricing-tiers/index.html", "HIPAA BAA &amp; SOC 2 Pricing Tiers", "Which plan signs a BAA, and what the CPA audit adds."),
         ("compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/index.html", "Google Workspace vs. Microsoft 365 HIPAA BAA", "Minimum editions that sign a BAA, plus form intake rules."),
+        ("compliance/okta-vs-workos-vs-1password-sso-tax-calculator/index.html", "SSO tax calculator", "What apps charge to turn on SAML, plus Okta, WorkOS, and 1Password as separate bills."),
         ("faq/does-hubspot-charge-onboarding-fees-2026/index.html", "Does HubSpot Charge Onboarding Fees in 2026?", "The fee schedule, waivers, and $0-onboarding alternatives."),
         ("faq/intercom-fin-ai-cost-calculator/index.html", "Intercom Fin AI Cost Calculator", "The FAQ copy of the $0.99 per resolution Year-1 price."),
         ("faq/stripe-vs-paddle-true-cost/index.html", "Stripe vs. Paddle vs. Whop True Cost &amp; Chargeback Calculator", "Processing, billing, tax, and dispute cost side by side."),
@@ -387,6 +388,12 @@ def render_related_links(rel_path, prefix):
             chargeback_rel,
             "exit/stripe-shopify-paddle-frozen-funds-alternatives/index.html",
             "pricing/stripe-billing-0-7-percent-recurring-tax-calculator/index.html",
+        ]
+    elif rel_path == "compliance/okta-vs-workos-vs-1password-sso-tax-calculator/index.html":
+        preferred = [
+            "compliance/hipaa-baa-and-soc2-pricing-tiers/index.html",
+            "compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/index.html",
+            "compare/typeform-vs-jotform-response-limit-and-hipaa-cost/index.html",
         ]
     elif rel_path == radar_rel:
         preferred = [

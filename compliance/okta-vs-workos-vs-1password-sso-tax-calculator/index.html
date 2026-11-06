@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-site-verification" content="W7-m7km1_5pZZUG38dpallcgdGss6_Vl2qo5pjVoMdA" />
+  <!-- Bing Webmaster Tools verification: paste <meta name="msvalidate.01" content="YOUR_BING_CODE" /> here or use 1-click Google Search Console import (see BING_WEBMASTER_VERIFICATION.md) -->
+  <title>SSO tax: Okta, WorkOS, 1Password – saasbill.io</title>
+  <meta name="description" content="At 25 people, the SAML step-up is $1,251 a year on Zoom and $3,000 on Notion. Okta Starter already includes SSO and is $1,800. Checked 6 Nov 2026." />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+  <meta property="og:site_name" content="SaaSBill" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="SSO tax: Okta, WorkOS, 1Password – saasbill.io" />
+  <meta property="og:description" content="At 25 people, the SAML step-up is $1,251 a year on Zoom and $3,000 on Notion. Okta Starter already includes SSO and is $1,800. Checked 6 Nov 2026." />
+  <meta property="og:url" content="https://saasbill.io/compliance/okta-vs-workos-vs-1password-sso-tax-calculator/" />
+  <meta property="og:updated_time" content="2026-11-06T06:02:53+00:00" />
+  <meta property="article:published_time" content="2026-11-06T00:00:00+01:00" />
+  <meta property="article:modified_time" content="2026-11-06T06:02:53+00:00" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="SSO tax: Okta, WorkOS, 1Password – saasbill.io" />
+  <meta name="twitter:description" content="At 25 people, the SAML step-up is $1,251 a year on Zoom and $3,000 on Notion. Okta Starter already includes SSO and is $1,800. Checked 6 Nov 2026." />
+  <meta name="last-modified" content="2026-11-06T06:02:53+00:00" />
+  <meta name="dcterms.modified" content="2026-11-06T06:02:53+00:00" />
+  <meta name="dcterms.issued" content="2026-11-06" />
+  <link rel="canonical" href="https://saasbill.io/compliance/okta-vs-workos-vs-1password-sso-tax-calculator/" />
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261030c" />
+  <link rel="alternate" type="text/plain" href="https://saasbill.io/llms.txt" title="SaaSBill LLMs.txt Summary" />
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script defer data-domain="saasbill.io" src="https://plausible.io/js/pa-VAaSVNs5XOobt9cv2UtKo.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init();
+    window.__saasbillEvents = window.__saasbillEvents || [];
+    window.trackSaaSBillEvent = function(eventName, props) {
+      var p = props || {};
+      var entry = { event: eventName, ts: Date.now() };
+      for (var k in p) {
+        if (Object.prototype.hasOwnProperty.call(p, k)) entry[k] = p[k];
+      }
+      window.__saasbillEvents.push(entry);
+      if (typeof window.plausible === 'function') {
+        window.plausible(eventName, { props: p });
+      }
+    };
+    window.trackEvent = window.trackSaaSBillEvent;
+
+    window.saasbillMoney = function (n) {
+      var v = Math.round(Number(n) || 0);
+      var sign = v < 0 ? '-' : '';
+      return sign + '$' + Math.abs(v).toLocaleString('en-US');
+    };
+    window.saasbillResultLine = function (hidden, sticker) {
+      var h = Math.round(Number(hidden) || 0);
+      var s = Math.round(Number(sticker) || 0);
+      if (h <= 0) return 'Matches advertised price ($0 hidden fees).';
+      var pct = s > 0 ? Math.round((h / s) * 100) : 0;
+      return '+' + window.saasbillMoney(h) + ' (+' + pct + '%) above advertised price.';
+    };
+    window.saasbillApplyWorkbench = function (opts) {
+      opts = opts || {};
+      var sticker = Math.max(0, Math.round(Number(opts.sticker) || 0));
+      var seats = Math.max(0, Math.round(Number(opts.seats) || 0));
+      var hidden = Math.max(0, Math.round(Number(opts.hidden) || 0));
+      var total = Math.round(Number(opts.total));
+      if (!isFinite(total)) total = sticker + seats + hidden;
+      var parts = Math.max(1, sticker + seats + hidden);
+      function node(id) { return document.getElementById(id); }
+      function setText(id, value) {
+        var el = node(id);
+        if (el) el.textContent = value;
+      }
+      function setFlex(id, amount) {
+        var el = node(id);
+        if (!el) return;
+        var share = amount <= 0 ? 8 : (amount / parts) * 100;
+        el.style.flex = share + ' 1 0px';
+      }
+      setText('shell-product', opts.product || '');
+      setText('shell-big', window.saasbillMoney(total));
+      setText('shell-quote', 'True Year-1 cost');
+      setText('shell-sub', window.saasbillResultLine(hidden, sticker + seats));
+      setText('shell-amt-base', window.saasbillMoney(sticker));
+      setText('shell-amt-seats', window.saasbillMoney(seats));
+      setText('shell-amt-hidden', window.saasbillMoney(hidden));
+      setText('shell-title-base', 'Sticker Price');
+      setText('shell-title-seats', opts.seatsTitle || 'Other sticker fees');
+      setText('shell-title-hidden', 'Hidden Cost Gap');
+      setText('shell-sub-base', opts.baseLabel || 'Advertised price');
+      setText('shell-sub-seats', opts.seatsLabel || 'Included in the sticker');
+      setText('shell-sub-hidden', opts.hiddenLabel || 'Fees above the advertised price');
+      setFlex('shell-row-base', sticker);
+      setFlex('shell-row-seats', seats);
+      setFlex('shell-row-hidden', hidden);
+      var seatsRow = node('shell-row-seats');
+      if (seatsRow) seatsRow.style.display = seats <= 0 ? 'none' : '';
+      var math = node('shell-math');
+      if (math && opts.mathHtml) math.innerHTML = opts.mathHtml;
+      var best = node('shell-best');
+      if (best && opts.bestHtml) best.innerHTML = opts.bestHtml;
+      var cta = node('shell-cta');
+      if (cta && opts.ctaHref) {
+        cta.href = opts.ctaHref;
+        var label = opts.ctaLabel || 'See pricing';
+        cta.textContent = /→\s*$/.test(label) ? label : label + ' \u2192';
+        if (opts.ctaVendor) cta.setAttribute('data-vendor', opts.ctaVendor);
+      }
+      setText('shell-sticker', window.saasbillMoney(sticker + seats));
+      setText('shell-gap', hidden > 0 ? '+' + window.saasbillMoney(hidden) : '$0');
+      if (opts.product) setText('shell-sticker-note', opts.product);
+    };
+
+  </script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "TechArticle", "@id": "https://saasbill.io/compliance/okta-vs-workos-vs-1password-sso-tax-calculator/#article", "headline": "SSO tax: Okta, WorkOS, 1Password \u2013 saasbill.io", "description": "At 25 people, the SAML step-up is $1,251 a year on Zoom and $3,000 on Notion. Okta Starter already includes SSO and is $1,800. Checked 6 Nov 2026.", "datePublished": "2026-11-06", "dateModified": "2026-11-06T06:02:53+00:00", "author": {"@type": "Organization", "name": "SaaSBill Editorial", "url": "https://saasbill.io/"}, "publisher": {"@type": "Organization", "name": "SaaSBill", "url": "https://saasbill.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://saasbill.io/compliance/okta-vs-workos-vs-1password-sso-tax-calculator/"}}, {"@type": "WebPage", "@id": "https://saasbill.io/compliance/okta-vs-workos-vs-1password-sso-tax-calculator/", "url": "https://saasbill.io/compliance/okta-vs-workos-vs-1password-sso-tax-calculator/", "name": "SSO tax: Okta, WorkOS, 1Password \u2013 saasbill.io", "description": "At 25 people, the SAML step-up is $1,251 a year on Zoom and $3,000 on Notion. Okta Starter already includes SSO and is $1,800. Checked 6 Nov 2026.", "inLanguage": "en-US", "datePublished": "2026-11-06", "dateModified": "2026-11-06T06:02:53+00:00", "lastReviewed": "2026-11-06", "reviewedBy": {"@type": "Organization", "name": "SaaSBill Editorial"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "SaaSBill", "item": "https://saasbill.io/"}, {"@type": "ListItem", "position": 2, "name": "SSO tax: Okta, WorkOS, 1Password \u2013 saasbill.io", "item": "https://saasbill.io/compliance/okta-vs-workos-vs-1password-sso-tax-calculator/"}]}, {"@type": "FAQPage", "@id": "https://saasbill.io/compliance/okta-vs-workos-vs-1password-sso-tax-calculator/#faq", "datePublished": "2026-11-06", "dateModified": "2026-11-06T06:02:53+00:00", "mainEntity": [{"@type": "Question", "name": "Does Okta charge extra for SAML?", "dateCreated": "2026-11-06", "dateModified": "2026-11-06T06:02:53+00:00", "acceptedAnswer": {"@type": "Answer", "text": "On the Workforce Identity pricing page checked 6 Nov 2026, SSO is included from the Starter suite at $6 per user per month, along with MFA, Universal Directory, and 5 Workflows. Suites are billed annually, and the annual contract minimum is $1,500. Professional and Enterprise are inquire, so those list prices are unknown. A standalone SSO dollar price is not on that page, so it is unknown.", "dateCreated": "2026-11-06", "dateModified": "2026-11-06T06:02:53+00:00"}}, {"@type": "Question", "name": "How does WorkOS charge for SSO?", "dateCreated": "2026-11-06", "dateModified": "2026-11-06T06:02:53+00:00", "acceptedAnswer": {"@type": "Answer", "text": "WorkOS prices production SSO per IdP connection per month: $125 for 1 to 15 connections, then $100, $80, and $65 on the higher rungs. 101 or more is custom, so that bill is unknown. AuthKit includes the first 1 million monthly active users. That is not a per-person SSO rate. Five connections at $125 are $7,500 a year, which is $300 a person only if you divide the connection bill by 25 people.", "dateCreated": "2026-11-06", "dateModified": "2026-11-06T06:02:53+00:00"}}, {"@type": "Question", "name": "Does 1Password replace Okta?", "dateCreated": "2026-11-06", "dateModified": "2026-11-06T06:02:53+00:00", "acceptedAnswer": {"@type": "Answer", "text": "No. 1Password Business, at $8.99 per user per month billed yearly, includes Unlock with Single Sign-On and that unlock is OIDC, not SAML. The Teams Starter Pack does not include it. Enterprise and SaaS Manager SAML are quote-only, so those prices are unknown. 1Password does not offer a HIPAA BAA. You still bring your own IdP.", "dateCreated": "2026-11-06", "dateModified": "2026-11-06T06:02:53+00:00"}}]}]}</script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-inner">
+      <div class="brand-wrap">
+        <a href="../../index.html" class="brand">SaaSBill<span>.io</span></a>
+        <span class="brand-tagline">Year-1 software cost &amp; contract calculators</span>
+      </div>
+      <nav class="nav-links" aria-label="Primary Navigation">
+        <a href="../../index.html#all-calculators">Audits &amp; Guides</a>
+        <a href="../../ai-act/">AI Act</a>
+        <a href="../../index.html#methodology">Methodology</a>
+        <span class="byline-bar">Updated <time datetime="2026-11-06" itemprop="dateModified">Nov 06, 2026</time></span>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+    <article itemscope itemtype="https://schema.org/TechArticle">
+      <meta itemprop="datePublished" content="2026-11-06" />
+      <meta itemprop="dateModified" content="2026-11-06T06:02:53+00:00" />
+      <section class="hero editorial-hero editorial-hero-wrap"><h1>The B2B SaaS SSO tax calculator (2026)</h1><p class="lead">At 25 people, the extra to turn on SAML is $1,251 a year on Zoom and $3,000 on Notion. Okta Starter already includes SSO and is $1,800 for the year after the $1,500 floor. Those are different bills.</p></section>
+<div class="unified-inspector-tray">
+<section class="calc-box editorial-workbench" aria-label="True cost calculator">
+  <div class="workbench-grid">
+    <div class="wb-col-controls">
+      <div class="wb-col-title">Your team</div>
+      <div class="wb-controls-stack">
+        
+        <div class="wb-control-item">
+          <label class="wb-control-label" for="ss-users">People on the app <span class="val-pill" id="ss-users-val">25</span></label>
+          <div class="wb-slider-row">
+            <input type="range" id="ss-users" min="0" max="3" step="1" value="1" aria-label="Team size" data-track="calculator-control" data-control="users" />
+          </div>
+        </div>
+        <div class="wb-control-item">
+          <label class="wb-control-label" for="ss-conn">WorkOS production connections <span class="val-pill" id="ss-conn-val">5</span></label>
+          <div class="wb-slider-row">
+            <input type="range" id="ss-conn" min="1" max="40" step="1" value="5" aria-label="WorkOS connections" data-track="calculator-control" data-control="connections" />
+          </div>
+        </div>
+        <p class="wb-budget-subnote">WorkOS is priced per IdP connection, not per person. The per-person figure below only divides that connection bill by the team size.</p>
+
+      </div>
+    </div>
+    <div class="wb-col-chart">
+      <div class="wb-col-title">Year-1 SAML step-up</div>
+      <div class="wb-vbar-container" aria-live="polite">
+        <div class="wb-vbar-row" id="shell-row-base" style="flex: 40 1 0px;">
+          <div class="wb-vbar-block block-base"><span class="wb-block-amount" id="shell-amt-base">$0</span></div>
+          <div class="wb-callout-item"><div class="wb-leader-line"></div><div class="wb-callout-text"><strong id="shell-title-base">Sticker Price</strong><span id="shell-sub-base">Advertised price</span></div></div>
+        </div>
+        <div class="wb-vbar-row" id="shell-row-seats" style="flex: 8 1 0px;">
+          <div class="wb-vbar-block block-seats"><span class="wb-block-amount" id="shell-amt-seats">$0</span></div>
+          <div class="wb-callout-item"><div class="wb-leader-line"></div><div class="wb-callout-text"><strong id="shell-title-seats">Other sticker fees</strong><span id="shell-sub-seats">Included in the sticker</span></div></div>
+        </div>
+        <div class="wb-vbar-row" id="shell-row-hidden" style="flex: 52 1 0px;">
+          <div class="wb-vbar-block block-hidden"><span class="wb-block-amount" id="shell-amt-hidden">$0</span></div>
+          <div class="wb-callout-item"><div class="wb-leader-line"></div><div class="wb-callout-text"><strong id="shell-title-hidden">Hidden Cost Gap</strong><span id="shell-sub-hidden">Fees above the advertised price</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="wb-result-col" id="shell-result">
+      <div class="wb-selected-product" id="shell-product">Year-1 total</div>
+      <div class="wb-big-total"><span id="shell-big">$0</span> <span class="wb-per-year">/ year</span></div>
+      <details class="math-drawer" id="shell-calc">
+        <summary>Show calculation</summary>
+        <div class="math-drawer-body" id="shell-math"></div>
+      </details>
+      <p class="wb-budget-quote" id="shell-quote">True Year-1 cost</p>
+      <p class="wb-budget-subnote" id="shell-sub">Matches advertised price ($0 hidden fees).</p>
+      <div class="wb-best-option" id="shell-best"></div>
+      <div class="cta-stack">
+        <a id="shell-cta" class="btn-cta wb-primary-cta" href="#ss-apps" data-track="vendor-cta" data-vendor="saasbill" data-cta-location="workbench">See the app step-ups &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+<section class="verdict-section" aria-label="Sticker price and hidden cost gap">
+  <div class="summary-strip" id="shell-summary">
+    <div class="summary-card result-card">
+      <div class="summary-label">Sticker Price</div>
+      <div class="summary-metric" id="shell-sticker">$0</div>
+      <div class="summary-scenario" id="shell-sticker-note">Advertised price</div>
+    </div>
+    <div class="summary-card result-card card-hidden">
+      <div class="summary-label">Hidden Cost Gap</div>
+      <div class="summary-metric" id="shell-gap">$0</div>
+      <div class="summary-scenario">Above the advertised price</div>
+    </div>
+  </div>
+</section>
+
+<section id="ss-apps">
+  <h2>What the apps charge to turn SAML on</h2>
+  <p>These are the extra dollars for the same people when the plan that includes SAML costs more than the plan below it. Slack's US step-up is unknown because the Pro price in US dollars was not re-checked on 6 Nov 2026.</p>
+  <div class="table-wrap editorial-gap-table mobile-cards">
+    <table>
+      <caption>Year-1 list price and the step-up for SAML, at the team size above</caption>
+      <thead>
+        <tr>
+          <th>App</th>
+          <th>Without SAML</th>
+          <th>With SAML</th>
+          <th>Year-1 step-up</th>
+        </tr>
+      </thead>
+      <tbody id="ss-apps-body">
+        <tr><td data-label="App">Notion</td><td data-label="Without SAML">Plus $10</td><td data-label="With SAML">Business $20</td><td data-label="Year-1 step-up">$3,000</td></tr>
+        <tr><td data-label="App">Zoom</td><td data-label="Without SAML">Pro $14.16</td><td data-label="With SAML">Business $18.33</td><td data-label="Year-1 step-up">$1,251</td></tr>
+        <tr><td data-label="App">GitHub</td><td data-label="Without SAML">Team $4</td><td data-label="With SAML">Enterprise $21</td><td data-label="Year-1 step-up">$5,100</td></tr>
+        <tr><td data-label="App">Figma</td><td data-label="Without SAML">Professional $16</td><td data-label="With SAML">Organization $55</td><td data-label="Year-1 step-up">$11,700</td></tr>
+        <tr><td data-label="App">Slack</td><td data-label="Without SAML">Pro, US dollars unknown</td><td data-label="With SAML">Business+ $15</td><td data-label="Year-1 step-up">unknown</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="summary-caveat">Slack also publishes a euro pair, Pro €6.75 to Business+ €15 per active user per month. That pair is not converted into the dollar totals.</p>
+</section>
+
+<section id="ss-context">
+  <h2>IdP and vault, which are different bills</h2>
+  <div class="table-wrap editorial-gap-table mobile-cards">
+    <table>
+      <caption>Year-1 context at the team size and connection count above</caption>
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>What you are buying</th>
+          <th>Year-1</th>
+        </tr>
+      </thead>
+      <tbody id="ss-context-body">
+        <tr><td data-label="Product">Okta Starter</td><td data-label="What you are buying">IdP. SSO is included.</td><td data-label="Year-1">$1,800</td></tr>
+        <tr><td data-label="Product">WorkOS SSO</td><td data-label="What you are buying">5 connections at $125 each</td><td data-label="Year-1">$7,500</td></tr>
+        <tr><td data-label="Product">1Password Business</td><td data-label="What you are buying">Vault. Unlock with SSO is OIDC.</td><td data-label="Year-1">$2,697</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p id="ss-split" class="summary-caveat">Five WorkOS connections are $7,500 a year. Divided by 25 people, that is $300 a person for the year. WorkOS does not publish a per-person SSO price.</p>
+</section>
+
+<section>
+  <h2>Prices checked on 6 Nov 2026</h2>
+  <div class="table-wrap editorial-gap-table mobile-cards">
+    <table>
+      <caption>Published list prices. Inquire and quote-only rows stay unknown.</caption>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Published price</th>
+          <th>In the Year-1 totals</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td data-label="Item">Okta Starter</td><td data-label="Published price">$6 per user per month. SSO, MFA, Universal Directory, and 5 Workflows are included.</td><td data-label="In the Year-1 totals">Seat price times 12, or the $1,500 Workforce Identity floor, whichever is higher.</td></tr>
+        <tr><td data-label="Item">Okta Core Essentials and Essentials</td><td data-label="Published price">$14 and $17 per user per month.</td><td data-label="In the Year-1 totals">Shown beside Starter. The same $1,500 floor applies.</td></tr>
+        <tr><td data-label="Item">Okta Professional and Enterprise</td><td data-label="Published price">Inquire.</td><td data-label="In the Year-1 totals">unknown</td></tr>
+        <tr><td data-label="Item">Okta standalone SSO</td><td data-label="Published price">Not listed as a public dollar amount on the pricing page.</td><td data-label="In the Year-1 totals">unknown</td></tr>
+        <tr><td data-label="Item">Okta Customer Identity Enterprise</td><td data-label="Published price">$3,000 per month, billed annually. A separate product line.</td><td data-label="In the Year-1 totals">$36,000. Not added to the Workforce seat total.</td></tr>
+        <tr><td data-label="Item">WorkOS AuthKit</td><td data-label="Published price">First 1 million monthly active users included. Each further 1 million is $2,500 per month. Includes enterprise SSO from one integration.</td><td data-label="In the Year-1 totals">Included while you stay under 1 million. Not a per-person SSO fee.</td></tr>
+        <tr><td data-label="Item">WorkOS SSO connections</td><td data-label="Published price">Per connection per month: 1 to 15 at $125, 16 to 30 at $100, 31 to 50 at $80, 51 to 100 at $65, 101 and above is custom.</td><td data-label="In the Year-1 totals">Connection count times the tier price times 12. Above 100 connections: unknown.</td></tr>
+        <tr><td data-label="Item">WorkOS Directory Sync</td><td data-label="Published price">The same per-connection ladder.</td><td data-label="In the Year-1 totals">Not added. Turning it on would be a second ladder, not a per-person fee.</td></tr>
+        <tr><td data-label="Item">WorkOS support</td><td data-label="Published price">Staging has no production charge. Scale support is $1,000 per month. Enterprise support is custom.</td><td data-label="In the Year-1 totals">Scale support is $12,000 a year and is not in the connection total. Enterprise support is unknown.</td></tr>
+        <tr><td data-label="Item">1Password Teams Starter Pack</td><td data-label="Published price">$24.95 per month for 10 members, billed annually. The page also lists $2.49 per user. Unlock with SSO is not included.</td><td data-label="In the Year-1 totals">$299.40 for that 10-member pack. Not scaled to the team slider.</td></tr>
+        <tr><td data-label="Item">1Password Business</td><td data-label="Published price">$8.99 per user per month, billed yearly ($107.88 per user per year). Unlock with SSO is included, and it is OIDC, not SAML. IdP provisioning covers Okta, Entra, and others.</td><td data-label="In the Year-1 totals">The vault line. It does not replace an IdP.</td></tr>
+        <tr><td data-label="Item">1Password Enterprise and SaaS Manager SAML</td><td data-label="Published price">Quote only.</td><td data-label="In the Year-1 totals">unknown</td></tr>
+        <tr><td data-label="Item">1Password HIPAA BAA</td><td data-label="Published price">1Password does not offer a HIPAA BAA.</td><td data-label="In the Year-1 totals">Not a priced add-on.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="src-cluster"><a class="src-link" href="https://www.okta.com/pricing/">Okta pricing</a> <span class="src-date">Accessed 2026-11-06</span></p>
+  <p class="src-cluster"><a class="src-link" href="https://workos.com/pricing">WorkOS pricing</a> <span class="src-date">Accessed 2026-11-06</span></p>
+  <p class="src-cluster"><a class="src-link" href="https://1password.com/pricing/business" target="_blank" rel="noopener">1Password Business pricing</a> <span class="src-date">Accessed 2026-11-06</span></p>
+  <p class="src-cluster"><a class="src-link" href="https://1password.com/pricing/enterprise" target="_blank" rel="noopener">1Password Enterprise pricing</a> <span class="src-date">Accessed 2026-11-06</span></p>
+  <p class="src-cluster"><a class="src-link" href="https://www.notion.com/pricing">Notion pricing</a> <span class="src-date">Accessed 2026-11-06</span></p>
+  <p class="src-cluster"><a class="src-link" href="https://zoom.us/pricing">Zoom pricing</a> <span class="src-date">Accessed 2026-11-06</span></p>
+  <p class="src-cluster"><a class="src-link" href="https://github.com/pricing">GitHub pricing</a> <span class="src-date">Accessed 2026-11-06</span></p>
+  <p class="src-cluster"><a class="src-link" href="https://www.figma.com/pricing/">Figma pricing</a> <span class="src-date">Accessed 2026-11-06</span></p>
+  <p class="src-cluster"><a class="src-link" href="https://slack.com/pricing">Slack pricing</a> <span class="src-date">Accessed 2026-11-06</span></p>
+  <p class="src-cluster"><a class="src-link" href="https://slack.com/help/articles/203772216-Set-up-SAML-single-sign-on-for-Slack">Slack SAML setup</a> <span class="src-date">Accessed 2026-11-06</span></p>
+</section>
+<script>
+var SS_USERS = [10, 25, 50, 100];
+
+function ssWorkosRate(connections) {
+  if (connections < 1) return -1;
+  if (connections <= 15) return 125;
+  if (connections <= 30) return 100;
+  if (connections <= 50) return 80;
+  if (connections <= 100) return 65;
+  return -1;
+}
+
+function ssYearFloor(centsPerUserMonth, users) {
+  var seats = users * centsPerUserMonth * 12;
+  return seats > 150000 ? seats : 150000;
+}
+
+function calcSsoTax(input) {
+  var idx = Math.max(0, Math.min(3, Math.round(Number(input.usersIndex) || 0)));
+  var users = SS_USERS[idx];
+  var connections = Math.max(1, Math.round(Number(input.connections) || 1));
+  var rate = ssWorkosRate(connections);
+  var workos = rate < 0 ? -1 : connections * rate * 12 * 100;
+  var notionLow = users * 1000 * 12;
+  var notionHigh = users * 2000 * 12;
+  var zoomLow = users * 1416 * 12;
+  var zoomHigh = users * 1833 * 12;
+  var githubLow = users * 400 * 12;
+  var githubHigh = users * 2100 * 12;
+  var figmaLow = users * 1600 * 12;
+  var figmaHigh = users * 5500 * 12;
+  var slackHigh = users * 1500 * 12;
+  return {
+    users: users,
+    connections: connections,
+    rate: rate,
+    oktaStarter: ssYearFloor(600, users),
+    oktaCore: ssYearFloor(1400, users),
+    oktaEssentials: ssYearFloor(1700, users),
+    workos: workos,
+    password: users * 899 * 12,
+    notionLow: notionLow,
+    notionHigh: notionHigh,
+    notionDelta: notionHigh - notionLow,
+    zoomLow: zoomLow,
+    zoomHigh: zoomHigh,
+    zoomDelta: zoomHigh - zoomLow,
+    githubLow: githubLow,
+    githubHigh: githubHigh,
+    githubDelta: githubHigh - githubLow,
+    figmaLow: figmaLow,
+    figmaHigh: figmaHigh,
+    figmaDelta: figmaHigh - figmaLow,
+    slackHigh: slackHigh
+  };
+}
+
+function ssMoney(cents) {
+  var negative = cents < 0;
+  var v = Math.abs(Math.round(cents));
+  var dollars = Math.floor(v / 100);
+  var rest = v % 100;
+  var text = "$" + dollars.toLocaleString("en-US");
+  if (rest) text += "." + (rest < 10 ? "0" : "") + rest;
+  return (negative ? "-" : "") + text;
+}
+
+function ssLowestApps(c) {
+  var rows = [
+    ["Zoom", c.zoomDelta],
+    ["Notion", c.notionDelta],
+    ["GitHub", c.githubDelta],
+    ["Figma", c.figmaDelta]
+  ];
+  var low = rows[0][1];
+  rows.forEach(function (row) { if (row[1] < low) low = row[1]; });
+  var lows = [];
+  var rest = [];
+  rows.forEach(function (row) {
+    if (row[1] === low) lows.push(row[0]);
+    else rest.push(row[0] + " " + ssMoney(row[1]));
+  });
+  var tail = rest.length ? rest.join(". ") + ". " : "";
+  return "Lowest Year-1 cost: " + lows.join(" and ") + ", " + ssMoney(low) + ". " + tail + "That is the smallest published step-up to the plan that includes SAML. Slack's US dollar step-up is unknown.";
+}
+
+function ssRead() {
+  return {
+    usersIndex: document.getElementById("ss-users").value,
+    connections: document.getElementById("ss-conn").value
+  };
+}
+
+function renderSsoTax() {
+  var c = calcSsoTax(ssRead());
+  document.getElementById("ss-users-val").textContent = String(c.users);
+  document.getElementById("ss-conn-val").textContent = String(c.connections);
+  var line = ssLowestApps(c);
+  var label = "Lowest Year-1 cost:";
+  document.getElementById("shell-best").innerHTML = "<strong>" + label + "</strong>" + line.slice(label.length);
+  document.getElementById("shell-big").textContent = ssMoney(c.zoomDelta);
+  document.getElementById("shell-product").textContent = "Zoom SAML step-up, " + c.users + " people";
+  document.getElementById("shell-sub").textContent = "App plan step-up only. Okta, WorkOS, and 1Password are separate bills.";
+  var bars = [
+    ["shell-row-base", "shell-amt-base", "shell-title-base", "shell-sub-base", "Zoom step-up", c.zoomDelta, "Pro to Business, annual"],
+    ["shell-row-seats", "shell-amt-seats", "shell-title-seats", "shell-sub-seats", "Notion step-up", c.notionDelta, "Plus to Business"],
+    ["shell-row-hidden", "shell-amt-hidden", "shell-title-hidden", "shell-sub-hidden", "GitHub step-up", c.githubDelta, "Team to Enterprise"]
+  ];
+  var maxBar = 1;
+  bars.forEach(function (bar) { if (bar[5] > maxBar) maxBar = bar[5]; });
+  bars.forEach(function (bar) {
+    document.getElementById(bar[0]).style.flex = Math.max(12, Math.round(bar[5] / maxBar * 100)) + " 1 0px";
+    document.getElementById(bar[1]).textContent = ssMoney(bar[5]);
+    document.getElementById(bar[2]).textContent = bar[4];
+    document.getElementById(bar[3]).textContent = bar[6];
+  });
+  document.getElementById("shell-sticker").textContent = ssMoney(c.zoomDelta) + " / yr";
+  document.getElementById("shell-sticker-note").textContent = "Smallest published SAML step-up";
+  document.getElementById("shell-gap").textContent = "+" + ssMoney(c.figmaDelta - c.zoomDelta);
+  var labels = document.querySelectorAll("#shell-summary .summary-label");
+  if (labels.length >= 2) {
+    labels[0].textContent = "Zoom step-up";
+    labels[1].textContent = "Figma above Zoom";
+  }
+  var notes = document.querySelectorAll("#shell-summary .summary-scenario");
+  if (notes.length >= 2) notes[1].textContent = "Organization minus the Zoom step-up";
+  var workosText = c.workos < 0 ? "unknown" : ssMoney(c.workos);
+  var perPerson = c.workos < 0 ? "unknown" : ssMoney(Math.round(c.workos / c.users));
+  document.getElementById("ss-split").textContent = c.connections + " WorkOS connections are " + workosText + " a year. Divided by " + c.users + " people, that is " + perPerson + " a person for the year. WorkOS does not publish a per-person SSO price.";
+  document.getElementById("shell-math").textContent = c.users + " people. Zoom " + ssMoney(c.zoomLow) + " to " + ssMoney(c.zoomHigh) + ", step-up " + ssMoney(c.zoomDelta) + ". Notion " + ssMoney(c.notionLow) + " to " + ssMoney(c.notionHigh) + ", step-up " + ssMoney(c.notionDelta) + ". GitHub " + ssMoney(c.githubLow) + " to " + ssMoney(c.githubHigh) + ", step-up " + ssMoney(c.githubDelta) + ". Figma " + ssMoney(c.figmaLow) + " to " + ssMoney(c.figmaHigh) + ", step-up " + ssMoney(c.figmaDelta) + ". Slack Business+ " + ssMoney(c.slackHigh) + "; Pro in US dollars is unknown, so the step-up is unknown. Okta Starter " + ssMoney(c.oktaStarter) + " (the $1,500 floor is included). WorkOS " + workosText + " at " + (c.rate < 0 ? "a custom rate" : "$" + c.rate + " per connection per month") + ". 1Password Business " + ssMoney(c.password) + ".";
+  function appRow(name, lowLabel, highLabel, low, high, delta) {
+    var step = delta < 0 ? "unknown" : ssMoney(delta);
+    return "<tr><td data-label=\"App\">" + name + "</td><td data-label=\"Without SAML\">" + lowLabel + " " + (low < 0 ? "unknown" : ssMoney(low)) + "</td><td data-label=\"With SAML\">" + highLabel + " " + ssMoney(high) + "</td><td data-label=\"Year-1 step-up\">" + step + "</td></tr>";
+  }
+  document.getElementById("ss-apps-body").innerHTML = ""
+    + appRow("Notion", "Plus $10/member/mo", "Business $20/member/mo", c.notionLow, c.notionHigh, c.notionDelta)
+    + appRow("Zoom", "Pro $14.16/user/mo annual", "Business $18.33/user/mo annual", c.zoomLow, c.zoomHigh, c.zoomDelta)
+    + appRow("GitHub", "Team $4/user/mo", "Enterprise $21/user/mo", c.githubLow, c.githubHigh, c.githubDelta)
+    + appRow("Figma", "Professional $16/editor/mo", "Organization $55/editor/mo", c.figmaLow, c.figmaHigh, c.figmaDelta)
+    + "<tr><td data-label=\"App\">Slack</td><td data-label=\"Without SAML\">Pro, US dollars unknown. Euro list is €6.75.</td><td data-label=\"With SAML\">Business+ " + ssMoney(c.slackHigh) + " at $15. Euro list is €15.</td><td data-label=\"Year-1 step-up\">unknown</td></tr>";
+  var rateLabel = c.rate < 0 ? "custom rate" : "$" + c.rate + " per connection per month";
+  document.getElementById("ss-context-body").innerHTML = ""
+    + "<tr><td data-label=\"Product\">Okta Starter</td><td data-label=\"What you are buying\">IdP. SSO is included from this suite. Floor $1,500.</td><td data-label=\"Year-1\">" + ssMoney(c.oktaStarter) + "</td></tr>"
+    + "<tr><td data-label=\"Product\">Okta Core Essentials</td><td data-label=\"What you are buying\">$14 per user per month, same floor.</td><td data-label=\"Year-1\">" + ssMoney(c.oktaCore) + "</td></tr>"
+    + "<tr><td data-label=\"Product\">Okta Essentials</td><td data-label=\"What you are buying\">$17 per user per month, same floor.</td><td data-label=\"Year-1\">" + ssMoney(c.oktaEssentials) + "</td></tr>"
+    + "<tr><td data-label=\"Product\">Okta Professional and Enterprise</td><td data-label=\"What you are buying\">Inquire.</td><td data-label=\"Year-1\">unknown</td></tr>"
+    + "<tr><td data-label=\"Product\">WorkOS SSO</td><td data-label=\"What you are buying\">" + c.connections + " connections, " + rateLabel + ".</td><td data-label=\"Year-1\">" + workosText + "</td></tr>"
+    + "<tr><td data-label=\"Product\">1Password Business</td><td data-label=\"What you are buying\">Vault. Unlock with SSO is OIDC, not SAML.</td><td data-label=\"Year-1\">" + ssMoney(c.password) + "</td></tr>";
+  if (typeof window.trackSaaSBillEvent === "function") {
+    window.trackSaaSBillEvent("result_rendered", { page: "sso-tax", users: c.users, connections: c.connections });
+  }
+}
+["ss-users", "ss-conn"].forEach(function (id) {
+  var el = document.getElementById(id);
+  el.addEventListener("input", renderSsoTax);
+  el.addEventListener("change", renderSsoTax);
+});
+renderSsoTax();
+</script>
+
+      
+        <section aria-labelledby="faq-heading">
+          <h2 id="faq-heading">Common questions</h2>
+          <div class="faq-list">
+            
+            <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+              <h3 itemprop="name">Does Okta charge extra for SAML?</h3>
+              <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                <p itemprop="text">On the Workforce Identity pricing page checked 6 Nov 2026, SSO is included from the Starter suite at $6 per user per month, along with MFA, Universal Directory, and 5 Workflows. Suites are billed annually, and the annual contract minimum is $1,500. Professional and Enterprise are inquire, so those list prices are unknown. A standalone SSO dollar price is not on that page, so it is unknown.</p>
+              </div>
+            </div>
+            
+            <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+              <h3 itemprop="name">How does WorkOS charge for SSO?</h3>
+              <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                <p itemprop="text">WorkOS prices production SSO per IdP connection per month: $125 for 1 to 15 connections, then $100, $80, and $65 on the higher rungs. 101 or more is custom, so that bill is unknown. AuthKit includes the first 1 million monthly active users. That is not a per-person SSO rate. Five connections at $125 are $7,500 a year, which is $300 a person only if you divide the connection bill by 25 people.</p>
+              </div>
+            </div>
+            
+            <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+              <h3 itemprop="name">Does 1Password replace Okta?</h3>
+              <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                <p itemprop="text">No. 1Password Business, at $8.99 per user per month billed yearly, includes Unlock with Single Sign-On and that unlock is OIDC, not SAML. The Teams Starter Pack does not include it. Enterprise and SaaS Manager SAML are quote-only, so those prices are unknown. 1Password does not offer a HIPAA BAA. You still bring your own IdP.</p>
+              </div>
+            </div>
+            
+          </div>
+        </section>
+        
+      
+    <section aria-labelledby="related-calculators-heading" style="margin-top:36px; padding-top:24px; border-top:1px solid var(--border);">
+      <h2 id="related-calculators-heading" style="font-size:1.2rem; margin-top:0;">Related Year-1 True-Cost Calculators &amp; Contract Audits</h2>
+      <div class="related-calc-grid">
+        
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../compliance/hipaa-baa-and-soc2-pricing-tiers/" data-track="internal-audit">HIPAA BAA &amp; SOC 2 Pricing Tiers &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">Which plan signs a BAA, and what the CPA audit adds.</p>
+        </div>
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/" data-track="internal-audit">Google Workspace vs. Microsoft 365 HIPAA BAA &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">Minimum editions that sign a BAA, plus form intake rules.</p>
+        </div>
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../compare/typeform-vs-jotform-response-limit-and-hipaa-cost/" data-track="internal-audit">Typeform vs. Jotform Response &amp; HIPAA Calculator &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">Response caps and which plan signs a HIPAA BAA.</p>
+        </div>
+      </div>
+      <details class="footer-directory-details">
+        <summary>Browse all 37 audited calculators &amp; guides</summary>
+        <div class="footer-directory-links">
+          <a href="../../" data-track="internal-audit">Year-1 SaaS True-Cost Directory &rarr;</a><a href="../../pricing/hubspot-true-cost-and-onboarding-fees/" data-track="internal-audit">HubSpot True Cost &amp; Onboarding &rarr;</a><a href="../../compare/close-crm-vs-hubspot-sales-hub-5-to-20-reps/" data-track="internal-audit">Close CRM vs. HubSpot Sales Hub &rarr;</a><a href="../../compare/close-vs-pipedrive-year-1-cost-calculator/" data-track="internal-audit">Close vs. Pipedrive Year-1 Cost (Calling Included) &rarr;</a><a href="../../compare/pipedrive-vs-salesforce-starter-and-pro-suite-cost/" data-track="internal-audit">Pipedrive vs Salesforce Year-1 cost &rarr;</a><a href="../../pricing/pipedrive-true-year-1-cost-calculator/" data-track="internal-audit">Pipedrive True Year-1 Cost &rarr;</a><a href="../../compare/pipedrive-vs-hubspot-sales-hub-year-1-cost/" data-track="internal-audit">Pipedrive vs. HubSpot Sales Hub Year-1 Cost &rarr;</a><a href="../../pricing/gong-io-platform-fee-and-seat-minimum-calculator/" data-track="internal-audit">Gong.io $5,000 Platform Fee &amp; Seat Calculator &rarr;</a><a href="../../compare/monday-crm-vs-pipedrive-vs-hubspot-seat-minimums/" data-track="internal-audit">monday CRM 3/5/10-Seat Bucket Calculator &rarr;</a><a href="../../intercom-fin-cost-calculator/" data-track="internal-audit">Intercom Fin AI Cost Calculator &rarr;</a><a href="../../intercom-vs-freshdesk-cost-comparison/" data-track="internal-audit">Intercom vs. Freshdesk Cost Comparison &rarr;</a><a href="../../exit/intercom-to-freshdesk-ticket-and-help-center-migration/" data-track="internal-audit">Intercom to Freshdesk migration Year-1 &rarr;</a><a href="../../intercom-vs-zendesk-cost-comparison/" data-track="internal-audit">Intercom vs. Zendesk Cost Comparison &rarr;</a><a href="../../pricing/intercom-fin-ai-resolution-cost-calculator/" data-track="internal-audit">Intercom Fin AI Cost Calculator &rarr;</a><a href="../../zendesk-ai-cost-calculator/" data-track="internal-audit">Zendesk AI Cost Calculator &rarr;</a><a href="../../zendesk-vs-freshdesk-cost-comparison/" data-track="internal-audit">Zendesk vs. Freshdesk Cost Comparison &rarr;</a><a href="../../hubspot-onboarding-fee-calculator/" data-track="internal-audit">HubSpot Onboarding Fee Calculator &rarr;</a><a href="../../pricing/zendesk-ai-resolution-and-automated-outcome-cost/" data-track="internal-audit">Zendesk AI Cost Calculator &rarr;</a><a href="../../pricing/stripe-billing-0-7-percent-recurring-tax-calculator/" data-track="internal-audit">Stripe Billing 0.7% Fee, Tax &amp; Chargeback Calculator &rarr;</a><a href="../../compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/" data-track="internal-audit">Gumroad vs. Whop vs. Lemon Squeezy Take-Rate &amp; Chargeback Calculator &rarr;</a><a href="../../exit/stripe-shopify-paddle-frozen-funds-alternatives/" data-track="internal-audit">Stripe, Shopify &amp; Paddle Frozen Funds &amp; Reserve Calculator &rarr;</a><a href="../../chargeback-fee-and-recovery-calculator/" data-track="internal-audit">Stripe, Shopify &amp; Paddle Chargeback Cost Calculator &rarr;</a><a href="../../exit/paypal-180-day-permanent-limitation-fund-recovery/" data-track="internal-audit">PayPal 180-Day Hold &amp; Reserve Cost Calculator &rarr;</a><a href="../../exit/shopify-payments-chargeback-threshold-and-reserve-appeal/" data-track="internal-audit">Shopify Payments Reserve &amp; Dispute Threshold Calculator &rarr;</a><a href="../../pricing/stripe-radar-and-dispute-fee-calculator-2026/" data-track="internal-audit">Stripe dispute and Radar cost &rarr;</a><a href="../../exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/" data-track="internal-audit">ZoomInfo 60-Day Auto-Renewal Notice &rarr;</a><a href="../../compare/typeform-vs-jotform-response-limit-and-hipaa-cost/" data-track="internal-audit">Typeform vs. Jotform Response &amp; HIPAA Calculator &rarr;</a><a href="../../guides/jotform-wix-app-setup-and-pricing-guide/" data-track="internal-audit">Jotform Wix App Setup &amp; Pricing Guide &rarr;</a><a href="../../pricing/jotform-pricing-tier-calculator/" data-track="internal-audit">Jotform 2026 Pricing Tier Calculator &rarr;</a><a href="../../pricing/docusign-envelope-allowance-and-api-overage-calculator/" data-track="internal-audit">DocuSign 100-Envelope Cap &amp; Overage Calculator &rarr;</a><a href="../../compliance/hipaa-baa-and-soc2-pricing-tiers/" data-track="internal-audit">HIPAA BAA &amp; SOC 2 Pricing Tiers &rarr;</a><a href="../../compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/" data-track="internal-audit">Google Workspace vs. Microsoft 365 HIPAA BAA &rarr;</a><a href="../../compliance/okta-vs-workos-vs-1password-sso-tax-calculator/" data-track="internal-audit">SSO tax calculator &rarr;</a><a href="../../faq/does-hubspot-charge-onboarding-fees-2026/" data-track="internal-audit">Does HubSpot Charge Onboarding Fees in 2026? &rarr;</a><a href="../../faq/intercom-fin-ai-cost-calculator/" data-track="internal-audit">Intercom Fin AI Cost Calculator &rarr;</a><a href="../../faq/stripe-vs-paddle-true-cost/" data-track="internal-audit">Stripe vs. Paddle vs. Whop True Cost &amp; Chargeback Calculator &rarr;</a><a href="../../pricing/stripe-shopify-chargeback-fee-and-chargeflow-roi-calculator/" data-track="internal-audit">Stripe, Shopify &amp; Paddle Chargeback Cost Calculator &rarr;</a>
+        </div>
+      </details>
+    </section>
+    
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <p><strong>SaaSBill</strong> &middot; Year-1 cost &amp; contract calculators for B2B software.</p>
+      <p class="footer-note">Updated <time datetime="2026-11-06">Nov 06, 2026</time> &middot; Inquiries: <a href="mailto:info@saasbill.io">info@saasbill.io</a></p>
+    </div>
+  </footer>
+  <script>
+  /* Plausible + local event dispatcher for: calculator_interaction, category_select, result_rendered, vendor_cta_click */
+  window.__saasbillEvents = window.__saasbillEvents || [];
+  try {
+    var p = (window.location && window.location.pathname ? window.location.pathname : '').toLowerCase();
+    if (p && p !== '/' && p !== '/index.html') {
+      var ctxCat = '';
+      var ctxTool = '';
+      if (p.indexOf('zoominfo') !== -1) {
+        ctxCat = 'CRM & Sales';
+        ctxTool = 'close-crm';
+      } else if (p.indexOf('stripe') !== -1 || p.indexOf('paddle') !== -1 || p.indexOf('whop') !== -1 || p.indexOf('gumroad') !== -1 || p.indexOf('paypal') !== -1) {
+        ctxCat = 'Payment Processors & MoR';
+        ctxTool = p.indexOf('paddle') !== -1 ? 'paddle-mor' : (p.indexOf('whop') !== -1 ? 'whop-payments' : 'stripe-payments');
+      } else if (p.indexOf('hubspot') !== -1 || p.indexOf('close-crm') !== -1 || p.indexOf('pipedrive') !== -1 || p.indexOf('monday-crm') !== -1 || p.indexOf('gong') !== -1) {
+        ctxCat = 'CRM & Sales';
+        ctxTool = p.indexOf('monday') !== -1 ? 'monday-crm' : (p.indexOf('close') !== -1 ? 'close-crm' : (p.indexOf('pipedrive') !== -1 ? 'pipedrive-crm' : 'hubspot-sales-pro'));
+      } else if (p.indexOf('hipaa') !== -1 || p.indexOf('soc2') !== -1 || p.indexOf('docusign') !== -1 || p.indexOf('typeform') !== -1 || p.indexOf('jotform') !== -1) {
+        ctxCat = 'Compliance, HIPAA & SOC 2';
+        ctxTool = (p.indexOf('typeform') !== -1 || p.indexOf('jotform') !== -1) ? 'jotform-hipaa' : 'vanta-soc2';
+      } else if (p.indexOf('intercom') !== -1 || p.indexOf('zendesk') !== -1 || p.indexOf('freshdesk') !== -1) {
+        ctxCat = 'Helpdesk & AI Support';
+        ctxTool = p.indexOf('intercom') !== -1 ? 'intercom-fin-ai' : (p.indexOf('freshdesk') !== -1 ? 'freshdesk-support' : 'zendesk-suite-team');
+      }
+      if (ctxCat && window.sessionStorage) {
+        sessionStorage.setItem('saasbill_last_cat', ctxCat);
+        if (ctxTool) sessionStorage.setItem('saasbill_last_tool', ctxTool);
+      }
+    }
+  } catch (err) {}
+  document.addEventListener('click', function(e) {
+    var cta = e.target.closest('[data-track="vendor-cta"], [data-track="vendor_cta_click"]');
+    if (cta) {
+      var vendor = cta.getAttribute('data-vendor') || '';
+      var location = cta.getAttribute('data-cta-location') || 'subpage-result';
+      var href = cta.getAttribute('href') || '';
+      if (typeof window.trackSaaSBillEvent === 'function') {
+        window.trackSaaSBillEvent('vendor_cta_click', { vendor: vendor, location: location, href: href });
+      }
+      return;
+    }
+    var catBtn = e.target.closest('[data-track="category-select"], [data-track="category_select"]');
+    if (catBtn) {
+      var cat = catBtn.getAttribute('data-cat') || '';
+      if (typeof window.trackSaaSBillEvent === 'function') {
+        window.trackSaaSBillEvent('category_select', { category: cat });
+      }
+    }
+  });
+  var _lastCalcTrackKey = '';
+  var _lastCalcTrackTs = 0;
+  function handleCalcControlEvent(e) {
+    var ctrl = e.target.closest('[data-track="calculator-control"], [data-track="calculator_interaction"], input[type="range"], select');
+    if (ctrl) {
+      var control = ctrl.getAttribute('data-control') || ctrl.id || '';
+      var val = String(ctrl.value);
+      var now = Date.now();
+      var key = control + ':' + val;
+      if (key === _lastCalcTrackKey && (now - _lastCalcTrackTs) < 150) return;
+      _lastCalcTrackKey = key;
+      _lastCalcTrackTs = now;
+      if (typeof window.trackSaaSBillEvent === 'function') {
+        window.trackSaaSBillEvent('calculator_interaction', { control: control, value: val });
+        if (ctrl.id === 'cat-filter') {
+          window.trackSaaSBillEvent('category_select', { category: val });
+        }
+      }
+    }
+  }
+  document.addEventListener('input', handleCalcControlEvent);
+  document.addEventListener('change', handleCalcControlEvent);
+  </script>
+  <script src="../../assets/app.js?v=20261030a"></script>
+</body>
+</html>
