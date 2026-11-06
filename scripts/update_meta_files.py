@@ -55,6 +55,7 @@ def generate_meta_files(extra_urls=None):
         "/pricing/stripe-radar-and-dispute-fee-calculator-2026/",
         "/exit/intercom-to-freshdesk-ticket-and-help-center-migration/",
         "/compare/pipedrive-vs-salesforce-starter-and-pro-suite-cost/",
+        "/compliance/okta-vs-workos-vs-1password-sso-tax-calculator/",
     ]
     if extra_urls:
         for u in extra_urls:
@@ -188,6 +189,7 @@ Sitemap: {SITE_ORIGIN}/sitemap.xml
 - [Stripe dispute and Radar cost calculator]({SITE_ORIGIN}/pricing/stripe-radar-and-dispute-fee-calculator-2026/): $15 dispute received fee, $15 manual counter fee refunded on a win, Smart Disputes at 30% of the amount won, and Radar starting prices. Checked 2026-11-02.
 - [Intercom to Freshdesk migration Year-1 calculator]({SITE_ORIGIN}/exit/intercom-to-freshdesk-ticket-and-help-center-migration/): Five Essential seats and 1,000 Fin outcomes a month are $13,620. Freshdesk Growth, Freddy packs, and a third-party $514 quote for 10,000 records are $7,289. The $6,331 gap counts one Fin outcome as one Freddy email session. Checked 2026-11-04.
 - [Pipedrive vs Salesforce Year-1 cost]({SITE_ORIGIN}/compare/pipedrive-vs-salesforce-starter-and-pro-suite-cost/): At 5 seats, Starter Suite is $1,500, Pipedrive Growth is $2,340, and Pro Suite is $6,000 before the API add-on. Implementation is unknown. Checked 2026-11-05.
+- [SSO tax calculator]({SITE_ORIGIN}/compliance/okta-vs-workos-vs-1password-sso-tax-calculator/): At 25 people the SAML step-up is $1,251 on Zoom and $3,000 on Notion. Okta Starter includes SSO and is $1,800 after the $1,500 floor. WorkOS bills per connection. Checked 2026-11-06.
 - [Typeform vs. Jotform Response Limit & HIPAA Cost Calculator]({SITE_ORIGIN}/compare/typeform-vs-jotform-response-limit-and-hipaa-cost/): Response caps & HIPAA BAA tiers ($99/mo Jotform Gold).
 - [DocuSign 100-Envelope Allowance & Overage Calculator]({SITE_ORIGIN}/pricing/docusign-envelope-allowance-and-api-overage-calculator/): 100-envelope annual cap vs. Jotform Sign & PandaDoc.
 - [HIPAA BAA & SOC 2 Type II Pricing Tier Matrix]({SITE_ORIGIN}/compliance/hipaa-baa-and-soc2-pricing-tiers/): Self-serve BAA tiers and Vanta/Drata negotiation calculator.

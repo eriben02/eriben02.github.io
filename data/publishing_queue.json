@@ -147,18 +147,21 @@
     "title": "Pipedrive vs. Salesforce Pro Suite True Cost (2026): Implementation Fees, Add-Ons & Contract Lock-In",
     "category": "CRM & Sales",
     "primary_affiliate": "pipedrive",
-    "status": "in_progress",
+    "status": "published",
+    "published_at": "2026-11-05",
+    "url": "https://saasbill.io/compare/pipedrive-vs-salesforce-starter-and-pro-suite-cost/",
     "strategic_rationale": "High-intent SMB migration from complex enterprise CRM contracts to transparent per-seat CRM.",
     "verification_note": "Pipedrive pricing and the plan-rename article, plus Salesforce Sales Cloud editions and sales pricing, checked 2026-11-05. Monthly Pipedrive rates are secondary and are not in the total. Implementation, Einstein availability on Pro Suite, and several add-on billing units stay unknown."
   },
   {
     "priority": 15,
     "slug": "/compliance/okta-vs-workos-vs-1password-sso-tax-calculator/",
-    "title": "The B2B SaaS SSO Tax Calculator (2026): Vendors Charging 2x\u20134x for SAML Single Sign-On",
+    "title": "The B2B SaaS SSO Tax Calculator (2026): App SAML Step-Ups Plus Okta, WorkOS, and 1Password",
     "category": "Compliance, HIPAA & SOC 2",
     "primary_affiliate": "1password",
-    "status": "queued",
-    "strategic_rationale": "Enterprise security & identity infrastructure required by cyber insurance and SOC 2 auditors."
+    "status": "in_progress",
+    "strategic_rationale": "Enterprise security & identity infrastructure required by cyber insurance and SOC 2 auditors.",
+    "verification_note": "Okta, WorkOS, and 1Password pricing, plus Notion, Zoom, GitHub, Figma, and Slack, checked 2026-11-06. Okta includes SSO from Starter. WorkOS is per connection. 1Password Business unlock is OIDC, not SAML, and there is no HIPAA BAA. 1Password affiliate tracking is not approved, so the page has no /go/ link. published_at waits for merge."
   },
   {
     "priority": 16,

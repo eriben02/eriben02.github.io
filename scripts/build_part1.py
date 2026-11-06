@@ -393,6 +393,11 @@ home_body = f"""
       <p>Minimum plans for a signed HIPAA BAA or SAML SSO, plus Vanta/Drata platform quotes and external CPA audit fees.</p>
     </div>
     <div class="card" data-cat="compliance">
+      <span class="badge badge-high">Compliance</span>
+      <h3><a href="./compliance/okta-vs-workos-vs-1password-sso-tax-calculator/">SSO tax calculator</a></h3>
+      <p>What Notion, Zoom, GitHub, and Figma charge to turn on SAML, next to Okta, WorkOS, and 1Password as separate bills.</p>
+    </div>
+    <div class="card" data-cat="compliance">
       <span class="badge badge-low">Compliance</span>
       <h3><a href="./compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/">Google Workspace vs Microsoft 365 HIPAA BAA</a></h3>
       <p>Cheapest BAA-eligible edition on each suite ($7 entry), Vault and archiving gaps, and HIPAA form intake costs.</p>

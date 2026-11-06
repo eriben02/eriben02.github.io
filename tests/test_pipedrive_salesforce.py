@@ -60,8 +60,12 @@ class TestPipedriveSalesforce(unittest.TestCase):
         with open(os.path.join(BASE, "data", "publishing_queue.json"), encoding="utf-8") as handle:
             queue = json.load(handle)
         item = next(row for row in queue if row["priority"] == 14)
-        self.assertEqual(item["status"], "in_progress")
-        self.assertNotIn("published_at", item)
+        self.assertEqual(item["status"], "published")
+        self.assertEqual(item["published_at"], "2026-11-05")
+        self.assertEqual(
+            item["url"],
+            "https://saasbill.io/compare/pipedrive-vs-salesforce-starter-and-pro-suite-cost/",
+        )
         self.assertEqual(item["primary_affiliate"], "pipedrive")
 
 
