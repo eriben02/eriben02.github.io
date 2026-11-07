@@ -16,6 +16,10 @@ jobs:
           python-version: "3.12"
       - name: Check the files GitHub Pages publishes from the root of main
         run: python3 -m unittest tests.test_deploy_guard -v
+      - name: SOC 2 calculator math
+        run: |
+          python3 -m unittest tests.test_soc2_cost -v
+          node tests/test_calculator_scenarios.js
 
   live-homepage:
     name: Live homepage after Pages deploy

@@ -723,14 +723,33 @@ function soc2Cost() {
   check(html.indexOf("partnerstack.com") === -1, "no invented PartnerStack tracking URL");
   const box = {};
   vm.createContext(box);
-  vm.runInContext(listFn + "\n" + nameFn + "\n" + fn + "\n" + lineFn + "\n" + moneyFn + "\nthis.fn=calcSoc2;\nthis.line=socLowest;", box);
+  const modFn = extractBalanced(html, "function socModules");
+  check(!!modFn, "missing soc module overlap math");
+  vm.runInContext(listFn + "\n" + nameFn + "\n" + modFn + "\n" + fn + "\n" + lineFn + "\n" + moneyFn + "\nthis.fn=calcSoc2;\nthis.line=socLowest;", box);
   const def = box.fn({ platform: "vanta-essentials", band: "1-20", auditor: 30000, trust: "none", quest: "none", ctm: false, tprm: false, ftr: false, tools: false });
   check(def.list === 14000 && def.year1 === 44000 && def.year2 === 44000 && def.auditor === 30000, "default Essentials plus midpoint auditor is $44,000");
   const line = box.line("1-20", 30000);
-  check(line.indexOf("Lowest Year-1 cost: Vanta Essentials, $44,000.") === 0, "Essentials is the lowest published list plus auditor: " + line);
-  check(line.indexOf("Drata Foundation $45,000") !== -1 && line.indexOf("Comp AI") !== -1, "Drata and Comp AI stay in the sentence");
-  const plus = box.fn({ platform: "vanta-plus", band: "1-20", auditor: 30000, trust: "standard", quest: "none", ctm: false, tprm: false, ftr: false, tools: true });
-  check(plus.list === 21500 && plus.modules === 6000 && plus.tools === 10000 && plus.year1 === 67500 && plus.year2 === 57500, "Plus, Trust Center, and the Year-1 allowance");
+  check(line.indexOf("Lowest Year-1 cost: Vanta Essentials, $44,000.") === 0, "Essentials is the lowest published AWS list plus this CPA fee: " + line);
+  check(line.indexOf("published AWS lists") !== -1 && line.indexOf("before add-ons") !== -1 && line.indexOf("1 to 50 FTE") !== -1, "the comparison names its scope: " + line);
+  check(line.indexOf("Comp AI") === -1, "unpriced plans stay outside the lowest sentence");
+  const one = box.line("21-50", 30000);
+  check(one.indexOf("Lowest Year-1 cost") === -1, "one published list is not a competitive label: " + one);
+  check(one.indexOf("1 to 50 FTE") !== -1 && one.indexOf("before add-ons") !== -1, one);
+  const plus = box.fn({ platform: "vanta-plus", band: "1-20", auditor: 30000, trust: "none", quest: "none", ctm: false, tprm: false, ftr: true, tools: true });
+  check(plus.list === 21500 && plus.modules === 7500 && plus.tools === 10000 && plus.year1 === 69000 && plus.year2 === 59000, "Plus, AWS FTR, and the Year-1 allowance");
+  const ctm = box.fn({ platform: "vanta-essentials", band: "1-20", auditor: 30000, trust: "advanced", quest: "advanced", ctm: true, tprm: false, ftr: false, tools: false });
+  check(ctm.modules === 22250 && ctm.year1 === 66250, "CTM includes the advanced modules and is not added again: " + ctm.modules);
+  check(ctm.modules !== 48250, "do not confirm a $48,250 double count");
+  const pro = box.fn({ platform: "vanta-professional", band: "1-20", auditor: 30000, trust: "advanced", quest: "qa", ctm: false, tprm: false, ftr: false, tools: false });
+  check(pro.modules === -1 && pro.year1 === -1, "Professional inclusions are not a confirmed extra");
+  const proCtm = box.fn({ platform: "vanta-professional", band: "1-20", auditor: 30000, trust: "none", quest: "none", ctm: true, tprm: false, ftr: false, tools: false });
+  check(proCtm.modules === -1 && proCtm.year1 === -1, "CTM on Professional stays unknown");
+  const plusTrust = box.fn({ platform: "vanta-plus", band: "1-20", auditor: 30000, trust: "standard", quest: "none", ctm: false, tprm: false, ftr: false, tools: false });
+  check(plusTrust.modules === -1 && plusTrust.year1 === -1, "Trust Center on Plus is not a confirmed $6,000 extra");
+  const plusQa = box.fn({ platform: "vanta-plus", band: "1-20", auditor: 30000, trust: "none", quest: "qa", ctm: false, tprm: false, ftr: false, tools: false });
+  check(plusQa.modules === -1 && plusQa.year1 === -1, "Plus upgrade to 144 has no confirmed price");
+  const ent = box.fn({ platform: "vanta-quote", band: "1-20", auditor: 30000, trust: "none", quest: "none", ctm: true, tprm: true, ftr: true, tools: false });
+  check(ent.list === -1 && ent.modules === -1 && ent.year1 === -1, "Enterprise entitlements stay unknown");
   const wider = box.fn({ platform: "vanta-essentials", band: "21-50", auditor: 30000, trust: "none", quest: "none", ctm: false, tprm: false, ftr: false, tools: false });
   check(wider.list === -1 && wider.year1 === -1, "Vanta list stops at 1 to 20 employees");
   const drata = box.fn({ platform: "drata-foundation", band: "21-50", auditor: 10000, trust: "none", quest: "none", ctm: false, tprm: false, ftr: false, tools: false });
@@ -741,7 +760,7 @@ function soc2Cost() {
   check(big.list === -1 && big.year1 === -1, "Drata Foundation list stops at 50 employees");
   const comp = box.fn({ platform: "comp-ai", band: "1-20", auditor: 30000, trust: "none", quest: "none", ctm: false, tprm: false, ftr: false, tools: false });
   check(comp.list === -1 && comp.year1 === -1, "Comp AI stays unknown");
-  check(box.line("51", 30000).indexOf("No published platform list") === 0, "51 or more has no published list");
+  check(box.line("51", 30000).indexOf("No published AWS list") === 0, "51 or more has no published AWS list: " + box.line("51", 30000));
 }
 
 function main() {
