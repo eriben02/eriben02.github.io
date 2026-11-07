@@ -159,9 +159,11 @@
     "title": "The B2B SaaS SSO Tax Calculator (2026): App SAML Step-Ups Plus Okta, WorkOS, and 1Password",
     "category": "Compliance, HIPAA & SOC 2",
     "primary_affiliate": "1password",
-    "status": "in_progress",
+    "status": "published",
+    "published_at": "2026-11-06",
+    "url": "https://saasbill.io/compliance/okta-vs-workos-vs-1password-sso-tax-calculator/",
     "strategic_rationale": "Enterprise security & identity infrastructure required by cyber insurance and SOC 2 auditors.",
-    "verification_note": "Okta, WorkOS, and 1Password pricing, plus Notion, Zoom, GitHub, Figma, and Slack, checked 2026-11-06. Okta includes SSO from Starter. WorkOS is per connection. 1Password Business unlock is OIDC, not SAML, and there is no HIPAA BAA. 1Password affiliate tracking is not approved, so the page has no /go/ link. published_at waits for merge."
+    "verification_note": "Okta, WorkOS, and 1Password pricing, plus Notion, Zoom, GitHub, Figma, and Slack, checked 2026-11-06. Okta includes SSO from Starter. WorkOS is per connection. 1Password Business unlock is OIDC, not SAML, and there is no HIPAA BAA. 1Password affiliate tracking is not approved, so the page has no /go/ link. Live after PR 16."
   },
   {
     "priority": 16,
@@ -169,8 +171,9 @@
     "title": "Vanta vs. Drata SOC 2 True Cost Calculator (2026): Platform Tiers + Mandatory External CPA Auditor Fees",
     "category": "Compliance, HIPAA & SOC 2",
     "primary_affiliate": "vanta",
-    "status": "queued",
-    "strategic_rationale": "Third-party SOC 2 / ISO 27001 attestation cannot be built in-house; high-ticket PartnerStack referrals."
+    "status": "in_progress",
+    "strategic_rationale": "Third-party SOC 2 / ISO 27001 attestation cannot be built in-house; high-ticket PartnerStack referrals.",
+    "verification_note": "Vanta and Drata AWS Marketplace lists, the vendor pricing pages, Vanta's SOC 2 audit-cost guide, and Comp AI pricing, checked 2026-11-07. AWS figures are list prices for the stated headcount band. Comp AI has no public rate card. Vanta and Drata PartnerStack tracking is still pending, so /go/vanta and /go/drata send people to the official sites. published_at waits for merge."
   },
   {
     "priority": 17,
