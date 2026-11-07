@@ -64,8 +64,12 @@ class TestSsoTax(unittest.TestCase):
         self.assertEqual(pipedrive["status"], "published")
         self.assertEqual(pipedrive["published_at"], "2026-11-05")
         item = next(row for row in queue if row["priority"] == 15)
-        self.assertEqual(item["status"], "in_progress")
-        self.assertNotIn("published_at", item)
+        self.assertEqual(item["status"], "published")
+        self.assertEqual(item["published_at"], "2026-11-06")
+        self.assertEqual(
+            item["url"],
+            "https://saasbill.io/compliance/okta-vs-workos-vs-1password-sso-tax-calculator/",
+        )
 
 
 if __name__ == "__main__":

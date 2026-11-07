@@ -398,6 +398,11 @@ home_body = f"""
       <p>What Notion, Zoom, GitHub, and Figma charge to turn on SAML, next to Okta, WorkOS, and 1Password as separate bills.</p>
     </div>
     <div class="card" data-cat="compliance">
+      <span class="badge badge-high">Compliance</span>
+      <h3><a href="./compliance/vanta-vs-drata-vs-comp-ai-soc2-negotiation-benchmarks/">SOC 2 cost: Vanta, Drata, Comp AI</a></h3>
+      <p>AWS list prices for the 1 to 20 and 1 to 50 bands, plus the separate CPA auditor fee. Comp AI is unknown.</p>
+    </div>
+    <div class="card" data-cat="compliance">
       <span class="badge badge-low">Compliance</span>
       <h3><a href="./compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/">Google Workspace vs Microsoft 365 HIPAA BAA</a></h3>
       <p>Cheapest BAA-eligible edition on each suite ($7 entry), Vault and archiving gaps, and HIPAA form intake costs.</p>

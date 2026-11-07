@@ -22,10 +22,15 @@ BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 DATA_DIR = os.path.join(BASE_DIR, "data")
 PUBLIC_DIR = os.path.join(BASE_DIR, "public")
 
-# go slug -> affiliate_links.json key
+# go slug -> affiliate_links.json key.
+# Approved programs use go_url (the network tracking link).
+# Pending programs have no go_url. They redirect to destination_url.
+# Do not invent a PartnerStack tracking ID.
 GO_PAGES = {
     "close": "close-crm",
     "pipedrive": "pipedrive",
+    "vanta": "vanta",
+    "drata": "drata",
 }
 
 TEMPLATE = """<!doctype html><html lang="en"><head><meta charset="utf-8">
@@ -45,7 +50,7 @@ def load_affiliates():
 
 def go_target(affiliates, key):
     entry = affiliates[key]
-    url = entry.get("go_url") or ""
+    url = entry.get("go_url") or entry.get("destination_url") or ""
     parsed = urlparse(url)
     if parsed.scheme != "https" or not parsed.netloc:
         raise SystemExit("affiliate_links.json %s.go_url must be an https URL, got %r" % (key, url))
