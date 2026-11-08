@@ -339,6 +339,7 @@ def render_related_links(rel_path, prefix):
         ("compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/index.html", "Google Workspace vs. Microsoft 365 HIPAA BAA", "Minimum editions that sign a BAA, plus form intake rules."),
         ("compliance/okta-vs-workos-vs-1password-sso-tax-calculator/index.html", "SSO tax calculator", "What apps charge to turn on SAML, plus Okta, WorkOS, and 1Password as separate bills."),
         ("compliance/vanta-vs-drata-vs-comp-ai-soc2-negotiation-benchmarks/index.html", "SOC 2 cost calculator", "AWS list prices for Vanta and Drata, plus the separate CPA auditor fee."),
+        ("compare/deel-vs-rippling-eor-hidden-fx-and-offboarding-fees/index.html", "Deel vs Rippling EOR cost", "Deel's starting EOR fee, the refundable deposit, and Rippling's unpublished price."),
         ("faq/does-hubspot-charge-onboarding-fees-2026/index.html", "Does HubSpot Charge Onboarding Fees in 2026?", "The fee schedule, waivers, and $0-onboarding alternatives."),
         ("faq/intercom-fin-ai-cost-calculator/index.html", "Intercom Fin AI Cost Calculator", "The FAQ copy of the $0.99 per resolution Year-1 price."),
         ("faq/stripe-vs-paddle-true-cost/index.html", "Stripe vs. Paddle vs. Whop True Cost &amp; Chargeback Calculator", "Processing, billing, tax, and dispute cost side by side."),
@@ -398,9 +399,15 @@ def render_related_links(rel_path, prefix):
         ]
     elif rel_path == "compliance/vanta-vs-drata-vs-comp-ai-soc2-negotiation-benchmarks/index.html":
         preferred = [
+            "compare/deel-vs-rippling-eor-hidden-fx-and-offboarding-fees/index.html",
             "compliance/hipaa-baa-and-soc2-pricing-tiers/index.html",
             "compliance/okta-vs-workos-vs-1password-sso-tax-calculator/index.html",
-            "compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/index.html",
+        ]
+    elif rel_path == "compare/deel-vs-rippling-eor-hidden-fx-and-offboarding-fees/index.html":
+        preferred = [
+            "compliance/vanta-vs-drata-vs-comp-ai-soc2-negotiation-benchmarks/index.html",
+            "compliance/hipaa-baa-and-soc2-pricing-tiers/index.html",
+            "compliance/okta-vs-workos-vs-1password-sso-tax-calculator/index.html",
         ]
     elif rel_path == radar_rel:
         preferred = [

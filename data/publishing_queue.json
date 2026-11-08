@@ -171,9 +171,11 @@
     "title": "Vanta vs. Drata SOC 2 True Cost Calculator (2026): Platform Tiers + Mandatory External CPA Auditor Fees",
     "category": "Compliance, HIPAA & SOC 2",
     "primary_affiliate": "vanta",
-    "status": "in_progress",
+    "status": "published",
+    "published_at": "2026-11-07",
+    "url": "https://saasbill.io/compliance/vanta-vs-drata-vs-comp-ai-soc2-negotiation-benchmarks/",
     "strategic_rationale": "Third-party SOC 2 / ISO 27001 attestation cannot be built in-house; high-ticket PartnerStack referrals.",
-    "verification_note": "Vanta and Drata AWS Marketplace lists, the vendor pricing pages, Vanta's SOC 2 audit-cost guide, and Comp AI pricing, checked 2026-11-07. AWS figures are list prices for the stated headcount band. Comp AI has no public rate card. Vanta and Drata PartnerStack tracking is still pending, so /go/vanta and /go/drata send people to the official sites. published_at waits for merge."
+    "verification_note": "Vanta and Drata AWS Marketplace lists, the vendor pricing pages, Vanta's SOC 2 audit-cost guide, and Comp AI pricing, checked 2026-11-07. AWS figures are list prices for the stated headcount band. Comp AI has no public rate card. Vanta and Drata PartnerStack tracking is still pending, so /go/vanta and /go/drata send people to the official sites. Live after PR 17."
   },
   {
     "priority": 17,
@@ -181,8 +183,9 @@
     "title": "Deel vs. Rippling EOR True Cost (2026): Hidden Currency FX Spreads, Deposit Rules & Offboarding Fees",
     "category": "Compliance, HIPAA & SOC 2",
     "primary_affiliate": "deel",
-    "status": "queued",
-    "strategic_rationale": "Cross-border legal entity & payroll compliance that companies cannot build in-house."
+    "status": "in_progress",
+    "strategic_rationale": "Cross-border legal entity & payroll compliance that companies cannot build in-house.",
+    "verification_note": "Deel pricing, the EOR deposit article, and the exchange-rate article, plus Rippling pricing, the EOR page, and two Rippling blogs, checked 2026-11-08. Deel EOR starts at $599 per employee per month. The deposit is 1 to 1.5 times monthly charges and is cash lock-up, not a Year-1 fee. Deel's numeric FX spread is unknown. Rippling's EOR price, deposit, FX, setup, offboarding fee, base fee, minimum term, and auto-renewal are unknown. A Rippling blog starting figure of $499 is optional, not the default. Deel's affiliate application is still applied, so the page has no /go/ link. published_at waits for merge."
   },
   {
     "priority": 18,

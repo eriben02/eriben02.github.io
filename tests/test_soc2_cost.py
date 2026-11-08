@@ -71,8 +71,12 @@ class TestSoc2Cost(unittest.TestCase):
         with open(os.path.join(BASE, "data", "publishing_queue.json"), encoding="utf-8") as handle:
             queue = json.load(handle)
         item = next(row for row in queue if row["priority"] == 16)
-        self.assertEqual(item["status"], "in_progress")
-        self.assertNotIn("published_at", item)
+        self.assertEqual(item["status"], "published")
+        self.assertEqual(item["published_at"], "2026-11-07")
+        self.assertEqual(
+            item["url"],
+            "https://saasbill.io/compliance/vanta-vs-drata-vs-comp-ai-soc2-negotiation-benchmarks/",
+        )
         self.assertEqual(item["primary_affiliate"], "vanta")
         with open(os.path.join(BASE, "data", "affiliate_links.json"), encoding="utf-8") as handle:
             affiliates = json.load(handle)

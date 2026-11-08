@@ -403,6 +403,11 @@ home_body = f"""
       <p>AWS list prices for the 1 to 20 and 1 to 50 bands, plus the separate CPA auditor fee. Comp AI is unknown.</p>
     </div>
     <div class="card" data-cat="compliance">
+      <span class="badge badge-high">Compliance</span>
+      <h3><a href="./compare/deel-vs-rippling-eor-hidden-fx-and-offboarding-fees/">Deel vs Rippling EOR cost</a></h3>
+      <p>Deel's $599 starting fee and refundable deposit, next to Rippling's unpublished EOR price.</p>
+    </div>
+    <div class="card" data-cat="compliance">
       <span class="badge badge-low">Compliance</span>
       <h3><a href="./compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/">Google Workspace vs Microsoft 365 HIPAA BAA</a></h3>
       <p>Cheapest BAA-eligible edition on each suite ($7 entry), Vault and archiving gaps, and HIPAA form intake costs.</p>

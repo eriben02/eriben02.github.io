@@ -226,6 +226,7 @@ if (typeof window !== "undefined") window.quotePayProfile = quotePayProfile;
       ["./compare/close-vs-pipedrive-year-1-cost-calculator/", "Close vs. Pipedrive Year-1 Cost (Calling Included)", "Seats, call minutes, and the dialer Pipedrive needs."]
     ],
     compliance: [
+      ["./compare/deel-vs-rippling-eor-hidden-fx-and-offboarding-fees/", "Deel vs Rippling EOR cost", "Deel's starting fee and refundable deposit. Rippling's EOR price is unknown."],
       ["./compliance/vanta-vs-drata-vs-comp-ai-soc2-negotiation-benchmarks/", "SOC 2 cost: Vanta, Drata, Comp AI", "AWS list prices for the platform, plus the separate CPA auditor fee."],
       ["./compliance/hipaa-baa-and-soc2-pricing-tiers/", "HIPAA BAA &amp; SOC 2 Pricing Tiers", "Which plan signs a BAA, and what the CPA audit adds."],
       ["./compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/", "Google Workspace vs. Microsoft 365 HIPAA BAA", "Minimum editions that sign a BAA, plus form intake rules."],
