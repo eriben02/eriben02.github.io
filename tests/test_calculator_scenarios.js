@@ -763,6 +763,40 @@ function soc2Cost() {
   check(box.line("51", 30000).indexOf("No published AWS list") === 0, "51 or more has no published AWS list: " + box.line("51", 30000));
 }
 
+function eorCost() {
+  const rel = "compare/deel-vs-rippling-eor-hidden-fx-and-offboarding-fees/index.html";
+  const html = read(rel);
+  const fn = extractBalanced(html, "function calcEor");
+  const monthFn = extractBalanced(html, "function eorRipplingMonth");
+  const lineFn = extractBalanced(html, "function eorLowest");
+  const moneyFn = extractBalanced(html, "function eorMoney");
+  check(!!fn && !!monthFn && !!lineFn && !!moneyFn, "missing eor math");
+  check(html.indexOf("/go/deel") === -1 && html.indexOf("/go/rippling") === -1, "no Deel or Rippling affiliate redirect");
+  check(html.indexOf("sponsored") === -1, "no sponsored affiliate markup");
+  check(html.indexOf("https://www.deel.com/pricing/") !== -1, "plain Deel pricing link");
+  check(html.indexOf("https://www.rippling.com/pricing") !== -1, "plain Rippling pricing link");
+  const box = {};
+  vm.createContext(box);
+  vm.runInContext(monthFn + "\n" + fn + "\n" + lineFn + "\n" + moneyFn + "\nthis.fn=calcEor;\nthis.line=eorLowest;", box);
+  const base = { employees: 1, salary: 5000, employerPct: 0, allowances: 0, depositTenths: 10, ripplingMode: "unknown", ripplingFee: 499, fxPct: 0, payMethod: "none", platform8: false };
+  const def = box.fn(base);
+  check(def.deelYear === 7188 && def.deposit === 5599 && def.ripplingYear === -1 && def.vendorCents === 718800, "default is Deel $7,188 and a $5,599 deposit, Rippling unknown");
+  const line = box.line(def.deelYear, def.ripplingYear);
+  check(line.indexOf("Lowest Year-1 cost") === -1, "unknown Rippling fee is not a winner: " + line);
+  check(line.indexOf("unknown") !== -1, line);
+  const blog = box.fn(Object.assign({}, base, { ripplingMode: "blog" }));
+  check(blog.ripplingYear === 5988, "blog figure is $499 a month");
+  const blogLine = box.line(blog.deelYear, blog.ripplingYear);
+  check(blogLine.indexOf("Lowest Year-1 cost: Rippling, $5,988.") === 0, blogLine);
+  const five = box.fn(Object.assign({}, base, { employees: 5 }));
+  check(five.deelYear === 35940 && five.deposit === 27995, "five employees scale the fee and the deposit");
+  const fx = box.fn(Object.assign({}, base, { fxPct: 2 }));
+  check(fx.fxYear === 1200 && fx.vendorCents === 838800 && fx.deelYear === 7188, "FX is an assumption on the pass-through, not a change to the $599 fee");
+  const high = box.fn(Object.assign({}, base, { depositTenths: 15 }));
+  check(high.deposit === 8399, "1.5 times monthly charges");
+  check(box.line(7188, -1).indexOf("no lowest cost") !== -1, "incomplete comparison stays neutral");
+}
+
 function main() {
   errors.length = 0;
   checks = 0;
@@ -780,6 +814,7 @@ function main() {
   pipedriveSalesforce();
   ssoTax();
   soc2Cost();
+  eorCost();
   plausible();
   if (errors.length) {
     console.error(errors.join("\n"));

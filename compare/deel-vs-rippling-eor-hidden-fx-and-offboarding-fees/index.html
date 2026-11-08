@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-site-verification" content="W7-m7km1_5pZZUG38dpallcgdGss6_Vl2qo5pjVoMdA" />
+  <!-- Bing Webmaster Tools verification: paste <meta name="msvalidate.01" content="YOUR_BING_CODE" /> here or use 1-click Google Search Console import (see BING_WEBMASTER_VERIFICATION.md) -->
+  <title>Deel vs Rippling EOR cost – saasbill.io</title>
+  <meta name="description" content="Deel EOR starts at $599 per employee per month. One employee is $7,188 for the year. Rippling's EOR price is unknown. Checked 8 Nov 2026." />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+  <meta property="og:site_name" content="SaaSBill" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Deel vs Rippling EOR cost – saasbill.io" />
+  <meta property="og:description" content="Deel EOR starts at $599 per employee per month. One employee is $7,188 for the year. Rippling's EOR price is unknown. Checked 8 Nov 2026." />
+  <meta property="og:url" content="https://saasbill.io/compare/deel-vs-rippling-eor-hidden-fx-and-offboarding-fees/" />
+  <meta property="og:updated_time" content="2026-11-08T05:58:26+00:00" />
+  <meta property="article:published_time" content="2026-11-08T00:00:00+01:00" />
+  <meta property="article:modified_time" content="2026-11-08T05:58:26+00:00" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Deel vs Rippling EOR cost – saasbill.io" />
+  <meta name="twitter:description" content="Deel EOR starts at $599 per employee per month. One employee is $7,188 for the year. Rippling's EOR price is unknown. Checked 8 Nov 2026." />
+  <meta name="last-modified" content="2026-11-08T05:58:26+00:00" />
+  <meta name="dcterms.modified" content="2026-11-08T05:58:26+00:00" />
+  <meta name="dcterms.issued" content="2026-11-08" />
+  <link rel="canonical" href="https://saasbill.io/compare/deel-vs-rippling-eor-hidden-fx-and-offboarding-fees/" />
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261030c" />
+  <link rel="alternate" type="text/plain" href="https://saasbill.io/llms.txt" title="SaaSBill LLMs.txt Summary" />
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script defer data-domain="saasbill.io" src="https://plausible.io/js/pa-VAaSVNs5XOobt9cv2UtKo.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init();
+    window.__saasbillEvents = window.__saasbillEvents || [];
+    window.trackSaaSBillEvent = function(eventName, props) {
+      var p = props || {};
+      var entry = { event: eventName, ts: Date.now() };
+      for (var k in p) {
+        if (Object.prototype.hasOwnProperty.call(p, k)) entry[k] = p[k];
+      }
+      window.__saasbillEvents.push(entry);
+      if (typeof window.plausible === 'function') {
+        window.plausible(eventName, { props: p });
+      }
+    };
+    window.trackEvent = window.trackSaaSBillEvent;
+
+    window.saasbillMoney = function (n) {
+      var v = Math.round(Number(n) || 0);
+      var sign = v < 0 ? '-' : '';
+      return sign + '$' + Math.abs(v).toLocaleString('en-US');
+    };
+    window.saasbillResultLine = function (hidden, sticker) {
+      var h = Math.round(Number(hidden) || 0);
+      var s = Math.round(Number(sticker) || 0);
+      if (h <= 0) return 'Matches advertised price ($0 hidden fees).';
+      var pct = s > 0 ? Math.round((h / s) * 100) : 0;
+      return '+' + window.saasbillMoney(h) + ' (+' + pct + '%) above advertised price.';
+    };
+    window.saasbillApplyWorkbench = function (opts) {
+      opts = opts || {};
+      var sticker = Math.max(0, Math.round(Number(opts.sticker) || 0));
+      var seats = Math.max(0, Math.round(Number(opts.seats) || 0));
+      var hidden = Math.max(0, Math.round(Number(opts.hidden) || 0));
+      var total = Math.round(Number(opts.total));
+      if (!isFinite(total)) total = sticker + seats + hidden;
+      var parts = Math.max(1, sticker + seats + hidden);
+      function node(id) { return document.getElementById(id); }
+      function setText(id, value) {
+        var el = node(id);
+        if (el) el.textContent = value;
+      }
+      function setFlex(id, amount) {
+        var el = node(id);
+        if (!el) return;
+        var share = amount <= 0 ? 8 : (amount / parts) * 100;
+        el.style.flex = share + ' 1 0px';
+      }
+      setText('shell-product', opts.product || '');
+      setText('shell-big', window.saasbillMoney(total));
+      setText('shell-quote', 'True Year-1 cost');
+      setText('shell-sub', window.saasbillResultLine(hidden, sticker + seats));
+      setText('shell-amt-base', window.saasbillMoney(sticker));
+      setText('shell-amt-seats', window.saasbillMoney(seats));
+      setText('shell-amt-hidden', window.saasbillMoney(hidden));
+      setText('shell-title-base', 'Sticker Price');
+      setText('shell-title-seats', opts.seatsTitle || 'Other sticker fees');
+      setText('shell-title-hidden', 'Hidden Cost Gap');
+      setText('shell-sub-base', opts.baseLabel || 'Advertised price');
+      setText('shell-sub-seats', opts.seatsLabel || 'Included in the sticker');
+      setText('shell-sub-hidden', opts.hiddenLabel || 'Fees above the advertised price');
+      setFlex('shell-row-base', sticker);
+      setFlex('shell-row-seats', seats);
+      setFlex('shell-row-hidden', hidden);
+      var seatsRow = node('shell-row-seats');
+      if (seatsRow) seatsRow.style.display = seats <= 0 ? 'none' : '';
+      var math = node('shell-math');
+      if (math && opts.mathHtml) math.innerHTML = opts.mathHtml;
+      var best = node('shell-best');
+      if (best && opts.bestHtml) best.innerHTML = opts.bestHtml;
+      var cta = node('shell-cta');
+      if (cta && opts.ctaHref) {
+        cta.href = opts.ctaHref;
+        var label = opts.ctaLabel || 'See pricing';
+        cta.textContent = /→\s*$/.test(label) ? label : label + ' \u2192';
+        if (opts.ctaVendor) cta.setAttribute('data-vendor', opts.ctaVendor);
+      }
+      setText('shell-sticker', window.saasbillMoney(sticker + seats));
+      setText('shell-gap', hidden > 0 ? '+' + window.saasbillMoney(hidden) : '$0');
+      if (opts.product) setText('shell-sticker-note', opts.product);
+    };
+
+  </script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "TechArticle", "@id": "https://saasbill.io/compare/deel-vs-rippling-eor-hidden-fx-and-offboarding-fees/#article", "headline": "Deel vs Rippling EOR cost \u2013 saasbill.io", "description": "Deel EOR starts at $599 per employee per month. One employee is $7,188 for the year. Rippling's EOR price is unknown. Checked 8 Nov 2026.", "datePublished": "2026-11-08", "dateModified": "2026-11-08T05:58:26+00:00", "author": {"@type": "Organization", "name": "SaaSBill Editorial", "url": "https://saasbill.io/"}, "publisher": {"@type": "Organization", "name": "SaaSBill", "url": "https://saasbill.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://saasbill.io/compare/deel-vs-rippling-eor-hidden-fx-and-offboarding-fees/"}}, {"@type": "WebPage", "@id": "https://saasbill.io/compare/deel-vs-rippling-eor-hidden-fx-and-offboarding-fees/", "url": "https://saasbill.io/compare/deel-vs-rippling-eor-hidden-fx-and-offboarding-fees/", "name": "Deel vs Rippling EOR cost \u2013 saasbill.io", "description": "Deel EOR starts at $599 per employee per month. One employee is $7,188 for the year. Rippling's EOR price is unknown. Checked 8 Nov 2026.", "inLanguage": "en-US", "datePublished": "2026-11-08", "dateModified": "2026-11-08T05:58:26+00:00", "lastReviewed": "2026-11-08", "reviewedBy": {"@type": "Organization", "name": "SaaSBill Editorial"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "SaaSBill", "item": "https://saasbill.io/"}, {"@type": "ListItem", "position": 2, "name": "Deel vs Rippling EOR cost \u2013 saasbill.io", "item": "https://saasbill.io/compare/deel-vs-rippling-eor-hidden-fx-and-offboarding-fees/"}]}, {"@type": "FAQPage", "@id": "https://saasbill.io/compare/deel-vs-rippling-eor-hidden-fx-and-offboarding-fees/#faq", "datePublished": "2026-11-08", "dateModified": "2026-11-08T05:58:26+00:00", "mainEntity": [{"@type": "Question", "name": "What does Deel's $599 include?", "dateCreated": "2026-11-08", "dateModified": "2026-11-08T05:58:26+00:00", "acceptedAnswer": {"@type": "Answer", "text": "Deel's pricing page says EOR starts at $599 per employee per month and lists legal employment, managed payroll and tax filings, benefits administration, onboarding, and HR, legal, and tax support. The same page says costs are in the quoted price. The help center still documents a deposit and a currency conversion when you pay in a different currency. Salary and statutory employer costs are not a Deel list price. A country surcharge above $599 is unknown.", "dateCreated": "2026-11-08", "dateModified": "2026-11-08T05:58:26+00:00"}}, {"@type": "Question", "name": "Is the Deel deposit a fee?", "dateCreated": "2026-11-08", "dateModified": "2026-11-08T05:58:26+00:00", "acceptedAnswer": {"@type": "Answer", "text": "No. Deel invoices a deposit for each EOR hire, usually 1 to 1.5 times monthly charges, and refunds it after the contract ends and outstanding invoices are paid. It can be used against the final invoice, which includes final salary, unused vacation, severance, and outstanding Deel fees. A separate offboarding administration fee is not published, so that amount is unknown.", "dateCreated": "2026-11-08", "dateModified": "2026-11-08T05:58:26+00:00"}}, {"@type": "Question", "name": "What does Rippling charge for EOR?", "dateCreated": "2026-11-08", "dateModified": "2026-11-08T05:58:26+00:00", "acceptedAnswer": {"@type": "Answer", "text": "Rippling's pricing page does not publish an EOR price, deposit, FX markup, setup fee, or offboarding fee. It says plans start at $8 per employee per month, plus a monthly base fee whose amount is unknown. A Rippling comparison blog says EOR starts at $499 a month, and another Rippling article says EOR is quote-based. The calculator leaves Rippling unknown until you choose one of those inputs. Country counts on Rippling's own pages conflict, so this page does not pick 50+, 115+, or 185+.", "dateCreated": "2026-11-08", "dateModified": "2026-11-08T05:58:26+00:00"}}]}]}</script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-inner">
+      <div class="brand-wrap">
+        <a href="../../index.html" class="brand">SaaSBill<span>.io</span></a>
+        <span class="brand-tagline">Year-1 software cost &amp; contract calculators</span>
+      </div>
+      <nav class="nav-links" aria-label="Primary Navigation">
+        <a href="../../index.html#all-calculators">Audits &amp; Guides</a>
+        <a href="../../ai-act/">AI Act</a>
+        <a href="../../index.html#methodology">Methodology</a>
+        <span class="byline-bar">Updated <time datetime="2026-11-08" itemprop="dateModified">Nov 08, 2026</time></span>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+    <article itemscope itemtype="https://schema.org/TechArticle">
+      <meta itemprop="datePublished" content="2026-11-08" />
+      <meta itemprop="dateModified" content="2026-11-08T05:58:26+00:00" />
+      <section class="hero editorial-hero editorial-hero-wrap"><h1>Deel vs. Rippling EOR cost (2026)</h1><p class="lead">Deel's EOR management fee starts at $599 per employee per month, $7,188 for one employee over a year. Rippling does not publish an EOR price, so there is no lowest cost. The Deel deposit is cash set aside, not part of that fee.</p></section>
+<div class="unified-inspector-tray">
+<section class="calc-box editorial-workbench" aria-label="True cost calculator">
+  <div class="workbench-grid">
+    <div class="wb-col-controls">
+      <div class="wb-col-title">Your EOR example</div>
+      <div class="wb-controls-stack">
+        
+        <div class="wb-control-item">
+          <label class="wb-control-label" for="eor-employees">EOR employees <span class="val-pill" id="eor-employees-val">1</span></label>
+          <div class="wb-slider-row">
+            <input type="range" id="eor-employees" min="1" max="10" step="1" value="1" aria-label="EOR employees" data-track="calculator-control" data-control="employees" />
+          </div>
+        </div>
+        <div class="wb-control-item">
+          <label class="wb-control-label" for="eor-salary">Example monthly salary <span class="val-pill" id="eor-salary-val">$5,000</span></label>
+          <div class="wb-slider-row">
+            <input type="range" id="eor-salary" min="1000" max="20000" step="500" value="5000" aria-label="Example monthly salary" data-track="calculator-control" data-control="salary" />
+          </div>
+          <p class="wb-budget-subnote">An example you can change. It is not a Deel or Rippling list price. Salary is a pass-through, not the vendor fee.</p>
+        </div>
+        <div class="wb-control-item">
+          <label class="wb-control-label" for="eor-rippling">Rippling EOR fee</label>
+          <select id="eor-rippling" class="wb-tool-select" aria-label="Rippling EOR fee" data-track="calculator-control" data-control="rippling">
+            <option value="unknown" selected>Unknown</option>
+            <option value="blog">Blog starting figure, $499</option>
+            <option value="entered">Use the fee in Add-ons</option>
+          </select>
+          <p class="wb-budget-subnote">The pricing page does not publish an EOR price. $499 a month is a starting figure on Rippling's own comparison blog, not the rate card.</p>
+        </div>
+        <div class="wb-control-item">
+          <label class="wb-control-label" for="eor-deposit">Deel deposit multiple <span class="val-pill" id="eor-deposit-val">1.0×</span></label>
+          <div class="wb-slider-row">
+            <input type="range" id="eor-deposit" min="10" max="15" step="1" value="10" aria-label="Deel deposit multiple" data-track="calculator-control" data-control="deposit" />
+          </div>
+          <p class="wb-budget-subnote">Standard deposit is 1 to 1.5 times monthly charges. It is refundable working capital, not a Year-1 fee. Higher cases are not applied unless you move this slider.</p>
+        </div>
+        <details class="full-table-disclosure" id="eor-extras">
+          <summary class="full-table-summary"><span class="below-disclosure-title">Add-ons</span><span class="full-table-toggle-pill">Show</span></summary>
+          <div class="full-table-body">
+            <div class="wb-control-item">
+              <label class="wb-control-label" for="eor-employer">Employer-cost percent <span class="val-pill" id="eor-employer-val">0%</span></label>
+              <div class="wb-slider-row">
+                <input type="range" id="eor-employer" min="0" max="40" step="1" value="0" aria-label="Employer cost percent" data-track="calculator-control" data-control="employer" />
+              </div>
+              <p class="wb-budget-subnote">Your country estimate. Not a vendor fee, and not a France or Germany default.</p>
+            </div>
+            <div class="wb-control-item">
+              <label class="wb-control-label" for="eor-allow">Fixed allowances <span class="val-pill" id="eor-allow-val">none</span></label>
+              <div class="wb-slider-row">
+                <input type="range" id="eor-allow" min="0" max="2000" step="50" value="0" aria-label="Monthly allowances" data-track="calculator-control" data-control="allowances" />
+              </div>
+            </div>
+            <div class="wb-control-item">
+              <label class="wb-control-label" for="eor-fx">FX assumption <span class="val-pill" id="eor-fx-val">excluded</span></label>
+              <div class="wb-slider-row">
+                <input type="range" id="eor-fx" min="0" max="8" step="1" value="0" aria-label="FX assumption percent" data-track="calculator-control" data-control="fx" />
+              </div>
+              <p class="wb-budget-subnote">Deel's numeric spread is unpublished. Zero means excluded. A percent here is your assumption on the payroll pass-through, not a Deel tariff.</p>
+            </div>
+            <div class="wb-control-item">
+              <label class="wb-control-label" for="eor-pay">Deel payment method</label>
+              <select id="eor-pay" class="wb-tool-select" aria-label="Deel payment method" data-track="calculator-control" data-control="payment">
+                <option value="none" selected>Invoice currency, no fee</option>
+                <option value="card-us">Card, US or EU</option>
+                <option value="card-intl">Card, outside US and EU</option>
+                <option value="flat5">$5 method</option>
+                <option value="pad">PAD, $10 CAD</option>
+                <option value="becs">BECS, $10 AUD</option>
+              </select>
+            </div>
+            <div class="wb-control-item">
+              <label class="wb-control-label" for="eor-rippling-fee">Entered Rippling fee <span class="val-pill" id="eor-rippling-fee-val">$499</span></label>
+              <div class="wb-slider-row">
+                <input type="range" id="eor-rippling-fee" min="100" max="2000" step="1" value="499" aria-label="Entered Rippling monthly fee" data-track="calculator-control" data-control="rippling-fee" />
+              </div>
+              <p class="wb-budget-subnote">Used only when the Rippling menu says to use the fee in Add-ons.</p>
+            </div>
+            <label class="wb-budget-subnote"><input type="checkbox" id="eor-platform" data-track="calculator-control" data-control="platform" /> Add Rippling's $8 per employee platform starting price</label>
+            <p class="wb-budget-subnote">That $8 line is the published platform starting price, not a confirmed EOR add-on. The monthly base fee is unknown and is not added.</p>
+          </div>
+        </details>
+
+      </div>
+    </div>
+    <div class="wb-col-chart">
+      <div class="wb-col-title">Fee and deposit</div>
+      <div class="wb-vbar-container" aria-live="polite">
+        <div class="wb-vbar-row" id="shell-row-base" style="flex: 40 1 0px;">
+          <div class="wb-vbar-block block-base"><span class="wb-block-amount" id="shell-amt-base">$0</span></div>
+          <div class="wb-callout-item"><div class="wb-leader-line"></div><div class="wb-callout-text"><strong id="shell-title-base">Sticker Price</strong><span id="shell-sub-base">Advertised price</span></div></div>
+        </div>
+        <div class="wb-vbar-row" id="shell-row-seats" style="flex: 8 1 0px;">
+          <div class="wb-vbar-block block-seats"><span class="wb-block-amount" id="shell-amt-seats">$0</span></div>
+          <div class="wb-callout-item"><div class="wb-leader-line"></div><div class="wb-callout-text"><strong id="shell-title-seats">Other sticker fees</strong><span id="shell-sub-seats">Included in the sticker</span></div></div>
+        </div>
+        <div class="wb-vbar-row" id="shell-row-hidden" style="flex: 52 1 0px;">
+          <div class="wb-vbar-block block-hidden"><span class="wb-block-amount" id="shell-amt-hidden">$0</span></div>
+          <div class="wb-callout-item"><div class="wb-leader-line"></div><div class="wb-callout-text"><strong id="shell-title-hidden">Hidden Cost Gap</strong><span id="shell-sub-hidden">Fees above the advertised price</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="wb-result-col" id="shell-result">
+      <div class="wb-selected-product" id="shell-product">Year-1 total</div>
+      <div class="wb-big-total"><span id="shell-big">$0</span> <span class="wb-per-year">/ year</span></div>
+      <details class="math-drawer" id="shell-calc">
+        <summary>Show calculation</summary>
+        <div class="math-drawer-body" id="shell-math"></div>
+      </details>
+      <p class="wb-budget-quote" id="shell-quote">True Year-1 cost</p>
+      <p class="wb-budget-subnote" id="shell-sub">Matches advertised price ($0 hidden fees).</p>
+      <div class="wb-best-option" id="shell-best"></div>
+      <div class="cta-stack">
+        <a id="shell-cta" class="btn-cta wb-primary-cta" href="https://www.deel.com/pricing/" target="_blank" rel="noopener" data-track="vendor-cta" data-vendor="deel" data-cta-location="workbench">Deel pricing &rarr;</a><a id="shell-cta-rippling" class="btn-secondary" href="https://www.rippling.com/pricing" target="_blank" rel="noopener" data-track="vendor-cta" data-vendor="rippling" data-cta-location="workbench">Rippling pricing &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+<section class="verdict-section" aria-label="Sticker price and hidden cost gap">
+  <div class="summary-strip" id="shell-summary">
+    <div class="summary-card result-card">
+      <div class="summary-label">Sticker Price</div>
+      <div class="summary-metric" id="shell-sticker">$0</div>
+      <div class="summary-scenario" id="shell-sticker-note">Advertised price</div>
+    </div>
+    <div class="summary-card result-card card-hidden">
+      <div class="summary-label">Hidden Cost Gap</div>
+      <div class="summary-metric" id="shell-gap">$0</div>
+      <div class="summary-scenario">Above the advertised price</div>
+    </div>
+  </div>
+</section>
+
+<section id="eor-split">
+  <h2>This example, split</h2>
+  <p>The vendor fee is the management fee. Salary, statutory employer costs, and allowances are pass-through. The Deel deposit is cash locked up and refunded after the contract ends and invoices are settled. It is not added to the Year-1 fee.</p>
+  <div class="table-wrap editorial-gap-table mobile-cards">
+    <table>
+      <caption>One employee, the $5,000 example salary, and Deel's starting fee. Rippling stays unknown.</caption>
+      <thead>
+        <tr>
+          <th>Line</th>
+          <th>Deel</th>
+          <th>Rippling</th>
+        </tr>
+      </thead>
+      <tbody id="eor-split-body">
+        <tr><td data-label="Line">Management fee, Year-1</td><td data-label="Deel">$7,188</td><td data-label="Rippling">unknown</td></tr>
+        <tr><td data-label="Line">Deposit cash lock-up</td><td data-label="Deel">$5,599</td><td data-label="Rippling">unknown</td></tr>
+        <tr><td data-label="Line">FX</td><td data-label="Deel">excluded</td><td data-label="Rippling">unknown</td></tr>
+        <tr><td data-label="Line">Offboarding administration fee</td><td data-label="Deel">unknown</td><td data-label="Rippling">unknown</td></tr>
+        <tr><td data-label="Line">Year-1 vendor fee</td><td data-label="Deel">$7,188</td><td data-label="Rippling">unknown</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p id="eor-note" class="summary-caveat">Rippling's EOR fee is unknown, so there is no lowest cost. Statutory notice, unused leave, and severance are country-specific pass-through amounts, not a vendor list price.</p>
+</section>
+
+<section>
+  <h2>Prices checked on 8 Nov 2026</h2>
+  <div class="table-wrap editorial-gap-table mobile-cards">
+    <table>
+      <caption>Published prices and the lines that stay unknown.</caption>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>What the page says</th>
+          <th>In the Year-1 fee</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td data-label="Item">Deel EOR</td><td data-label="What the page says">Starting at $599 per EOR employee per month. The pricing page lists full legal employment in 130+ countries, managed payroll, tax filings, benefits administration, onboarding, and on-demand HR, legal, and tax expertise.</td><td data-label="In the Year-1 fee">12 times the starting fee, times the employee count.</td></tr>
+        <tr><td data-label="Item">Deel's pricing claim</td><td data-label="What the page says">Deel says you only pay for the services you use, with no hidden fees, and that local compliance, payroll, and benefits administration are in the quoted price. Pricing is month to month. EOR cancellation follows local labor laws, including notice and severance.</td><td data-label="In the Year-1 fee">Reported next to the deposit and FX help articles. Those articles document extras the pricing FAQ does not price.</td></tr>
+        <tr><td data-label="Item">Not in the $599</td><td data-label="What the page says">From Deel's own pages: employee salary, country-specific employer costs, the EOR deposit, FX when the funding currency differs from the invoice currency, and legally required notice, unused leave, and severance on the final invoice.</td><td data-label="In the Year-1 fee">Salary and employer costs stay pass-through. The deposit stays out of the fee. Exit administration has no published dollar amount, so it is unknown.</td></tr>
+        <tr><td data-label="Item">Deel deposit</td><td data-label="What the page says">Charged for each EOR hire and invoiced in the EOR location currency. Standard deposit is 1 to 1.5 times monthly charges, including salary, employer costs, fixed allowances, and management fees. Some countries can require more. Removing probation, extra PTO beyond the legal minimum by more than 8 days, a longer notice period, a transfer with accrued benefits, or a large incentive plan can raise it. The usual cap is two months, with exceptions. Refunded after termination or resignation once invoices are settled.</td><td data-label="In the Year-1 fee">Shown as cash lock-up. Not a Year-1 expense unless it is later used to pay the final invoice.</td></tr>
+        <tr><td data-label="Item">Deel FX</td><td data-label="What the page says">A forward rate from banking partners. No numeric markup is published. Paying the invoice in its own currency avoids the conversion. Deel says its rates are typically more favorable than the 4% to 5% markup it attributes to many retail banks. That is Deel's comparison, not Deel's own spread.</td><td data-label="In the Year-1 fee">Excluded unless you set a percent. That percent is your assumption on the payroll pass-through.</td></tr>
+        <tr><td data-label="Item">Deel payment fees</td><td data-label="What the page says">Cards in the US or EU: $0.30 and 2.9%. Cards elsewhere: $0.30 and 3.9%. ACH, SEPA, BACS, wire, Brex, and Coinbase: $5. Mercury and Wise: the equivalent of $5. PAD: $10 CAD. BECS: $10 AUD.</td><td data-label="In the Year-1 fee">Off by default. CAD and AUD fees are not converted into the dollar total.</td></tr>
+        <tr><td data-label="Item">Deel country surcharge</td><td data-label="What the page says">No public schedule of EOR prices above $599.</td><td data-label="In the Year-1 fee">unknown</td></tr>
+        <tr><td data-label="Item">Rippling EOR</td><td data-label="What the page says">The pricing page says plans start at $8 per employee per month, with a monthly base fee, and that the total depends on the products you choose. It does not publish an EOR price, deposit, FX markup, setup fee, offboarding fee, minimum term, or auto-renewal clause. One Rippling blog says EOR starts at $499 a month. Another says EOR is quote-based.</td><td data-label="In the Year-1 fee">unknown until you choose the blog figure or enter a fee. The $8 line is optional and is not a confirmed EOR add-on. The base fee amount is unknown.</td></tr>
+        <tr><td data-label="Item">Rippling country count</td><td data-label="What the page says">Rippling's own pages say 50+, 115+, and 185+. They do not agree, and the text does not always say the unit.</td><td data-label="In the Year-1 fee">Not used. Coverage stays unpublished as a single number.</td></tr>
+        <tr><td data-label="Item">User reports</td><td data-label="What the page says">One employer described a Deel forward rate about 3% to 4% above the figure they expected, and a deposit refund that was hard to collect. Another described USD and CAD conversions that added about 2% to 5.5%. An AskDeel reply said Deel uses a forward rate and that a consistent 3% to 4% needed a closer look.</td><td data-label="In the Year-1 fee">Not a tariff. Not used in the default math.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="src-cluster"><a class="src-link" href="https://www.deel.com/pricing/" target="_blank" rel="noopener">Deel pricing</a> <span class="src-date">Accessed 2026-11-08</span></p>
+  <p class="src-cluster"><a class="src-link" href="https://help.letsdeel.com/hc/en-gb/articles/15574494993297-About-EOR-Deposit-Calculations" target="_blank" rel="noopener">Deel, EOR deposit calculations</a> <span class="src-date">Accessed 2026-11-08</span></p>
+  <p class="src-cluster"><a class="src-link" href="https://help.letsdeel.com/hc/en-gb/articles/4407745380241-About-Exchange-Rates-and-Fees" target="_blank" rel="noopener">Deel, exchange rates and fees</a> <span class="src-date">Accessed 2026-11-08</span></p>
+  <p class="src-cluster"><a class="src-link" href="https://www.rippling.com/pricing" target="_blank" rel="noopener">Rippling pricing</a> <span class="src-date">Accessed 2026-11-08</span></p>
+  <p class="src-cluster"><a class="src-link" href="https://www.rippling.com/employer-of-record" target="_blank" rel="noopener">Rippling employer of record</a> <span class="src-date">Accessed 2026-11-08</span></p>
+  <p class="src-cluster"><a class="src-link" href="https://www.rippling.com/blog/best-employer-of-record" target="_blank" rel="noopener">Rippling, best employer of record</a> <span class="src-date">Accessed 2026-11-08</span></p>
+  <p class="src-cluster"><a class="src-link" href="https://www.rippling.com/blog/remote-competitors" target="_blank" rel="noopener">Rippling, remote competitors</a> <span class="src-date">Accessed 2026-11-08</span></p>
+  <p class="src-cluster"><a class="src-link" href="https://www.reddit.com/r/Payroll/comments/1rxqkce/frustrations_with_deel/" target="_blank" rel="noopener">User report, Deel billing</a> <span class="src-date">Accessed 2026-11-08</span></p>
+  <p class="src-cluster"><a class="src-link" href="https://www.reddit.com/r/Payroll/comments/1lkkzn2/currency_handling_at_deel_causing_me_headaches/" target="_blank" rel="noopener">User report, Deel currency handling</a> <span class="src-date">Accessed 2026-11-08</span></p>
+</section>
+<script>
+function eorMoney(cents) {
+  if (cents < 0) return "unknown";
+  var v = Math.round(cents);
+  var dollars = Math.floor(v / 100);
+  var rest = v % 100;
+  var text = "$" + dollars.toLocaleString("en-US");
+  if (rest) text += "." + (rest < 10 ? "0" : "") + rest;
+  return text;
+}
+
+function eorRipplingMonth(mode, fee) {
+  if (mode === "blog") return 499;
+  if (mode === "entered") return Math.max(100, Math.round(Number(fee) || 0));
+  return -1;
+}
+
+function calcEor(input) {
+  var employees = Math.max(1, Math.round(Number(input.employees) || 1));
+  var salary = Math.max(0, Math.round(Number(input.salary) || 0));
+  var pct = Math.max(0, Math.round(Number(input.employerPct) || 0));
+  var allowances = Math.max(0, Math.round(Number(input.allowances) || 0));
+  var tenths = Math.max(10, Math.min(15, Math.round(Number(input.depositTenths) || 10)));
+  var employer = Math.round(salary * pct / 100);
+  var perHead = salary + employer + allowances + 599;
+  var deposit = Math.round(perHead * employees * tenths / 10);
+  var deelYear = 599 * 12 * employees;
+  var ripplingMonth = eorRipplingMonth(input.ripplingMode, input.ripplingFee);
+  var ripplingYear = ripplingMonth < 0 ? -1 : ripplingMonth * 12 * employees;
+  var passMonth = (salary + employer + allowances) * employees;
+  var fxPct = Math.max(0, Math.round(Number(input.fxPct) || 0));
+  var fxYear = fxPct === 0 ? 0 : Math.round(passMonth * 12 * fxPct / 100);
+  var invoiceMonth = passMonth + 599 * employees;
+  var pay = input.payMethod || "none";
+  var payCents = 0;
+  if (pay === "card-us") payCents = Math.round(invoiceMonth * 12 * 2.9) + 360;
+  else if (pay === "card-intl") payCents = Math.round(invoiceMonth * 12 * 3.9) + 360;
+  else if (pay === "flat5") payCents = 6000;
+  else if (pay === "pad" || pay === "becs") payCents = -1;
+  var vendorCents = deelYear * 100 + fxYear * 100 + (payCents > 0 ? payCents : 0);
+  var platformYear = input.platform8 ? 8 * 12 * employees : 0;
+  return {
+    employees: employees,
+    salary: salary,
+    pct: pct,
+    employer: employer,
+    allowances: allowances,
+    tenths: tenths,
+    perHead: perHead,
+    deposit: deposit,
+    deelYear: deelYear,
+    ripplingMonth: ripplingMonth,
+    ripplingYear: ripplingYear,
+    fxYear: fxYear,
+    fxPct: fxPct,
+    payCents: payCents,
+    pay: pay,
+    vendorCents: vendorCents,
+    platformYear: platformYear
+  };
+}
+
+function eorLowest(deelYear, ripplingYear) {
+  if (ripplingYear < 0) {
+    return "Rippling's EOR fee is unknown, so there is no lowest cost. Deel's starting management fee is " + eorMoney(deelYear * 100) + " for the year.";
+  }
+  if (deelYear === ripplingYear) {
+    return "Lowest Year-1 cost: Deel and Rippling, " + eorMoney(deelYear * 100) + ". Management fees only.";
+  }
+  if (deelYear < ripplingYear) {
+    return "Lowest Year-1 cost: Deel, " + eorMoney(deelYear * 100) + ". Rippling " + eorMoney(ripplingYear * 100) + ". Management fees only.";
+  }
+  return "Lowest Year-1 cost: Rippling, " + eorMoney(ripplingYear * 100) + ". Deel " + eorMoney(deelYear * 100) + ". Management fees only.";
+}
+
+function eorRead() {
+  return {
+    employees: document.getElementById("eor-employees").value,
+    salary: document.getElementById("eor-salary").value,
+    employerPct: document.getElementById("eor-employer").value,
+    allowances: document.getElementById("eor-allow").value,
+    depositTenths: document.getElementById("eor-deposit").value,
+    ripplingMode: document.getElementById("eor-rippling").value,
+    ripplingFee: document.getElementById("eor-rippling-fee").value,
+    fxPct: document.getElementById("eor-fx").value,
+    payMethod: document.getElementById("eor-pay").value,
+    platform8: document.getElementById("eor-platform").checked
+  };
+}
+
+function eorNone(amount) {
+  if (amount < 0) return "unknown";
+  if (amount === 0) return "none";
+  return eorMoney(amount * 100);
+}
+
+function renderEor() {
+  var c = calcEor(eorRead());
+  document.getElementById("eor-employees-val").textContent = String(c.employees);
+  document.getElementById("eor-salary-val").textContent = eorMoney(c.salary * 100);
+  document.getElementById("eor-employer-val").textContent = String(c.pct) + "%";
+  document.getElementById("eor-allow-val").textContent = c.allowances === 0 ? "none" : eorMoney(c.allowances * 100);
+  document.getElementById("eor-deposit-val").textContent = (c.tenths / 10).toFixed(1) + "×";
+  document.getElementById("eor-fx-val").textContent = c.fxPct === 0 ? "excluded" : String(c.fxPct) + "%";
+  document.getElementById("eor-rippling-fee-val").textContent = eorMoney(Math.round(Number(document.getElementById("eor-rippling-fee").value) || 0) * 100);
+  var line = eorLowest(c.deelYear, c.ripplingYear);
+  var label = "Lowest Year-1 cost:";
+  var best = document.getElementById("shell-best");
+  if (line.indexOf(label) === 0) best.innerHTML = "<strong>" + label + "</strong>" + line.slice(label.length);
+  else best.textContent = line;
+  document.getElementById("shell-big").textContent = eorMoney(c.vendorCents);
+  document.getElementById("shell-product").textContent = "Deel management fee, " + c.employees + (c.employees === 1 ? " employee" : " employees");
+  document.getElementById("shell-sub").textContent = "Year-1 vendor fee is the management fee, plus any FX percent or payment fee you turn on. Salary and the deposit are not in this number.";
+  var ripplingBar = c.ripplingYear < 0 ? -1 : c.ripplingYear * 100;
+  var bars = [
+    ["shell-row-base", "shell-amt-base", "shell-title-base", "shell-sub-base", "Deel fee", c.deelYear * 100, "Starting price, 12 months"],
+    ["shell-row-seats", "shell-amt-seats", "shell-title-seats", "shell-sub-seats", "Deposit", c.deposit * 100, "Cash lock-up, not a fee"],
+    ["shell-row-hidden", "shell-amt-hidden", "shell-title-hidden", "shell-sub-hidden", "Rippling fee", ripplingBar, "Unknown unless you enter one"]
+  ];
+  var maxBar = 1;
+  bars.forEach(function (bar) { if (bar[5] > maxBar) maxBar = bar[5]; });
+  bars.forEach(function (bar) {
+    var flex = bar[5] > 0 ? Math.max(12, Math.round(bar[5] / maxBar * 100)) : 12;
+    document.getElementById(bar[0]).style.flex = flex + " 1 0px";
+    document.getElementById(bar[1]).textContent = eorMoney(bar[5]);
+    document.getElementById(bar[2]).textContent = bar[4];
+    document.getElementById(bar[3]).textContent = bar[6];
+  });
+  document.getElementById("shell-sticker").textContent = eorMoney(c.deelYear * 100);
+  document.getElementById("shell-sticker-note").textContent = "Deel management fee";
+  document.getElementById("shell-gap").textContent = eorMoney(c.deposit * 100);
+  var labels = document.querySelectorAll("#shell-summary .summary-label");
+  if (labels.length >= 2) {
+    labels[0].textContent = "Deel Year-1 fee";
+    labels[1].textContent = "Deposit lock-up";
+  }
+  var notes = document.querySelectorAll("#shell-summary .summary-scenario");
+  if (notes.length >= 2) notes[1].textContent = "Not added to the Year-1 fee";
+  var fxText = c.fxPct === 0 ? "excluded" : eorMoney(c.fxYear * 100);
+  var payText = "none";
+  if (c.pay === "pad") payText = "$10 CAD, not converted";
+  else if (c.pay === "becs") payText = "$10 AUD, not converted";
+  else if (c.payCents > 0) payText = eorMoney(c.payCents);
+  var platformText = c.platformYear === 0 ? "off" : eorMoney(c.platformYear * 100);
+  document.getElementById("shell-math").textContent = c.employees + " employees. Example salary " + eorMoney(c.salary * 100) + ". Deel management " + eorMoney(c.deelYear * 100) + ". Deposit " + eorMoney(c.deposit * 100) + " at " + (c.tenths / 10).toFixed(1) + " times monthly charges, not in the fee. FX " + fxText + ". Payment fee " + payText + ". Rippling management " + eorMoney(c.ripplingYear < 0 ? -1 : c.ripplingYear * 100) + ". Optional $8 platform line " + platformText + ". Offboarding administration fee unknown for both.";
+  function row(name, deel, rip) {
+    return "<tr><td data-label=\"Line\">" + name + "</td><td data-label=\"Deel\">" + deel + "</td><td data-label=\"Rippling\">" + rip + "</td></tr>";
+  }
+  document.getElementById("eor-split-body").innerHTML = ""
+    + row("Management fee, Year-1", eorMoney(c.deelYear * 100), eorMoney(c.ripplingYear < 0 ? -1 : c.ripplingYear * 100))
+    + row("Deposit cash lock-up", eorMoney(c.deposit * 100), "unknown")
+    + row("Payroll pass-through, Year-1", eorNone((c.salary + c.employer + c.allowances) * c.employees * 12), "same example, not a vendor fee")
+    + row("FX on that pass-through", fxText, "unknown")
+    + row("Payment fee", payText, "unknown")
+    + row("Platform starting price", "not a Deel line", platformText)
+    + row("Offboarding administration fee", "unknown", "unknown")
+    + row("Year-1 vendor fee", eorMoney(c.vendorCents), eorMoney(c.ripplingYear < 0 ? -1 : c.ripplingYear * 100));
+  document.getElementById("eor-note").textContent = line + " The deposit is not in that fee. Statutory notice, unused leave, and severance stay country-specific.";
+  if (typeof window.trackSaaSBillEvent === "function") {
+    window.trackSaaSBillEvent("result_rendered", { page: "eor-cost", employees: c.employees });
+  }
+}
+["eor-employees", "eor-salary", "eor-employer", "eor-allow", "eor-deposit", "eor-rippling", "eor-rippling-fee", "eor-fx", "eor-pay", "eor-platform"].forEach(function (id) {
+  var el = document.getElementById(id);
+  el.addEventListener("input", renderEor);
+  el.addEventListener("change", renderEor);
+});
+renderEor();
+</script>
+
+      
+        <section aria-labelledby="faq-heading">
+          <h2 id="faq-heading">Common questions</h2>
+          <div class="faq-list">
+            
+            <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+              <h3 itemprop="name">What does Deel's $599 include?</h3>
+              <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                <p itemprop="text">Deel's pricing page says EOR starts at $599 per employee per month and lists legal employment, managed payroll and tax filings, benefits administration, onboarding, and HR, legal, and tax support. The same page says costs are in the quoted price. The help center still documents a deposit and a currency conversion when you pay in a different currency. Salary and statutory employer costs are not a Deel list price. A country surcharge above $599 is unknown.</p>
+              </div>
+            </div>
+            
+            <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+              <h3 itemprop="name">Is the Deel deposit a fee?</h3>
+              <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                <p itemprop="text">No. Deel invoices a deposit for each EOR hire, usually 1 to 1.5 times monthly charges, and refunds it after the contract ends and outstanding invoices are paid. It can be used against the final invoice, which includes final salary, unused vacation, severance, and outstanding Deel fees. A separate offboarding administration fee is not published, so that amount is unknown.</p>
+              </div>
+            </div>
+            
+            <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+              <h3 itemprop="name">What does Rippling charge for EOR?</h3>
+              <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                <p itemprop="text">Rippling's pricing page does not publish an EOR price, deposit, FX markup, setup fee, or offboarding fee. It says plans start at $8 per employee per month, plus a monthly base fee whose amount is unknown. A Rippling comparison blog says EOR starts at $499 a month, and another Rippling article says EOR is quote-based. The calculator leaves Rippling unknown until you choose one of those inputs. Country counts on Rippling's own pages conflict, so this page does not pick 50+, 115+, or 185+.</p>
+              </div>
+            </div>
+            
+          </div>
+        </section>
+        
+      
+    <section aria-labelledby="related-calculators-heading" style="margin-top:36px; padding-top:24px; border-top:1px solid var(--border);">
+      <h2 id="related-calculators-heading" style="font-size:1.2rem; margin-top:0;">Related Year-1 True-Cost Calculators &amp; Contract Audits</h2>
+      <div class="related-calc-grid">
+        
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../compliance/vanta-vs-drata-vs-comp-ai-soc2-negotiation-benchmarks/" data-track="internal-audit">SOC 2 cost calculator &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">AWS list prices for Vanta and Drata, plus the separate CPA auditor fee.</p>
+        </div>
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../compliance/hipaa-baa-and-soc2-pricing-tiers/" data-track="internal-audit">HIPAA BAA &amp; SOC 2 Pricing Tiers &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">Which plan signs a BAA, and what the CPA audit adds.</p>
+        </div>
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../compliance/okta-vs-workos-vs-1password-sso-tax-calculator/" data-track="internal-audit">SSO tax calculator &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">What apps charge to turn on SAML, plus Okta, WorkOS, and 1Password as separate bills.</p>
+        </div>
+      </div>
+      <details class="footer-directory-details">
+        <summary>Browse all 39 audited calculators &amp; guides</summary>
+        <div class="footer-directory-links">
+          <a href="../../" data-track="internal-audit">Year-1 SaaS True-Cost Directory &rarr;</a><a href="../../pricing/hubspot-true-cost-and-onboarding-fees/" data-track="internal-audit">HubSpot True Cost &amp; Onboarding &rarr;</a><a href="../../compare/close-crm-vs-hubspot-sales-hub-5-to-20-reps/" data-track="internal-audit">Close CRM vs. HubSpot Sales Hub &rarr;</a><a href="../../compare/close-vs-pipedrive-year-1-cost-calculator/" data-track="internal-audit">Close vs. Pipedrive Year-1 Cost (Calling Included) &rarr;</a><a href="../../compare/pipedrive-vs-salesforce-starter-and-pro-suite-cost/" data-track="internal-audit">Pipedrive vs Salesforce Year-1 cost &rarr;</a><a href="../../pricing/pipedrive-true-year-1-cost-calculator/" data-track="internal-audit">Pipedrive True Year-1 Cost &rarr;</a><a href="../../compare/pipedrive-vs-hubspot-sales-hub-year-1-cost/" data-track="internal-audit">Pipedrive vs. HubSpot Sales Hub Year-1 Cost &rarr;</a><a href="../../pricing/gong-io-platform-fee-and-seat-minimum-calculator/" data-track="internal-audit">Gong.io $5,000 Platform Fee &amp; Seat Calculator &rarr;</a><a href="../../compare/monday-crm-vs-pipedrive-vs-hubspot-seat-minimums/" data-track="internal-audit">monday CRM 3/5/10-Seat Bucket Calculator &rarr;</a><a href="../../intercom-fin-cost-calculator/" data-track="internal-audit">Intercom Fin AI Cost Calculator &rarr;</a><a href="../../intercom-vs-freshdesk-cost-comparison/" data-track="internal-audit">Intercom vs. Freshdesk Cost Comparison &rarr;</a><a href="../../exit/intercom-to-freshdesk-ticket-and-help-center-migration/" data-track="internal-audit">Intercom to Freshdesk migration Year-1 &rarr;</a><a href="../../intercom-vs-zendesk-cost-comparison/" data-track="internal-audit">Intercom vs. Zendesk Cost Comparison &rarr;</a><a href="../../pricing/intercom-fin-ai-resolution-cost-calculator/" data-track="internal-audit">Intercom Fin AI Cost Calculator &rarr;</a><a href="../../zendesk-ai-cost-calculator/" data-track="internal-audit">Zendesk AI Cost Calculator &rarr;</a><a href="../../zendesk-vs-freshdesk-cost-comparison/" data-track="internal-audit">Zendesk vs. Freshdesk Cost Comparison &rarr;</a><a href="../../hubspot-onboarding-fee-calculator/" data-track="internal-audit">HubSpot Onboarding Fee Calculator &rarr;</a><a href="../../pricing/zendesk-ai-resolution-and-automated-outcome-cost/" data-track="internal-audit">Zendesk AI Cost Calculator &rarr;</a><a href="../../pricing/stripe-billing-0-7-percent-recurring-tax-calculator/" data-track="internal-audit">Stripe Billing 0.7% Fee, Tax &amp; Chargeback Calculator &rarr;</a><a href="../../compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/" data-track="internal-audit">Gumroad vs. Whop vs. Lemon Squeezy Take-Rate &amp; Chargeback Calculator &rarr;</a><a href="../../exit/stripe-shopify-paddle-frozen-funds-alternatives/" data-track="internal-audit">Stripe, Shopify &amp; Paddle Frozen Funds &amp; Reserve Calculator &rarr;</a><a href="../../chargeback-fee-and-recovery-calculator/" data-track="internal-audit">Stripe, Shopify &amp; Paddle Chargeback Cost Calculator &rarr;</a><a href="../../exit/paypal-180-day-permanent-limitation-fund-recovery/" data-track="internal-audit">PayPal 180-Day Hold &amp; Reserve Cost Calculator &rarr;</a><a href="../../exit/shopify-payments-chargeback-threshold-and-reserve-appeal/" data-track="internal-audit">Shopify Payments Reserve &amp; Dispute Threshold Calculator &rarr;</a><a href="../../pricing/stripe-radar-and-dispute-fee-calculator-2026/" data-track="internal-audit">Stripe dispute and Radar cost &rarr;</a><a href="../../exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/" data-track="internal-audit">ZoomInfo 60-Day Auto-Renewal Notice &rarr;</a><a href="../../compare/typeform-vs-jotform-response-limit-and-hipaa-cost/" data-track="internal-audit">Typeform vs. Jotform Response &amp; HIPAA Calculator &rarr;</a><a href="../../guides/jotform-wix-app-setup-and-pricing-guide/" data-track="internal-audit">Jotform Wix App Setup &amp; Pricing Guide &rarr;</a><a href="../../pricing/jotform-pricing-tier-calculator/" data-track="internal-audit">Jotform 2026 Pricing Tier Calculator &rarr;</a><a href="../../pricing/docusign-envelope-allowance-and-api-overage-calculator/" data-track="internal-audit">DocuSign 100-Envelope Cap &amp; Overage Calculator &rarr;</a><a href="../../compliance/hipaa-baa-and-soc2-pricing-tiers/" data-track="internal-audit">HIPAA BAA &amp; SOC 2 Pricing Tiers &rarr;</a><a href="../../compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/" data-track="internal-audit">Google Workspace vs. Microsoft 365 HIPAA BAA &rarr;</a><a href="../../compliance/okta-vs-workos-vs-1password-sso-tax-calculator/" data-track="internal-audit">SSO tax calculator &rarr;</a><a href="../../compliance/vanta-vs-drata-vs-comp-ai-soc2-negotiation-benchmarks/" data-track="internal-audit">SOC 2 cost calculator &rarr;</a><a href="../../compare/deel-vs-rippling-eor-hidden-fx-and-offboarding-fees/" data-track="internal-audit">Deel vs Rippling EOR cost &rarr;</a><a href="../../faq/does-hubspot-charge-onboarding-fees-2026/" data-track="internal-audit">Does HubSpot Charge Onboarding Fees in 2026? &rarr;</a><a href="../../faq/intercom-fin-ai-cost-calculator/" data-track="internal-audit">Intercom Fin AI Cost Calculator &rarr;</a><a href="../../faq/stripe-vs-paddle-true-cost/" data-track="internal-audit">Stripe vs. Paddle vs. Whop True Cost &amp; Chargeback Calculator &rarr;</a><a href="../../pricing/stripe-shopify-chargeback-fee-and-chargeflow-roi-calculator/" data-track="internal-audit">Stripe, Shopify &amp; Paddle Chargeback Cost Calculator &rarr;</a>
+        </div>
+      </details>
+    </section>
+    
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <p><strong>SaaSBill</strong> &middot; Year-1 cost &amp; contract calculators for B2B software.</p>
+      <p class="footer-note">Updated <time datetime="2026-11-08">Nov 08, 2026</time> &middot; Inquiries: <a href="mailto:info@saasbill.io">info@saasbill.io</a></p>
+    </div>
+  </footer>
+  <script>
+  /* Plausible + local event dispatcher for: calculator_interaction, category_select, result_rendered, vendor_cta_click */
+  window.__saasbillEvents = window.__saasbillEvents || [];
+  try {
+    var p = (window.location && window.location.pathname ? window.location.pathname : '').toLowerCase();
+    if (p && p !== '/' && p !== '/index.html') {
+      var ctxCat = '';
+      var ctxTool = '';
+      if (p.indexOf('zoominfo') !== -1) {
+        ctxCat = 'CRM & Sales';
+        ctxTool = 'close-crm';
+      } else if (p.indexOf('stripe') !== -1 || p.indexOf('paddle') !== -1 || p.indexOf('whop') !== -1 || p.indexOf('gumroad') !== -1 || p.indexOf('paypal') !== -1) {
+        ctxCat = 'Payment Processors & MoR';
+        ctxTool = p.indexOf('paddle') !== -1 ? 'paddle-mor' : (p.indexOf('whop') !== -1 ? 'whop-payments' : 'stripe-payments');
+      } else if (p.indexOf('hubspot') !== -1 || p.indexOf('close-crm') !== -1 || p.indexOf('pipedrive') !== -1 || p.indexOf('monday-crm') !== -1 || p.indexOf('gong') !== -1) {
+        ctxCat = 'CRM & Sales';
+        ctxTool = p.indexOf('monday') !== -1 ? 'monday-crm' : (p.indexOf('close') !== -1 ? 'close-crm' : (p.indexOf('pipedrive') !== -1 ? 'pipedrive-crm' : 'hubspot-sales-pro'));
+      } else if (p.indexOf('hipaa') !== -1 || p.indexOf('soc2') !== -1 || p.indexOf('docusign') !== -1 || p.indexOf('typeform') !== -1 || p.indexOf('jotform') !== -1) {
+        ctxCat = 'Compliance, HIPAA & SOC 2';
+        ctxTool = (p.indexOf('typeform') !== -1 || p.indexOf('jotform') !== -1) ? 'jotform-hipaa' : 'vanta-soc2';
+      } else if (p.indexOf('intercom') !== -1 || p.indexOf('zendesk') !== -1 || p.indexOf('freshdesk') !== -1) {
+        ctxCat = 'Helpdesk & AI Support';
+        ctxTool = p.indexOf('intercom') !== -1 ? 'intercom-fin-ai' : (p.indexOf('freshdesk') !== -1 ? 'freshdesk-support' : 'zendesk-suite-team');
+      }
+      if (ctxCat && window.sessionStorage) {
+        sessionStorage.setItem('saasbill_last_cat', ctxCat);
+        if (ctxTool) sessionStorage.setItem('saasbill_last_tool', ctxTool);
+      }
+    }
+  } catch (err) {}
+  document.addEventListener('click', function(e) {
+    var cta = e.target.closest('[data-track="vendor-cta"], [data-track="vendor_cta_click"]');
+    if (cta) {
+      var vendor = cta.getAttribute('data-vendor') || '';
+      var location = cta.getAttribute('data-cta-location') || 'subpage-result';
+      var href = cta.getAttribute('href') || '';
+      if (typeof window.trackSaaSBillEvent === 'function') {
+        window.trackSaaSBillEvent('vendor_cta_click', { vendor: vendor, location: location, href: href });
+      }
+      return;
+    }
+    var catBtn = e.target.closest('[data-track="category-select"], [data-track="category_select"]');
+    if (catBtn) {
+      var cat = catBtn.getAttribute('data-cat') || '';
+      if (typeof window.trackSaaSBillEvent === 'function') {
+        window.trackSaaSBillEvent('category_select', { category: cat });
+      }
+    }
+  });
+  var _lastCalcTrackKey = '';
+  var _lastCalcTrackTs = 0;
+  function handleCalcControlEvent(e) {
+    var ctrl = e.target.closest('[data-track="calculator-control"], [data-track="calculator_interaction"], input[type="range"], select');
+    if (ctrl) {
+      var control = ctrl.getAttribute('data-control') || ctrl.id || '';
+      var val = String(ctrl.value);
+      var now = Date.now();
+      var key = control + ':' + val;
+      if (key === _lastCalcTrackKey && (now - _lastCalcTrackTs) < 150) return;
+      _lastCalcTrackKey = key;
+      _lastCalcTrackTs = now;
+      if (typeof window.trackSaaSBillEvent === 'function') {
+        window.trackSaaSBillEvent('calculator_interaction', { control: control, value: val });
+        if (ctrl.id === 'cat-filter') {
+          window.trackSaaSBillEvent('category_select', { category: val });
+        }
+      }
+    }
+  }
+  document.addEventListener('input', handleCalcControlEvent);
+  document.addEventListener('change', handleCalcControlEvent);
+  </script>
+  <script src="../../assets/app.js?v=20261030a"></script>
+</body>
+</html>
