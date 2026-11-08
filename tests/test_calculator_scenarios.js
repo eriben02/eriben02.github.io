@@ -768,7 +768,7 @@ function eorCost() {
   const html = read(rel);
   const fn = extractBalanced(html, "function calcEor");
   const monthFn = extractBalanced(html, "function eorRipplingMonth");
-  const lineFn = extractBalanced(html, "function eorLowest");
+  const lineFn = extractBalanced(html, "function eorScenario");
   const moneyFn = extractBalanced(html, "function eorMoney");
   check(!!fn && !!monthFn && !!lineFn && !!moneyFn, "missing eor math");
   check(html.indexOf("/go/deel") === -1 && html.indexOf("/go/rippling") === -1, "no Deel or Rippling affiliate redirect");
@@ -777,24 +777,33 @@ function eorCost() {
   check(html.indexOf("https://www.rippling.com/pricing") !== -1, "plain Rippling pricing link");
   const box = {};
   vm.createContext(box);
-  vm.runInContext(monthFn + "\n" + fn + "\n" + lineFn + "\n" + moneyFn + "\nthis.fn=calcEor;\nthis.line=eorLowest;", box);
+  vm.runInContext(monthFn + "\n" + fn + "\n" + lineFn + "\n" + moneyFn + "\nthis.fn=calcEor;\nthis.line=eorScenario;", box);
   const base = { employees: 1, salary: 5000, employerPct: 0, allowances: 0, depositTenths: 10, ripplingMode: "unknown", ripplingFee: 499, fxPct: 0, payMethod: "none", platform8: false };
   const def = box.fn(base);
   check(def.deelYear === 7188 && def.deposit === 5599 && def.ripplingYear === -1 && def.vendorCents === 718800, "default is Deel $7,188 and a $5,599 deposit, Rippling unknown");
-  const line = box.line(def.deelYear, def.ripplingYear);
-  check(line.indexOf("Lowest Year-1 cost") === -1, "unknown Rippling fee is not a winner: " + line);
-  check(line.indexOf("unknown") !== -1, line);
+  const line = box.line(def.deelYear, def.ripplingYear, "unknown");
+  check(line.indexOf("Lowest Year-1 cost") === -1, "default is not a ranking: " + line);
+  check(line.indexOf("not a ranking") !== -1 && line.indexOf("unknown") !== -1, line);
   const blog = box.fn(Object.assign({}, base, { ripplingMode: "blog" }));
-  check(blog.ripplingYear === 5988, "blog figure is $499 a month");
-  const blogLine = box.line(blog.deelYear, blog.ripplingYear);
-  check(blogLine.indexOf("Lowest Year-1 cost: Rippling, $5,988.") === 0, blogLine);
+  check(blog.ripplingYear === 5988, "blog figure treated as $499 per employee is $5,988");
+  const blogLine = box.line(blog.deelYear, blog.ripplingYear, "blog");
+  check(blogLine.indexOf("Lowest Year-1 cost") === -1, "blog mode is not a winner: " + blogLine);
+  check(blogLine.indexOf("does not say per employee") !== -1 && blogLine.indexOf("$5,988") !== -1, blogLine);
+  const entered = box.fn(Object.assign({}, base, { ripplingMode: "entered", ripplingFee: 400 }));
+  check(entered.ripplingYear === 4800, "entered fee stays a per-employee assumption");
+  const enteredLine = box.line(entered.deelYear, entered.ripplingYear, "entered");
+  check(enteredLine.indexOf("Lowest Year-1 cost") === -1 && enteredLine.indexOf("you entered") !== -1, enteredLine);
+  const cad = box.fn(Object.assign({}, base, { payMethod: "pad" }));
+  check(cad.payIncomplete === true && cad.payCents === -1 && cad.vendorCents === 718800, "CAD fee stays out of the USD subtotal");
+  const aud = box.fn(Object.assign({}, base, { payMethod: "becs" }));
+  check(aud.payIncomplete === true && aud.vendorCents === 718800, "AUD fee stays out of the USD subtotal");
   const five = box.fn(Object.assign({}, base, { employees: 5 }));
   check(five.deelYear === 35940 && five.deposit === 27995, "five employees scale the fee and the deposit");
   const fx = box.fn(Object.assign({}, base, { fxPct: 2 }));
   check(fx.fxYear === 1200 && fx.vendorCents === 838800 && fx.deelYear === 7188, "FX is an assumption on the pass-through, not a change to the $599 fee");
   const high = box.fn(Object.assign({}, base, { depositTenths: 15 }));
   check(high.deposit === 8399, "1.5 times monthly charges");
-  check(box.line(7188, -1).indexOf("no lowest cost") !== -1, "incomplete comparison stays neutral");
+  check(box.line(7188, -1, "unknown").indexOf("Lowest Year-1 cost") === -1, "incomplete comparison is not a ranking");
 }
 
 function main() {
