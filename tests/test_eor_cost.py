@@ -71,6 +71,14 @@ class TestEorCost(unittest.TestCase):
             affiliates = json.load(handle)
         self.assertTrue(affiliates["deel"]["status"].startswith("applied"))
         self.assertNotIn("rippling", affiliates)
+        self.assertIn('id="shell-product">Deel management fee, 1 employee<', html)
+        self.assertIn('id="shell-big">$7,188<', html)
+        self.assertIn('id="shell-amt-base">$7,188<', html)
+        self.assertIn('id="shell-amt-seats">$5,599<', html)
+        self.assertIn('id="shell-amt-hidden">unknown<', html)
+        self.assertIn("2026-11-08T06:05:08+00:00", html)
+        self.assertNotIn("2026-11-09", html)
+        self.assertIn(">Nov 08, 2026<", html)
 
 
 if __name__ == "__main__":

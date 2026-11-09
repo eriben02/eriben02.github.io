@@ -497,8 +497,12 @@ def render_related_links(rel_path, prefix):
     </section>
     """
 
-def render_page(rel_path, title, description, canonical_path, body_html, faqs=None, extra_schema=None, published_date=None, show_affiliate_note=True):
+def render_page(rel_path, title, description, canonical_path, body_html, faqs=None, extra_schema=None, published_date=None, show_affiliate_note=True, modified_datetime=None):
     iso_date, iso_datetime, human_date = get_freshness_timestamps()
+    if modified_datetime:
+        iso_datetime = modified_datetime
+        iso_date = modified_datetime[:10]
+        human_date = datetime.fromisoformat(modified_datetime).strftime("%b %d, %Y")
     pub_date = published_date or iso_date
     full_title = title if ("saasbill" in title.lower()) else f"{title} – saasbill.io"
 

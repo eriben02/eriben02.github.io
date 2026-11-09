@@ -383,7 +383,7 @@ def build():
     for old, new in (
         ('id="shell-product">Year-1 total<', 'id="shell-product">Deel management fee, 1 employee<'),
         ('id="shell-big">$0<', 'id="shell-big">$7,188<'),
-        ('id="shell-sub">Matches advertised price ($0 hidden fees).</p>', 'id="shell-sub">Modeled known fees, not an all-in quote. Payment fees are excluded. That does not mean funding is free.</p>'),
+        ('id="shell-sub">Matches advertised price ($0 hidden fees).</p>', 'id="shell-sub">Modeled known fees, not an all-in quote. Payment fees are excluded. That does not mean funding is free. Rippling\'s price, FX spread, deposit, setup, and offboarding fee stay unknown unless a line below is an assumption you turned on.</p>'),
         ('id="shell-title-base">Sticker Price<', 'id="shell-title-base">Deel fee<'),
         ('id="shell-sub-base">Advertised price<', 'id="shell-sub-base">Starting price, 12 months<'),
         ('id="shell-amt-base">$0<', 'id="shell-amt-base">$7,188<'),
@@ -424,6 +424,7 @@ def build():
         faqs=FAQS,
         published_date="2026-11-08",
         show_affiliate_note=False,
+        modified_datetime="2026-11-08T06:05:08+00:00",
     )
     copy_to_root(REL)
 

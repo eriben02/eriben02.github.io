@@ -428,24 +428,24 @@ def build():
         raise SystemExit("Vanta CTA not found")
     workbench = workbench.replace(needle, replacement, 1)
     for old, new in (
-        ('id="shell-product">Year-1 total<', 'id="shell-product">Zoom SAML step-up, 25 people<'),
-        ('id="shell-big">$0<', 'id="shell-big">$1,251<'),
-        ('id="shell-sub">Matches advertised price ($0 hidden fees).</p>', 'id="shell-sub">App plan step-up only. Okta, WorkOS, and 1Password are separate bills.</p>'),
-        ('id="shell-title-base">Sticker Price<', 'id="shell-title-base">Zoom step-up<'),
-        ('id="shell-sub-base">Advertised price<', 'id="shell-sub-base">Pro to Business, annual<'),
-        ('id="shell-amt-base">$0<', 'id="shell-amt-base">$1,251<'),
-        ('id="shell-title-seats">Other sticker fees<', 'id="shell-title-seats">Notion step-up<'),
-        ('id="shell-sub-seats">Included in the sticker<', 'id="shell-sub-seats">Plus to Business<'),
-        ('id="shell-amt-seats">$0<', 'id="shell-amt-seats">$3,000<'),
-        ('id="shell-title-hidden">Hidden Cost Gap<', 'id="shell-title-hidden">GitHub step-up<'),
-        ('id="shell-sub-hidden">Fees above the advertised price<', 'id="shell-sub-hidden">Team to Enterprise<'),
-        ('id="shell-amt-hidden">$0<', 'id="shell-amt-hidden">$5,100<'),
-        ('<div class="summary-label">Sticker Price</div>', '<div class="summary-label">Zoom step-up</div>'),
-        ('id="shell-sticker">$0<', 'id="shell-sticker">$1,251<'),
-        ('id="shell-sticker-note">Advertised price<', 'id="shell-sticker-note">Smallest published SAML step-up<'),
-        ('<div class="summary-label">Hidden Cost Gap</div>', '<div class="summary-label">Figma above Zoom</div>'),
-        ('id="shell-gap">$0<', 'id="shell-gap">+$10,449<'),
-        ('<div class="summary-scenario">Above the advertised price</div>', '<div class="summary-scenario">Organization minus the Zoom step-up</div>'),
+        ('id="shell-product">Year-1 total<', 'id="shell-product">Vanta Essentials, modeled Year-1<'),
+        ('id="shell-big">$0<', 'id="shell-big">$44,000<'),
+        ('id="shell-sub">Matches advertised price ($0 hidden fees).</p>', 'id="shell-sub">Modeled from the platform list, this CPA fee, and selected add-ons. Not an all-in quote. Readiness, internal prep, and a pen test are excluded. The security-tools allowance is off.</p>'),
+        ('id="shell-title-base">Sticker Price<', 'id="shell-title-base">Platform<'),
+        ('id="shell-sub-base">Advertised price<', 'id="shell-sub-base">12-month AWS list, or unknown<'),
+        ('id="shell-amt-base">$0<', 'id="shell-amt-base">$14,000<'),
+        ('id="shell-title-seats">Other sticker fees<', 'id="shell-title-seats">Add-ons<'),
+        ('id="shell-sub-seats">Included in the sticker<', 'id="shell-sub-seats">Selected modules, without overlap<'),
+        ('id="shell-amt-seats">$0<', 'id="shell-amt-seats">none<'),
+        ('id="shell-title-hidden">Hidden Cost Gap<', 'id="shell-title-hidden">CPA auditor<'),
+        ('id="shell-sub-hidden">Fees above the advertised price<', 'id="shell-sub-hidden">Separate from the subscription<'),
+        ('id="shell-amt-hidden">$0<', 'id="shell-amt-hidden">$30,000<'),
+        ('<div class="summary-label">Sticker Price</div>', '<div class="summary-label">Platform</div>'),
+        ('id="shell-sticker">$0<', 'id="shell-sticker">$14,000<'),
+        ('id="shell-sticker-note">Advertised price<', 'id="shell-sticker-note">12-month list<'),
+        ('<div class="summary-label">Hidden Cost Gap</div>', '<div class="summary-label">Auditor and add-ons</div>'),
+        ('id="shell-gap">$0<', 'id="shell-gap">+$30,000<'),
+        ('<div class="summary-scenario">Above the advertised price</div>', '<div class="summary-scenario">Year-2 is $44,000</div>'),
     ):
         if old not in workbench:
             raise SystemExit("missing soc2 fallback: " + old)
@@ -471,6 +471,7 @@ def build():
         faqs=FAQS,
         published_date="2026-11-07",
         show_affiliate_note=True,
+        modified_datetime="2026-11-07T06:11:32+00:00",
     )
     copy_to_root(REL)
 
