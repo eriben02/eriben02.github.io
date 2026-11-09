@@ -98,6 +98,11 @@ WORKBENCH_JS = r"""
 
 def render_workbench(controls_html, controls_title="Estimate Your True Cost", chart_title="Your Estimated True Cost", cta_href="#comparison", cta_label="See pricing", cta_vendor="saasbill"):
     """Shared tactile editorial workbench: recessed controls, stacked bar, raised result column, summary cards."""
+    # Hash links stay on this site. vendor_cta_click is for vendor and affiliate clicks only.
+    if str(cta_href).startswith("#"):
+        cta_attrs = ""
+    else:
+        cta_attrs = ' data-track="vendor-cta" data-vendor="%s" data-cta-location="workbench"' % cta_vendor
     return f"""
 <div class="unified-inspector-tray">
 <section class="calc-box editorial-workbench" aria-label="True cost calculator">
@@ -136,7 +141,7 @@ def render_workbench(controls_html, controls_title="Estimate Your True Cost", ch
       <p class="wb-budget-subnote" id="shell-sub">Matches advertised price ($0 hidden fees).</p>
       <div class="wb-best-option" id="shell-best"></div>
       <div class="cta-stack">
-        <a id="shell-cta" class="btn-cta wb-primary-cta" href="{cta_href}" data-track="vendor-cta" data-vendor="{cta_vendor}" data-cta-location="workbench">{cta_label} &rarr;</a>
+        <a id="shell-cta" class="btn-cta wb-primary-cta" href="{cta_href}"{cta_attrs}>{cta_label} &rarr;</a>
       </div>
     </div>
   </div>

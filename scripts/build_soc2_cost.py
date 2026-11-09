@@ -427,6 +427,29 @@ def build():
     if needle not in workbench:
         raise SystemExit("Vanta CTA not found")
     workbench = workbench.replace(needle, replacement, 1)
+    for old, new in (
+        ('id="shell-product">Year-1 total<', 'id="shell-product">Zoom SAML step-up, 25 people<'),
+        ('id="shell-big">$0<', 'id="shell-big">$1,251<'),
+        ('id="shell-sub">Matches advertised price ($0 hidden fees).</p>', 'id="shell-sub">App plan step-up only. Okta, WorkOS, and 1Password are separate bills.</p>'),
+        ('id="shell-title-base">Sticker Price<', 'id="shell-title-base">Zoom step-up<'),
+        ('id="shell-sub-base">Advertised price<', 'id="shell-sub-base">Pro to Business, annual<'),
+        ('id="shell-amt-base">$0<', 'id="shell-amt-base">$1,251<'),
+        ('id="shell-title-seats">Other sticker fees<', 'id="shell-title-seats">Notion step-up<'),
+        ('id="shell-sub-seats">Included in the sticker<', 'id="shell-sub-seats">Plus to Business<'),
+        ('id="shell-amt-seats">$0<', 'id="shell-amt-seats">$3,000<'),
+        ('id="shell-title-hidden">Hidden Cost Gap<', 'id="shell-title-hidden">GitHub step-up<'),
+        ('id="shell-sub-hidden">Fees above the advertised price<', 'id="shell-sub-hidden">Team to Enterprise<'),
+        ('id="shell-amt-hidden">$0<', 'id="shell-amt-hidden">$5,100<'),
+        ('<div class="summary-label">Sticker Price</div>', '<div class="summary-label">Zoom step-up</div>'),
+        ('id="shell-sticker">$0<', 'id="shell-sticker">$1,251<'),
+        ('id="shell-sticker-note">Advertised price<', 'id="shell-sticker-note">Smallest published SAML step-up<'),
+        ('<div class="summary-label">Hidden Cost Gap</div>', '<div class="summary-label">Figma above Zoom</div>'),
+        ('id="shell-gap">$0<', 'id="shell-gap">+$10,449<'),
+        ('<div class="summary-scenario">Above the advertised price</div>', '<div class="summary-scenario">Organization minus the Zoom step-up</div>'),
+    ):
+        if old not in workbench:
+            raise SystemExit("missing soc2 fallback: " + old)
+        workbench = workbench.replace(old, new, 1)
     body = (
         '<section class="hero">'
         "<h1>Vanta, Drata, and Comp AI SOC 2 cost (2026)</h1>"

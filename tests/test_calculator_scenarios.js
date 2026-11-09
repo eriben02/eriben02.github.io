@@ -811,23 +811,32 @@ function hipaaVoice() {
   const html = read(rel);
   const fn = extractBalanced(html, "function calcHipaa");
   const yearFn = extractBalanced(html, "function hvYear");
-  check(!!fn && !!yearFn, "missing hipaa voice math");
+  const capFn = extractBalanced(html, "function hvCaption");
+  check(!!fn && !!yearFn && !!capFn, "missing hipaa voice math");
   check(html.indexOf("/go/") === -1, "no affiliate redirect");
   check(html.indexOf("sponsored") === -1, "no sponsored markup");
+  check(html.indexOf("$99.99") === -1, "do not invent Otter's $99.99 annual total");
+  const quote = (html.match(/id="shell-quote">([^<]*)</) || [])[1] || "";
+  check(quote === "Published seat list prices, not a full cost", "neutral result label: " + quote);
+  check(quote.indexOf("True Year-1 cost") === -1, "this page does not label one vendor as the Year-1 cost");
   check(html.indexOf("Lowest Year-1 cost") === -1 && html.indexOf("Winner") === -1, "no ranking label");
   check(html.indexOf("necessary but not sufficient") !== -1, "BAA scope line");
+  const ctaAt = html.indexOf('id="shell-cta"');
+  const cta = html.slice(ctaAt, html.indexOf("</a>", ctaAt));
+  check(cta.indexOf('href="#hv-matrix"') !== -1, "matrix CTA is internal");
+  check(cta.indexOf("vendor-cta") === -1 && cta.indexOf("data-vendor") === -1, "internal CTA is not a vendor click");
   const box = {};
   vm.createContext(box);
-  vm.runInContext(yearFn + "\n" + fn + "\nthis.fn=calcHipaa;", box);
-  const def = box.fn({ seats: 5, billing: "annual", baa: "yes" });
+  vm.runInContext(yearFn + "\n" + capFn + "\n" + fn + "\nthis.fn=calcHipaa;\nthis.cap=hvCaption;", box);
+  check(box.cap(1, true) === "1 seat, annual billing, BAA required. Not a ranking.", "1 seat grammar: " + box.cap(1, true));
+  check(box.cap(5, false) === "5 seats, monthly billing, BAA required. Not a ranking.", box.cap(5, false));
+  const def = box.fn({ seats: 5, billing: "annual" });
   check(def.zoomYear === 84960 && def.fathomYear === 90000 && def.granolaYear === 210000, "5 annual seats: Zoom $849.60, Fathom $900, Granola $2,100");
   check(def.firefliesBase === 234000 && def.otterYear === -1 && def.assemblyYear === -1 && def.deepgramYear === -1, "Fireflies base is not a HIPAA total; Otter, AssemblyAI, and Deepgram stay unknown");
-  const one = box.fn({ seats: 1, billing: "annual", baa: "yes" });
+  const one = box.fn({ seats: 1, billing: "annual" });
   check(one.fathomSeats === 2 && one.fathomYear === 36000, "Fathom bills a 2-seat minimum");
-  const monthly = box.fn({ seats: 5, billing: "monthly", baa: "yes" });
+  const monthly = box.fn({ seats: 5, billing: "monthly" });
   check(monthly.zoomYear === 101940 && monthly.fathomYear === 114000 && monthly.firefliesBase === -1, "monthly Zoom and Fathom; Fireflies HIPAA is annual only");
-  const off = box.fn({ seats: 5, billing: "annual", baa: "no" });
-  check(off.otterYear === 0 && off.fathomYear === 0 && off.granolaYear === 0 && off.zoomYear === 0, "without a BAA the free plans are included, not a dollar guess");
 }
 
 function main() {

@@ -3115,6 +3115,33 @@ input[type="date"],
   pointer-events: none;
   z-index: 2;
 }
+.wb-vbar-container.wb-vbar-separate {
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 18px;
+  min-height: 220px;
+}
+.wb-vbar-container.wb-vbar-separate::before {
+  content: none;
+}
+.wb-vbar-container.wb-vbar-separate .wb-vbar-row {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 1 1 0;
+  gap: 8px;
+}
+.wb-vbar-container.wb-vbar-separate .wb-vbar-block {
+  width: 100%;
+  max-width: 96px;
+  border-radius: 7px !important;
+  border-bottom: 0 !important;
+}
+.wb-vbar-container.wb-vbar-separate .wb-callout-text {
+  text-align: center;
+}
 .wb-vbar-row:first-child .wb-vbar-block { border-radius: 7px 7px 0 0; }
 .wb-vbar-row:last-child .wb-vbar-block { border-radius: 0 0 7px 7px; }
 .wb-vbar-block,

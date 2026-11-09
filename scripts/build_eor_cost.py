@@ -380,6 +380,29 @@ def build():
     if needle not in workbench:
         raise SystemExit("Deel CTA not found")
     workbench = workbench.replace(needle, replacement, 1)
+    for old, new in (
+        ('id="shell-product">Year-1 total<', 'id="shell-product">Deel management fee, 1 employee<'),
+        ('id="shell-big">$0<', 'id="shell-big">$7,188<'),
+        ('id="shell-sub">Matches advertised price ($0 hidden fees).</p>', 'id="shell-sub">Modeled known fees, not an all-in quote. Payment fees are excluded. That does not mean funding is free.</p>'),
+        ('id="shell-title-base">Sticker Price<', 'id="shell-title-base">Deel fee<'),
+        ('id="shell-sub-base">Advertised price<', 'id="shell-sub-base">Starting price, 12 months<'),
+        ('id="shell-amt-base">$0<', 'id="shell-amt-base">$7,188<'),
+        ('id="shell-title-seats">Other sticker fees<', 'id="shell-title-seats">Deposit<'),
+        ('id="shell-sub-seats">Included in the sticker<', 'id="shell-sub-seats">Cash lock-up, not a fee<'),
+        ('id="shell-amt-seats">$0<', 'id="shell-amt-seats">$5,599<'),
+        ('id="shell-title-hidden">Hidden Cost Gap<', 'id="shell-title-hidden">Rippling fee<'),
+        ('id="shell-sub-hidden">Fees above the advertised price<', 'id="shell-sub-hidden">Unknown unless you enter one<'),
+        ('id="shell-amt-hidden">$0<', 'id="shell-amt-hidden">unknown<'),
+        ('<div class="summary-label">Sticker Price</div>', '<div class="summary-label">Deel Year-1 fee</div>'),
+        ('id="shell-sticker">$0<', 'id="shell-sticker">$7,188<'),
+        ('id="shell-sticker-note">Advertised price<', 'id="shell-sticker-note">Deel management fee<'),
+        ('<div class="summary-label">Hidden Cost Gap</div>', '<div class="summary-label">Deposit lock-up</div>'),
+        ('id="shell-gap">$0<', 'id="shell-gap">$5,599<'),
+        ('<div class="summary-scenario">Above the advertised price</div>', '<div class="summary-scenario">Not added to the Year-1 fee</div>'),
+    ):
+        if old not in workbench:
+            raise SystemExit("missing eor fallback: " + old)
+        workbench = workbench.replace(old, new, 1)
     body = (
         '<section class="hero">'
         "<h1>Deel vs. Rippling EOR cost (2026)</h1>"
