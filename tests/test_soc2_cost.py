@@ -92,6 +92,33 @@ class TestSoc2Cost(unittest.TestCase):
             self.assertIn(target, page)
             self.assertNotIn("partnerstack", page.lower())
 
+    def test_no_js_fallback_matches_the_default_and_is_not_the_sso_page(self):
+        html = self.page()
+        workbench = html.split('id="soc-compare"', 1)[0]
+        for banned in (
+            "SAML",
+            "Zoom step-up",
+            "Notion step-up",
+            "GitHub step-up",
+            "Smallest published",
+            "Figma above Zoom",
+            "Okta, WorkOS",
+            "$1,251",
+            "$10,449",
+        ):
+            self.assertNotIn(banned, workbench)
+        self.assertIn('id="shell-product">Vanta Essentials, modeled Year-1<', html)
+        self.assertIn('id="shell-big">$44,000<', html)
+        self.assertIn('id="shell-amt-base">$14,000<', html)
+        self.assertIn('id="shell-amt-hidden">$30,000<', html)
+        self.assertIn('id="shell-gap">+$30,000<', html)
+        self.assertIn(">$45,000<", html)
+        self.assertIn(">$51,500<", html)
+        self.assertIn(">$53,000<", html)
+        self.assertIn("2026-11-07T06:11:32+00:00", html)
+        self.assertNotIn("2026-11-09", html)
+        self.assertIn(">Nov 07, 2026<", html)
+
 
 if __name__ == "__main__":
     unittest.main()

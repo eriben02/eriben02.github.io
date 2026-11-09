@@ -183,9 +183,11 @@
     "title": "Deel vs. Rippling EOR True Cost (2026): Hidden Currency FX Spreads, Deposit Rules & Offboarding Fees",
     "category": "Compliance, HIPAA & SOC 2",
     "primary_affiliate": "deel",
-    "status": "in_progress",
+    "status": "published",
+    "published_at": "2026-11-08",
+    "url": "https://saasbill.io/compare/deel-vs-rippling-eor-hidden-fx-and-offboarding-fees/",
     "strategic_rationale": "Cross-border legal entity & payroll compliance that companies cannot build in-house.",
-    "verification_note": "Deel pricing, the EOR deposit article, and the exchange-rate article, plus Rippling pricing, the EOR page, and two Rippling blogs, checked 2026-11-08. Deel EOR starts at $599 per employee per month. The deposit is 1 to 1.5 times monthly charges and is cash lock-up, not a Year-1 fee. Deel's numeric FX spread is unknown. Rippling's EOR price, deposit, FX, setup, offboarding fee, base fee, minimum term, and auto-renewal are unknown. A Rippling blog starting figure of $499 is optional, not the default. Deel's affiliate application is still applied, so the page has no /go/ link. published_at waits for merge."
+    "verification_note": "Deel pricing, the EOR deposit article, and the exchange-rate article, plus Rippling pricing, the EOR page, and two Rippling blogs, checked 2026-11-08. Deel EOR starts at $599 per employee per month. The deposit is 1 to 1.5 times monthly charges and is cash lock-up, not a Year-1 fee. Deel's numeric FX spread is unknown. Rippling's EOR price, deposit, FX, setup, offboarding fee, base fee, minimum term, and auto-renewal are unknown. A Rippling blog starting figure of $499 is optional, not the default. Deel's affiliate application is still applied, so the page has no /go/ link. Live after PR 18."
   },
   {
     "priority": 18,
@@ -193,7 +195,8 @@
     "title": "AI Voice & Meeting Transcription HIPAA BAA Matrix (2026): Enterprise BAA Tiers vs. Self-Serve Compliance",
     "category": "Compliance, HIPAA & SOC 2",
     "primary_affiliate": "vanta",
-    "status": "queued",
-    "strategic_rationale": "AI compliance bottleneck: every company adopting AI voice/notes needs BAA & SOC 2 vendor verification."
+    "status": "in_progress",
+    "strategic_rationale": "AI compliance bottleneck: every company adopting AI voice/notes needs BAA & SOC 2 vendor verification.",
+    "verification_note": "Otter, Fireflies, Fathom, Granola, Zoom healthcare, AssemblyAI, and Deepgram pages checked 2026-11-09. Granola Enterprise is $35 per user per month on the live pricing page, with HIPAA workspaces on Enterprise only. Otter Enterprise and its HIPAA add-on, Fireflies Private Storage, AssemblyAI usage, and Deepgram Enterprise stay unknown. No affiliate link: none of these vendors are active partners, and Vanta is only applied. published_at waits for merge."
   }
 ]

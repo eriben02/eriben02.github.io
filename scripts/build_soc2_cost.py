@@ -427,6 +427,29 @@ def build():
     if needle not in workbench:
         raise SystemExit("Vanta CTA not found")
     workbench = workbench.replace(needle, replacement, 1)
+    for old, new in (
+        ('id="shell-product">Year-1 total<', 'id="shell-product">Vanta Essentials, modeled Year-1<'),
+        ('id="shell-big">$0<', 'id="shell-big">$44,000<'),
+        ('id="shell-sub">Matches advertised price ($0 hidden fees).</p>', 'id="shell-sub">Modeled from the platform list, this CPA fee, and selected add-ons. Not an all-in quote. Readiness, internal prep, and a pen test are excluded. The security-tools allowance is off.</p>'),
+        ('id="shell-title-base">Sticker Price<', 'id="shell-title-base">Platform<'),
+        ('id="shell-sub-base">Advertised price<', 'id="shell-sub-base">12-month AWS list, or unknown<'),
+        ('id="shell-amt-base">$0<', 'id="shell-amt-base">$14,000<'),
+        ('id="shell-title-seats">Other sticker fees<', 'id="shell-title-seats">Add-ons<'),
+        ('id="shell-sub-seats">Included in the sticker<', 'id="shell-sub-seats">Selected modules, without overlap<'),
+        ('id="shell-amt-seats">$0<', 'id="shell-amt-seats">none<'),
+        ('id="shell-title-hidden">Hidden Cost Gap<', 'id="shell-title-hidden">CPA auditor<'),
+        ('id="shell-sub-hidden">Fees above the advertised price<', 'id="shell-sub-hidden">Separate from the subscription<'),
+        ('id="shell-amt-hidden">$0<', 'id="shell-amt-hidden">$30,000<'),
+        ('<div class="summary-label">Sticker Price</div>', '<div class="summary-label">Platform</div>'),
+        ('id="shell-sticker">$0<', 'id="shell-sticker">$14,000<'),
+        ('id="shell-sticker-note">Advertised price<', 'id="shell-sticker-note">12-month list<'),
+        ('<div class="summary-label">Hidden Cost Gap</div>', '<div class="summary-label">Auditor and add-ons</div>'),
+        ('id="shell-gap">$0<', 'id="shell-gap">+$30,000<'),
+        ('<div class="summary-scenario">Above the advertised price</div>', '<div class="summary-scenario">Year-2 is $44,000</div>'),
+    ):
+        if old not in workbench:
+            raise SystemExit("missing soc2 fallback: " + old)
+        workbench = workbench.replace(old, new, 1)
     body = (
         '<section class="hero">'
         "<h1>Vanta, Drata, and Comp AI SOC 2 cost (2026)</h1>"
@@ -448,6 +471,7 @@ def build():
         faqs=FAQS,
         published_date="2026-11-07",
         show_affiliate_note=True,
+        modified_datetime="2026-11-07T06:11:32+00:00",
     )
     copy_to_root(REL)
 

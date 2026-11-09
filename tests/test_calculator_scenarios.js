@@ -25,6 +25,11 @@ function read(rel) {
   return fs.readFileSync(path.join(pub, rel), "utf8");
 }
 
+function idText(html, id) {
+  const match = html.match(new RegExp('id="' + id + '"[^>]*>([^<]*)<'));
+  return match ? match[1] : null;
+}
+
 function walkHtml(dir, out) {
   for (const name of fs.readdirSync(dir)) {
     const full = path.join(dir, name);
@@ -725,9 +730,27 @@ function soc2Cost() {
   vm.createContext(box);
   const modFn = extractBalanced(html, "function socModules");
   check(!!modFn, "missing soc module overlap math");
-  vm.runInContext(listFn + "\n" + nameFn + "\n" + modFn + "\n" + fn + "\n" + lineFn + "\n" + moneyFn + "\nthis.fn=calcSoc2;\nthis.line=socLowest;", box);
+  vm.runInContext(listFn + "\n" + nameFn + "\n" + modFn + "\n" + fn + "\n" + lineFn + "\n" + moneyFn + "\nthis.fn=calcSoc2;\nthis.line=socLowest;\nthis.money=socMoney;", box);
   const def = box.fn({ platform: "vanta-essentials", band: "1-20", auditor: 30000, trust: "none", quest: "none", ctm: false, tprm: false, ftr: false, tools: false });
   check(def.list === 14000 && def.year1 === 44000 && def.year2 === 44000 && def.auditor === 30000, "default Essentials plus midpoint auditor is $44,000");
+  const workbench = html.split('id="soc-compare"', 1)[0];
+  ["SAML", "Zoom step-up", "Notion step-up", "GitHub step-up", "Smallest published", "Figma above Zoom", "Okta, WorkOS", "$1,251", "$10,449"].forEach(function (banned) {
+    check(workbench.indexOf(banned) === -1, "SOC 2 no-JS fallback must not contain " + banned);
+  });
+  check(idText(html, "shell-best") === "", "static SOC 2 result does not pre-rank");
+  check(idText(html, "shell-product") === def.name + ", modeled Year-1", "SOC 2 static product");
+  check(idText(html, "shell-big") === box.money(def.year1), "SOC 2 static Year-1 " + idText(html, "shell-big"));
+  check(idText(html, "shell-amt-base") === box.money(def.list), "SOC 2 static platform");
+  check(idText(html, "shell-amt-seats") === "none", "SOC 2 static add-ons");
+  check(idText(html, "shell-amt-hidden") === box.money(def.auditor), "SOC 2 static auditor");
+  check(idText(html, "shell-sticker") === box.money(def.list), "SOC 2 static sticker");
+  check(idText(html, "shell-gap") === "+" + box.money(def.year1 - def.list), "SOC 2 static gap");
+  const compare = (html.match(/id="soc-compare-body">([\s\S]*?)<\/tbody>/) || [""])[1];
+  [["Vanta Essentials", 14000], ["Vanta Plus", 21500], ["Vanta Professional", 23000], ["Drata Foundation (1 to 50 FTE)", 15000]].forEach(function (row) {
+    const total = box.money(row[1] + def.auditor);
+    check(compare.indexOf(row[0] + "</td><td data-label=\"12-month list\">" + box.money(row[1]) + "</td><td data-label=\"Year-1\">" + total) !== -1, "SOC 2 static row " + row[0] + " " + total);
+  });
+  check(html.indexOf("2026-11-07T06:11:32+00:00") !== -1 && html.indexOf("2026-11-09") === -1, "SOC 2 check date stays 2026-11-07");
   const line = box.line("1-20", 30000);
   check(line.indexOf("Lowest Year-1 cost: Vanta Essentials, $44,000.") === 0, "Essentials is the lowest published AWS list plus this CPA fee: " + line);
   check(line.indexOf("published AWS lists") !== -1 && line.indexOf("before add-ons") !== -1 && line.indexOf("1 to 50 FTE") !== -1, "the comparison names its scope: " + line);
@@ -777,10 +800,18 @@ function eorCost() {
   check(html.indexOf("https://www.rippling.com/pricing") !== -1, "plain Rippling pricing link");
   const box = {};
   vm.createContext(box);
-  vm.runInContext(monthFn + "\n" + fn + "\n" + lineFn + "\n" + moneyFn + "\nthis.fn=calcEor;\nthis.line=eorScenario;", box);
+  vm.runInContext(monthFn + "\n" + fn + "\n" + lineFn + "\n" + moneyFn + "\nthis.fn=calcEor;\nthis.line=eorScenario;\nthis.money=eorMoney;", box);
   const base = { employees: 1, salary: 5000, employerPct: 0, allowances: 0, depositTenths: 10, ripplingMode: "unknown", ripplingFee: 499, fxPct: 0, payMethod: "none", platform8: false };
   const def = box.fn(base);
   check(def.deelYear === 7188 && def.deposit === 5599 && def.ripplingYear === -1 && def.vendorCents === 718800, "default is Deel $7,188 and a $5,599 deposit, Rippling unknown");
+  check(idText(html, "shell-product") === "Deel management fee, " + def.employees + " employee", "Deel static product");
+  check(idText(html, "shell-big") === box.money(def.vendorCents), "Deel static Year-1 " + idText(html, "shell-big"));
+  check(idText(html, "shell-amt-base") === box.money(def.deelYear * 100), "Deel static fee");
+  check(idText(html, "shell-amt-seats") === box.money(def.deposit * 100), "Deel static deposit");
+  check(idText(html, "shell-amt-hidden") === box.money(def.ripplingYear), "Deel static Rippling");
+  check(idText(html, "shell-sticker") === box.money(def.deelYear * 100), "Deel static sticker");
+  check(idText(html, "shell-gap") === box.money(def.deposit * 100), "Deel static gap");
+  check(html.indexOf("2026-11-08T06:05:08+00:00") !== -1 && html.indexOf("2026-11-09") === -1, "Deel check date stays 2026-11-08");
   const line = box.line(def.deelYear, def.ripplingYear, "unknown");
   check(line.indexOf("Lowest Year-1 cost") === -1, "default is not a ranking: " + line);
   check(line.indexOf("not a ranking") !== -1 && line.indexOf("unknown") !== -1, line);
@@ -806,6 +837,46 @@ function eorCost() {
   check(box.line(7188, -1, "unknown").indexOf("Lowest Year-1 cost") === -1, "incomplete comparison is not a ranking");
 }
 
+function hipaaVoice() {
+  const rel = "compliance/ai-voice-and-transcription-hipaa-baa-matrix-2026/index.html";
+  const html = read(rel);
+  const fn = extractBalanced(html, "function calcHipaa");
+  const yearFn = extractBalanced(html, "function hvYear");
+  const capFn = extractBalanced(html, "function hvCaption");
+  check(!!fn && !!yearFn && !!capFn, "missing hipaa voice math");
+  check(html.indexOf("/go/") === -1, "no affiliate redirect");
+  check(html.indexOf("sponsored") === -1, "no sponsored markup");
+  check(html.indexOf("$99.99") === -1, "do not invent Otter's $99.99 annual total");
+  const quote = (html.match(/id="shell-quote">([^<]*)</) || [])[1] || "";
+  check(quote === "Published seat list prices, not a full cost", "neutral result label: " + quote);
+  check(quote.indexOf("True Year-1 cost") === -1, "this page does not label one vendor as the Year-1 cost");
+  check(html.indexOf("Lowest Year-1 cost") === -1 && html.indexOf("Winner") === -1, "no ranking label");
+  check(html.indexOf("necessary but not sufficient") !== -1, "BAA scope line");
+  const ctaAt = html.indexOf('id="shell-cta"');
+  const cta = html.slice(ctaAt, html.indexOf("</a>", ctaAt));
+  check(cta.indexOf('href="#hv-matrix"') !== -1, "matrix CTA is internal");
+  check(cta.indexOf("vendor-cta") === -1 && cta.indexOf("data-vendor") === -1, "internal CTA is not a vendor click");
+  const box = {};
+  vm.createContext(box);
+  const moneyFn = extractBalanced(html, "function hvMoney");
+  vm.runInContext(yearFn + "\n" + capFn + "\n" + moneyFn + "\n" + fn + "\nthis.fn=calcHipaa;\nthis.cap=hvCaption;\nthis.money=hvMoney;", box);
+  check(box.cap(1, true) === "1 seat, annual billing, BAA required. Not a ranking.", "1 seat grammar: " + box.cap(1, true));
+  check(box.cap(5, false) === "5 seats, monthly billing, BAA required. Not a ranking.", box.cap(5, false));
+  const def = box.fn({ seats: 5, billing: "annual" });
+  check(def.zoomYear === 84960 && def.fathomYear === 90000 && def.granolaYear === 210000, "5 annual seats: Zoom $849.60, Fathom $900, Granola $2,100");
+  check(idText(html, "shell-big") === "Not a ranking", "HIPAA static total is not one vendor");
+  check(idText(html, "shell-product") === "Published seat list prices", "HIPAA static product");
+  check(idText(html, "shell-amt-base") === box.money(def.zoomYear), "HIPAA static Zoom");
+  check(idText(html, "shell-amt-seats") === box.money(def.fathomYear), "HIPAA static Fathom");
+  check(idText(html, "shell-amt-hidden") === box.money(def.granolaYear), "HIPAA static Granola");
+  check(idText(html, "hv-caption") === box.cap(5, true), "HIPAA static caption");
+  check(def.firefliesBase === 234000 && def.otterYear === -1 && def.assemblyYear === -1 && def.deepgramYear === -1, "Fireflies base is not a HIPAA total; Otter, AssemblyAI, and Deepgram stay unknown");
+  const one = box.fn({ seats: 1, billing: "annual" });
+  check(one.fathomSeats === 2 && one.fathomYear === 36000, "Fathom bills a 2-seat minimum");
+  const monthly = box.fn({ seats: 5, billing: "monthly" });
+  check(monthly.zoomYear === 101940 && monthly.fathomYear === 114000 && monthly.firefliesBase === -1, "monthly Zoom and Fathom; Fireflies HIPAA is annual only");
+}
+
 function main() {
   errors.length = 0;
   checks = 0;
@@ -824,6 +895,7 @@ function main() {
   ssoTax();
   soc2Cost();
   eorCost();
+  hipaaVoice();
   plausible();
   if (errors.length) {
     console.error(errors.join("\n"));

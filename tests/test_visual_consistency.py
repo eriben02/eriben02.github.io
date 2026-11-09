@@ -58,6 +58,7 @@ class TestVisualConsistency(unittest.TestCase):
                         hasRange: !!slider,
                         show: document.body.innerText.indexOf('Show calculation') !== -1,
                         quote: document.body.innerText.indexOf('True Year-1 cost') !== -1,
+                        neutral: document.body.innerText.indexOf('Published seat list prices, not a full cost') !== -1,
                         calcCard: !!document.querySelector('.calc-card'),
                         styleTag: !!document.querySelector('style')
                       };
@@ -81,7 +82,13 @@ class TestVisualConsistency(unittest.TestCase):
                         flags.append("slider " + info["sliderH"])
                     if not info["show"]:
                         flags.append("missing Show calculation")
-                    if not info["quote"]:
+                    matrix = "/compliance/ai-voice-and-transcription-hipaa-baa-matrix-2026/"
+                    if path == matrix:
+                        if not info["neutral"]:
+                            flags.append("missing neutral price label")
+                        if info["quote"]:
+                            flags.append("True Year-1 cost on the BAA matrix")
+                    elif not info["quote"]:
                         flags.append("missing True Year-1 cost")
                 if info["calcCard"]:
                     flags.append("calc-card")

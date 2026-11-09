@@ -60,13 +60,25 @@ class TestEorCost(unittest.TestCase):
         with open(os.path.join(BASE, "data", "publishing_queue.json"), encoding="utf-8") as handle:
             queue = json.load(handle)
         item = next(row for row in queue if row["priority"] == 17)
-        self.assertEqual(item["status"], "in_progress")
-        self.assertNotIn("published_at", item)
+        self.assertEqual(item["status"], "published")
+        self.assertEqual(item["published_at"], "2026-11-08")
+        self.assertEqual(
+            item["url"],
+            "https://saasbill.io/compare/deel-vs-rippling-eor-hidden-fx-and-offboarding-fees/",
+        )
         self.assertIn("unknown", item["verification_note"])
         with open(os.path.join(BASE, "data", "affiliate_links.json"), encoding="utf-8") as handle:
             affiliates = json.load(handle)
         self.assertTrue(affiliates["deel"]["status"].startswith("applied"))
         self.assertNotIn("rippling", affiliates)
+        self.assertIn('id="shell-product">Deel management fee, 1 employee<', html)
+        self.assertIn('id="shell-big">$7,188<', html)
+        self.assertIn('id="shell-amt-base">$7,188<', html)
+        self.assertIn('id="shell-amt-seats">$5,599<', html)
+        self.assertIn('id="shell-amt-hidden">unknown<', html)
+        self.assertIn("2026-11-08T06:05:08+00:00", html)
+        self.assertNotIn("2026-11-09", html)
+        self.assertIn(">Nov 08, 2026<", html)
 
 
 if __name__ == "__main__":

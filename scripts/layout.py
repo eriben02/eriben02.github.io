@@ -98,6 +98,11 @@ WORKBENCH_JS = r"""
 
 def render_workbench(controls_html, controls_title="Estimate Your True Cost", chart_title="Your Estimated True Cost", cta_href="#comparison", cta_label="See pricing", cta_vendor="saasbill"):
     """Shared tactile editorial workbench: recessed controls, stacked bar, raised result column, summary cards."""
+    # Hash links stay on this site. vendor_cta_click is for vendor and affiliate clicks only.
+    if str(cta_href).startswith("#"):
+        cta_attrs = ""
+    else:
+        cta_attrs = ' data-track="vendor-cta" data-vendor="%s" data-cta-location="workbench"' % cta_vendor
     return f"""
 <div class="unified-inspector-tray">
 <section class="calc-box editorial-workbench" aria-label="True cost calculator">
@@ -136,7 +141,7 @@ def render_workbench(controls_html, controls_title="Estimate Your True Cost", ch
       <p class="wb-budget-subnote" id="shell-sub">Matches advertised price ($0 hidden fees).</p>
       <div class="wb-best-option" id="shell-best"></div>
       <div class="cta-stack">
-        <a id="shell-cta" class="btn-cta wb-primary-cta" href="{cta_href}" data-track="vendor-cta" data-vendor="{cta_vendor}" data-cta-location="workbench">{cta_label} &rarr;</a>
+        <a id="shell-cta" class="btn-cta wb-primary-cta" href="{cta_href}"{cta_attrs}>{cta_label} &rarr;</a>
       </div>
     </div>
   </div>
@@ -340,6 +345,7 @@ def render_related_links(rel_path, prefix):
         ("compliance/okta-vs-workos-vs-1password-sso-tax-calculator/index.html", "SSO tax calculator", "What apps charge to turn on SAML, plus Okta, WorkOS, and 1Password as separate bills."),
         ("compliance/vanta-vs-drata-vs-comp-ai-soc2-negotiation-benchmarks/index.html", "SOC 2 cost calculator", "AWS list prices for Vanta and Drata, plus the separate CPA auditor fee."),
         ("compare/deel-vs-rippling-eor-hidden-fx-and-offboarding-fees/index.html", "Deel vs Rippling EOR cost", "Deel's starting EOR fee, the refundable deposit, and Rippling's unpublished price."),
+        ("compliance/ai-voice-and-transcription-hipaa-baa-matrix-2026/index.html", "AI voice HIPAA BAA matrix", "Which plan lists a BAA, and which Year-1 prices are still unknown."),
         ("faq/does-hubspot-charge-onboarding-fees-2026/index.html", "Does HubSpot Charge Onboarding Fees in 2026?", "The fee schedule, waivers, and $0-onboarding alternatives."),
         ("faq/intercom-fin-ai-cost-calculator/index.html", "Intercom Fin AI Cost Calculator", "The FAQ copy of the $0.99 per resolution Year-1 price."),
         ("faq/stripe-vs-paddle-true-cost/index.html", "Stripe vs. Paddle vs. Whop True Cost &amp; Chargeback Calculator", "Processing, billing, tax, and dispute cost side by side."),
@@ -405,9 +411,15 @@ def render_related_links(rel_path, prefix):
         ]
     elif rel_path == "compare/deel-vs-rippling-eor-hidden-fx-and-offboarding-fees/index.html":
         preferred = [
+            "compliance/ai-voice-and-transcription-hipaa-baa-matrix-2026/index.html",
             "compliance/vanta-vs-drata-vs-comp-ai-soc2-negotiation-benchmarks/index.html",
             "compliance/hipaa-baa-and-soc2-pricing-tiers/index.html",
-            "compliance/okta-vs-workos-vs-1password-sso-tax-calculator/index.html",
+        ]
+    elif rel_path == "compliance/ai-voice-and-transcription-hipaa-baa-matrix-2026/index.html":
+        preferred = [
+            "compliance/hipaa-baa-and-soc2-pricing-tiers/index.html",
+            "compliance/vanta-vs-drata-vs-comp-ai-soc2-negotiation-benchmarks/index.html",
+            "compare/deel-vs-rippling-eor-hidden-fx-and-offboarding-fees/index.html",
         ]
     elif rel_path == radar_rel:
         preferred = [
@@ -485,8 +497,12 @@ def render_related_links(rel_path, prefix):
     </section>
     """
 
-def render_page(rel_path, title, description, canonical_path, body_html, faqs=None, extra_schema=None, published_date=None, show_affiliate_note=True):
+def render_page(rel_path, title, description, canonical_path, body_html, faqs=None, extra_schema=None, published_date=None, show_affiliate_note=True, modified_datetime=None):
     iso_date, iso_datetime, human_date = get_freshness_timestamps()
+    if modified_datetime:
+        iso_datetime = modified_datetime
+        iso_date = modified_datetime[:10]
+        human_date = datetime.fromisoformat(modified_datetime).strftime("%b %d, %Y")
     pub_date = published_date or iso_date
     full_title = title if ("saasbill" in title.lower()) else f"{title} – saasbill.io"
 
