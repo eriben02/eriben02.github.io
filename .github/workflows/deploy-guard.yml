@@ -18,7 +18,7 @@ jobs:
         run: python3 -m unittest tests.test_deploy_guard -v
       - name: SOC 2 and EOR calculator math
         run: |
-          python3 -m unittest tests.test_soc2_cost tests.test_eor_cost -v
+          python3 -m unittest tests.test_soc2_cost tests.test_eor_cost tests.test_hipaa_voice -v
           node tests/test_calculator_scenarios.js
 
   live-homepage:

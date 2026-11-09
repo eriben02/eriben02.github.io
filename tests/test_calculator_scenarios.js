@@ -806,6 +806,30 @@ function eorCost() {
   check(box.line(7188, -1, "unknown").indexOf("Lowest Year-1 cost") === -1, "incomplete comparison is not a ranking");
 }
 
+function hipaaVoice() {
+  const rel = "compliance/ai-voice-and-transcription-hipaa-baa-matrix-2026/index.html";
+  const html = read(rel);
+  const fn = extractBalanced(html, "function calcHipaa");
+  const yearFn = extractBalanced(html, "function hvYear");
+  check(!!fn && !!yearFn, "missing hipaa voice math");
+  check(html.indexOf("/go/") === -1, "no affiliate redirect");
+  check(html.indexOf("sponsored") === -1, "no sponsored markup");
+  check(html.indexOf("Lowest Year-1 cost") === -1 && html.indexOf("Winner") === -1, "no ranking label");
+  check(html.indexOf("necessary but not sufficient") !== -1, "BAA scope line");
+  const box = {};
+  vm.createContext(box);
+  vm.runInContext(yearFn + "\n" + fn + "\nthis.fn=calcHipaa;", box);
+  const def = box.fn({ seats: 5, billing: "annual", baa: "yes" });
+  check(def.zoomYear === 84960 && def.fathomYear === 90000 && def.granolaYear === 210000, "5 annual seats: Zoom $849.60, Fathom $900, Granola $2,100");
+  check(def.firefliesBase === 234000 && def.otterYear === -1 && def.assemblyYear === -1 && def.deepgramYear === -1, "Fireflies base is not a HIPAA total; Otter, AssemblyAI, and Deepgram stay unknown");
+  const one = box.fn({ seats: 1, billing: "annual", baa: "yes" });
+  check(one.fathomSeats === 2 && one.fathomYear === 36000, "Fathom bills a 2-seat minimum");
+  const monthly = box.fn({ seats: 5, billing: "monthly", baa: "yes" });
+  check(monthly.zoomYear === 101940 && monthly.fathomYear === 114000 && monthly.firefliesBase === -1, "monthly Zoom and Fathom; Fireflies HIPAA is annual only");
+  const off = box.fn({ seats: 5, billing: "annual", baa: "no" });
+  check(off.otterYear === 0 && off.fathomYear === 0 && off.granolaYear === 0 && off.zoomYear === 0, "without a BAA the free plans are included, not a dollar guess");
+}
+
 function main() {
   errors.length = 0;
   checks = 0;
@@ -824,6 +848,7 @@ function main() {
   ssoTax();
   soc2Cost();
   eorCost();
+  hipaaVoice();
   plausible();
   if (errors.length) {
     console.error(errors.join("\n"));

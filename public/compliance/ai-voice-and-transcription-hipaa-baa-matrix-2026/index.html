@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-site-verification" content="W7-m7km1_5pZZUG38dpallcgdGss6_Vl2qo5pjVoMdA" />
+  <!-- Bing Webmaster Tools verification: paste <meta name="msvalidate.01" content="YOUR_BING_CODE" /> here or use 1-click Google Search Console import (see BING_WEBMASTER_VERIFICATION.md) -->
+  <title>AI voice HIPAA BAA matrix – saasbill.io</title>
+  <meta name="description" content="A BAA is necessary but not sufficient. Zoom healthcare Pro lists $14.16 a user a month on the annual plan. Otter's HIPAA add-on price is unknown. Checked 9 Nov 2026." />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+  <meta property="og:site_name" content="SaaSBill" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="AI voice HIPAA BAA matrix – saasbill.io" />
+  <meta property="og:description" content="A BAA is necessary but not sufficient. Zoom healthcare Pro lists $14.16 a user a month on the annual plan. Otter's HIPAA add-on price is unknown. Checked 9 Nov 2026." />
+  <meta property="og:url" content="https://saasbill.io/compliance/ai-voice-and-transcription-hipaa-baa-matrix-2026/" />
+  <meta property="og:updated_time" content="2026-11-09T06:04:08+00:00" />
+  <meta property="article:published_time" content="2026-11-09T00:00:00+01:00" />
+  <meta property="article:modified_time" content="2026-11-09T06:04:08+00:00" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AI voice HIPAA BAA matrix – saasbill.io" />
+  <meta name="twitter:description" content="A BAA is necessary but not sufficient. Zoom healthcare Pro lists $14.16 a user a month on the annual plan. Otter's HIPAA add-on price is unknown. Checked 9 Nov 2026." />
+  <meta name="last-modified" content="2026-11-09T06:04:08+00:00" />
+  <meta name="dcterms.modified" content="2026-11-09T06:04:08+00:00" />
+  <meta name="dcterms.issued" content="2026-11-09" />
+  <link rel="canonical" href="https://saasbill.io/compliance/ai-voice-and-transcription-hipaa-baa-matrix-2026/" />
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261030c" />
+  <link rel="alternate" type="text/plain" href="https://saasbill.io/llms.txt" title="SaaSBill LLMs.txt Summary" />
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script defer data-domain="saasbill.io" src="https://plausible.io/js/pa-VAaSVNs5XOobt9cv2UtKo.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init();
+    window.__saasbillEvents = window.__saasbillEvents || [];
+    window.trackSaaSBillEvent = function(eventName, props) {
+      var p = props || {};
+      var entry = { event: eventName, ts: Date.now() };
+      for (var k in p) {
+        if (Object.prototype.hasOwnProperty.call(p, k)) entry[k] = p[k];
+      }
+      window.__saasbillEvents.push(entry);
+      if (typeof window.plausible === 'function') {
+        window.plausible(eventName, { props: p });
+      }
+    };
+    window.trackEvent = window.trackSaaSBillEvent;
+
+    window.saasbillMoney = function (n) {
+      var v = Math.round(Number(n) || 0);
+      var sign = v < 0 ? '-' : '';
+      return sign + '$' + Math.abs(v).toLocaleString('en-US');
+    };
+    window.saasbillResultLine = function (hidden, sticker) {
+      var h = Math.round(Number(hidden) || 0);
+      var s = Math.round(Number(sticker) || 0);
+      if (h <= 0) return 'Matches advertised price ($0 hidden fees).';
+      var pct = s > 0 ? Math.round((h / s) * 100) : 0;
+      return '+' + window.saasbillMoney(h) + ' (+' + pct + '%) above advertised price.';
+    };
+    window.saasbillApplyWorkbench = function (opts) {
+      opts = opts || {};
+      var sticker = Math.max(0, Math.round(Number(opts.sticker) || 0));
+      var seats = Math.max(0, Math.round(Number(opts.seats) || 0));
+      var hidden = Math.max(0, Math.round(Number(opts.hidden) || 0));
+      var total = Math.round(Number(opts.total));
+      if (!isFinite(total)) total = sticker + seats + hidden;
+      var parts = Math.max(1, sticker + seats + hidden);
+      function node(id) { return document.getElementById(id); }
+      function setText(id, value) {
+        var el = node(id);
+        if (el) el.textContent = value;
+      }
+      function setFlex(id, amount) {
+        var el = node(id);
+        if (!el) return;
+        var share = amount <= 0 ? 8 : (amount / parts) * 100;
+        el.style.flex = share + ' 1 0px';
+      }
+      setText('shell-product', opts.product || '');
+      setText('shell-big', window.saasbillMoney(total));
+      setText('shell-quote', 'True Year-1 cost');
+      setText('shell-sub', window.saasbillResultLine(hidden, sticker + seats));
+      setText('shell-amt-base', window.saasbillMoney(sticker));
+      setText('shell-amt-seats', window.saasbillMoney(seats));
+      setText('shell-amt-hidden', window.saasbillMoney(hidden));
+      setText('shell-title-base', 'Sticker Price');
+      setText('shell-title-seats', opts.seatsTitle || 'Other sticker fees');
+      setText('shell-title-hidden', 'Hidden Cost Gap');
+      setText('shell-sub-base', opts.baseLabel || 'Advertised price');
+      setText('shell-sub-seats', opts.seatsLabel || 'Included in the sticker');
+      setText('shell-sub-hidden', opts.hiddenLabel || 'Fees above the advertised price');
+      setFlex('shell-row-base', sticker);
+      setFlex('shell-row-seats', seats);
+      setFlex('shell-row-hidden', hidden);
+      var seatsRow = node('shell-row-seats');
+      if (seatsRow) seatsRow.style.display = seats <= 0 ? 'none' : '';
+      var math = node('shell-math');
+      if (math && opts.mathHtml) math.innerHTML = opts.mathHtml;
+      var best = node('shell-best');
+      if (best && opts.bestHtml) best.innerHTML = opts.bestHtml;
+      var cta = node('shell-cta');
+      if (cta && opts.ctaHref) {
+        cta.href = opts.ctaHref;
+        var label = opts.ctaLabel || 'See pricing';
+        cta.textContent = /→\s*$/.test(label) ? label : label + ' \u2192';
+        if (opts.ctaVendor) cta.setAttribute('data-vendor', opts.ctaVendor);
+      }
+      setText('shell-sticker', window.saasbillMoney(sticker + seats));
+      setText('shell-gap', hidden > 0 ? '+' + window.saasbillMoney(hidden) : '$0');
+      if (opts.product) setText('shell-sticker-note', opts.product);
+    };
+
+  </script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "TechArticle", "@id": "https://saasbill.io/compliance/ai-voice-and-transcription-hipaa-baa-matrix-2026/#article", "headline": "AI voice HIPAA BAA matrix \u2013 saasbill.io", "description": "A BAA is necessary but not sufficient. Zoom healthcare Pro lists $14.16 a user a month on the annual plan. Otter's HIPAA add-on price is unknown. Checked 9 Nov 2026.", "datePublished": "2026-11-09", "dateModified": "2026-11-09T06:04:08+00:00", "author": {"@type": "Organization", "name": "SaaSBill Editorial", "url": "https://saasbill.io/"}, "publisher": {"@type": "Organization", "name": "SaaSBill", "url": "https://saasbill.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://saasbill.io/compliance/ai-voice-and-transcription-hipaa-baa-matrix-2026/"}}, {"@type": "WebPage", "@id": "https://saasbill.io/compliance/ai-voice-and-transcription-hipaa-baa-matrix-2026/", "url": "https://saasbill.io/compliance/ai-voice-and-transcription-hipaa-baa-matrix-2026/", "name": "AI voice HIPAA BAA matrix \u2013 saasbill.io", "description": "A BAA is necessary but not sufficient. Zoom healthcare Pro lists $14.16 a user a month on the annual plan. Otter's HIPAA add-on price is unknown. Checked 9 Nov 2026.", "inLanguage": "en-US", "datePublished": "2026-11-09", "dateModified": "2026-11-09T06:04:08+00:00", "lastReviewed": "2026-11-09", "reviewedBy": {"@type": "Organization", "name": "SaaSBill Editorial"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "SaaSBill", "item": "https://saasbill.io/"}, {"@type": "ListItem", "position": 2, "name": "AI voice HIPAA BAA matrix \u2013 saasbill.io", "item": "https://saasbill.io/compliance/ai-voice-and-transcription-hipaa-baa-matrix-2026/"}]}, {"@type": "FAQPage", "@id": "https://saasbill.io/compliance/ai-voice-and-transcription-hipaa-baa-matrix-2026/#faq", "datePublished": "2026-11-09", "dateModified": "2026-11-09T06:04:08+00:00", "mainEntity": [{"@type": "Question", "name": "Which Otter plan signs a BAA?", "dateCreated": "2026-11-09", "dateModified": "2026-11-09T06:04:08+00:00", "acceptedAnswer": {"@type": "Answer", "text": "Only Enterprise, and HIPAA is a paid add-on arranged with an account manager. Pro and Business publish seat prices and do not list that add-on. The Enterprise price and the add-on price are unknown. SSO and SCIM on Enterprise require a 100-user minimum license.", "dateCreated": "2026-11-09", "dateModified": "2026-11-09T06:04:08+00:00"}}, {"@type": "Question", "name": "Does Fireflies include HIPAA in the $39 price?", "dateCreated": "2026-11-09", "dateModified": "2026-11-09T06:04:08+00:00", "acceptedAnswer": {"@type": "Answer", "text": "No. Enterprise is $39 per seat per month, billed annually only. HIPAA also requires Private Storage and a signed BAA. Private Storage has no published price, so the HIPAA total is unknown. Removing Private Storage or downgrading turns HIPAA off. AI credits start at $5 per user per month and are not in the base price.", "dateCreated": "2026-11-09", "dateModified": "2026-11-09T06:04:08+00:00"}}, {"@type": "Question", "name": "Does a BAA make the product safe to use?", "dateCreated": "2026-11-09", "dateModified": "2026-11-09T06:04:08+00:00", "acceptedAnswer": {"@type": "Answer", "text": "A BAA is necessary but not sufficient. You still follow the vendor's setup, including storage and sharing rules. Zoom says some AI features may be unavailable for healthcare customers with a BAA.", "dateCreated": "2026-11-09", "dateModified": "2026-11-09T06:04:08+00:00"}}]}]}</script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-inner">
+      <div class="brand-wrap">
+        <a href="../../index.html" class="brand">SaaSBill<span>.io</span></a>
+        <span class="brand-tagline">Year-1 software cost &amp; contract calculators</span>
+      </div>
+      <nav class="nav-links" aria-label="Primary Navigation">
+        <a href="../../index.html#all-calculators">Audits &amp; Guides</a>
+        <a href="../../ai-act/">AI Act</a>
+        <a href="../../index.html#methodology">Methodology</a>
+        <span class="byline-bar">Updated <time datetime="2026-11-09" itemprop="dateModified">Nov 09, 2026</time></span>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+    <article itemscope itemtype="https://schema.org/TechArticle">
+      <meta itemprop="datePublished" content="2026-11-09" />
+      <meta itemprop="dateModified" content="2026-11-09T06:04:08+00:00" />
+      <section class="hero editorial-hero editorial-hero-wrap"><h1>AI voice and transcription HIPAA BAA matrix (2026)</h1><p class="lead">A BAA is necessary but not sufficient. Zoom healthcare Pro lists $14.16 per user per month on the annual plan. Fathom Team lists $15 with a standard BAA. Otter's HIPAA add-on, Fireflies Private Storage, and Deepgram Enterprise are unknown.</p></section>
+<div class="unified-inspector-tray">
+<section class="calc-box editorial-workbench" aria-label="True cost calculator">
+  <div class="workbench-grid">
+    <div class="wb-col-controls">
+      <div class="wb-col-title">Your team</div>
+      <div class="wb-controls-stack">
+        
+        <div class="wb-control-item">
+          <label class="wb-control-label" for="hv-seats">Seats <span class="val-pill" id="hv-seats-val">5</span></label>
+          <div class="wb-slider-row">
+            <input type="range" id="hv-seats" min="1" max="25" step="1" value="5" aria-label="Seats" data-track="calculator-control" data-control="seats" />
+          </div>
+        </div>
+        <div class="wb-control-item">
+          <label class="wb-control-label" for="hv-bill">Billing</label>
+          <select id="hv-bill" class="wb-tool-select" aria-label="Billing" data-track="calculator-control" data-control="billing">
+            <option value="annual" selected>Annual</option>
+            <option value="monthly">Monthly</option>
+          </select>
+        </div>
+        <div class="wb-control-item">
+          <label class="wb-control-label" for="hv-baa">Need a BAA</label>
+          <select id="hv-baa" class="wb-tool-select" aria-label="Need a BAA" data-track="calculator-control" data-control="baa">
+            <option value="yes" selected>Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+        <p class="wb-budget-subnote">A BAA is necessary but not sufficient. The matrix does not rank vendors.</p>
+
+      </div>
+    </div>
+    <div class="wb-col-chart">
+      <div class="wb-col-title">Published BAA seat prices</div>
+      <div class="wb-vbar-container" aria-live="polite">
+        <div class="wb-vbar-row" id="shell-row-base" style="flex: 40 1 0px;">
+          <div class="wb-vbar-block block-base"><span class="wb-block-amount" id="shell-amt-base">$0</span></div>
+          <div class="wb-callout-item"><div class="wb-leader-line"></div><div class="wb-callout-text"><strong id="shell-title-base">Sticker Price</strong><span id="shell-sub-base">Advertised price</span></div></div>
+        </div>
+        <div class="wb-vbar-row" id="shell-row-seats" style="flex: 8 1 0px;">
+          <div class="wb-vbar-block block-seats"><span class="wb-block-amount" id="shell-amt-seats">$0</span></div>
+          <div class="wb-callout-item"><div class="wb-leader-line"></div><div class="wb-callout-text"><strong id="shell-title-seats">Other sticker fees</strong><span id="shell-sub-seats">Included in the sticker</span></div></div>
+        </div>
+        <div class="wb-vbar-row" id="shell-row-hidden" style="flex: 52 1 0px;">
+          <div class="wb-vbar-block block-hidden"><span class="wb-block-amount" id="shell-amt-hidden">$0</span></div>
+          <div class="wb-callout-item"><div class="wb-leader-line"></div><div class="wb-callout-text"><strong id="shell-title-hidden">Hidden Cost Gap</strong><span id="shell-sub-hidden">Fees above the advertised price</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="wb-result-col" id="shell-result">
+      <div class="wb-selected-product" id="shell-product">Year-1 total</div>
+      <div class="wb-big-total"><span id="shell-big">$0</span> <span class="wb-per-year">/ year</span></div>
+      <details class="math-drawer" id="shell-calc">
+        <summary>Show calculation</summary>
+        <div class="math-drawer-body" id="shell-math"></div>
+      </details>
+      <p class="wb-budget-quote" id="shell-quote">True Year-1 cost</p>
+      <p class="wb-budget-subnote" id="shell-sub">Matches advertised price ($0 hidden fees).</p>
+      <div class="wb-best-option" id="shell-best"></div>
+      <div class="cta-stack">
+        <a id="shell-cta" class="btn-cta wb-primary-cta" href="#hv-matrix" data-track="vendor-cta" data-vendor="saasbill" data-cta-location="workbench">See the matrix &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+<section class="verdict-section" aria-label="Sticker price and hidden cost gap">
+  <div class="summary-strip" id="shell-summary">
+    <div class="summary-card result-card">
+      <div class="summary-label">Sticker Price</div>
+      <div class="summary-metric" id="shell-sticker">$0</div>
+      <div class="summary-scenario" id="shell-sticker-note">Advertised price</div>
+    </div>
+    <div class="summary-card result-card card-hidden">
+      <div class="summary-label">Hidden Cost Gap</div>
+      <div class="summary-metric" id="shell-gap">$0</div>
+      <div class="summary-scenario">Above the advertised price</div>
+    </div>
+  </div>
+</section>
+
+<section id="hv-matrix">
+  <h2>BAA plan and Year-1</h2>
+  <p>Each row is that vendor's plan that lists a BAA, or the documented plan without one when you do not need a BAA. A missing price stays unknown. Fathom's Team and Business standard BAA was on the pricing page on 9 Nov 2026.</p>
+  <div class="table-wrap editorial-gap-table mobile-cards">
+    <table>
+      <caption>Five seats, annual billing, BAA required. Not a ranking.</caption>
+      <thead>
+        <tr>
+          <th>Vendor</th>
+          <th>Plan</th>
+          <th>Year-1</th>
+          <th>Still unknown</th>
+        </tr>
+      </thead>
+      <tbody id="hv-body">
+        <tr><td data-label="Vendor">Otter</td><td data-label="Plan">Enterprise, HIPAA add-on</td><td data-label="Year-1">unknown</td><td data-label="Still unknown">Enterprise price and HIPAA add-on price</td></tr>
+        <tr><td data-label="Vendor">Fireflies</td><td data-label="Plan">Enterprise, annual only</td><td data-label="Year-1">Base $2,340. HIPAA total unknown</td><td data-label="Still unknown">Private Storage, required for HIPAA</td></tr>
+        <tr><td data-label="Vendor">Fathom</td><td data-label="Plan">Team, standard BAA</td><td data-label="Year-1">$900</td><td data-label="Still unknown">None on this seat line</td></tr>
+        <tr><td data-label="Vendor">Granola</td><td data-label="Plan">Enterprise</td><td data-label="Year-1">$2,100</td><td data-label="Still unknown">A separate annual rate</td></tr>
+        <tr><td data-label="Vendor">Zoom</td><td data-label="Plan">Healthcare Pro</td><td data-label="Year-1">$849.60</td><td data-label="Still unknown">Business and above, sold through sales</td></tr>
+        <tr><td data-label="Vendor">AssemblyAI</td><td data-label="Plan">Paid account, dashboard BAA</td><td data-label="Year-1">unknown</td><td data-label="Still unknown">Per-hour usage</td></tr>
+        <tr><td data-label="Vendor">Deepgram</td><td data-label="Plan">Enterprise</td><td data-label="Year-1">unknown</td><td data-label="Still unknown">Custom price. Growth is not the BAA plan</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p id="hv-note" class="summary-caveat">A BAA is necessary but not sufficient. No vendor is ranked.</p>
+</section>
+
+<section>
+  <h2>What a BAA does not cover</h2>
+  <ul class="key-list">
+    <li>A signed BAA does not, by itself, finish the vendor's setup. Fireflies requires Private Storage as well as the BAA. Removing Private Storage, or downgrading, turns HIPAA off. The Private Storage price is unknown.</li>
+    <li>Turn off public sharing and auto-join bots where the vendor's own HIPAA setup tells you to. Those switches are not priced here.</li>
+    <li>Zoom says some AI features may be unavailable for healthcare customers with a BAA.</li>
+    <li>Otter's HIPAA add-on is sold through an account manager. The add-on price is unknown. SSO and SCIM on Enterprise have a 100-user minimum license. That minimum is not stated as the HIPAA price.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Prices checked on 9 Nov 2026</h2>
+  <div class="table-wrap editorial-gap-table mobile-cards">
+    <table>
+      <caption>Published list prices. Quote-only lines stay unknown.</caption>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Published price</th>
+          <th>In the Year-1 column</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td data-label="Item">Otter</td><td data-label="Published price">Basic is free. Pro is $16.99 per user per month, or $8.33 per user per month annual ($99.99 a year). Business is $30 per user per month, or $19.99 annual. HIPAA is only on Enterprise, as a paid add-on, through an account manager.</td><td data-label="In the Year-1 column">Enterprise and the HIPAA add-on are unknown. Pro and Business do not list a BAA.</td></tr>
+        <tr><td data-label="Item">Fireflies</td><td data-label="Published price">Enterprise is $39 per seat per month, billed annually only. HIPAA needs Private Storage and a signed BAA. AI credits are not in the base price. The add-on starts at $5 per user per month.</td><td data-label="In the Year-1 column">The $39 line is the base only. The HIPAA total is unknown because Private Storage is unknown. Credits are not added.</td></tr>
+        <tr><td data-label="Item">Fathom</td><td data-label="Published price">Team is $19 per user per month, or $15 annual, with a 2-user minimum, and includes a standard BAA. Business is $34 monthly or $25 annual, also a standard BAA, same minimum. Enterprise is $35 per user per month, annual only, and is eligible for a custom BAA. Free and Premium ($20 monthly or $16 annual) have no BAA.</td><td data-label="In the Year-1 column">Team, with the 2-user minimum. Checked 9 Nov 2026.</td></tr>
+        <tr><td data-label="Item">Granola</td><td data-label="Published price">Basic is free. Business is $14 per user per month. Enterprise is $35 per user per month. HIPAA workspaces are on Enterprise only. The pricing page says to contact sales. SSO is for enterprise workspaces with 50 or more users.</td><td data-label="In the Year-1 column">$35 times 12 times seats. No separate annual rate was on the page, so both billing choices use that monthly rate. The 50-user note is for SSO, not a price floor.</td></tr>
+        <tr><td data-label="Item">Zoom</td><td data-label="Published price">A BAA is for paid plans. Pro can accept it at checkout. Business, Business Plus, and Enterprise go through sales. Free Basic is not eligible. Healthcare Pro is $16.99 per user per month, or $14.16 annual.</td><td data-label="In the Year-1 column">Healthcare Pro. Higher healthcare editions are unknown.</td></tr>
+        <tr><td data-label="Item">AssemblyAI</td><td data-label="Published price">A HIPAA BAA is self-serve on a paid account and can be signed in the dashboard. No premium price for the BAA. New accounts get $50 of free credits. Usage is billed per hour.</td><td data-label="In the Year-1 column">unknown. Seats do not set the bill.</td></tr>
+        <tr><td data-label="Item">Deepgram</td><td data-label="Published price">BAAs are for Enterprise customers, custom pricing, through sales. Pay as you go includes $200 of free credit. Growth is from $4,000 a year prepaid.</td><td data-label="In the Year-1 column">Enterprise is unknown. The $4,000 Growth floor is not a BAA price.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="src-cluster"><a class="src-link" href="https://help.otter.ai/hc/en-us/articles/33975072019991-HIPAA-Otter-ai" target="_blank" rel="noopener">Otter HIPAA</a> <span class="src-date">Accessed 2026-11-09</span></p>
+  <p class="src-cluster"><a class="src-link" href="https://otter.ai/pricing" target="_blank" rel="noopener">Otter pricing</a> <span class="src-date">Accessed 2026-11-09</span></p>
+  <p class="src-cluster"><a class="src-link" href="https://guide.fireflies.ai/articles/4771323041-learn-about-fireflies-enterprise-plan" target="_blank" rel="noopener">Fireflies Enterprise</a> <span class="src-date">Accessed 2026-11-09</span></p>
+  <p class="src-cluster"><a class="src-link" href="https://guide.fireflies.ai/articles/3704059205-set-up-hipaa-compliance-for-your-workspace" target="_blank" rel="noopener">Fireflies HIPAA setup</a> <span class="src-date">Accessed 2026-11-09</span></p>
+  <p class="src-cluster"><a class="src-link" href="https://fireflies.ai/baa" target="_blank" rel="noopener">Fireflies BAA</a> <span class="src-date">Accessed 2026-11-09</span></p>
+  <p class="src-cluster"><a class="src-link" href="https://fireflies.ai/pricing" target="_blank" rel="noopener">Fireflies pricing</a> <span class="src-date">Accessed 2026-11-09</span></p>
+  <p class="src-cluster"><a class="src-link" href="https://www.fathom.ai/pricing" target="_blank" rel="noopener">Fathom pricing</a> <span class="src-date">Accessed 2026-11-09</span></p>
+  <p class="src-cluster"><a class="src-link" href="https://www.granola.ai/pricing" target="_blank" rel="noopener">Granola pricing</a> <span class="src-date">Accessed 2026-11-09</span></p>
+  <p class="src-cluster"><a class="src-link" href="https://docs.granola.ai/help-center/consent-security-privacy/is-granola-hipaa-compliant" target="_blank" rel="noopener">Granola HIPAA</a> <span class="src-date">Accessed 2026-11-09</span></p>
+  <p class="src-cluster"><a class="src-link" href="https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0067751" target="_blank" rel="noopener">Zoom BAA</a> <span class="src-date">Accessed 2026-11-09</span></p>
+  <p class="src-cluster"><a class="src-link" href="https://zoom.us/pricing/healthcare" target="_blank" rel="noopener">Zoom healthcare pricing</a> <span class="src-date">Accessed 2026-11-09</span></p>
+  <p class="src-cluster"><a class="src-link" href="https://www.assemblyai.com/pricing/" target="_blank" rel="noopener">AssemblyAI pricing</a> <span class="src-date">Accessed 2026-11-09</span></p>
+  <p class="src-cluster"><a class="src-link" href="https://deepgram.com/pricing" target="_blank" rel="noopener">Deepgram pricing</a> <span class="src-date">Accessed 2026-11-09</span></p>
+  <p class="src-cluster"><a class="src-link" href="https://developers.deepgram.com/trust-security/data-privacy-compliance" target="_blank" rel="noopener">Deepgram privacy</a> <span class="src-date">Accessed 2026-11-09</span></p>
+</section>
+<script>
+function hvMoney(cents) {
+  if (cents < 0) return "unknown";
+  if (cents === 0) return "included";
+  var v = Math.round(cents);
+  var dollars = Math.floor(v / 100);
+  var rest = v % 100;
+  var text = "$" + dollars.toLocaleString("en-US");
+  if (rest) text += "." + (rest < 10 ? "0" : "") + rest;
+  return text;
+}
+
+function hvYear(centsPerUserMonth, seats) {
+  return seats * centsPerUserMonth * 12;
+}
+
+function calcHipaa(input) {
+  var seats = Math.max(1, Math.min(25, Math.round(Number(input.seats) || 1)));
+  var annual = String(input.billing || "annual") !== "monthly";
+  var baa = String(input.baa || "yes") !== "no";
+  var fathomSeats = Math.max(seats, 2);
+  var fathomYear = baa ? hvYear(annual ? 1500 : 1900, fathomSeats) : 0;
+  var zoomYear = baa ? hvYear(annual ? 1416 : 1699, seats) : 0;
+  var granolaYear = baa ? hvYear(3500, seats) : 0;
+  var firefliesBase = !baa ? -1 : (annual ? hvYear(3900, seats) : -1);
+  return {
+    seats: seats,
+    annual: annual,
+    baa: baa,
+    fathomSeats: fathomSeats,
+    fathomYear: fathomYear,
+    zoomYear: zoomYear,
+    granolaYear: granolaYear,
+    firefliesBase: firefliesBase,
+    otterYear: baa ? -1 : 0,
+    assemblyYear: -1,
+    deepgramYear: -1
+  };
+}
+
+function hvRead() {
+  return {
+    seats: document.getElementById("hv-seats").value,
+    billing: document.getElementById("hv-bill").value,
+    baa: document.getElementById("hv-baa").value
+  };
+}
+
+function renderHipaa() {
+  var c = calcHipaa(hvRead());
+  document.getElementById("hv-seats-val").textContent = String(c.seats);
+  var term = c.annual ? "annual" : "monthly";
+  document.getElementById("shell-big").textContent = hvMoney(c.zoomYear);
+  document.getElementById("shell-product").textContent = (c.baa ? "Zoom healthcare Pro, " : "Zoom Free Basic, ") + c.seats + " seats";
+  document.getElementById("shell-sub").textContent = "One published Zoom list, not a ranking. A BAA is necessary but not sufficient. Other prices are in the table. Missing prices stay unknown.";
+  document.getElementById("shell-best").textContent = "No vendor is ranked.";
+  var bars = [
+    ["shell-row-base", "shell-amt-base", "shell-title-base", "shell-sub-base", "Zoom Pro", c.baa ? c.zoomYear : -1, "Healthcare list price"],
+    ["shell-row-seats", "shell-amt-seats", "shell-title-seats", "shell-sub-seats", "Fathom Team", c.baa ? c.fathomYear : -1, "Standard BAA, 2-seat minimum"],
+    ["shell-row-hidden", "shell-amt-hidden", "shell-title-hidden", "shell-sub-hidden", "Granola Enterprise", c.baa ? c.granolaYear : -1, "$35 per user per month"]
+  ];
+  var maxBar = 1;
+  bars.forEach(function (bar) { if (bar[5] > maxBar) maxBar = bar[5]; });
+  bars.forEach(function (bar) {
+    var flex = bar[5] > 0 ? Math.max(12, Math.round(bar[5] / maxBar * 100)) : 12;
+    document.getElementById(bar[0]).style.flex = flex + " 1 0px";
+    document.getElementById(bar[1]).textContent = c.baa ? hvMoney(bar[5]) : "no BAA row";
+    document.getElementById(bar[2]).textContent = bar[4];
+    document.getElementById(bar[3]).textContent = bar[6];
+  });
+  document.getElementById("shell-sticker").textContent = c.baa ? hvMoney(c.zoomYear) : "included";
+  document.getElementById("shell-sticker-note").textContent = c.baa ? "Zoom healthcare Pro" : "Zoom Free Basic, no BAA";
+  document.getElementById("shell-gap").textContent = c.baa ? hvMoney(c.fathomYear) : "included";
+  var labels = document.querySelectorAll("#shell-summary .summary-label");
+  if (labels.length >= 2) {
+    labels[0].textContent = "Zoom";
+    labels[1].textContent = "Fathom";
+  }
+  var notes = document.querySelectorAll("#shell-summary .summary-scenario");
+  if (notes.length >= 2) notes[1].textContent = c.baa ? "Team, standard BAA" : "Free, no BAA";
+  var firefliesText = "unknown";
+  if (c.baa && c.annual) firefliesText = "Base " + hvMoney(c.firefliesBase) + ". HIPAA total unknown";
+  else if (c.baa) firefliesText = "unknown. Annual only";
+  else firefliesText = "Other plan prices were not checked";
+  var otterPlan = c.baa ? "Enterprise, HIPAA add-on" : "Basic, no BAA";
+  var fathomPlan = c.baa ? "Team, standard BAA" : "Free, no BAA";
+  var granolaPlan = c.baa ? "Enterprise" : "Basic, no BAA";
+  var zoomPlan = c.baa ? "Healthcare Pro" : "Free Basic, no BAA";
+  function row(vendor, plan, yearText, unknownText) {
+    return "<tr><td data-label=\"Vendor\">" + vendor + "</td><td data-label=\"Plan\">" + plan + "</td><td data-label=\"Year-1\">" + yearText + "</td><td data-label=\"Still unknown\">" + unknownText + "</td></tr>";
+  }
+  document.getElementById("hv-body").innerHTML = ""
+    + row("Otter", otterPlan, hvMoney(c.otterYear), c.baa ? "Enterprise price and HIPAA add-on price" : "Not applicable on Basic")
+    + row("Fireflies", c.baa ? "Enterprise" : "Not priced here", firefliesText, "Private Storage, required for HIPAA")
+    + row("Fathom", fathomPlan, hvMoney(c.fathomYear), c.baa ? "Billed seats " + c.fathomSeats + ". Custom BAA is Enterprise." : "Premium and paid teams are separate")
+    + row("Granola", granolaPlan, hvMoney(c.granolaYear), c.baa ? "No separate annual rate was published" : "Business is $14 and has no BAA")
+    + row("Zoom", zoomPlan, hvMoney(c.zoomYear), "Business and above are unknown")
+    + row("AssemblyAI", c.baa ? "Paid account, dashboard BAA" : "Usage, no seat price", "unknown", "Per-hour usage. $50 of credits. No BAA premium")
+    + row("Deepgram", c.baa ? "Enterprise" : "Pay as you go", "unknown", "Enterprise is custom. Growth from $4,000 is not a BAA price");
+  document.getElementById("shell-math").textContent = c.seats + " seats, " + term + ". Otter " + hvMoney(c.otterYear) + ". Fireflies " + firefliesText + ". Fathom " + hvMoney(c.fathomYear) + " on " + c.fathomSeats + " billed seats. Granola " + hvMoney(c.granolaYear) + ". Zoom " + hvMoney(c.zoomYear) + ". AssemblyAI unknown. Deepgram unknown. A BAA is necessary but not sufficient.";
+  document.getElementById("hv-note").textContent = "A BAA is necessary but not sufficient. No vendor is ranked. Fathom Team and Business list a standard BAA on the pricing page checked 9 Nov 2026.";
+  if (typeof window.trackSaaSBillEvent === "function") {
+    window.trackSaaSBillEvent("result_rendered", { page: "hipaa-voice", seats: c.seats });
+  }
+}
+["hv-seats", "hv-bill", "hv-baa"].forEach(function (id) {
+  var el = document.getElementById(id);
+  el.addEventListener("input", renderHipaa);
+  el.addEventListener("change", renderHipaa);
+});
+renderHipaa();
+</script>
+
+      
+        <section aria-labelledby="faq-heading">
+          <h2 id="faq-heading">Common questions</h2>
+          <div class="faq-list">
+            
+            <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+              <h3 itemprop="name">Which Otter plan signs a BAA?</h3>
+              <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                <p itemprop="text">Only Enterprise, and HIPAA is a paid add-on arranged with an account manager. Pro and Business publish seat prices and do not list that add-on. The Enterprise price and the add-on price are unknown. SSO and SCIM on Enterprise require a 100-user minimum license.</p>
+              </div>
+            </div>
+            
+            <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+              <h3 itemprop="name">Does Fireflies include HIPAA in the $39 price?</h3>
+              <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                <p itemprop="text">No. Enterprise is $39 per seat per month, billed annually only. HIPAA also requires Private Storage and a signed BAA. Private Storage has no published price, so the HIPAA total is unknown. Removing Private Storage or downgrading turns HIPAA off. AI credits start at $5 per user per month and are not in the base price.</p>
+              </div>
+            </div>
+            
+            <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+              <h3 itemprop="name">Does a BAA make the product safe to use?</h3>
+              <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                <p itemprop="text">A BAA is necessary but not sufficient. You still follow the vendor's setup, including storage and sharing rules. Zoom says some AI features may be unavailable for healthcare customers with a BAA.</p>
+              </div>
+            </div>
+            
+          </div>
+        </section>
+        
+      
+    <section aria-labelledby="related-calculators-heading" style="margin-top:36px; padding-top:24px; border-top:1px solid var(--border);">
+      <h2 id="related-calculators-heading" style="font-size:1.2rem; margin-top:0;">Related Year-1 True-Cost Calculators &amp; Contract Audits</h2>
+      <div class="related-calc-grid">
+        
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../compliance/hipaa-baa-and-soc2-pricing-tiers/" data-track="internal-audit">HIPAA BAA &amp; SOC 2 Pricing Tiers &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">Which plan signs a BAA, and what the CPA audit adds.</p>
+        </div>
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../compliance/vanta-vs-drata-vs-comp-ai-soc2-negotiation-benchmarks/" data-track="internal-audit">SOC 2 cost calculator &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">AWS list prices for Vanta and Drata, plus the separate CPA auditor fee.</p>
+        </div>
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../compare/deel-vs-rippling-eor-hidden-fx-and-offboarding-fees/" data-track="internal-audit">Deel vs Rippling EOR cost &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">Deel's starting EOR fee, the refundable deposit, and Rippling's unpublished price.</p>
+        </div>
+      </div>
+      <details class="footer-directory-details">
+        <summary>Browse all 40 audited calculators &amp; guides</summary>
+        <div class="footer-directory-links">
+          <a href="../../" data-track="internal-audit">Year-1 SaaS True-Cost Directory &rarr;</a><a href="../../pricing/hubspot-true-cost-and-onboarding-fees/" data-track="internal-audit">HubSpot True Cost &amp; Onboarding &rarr;</a><a href="../../compare/close-crm-vs-hubspot-sales-hub-5-to-20-reps/" data-track="internal-audit">Close CRM vs. HubSpot Sales Hub &rarr;</a><a href="../../compare/close-vs-pipedrive-year-1-cost-calculator/" data-track="internal-audit">Close vs. Pipedrive Year-1 Cost (Calling Included) &rarr;</a><a href="../../compare/pipedrive-vs-salesforce-starter-and-pro-suite-cost/" data-track="internal-audit">Pipedrive vs Salesforce Year-1 cost &rarr;</a><a href="../../pricing/pipedrive-true-year-1-cost-calculator/" data-track="internal-audit">Pipedrive True Year-1 Cost &rarr;</a><a href="../../compare/pipedrive-vs-hubspot-sales-hub-year-1-cost/" data-track="internal-audit">Pipedrive vs. HubSpot Sales Hub Year-1 Cost &rarr;</a><a href="../../pricing/gong-io-platform-fee-and-seat-minimum-calculator/" data-track="internal-audit">Gong.io $5,000 Platform Fee &amp; Seat Calculator &rarr;</a><a href="../../compare/monday-crm-vs-pipedrive-vs-hubspot-seat-minimums/" data-track="internal-audit">monday CRM 3/5/10-Seat Bucket Calculator &rarr;</a><a href="../../intercom-fin-cost-calculator/" data-track="internal-audit">Intercom Fin AI Cost Calculator &rarr;</a><a href="../../intercom-vs-freshdesk-cost-comparison/" data-track="internal-audit">Intercom vs. Freshdesk Cost Comparison &rarr;</a><a href="../../exit/intercom-to-freshdesk-ticket-and-help-center-migration/" data-track="internal-audit">Intercom to Freshdesk migration Year-1 &rarr;</a><a href="../../intercom-vs-zendesk-cost-comparison/" data-track="internal-audit">Intercom vs. Zendesk Cost Comparison &rarr;</a><a href="../../pricing/intercom-fin-ai-resolution-cost-calculator/" data-track="internal-audit">Intercom Fin AI Cost Calculator &rarr;</a><a href="../../zendesk-ai-cost-calculator/" data-track="internal-audit">Zendesk AI Cost Calculator &rarr;</a><a href="../../zendesk-vs-freshdesk-cost-comparison/" data-track="internal-audit">Zendesk vs. Freshdesk Cost Comparison &rarr;</a><a href="../../hubspot-onboarding-fee-calculator/" data-track="internal-audit">HubSpot Onboarding Fee Calculator &rarr;</a><a href="../../pricing/zendesk-ai-resolution-and-automated-outcome-cost/" data-track="internal-audit">Zendesk AI Cost Calculator &rarr;</a><a href="../../pricing/stripe-billing-0-7-percent-recurring-tax-calculator/" data-track="internal-audit">Stripe Billing 0.7% Fee, Tax &amp; Chargeback Calculator &rarr;</a><a href="../../compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/" data-track="internal-audit">Gumroad vs. Whop vs. Lemon Squeezy Take-Rate &amp; Chargeback Calculator &rarr;</a><a href="../../exit/stripe-shopify-paddle-frozen-funds-alternatives/" data-track="internal-audit">Stripe, Shopify &amp; Paddle Frozen Funds &amp; Reserve Calculator &rarr;</a><a href="../../chargeback-fee-and-recovery-calculator/" data-track="internal-audit">Stripe, Shopify &amp; Paddle Chargeback Cost Calculator &rarr;</a><a href="../../exit/paypal-180-day-permanent-limitation-fund-recovery/" data-track="internal-audit">PayPal 180-Day Hold &amp; Reserve Cost Calculator &rarr;</a><a href="../../exit/shopify-payments-chargeback-threshold-and-reserve-appeal/" data-track="internal-audit">Shopify Payments Reserve &amp; Dispute Threshold Calculator &rarr;</a><a href="../../pricing/stripe-radar-and-dispute-fee-calculator-2026/" data-track="internal-audit">Stripe dispute and Radar cost &rarr;</a><a href="../../exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/" data-track="internal-audit">ZoomInfo 60-Day Auto-Renewal Notice &rarr;</a><a href="../../compare/typeform-vs-jotform-response-limit-and-hipaa-cost/" data-track="internal-audit">Typeform vs. Jotform Response &amp; HIPAA Calculator &rarr;</a><a href="../../guides/jotform-wix-app-setup-and-pricing-guide/" data-track="internal-audit">Jotform Wix App Setup &amp; Pricing Guide &rarr;</a><a href="../../pricing/jotform-pricing-tier-calculator/" data-track="internal-audit">Jotform 2026 Pricing Tier Calculator &rarr;</a><a href="../../pricing/docusign-envelope-allowance-and-api-overage-calculator/" data-track="internal-audit">DocuSign 100-Envelope Cap &amp; Overage Calculator &rarr;</a><a href="../../compliance/hipaa-baa-and-soc2-pricing-tiers/" data-track="internal-audit">HIPAA BAA &amp; SOC 2 Pricing Tiers &rarr;</a><a href="../../compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/" data-track="internal-audit">Google Workspace vs. Microsoft 365 HIPAA BAA &rarr;</a><a href="../../compliance/okta-vs-workos-vs-1password-sso-tax-calculator/" data-track="internal-audit">SSO tax calculator &rarr;</a><a href="../../compliance/vanta-vs-drata-vs-comp-ai-soc2-negotiation-benchmarks/" data-track="internal-audit">SOC 2 cost calculator &rarr;</a><a href="../../compare/deel-vs-rippling-eor-hidden-fx-and-offboarding-fees/" data-track="internal-audit">Deel vs Rippling EOR cost &rarr;</a><a href="../../compliance/ai-voice-and-transcription-hipaa-baa-matrix-2026/" data-track="internal-audit">AI voice HIPAA BAA matrix &rarr;</a><a href="../../faq/does-hubspot-charge-onboarding-fees-2026/" data-track="internal-audit">Does HubSpot Charge Onboarding Fees in 2026? &rarr;</a><a href="../../faq/intercom-fin-ai-cost-calculator/" data-track="internal-audit">Intercom Fin AI Cost Calculator &rarr;</a><a href="../../faq/stripe-vs-paddle-true-cost/" data-track="internal-audit">Stripe vs. Paddle vs. Whop True Cost &amp; Chargeback Calculator &rarr;</a><a href="../../pricing/stripe-shopify-chargeback-fee-and-chargeflow-roi-calculator/" data-track="internal-audit">Stripe, Shopify &amp; Paddle Chargeback Cost Calculator &rarr;</a>
+        </div>
+      </details>
+    </section>
+    
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <p><strong>SaaSBill</strong> &middot; Year-1 cost &amp; contract calculators for B2B software.</p>
+      <p class="footer-note">Updated <time datetime="2026-11-09">Nov 09, 2026</time> &middot; Inquiries: <a href="mailto:info@saasbill.io">info@saasbill.io</a></p>
+    </div>
+  </footer>
+  <script>
+  /* Plausible + local event dispatcher for: calculator_interaction, category_select, result_rendered, vendor_cta_click */
+  window.__saasbillEvents = window.__saasbillEvents || [];
+  try {
+    var p = (window.location && window.location.pathname ? window.location.pathname : '').toLowerCase();
+    if (p && p !== '/' && p !== '/index.html') {
+      var ctxCat = '';
+      var ctxTool = '';
+      if (p.indexOf('zoominfo') !== -1) {
+        ctxCat = 'CRM & Sales';
+        ctxTool = 'close-crm';
+      } else if (p.indexOf('stripe') !== -1 || p.indexOf('paddle') !== -1 || p.indexOf('whop') !== -1 || p.indexOf('gumroad') !== -1 || p.indexOf('paypal') !== -1) {
+        ctxCat = 'Payment Processors & MoR';
+        ctxTool = p.indexOf('paddle') !== -1 ? 'paddle-mor' : (p.indexOf('whop') !== -1 ? 'whop-payments' : 'stripe-payments');
+      } else if (p.indexOf('hubspot') !== -1 || p.indexOf('close-crm') !== -1 || p.indexOf('pipedrive') !== -1 || p.indexOf('monday-crm') !== -1 || p.indexOf('gong') !== -1) {
+        ctxCat = 'CRM & Sales';
+        ctxTool = p.indexOf('monday') !== -1 ? 'monday-crm' : (p.indexOf('close') !== -1 ? 'close-crm' : (p.indexOf('pipedrive') !== -1 ? 'pipedrive-crm' : 'hubspot-sales-pro'));
+      } else if (p.indexOf('hipaa') !== -1 || p.indexOf('soc2') !== -1 || p.indexOf('docusign') !== -1 || p.indexOf('typeform') !== -1 || p.indexOf('jotform') !== -1) {
+        ctxCat = 'Compliance, HIPAA & SOC 2';
+        ctxTool = (p.indexOf('typeform') !== -1 || p.indexOf('jotform') !== -1) ? 'jotform-hipaa' : 'vanta-soc2';
+      } else if (p.indexOf('intercom') !== -1 || p.indexOf('zendesk') !== -1 || p.indexOf('freshdesk') !== -1) {
+        ctxCat = 'Helpdesk & AI Support';
+        ctxTool = p.indexOf('intercom') !== -1 ? 'intercom-fin-ai' : (p.indexOf('freshdesk') !== -1 ? 'freshdesk-support' : 'zendesk-suite-team');
+      }
+      if (ctxCat && window.sessionStorage) {
+        sessionStorage.setItem('saasbill_last_cat', ctxCat);
+        if (ctxTool) sessionStorage.setItem('saasbill_last_tool', ctxTool);
+      }
+    }
+  } catch (err) {}
+  document.addEventListener('click', function(e) {
+    var cta = e.target.closest('[data-track="vendor-cta"], [data-track="vendor_cta_click"]');
+    if (cta) {
+      var vendor = cta.getAttribute('data-vendor') || '';
+      var location = cta.getAttribute('data-cta-location') || 'subpage-result';
+      var href = cta.getAttribute('href') || '';
+      if (typeof window.trackSaaSBillEvent === 'function') {
+        window.trackSaaSBillEvent('vendor_cta_click', { vendor: vendor, location: location, href: href });
+      }
+      return;
+    }
+    var catBtn = e.target.closest('[data-track="category-select"], [data-track="category_select"]');
+    if (catBtn) {
+      var cat = catBtn.getAttribute('data-cat') || '';
+      if (typeof window.trackSaaSBillEvent === 'function') {
+        window.trackSaaSBillEvent('category_select', { category: cat });
+      }
+    }
+  });
+  var _lastCalcTrackKey = '';
+  var _lastCalcTrackTs = 0;
+  function handleCalcControlEvent(e) {
+    var ctrl = e.target.closest('[data-track="calculator-control"], [data-track="calculator_interaction"], input[type="range"], select');
+    if (ctrl) {
+      var control = ctrl.getAttribute('data-control') || ctrl.id || '';
+      var val = String(ctrl.value);
+      var now = Date.now();
+      var key = control + ':' + val;
+      if (key === _lastCalcTrackKey && (now - _lastCalcTrackTs) < 150) return;
+      _lastCalcTrackKey = key;
+      _lastCalcTrackTs = now;
+      if (typeof window.trackSaaSBillEvent === 'function') {
+        window.trackSaaSBillEvent('calculator_interaction', { control: control, value: val });
+        if (ctrl.id === 'cat-filter') {
+          window.trackSaaSBillEvent('category_select', { category: val });
+        }
+      }
+    }
+  }
+  document.addEventListener('input', handleCalcControlEvent);
+  document.addEventListener('change', handleCalcControlEvent);
+  </script>
+  <script src="../../assets/app.js?v=20261030a"></script>
+</body>
+</html>

@@ -60,8 +60,12 @@ class TestEorCost(unittest.TestCase):
         with open(os.path.join(BASE, "data", "publishing_queue.json"), encoding="utf-8") as handle:
             queue = json.load(handle)
         item = next(row for row in queue if row["priority"] == 17)
-        self.assertEqual(item["status"], "in_progress")
-        self.assertNotIn("published_at", item)
+        self.assertEqual(item["status"], "published")
+        self.assertEqual(item["published_at"], "2026-11-08")
+        self.assertEqual(
+            item["url"],
+            "https://saasbill.io/compare/deel-vs-rippling-eor-hidden-fx-and-offboarding-fees/",
+        )
         self.assertIn("unknown", item["verification_note"])
         with open(os.path.join(BASE, "data", "affiliate_links.json"), encoding="utf-8") as handle:
             affiliates = json.load(handle)

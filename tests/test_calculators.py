@@ -630,8 +630,9 @@ class TestSaaSBillCalculators(unittest.TestCase):
 
         with open(os.path.join(PUBLIC_DIR, "sitemap.xml"), encoding="utf-8") as f:
             sitemap = f.read()
-        self.assertEqual(sitemap.count("<url><loc>"), 44)
+        self.assertEqual(sitemap.count("<url><loc>"), 45)
         self.assertIn("https://saasbill.io/compare/deel-vs-rippling-eor-hidden-fx-and-offboarding-fees/", sitemap)
+        self.assertIn("https://saasbill.io/compliance/ai-voice-and-transcription-hipaa-baa-matrix-2026/", sitemap)
         self.assertIn("https://saasbill.io/compliance/okta-vs-workos-vs-1password-sso-tax-calculator/", sitemap)
         self.assertIn("https://saasbill.io/compliance/vanta-vs-drata-vs-comp-ai-soc2-negotiation-benchmarks/", sitemap)
         self.assertIn("https://saasbill.io/compare/pipedrive-vs-salesforce-starter-and-pro-suite-cost/", sitemap)
@@ -924,7 +925,7 @@ class TestSaaSBillCalculators(unittest.TestCase):
             self.assertNotIn("may earn a commission", html, rel)
             self.assertNotIn("calc-affiliate-disclosure", html, rel)
             self.assertNotIn("Paid Partnership", html, rel)
-            if loc.startswith("/ai-act") or loc.startswith("/compliance/okta-vs-workos-vs-1password-sso-tax-calculator") or loc.startswith("/compare/deel-vs-rippling-eor-hidden-fx-and-offboarding-fees"):
+            if loc.startswith("/ai-act") or loc.startswith("/compliance/okta-vs-workos-vs-1password-sso-tax-calculator") or loc.startswith("/compare/deel-vs-rippling-eor-hidden-fx-and-offboarding-fees") or loc.startswith("/compliance/ai-voice-and-transcription-hipaa-baa-matrix-2026"):
                 self.assertNotIn(footer, html, rel)
                 self.assertNotIn('class="footer-disclosure"', html, rel)
                 self.assertNotIn("/go/1password", html, rel)
