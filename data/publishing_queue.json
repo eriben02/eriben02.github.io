@@ -230,5 +230,25 @@
     "status": "queued",
     "strategic_rationale": "Year-1 e-signature cost across PandaDoc, DocuSign, and Jotform Sign.",
     "verification_note": "E-signature cost for compliance and forms. PandaDoc's affiliate program left PartnerStack on 9 Nov 2026, so there is no PandaDoc link. The existing Jotform affiliate link may be used, with the disclosure line Paid partnership with Jotform (#JotformPartner)."
+  },
+  {
+    "priority": 22,
+    "slug": "/pricing/apollo-vs-zoominfo-vs-sales-navigator-year-1-cost/",
+    "title": "What does Apollo cost in Year 1 versus ZoomInfo and Sales Navigator?",
+    "category": "CRM & Sales",
+    "primary_affiliate": "apollo",
+    "status": "queued",
+    "strategic_rationale": "Year-1 Apollo cost for a small or mid-size outbound team, counting seats, email and phone credits, credits that do not roll over, one plan for every seat, and add-on credits, versus ZoomInfo, Sales Navigator, or a split stack.",
+    "verification_note": "Reddit: https://www.reddit.com/r/work/comments/1wacab8/apollo_alternatives_after_the_price_hike_what_is/ and https://www.reddit.com/r/SaaS/comments/1s4y3u9/how_much_are_you_actually_spending_on_cold_email/. Re-read https://www.apollo.io/pricing and https://www.apollo.io/pricing/about-credits at build time. Credits expire at the end of the billing cycle and do not roll over. Email is no more than 1 credit per contact. All seats on an account must be on the same plan. Add-on credits are bought in the app, charged immediately, and renew until removed. An annual invoice cannot switch to monthly mid-cycle. Sales Navigator compare-plans, read 2026-11-10: Core $119.99 per month or $1,079.88 per year, Advanced $159.99 per month or $1,799.88 per year; LinkedIn calls those estimates. Stay unknown: ZoomInfo list price, Apollo plan prices and credit quotas until the live table is re-read, phone credit cost, and Sales Navigator Advanced Plus. Apollo is the affiliate. ZoomInfo and Sales Navigator are not."
+  },
+  {
+    "priority": 23,
+    "slug": "/pricing/jotform-multi-user-vs-enterprise-year-1-cost/",
+    "title": "What does Jotform cost in Year 1 for a team of 3 to 4?",
+    "category": "Compliance, HIPAA & SOC 2",
+    "primary_affiliate": "jotform",
+    "status": "queued",
+    "strategic_rationale": "Year-1 cost for a team of 3 to 4 that needs shared forms and data, comparing several single-user plans with Enterprise, including when a HIPAA BAA is required.",
+    "verification_note": "Reddit: https://www.reddit.com/r/jotform/comments/1w0ud3g/why_cant_a_small_team_have_separate_individual/. https://www.jotform.com/pricing, read 2026-11-10: Bronze $408 a year, Silver $468 a year, Gold $1,188 a year, all single-user, and HIPAA only on Gold and Enterprise. https://www.jotform.com/enterprise/faq/: the base package includes up to 5 users, the price is a quote, the term is paid up front, there is no trial or refund, a HIPAA server costs extra, and shared logins are not allowed for PHI. Four Gold annual plans are 4 times $1,188, which is $4,752, and that is not an Enterprise price. Stay unknown: the Enterprise price, the HIPAA server add-on, whether several individual accounts in one organization are allowed in practice, and the 50% campaign discount, which must not be used as a baseline. Use the existing Jotform affiliate link with the disclosure line Paid partnership with Jotform (#JotformPartner)."
   }
 ]
