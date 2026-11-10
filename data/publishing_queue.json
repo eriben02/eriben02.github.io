@@ -195,9 +195,11 @@
     "title": "AI Voice & Meeting Transcription HIPAA BAA Matrix (2026): Enterprise BAA Tiers vs. Self-Serve Compliance",
     "category": "Compliance, HIPAA & SOC 2",
     "primary_affiliate": "vanta",
-    "status": "in_progress",
+    "status": "published",
+    "published_at": "2026-11-09",
+    "url": "https://saasbill.io/compliance/ai-voice-and-transcription-hipaa-baa-matrix-2026/",
     "strategic_rationale": "AI compliance bottleneck: every company adopting AI voice/notes needs BAA & SOC 2 vendor verification.",
-    "verification_note": "Otter, Fireflies, Fathom, Granola, Zoom healthcare, AssemblyAI, and Deepgram pages checked 2026-11-09. Granola Enterprise is $35 per user per month on the live pricing page, with HIPAA workspaces on Enterprise only. Otter Enterprise and its HIPAA add-on, Fireflies Private Storage, AssemblyAI usage, and Deepgram Enterprise stay unknown. No affiliate link: none of these vendors are active partners, and Vanta is only applied. published_at waits for merge."
+    "verification_note": "Otter, Fireflies, Fathom, Granola, Zoom healthcare, AssemblyAI, and Deepgram pages checked 2026-11-09. Granola Enterprise is $35 per user per month on the live pricing page, with HIPAA workspaces on Enterprise only. Otter Enterprise and its HIPAA add-on, Fireflies Private Storage, AssemblyAI usage, and Deepgram Enterprise stay unknown. No affiliate link: none of these vendors are active partners, and Vanta is only applied. Live after PR 19."
   },
   {
     "priority": 19,

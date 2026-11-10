@@ -73,8 +73,12 @@ class TestHipaaVoice(unittest.TestCase):
         with open(os.path.join(BASE, "data", "publishing_queue.json"), encoding="utf-8") as handle:
             queue = json.load(handle)
         item = next(row for row in queue if row["priority"] == 18)
-        self.assertEqual(item["status"], "in_progress")
-        self.assertNotIn("published_at", item)
+        self.assertEqual(item["status"], "published")
+        self.assertEqual(item["published_at"], "2026-11-09")
+        self.assertEqual(
+            item["url"],
+            "https://saasbill.io/compliance/ai-voice-and-transcription-hipaa-baa-matrix-2026/",
+        )
         self.assertIn("unknown", item["verification_note"])
 
 
