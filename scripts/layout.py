@@ -284,9 +284,90 @@ AI_ACT_LINKS = [
 ]
 
 
+# Every sitemap URL except the homepage, in the order shown on the homepage.
+CRAWL_DIRECTORY = [
+    ("CRM &amp; Sales", [
+        ("pricing/hubspot-true-cost-and-onboarding-fees/index.html", "What HubSpot costs in Year 1"),
+        ("hubspot-onboarding-fee-calculator/index.html", "HubSpot onboarding fee calculator"),
+        ("faq/does-hubspot-charge-onboarding-fees-2026/index.html", "Does HubSpot charge onboarding fees in 2026?"),
+        ("compare/close-crm-vs-hubspot-sales-hub-5-to-20-reps/index.html", "Close CRM vs HubSpot Sales Hub for 5 to 20 reps"),
+        ("compare/close-vs-pipedrive-year-1-cost-calculator/index.html", "Close vs Pipedrive Year-1 cost"),
+        ("pricing/pipedrive-true-year-1-cost-calculator/index.html", "Pipedrive true Year-1 cost"),
+        ("compare/pipedrive-vs-hubspot-sales-hub-year-1-cost/index.html", "Pipedrive vs HubSpot Sales Hub Year-1 cost"),
+        ("compare/pipedrive-vs-salesforce-starter-and-pro-suite-cost/index.html", "Pipedrive vs Salesforce Year-1 cost"),
+        ("pricing/gong-io-platform-fee-and-seat-minimum-calculator/index.html", "Gong platform fee and seat calculator"),
+        ("exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/index.html", "ZoomInfo 60-day auto-renewal notice"),
+        ("compare/monday-crm-vs-pipedrive-vs-hubspot-seat-minimums/index.html", "monday CRM seat minimums"),
+    ]),
+    ("Helpdesk &amp; AI Support", [
+        ("intercom-fin-cost-calculator/index.html", "Intercom Fin AI cost calculator"),
+        ("intercom-vs-freshdesk-cost-comparison/index.html", "Intercom vs Freshdesk cost comparison"),
+        ("intercom-vs-zendesk-cost-comparison/index.html", "Intercom vs Zendesk cost comparison"),
+        ("exit/intercom-to-freshdesk-ticket-and-help-center-migration/index.html", "Migrate off Intercom without losing ticket history"),
+        ("zendesk-ai-cost-calculator/index.html", "Zendesk AI cost calculator"),
+        ("zendesk-vs-freshdesk-cost-comparison/index.html", "Zendesk vs Freshdesk cost comparison"),
+        ("pricing/intercom-fin-ai-resolution-cost-calculator/index.html", "Intercom Fin cost per AI resolution"),
+        ("pricing/zendesk-ai-resolution-and-automated-outcome-cost/index.html", "Zendesk automated resolution cost"),
+        ("faq/intercom-fin-ai-cost-calculator/index.html", "How much does Intercom Fin cost per resolution?"),
+    ]),
+    ("Payment Processors", [
+        ("pricing/stripe-billing-0-7-percent-recurring-tax-calculator/index.html", "Stripe Billing 0.7% recurring revenue tax"),
+        ("faq/stripe-vs-paddle-true-cost/index.html", "Stripe vs Paddle vs Whop true cost"),
+        ("compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/index.html", "Gumroad vs Whop vs Lemon Squeezy take rate"),
+        ("exit/stripe-shopify-paddle-frozen-funds-alternatives/index.html", "Stripe, Shopify and Paddle frozen funds"),
+        ("chargeback-fee-and-recovery-calculator/index.html", "Stripe, Shopify and Paddle chargeback cost"),
+        ("pricing/stripe-shopify-chargeback-fee-and-chargeflow-roi-calculator/index.html", "Chargeflow ROI vs manual dispute handling"),
+        ("exit/shopify-payments-chargeback-threshold-and-reserve-appeal/index.html", "Shopify Payments reserve and dispute threshold"),
+        ("pricing/stripe-radar-and-dispute-fee-calculator-2026/index.html", "Stripe dispute and Radar cost"),
+        ("exit/paypal-180-day-permanent-limitation-fund-recovery/index.html", "PayPal 180-day hold and reserve cost"),
+    ]),
+    ("Compliance, HIPAA &amp; SOC 2", [
+        ("compare/typeform-vs-jotform-response-limit-and-hipaa-cost/index.html", "Typeform vs Jotform response caps and HIPAA"),
+        ("guides/jotform-wix-app-setup-and-pricing-guide/index.html", "Jotform on Wix setup and pricing"),
+        ("pricing/jotform-pricing-tier-calculator/index.html", "Jotform pricing tier calculator"),
+        ("pricing/docusign-envelope-allowance-and-api-overage-calculator/index.html", "DocuSign envelope allowance calculator"),
+        ("compliance/hipaa-baa-and-soc2-pricing-tiers/index.html", "HIPAA BAA and SOC 2 pricing tiers"),
+        ("compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/index.html", "Google Workspace vs Microsoft 365 HIPAA BAA"),
+        ("compliance/okta-vs-workos-vs-1password-sso-tax-calculator/index.html", "SSO tax calculator"),
+        ("compliance/vanta-vs-drata-vs-comp-ai-soc2-negotiation-benchmarks/index.html", "SOC 2 cost: Vanta, Drata, Comp AI"),
+        ("compare/deel-vs-rippling-eor-hidden-fx-and-offboarding-fees/index.html", "Deel vs Rippling EOR cost"),
+        ("compliance/ai-voice-and-transcription-hipaa-baa-matrix-2026/index.html", "AI voice HIPAA BAA matrix"),
+    ]),
+    ("AI Act", [
+        ("ai-act/index.html", "AI Act Article 50"),
+        ("ai-act/article-50-deployer-checklist/index.html", "Article 50 deployer checklist"),
+        ("ai-act/deepfake-labelling-patterns/index.html", "Deepfake labelling patterns"),
+        ("ai-act/c2pa-watermarking-tools-compared/index.html", "C2PA and watermarking tools"),
+        ("ai-act/etsi-ts-104-275-explained/index.html", "ETSI TS 104 275 explained"),
+    ]),
+]
+
+
+def render_site_directory(prefix):
+    blocks = []
+    for category, items in CRAWL_DIRECTORY:
+        links = []
+        for rel, label in items:
+            href = prefix + rel.replace("index.html", "")
+            links.append(f'<li><a href="{href}">{label}</a></li>')
+        blocks.append(
+            f"<h3>{category}</h3>\n      <ul class=\"key-list\">\n        "
+            + "\n        ".join(links)
+            + "\n      </ul>"
+        )
+    body = "\n      ".join(blocks)
+    return f"""
+    <section id="site-directory" class="editorial-below-section" aria-labelledby="site-directory-heading">
+      <h2 id="site-directory-heading">Every calculator and guide</h2>
+      <p class="gap-subhead">Each calculator and guide on this site, grouped by topic.</p>
+      {body}
+    </section>
+    """
+
+
 def render_related_links(rel_path, prefix):
     if rel_path == "index.html":
-        return ""
+        return render_site_directory(prefix)
     if rel_path.startswith("ai-act/"):
         cards = []
         for target_rel, label, summary in AI_ACT_LINKS:
@@ -323,11 +404,11 @@ def render_related_links(rel_path, prefix):
         ("intercom-vs-freshdesk-cost-comparison/index.html", "Intercom vs. Freshdesk Cost Comparison", "Real Year-1 price and AI fees for the same team."),
         ("exit/intercom-to-freshdesk-ticket-and-help-center-migration/index.html", "Intercom to Freshdesk migration Year-1", "Fin outcomes versus Freddy sessions, plus a one-time record migration quote."),
         ("intercom-vs-zendesk-cost-comparison/index.html", "Intercom vs. Zendesk Cost Comparison", "Real Year-1 price and per-resolution overage."),
-        ("pricing/intercom-fin-ai-resolution-cost-calculator/index.html", "Intercom Fin AI Cost Calculator", "The pricing-page copy of the $0.99 per resolution Year-1 calculator."),
+        ("pricing/intercom-fin-ai-resolution-cost-calculator/index.html", "Intercom Fin cost per AI resolution", "Year-1 price at $0.99 per AI resolution."),
         ("zendesk-ai-cost-calculator/index.html", "Zendesk AI Cost Calculator", "Suite seats plus the per-resolution add-on versus Freshdesk and Intercom."),
         ("zendesk-vs-freshdesk-cost-comparison/index.html", "Zendesk vs. Freshdesk Cost Comparison", "Year-1 pricing with AI resolutions side by side."),
         ("hubspot-onboarding-fee-calculator/index.html", "HubSpot Onboarding Fee Calculator", "Mandatory setup from $1,500 to $7,000 plus the Year-1 license."),
-        ("pricing/zendesk-ai-resolution-and-automated-outcome-cost/index.html", "Zendesk AI Cost Calculator", "The pricing-page copy of the Zendesk AI Year-1 calculator."),
+        ("pricing/zendesk-ai-resolution-and-automated-outcome-cost/index.html", "Zendesk automated resolution cost", "Year-1 total with the seat add-on and the per-resolution cost."),
         ("pricing/stripe-billing-0-7-percent-recurring-tax-calculator/index.html", "Stripe Billing 0.7% Fee, Tax &amp; Chargeback Calculator", "Recurring revenue tax, Stripe Tax, and subscription chargebacks versus Whop and Paddle."),
         ("compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/index.html", "Gumroad vs. Whop vs. Lemon Squeezy Take-Rate &amp; Chargeback Calculator", "10%, 2.7%, and 5% take rates plus dispute fees."),
         ("exit/stripe-shopify-paddle-frozen-funds-alternatives/index.html", "Stripe, Shopify &amp; Paddle Frozen Funds &amp; Reserve Calculator", "25% rolling reserves, payout holds, and the chargeback rate that triggers a freeze."),
@@ -347,9 +428,9 @@ def render_related_links(rel_path, prefix):
         ("compare/deel-vs-rippling-eor-hidden-fx-and-offboarding-fees/index.html", "Deel vs Rippling EOR cost", "Deel's starting EOR fee, the refundable deposit, and Rippling's unpublished price."),
         ("compliance/ai-voice-and-transcription-hipaa-baa-matrix-2026/index.html", "AI voice HIPAA BAA matrix", "Which plan lists a BAA, and which Year-1 prices are still unknown."),
         ("faq/does-hubspot-charge-onboarding-fees-2026/index.html", "Does HubSpot Charge Onboarding Fees in 2026?", "The fee schedule, waivers, and $0-onboarding alternatives."),
-        ("faq/intercom-fin-ai-cost-calculator/index.html", "Intercom Fin AI Cost Calculator", "The FAQ copy of the $0.99 per resolution Year-1 price."),
+        ("faq/intercom-fin-ai-cost-calculator/index.html", "How much does Intercom Fin cost per resolution?", "What $0.99 per resolution adds on top of the seat price."),
         ("faq/stripe-vs-paddle-true-cost/index.html", "Stripe vs. Paddle vs. Whop True Cost &amp; Chargeback Calculator", "Processing, billing, tax, and dispute cost side by side."),
-        ("pricing/stripe-shopify-chargeback-fee-and-chargeflow-roi-calculator/index.html", "Stripe, Shopify &amp; Paddle Chargeback Cost Calculator", "The pricing-page copy of the dispute fee and recovery calculator."),
+        ("pricing/stripe-shopify-chargeback-fee-and-chargeflow-roi-calculator/index.html", "Chargeflow ROI vs manual dispute handling", "Dispute fees and manual prep versus automated recovery."),
     ]
     by_rel = {rel: (label, summary) for rel, label, summary in all_links}
     chargeback_rel = "chargeback-fee-and-recovery-calculator/index.html"
@@ -484,7 +565,7 @@ def render_related_links(rel_path, prefix):
         directory_links.append(f'<a href="{href}" data-track="internal-audit">{label} &rarr;</a>')
     return f"""
     <section aria-labelledby="related-calculators-heading" style="margin-top:36px; padding-top:24px; border-top:1px solid var(--border);">
-      <h2 id="related-calculators-heading" style="font-size:1.2rem; margin-top:0;">Related Year-1 True-Cost Calculators &amp; Contract Audits</h2>
+      <h2 id="related-calculators-heading" style="font-size:1.2rem; margin-top:0;">Related calculators</h2>
       <div class="related-calc-grid">
         {''.join(cards)}
       </div>
