@@ -12,7 +12,7 @@ Manual 20% win rate:
   evidence prep 156 x $30 = $4,680
   total annual drain = $2,340 + $4,680 + $14,976 = $21,996
   net after prep = $3,744 - $4,680 = -$936
-Chargeflow planning benchmark, 65% win rate, 25% success fee, $0 monthly, $0 prep:
+SaaSBill assumption, not a Chargeflow figure, 65% win rate, 25% success fee, $0 monthly, $0 prep:
   gross recovered 156 x 65% x $120 = $12,168
   success fee 25% = $3,042
   net recovered = $9,126
@@ -20,7 +20,7 @@ Chargeflow planning benchmark, 65% win rate, 25% success fee, $0 monthly, $0 pre
   total annual drain = $2,340 + $6,552 + $3,042 = $11,934
   savings vs manual = $21,996 - $11,934 = $10,062
 A 0.40% fee on all GMV = $11,520, plus the 30% of disputes that are not fraud.
-The 65% recovery rate is a labeled planning benchmark, not a Chargeflow guarantee.
+The 65% recovery rate is SaaSBill’s assumption, not a Chargeflow figure.
 Stripe's separate $15 counter fee is named on the processor menu and is covered
 inside the $30 handling line so it is not added a second time.
 """
@@ -161,7 +161,7 @@ TEMPLATE = r"""
     <li><strong>Paddle:</strong> public notes put the dispute fee around $15 to $20. The Paddle option uses $20.</li>
     <li><strong>High-volume or high-risk:</strong> modeled at $25 per dispute, before any monitoring program penalty.</li>
     <li><strong>Manual in-house:</strong> a 20% win rate, plus $30 per dispute for evidence prep and counter handling. At the default volume that prep is 156 x $30 = $4,680, which is more than the $3,744 gross recovered.</li>
-    <li><strong>Pay-on-performance recovery (Chargeflow in this model):</strong> 25% of recovered dispute dollars ($0/mo base). Does not refund the processor's $15 to $20 dispute fee when a dispute is lost, and a 65% win rate is a planning benchmark. Actual recovery varies by dispute reason code.</li>
+    <li><strong>Pay-on-performance recovery (Chargeflow in this model):</strong> 25% of recovered dispute dollars ($0/mo base). Does not refund the processor's $15 to $20 dispute fee when a dispute is lost, and a 65% win rate is SaaSBill’s assumption, not a Chargeflow figure. Actual recovery varies by dispute reason code.</li>
     <li><strong>Stripe Chargeback Protection at 0.40% of GMV:</strong> the fee covers disputes with the fraudulent reason code only. Subscription cancellations, product not received, product unacceptable, credit not processed, and general disputes, modeled here as 30% of disputes, stay with the merchant, including the order value, the dispute fee, and evidence prep. Stripe Radar for Fraud Teams is a different product and is often billed per screened payment.</li>
     <li><strong>Shopify Protect:</strong> covers eligible Shop Pay orders in the US. It does not cover a standard card gateway or PayPal dispute, so it is not the dollar winner for the whole volume.</li>
     <li><strong>Pre-dispute alert networks (Ethoca, Verifi RDR, Chargeblast):</strong> priced per alert and quoted. This model does not invent an alert fee, so they are listed beside the calculated options and are not picked as the dollar winner.</li>
@@ -297,7 +297,7 @@ function renderChargeback() {
   document.getElementById('cb-big').textContent = money(c.manualLoss);
   document.getElementById('cb-quote').textContent = 'True Year-1 cost';
   document.getElementById('cb-sub').textContent = window.saasbillResultLine(Math.max(0, c.manualLoss - c.fees), c.fees);
-  const cfNote = '25% of recovered dispute dollars ($0/mo base). Does not refund the processor $15 to $20 dispute fee when a dispute is lost, and a 65% win rate is a planning benchmark. Actual recovery varies by dispute reason code.';
+  const cfNote = '25% of recovered dispute dollars ($0/mo base). Does not refund the processor $15 to $20 dispute fee when a dispute is lost, and a 65% win rate is SaaSBill’s assumption, not a Chargeflow figure. Actual recovery varies by dispute reason code.';
   const paths = [
     { id: 'manual', cost: c.manualLoss, name: 'Manual in-house handling' },
     { id: 'chargeflow', cost: c.cfLoss, name: 'Pay-on-performance recovery' },
@@ -340,7 +340,7 @@ function renderChargeback() {
     row('Evidence prep and counter handling', c.disputes.toLocaleString('en-US') + ' x $' + c.opsPerDispute, money(c.manualOps)) +
     row('Net after prep', money(c.manualGross) + ' minus ' + money(c.manualOps), money(c.manualNetAfterOps)) +
     total('Manual in-house total annual drain', money(c.manualLoss) + ' / yr') +
-    row('Chargeflow gross recovered', '65% of ' + money(c.disputed) + ' (planning benchmark)', money(c.recovered)) +
+    row('Chargeflow gross recovered', '65% of ' + money(c.disputed) + ' (SaaSBill’s assumption, not a Chargeflow figure)', money(c.recovered)) +
     row('Chargeflow success fee', '25% of ' + money(c.recovered) + ', $0 monthly, $0 setup', money(c.successFee)) +
     row('Net recovered after the success fee', money(c.recovered) + ' minus ' + money(c.successFee), money(c.netRecovered)) +
     row('Unrecovered with Chargeflow', '35% of ' + money(c.disputed), money(c.cfLost)) +
@@ -352,7 +352,7 @@ function renderChargeback() {
     row('0.40% path total annual drain', money(c.radarFee) + ' + ' + money(c.nonFraudDrain), money(c.radarLoss)) +
     '</div>' + counterNote(processor, c, money);
   const manualMath = 'Disputes = ' + c.disputes.toLocaleString('en-US') + '. Gross recovered at a 20% win rate = ' + money(c.manualGross) + '. Unrecovered sales = ' + money(c.manualLost) + '. Processor dispute fees = ' + money(c.fees) + '. Evidence prep = ' + c.disputes.toLocaleString('en-US') + ' x $30 = ' + money(c.manualOps) + '. Total annual drain = ' + money(c.fees) + ' + ' + money(c.manualOps) + ' + ' + money(c.manualLost) + ' = ' + money(c.manualLoss) + '. Net after prep = ' + money(c.manualGross) + ' minus ' + money(c.manualOps) + ' = ' + money(c.manualNetAfterOps) + '.';
-  const cfMath = 'Gross recovered at a 65% planning win rate = ' + money(c.recovered) + '. Success fee = 25% of ' + money(c.recovered) + ' = ' + money(c.successFee) + ', with a $0 monthly fee. Net recovered = ' + money(c.netRecovered) + '. Unrecovered sales (35%) = ' + money(c.cfLost) + '. Processor dispute fees stay in the total at ' + money(c.fees) + ' because a lost dispute does not refund that fee. Evidence prep = $0. Total annual drain = ' + money(c.cfLoss) + '. ' + cfNote;
+  const cfMath = 'Gross recovered at a 65% win rate (SaaSBill’s assumption, not a Chargeflow figure) = ' + money(c.recovered) + '. Success fee = 25% of ' + money(c.recovered) + ' = ' + money(c.successFee) + ', with a $0 monthly fee. Net recovered = ' + money(c.netRecovered) + '. Unrecovered sales (35%) = ' + money(c.cfLost) + '. Processor dispute fees stay in the total at ' + money(c.fees) + ' because a lost dispute does not refund that fee. Evidence prep = $0. Total annual drain = ' + money(c.cfLoss) + '. ' + cfNote;
   const radarMath = '0.40% fee on all sales (100% of GMV): 0.40% x ' + money(c.gmv) + ' = ' + money(c.radarFee) + '. Fraud disputes covered (70% of disputes): ' + c.fraudDisputes.toLocaleString('en-US') + ' disputes = $0 extra. Uncovered non-fraud and subscription disputes (30%): ' + c.nonFraudDisputes.toLocaleString('en-US') + ' disputes x ' + money(aov) + ' (80% lost at a 20% manual win rate) = ' + money(c.nonFraudLost) + '. Dispute fees and prep on the uncovered 30%: ' + c.nonFraudDisputes.toLocaleString('en-US') + ' x (' + money(fee) + ' fee + $30 prep) = ' + money(c.nonFraudFees + c.nonFraudOps) + '. Total annual drain (0.40% fee + uncovered 30%): ' + money(c.radarLoss) + ' / yr. Stripe Chargeback Protection covers the fraudulent reason code only. Shopify Protect is $0 on eligible Shop Pay orders in the US and does not cover a standard gateway or PayPal dispute.';
   const mark = function(id) { return winner.id === id ? ' card-lowest best-card' : (id === 'percent' ? ' card-hidden' : ''); };
   const cards = document.getElementById('cb-summary');
@@ -382,7 +382,7 @@ function renderChargeback() {
       '<div class="summary-actions"><a class="btn-secondary" href="https://stripe.com/radar" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="stripe-payments" data-cta-location="summary-card">View Stripe Radar &rarr;</a> <a class="summary-audit-link" href="https://help.shopify.com/en/manual/payments/shopify-protect" target="_blank" rel="noopener">Shopify Protect</a></div>' +
     '</div>';
   const rows = [
-    ['Chargeflow Pay-On-Performance', '$0 a month, then 25% of recovered dispute dollars', money(c.successFee) + ' success fee, ' + money(c.netRecovered) + ' net recovered', '2-click Stripe and Shopify connection. $0 evidence prep. The 65% win rate is a planning benchmark, not a promise.', '%%CF%%', 'chargeflow', 'View Chargeflow'],
+    ['Chargeflow Pay-On-Performance', '$0 a month, then 25% of recovered dispute dollars', money(c.successFee) + ' success fee, ' + money(c.netRecovered) + ' net recovered', '2-click Stripe and Shopify connection. $0 evidence prep. The 65% win rate is SaaSBill’s assumption, not a Chargeflow figure.', '%%CF%%', 'chargeflow', 'View Chargeflow'],
     ['Stripe Chargeback Protection (0.40% of GMV)', '0.40% of yearly sales, fraudulent reason codes only', money(c.radarFee) + ' fee + ' + money(c.nonFraudDrain) + ' uncovered = ' + money(c.radarLoss), 'Covers fraudulent disputes. The other 30% (subscription, product, and service disputes) stay with the merchant.', 'https://stripe.com/radar', 'stripe-payments', 'View Stripe Radar'],
     ['Shopify Protect', '$0 on eligible Shop Pay orders in the US', 'No dollar fee in this model', 'Does not cover a standard card gateway or PayPal dispute, so it is not scored as the winner for the whole volume.', 'https://help.shopify.com/en/manual/payments/shopify-protect', 'shopify', 'View Shopify Protect'],
     ['Pre-dispute alerts (Ethoca, Verifi RDR, Chargeblast)', 'Per alert, quoted', 'Not priced in this model', 'Listed so the comparison is not limited to one recovery vendor. Alert fees vary and are not used to pick the dollar winner.', 'https://www.chargeblast.com/', 'chargeblast', 'View Chargeblast'],
@@ -429,7 +429,7 @@ def build():
         ),
         (
             "What does Chargeflow charge?",
-            "In this model a pay-on-performance tool such as Chargeflow has a $0 monthly fee and a $0 setup fee, then 25% of the dispute dollars it recovers. It does not refund the processor's $15 to $20 dispute fee when a dispute is lost. The 65% figure is a planning benchmark. Actual recovery varies by dispute reason code.",
+            "In this model a pay-on-performance tool such as Chargeflow has a $0 monthly fee and a $0 setup fee, then 25% of the dispute dollars it recovers. It does not refund the processor's $15 to $20 dispute fee when a dispute is lost. The 65% figure is SaaSBill’s assumption, not a Chargeflow figure. Actual recovery varies by dispute reason code.",
         ),
         (
             "Why is the 0.40% of GMV path more than the fee itself?",
