@@ -200,5 +200,35 @@
     "url": "https://saasbill.io/compliance/ai-voice-and-transcription-hipaa-baa-matrix-2026/",
     "strategic_rationale": "AI compliance bottleneck: every company adopting AI voice/notes needs BAA & SOC 2 vendor verification.",
     "verification_note": "Otter, Fireflies, Fathom, Granola, Zoom healthcare, AssemblyAI, and Deepgram pages checked 2026-11-09. Granola Enterprise is $35 per user per month on the live pricing page, with HIPAA workspaces on Enterprise only. Otter Enterprise and its HIPAA add-on, Fireflies Private Storage, AssemblyAI usage, and Deepgram Enterprise stay unknown. No affiliate link: none of these vendors are active partners, and Vanta is only applied. Live after PR 19."
+  },
+  {
+    "priority": 19,
+    "slug": "/pricing/chargeflow-vs-stripe-chargeback-protection-year-1-cost/",
+    "title": "What does Chargeflow cost versus Stripe Chargeback Protection in Year 1?",
+    "category": "Payment Processors & MoR",
+    "primary_affiliate": "chargeflow",
+    "status": "queued",
+    "strategic_rationale": "Year-1 cost of a recovery share on won disputes versus a percent of covered sales.",
+    "verification_note": "Chargeflow takes 25% of recovered disputes and has no fee on sales (https://www.chargeflow.io/pricing). Stripe Chargeback Protection is described as 0.4% of all covered sales; verify that on Stripe's own pricing page when the page is built. No Chargeflow affiliate link yet."
+  },
+  {
+    "priority": 20,
+    "slug": "/pricing/hubspot-payments-vs-stripe-platform-fee-year-1-cost/",
+    "title": "What do HubSpot Payments fees cost versus connecting Stripe?",
+    "category": "Payment Processors & MoR",
+    "primary_affiliate": "hubspot",
+    "status": "queued",
+    "strategic_rationale": "Platform fee on HubSpot Payments versus card processing when Stripe is connected to the CRM.",
+    "verification_note": "HubSpot's payments FAQ puts the platform fees at 0.5% and 0.75% (https://knowledge.hubspot.com/payment-processing/payments-frequently-asked-questions). Re-verify both rates when the page is built. This is the payments fee inside the CRM. HubSpot's affiliate program was declined, so this page gets no HubSpot affiliate link."
+  },
+  {
+    "priority": 21,
+    "slug": "/pricing/pandadoc-vs-docusign-vs-jotform-sign-year-1-cost/",
+    "title": "What does PandaDoc cost versus DocuSign and Jotform Sign in Year 1?",
+    "category": "Compliance, HIPAA & SOC 2",
+    "primary_affiliate": "jotform",
+    "status": "queued",
+    "strategic_rationale": "Year-1 e-signature cost across PandaDoc, DocuSign, and Jotform Sign.",
+    "verification_note": "E-signature cost for compliance and forms. PandaDoc's affiliate program left PartnerStack on 9 Nov 2026, so there is no PandaDoc link. The existing Jotform affiliate link may be used, with the disclosure line Paid partnership with Jotform (#JotformPartner)."
   }
 ]
