@@ -406,9 +406,8 @@ def build():
     body = (
         '<section class="hero">'
         "<h1>Deel vs. Rippling EOR cost (2026)</h1>"
-        '<p class="lead">Deel\'s EOR management fee starts at $599 per employee per month, $7,188 for one employee over a year. '
-        "Rippling does not publish an EOR price. These figures are a model, not a quote and not a ranking. "
-        "The deposit shown is the lower-end 1.0 times example, not a guaranteed deposit.</p>"
+        '<p class="lead">Deel\'s published EOR management fee next to Rippling, which does not publish an EOR price. '
+        "The deposit shown is an example, not a quote and not a ranking.</p>"
         "</section>"
         + workbench
         + REST

@@ -323,8 +323,7 @@ def build():
     body = (
         "<section class=\"hero\">"
         "<h1>The B2B SaaS SSO tax calculator (2026)</h1>"
-        "<p class=\"lead\">At 25 people, the extra to turn on SAML is $1,251 a year on Zoom and $3,000 on Notion. "
-        "Okta Starter already includes SSO and is $1,800 for the year after the $1,500 floor. Those are different bills.</p>"
+        "<p class=\"lead\">What selected apps charge to turn on SAML, plus Okta, WorkOS, and 1Password as separate bills.</p>"
         "</section>"
         + workbench
         + REST

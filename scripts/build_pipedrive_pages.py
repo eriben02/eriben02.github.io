@@ -491,17 +491,8 @@ def build():
     pd_run = run_node(core, "pd", {"default": DEFAULT})["default"]
     hs_run = run_node(core, "hs", {"default": DEFAULT})["default"]
     pd_row = pd_run["r"]["current"]
-    pd_lead = (
-        "Pipedrive %s for %d seats, billed annually, is %s in Year 1 before add-ons. "
-        "Lite at the same seat count is %s. Add-ons whose price basis is unpublished are shown as at least the published starting price, never as $0."
-        % (pd_row["planLabel"], pd_row["seats"], money(pd_row["total"]), money(next(r["seat"] for r in pd_run["r"]["rows"] if r["id"] == "lite")))
-    )
-    cmp = hs_run["r"]
-    hs_lead = (
-        "For %d seats on annual billing, Pipedrive %s is %s in Year 1 and %s is %s, including %s of mandatory onboarding. "
-        "Lowest Year-1 cost: Pipedrive."
-        % (cmp["seats"], cmp["pipedrive"]["planLabel"], money(cmp["pipedrive"]["total"]), cmp["hubspot"]["planLabel"], money(cmp["hubspot"]["total"]), money(cmp["hubspot"]["onboarding"]))
-    )
+    pd_lead = "Annual Pipedrive seats and add-ons. An unpublished price basis stays a floor, never $0."
+    hs_lead = "The same seats on Pipedrive and HubSpot Sales Hub, with HubSpot onboarding in the Year-1 total."
     fine = "Prices last verified: Pipedrive <time datetime=\"%s\">%s</time>, HubSpot <time datetime=\"%s\">%s</time> &middot; USD, annual billing" % (
         pricing["pipedrive"]["plans"]["growth"]["verified_date"], human(pricing["pipedrive"]["plans"]["growth"]["verified_date"]), hs["verifiedDate"], hs["verified"])
     pd_body = f"""

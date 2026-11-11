@@ -418,12 +418,7 @@ def body_html(pricing, affiliates, runs, data, core):
 </section>
 """
 
-    dc, dp = d["r"]["close"], d["r"]["pipedrive"]
-    lead = (
-        "Pipedrive has no built-in calling, so a team that calls from its CRM also pays for a dialer. "
-        "For %d reps, Close %s comes to %s in Year 1 and Pipedrive %s + Aircall to %s (example: %s billed min/rep/mo)."
-        % (d["r"]["seats"], dc["planLabel"], money(dc["total"]), dp["planLabel"], money(dp["total"]), policy["default_minutes_per_rep_month"])
-    )
+    lead = "Pipedrive has no built-in calling, so a team that calls from its CRM also pays for a dialer."
 
     return f"""
 <section class="hero editorial-hero editorial-hero-wrap">

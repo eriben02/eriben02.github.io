@@ -286,9 +286,7 @@ def build():
         '<section class="hero">'
         "<h1>AI voice and transcription HIPAA BAA matrix (2026)</h1>"
         '<p class="lead">A BAA is necessary but not sufficient. '
-        "Zoom healthcare Pro lists $14.16 per user per month on the annual plan. "
-        "Fathom Team lists $15 with a standard BAA. "
-        "Otter's HIPAA add-on, Fireflies Private Storage, and Deepgram Enterprise are unknown.</p>"
+        "The matrix lists which plan publishes a BAA, and which Year-1 prices stay unknown.</p>"
         "</section>"
         + workbench
         + REST
