@@ -203,13 +203,15 @@
   },
   {
     "priority": 19,
-    "slug": "/pricing/chargeflow-vs-stripe-chargeback-protection-year-1-cost/",
-    "title": "What does Chargeflow cost versus Stripe Chargeback Protection in Year 1?",
+    "slug": "/pricing/chargeflow-vs-stripe-smart-disputes-year-1-cost/",
+    "title": "What does Chargeflow cost versus Stripe Smart Disputes in Year 1?",
     "category": "Payment Processors & MoR",
     "primary_affiliate": "chargeflow",
-    "status": "queued",
-    "strategic_rationale": "Year-1 cost of a recovery share on won disputes versus a percent of covered sales.",
-    "verification_note": "Chargeflow takes 25% of recovered disputes and has no fee on sales (https://www.chargeflow.io/pricing). Stripe Chargeback Protection is described as 0.4% of all covered sales; verify that on Stripe's own pricing page when the page is built. No Chargeflow affiliate link yet."
+    "status": "published",
+    "published_at": "2026-11-11",
+    "url": "https://saasbill.io/pricing/chargeflow-vs-stripe-smart-disputes-year-1-cost/",
+    "strategic_rationale": "Year-1 cost of a manual Stripe response, Smart Disputes, and Chargeflow Automation. Chargeback Protection is not a listed product.",
+    "verification_note": "Stripe US pricing and Smart Disputes docs, plus Chargeflow pricing, checked 2026-11-11. Received fee $15, countered fee $15 returned only on a win, Smart Disputes 30% of the amount won, Chargeflow Automation 25% of the recovered amount and the dispute fee is extra. Chargeback Protection is not on the US pricing page. Current availability and price are unknown. A 2019 launch price is not used. No Chargeflow affiliate link."
   },
   {
     "priority": 20,

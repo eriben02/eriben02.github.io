@@ -59,6 +59,7 @@ def generate_meta_files(extra_urls=None):
         "/compliance/vanta-vs-drata-vs-comp-ai-soc2-negotiation-benchmarks/",
         "/compare/deel-vs-rippling-eor-hidden-fx-and-offboarding-fees/",
         "/compliance/ai-voice-and-transcription-hipaa-baa-matrix-2026/",
+        "/pricing/chargeflow-vs-stripe-smart-disputes-year-1-cost/",
     ]
     if extra_urls:
         for u in extra_urls:

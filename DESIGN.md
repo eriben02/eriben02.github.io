@@ -22,7 +22,7 @@ These are internal. Do not print them as visible copy. The copy lint in `data/co
 
 `render_workbench(controls_html, controls_title="Estimate Your True Cost", chart_title="Your Estimated True Cost", cta_href="#comparison", cta_label="See pricing", cta_vendor="saasbill")` is the shared calculator: controls, stacked bar, result column, and the sticker / hidden-cost cards. Reference: the homepage workbench in `index.html`.
 
-`render_related_links` adds four cards under the heading "Related calculators", plus a "Browse all" list. The homepage gets `render_site_directory` instead: every sitemap URL as a plain link, grouped by topic. Pages under `ai-act/` only link to the other AI Act guides, under "Related AI Act guides". Reference: `compare/close-vs-pipedrive-year-1-cost-calculator/index.html`, `index.html`, and `ai-act/index.html`.
+`render_related_links` adds four cards under the heading "Related calculators", plus a "Browse all calculators and guides" list that also links to the homepage directory. The homepage gets `render_site_directory` instead: every sitemap URL as a plain link, grouped by topic. Pages under `ai-act/` only link to the other AI Act guides, under "Related AI Act guides". Reference: `compare/close-vs-pipedrive-year-1-cost-calculator/index.html`, `index.html`, and `ai-act/index.html`.
 
 | Class or element | What it is | Reference |
 | --- | --- | --- |
