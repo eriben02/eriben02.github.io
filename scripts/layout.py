@@ -571,7 +571,9 @@ def render_related_links(rel_path, prefix):
         </div>""")
         if len(cards) >= (4 if smart_rel in preferred else 3):
             break
-    directory_links = []
+    directory_links = [
+        f'<a href="{prefix}index.html#site-directory" data-track="internal-audit">Every calculator and guide &rarr;</a>'
+    ]
     for target_rel, label, _ in all_links:
         href = prefix + target_rel.replace("index.html", "")
         directory_links.append(f'<a href="{href}" data-track="internal-audit">{label} &rarr;</a>')
@@ -582,7 +584,7 @@ def render_related_links(rel_path, prefix):
         {''.join(cards)}
       </div>
       <details class="footer-directory-details">
-        <summary>Browse all {len(all_links)} audited calculators &amp; guides</summary>
+        <summary>Browse all calculators and guides</summary>
         <div class="footer-directory-links">
           {''.join(directory_links)}
         </div>

@@ -414,7 +414,7 @@ class TestCloseVsPipedrivePublishing(unittest.TestCase):
         self.assertNotIn("cp-answer", pub)
         self.assertNotIn("cp-seg", pub)
         # Footer link wall is collapsed, as on every other page.
-        self.assertRegex(pub, r"<details[^>]*>\s*<summary>Browse all \d+ audited calculators")
+        self.assertRegex(pub, r"<details[^>]*>\s*<summary>Browse all calculators and guides</summary>")
         self.assertEqual(pub.count('class="faq-item"'), 8)
 
     def test_plausible_static(self):
