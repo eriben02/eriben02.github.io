@@ -877,6 +877,26 @@ function hipaaVoice() {
   check(monthly.zoomYear === 101940 && monthly.fathomYear === 114000 && monthly.firefliesBase === -1, "monthly Zoom and Fathom; Fireflies HIPAA is annual only");
 }
 
+function smartDisputes() {
+  const rel = "pricing/chargeflow-vs-stripe-smart-disputes-year-1-cost/index.html";
+  const html = read(rel);
+  const fn = extractBalanced(html, "function calcSmartDisputes");
+  check(!!fn, "missing smart disputes math");
+  check(html.indexOf("/go/") === -1 && html.indexOf("sponsored") === -1, "no Chargeflow affiliate link");
+  check(html.indexOf("0.4%") === -1, "do not use 0.4% as a current Chargeback Protection price");
+  check(html.indexOf("Chargeback Protection is not listed") !== -1, "Chargeback Protection status note");
+  const box = {};
+  vm.createContext(box);
+  vm.runInContext(fn + "\nthis.fn=calcSmartDisputes;", box);
+  const def = box.fn({ disputes: 10, amount: 100, win: 50 });
+  check(def.manual === 270000 && def.smart === 360000 && def.chargeflow === 330000, "default year cents " + def.manual + " " + def.smart + " " + def.chargeflow);
+  const high = box.fn({ disputes: 10, amount: 20, win: 50 });
+  check(high.chargeflow < high.manual, "a small disputed amount can make Chargeflow less than manual");
+  const none = box.fn({ disputes: 10, amount: 100, win: 0 });
+  check(none.smartFee === 0 && none.cfFee === 0 && none.smart === none.chargeflow, "a 0% win rate drops the success fees");
+  check(none.manual === none.received + none.countered, "losses still keep the countered fee");
+}
+
 function main() {
   errors.length = 0;
   checks = 0;
@@ -896,6 +916,7 @@ function main() {
   soc2Cost();
   eorCost();
   hipaaVoice();
+  smartDisputes();
   plausible();
   if (errors.length) {
     console.error(errors.join("\n"));

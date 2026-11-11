@@ -317,6 +317,7 @@ CRAWL_DIRECTORY = [
         ("exit/stripe-shopify-paddle-frozen-funds-alternatives/index.html", "Stripe, Shopify and Paddle frozen funds"),
         ("chargeback-fee-and-recovery-calculator/index.html", "Stripe, Shopify and Paddle chargeback cost"),
         ("pricing/stripe-shopify-chargeback-fee-and-chargeflow-roi-calculator/index.html", "Chargeflow ROI vs manual dispute handling"),
+        ("pricing/chargeflow-vs-stripe-smart-disputes-year-1-cost/index.html", "Chargeflow vs Stripe Smart Disputes"),
         ("exit/shopify-payments-chargeback-threshold-and-reserve-appeal/index.html", "Shopify Payments reserve and dispute threshold"),
         ("pricing/stripe-radar-and-dispute-fee-calculator-2026/index.html", "Stripe dispute and Radar cost"),
         ("exit/paypal-180-day-permanent-limitation-fund-recovery/index.html", "PayPal 180-day hold and reserve cost"),
@@ -431,6 +432,7 @@ def render_related_links(rel_path, prefix):
         ("faq/intercom-fin-ai-cost-calculator/index.html", "How much does Intercom Fin cost per resolution?", "What $0.99 per resolution adds on top of the seat price."),
         ("faq/stripe-vs-paddle-true-cost/index.html", "Stripe vs. Paddle vs. Whop True Cost &amp; Chargeback Calculator", "Processing, billing, tax, and dispute cost side by side."),
         ("pricing/stripe-shopify-chargeback-fee-and-chargeflow-roi-calculator/index.html", "Chargeflow ROI vs manual dispute handling", "Dispute fees and manual prep versus automated recovery."),
+        ("pricing/chargeflow-vs-stripe-smart-disputes-year-1-cost/index.html", "Chargeflow vs Stripe Smart Disputes", "Manual response, Smart Disputes, and Chargeflow. The win rate is an assumption."),
     ]
     by_rel = {rel: (label, summary) for rel, label, summary in all_links}
     chargeback_rel = "chargeback-fee-and-recovery-calculator/index.html"
@@ -447,6 +449,7 @@ def render_related_links(rel_path, prefix):
     }
     shopify_reserve_rel = "exit/shopify-payments-chargeback-threshold-and-reserve-appeal/index.html"
     radar_rel = "pricing/stripe-radar-and-dispute-fee-calculator-2026/index.html"
+    smart_rel = "pricing/chargeflow-vs-stripe-smart-disputes-year-1-cost/index.html"
     # CRM pages show each other first. The Close vs Pipedrive page leads with
     # the seat-bucket and Close vs HubSpot pages, then HubSpot and Gong.
     close_pipedrive_rel = "compare/close-vs-pipedrive-year-1-cost-calculator/index.html"
@@ -471,12 +474,14 @@ def render_related_links(rel_path, prefix):
             "exit/stripe-shopify-paddle-frozen-funds-alternatives/index.html",
             "pricing/stripe-billing-0-7-percent-recurring-tax-calculator/index.html",
             "faq/stripe-vs-paddle-true-cost/index.html",
+            smart_rel,
         ]
     elif rel_path == shopify_reserve_rel:
         preferred = [
             chargeback_rel,
             "exit/stripe-shopify-paddle-frozen-funds-alternatives/index.html",
             "pricing/stripe-billing-0-7-percent-recurring-tax-calculator/index.html",
+            smart_rel,
         ]
     elif rel_path == "compliance/okta-vs-workos-vs-1password-sso-tax-calculator/index.html":
         preferred = [
@@ -502,11 +507,18 @@ def render_related_links(rel_path, prefix):
             "compliance/vanta-vs-drata-vs-comp-ai-soc2-negotiation-benchmarks/index.html",
             "compare/deel-vs-rippling-eor-hidden-fx-and-offboarding-fees/index.html",
         ]
+    elif rel_path == smart_rel:
+        preferred = [
+            chargeback_rel,
+            radar_rel,
+            shopify_reserve_rel,
+        ]
     elif rel_path == radar_rel:
         preferred = [
             chargeback_rel,
             shopify_reserve_rel,
             "exit/stripe-shopify-paddle-frozen-funds-alternatives/index.html",
+            smart_rel,
         ]
     elif rel_path in payment_rels:
         preferred = [chargeback_rel] + [rel for rel, _, _ in all_links if rel in payment_rels and rel != chargeback_rel and rel != shopify_reserve_rel]
@@ -557,7 +569,7 @@ def render_related_links(rel_path, prefix):
           <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="{href}" data-track="internal-audit">{label} &rarr;</a></h3>
           <p style="margin:0; font-size:0.84rem; color:var(--muted);">{summary}</p>
         </div>""")
-        if len(cards) >= 3:
+        if len(cards) >= (4 if smart_rel in preferred else 3):
             break
     directory_links = []
     for target_rel, label, _ in all_links:
