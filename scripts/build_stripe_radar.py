@@ -34,9 +34,7 @@ DESCRIPTION = (
 )
 H1 = "Stripe dispute and Radar cost"
 LEAD = (
-    "Twelve disputes a month, from 2,000 card payments at a 0.60% dispute rate, "
-    "cost $270 in Stripe dispute fees before any lost orders. "
-    "Change the count, the rate, the share you fight, and the Radar plan to see the Year-1 total."
+    "Stripe dispute fees, lost order value, Smart Disputes, and a Radar plan, for the dispute rate you enter."
 )
 REL = "pricing/stripe-radar-and-dispute-fee-calculator-2026/index.html"
 CANONICAL = "/pricing/stripe-radar-and-dispute-fee-calculator-2026/"
@@ -44,7 +42,7 @@ CANONICAL = "/pricing/stripe-radar-and-dispute-fee-calculator-2026/"
 BODY = r"""
 <section class="hero">
   <h1>Stripe dispute and Radar cost</h1>
-  <p class="lead">Twelve disputes a month, from 2,000 card payments at a 0.60% dispute rate, cost $270 in Stripe dispute fees before any lost orders. Change the count, the rate, the share you fight, and the Radar plan to see the Year-1 total.</p>
+  <p class="lead">Stripe dispute fees, lost order value, Smart Disputes, and a Radar plan, for the dispute rate you enter.</p>
 </section>
 
 <div class="unified-inspector-tray">

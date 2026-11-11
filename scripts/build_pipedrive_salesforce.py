@@ -353,8 +353,7 @@ def build():
     body = (
         "<section class=\"hero\">"
         "<h1>Pipedrive vs Salesforce Year-1 cost</h1>"
-        "<p class=\"lead\">At 5 seats, billed annually, Salesforce Starter Suite is $1,500 for the year and Pipedrive Growth is $2,340. "
-        "Salesforce Pro Suite is $6,000 before the API add-on. Pipedrive Lite is $840, which is lower than these five paths and is listed with the seat prices.</p>"
+        "<p class=\"lead\">Annual list prices for Salesforce Starter Suite and Pro Suite next to Pipedrive. Implementation stays unknown.</p>"
         "</section>"
         + workbench
         + REST

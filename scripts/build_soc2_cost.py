@@ -453,9 +453,7 @@ def build():
     body = (
         '<section class="hero">'
         "<h1>Vanta, Drata, and Comp AI SOC 2 cost (2026)</h1>"
-        '<p class="lead">For 1 to 20 employees, the AWS Marketplace list is $14,000 for Vanta Essentials. '
-        "Drata Foundation is $15,000 for a company of 1 to 50 FTE. "
-        "The CPA audit is a separate bill, typically $10,000 to $50,000. Comp AI does not publish a price.</p>"
+        '<p class="lead">AWS list prices for Vanta and Drata, plus a separate CPA fee. Comp AI does not publish a price.</p>'
         "</section>"
         + workbench
         + REST

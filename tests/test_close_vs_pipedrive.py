@@ -370,9 +370,10 @@ class TestCloseVsPipedriveSources(unittest.TestCase):
         for chunk in (tbody, answer, lead, best, sources):
             for m in re.findall(r"\$(\d[\d,]*(?:\.\d+)?)", chunk):
                 self.assertIn(round(float(m.replace(",", "")), 2), allowed, "$" + m)
-        for chunk in (answer, lead):
-            self.assertIn("$2,760", chunk)
-            self.assertIn("$4,428", chunk)
+        self.assertIn("$2,760", answer)
+        self.assertIn("$4,428", answer)
+        self.assertNotIn("$2,760", lead)
+        self.assertNotIn("$4,428", lead)
         self.assertIn("$1,668/yr less than Pipedrive", answer)
         self.assertIn("$1,668/yr less than Pipedrive", best)
         # Secondary Pipedrive monthly prices never render as numbers.
@@ -395,9 +396,11 @@ class TestCloseVsPipedrivePublishing(unittest.TestCase):
         self.assertIn(URL, read(os.path.join(ROOT, "sitemap.xml")))
         self.assertIn("<h1>Close vs Pipedrive (2026): True Year-1 Cost for Your Sales Team, Calling Included</h1>", pub)
         lead = re.search(r'<p class="lead">(.*?)</p>', pub, re.S).group(1)
-        self.assertEqual(lead.count(". "), 1)
-        self.assertIn("$2,760", lead)
-        self.assertIn("$4,428", lead)
+        self.assertEqual(lead.count(". "), 0)
+        self.assertNotIn("$2,760", lead)
+        self.assertNotIn("$4,428", lead)
+        self.assertIn("$2,760", pub)
+        self.assertIn("$4,428", pub)
         self.assertIn('"inLanguage": "en-US"', pub)
         self.assertIn("Lowest Year-1 cost", pub)
         for control in ("cp-users", "cp-billing", "cp-email", "cp-sequences", "cp-leadcapture", "cp-calling", "cp-minutes", "cp-exclude-dialer"):
