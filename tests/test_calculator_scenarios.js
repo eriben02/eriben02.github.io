@@ -897,6 +897,35 @@ function smartDisputes() {
   check(none.manual === none.received + none.countered, "losses still keep the countered fee");
 }
 
+function hubspotPayments() {
+  const rel = "pricing/hubspot-payments-vs-stripe-platform-fee-year-1-cost/index.html";
+  const html = read(rel);
+  const fn = extractBalanced(html, "function calcHubspotPayments");
+  check(!!fn, "missing HubSpot payments math");
+  check(html.indexOf("/go/") === -1 && html.indexOf("sponsored") === -1, "no HubSpot affiliate link");
+  check(html.indexOf("The 0.75% platform fee applies on top of Stripe's own fees. On bank debits, that 0.75% is uncapped.") !== -1, "platform fee note once");
+  check(html.split("On bank debits, that 0.75% is uncapped.").length === 2, "uncapped note is not repeated");
+  const box = {};
+  vm.createContext(box);
+  vm.runInContext(fn + "\nthis.fn=calcHubspotPayments;", box);
+  const base = { card: 10000, avg: 100, intl: 0, ach: 0, stripePct: 2.9, stripeFixed: 0.3, promo: "no", ukIntl: "eea" };
+  const def = box.fn(Object.assign({ country: "us" }, base));
+  check(def.hubspot1 === 408000 && def.hubspot2 === 408000 && def.stripe1 === 474000 && def.stripe2 === 474000, "US default cents " + def.hubspot1 + " " + def.stripe1);
+  const promo = box.fn(Object.assign({}, base, { country: "us", promo: "yes" }));
+  check(promo.hubspot1 === 348000 && promo.hubspot2 === 408000 && promo.stripe1 === 474000, "promotion drops only HubSpot Year 1");
+  const foreign = box.fn(Object.assign({}, base, { country: "us", intl: 100 }));
+  check(foreign.hubspot1 === 588000 && foreign.stripe1 === 474000, "US foreign cards use 4.4% on HubSpot payments only");
+  const uk = box.fn(Object.assign({}, base, { country: "uk", intl: 100, ukIntl: "eea" }));
+  const ukFar = box.fn(Object.assign({}, base, { country: "uk", intl: 100, ukIntl: "noneea" }));
+  check(uk.hubspot1 === 360000 && ukFar.hubspot1 === 450000, "UK international adders " + uk.hubspot1 + " " + ukFar.hubspot1);
+  const other = box.fn(Object.assign({}, base, { country: "other" }));
+  check(other.offered === false && other.hubspot1 === null && other.stripe1 === 474000, "other countries keep only the Stripe path");
+  const ach = box.fn({ country: "us", card: 2000, avg: 2000, intl: 0, ach: 100, stripePct: 2.9, stripeFixed: 0.3, promo: "no", ukIntl: "eea" });
+  check(ach.achProcSample === 1000 && ach.stripeAchSample === 500, "ACH caps: HubSpot $10, Stripe $5");
+  const ukAch = box.fn({ country: "uk", card: 2000, avg: 2000, intl: 0, ach: 100, stripePct: 2.9, stripeFixed: 0.3, promo: "no", ukIntl: "eea" });
+  check(ukAch.stripeAchUnknown === true && ukAch.stripeAchSample === null, "non-US Stripe bank debit stays unknown");
+}
+
 function main() {
   errors.length = 0;
   checks = 0;
@@ -917,6 +946,7 @@ function main() {
   eorCost();
   hipaaVoice();
   smartDisputes();
+  hubspotPayments();
   plausible();
   if (errors.length) {
     console.error(errors.join("\n"));

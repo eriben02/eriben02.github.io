@@ -219,9 +219,11 @@
     "title": "What do HubSpot Payments fees cost versus connecting Stripe?",
     "category": "Payment Processors & MoR",
     "primary_affiliate": "hubspot",
-    "status": "queued",
+    "status": "published",
+    "published_at": "2026-11-12",
+    "url": "https://saasbill.io/pricing/hubspot-payments-vs-stripe-platform-fee-year-1-cost/",
     "strategic_rationale": "Platform fee on HubSpot Payments versus card processing when Stripe is connected to the CRM.",
-    "verification_note": "HubSpot's payments FAQ puts the platform fees at 0.5% and 0.75% (https://knowledge.hubspot.com/payment-processing/payments-frequently-asked-questions). Re-verify both rates when the page is built. This is the payments fee inside the CRM. HubSpot's affiliate program was declined, so this page gets no HubSpot affiliate link."
+    "verification_note": "HubSpot payments FAQ last updated 22 Sep 2026, the connect-Stripe article last updated 28 Oct 2026, the HubSpot payments product page, and Stripe US pricing, checked 2026-11-12. HubSpot payments platform fee is 0% in year 1 only for an eligible promotion, then 0.5%. The Stripe option adds 0.75%, and that 0.75% is uncapped on bank debits. US HubSpot card processing is 2.9%, plus 1.5% on international cards. Stripe standard US cards are 2.9% + $0.30, ACH Direct Debit is 0.8% capped at $5, and the dispute received fee is $15. The promotion's eligibility, Revenue Hub seat price, tax, custom rates, and non-US Stripe bank-debit fees stay unknown. No HubSpot affiliate link."
   },
   {
     "priority": 21,
