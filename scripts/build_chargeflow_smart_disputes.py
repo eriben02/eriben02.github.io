@@ -37,7 +37,7 @@ CONTROLS = """
         <div class="wb-control-item">
           <label class="wb-control-label" for="sd-win">Win rate (our planning assumption, adjust to yours) <span class="val-pill" id="sd-win-val">50%</span></label>
           <div class="wb-slider-row">
-            <input type="range" id="sd-win" min="0" max="100" step="5" value="50" aria-label="Win rate (our planning assumption, adjust to yours)" data-track="calculator-control" data-control="win-rate" />
+            <input type="range" id="sd-win" min="0" max="100" step="5" value="50" aria-label="Win rate" data-track="calculator-control" data-control="win-rate" />
           </div>
         </div>
         <p class="wb-budget-subnote">Year 1 is 12 months.</p>

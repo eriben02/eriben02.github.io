@@ -359,7 +359,7 @@ function updateTr() {{
     <div class="summary-card result-card">
       <div class="summary-label">Add-on: dispute recovery</div>
       <div class="summary-metric">${{trFmt(cf.net)}} / yr net</div>
-      <div class="summary-scenario">$0/mo, 25% only on won disputes, 65% win rate (our planning assumption, adjust to yours)</div>
+      <div class="summary-scenario">$0/mo, 25% only on won disputes. The 65% win rate is our planning assumption, not a Chargeflow figure. Adjust it to yours.</div>
       <div class="summary-breakdown">Gross recovered ${{trFmt(cf.recovered)}} minus a ${{trFmt(cf.successFee)}} success fee. </div>
       <details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">Disputed sales/yr = ${{o.sales.toLocaleString('en-US')}} x ${{o.dispute.toFixed(1)}}% x $${{o.price}} x 12 = ${{trFmt(cf.disputedYr)}}. Lemon Squeezy and Whop dispute fees = ${{trFmt(cf.feeYr)}}/yr. Chargeflow net = 65% recovered, then minus 25%.</div></details>
       <div class="summary-actions">

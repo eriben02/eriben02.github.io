@@ -747,7 +747,7 @@ function renderCalcBreakdownHtml(r, seats, aiVol, mode, cat) {{
             <span class="calc-math-val">${{money(bench.disputed)}}/yr</span>
           </div>
           <div class="calc-math-row">
-            <span class="calc-math-label"><strong>Gross recovered at 65%</strong><span class="calc-math-formula">Win rate (our planning assumption, adjust to yours)</span></span>
+            <span class="calc-math-label"><strong>Gross recovered at a 65% win rate, our planning assumption. Adjust it to yours.</strong></span>
             <span class="calc-math-val">${{money(bench.recovered)}}/yr</span>
           </div>
           <div class="calc-math-row">

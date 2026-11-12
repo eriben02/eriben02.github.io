@@ -32,7 +32,7 @@ class TestChargeflowSmartDisputes(unittest.TestCase):
         self.assertIn('id="shell-amt-seats">$3,600<', html)
         self.assertIn('id="shell-amt-hidden">$3,300<', html)
         self.assertIn("Win rate (our planning assumption, adjust to yours)", html)
-        self.assertEqual(html.count("our planning assumption, adjust to yours"), 2)
+        self.assertEqual(html.count("our planning assumption, adjust to yours"), 1)
         self.assertEqual(html.count("The manual response total covers only Stripe's fees. It does not include the time your team spends preparing evidence."), 1)
         self.assertNotIn("Lowest modeled Year-1 cost", html)
         self.assertNotIn("See the three costs", html)

@@ -123,13 +123,13 @@ function quotePayProfile(id, gmvMo, txMo) {
       callTitleHidden: "Hidden Cost Gap",
       callSubHidden: "25% success fee (" + payMoney(fee) + "/yr) on " + payMoney(recovered) + " recovered. Net kept " + payMoney(net) + "/yr (" + payMoney(netMo) + "/mo).",
       quote: "<strong>Estimated monthly processing fees:</strong> $0/mo<br/><strong>Potential funds temporarily held:</strong> $0/mo (add-on dispute layer)",
-      sub: assumptions + ". " + cline + ". Disputed sales " + payMoney(disputed) + "/yr. Gross recovered at a 65% win rate (SaaSBill’s assumption, not a Chargeflow figure) " + payMoney(recovered) + ". Success fee 25% " + payMoney(fee) + ". $0/mo base platform fee and $0 evidence prep.",
+      sub: assumptions + ". " + cline + ". Disputed sales " + payMoney(disputed) + "/yr. Gross recovered at a 65% win rate, our planning assumption. Adjust it to yours. " + payMoney(recovered) + ". Success fee 25% " + payMoney(fee) + ". $0/mo base platform fee and $0 evidence prep.",
       gapLine: cline,
       disputeLine: "Disputed sales at 0.65% = " + payMoney(disputed) + "/yr. Gross recovered at 65% = " + payMoney(recovered) + ". Success fee 25% = " + payMoney(fee) + ". Net kept " + payMoney(net) + "/yr.",
       disputeAmt: "+" + payMoney(net) + "/yr",
       tableFeeSub: "$0/mo base · $0 evidence prep · 25% of " + payMoney(recovered) + " recovered",
       tableHeldPill: "+" + payMoney(net) + " / yr net recovered",
-      tableHeldSub: "$0/mo platform fee · 65% is SaaSBill’s assumption, not a Chargeflow figure"
+      tableHeldSub: "$0/mo platform fee"
     };
   }
 
