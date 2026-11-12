@@ -260,13 +260,20 @@ function renderHubspotPayments() {
   var baseRow = document.getElementById("shell-row-base");
   var seatsRow = document.getElementById("shell-row-seats");
   var hiddenRow = document.getElementById("shell-row-hidden");
-  var baseAmt = c.hubspot1 === null ? 0 : c.hubspot1;
-  var seatsAmt = c.stripe1;
-  var hiddenAmt = c.hubspot2 === null ? 0 : c.hubspot2;
+  baseRow.style.display = c.offered ? "" : "none";
+  hiddenRow.style.display = c.offered ? "" : "none";
+  seatsRow.style.display = "";
+  var baseAmt = c.offered && c.hubspot1 ? c.hubspot1 : 0;
+  var seatsAmt = c.stripe1 || 0;
+  var hiddenAmt = c.offered && c.hubspot2 ? c.hubspot2 : 0;
   var parts = Math.max(1, baseAmt + seatsAmt + hiddenAmt);
-  baseRow.style.flex = Math.max(8, Math.round(baseAmt / parts * 100)) + " 1 0px";
-  seatsRow.style.flex = Math.max(8, Math.round(seatsAmt / parts * 100)) + " 1 0px";
-  hiddenRow.style.flex = Math.max(8, Math.round(hiddenAmt / parts * 100)) + " 1 0px";
+  function barFlex(amount) {
+    var share = amount <= 0 ? 8 : Math.round(amount / parts * 100);
+    return Math.max(8, share) + " 1 0px";
+  }
+  baseRow.style.flex = barFlex(baseAmt);
+  seatsRow.style.flex = barFlex(seatsAmt);
+  hiddenRow.style.flex = barFlex(hiddenAmt);
   var best = "";
   if (c.offered) {
     if (c.hubspot1 < c.stripe1) best = "Lower Year-1 fee: HubSpot payments, " + hpMoney(c.hubspot1) + ".";
@@ -315,7 +322,9 @@ def build():
         cta_vendor="saasbill",
     )
     for old, new in (
-        ('class="wb-vbar-container"', 'class="wb-vbar-container wb-vbar-separate"'),
+        ('id="shell-row-base" style="flex: 40 1 0px;"', 'id="shell-row-base" style="flex: 32 1 0px;"'),
+        ('id="shell-row-seats" style="flex: 8 1 0px;"', 'id="shell-row-seats" style="flex: 37 1 0px;"'),
+        ('id="shell-row-hidden" style="flex: 52 1 0px;"', 'id="shell-row-hidden" style="flex: 32 1 0px;"'),
         ('id="shell-product">Year-1 total<', 'id="shell-product">HubSpot payments<'),
         ('id="shell-big">$0<', 'id="shell-big">$4,080<'),
         ('id="shell-sub">Matches advertised price ($0 hidden fees).</p>', 'id="shell-sub"></p>'),
