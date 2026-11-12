@@ -275,9 +275,10 @@ function renderHubspotPayments() {
   hiddenRow.style.setProperty("--wb-bar-share", barShare(hiddenAmt));
   var best = "";
   if (c.offered) {
-    if (c.hubspot1 < c.stripe1) best = "Lower Year-1 fee: HubSpot payments, " + hpMoney(c.hubspot1) + ".";
-    else if (c.stripe1 < c.hubspot1) best = "Lower Year-1 fee: Stripe connected to HubSpot, " + hpMoney(c.stripe1) + ".";
-    else best = "Same Year-1 fee: " + hpMoney(c.hubspot1) + ".";
+    var gap = Math.abs(c.hubspot1 - c.stripe1);
+    if (c.hubspot1 < c.stripe1) best = hpMoney(gap) + " less than Stripe connected.";
+    else if (c.stripe1 < c.hubspot1) best = hpMoney(gap) + " less than HubSpot payments.";
+    else best = "Same Year-1 fee.";
   }
   document.getElementById("shell-best").textContent = best;
   document.getElementById("hp-body").innerHTML = ""
@@ -315,7 +316,7 @@ def build():
     workbench = render_workbench(
         CONTROLS,
         controls_title="Your payments",
-        chart_title="Year-1 fees",
+        chart_title="Year-1 and Year-2 fees",
         cta_href="#hp-fees",
         cta_label="Fee table",
         cta_vendor="saasbill",
@@ -337,7 +338,7 @@ def build():
         ('id="shell-title-hidden">Hidden Cost Gap<', 'id="shell-title-hidden">HubSpot payments<'),
         ('id="shell-sub-hidden">Fees above the advertised price<', 'id="shell-sub-hidden">Year 2<'),
         ('id="shell-amt-hidden">$0<', 'id="shell-amt-hidden">$4,080<'),
-        ('id="shell-best"></div>', 'id="shell-best">Lower Year-1 fee: HubSpot payments, $4,080.</div>'),
+        ('id="shell-best"></div>', 'id="shell-best">$660 less than Stripe connected.</div>'),
     ):
         if old not in workbench:
             raise SystemExit("missing workbench fallback: " + old)
