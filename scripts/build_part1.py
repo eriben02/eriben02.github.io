@@ -747,7 +747,7 @@ function renderCalcBreakdownHtml(r, seats, aiVol, mode, cat) {{
             <span class="calc-math-val">${{money(bench.disputed)}}/yr</span>
           </div>
           <div class="calc-math-row">
-            <span class="calc-math-label"><strong>Gross recovered at 65%</strong><span class="calc-math-formula">Planning benchmark, not a guaranteed win rate</span></span>
+            <span class="calc-math-label"><strong>Gross recovered at 65%</strong><span class="calc-math-formula">Win rate (our planning assumption, adjust to yours)</span></span>
             <span class="calc-math-val">${{money(bench.recovered)}}/yr</span>
           </div>
           <div class="calc-math-row">
@@ -1206,7 +1206,7 @@ function renderDirectory() {{
           <div class="summary-metric">+${{payMoney(cfBench.net)}} / yr recovered &middot; Chargeflow</div>
           <details class="math-drawer">
             <summary>Show calculation</summary>
-            <div class="math-drawer-body"><div class="summary-scenario">Based on ${{payMoney(gmvMo)}}/mo GMV and a 0.65% dispute rate</div><div class="summary-breakdown">$0/mo fixed fee. 25% only on the ${{payMoney(cfBench.recovered)}} recovered. Net kept ${{payMoney(cfBench.net)}}/yr.</div><div class="summary-caveat"><strong>Contract note:</strong> 25% of recovered dispute dollars ($0/mo base). A 65% win rate is SaaSBill’s assumption, not a Chargeflow figure. Actual recovery varies by dispute reason code. This card is an add-on layer. It does not replace the payment processor comparison above.</div><p>Yearly sales = ${{payMoney(gmvMo)}} x 12 = ${{payMoney(yearlySales)}}. Disputed sales at 0.65% = ${{payMoney(cfBench.disputed)}}. Gross recovered at a 65% win rate (SaaSBill’s assumption, not a Chargeflow figure) = ${{payMoney(cfBench.recovered)}}. Success fee = 25% of recovered dollars = ${{payMoney(cfBench.fee)}}. Net kept = ${{payMoney(cfBench.net)}} (${{payMoney(cfBench.netMo)}}/mo). Fixed fee = $0/mo. Evidence prep = $0. The 65% win rate is SaaSBill’s assumption, not a Chargeflow figure. Keeping the dispute rate under 0.5% to 0.75% is what avoids a 25% reserve (${{payMoney(paddleProf.held)}}/mo on this volume).</p></div>
+            <div class="math-drawer-body"><div class="summary-scenario">Based on ${{payMoney(gmvMo)}}/mo GMV and a 0.65% dispute rate</div><div class="summary-breakdown">$0/mo fixed fee. 25% only on the ${{payMoney(cfBench.recovered)}} recovered. Net kept ${{payMoney(cfBench.net)}}/yr.</div><div class="summary-caveat"><strong>Contract note:</strong> 25% of recovered dispute dollars ($0/mo base). Actual recovery varies by dispute reason code. This card is an add-on layer. It does not replace the payment processor comparison above.</div><p>Yearly sales = ${{payMoney(gmvMo)}} x 12 = ${{payMoney(yearlySales)}}. Disputed sales at 0.65% = ${{payMoney(cfBench.disputed)}}. Gross recovered at 65% = ${{payMoney(cfBench.recovered)}}. Success fee = 25% of recovered dollars = ${{payMoney(cfBench.fee)}}. Net kept = ${{payMoney(cfBench.net)}} (${{payMoney(cfBench.netMo)}}/mo). Fixed fee = $0/mo. Evidence prep = $0. Keeping the dispute rate under 0.5% to 0.75% is what avoids a 25% reserve (${{payMoney(paddleProf.held)}}/mo on this volume).</p></div>
           </details>
           <div class="summary-actions">
             <div class="cta-stack">

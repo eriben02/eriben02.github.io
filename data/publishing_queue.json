@@ -211,7 +211,7 @@
     "published_at": "2026-11-11",
     "url": "https://saasbill.io/pricing/chargeflow-vs-stripe-smart-disputes-year-1-cost/",
     "strategic_rationale": "Year-1 cost of a manual Stripe response, Smart Disputes, and Chargeflow Automation. Chargeback Protection is not a listed product.",
-    "verification_note": "Stripe US pricing and Smart Disputes docs, plus Chargeflow pricing, checked 2026-11-11. Received fee $15, countered fee $15 returned only on a win, Smart Disputes 30% of the amount won, Chargeflow Automation 25% of the recovered amount and the dispute fee is extra. Chargeback Protection is not on the US pricing page. Current availability and price are unknown. A 2019 launch price is not used. No Chargeflow affiliate link."
+    "verification_note": "Stripe US pricing and Smart Disputes docs checked 2026-11-11. Chargeflow pricing rechecked 2026-11-12. Received fee $15, countered fee $15 returned only on a win, Smart Disputes 30% of the amount won, Chargeflow Automation 25% of the recovered amount and the dispute fee is extra. Chargeflow does not charge a percent of sales. Chargeback Protection is not on the US pricing page. Current availability and price are unknown. A 2019 launch price is not used. No Chargeflow affiliate link."
   },
   {
     "priority": 20,

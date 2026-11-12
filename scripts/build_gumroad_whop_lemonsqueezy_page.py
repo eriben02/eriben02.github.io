@@ -359,8 +359,8 @@ function updateTr() {{
     <div class="summary-card result-card">
       <div class="summary-label">Add-on: dispute recovery</div>
       <div class="summary-metric">${{trFmt(cf.net)}} / yr net</div>
-      <div class="summary-scenario">$0/mo, 25% only on won disputes, 65% win rate (SaaSBill’s assumption, not a Chargeflow figure)</div>
-      <div class="summary-breakdown">Gross recovered ${{trFmt(cf.recovered)}} minus a ${{trFmt(cf.successFee)}} success fee. The 65% win rate is SaaSBill’s assumption, not a Chargeflow figure.</div>
+      <div class="summary-scenario">$0/mo, 25% only on won disputes, 65% win rate (our planning assumption, adjust to yours)</div>
+      <div class="summary-breakdown">Gross recovered ${{trFmt(cf.recovered)}} minus a ${{trFmt(cf.successFee)}} success fee. </div>
       <details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">Disputed sales/yr = ${{o.sales.toLocaleString('en-US')}} x ${{o.dispute.toFixed(1)}}% x $${{o.price}} x 12 = ${{trFmt(cf.disputedYr)}}. Lemon Squeezy and Whop dispute fees = ${{trFmt(cf.feeYr)}}/yr. Chargeflow net = 65% recovered, then minus 25%.</div></details>
       <div class="summary-actions">
         <a id="tr-cf-cta" class="btn-secondary" href="https://www.chargeflow.io/" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="chargeflow" data-cta-location="summary-card">Review dispute recovery (${{trFmt(cf.net)}}/yr net) &rarr;</a>
@@ -378,7 +378,7 @@ function updateTr() {{
       <td data-label="Net payout / yr" class="price-highlight">${{trFmt(r.net * 12)}}<div class="cell-scenario">${{scenarioLine}}</div></td>
       <td data-label="Next step"><div class="cta-stack"><a class="btn-secondary" href="${{r.url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${{r.id}}" data-cta-location="table-row">${{r.cta}}</a></div></td>
     </tr>`).join('');
-  let note = 'Assumptions: list prices, fees calculated on the pre-tax price (Lemon Squeezy calculates its fee on the order total including tax, so its real fee is slightly higher on taxed sales). Gumroad PayPal sales are modelled at the 2.9% + 30¢ card rate; actual PayPal fees may differ. Whop payouts assume 4 next-day ACH withdrawals/mo ($2.50 each). The Chargeflow card prices the disputed sale value and the $15 dispute fee. The 65% win rate is SaaSBill’s assumption, not a Chargeflow figure.';
+  let note = 'Assumptions: list prices, fees calculated on the pre-tax price (Lemon Squeezy calculates its fee on the order total including tax, so its real fee is slightly higher on taxed sales). Gumroad PayPal sales are modelled at the 2.9% + 30¢ card rate; actual PayPal fees may differ. Whop payouts assume 4 next-day ACH withdrawals/mo ($2.50 each). The Chargeflow card prices the disputed sale value and the $15 dispute fee. ';
   if (o.payout === 'intl') note += ' Whop international local-bank payout fees vary by country and are not included.';
   document.getElementById('tr-note').textContent = note;
   if (typeof window.saasbillApplyWorkbench === 'function') {{
