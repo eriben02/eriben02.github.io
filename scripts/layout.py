@@ -318,6 +318,7 @@ CRAWL_DIRECTORY = [
         ("chargeback-fee-and-recovery-calculator/index.html", "Stripe, Shopify and Paddle chargeback cost"),
         ("pricing/stripe-shopify-chargeback-fee-and-chargeflow-roi-calculator/index.html", "Chargeflow ROI vs manual dispute handling"),
         ("pricing/chargeflow-vs-stripe-smart-disputes-year-1-cost/index.html", "Chargeflow vs Stripe Smart Disputes"),
+        ("pricing/hubspot-payments-vs-stripe-platform-fee-year-1-cost/index.html", "HubSpot payments vs Stripe"),
         ("exit/shopify-payments-chargeback-threshold-and-reserve-appeal/index.html", "Shopify Payments reserve and dispute threshold"),
         ("pricing/stripe-radar-and-dispute-fee-calculator-2026/index.html", "Stripe dispute and Radar cost"),
         ("exit/paypal-180-day-permanent-limitation-fund-recovery/index.html", "PayPal 180-day hold and reserve cost"),
@@ -433,6 +434,7 @@ def render_related_links(rel_path, prefix):
         ("faq/stripe-vs-paddle-true-cost/index.html", "Stripe vs. Paddle vs. Whop True Cost &amp; Chargeback Calculator", "Processing, billing, tax, and dispute cost side by side."),
         ("pricing/stripe-shopify-chargeback-fee-and-chargeflow-roi-calculator/index.html", "Chargeflow ROI vs manual dispute handling", "Dispute fees and manual prep versus automated recovery."),
         ("pricing/chargeflow-vs-stripe-smart-disputes-year-1-cost/index.html", "Chargeflow vs Stripe Smart Disputes", "Manual response, Smart Disputes, and Chargeflow. The win rate is an assumption."),
+        ("pricing/hubspot-payments-vs-stripe-platform-fee-year-1-cost/index.html", "HubSpot payments vs connecting Stripe", "HubSpot payments fees versus Stripe connected to HubSpot."),
     ]
     by_rel = {rel: (label, summary) for rel, label, summary in all_links}
     chargeback_rel = "chargeback-fee-and-recovery-calculator/index.html"
@@ -450,6 +452,7 @@ def render_related_links(rel_path, prefix):
     shopify_reserve_rel = "exit/shopify-payments-chargeback-threshold-and-reserve-appeal/index.html"
     radar_rel = "pricing/stripe-radar-and-dispute-fee-calculator-2026/index.html"
     smart_rel = "pricing/chargeflow-vs-stripe-smart-disputes-year-1-cost/index.html"
+    hub_rel = "pricing/hubspot-payments-vs-stripe-platform-fee-year-1-cost/index.html"
     # CRM pages show each other first. The Close vs Pipedrive page leads with
     # the seat-bucket and Close vs HubSpot pages, then HubSpot and Gong.
     close_pipedrive_rel = "compare/close-vs-pipedrive-year-1-cost-calculator/index.html"
@@ -512,6 +515,13 @@ def render_related_links(rel_path, prefix):
             chargeback_rel,
             radar_rel,
             shopify_reserve_rel,
+            hub_rel,
+        ]
+    elif rel_path == hub_rel:
+        preferred = [
+            radar_rel,
+            smart_rel,
+            chargeback_rel,
         ]
     elif rel_path == radar_rel:
         preferred = [

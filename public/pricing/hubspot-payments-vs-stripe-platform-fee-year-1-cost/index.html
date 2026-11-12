@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-site-verification" content="W7-m7km1_5pZZUG38dpallcgdGss6_Vl2qo5pjVoMdA" />
+  <!-- Bing Webmaster Tools verification: paste <meta name="msvalidate.01" content="YOUR_BING_CODE" /> here or use 1-click Google Search Console import (see BING_WEBMASTER_VERIFICATION.md) -->
+  <title>HubSpot Payments vs Stripe fees – saasbill.io</title>
+  <meta name="description" content="Compares HubSpot payments with Stripe connected to HubSpot. Checked 12 Nov 2026." />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+  <meta property="og:site_name" content="SaaSBill" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="HubSpot Payments vs Stripe fees – saasbill.io" />
+  <meta property="og:description" content="Compares HubSpot payments with Stripe connected to HubSpot. Checked 12 Nov 2026." />
+  <meta property="og:url" content="https://saasbill.io/pricing/hubspot-payments-vs-stripe-platform-fee-year-1-cost/" />
+  <meta property="og:updated_time" content="2026-11-12T05:56:33+00:00" />
+  <meta property="article:published_time" content="2026-11-12T00:00:00+01:00" />
+  <meta property="article:modified_time" content="2026-11-12T05:56:33+00:00" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="HubSpot Payments vs Stripe fees – saasbill.io" />
+  <meta name="twitter:description" content="Compares HubSpot payments with Stripe connected to HubSpot. Checked 12 Nov 2026." />
+  <meta name="last-modified" content="2026-11-12T05:56:33+00:00" />
+  <meta name="dcterms.modified" content="2026-11-12T05:56:33+00:00" />
+  <meta name="dcterms.issued" content="2026-11-12" />
+  <link rel="canonical" href="https://saasbill.io/pricing/hubspot-payments-vs-stripe-platform-fee-year-1-cost/" />
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261030c" />
+  <link rel="alternate" type="text/plain" href="https://saasbill.io/llms.txt" title="SaaSBill LLMs.txt Summary" />
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script defer data-domain="saasbill.io" src="https://plausible.io/js/pa-VAaSVNs5XOobt9cv2UtKo.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init();
+    window.__saasbillEvents = window.__saasbillEvents || [];
+    window.trackSaaSBillEvent = function(eventName, props) {
+      var p = props || {};
+      var entry = { event: eventName, ts: Date.now() };
+      for (var k in p) {
+        if (Object.prototype.hasOwnProperty.call(p, k)) entry[k] = p[k];
+      }
+      window.__saasbillEvents.push(entry);
+      if (typeof window.plausible === 'function') {
+        window.plausible(eventName, { props: p });
+      }
+    };
+    window.trackEvent = window.trackSaaSBillEvent;
+
+    window.saasbillMoney = function (n) {
+      var v = Math.round(Number(n) || 0);
+      var sign = v < 0 ? '-' : '';
+      return sign + '$' + Math.abs(v).toLocaleString('en-US');
+    };
+    window.saasbillResultLine = function (hidden, sticker) {
+      var h = Math.round(Number(hidden) || 0);
+      var s = Math.round(Number(sticker) || 0);
+      if (h <= 0) return 'Matches advertised price ($0 hidden fees).';
+      var pct = s > 0 ? Math.round((h / s) * 100) : 0;
+      return '+' + window.saasbillMoney(h) + ' (+' + pct + '%) above advertised price.';
+    };
+    window.saasbillApplyWorkbench = function (opts) {
+      opts = opts || {};
+      var sticker = Math.max(0, Math.round(Number(opts.sticker) || 0));
+      var seats = Math.max(0, Math.round(Number(opts.seats) || 0));
+      var hidden = Math.max(0, Math.round(Number(opts.hidden) || 0));
+      var total = Math.round(Number(opts.total));
+      if (!isFinite(total)) total = sticker + seats + hidden;
+      var parts = Math.max(1, sticker + seats + hidden);
+      function node(id) { return document.getElementById(id); }
+      function setText(id, value) {
+        var el = node(id);
+        if (el) el.textContent = value;
+      }
+      function setFlex(id, amount) {
+        var el = node(id);
+        if (!el) return;
+        var share = amount <= 0 ? 8 : (amount / parts) * 100;
+        el.style.flex = share + ' 1 0px';
+      }
+      setText('shell-product', opts.product || '');
+      setText('shell-big', window.saasbillMoney(total));
+      setText('shell-quote', 'True Year-1 cost');
+      setText('shell-sub', window.saasbillResultLine(hidden, sticker + seats));
+      setText('shell-amt-base', window.saasbillMoney(sticker));
+      setText('shell-amt-seats', window.saasbillMoney(seats));
+      setText('shell-amt-hidden', window.saasbillMoney(hidden));
+      setText('shell-title-base', 'Sticker Price');
+      setText('shell-title-seats', opts.seatsTitle || 'Other sticker fees');
+      setText('shell-title-hidden', 'Hidden Cost Gap');
+      setText('shell-sub-base', opts.baseLabel || 'Advertised price');
+      setText('shell-sub-seats', opts.seatsLabel || 'Included in the sticker');
+      setText('shell-sub-hidden', opts.hiddenLabel || 'Fees above the advertised price');
+      setFlex('shell-row-base', sticker);
+      setFlex('shell-row-seats', seats);
+      setFlex('shell-row-hidden', hidden);
+      var seatsRow = node('shell-row-seats');
+      if (seatsRow) seatsRow.style.display = seats <= 0 ? 'none' : '';
+      var math = node('shell-math');
+      if (math && opts.mathHtml) math.innerHTML = opts.mathHtml;
+      var best = node('shell-best');
+      if (best && opts.bestHtml) best.innerHTML = opts.bestHtml;
+      var cta = node('shell-cta');
+      if (cta && opts.ctaHref) {
+        cta.href = opts.ctaHref;
+        var label = opts.ctaLabel || 'See pricing';
+        cta.textContent = /→\s*$/.test(label) ? label : label + ' \u2192';
+        if (opts.ctaVendor) cta.setAttribute('data-vendor', opts.ctaVendor);
+      }
+      setText('shell-sticker', window.saasbillMoney(sticker + seats));
+      setText('shell-gap', hidden > 0 ? '+' + window.saasbillMoney(hidden) : '$0');
+      if (opts.product) setText('shell-sticker-note', opts.product);
+    };
+
+  </script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "TechArticle", "@id": "https://saasbill.io/pricing/hubspot-payments-vs-stripe-platform-fee-year-1-cost/#article", "headline": "HubSpot Payments vs Stripe fees \u2013 saasbill.io", "description": "Compares HubSpot payments with Stripe connected to HubSpot. Checked 12 Nov 2026.", "datePublished": "2026-11-12", "dateModified": "2026-11-12T05:56:33+00:00", "author": {"@type": "Organization", "name": "SaaSBill Editorial", "url": "https://saasbill.io/"}, "publisher": {"@type": "Organization", "name": "SaaSBill", "url": "https://saasbill.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://saasbill.io/pricing/hubspot-payments-vs-stripe-platform-fee-year-1-cost/"}}, {"@type": "WebPage", "@id": "https://saasbill.io/pricing/hubspot-payments-vs-stripe-platform-fee-year-1-cost/", "url": "https://saasbill.io/pricing/hubspot-payments-vs-stripe-platform-fee-year-1-cost/", "name": "HubSpot Payments vs Stripe fees \u2013 saasbill.io", "description": "Compares HubSpot payments with Stripe connected to HubSpot. Checked 12 Nov 2026.", "inLanguage": "en-US", "datePublished": "2026-11-12", "dateModified": "2026-11-12T05:56:33+00:00", "lastReviewed": "2026-11-12", "reviewedBy": {"@type": "Organization", "name": "SaaSBill Editorial"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "SaaSBill", "item": "https://saasbill.io/"}, {"@type": "ListItem", "position": 2, "name": "HubSpot Payments vs Stripe fees \u2013 saasbill.io", "item": "https://saasbill.io/pricing/hubspot-payments-vs-stripe-platform-fee-year-1-cost/"}]}]}</script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-inner">
+      <div class="brand-wrap">
+        <a href="../../index.html" class="brand">SaaSBill<span>.io</span></a>
+        <span class="brand-tagline">Year-1 software cost &amp; contract calculators</span>
+      </div>
+      <nav class="nav-links" aria-label="Primary Navigation">
+        <a href="../../index.html#all-calculators">Audits &amp; Guides</a>
+        <a href="../../ai-act/">AI Act</a>
+        <a href="../../index.html#methodology">Methodology</a>
+        <span class="byline-bar">Updated <time datetime="2026-11-12" itemprop="dateModified">Nov 12, 2026</time></span>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+    <article itemscope itemtype="https://schema.org/TechArticle">
+      <meta itemprop="datePublished" content="2026-11-12" />
+      <meta itemprop="dateModified" content="2026-11-12T05:56:33+00:00" />
+      <section class="hero editorial-hero editorial-hero-wrap"><h1>What do HubSpot Payments fees cost versus connecting Stripe?</h1><p class="lead">This page compares HubSpot payments with Stripe connected to HubSpot.</p></section>
+<div class="unified-inspector-tray">
+<section class="calc-box editorial-workbench" aria-label="True cost calculator">
+  <div class="workbench-grid">
+    <div class="wb-col-controls">
+      <div class="wb-col-title">Your payments</div>
+      <div class="wb-controls-stack">
+        
+        <div class="wb-control-item">
+          <label class="wb-control-label" for="hp-country">Country</label>
+          <select id="hp-country" class="wb-tool-select" data-track="calculator-control" data-control="country">
+            <option value="us" selected>United States</option>
+            <option value="uk">United Kingdom</option>
+            <option value="ca">Canada</option>
+            <option value="other">Other</option>
+          </select>
+          <p class="wb-budget-subnote">HubSpot payments is listed for businesses in the US, UK, and Canada. Another country uses a connected Stripe account.</p>
+        </div>
+        <div class="wb-control-item">
+          <label class="wb-control-label" for="hp-card">Monthly card volume <span class="val-pill" id="hp-card-val">$10,000</span></label>
+          <div class="wb-slider-row">
+            <input type="range" id="hp-card" min="0" max="200000" step="500" value="10000" aria-label="Monthly card volume" data-track="calculator-control" data-control="card-volume" />
+          </div>
+        </div>
+        <div class="wb-control-item">
+          <label class="wb-control-label" for="hp-avg">Average transaction <span class="val-pill" id="hp-avg-val">$100</span></label>
+          <div class="wb-slider-row">
+            <input type="range" id="hp-avg" min="1" max="5000" step="1" value="100" aria-label="Average transaction" data-track="calculator-control" data-control="average-transaction" />
+          </div>
+        </div>
+        <div class="wb-control-item">
+          <label class="wb-control-label" for="hp-intl">International cards <span class="val-pill" id="hp-intl-val">0%</span></label>
+          <div class="wb-slider-row">
+            <input type="range" id="hp-intl" min="0" max="100" step="5" value="0" aria-label="Share of card volume on international cards" data-track="calculator-control" data-control="international-share" />
+          </div>
+        </div>
+        <div class="wb-control-item">
+          <label class="wb-control-label" for="hp-uk-intl">UK international cards</label>
+          <select id="hp-uk-intl" class="wb-tool-select" data-track="calculator-control" data-control="uk-international">
+            <option value="eea" selected>Non-UK EEA, +0.8%</option>
+            <option value="noneea">Outside the EEA, +1.55%</option>
+          </select>
+          <p class="wb-budget-subnote">Used only for a UK business. The FAQ lists both adders.</p>
+        </div>
+        <div class="wb-control-item">
+          <label class="wb-control-label" for="hp-ach">ACH volume, as a percent of card volume <span class="val-pill" id="hp-ach-val">0%</span></label>
+          <div class="wb-slider-row">
+            <input type="range" id="hp-ach" min="0" max="100" step="5" value="0" aria-label="ACH volume as a percent of card volume" data-track="calculator-control" data-control="ach-share" />
+          </div>
+        </div>
+        <div class="wb-control-item">
+          <label class="wb-control-label" for="hp-stripe-pct">Your Stripe card rate <span class="val-pill" id="hp-stripe-pct-val">2.9%</span></label>
+          <div class="wb-slider-row">
+            <input type="range" id="hp-stripe-pct" min="0" max="10" step="0.1" value="2.9" aria-label="Your Stripe card rate" data-track="calculator-control" data-control="stripe-rate" />
+          </div>
+          <p class="wb-budget-subnote">Default is Stripe's standard US domestic card rate, 2.9% + $0.30, checked 12 Nov 2026. Change it if your rate is different.</p>
+        </div>
+        <div class="wb-control-item">
+          <label class="wb-control-label" for="hp-stripe-fixed">Stripe fixed fee per card charge <span class="val-pill" id="hp-stripe-fixed-val">$0.30</span></label>
+          <div class="wb-slider-row">
+            <input type="range" id="hp-stripe-fixed" min="0" max="2" step="0.01" value="0.30" aria-label="Stripe fixed fee per card charge" data-track="calculator-control" data-control="stripe-fixed" />
+          </div>
+        </div>
+        <div class="wb-control-item">
+          <label class="wb-control-label" for="hp-promo">First-year platform promotion</label>
+          <select id="hp-promo" class="wb-tool-select" data-track="calculator-control" data-control="promotion">
+            <option value="no" selected>Off</option>
+            <option value="yes">On for Year 1</option>
+          </select>
+          <p class="wb-budget-subnote">Assumption. The 0% platform fee in Year 1 is a promotion for eligible customers. Who qualifies is not stated, so this stays off unless you turn it on. Year 2 uses 0.5% either way.</p>
+        </div>
+
+      </div>
+    </div>
+    <div class="wb-col-chart">
+      <div class="wb-col-title">Year-1 fees</div>
+      <div class="wb-vbar-container wb-vbar-separate" aria-live="polite">
+        <div class="wb-vbar-row" id="shell-row-base" style="flex: 40 1 0px;">
+          <div class="wb-vbar-block block-base"><span class="wb-block-amount" id="shell-amt-base">$4,080</span></div>
+          <div class="wb-callout-item"><div class="wb-leader-line"></div><div class="wb-callout-text"><strong id="shell-title-base">HubSpot payments</strong><span id="shell-sub-base">Year 1</span></div></div>
+        </div>
+        <div class="wb-vbar-row" id="shell-row-seats" style="flex: 8 1 0px;">
+          <div class="wb-vbar-block block-seats"><span class="wb-block-amount" id="shell-amt-seats">$4,740</span></div>
+          <div class="wb-callout-item"><div class="wb-leader-line"></div><div class="wb-callout-text"><strong id="shell-title-seats">Stripe connected</strong><span id="shell-sub-seats">Year 1</span></div></div>
+        </div>
+        <div class="wb-vbar-row" id="shell-row-hidden" style="flex: 52 1 0px;">
+          <div class="wb-vbar-block block-hidden"><span class="wb-block-amount" id="shell-amt-hidden">$4,080</span></div>
+          <div class="wb-callout-item"><div class="wb-leader-line"></div><div class="wb-callout-text"><strong id="shell-title-hidden">HubSpot payments</strong><span id="shell-sub-hidden">Year 2</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="wb-result-col" id="shell-result">
+      <div class="wb-selected-product" id="shell-product">HubSpot payments</div>
+      <div class="wb-big-total"><span id="shell-big">$4,080</span> <span class="wb-per-year">/ year</span></div>
+      <details class="math-drawer" id="shell-calc">
+        <summary>Show calculation</summary>
+        <div class="math-drawer-body" id="shell-math"></div>
+      </details>
+      <p class="wb-budget-quote" id="shell-quote">True Year-1 cost</p>
+      <p class="wb-budget-subnote" id="shell-sub"></p>
+      <div class="wb-best-option" id="shell-best">Lower Year-1 fee: HubSpot payments, $4,080.</div>
+      <div class="cta-stack">
+        <a id="shell-cta" class="btn-cta wb-primary-cta" href="#hp-fees">Fee table &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+
+<section id="hp-fees">
+  <h2>Year-1 and Year-2 fees</h2>
+  <div class="table-wrap editorial-gap-table mobile-cards">
+    <table>
+      <caption>Twelve months of the fees on the volume you enter.</caption>
+      <thead>
+        <tr>
+          <th>Path</th>
+          <th>Year 1</th>
+          <th>Year 2</th>
+        </tr>
+      </thead>
+      <tbody id="hp-body">
+        <tr><td data-label="Path">HubSpot payments</td><td data-label="Year 1">$4,080</td><td data-label="Year 2">$4,080</td></tr>
+        <tr><td data-label="Path">Stripe connected to HubSpot</td><td data-label="Year 1">$4,740</td><td data-label="Year 2">$4,740</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p id="hp-note" class="summary-caveat">The 0.75% platform fee applies on top of Stripe's own fees. On bank debits, that 0.75% is uncapped.</p>
+</section>
+
+<section>
+  <h2>What is not in these fees</h2>
+  <ul class="key-list">
+    <li>Currency conversion on HubSpot payments is +1% in the US and +2% in the UK and Canada. It is not in this total.</li>
+    <li>Affirm and Klarna are 5.99% plus the platform fee. They are not in this total.</li>
+    <li>HubSpot charges no refund fee. The original transaction fees are not returned.</li>
+    <li>Taxes may apply to payment processing fees from 3 Aug 2026. Whether they apply here is unknown.</li>
+    <li>A high-volume rate is possible through HubSpot's commerce team. The terms are unknown.</li>
+    <li>Stripe's dispute received fee is $15. This page does not ask how many disputes you get, so dispute fees stay out of the total.</li>
+    <li>Stripe lists +1.5% for international cards when currency conversion is required. It is not added unless you include it in the Stripe rate you enter.</li>
+    <li>Outside the US, Stripe's own bank-debit fee was not on the US pricing page checked 12 Nov 2026, so it stays unknown and is not added.</li>
+    <li>The Revenue Hub seat price is unknown and is not in this total. Invoices, payment links, and subscriptions have no monthly SaaS fee. Quotes and contracts need a Revenue Hub subscription.</li>
+    <li>Payouts can be held during a document request or a risk review. A maximum monthly volume is set in underwriting.</li>
+    <li>Downgrading to the free HubSpot plan ends HubSpot payments. Subscriptions keep billing for 30 days.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>What users wrote</h2>
+  <ul class="key-list">
+    <li>On the HubSpot Community, a prospective customer calls the Stripe option's platform fee a dealbreaker. That is one post, not a measured result. <span class="src-cluster"><a class="src-link" href="https://community.hubspot.com/t/credit-card-payment-fees/64536/34" target="_blank" rel="noopener">HubSpot Community thread</a> <span class="src-date">Accessed 12 Nov 2026.</span></span></li>
+    <li>On Reddit in October 2024, users describe the move from the older Stripe integration to the newer connection. Those are posts, not a measured result. <span class="src-cluster"><a class="src-link" href="https://www.reddit.com/r/hubspot/comments/1g8tx9x/hubspot_stripe_ends_on_november_4_what_are_you/" target="_blank" rel="noopener">Reddit thread, 21 Oct 2024</a> <span class="src-date">Accessed 12 Nov 2026.</span></span></li>
+  </ul>
+</section>
+
+<p class="summary-caveat">Checked 12 Nov 2026. <span class="src-cluster"><a class="src-link" href="https://knowledge.hubspot.com/payment-processing/payments-frequently-asked-questions" target="_blank" rel="noopener">HubSpot payments FAQ</a> <span class="src-date">Last updated 22 Sep 2026. Accessed 12 Nov 2026.</span></span> <span class="src-cluster"><a class="src-link" href="https://knowledge.hubspot.com/payment-processing/connect-your-stripe-account-as-a-payment-processor-in-hubspot" target="_blank" rel="noopener">Connect a Stripe account</a> <span class="src-date">Last updated 28 Oct 2026. Accessed 12 Nov 2026.</span></span> <span class="src-cluster"><a class="src-link" href="https://www.hubspot.com/products/revenue/payments" target="_blank" rel="noopener">HubSpot payments</a> <span class="src-date">Accessed 12 Nov 2026.</span></span> <span class="src-cluster"><a class="src-link" href="https://stripe.com/us/pricing" target="_blank" rel="noopener">Stripe US pricing</a> <span class="src-date">Accessed 12 Nov 2026.</span></span></p>
+
+<script>
+function calcHubspotPayments(input) {
+  var country = input.country || "us";
+  if (country !== "uk" && country !== "ca" && country !== "other") country = "us";
+  var card = Math.max(0, Math.round(Number(input.card) || 0));
+  var avg = Math.max(1, Math.round(Number(input.avg) || 1));
+  var intl = Math.max(0, Math.min(100, Math.round(Number(input.intl) || 0)));
+  var achPct = Math.max(0, Math.min(100, Math.round(Number(input.ach) || 0)));
+  var stripePct = Number(input.stripePct);
+  if (!isFinite(stripePct) || stripePct < 0) stripePct = 0;
+  var stripeFixed = Number(input.stripeFixed);
+  if (!isFinite(stripeFixed) || stripeFixed < 0) stripeFixed = 0;
+  var promo = input.promo === "yes";
+  var ukIntl = input.ukIntl === "noneea" ? 0.0155 : 0.008;
+  var cardCents = card * 100;
+  var avgCents = avg * 100;
+  var achCents = Math.round(cardCents * achPct / 100);
+  var cardTx = cardCents / avgCents;
+  var achTx = achCents / avgCents;
+  var intlShare = intl / 100;
+  var offered = country !== "other";
+  function cardRate() {
+    if (country === "us") return 0.029 + 0.015 * intlShare;
+    if (country === "uk") return 0.017 + ukIntl * intlShare;
+    if (country === "ca") return 0.029 + 0.008 * intlShare;
+    return 0;
+  }
+  function cappedMonth(volumeCents, txCount, rate, capCents) {
+    if (volumeCents <= 0 || txCount <= 0) return 0;
+    var per = Math.min(Math.round(avgCents * rate), capCents);
+    return Math.round(per * txCount);
+  }
+  function platformRate(year) {
+    if (promo && year === 1) return 0;
+    return 0.005;
+  }
+  function hubspotYear(year) {
+    if (!offered) return null;
+    var pRate = platformRate(year);
+    var cardFee = Math.round(cardCents * cardRate()) + Math.round(cardCents * pRate);
+    var achProc = cappedMonth(achCents, achTx, 0.008, 1000);
+    var achPlat = cappedMonth(achCents, achTx, pRate, 1000);
+    return (cardFee + achProc + achPlat) * 12;
+  }
+  var fixedCents = Math.round(stripeFixed * 100);
+  var stripeCard = Math.round(cardCents * stripePct / 100) + Math.round(cardTx * fixedCents) + Math.round(cardCents * 0.0075);
+  var stripeAchPlat = Math.round(achCents * 0.0075);
+  var stripeAchOwn = country === "us" ? cappedMonth(achCents, achTx, 0.008, 500) : (achCents > 0 ? null : 0);
+  var stripeMonth = stripeCard + stripeAchPlat + (stripeAchOwn === null ? 0 : stripeAchOwn);
+  return {
+    country: country,
+    offered: offered,
+    card: card,
+    avg: avg,
+    intl: intl,
+    achPct: achPct,
+    promo: promo,
+    stripePct: stripePct,
+    stripeFixed: stripeFixed,
+    cardRate: offered ? cardRate() : null,
+    hubspot1: hubspotYear(1),
+    hubspot2: hubspotYear(2),
+    stripe1: stripeMonth * 12,
+    stripe2: stripeMonth * 12,
+    stripeAchUnknown: stripeAchOwn === null,
+    achProcSample: offered ? cappedMonth(achCents, achTx, 0.008, 1000) : null,
+    stripeAchSample: stripeAchOwn
+  };
+}
+
+function hpMoney(cents) {
+  if (cents === null) return "Not offered";
+  var v = Math.round(cents);
+  var neg = v < 0;
+  v = Math.abs(v);
+  var dollars = Math.floor(v / 100);
+  var rem = v % 100;
+  var text = "$" + dollars.toLocaleString("en-US");
+  if (rem) text += "." + (rem < 10 ? "0" : "") + rem;
+  return neg ? "-" + text : text;
+}
+
+function hpRateText(rate) {
+  return (Math.round(rate * 1000) / 10) + "%";
+}
+
+function hpRead() {
+  return {
+    country: document.getElementById("hp-country").value,
+    card: document.getElementById("hp-card").value,
+    avg: document.getElementById("hp-avg").value,
+    intl: document.getElementById("hp-intl").value,
+    ukIntl: document.getElementById("hp-uk-intl").value,
+    ach: document.getElementById("hp-ach").value,
+    stripePct: document.getElementById("hp-stripe-pct").value,
+    stripeFixed: document.getElementById("hp-stripe-fixed").value,
+    promo: document.getElementById("hp-promo").value
+  };
+}
+
+function renderHubspotPayments() {
+  var c = calcHubspotPayments(hpRead());
+  document.getElementById("hp-card-val").textContent = hpMoney(c.card * 100);
+  document.getElementById("hp-avg-val").textContent = hpMoney(c.avg * 100);
+  document.getElementById("hp-intl-val").textContent = c.intl + "%";
+  document.getElementById("hp-ach-val").textContent = c.achPct + "%";
+  document.getElementById("hp-stripe-pct-val").textContent = (Math.round(c.stripePct * 10) / 10) + "%";
+  document.getElementById("hp-stripe-fixed-val").textContent = hpMoney(Math.round(c.stripeFixed * 100));
+  var hubLabel = c.offered ? "HubSpot payments" : "Stripe connected to HubSpot";
+  var big = c.offered ? c.hubspot1 : c.stripe1;
+  document.getElementById("shell-product").textContent = hubLabel;
+  document.getElementById("shell-big").textContent = hpMoney(big);
+  document.getElementById("shell-sub").textContent = "";
+  document.getElementById("shell-amt-base").textContent = hpMoney(c.hubspot1);
+  document.getElementById("shell-title-base").textContent = "HubSpot payments";
+  document.getElementById("shell-sub-base").textContent = "Year 1";
+  document.getElementById("shell-amt-seats").textContent = hpMoney(c.stripe1);
+  document.getElementById("shell-title-seats").textContent = "Stripe connected";
+  document.getElementById("shell-sub-seats").textContent = "Year 1";
+  document.getElementById("shell-amt-hidden").textContent = hpMoney(c.hubspot2);
+  document.getElementById("shell-title-hidden").textContent = "HubSpot payments";
+  document.getElementById("shell-sub-hidden").textContent = "Year 2";
+  var baseRow = document.getElementById("shell-row-base");
+  var seatsRow = document.getElementById("shell-row-seats");
+  var hiddenRow = document.getElementById("shell-row-hidden");
+  var baseAmt = c.hubspot1 === null ? 0 : c.hubspot1;
+  var seatsAmt = c.stripe1;
+  var hiddenAmt = c.hubspot2 === null ? 0 : c.hubspot2;
+  var parts = Math.max(1, baseAmt + seatsAmt + hiddenAmt);
+  baseRow.style.flex = Math.max(8, Math.round(baseAmt / parts * 100)) + " 1 0px";
+  seatsRow.style.flex = Math.max(8, Math.round(seatsAmt / parts * 100)) + " 1 0px";
+  hiddenRow.style.flex = Math.max(8, Math.round(hiddenAmt / parts * 100)) + " 1 0px";
+  var best = "";
+  if (c.offered) {
+    if (c.hubspot1 < c.stripe1) best = "Lower Year-1 fee: HubSpot payments, " + hpMoney(c.hubspot1) + ".";
+    else if (c.stripe1 < c.hubspot1) best = "Lower Year-1 fee: Stripe connected to HubSpot, " + hpMoney(c.stripe1) + ".";
+    else best = "Same Year-1 fee: " + hpMoney(c.hubspot1) + ".";
+  }
+  document.getElementById("shell-best").textContent = best;
+  document.getElementById("hp-body").innerHTML = ""
+    + "<tr><td data-label=\"Path\">HubSpot payments</td><td data-label=\"Year 1\">" + hpMoney(c.hubspot1) + "</td><td data-label=\"Year 2\">" + hpMoney(c.hubspot2) + "</td></tr>"
+    + "<tr><td data-label=\"Path\">Stripe connected to HubSpot</td><td data-label=\"Year 1\">" + hpMoney(c.stripe1) + "</td><td data-label=\"Year 2\">" + hpMoney(c.stripe2) + "</td></tr>";
+  var cardRate = c.cardRate === null ? "not offered" : hpRateText(c.cardRate);
+  var platform1 = c.promo ? "0%" : "0.5%";
+  document.getElementById("shell-math").textContent = "Card volume " + hpMoney(c.card * 100) + " a month. Average transaction " + hpMoney(c.avg * 100) + ". ACH volume " + hpMoney(Math.round(c.card * 100 * c.achPct / 100)) + ". HubSpot card rate " + cardRate + ". Year-1 platform " + platform1 + ". ACH processing on HubSpot payments is 0.8% capped at $10 a transaction, and the platform fee on that ACH is capped at $10 a transaction. Stripe card rate " + (Math.round(c.stripePct * 10) / 10) + "% plus " + hpMoney(Math.round(c.stripeFixed * 100)) + " a charge. US ACH on Stripe is 0.8% capped at $5. HubSpot payments Year 1 " + hpMoney(c.hubspot1) + ", Year 2 " + hpMoney(c.hubspot2) + ". Stripe connected Year 1 " + hpMoney(c.stripe1) + ".";
+}
+
+["hp-country", "hp-card", "hp-avg", "hp-intl", "hp-uk-intl", "hp-ach", "hp-stripe-pct", "hp-stripe-fixed", "hp-promo"].forEach(function (id) {
+  var el = document.getElementById(id);
+  el.addEventListener("input", renderHubspotPayments);
+  el.addEventListener("change", renderHubspotPayments);
+});
+renderHubspotPayments();
+</script>
+
+      
+      
+    <section aria-labelledby="related-calculators-heading" style="margin-top:36px; padding-top:24px; border-top:1px solid var(--border);">
+      <h2 id="related-calculators-heading" style="font-size:1.2rem; margin-top:0;">Related calculators</h2>
+      <div class="related-calc-grid">
+        
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../pricing/stripe-radar-and-dispute-fee-calculator-2026/" data-track="internal-audit">Stripe dispute and Radar cost &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">Dispute fees, lost order value, Smart Disputes, and Radar starting prices.</p>
+        </div>
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../pricing/chargeflow-vs-stripe-smart-disputes-year-1-cost/" data-track="internal-audit">Chargeflow vs Stripe Smart Disputes &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">Manual response, Smart Disputes, and Chargeflow. The win rate is an assumption.</p>
+        </div>
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../chargeback-fee-and-recovery-calculator/" data-track="internal-audit">Stripe, Shopify &amp; Paddle Chargeback Cost Calculator &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">Dispute fees, manual prep, and automated recovery.</p>
+        </div>
+      </div>
+      <details class="footer-directory-details">
+        <summary>Browse all calculators and guides</summary>
+        <div class="footer-directory-links">
+          <a href="../../index.html#site-directory" data-track="internal-audit">Every calculator and guide &rarr;</a><a href="../../" data-track="internal-audit">Year-1 SaaS True-Cost Directory &rarr;</a><a href="../../pricing/hubspot-true-cost-and-onboarding-fees/" data-track="internal-audit">HubSpot True Cost &amp; Onboarding &rarr;</a><a href="../../compare/close-crm-vs-hubspot-sales-hub-5-to-20-reps/" data-track="internal-audit">Close CRM vs. HubSpot Sales Hub &rarr;</a><a href="../../compare/close-vs-pipedrive-year-1-cost-calculator/" data-track="internal-audit">Close vs. Pipedrive Year-1 Cost (Calling Included) &rarr;</a><a href="../../compare/pipedrive-vs-salesforce-starter-and-pro-suite-cost/" data-track="internal-audit">Pipedrive vs Salesforce Year-1 cost &rarr;</a><a href="../../pricing/pipedrive-true-year-1-cost-calculator/" data-track="internal-audit">Pipedrive True Year-1 Cost &rarr;</a><a href="../../compare/pipedrive-vs-hubspot-sales-hub-year-1-cost/" data-track="internal-audit">Pipedrive vs. HubSpot Sales Hub Year-1 Cost &rarr;</a><a href="../../pricing/gong-io-platform-fee-and-seat-minimum-calculator/" data-track="internal-audit">Gong.io $5,000 Platform Fee &amp; Seat Calculator &rarr;</a><a href="../../compare/monday-crm-vs-pipedrive-vs-hubspot-seat-minimums/" data-track="internal-audit">monday CRM 3/5/10-Seat Bucket Calculator &rarr;</a><a href="../../intercom-fin-cost-calculator/" data-track="internal-audit">Intercom Fin AI Cost Calculator &rarr;</a><a href="../../intercom-vs-freshdesk-cost-comparison/" data-track="internal-audit">Intercom vs. Freshdesk Cost Comparison &rarr;</a><a href="../../exit/intercom-to-freshdesk-ticket-and-help-center-migration/" data-track="internal-audit">Intercom to Freshdesk migration Year-1 &rarr;</a><a href="../../intercom-vs-zendesk-cost-comparison/" data-track="internal-audit">Intercom vs. Zendesk Cost Comparison &rarr;</a><a href="../../pricing/intercom-fin-ai-resolution-cost-calculator/" data-track="internal-audit">Intercom Fin cost per AI resolution &rarr;</a><a href="../../zendesk-ai-cost-calculator/" data-track="internal-audit">Zendesk AI Cost Calculator &rarr;</a><a href="../../zendesk-vs-freshdesk-cost-comparison/" data-track="internal-audit">Zendesk vs. Freshdesk Cost Comparison &rarr;</a><a href="../../hubspot-onboarding-fee-calculator/" data-track="internal-audit">HubSpot Onboarding Fee Calculator &rarr;</a><a href="../../pricing/zendesk-ai-resolution-and-automated-outcome-cost/" data-track="internal-audit">Zendesk automated resolution cost &rarr;</a><a href="../../pricing/stripe-billing-0-7-percent-recurring-tax-calculator/" data-track="internal-audit">Stripe Billing 0.7% Fee, Tax &amp; Chargeback Calculator &rarr;</a><a href="../../compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/" data-track="internal-audit">Gumroad vs. Whop vs. Lemon Squeezy Take-Rate &amp; Chargeback Calculator &rarr;</a><a href="../../exit/stripe-shopify-paddle-frozen-funds-alternatives/" data-track="internal-audit">Stripe, Shopify &amp; Paddle Frozen Funds &amp; Reserve Calculator &rarr;</a><a href="../../chargeback-fee-and-recovery-calculator/" data-track="internal-audit">Stripe, Shopify &amp; Paddle Chargeback Cost Calculator &rarr;</a><a href="../../exit/paypal-180-day-permanent-limitation-fund-recovery/" data-track="internal-audit">PayPal 180-Day Hold &amp; Reserve Cost Calculator &rarr;</a><a href="../../exit/shopify-payments-chargeback-threshold-and-reserve-appeal/" data-track="internal-audit">Shopify Payments Reserve &amp; Dispute Threshold Calculator &rarr;</a><a href="../../pricing/stripe-radar-and-dispute-fee-calculator-2026/" data-track="internal-audit">Stripe dispute and Radar cost &rarr;</a><a href="../../exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/" data-track="internal-audit">ZoomInfo 60-Day Auto-Renewal Notice &rarr;</a><a href="../../compare/typeform-vs-jotform-response-limit-and-hipaa-cost/" data-track="internal-audit">Typeform vs. Jotform Response &amp; HIPAA Calculator &rarr;</a><a href="../../guides/jotform-wix-app-setup-and-pricing-guide/" data-track="internal-audit">Jotform Wix App Setup &amp; Pricing Guide &rarr;</a><a href="../../pricing/jotform-pricing-tier-calculator/" data-track="internal-audit">Jotform 2026 Pricing Tier Calculator &rarr;</a><a href="../../pricing/docusign-envelope-allowance-and-api-overage-calculator/" data-track="internal-audit">DocuSign 100-Envelope Cap &amp; Overage Calculator &rarr;</a><a href="../../compliance/hipaa-baa-and-soc2-pricing-tiers/" data-track="internal-audit">HIPAA BAA &amp; SOC 2 Pricing Tiers &rarr;</a><a href="../../compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/" data-track="internal-audit">Google Workspace vs. Microsoft 365 HIPAA BAA &rarr;</a><a href="../../compliance/okta-vs-workos-vs-1password-sso-tax-calculator/" data-track="internal-audit">SSO tax calculator &rarr;</a><a href="../../compliance/vanta-vs-drata-vs-comp-ai-soc2-negotiation-benchmarks/" data-track="internal-audit">SOC 2 cost calculator &rarr;</a><a href="../../compare/deel-vs-rippling-eor-hidden-fx-and-offboarding-fees/" data-track="internal-audit">Deel vs Rippling EOR cost &rarr;</a><a href="../../compliance/ai-voice-and-transcription-hipaa-baa-matrix-2026/" data-track="internal-audit">AI voice HIPAA BAA matrix &rarr;</a><a href="../../faq/does-hubspot-charge-onboarding-fees-2026/" data-track="internal-audit">Does HubSpot Charge Onboarding Fees in 2026? &rarr;</a><a href="../../faq/intercom-fin-ai-cost-calculator/" data-track="internal-audit">How much does Intercom Fin cost per resolution? &rarr;</a><a href="../../faq/stripe-vs-paddle-true-cost/" data-track="internal-audit">Stripe vs. Paddle vs. Whop True Cost &amp; Chargeback Calculator &rarr;</a><a href="../../pricing/stripe-shopify-chargeback-fee-and-chargeflow-roi-calculator/" data-track="internal-audit">Chargeflow ROI vs manual dispute handling &rarr;</a><a href="../../pricing/chargeflow-vs-stripe-smart-disputes-year-1-cost/" data-track="internal-audit">Chargeflow vs Stripe Smart Disputes &rarr;</a><a href="../../pricing/hubspot-payments-vs-stripe-platform-fee-year-1-cost/" data-track="internal-audit">HubSpot payments vs connecting Stripe &rarr;</a>
+        </div>
+      </details>
+    </section>
+    
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <p><strong>SaaSBill</strong> &middot; Year-1 cost &amp; contract calculators for B2B software.</p>
+      <p class="footer-note">Updated <time datetime="2026-11-12">Nov 12, 2026</time> &middot; Inquiries: <a href="mailto:info@saasbill.io">info@saasbill.io</a></p>
+    </div>
+  </footer>
+  <script>
+  /* Plausible + local event dispatcher for: calculator_interaction, category_select, result_rendered, vendor_cta_click */
+  window.__saasbillEvents = window.__saasbillEvents || [];
+  try {
+    var p = (window.location && window.location.pathname ? window.location.pathname : '').toLowerCase();
+    if (p && p !== '/' && p !== '/index.html') {
+      var ctxCat = '';
+      var ctxTool = '';
+      if (p.indexOf('zoominfo') !== -1) {
+        ctxCat = 'CRM & Sales';
+        ctxTool = 'close-crm';
+      } else if (p.indexOf('stripe') !== -1 || p.indexOf('paddle') !== -1 || p.indexOf('whop') !== -1 || p.indexOf('gumroad') !== -1 || p.indexOf('paypal') !== -1) {
+        ctxCat = 'Payment Processors & MoR';
+        ctxTool = p.indexOf('paddle') !== -1 ? 'paddle-mor' : (p.indexOf('whop') !== -1 ? 'whop-payments' : 'stripe-payments');
+      } else if (p.indexOf('hubspot') !== -1 || p.indexOf('close-crm') !== -1 || p.indexOf('pipedrive') !== -1 || p.indexOf('monday-crm') !== -1 || p.indexOf('gong') !== -1) {
+        ctxCat = 'CRM & Sales';
+        ctxTool = p.indexOf('monday') !== -1 ? 'monday-crm' : (p.indexOf('close') !== -1 ? 'close-crm' : (p.indexOf('pipedrive') !== -1 ? 'pipedrive-crm' : 'hubspot-sales-pro'));
+      } else if (p.indexOf('hipaa') !== -1 || p.indexOf('soc2') !== -1 || p.indexOf('docusign') !== -1 || p.indexOf('typeform') !== -1 || p.indexOf('jotform') !== -1) {
+        ctxCat = 'Compliance, HIPAA & SOC 2';
+        ctxTool = (p.indexOf('typeform') !== -1 || p.indexOf('jotform') !== -1) ? 'jotform-hipaa' : 'vanta-soc2';
+      } else if (p.indexOf('intercom') !== -1 || p.indexOf('zendesk') !== -1 || p.indexOf('freshdesk') !== -1) {
+        ctxCat = 'Helpdesk & AI Support';
+        ctxTool = p.indexOf('intercom') !== -1 ? 'intercom-fin-ai' : (p.indexOf('freshdesk') !== -1 ? 'freshdesk-support' : 'zendesk-suite-team');
+      }
+      if (ctxCat && window.sessionStorage) {
+        sessionStorage.setItem('saasbill_last_cat', ctxCat);
+        if (ctxTool) sessionStorage.setItem('saasbill_last_tool', ctxTool);
+      }
+    }
+  } catch (err) {}
+  document.addEventListener('click', function(e) {
+    var cta = e.target.closest('[data-track="vendor-cta"], [data-track="vendor_cta_click"]');
+    if (cta) {
+      var vendor = cta.getAttribute('data-vendor') || '';
+      var location = cta.getAttribute('data-cta-location') || 'subpage-result';
+      var href = cta.getAttribute('href') || '';
+      if (typeof window.trackSaaSBillEvent === 'function') {
+        window.trackSaaSBillEvent('vendor_cta_click', { vendor: vendor, location: location, href: href });
+      }
+      return;
+    }
+    var catBtn = e.target.closest('[data-track="category-select"], [data-track="category_select"]');
+    if (catBtn) {
+      var cat = catBtn.getAttribute('data-cat') || '';
+      if (typeof window.trackSaaSBillEvent === 'function') {
+        window.trackSaaSBillEvent('category_select', { category: cat });
+      }
+    }
+  });
+  var _lastCalcTrackKey = '';
+  var _lastCalcTrackTs = 0;
+  function handleCalcControlEvent(e) {
+    var ctrl = e.target.closest('[data-track="calculator-control"], [data-track="calculator_interaction"], input[type="range"], select');
+    if (ctrl) {
+      var control = ctrl.getAttribute('data-control') || ctrl.id || '';
+      var val = String(ctrl.value);
+      var now = Date.now();
+      var key = control + ':' + val;
+      if (key === _lastCalcTrackKey && (now - _lastCalcTrackTs) < 150) return;
+      _lastCalcTrackKey = key;
+      _lastCalcTrackTs = now;
+      if (typeof window.trackSaaSBillEvent === 'function') {
+        window.trackSaaSBillEvent('calculator_interaction', { control: control, value: val });
+        if (ctrl.id === 'cat-filter') {
+          window.trackSaaSBillEvent('category_select', { category: val });
+        }
+      }
+    }
+  }
+  document.addEventListener('input', handleCalcControlEvent);
+  document.addEventListener('change', handleCalcControlEvent);
+  </script>
+  <script src="../../assets/app.js?v=20261030a"></script>
+</body>
+</html>
