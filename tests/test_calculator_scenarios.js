@@ -926,6 +926,59 @@ function hubspotPayments() {
   check(ukAch.stripeAchUnknown === true && ukAch.stripeAchSample === null, "non-US Stripe bank debit stays unknown");
 }
 
+function esignYear1() {
+  const rel = "pricing/pandadoc-vs-docusign-vs-jotform-sign-year-1-cost/index.html";
+  const html = read(rel);
+  const fn = extractBalanced(html, "function calcEsign");
+  const formulaFn = extractBalanced(html, "function esFormula");
+  const ratesFn = extractBalanced(html, "function esDefaultRates");
+  const moneyFn = extractBalanced(html, "function esMoney");
+  const rateFn = extractBalanced(html, "function esRate");
+  check(!!fn && !!formulaFn && !!ratesFn && !!moneyFn && !!rateFn, "missing e-sign math");
+  check(html.indexOf('rel="sponsored nofollow noopener"') !== -1, "Jotform link is sponsored");
+  check(html.indexOf("https://www.pandadoc.com/pricing/") !== -1, "plain PandaDoc link");
+  check(html.split("Paid partnership with Jotform (#JotformPartner)").length === 2, "one Jotform partnership line");
+  const box = {};
+  vm.createContext(box);
+  vm.runInContext([fn, formulaFn, ratesFn, moneyFn, rateFn, "this.fn=calcEsign;this.formula=esFormula;this.rates=esDefaultRates;"].join("\n"), box);
+  const base = { seats: 3, docs: 20, billing: "annual", hipaa: "no", auto: 0, stdRate: 3.6, bpRate: 5.8 };
+  const def = box.fn(base);
+  check(def.starterSeat === 68400 && def.businessSeat === 176400, "PandaDoc annual seats " + def.starterSeat);
+  check(def.standard === 90000 && def.businessPro === 144000 && def.over === 0, "DocuSign annual within allowance");
+  check(def.jfName === "Bronze" && def.jfOne === 40800 && def.jfPer === 122400, "Jotform one account vs per user");
+  check(def.personal === "off", "Personal stays off for 3 senders");
+  const math = box.formula(def);
+  check(html.indexOf(math) !== -1, "static formula matches the default");
+  check(math.indexOf("DocuSign counts sent envelopes") === -1, "formula does not repeat the intro");
+  const high = box.fn(Object.assign({}, base, { docs: 100 }));
+  check(high.over === 900 && high.standard === 414000 && high.businessPro === 666000, "annual overage " + high.standard + " " + high.businessPro);
+  check(high.jfOne === 40800, "100 signed documents still fits Bronze");
+  const silver = box.fn(Object.assign({}, base, { docs: 101 }));
+  check(silver.jfName === "Silver" && silver.jfOne === 46800, "Silver starts at 101");
+  const gold = box.fn(Object.assign({}, base, { docs: 251 }));
+  check(gold.jfName === "Gold" && gold.jfOne === 118800, "Gold starts at 251");
+  const enterprise = box.fn(Object.assign({}, base, { docs: 1001 }));
+  check(enterprise.jfQuote === "quote (Enterprise)" && enterprise.jfOne === null, "over 1,000 is a Jotform quote");
+  const monthly = box.fn(Object.assign({}, base, { billing: "monthly", stdRate: 5.4, bpRate: 7.8 }));
+  check(monthly.starterSeat === 126000 && monthly.standard === 162000 && monthly.jfOne === 46800, "month-to-month within allowance");
+  const monthlyOver = box.fn({ seats: 3, docs: 50, billing: "monthly", hipaa: "no", auto: 0, stdRate: 5.4, bpRate: 7.8 });
+  check(monthlyOver.over === 240 && monthlyOver.standard === 291600 && monthlyOver.businessPro === 421200, "month-to-month overage " + monthlyOver.standard);
+  const hipaa = box.fn(Object.assign({}, base, { hipaa: "yes" }));
+  check(hipaa.pandaQuote === "quote (Enterprise)" && hipaa.dsQuote === "quote (Enhanced)", "HIPAA quotes");
+  check(hipaa.starterSeat === null && hipaa.standard === null && hipaa.jfName === "Gold" && hipaa.jfOne === 118800, "HIPAA keeps Jotform Gold");
+  const auto = box.fn(Object.assign({}, base, { auto: 50 }));
+  check(auto.autoMonth === 10 && auto.creditUnknown === true && auto.starterSeat === 68400, "automation credit pack stays unknown");
+  const one = box.fn({ seats: 1, docs: 5, billing: "annual", hipaa: "no", auto: 0, stdRate: 3.6, bpRate: 5.8 });
+  check(one.personal === "price" && one.personalCents === 12000 && one.jfOne === 0, "one sender inside Personal and Starter");
+  const oneOver = box.fn(Object.assign({}, one, { docs: 6 }));
+  const overPersonal = box.fn({ seats: 1, docs: 6, billing: "annual", hipaa: "no", auto: 0, stdRate: 3.6, bpRate: 5.8 });
+  check(overPersonal.personal === "over" && overPersonal.personalCents === null, "Personal does not sell extra envelopes");
+  const cap = box.fn(Object.assign({}, base, { seats: 51 }));
+  check(cap.dsQuote === "quote (Enhanced)" && cap.standard === null && cap.starterSeat === 1162800, "above 50 users leaves DocuSign as a quote");
+  check(box.rates("annual").std === 360 && box.rates("monthly").bp === 780, "third-party starting rates");
+  check(oneOver.docs === 6, "input passes through");
+}
+
 function main() {
   errors.length = 0;
   checks = 0;
@@ -947,6 +1000,7 @@ function main() {
   hipaaVoice();
   smartDisputes();
   hubspotPayments();
+  esignYear1();
   plausible();
   if (errors.length) {
     console.error(errors.join("\n"));

@@ -231,9 +231,11 @@
     "title": "What does PandaDoc cost versus DocuSign and Jotform Sign in Year 1?",
     "category": "Compliance, HIPAA & SOC 2",
     "primary_affiliate": "jotform",
-    "status": "queued",
+    "status": "published",
+    "published_at": "2026-11-13",
+    "url": "https://saasbill.io/pricing/pandadoc-vs-docusign-vs-jotform-sign-year-1-cost/",
     "strategic_rationale": "Year-1 e-signature cost across PandaDoc, DocuSign, and Jotform Sign.",
-    "verification_note": "E-signature cost for compliance and forms. PandaDoc's affiliate program left PartnerStack on 9 Nov 2026, so there is no PandaDoc link. The existing Jotform affiliate link may be used, with the disclosure line Paid partnership with Jotform (#JotformPartner)."
+    "verification_note": "Checked 2026-11-13. PandaDoc pricing and https://support.pandadoc.com/en/articles/9715033-compare-subscription-plan-features: Free 5 documents a month, Starter $19/$35 per seat, Business $49/$65, Enterprise quote. Automation credits have no published pack price. API stops when credits run out. Other automation overage is the order-form unit price or up to $5 a document. HIPAA is not on Starter or Business. PandaDoc's own MSA was not loaded, so the page states only the BBB auto-renew fact: cancel at least 30 days before renewal, reminder 45 days ahead. One BBB case: 250 Forms credits then $2 a document. DocuSign pricing and https://www.docusign.com/blog/docusign-plans-and-pricing: Personal $10/$11/$15, Standard $25/$30/$45, Business Pro $40/$45/$65, up to 50 users, 100 envelopes per user per year on annual plans and 10 per user per month on monthly plans. The article states pay-as-you-go overage of $3.60 to $7.80 and does not assign a rate to each plan. nodshake https://www.nodshake.com/guides/docusign-cost-per-envelope lists Standard annual $3.60, Standard monthly $5.40, Business Pro annual $5.80, Business Pro monthly $7.80, labeled third-party. SMS from $0.36, ID verification from $2.40. HIPAA is Enhanced, a quote. Jotform pricing and Jotform Sign: Starter 10, Bronze 100 at $39/mo or $408/yr, Silver 250 at $49/mo or $468/yr, Gold 1,000 at $129/mo or $1,188/yr, Enterprise quote. Paid self-serve plans are single-user. HIPAA on Gold and Enterprise. Nonprofit and 24-hour discounts are not used. No PandaDoc affiliate link. Jotform uses the pricing URL in affiliate_links.json with the line Paid partnership with Jotform (#JotformPartner)."
   },
   {
     "priority": 22,
