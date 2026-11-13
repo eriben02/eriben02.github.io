@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-site-verification" content="W7-m7km1_5pZZUG38dpallcgdGss6_Vl2qo5pjVoMdA" />
+  <!-- Bing Webmaster Tools verification: paste <meta name="msvalidate.01" content="YOUR_BING_CODE" /> here or use 1-click Google Search Console import (see BING_WEBMASTER_VERIFICATION.md) -->
+  <title>PandaDoc vs DocuSign vs Jotform – saasbill.io</title>
+  <meta name="description" content="Year-1 list price for PandaDoc, DocuSign, and Jotform Sign. Checked 13 Nov 2026." />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+  <meta property="og:site_name" content="SaaSBill" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="PandaDoc vs DocuSign vs Jotform – saasbill.io" />
+  <meta property="og:description" content="Year-1 list price for PandaDoc, DocuSign, and Jotform Sign. Checked 13 Nov 2026." />
+  <meta property="og:url" content="https://saasbill.io/pricing/pandadoc-vs-docusign-vs-jotform-sign-year-1-cost/" />
+  <meta property="og:updated_time" content="2026-11-13T00:00:00+00:00" />
+  <meta property="article:published_time" content="2026-11-13T00:00:00+01:00" />
+  <meta property="article:modified_time" content="2026-11-13T00:00:00+00:00" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="PandaDoc vs DocuSign vs Jotform – saasbill.io" />
+  <meta name="twitter:description" content="Year-1 list price for PandaDoc, DocuSign, and Jotform Sign. Checked 13 Nov 2026." />
+  <meta name="last-modified" content="2026-11-13T00:00:00+00:00" />
+  <meta name="dcterms.modified" content="2026-11-13T00:00:00+00:00" />
+  <meta name="dcterms.issued" content="2026-11-13" />
+  <link rel="canonical" href="https://saasbill.io/pricing/pandadoc-vs-docusign-vs-jotform-sign-year-1-cost/" />
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261030c" />
+  <link rel="alternate" type="text/plain" href="https://saasbill.io/llms.txt" title="SaaSBill LLMs.txt Summary" />
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script defer data-domain="saasbill.io" src="https://plausible.io/js/pa-VAaSVNs5XOobt9cv2UtKo.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init();
+    window.__saasbillEvents = window.__saasbillEvents || [];
+    window.trackSaaSBillEvent = function(eventName, props) {
+      var p = props || {};
+      var entry = { event: eventName, ts: Date.now() };
+      for (var k in p) {
+        if (Object.prototype.hasOwnProperty.call(p, k)) entry[k] = p[k];
+      }
+      window.__saasbillEvents.push(entry);
+      if (typeof window.plausible === 'function') {
+        window.plausible(eventName, { props: p });
+      }
+    };
+    window.trackEvent = window.trackSaaSBillEvent;
+
+    window.saasbillMoney = function (n) {
+      var v = Math.round(Number(n) || 0);
+      var sign = v < 0 ? '-' : '';
+      return sign + '$' + Math.abs(v).toLocaleString('en-US');
+    };
+    window.saasbillResultLine = function (hidden, sticker) {
+      var h = Math.round(Number(hidden) || 0);
+      var s = Math.round(Number(sticker) || 0);
+      if (h <= 0) return 'Matches advertised price ($0 hidden fees).';
+      var pct = s > 0 ? Math.round((h / s) * 100) : 0;
+      return '+' + window.saasbillMoney(h) + ' (+' + pct + '%) above advertised price.';
+    };
+    window.saasbillApplyWorkbench = function (opts) {
+      opts = opts || {};
+      var sticker = Math.max(0, Math.round(Number(opts.sticker) || 0));
+      var seats = Math.max(0, Math.round(Number(opts.seats) || 0));
+      var hidden = Math.max(0, Math.round(Number(opts.hidden) || 0));
+      var total = Math.round(Number(opts.total));
+      if (!isFinite(total)) total = sticker + seats + hidden;
+      var parts = Math.max(1, sticker + seats + hidden);
+      function node(id) { return document.getElementById(id); }
+      function setText(id, value) {
+        var el = node(id);
+        if (el) el.textContent = value;
+      }
+      function setFlex(id, amount) {
+        var el = node(id);
+        if (!el) return;
+        var share = amount <= 0 ? 8 : (amount / parts) * 100;
+        el.style.flex = share + ' 1 0px';
+      }
+      setText('shell-product', opts.product || '');
+      setText('shell-big', window.saasbillMoney(total));
+      setText('shell-quote', 'True Year-1 cost');
+      setText('shell-sub', window.saasbillResultLine(hidden, sticker + seats));
+      setText('shell-amt-base', window.saasbillMoney(sticker));
+      setText('shell-amt-seats', window.saasbillMoney(seats));
+      setText('shell-amt-hidden', window.saasbillMoney(hidden));
+      setText('shell-title-base', 'Sticker Price');
+      setText('shell-title-seats', opts.seatsTitle || 'Other sticker fees');
+      setText('shell-title-hidden', 'Hidden Cost Gap');
+      setText('shell-sub-base', opts.baseLabel || 'Advertised price');
+      setText('shell-sub-seats', opts.seatsLabel || 'Included in the sticker');
+      setText('shell-sub-hidden', opts.hiddenLabel || 'Fees above the advertised price');
+      setFlex('shell-row-base', sticker);
+      setFlex('shell-row-seats', seats);
+      setFlex('shell-row-hidden', hidden);
+      var seatsRow = node('shell-row-seats');
+      if (seatsRow) seatsRow.style.display = seats <= 0 ? 'none' : '';
+      var math = node('shell-math');
+      if (math && opts.mathHtml) math.innerHTML = opts.mathHtml;
+      var best = node('shell-best');
+      if (best && opts.bestHtml) best.innerHTML = opts.bestHtml;
+      var cta = node('shell-cta');
+      if (cta && opts.ctaHref) {
+        cta.href = opts.ctaHref;
+        var label = opts.ctaLabel || 'See pricing';
+        cta.textContent = /→\s*$/.test(label) ? label : label + ' \u2192';
+        if (opts.ctaVendor) cta.setAttribute('data-vendor', opts.ctaVendor);
+      }
+      setText('shell-sticker', window.saasbillMoney(sticker + seats));
+      setText('shell-gap', hidden > 0 ? '+' + window.saasbillMoney(hidden) : '$0');
+      if (opts.product) setText('shell-sticker-note', opts.product);
+    };
+
+  </script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "TechArticle", "@id": "https://saasbill.io/pricing/pandadoc-vs-docusign-vs-jotform-sign-year-1-cost/#article", "headline": "PandaDoc vs DocuSign vs Jotform \u2013 saasbill.io", "description": "Year-1 list price for PandaDoc, DocuSign, and Jotform Sign. Checked 13 Nov 2026.", "datePublished": "2026-11-13", "dateModified": "2026-11-13T00:00:00+00:00", "author": {"@type": "Organization", "name": "SaaSBill Editorial", "url": "https://saasbill.io/"}, "publisher": {"@type": "Organization", "name": "SaaSBill", "url": "https://saasbill.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://saasbill.io/pricing/pandadoc-vs-docusign-vs-jotform-sign-year-1-cost/"}}, {"@type": "WebPage", "@id": "https://saasbill.io/pricing/pandadoc-vs-docusign-vs-jotform-sign-year-1-cost/", "url": "https://saasbill.io/pricing/pandadoc-vs-docusign-vs-jotform-sign-year-1-cost/", "name": "PandaDoc vs DocuSign vs Jotform \u2013 saasbill.io", "description": "Year-1 list price for PandaDoc, DocuSign, and Jotform Sign. Checked 13 Nov 2026.", "inLanguage": "en-US", "datePublished": "2026-11-13", "dateModified": "2026-11-13T00:00:00+00:00", "lastReviewed": "2026-11-13", "reviewedBy": {"@type": "Organization", "name": "SaaSBill Editorial"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "SaaSBill", "item": "https://saasbill.io/"}, {"@type": "ListItem", "position": 2, "name": "PandaDoc vs DocuSign vs Jotform \u2013 saasbill.io", "item": "https://saasbill.io/pricing/pandadoc-vs-docusign-vs-jotform-sign-year-1-cost/"}]}]}</script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-inner">
+      <div class="brand-wrap">
+        <a href="../../index.html" class="brand">SaaSBill<span>.io</span></a>
+        <span class="brand-tagline">Year-1 software cost &amp; contract calculators</span>
+      </div>
+      <nav class="nav-links" aria-label="Primary Navigation">
+        <a href="../../index.html#all-calculators">Audits &amp; Guides</a>
+        <a href="../../ai-act/">AI Act</a>
+        <a href="../../index.html#methodology">Methodology</a>
+        <span class="byline-bar">Updated <time datetime="2026-11-13" itemprop="dateModified">Nov 13, 2026</time></span>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+    <article itemscope itemtype="https://schema.org/TechArticle">
+      <meta itemprop="datePublished" content="2026-11-13" />
+      <meta itemprop="dateModified" content="2026-11-13T00:00:00+00:00" />
+      <section class="hero editorial-hero editorial-hero-wrap"><h1>What does PandaDoc cost versus DocuSign and Jotform Sign in Year 1?</h1><p class="lead">DocuSign counts sent envelopes, Jotform Sign counts signed documents, and PandaDoc counts seats plus automation credits.</p></section>
+<div class="unified-inspector-tray">
+<section class="calc-box editorial-workbench" aria-label="True cost calculator">
+  <div class="workbench-grid">
+    <div class="wb-col-controls">
+      <div class="wb-col-title">Your sending</div>
+      <div class="wb-controls-stack">
+        
+        <div class="wb-control-item">
+          <label class="wb-control-label" for="es-seats">Senders <span class="val-pill" id="es-seats-val">3</span></label>
+          <div class="wb-slider-row">
+            <input type="range" id="es-seats" min="1" max="60" step="1" value="3" aria-label="Number of senders" data-track="calculator-control" data-control="seats" />
+          </div>
+        </div>
+        <div class="wb-control-item">
+          <label class="wb-control-label" for="es-docs">Documents a month <span class="val-pill" id="es-docs-val">20</span></label>
+          <div class="wb-slider-row">
+            <input type="range" id="es-docs" min="0" max="1500" step="1" value="20" aria-label="Documents sent per month" data-track="calculator-control" data-control="documents" />
+          </div>
+        </div>
+        <div class="wb-control-item">
+          <label class="wb-control-label" for="es-billing">Billing</label>
+          <select id="es-billing" class="wb-tool-select" data-track="calculator-control" data-control="billing">
+            <option value="annual" selected>Annual, paid upfront</option>
+            <option value="monthly">Month to month</option>
+          </select>
+        </div>
+        <div class="wb-control-item">
+          <label class="wb-control-label" for="es-hipaa">HIPAA required</label>
+          <select id="es-hipaa" class="wb-tool-select" data-track="calculator-control" data-control="hipaa">
+            <option value="no" selected>No</option>
+            <option value="yes">Yes</option>
+          </select>
+        </div>
+        <div class="wb-control-item">
+          <label class="wb-control-label" for="es-auto">PandaDoc forms and automation <span class="val-pill" id="es-auto-val">0%</span></label>
+          <div class="wb-slider-row">
+            <input type="range" id="es-auto" min="0" max="100" step="5" value="0" aria-label="Share of documents created through forms or automation" data-track="calculator-control" data-control="automation-share" />
+          </div>
+        </div>
+        <div class="wb-control-item">
+          <label class="wb-control-label" for="es-std-over">Standard overage per envelope <span class="val-pill" id="es-std-over-val">$3.60</span></label>
+          <div class="wb-slider-row">
+            <input type="range" id="es-std-over" min="0" max="20" step="0.01" value="3.60" aria-label="DocuSign Standard overage per envelope" data-track="calculator-control" data-control="standard-overage" />
+          </div>
+        </div>
+        <div class="wb-control-item">
+          <label class="wb-control-label" for="es-bp-over">Business Pro overage per envelope <span class="val-pill" id="es-bp-over-val">$5.80</span></label>
+          <div class="wb-slider-row">
+            <input type="range" id="es-bp-over" min="0" max="20" step="0.01" value="5.80" aria-label="DocuSign Business Pro overage per envelope" data-track="calculator-control" data-control="business-pro-overage" />
+          </div>
+          <p class="wb-budget-subnote">Starting rates are third-party figures from nodshake: $3.60 and $5.80 on annual plans, $5.40 and $7.80 month to month. DocuSign's pricing article states a range of $3.60 to $7.80 per envelope and does not print this split.</p>
+        </div>
+
+      </div>
+    </div>
+    <div class="wb-col-chart">
+      <div class="wb-col-title">Year-1 list price</div>
+      <div class="wb-vbar-container wb-vbar-separate" aria-live="polite">
+        <div class="wb-vbar-row" id="shell-row-base" style="--wb-bar-share: 76%;">
+          <div class="wb-vbar-block block-base"><span class="wb-block-amount" id="shell-amt-base">$684</span></div>
+          <div class="wb-callout-item"><div class="wb-leader-line"></div><div class="wb-callout-text"><strong id="shell-title-base">PandaDoc Starter</strong><span id="shell-sub-base">Year 1</span></div></div>
+        </div>
+        <div class="wb-vbar-row" id="shell-row-seats" style="--wb-bar-share: 100%;">
+          <div class="wb-vbar-block block-seats"><span class="wb-block-amount" id="shell-amt-seats">$900</span></div>
+          <div class="wb-callout-item"><div class="wb-leader-line"></div><div class="wb-callout-text"><strong id="shell-title-seats">DocuSign Standard</strong><span id="shell-sub-seats">Year 1</span></div></div>
+        </div>
+        <div class="wb-vbar-row" id="shell-row-hidden" style="--wb-bar-share: 45.3%;">
+          <div class="wb-vbar-block block-hidden"><span class="wb-block-amount" id="shell-amt-hidden">$408</span></div>
+          <div class="wb-callout-item"><div class="wb-leader-line"></div><div class="wb-callout-text"><strong id="shell-title-hidden">Jotform Sign</strong><span id="shell-sub-hidden">One account</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="wb-result-col" id="shell-result">
+      <div class="wb-selected-product" id="shell-product">Jotform Sign, one account</div>
+      <div class="wb-big-total"><span id="shell-big">$408</span> <span class="wb-per-year">/ year</span></div>
+      <details class="math-drawer" id="shell-calc">
+        <summary>Show calculation</summary>
+        <div class="math-drawer-body" id="shell-math">3 senders. 20 documents a month, 240 in the year. Annual, paid upfront. HIPAA is off. Automation share is 0%. No PandaDoc credit pack is added. PandaDoc Starter is 3 seats at $19 a month for a year, $684. PandaDoc Business is 3 seats at $49 a month for a year, $1,764. DocuSign Standard is 3 users at $25 a month, $900. Allowance for this team: 300. Envelopes over that: 0. Standard overage rate $3.60. Business Pro overage rate $5.80. DocuSign Business Pro is 3 users at $40 a month, $1,440. Jotform Sign one account is Bronze, $408. One account per user is $1,224.</div>
+      </details>
+      <p class="wb-budget-quote" id="shell-quote">True Year-1 cost</p>
+      <p class="wb-budget-subnote" id="shell-sub"></p>
+      <div class="wb-best-option" id="shell-best">Lowest Year-1 cost: Jotform Sign, one account.</div>
+      <div class="cta-stack">
+        <a id="shell-cta" class="btn-cta wb-primary-cta" href="#es-costs">Cost table &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+
+<section id="es-costs">
+  <h2>Year-1 list price</h2>
+  <div class="table-wrap editorial-gap-table mobile-cards">
+    <table>
+      <caption>Twelve months at the list price for the numbers above.</caption>
+      <thead>
+        <tr>
+          <th>Plan</th>
+          <th>Year 1</th>
+        </tr>
+      </thead>
+      <tbody id="es-body">
+        <tr><td data-label="Plan">PandaDoc Starter</td><td data-label="Year 1">$684</td></tr>
+        <tr><td data-label="Plan">PandaDoc Business</td><td data-label="Year 1">$1,764</td></tr>
+        <tr><td data-label="Plan">DocuSign Standard</td><td data-label="Year 1">$900</td></tr>
+        <tr><td data-label="Plan">DocuSign Business Pro</td><td data-label="Year 1">$1,440</td></tr>
+        <tr><td data-label="Plan">Jotform Sign, one account</td><td data-label="Year 1">$408</td></tr>
+        <tr><td data-label="Plan">Jotform Sign, one account per user</td><td data-label="Year 1">$1,224</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="paid-partnership-note">Paid partnership with Jotform (#JotformPartner)</p>
+  <div class="cta-stack">
+    <a class="btn-cta" href="https://www.jotform.com/pricing/?partner=saasbill" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="jotform" data-cta-location="subpage-summary">Jotform pricing &rarr;</a>
+  </div>
+</section>
+
+<section>
+  <h2>What changes the list price</h2>
+  <ul class="key-list">
+    <li>PandaDoc Free allows 5 documents a month on one shared limit. It is not a row above.</li>
+    <li>Documents sent from the PandaDoc editor are not metered on Starter or Business. Documents created through the API, Zapier, Make, forms, or bulk send use usage credits. The recurring credit pack price is not published. The API stops when credits run out. Other automations continue, and the overage uses the unit price on the order form, or up to $5 a document when the order form has no unit price. Unused documents do not roll over.</li>
+    <li>A 14-day PandaDoc trial is listed and is not subtracted here. PandaDoc prices exclude taxes. Qualified electronic signatures are on annual PandaDoc plans only.</li>
+    <li>HIPAA is not listed on PandaDoc Starter or Business. A third-party summary calls it an optional Enterprise extra, so this page treats it as a quote. <span class="src-cluster"><a class="src-link" href="https://grouglobal.com/blog/pandadoc-pricing" target="_blank" rel="noopener">Third-party PandaDoc pricing summary</a> <span class="src-date">Listed 14 Oct 2026. Accessed 13 Nov 2026.</span></span></li>
+    <li>PandaDoc annual plans renew unless cancellation is requested at least 30 days before renewal. The company says a reminder goes out 45 days ahead.</li>
+    <li>DocuSign annual plans include 100 envelopes per user for the year. Month-to-month plans include 10 per user each month. A sent envelope counts even when it is not completed.</li>
+    <li>DocuSign also sells annual plans billed monthly: Personal $11 a month ($132 a year), Standard $30 per user ($360), and Business Pro $45 per user ($540). This calculator uses annual upfront or month-to-month, not that middle option.</li>
+    <li>An annual DocuSign plan is a 12-month commitment. Cancel within 30 days of purchase for a refund, once per customer. After 30 days, an annual plan billed monthly still owes the rest of the year. Plans renew on their own.</li>
+    <li>DocuSign Personal is one user and 5 envelopes a month. Past that, extra envelopes are not offered on Personal. Standard and Business Pro list up to 50 users. Web forms, bulk send, and payment collection are on Business Pro.</li>
+    <li>SMS delivery starts at $0.36 a delivery and ID verification starts at $2.40 an attempt. Those add-ons are not in this total. A HIPAA agreement, SSO, and knowledge-based authentication are on Enhanced plans, which are a quote.</li>
+    <li>Jotform Sign monthly limits are 10 on Starter, 100 on Bronze, 250 on Silver, and 1,000 on Gold. Paid self-serve plans are one user. Enterprise is the multi-user plan, and its price is a quote. One shared account is not the same thing as one account per person.</li>
+    <li>Jotform HIPAA features are on Gold and Enterprise. Plans renew until canceled. A 30-day money-back guarantee is listed, and canceling keeps the plan until the next billing date. A nonprofit or education discount, and any 24-hour signup offer, are not in these prices.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>What users wrote</h2>
+  <ul class="key-list">
+    <li>On Reddit, one user says a PandaDoc cancellation looked complete in the app, then the annual plan renewed and no refund was given. That is one post. <span class="src-cluster"><a class="src-link" href="https://www.reddit.com/r/software/comments/1vfdwol/dealing_with_pandadocs_terrible_customer_service/" target="_blank" rel="noopener">Reddit thread</a> <span class="src-date">Accessed 13 Nov 2026.</span></span></li>
+    <li>On the BBB page, a long-time Business customer was surprised by per-document charges for form-generated documents after renewal. PandaDoc's response on that complaint says the plan included 250 Forms usage credits and further documents cost $2 each. That is one case. <span class="src-cluster"><a class="src-link" href="https://www.bbb.org/us/ca/san-francisco/profile/computer-software-developers/pandadoc-1116-905103/complaints" target="_blank" rel="noopener">PandaDoc BBB complaints</a> <span class="src-date">Accessed 13 Nov 2026.</span></span></li>
+  </ul>
+</section>
+
+<p class="summary-caveat">Checked 13 Nov 2026. <span class="src-cluster"><a class="src-link" href="https://www.pandadoc.com/pricing/" target="_blank" rel="noopener">PandaDoc pricing</a> <span class="src-date">Accessed 13 Nov 2026.</span></span> <span class="src-cluster"><a class="src-link" href="https://support.pandadoc.com/en/articles/9715033-compare-subscription-plan-features" target="_blank" rel="noopener">PandaDoc plan comparison</a> <span class="src-date">Accessed 13 Nov 2026.</span></span> <span class="src-cluster"><a class="src-link" href="https://www.docusign.com/products-and-pricing" target="_blank" rel="noopener">DocuSign plans and pricing</a> <span class="src-date">Accessed 13 Nov 2026.</span></span> <span class="src-cluster"><a class="src-link" href="https://www.docusign.com/blog/docusign-plans-and-pricing" target="_blank" rel="noopener">DocuSign plans article</a> <span class="src-date">Accessed 13 Nov 2026.</span></span> <span class="src-cluster"><a class="src-link" href="https://www.nodshake.com/guides/docusign-cost-per-envelope" target="_blank" rel="noopener">nodshake overage table</a> <span class="src-date">Updated 15 Oct 2026. Accessed 13 Nov 2026.</span></span> <span class="src-cluster"><a class="src-link" href="https://www.jotform.com/pricing/" target="_blank" rel="noopener">Jotform pricing</a> <span class="src-date">Accessed 13 Nov 2026.</span></span> <span class="src-cluster"><a class="src-link" href="https://www.jotform.com/products/sign/" target="_blank" rel="noopener">Jotform Sign</a> <span class="src-date">Accessed 13 Nov 2026.</span></span></p>
+
+<script>
+function calcEsign(input) {
+  var seats = Math.max(1, Math.round(Number(input.seats) || 1));
+  var docs = Math.max(0, Math.round(Number(input.docs) || 0));
+  var billing = input.billing === "monthly" ? "monthly" : "annual";
+  var hipaa = input.hipaa === "yes";
+  var auto = Math.max(0, Math.min(100, Math.round(Number(input.auto) || 0)));
+  var stdRate = Number(input.stdRate);
+  if (!isFinite(stdRate) || stdRate < 0) stdRate = 0;
+  var bpRate = Number(input.bpRate);
+  if (!isFinite(bpRate) || bpRate < 0) bpRate = 0;
+  var annual = billing === "annual";
+  var autoMonth = Math.round(docs * auto / 100);
+  var stdRateCents = Math.round(stdRate * 100);
+  var bpRateCents = Math.round(bpRate * 100);
+  var yearDocs = docs * 12;
+  var allowance = annual ? 100 * seats : 10 * seats;
+  var over = annual ? Math.max(0, yearDocs - 100 * seats) : Math.max(0, docs - 10 * seats) * 12;
+  var pandaQuote = hipaa ? "quote (Enterprise)" : "";
+  var creditUnknown = !hipaa && autoMonth > 0;
+  var starterSeat = hipaa ? null : (annual ? 1900 : 3500) * seats * 12;
+  var businessSeat = hipaa ? null : (annual ? 4900 : 6500) * seats * 12;
+  var dsQuote = (hipaa || seats > 50) ? "quote (Enhanced)" : "";
+  var standard = dsQuote ? null : (annual ? 2500 : 4500) * seats * 12 + over * stdRateCents;
+  var businessPro = dsQuote ? null : (annual ? 4000 : 6500) * seats * 12 + over * bpRateCents;
+  var personal = "off";
+  var personalCents = null;
+  if (seats === 1) {
+    if (hipaa) personal = "hipaa";
+    else if (docs > 5) personal = "over";
+    else {
+      personal = "price";
+      personalCents = annual ? 12000 : 18000;
+    }
+  }
+  var jfName = "Enterprise";
+  var jfOne = null;
+  var jfPer = null;
+  var jfQuote = "";
+  var jfLimit = 0;
+  if (!hipaa && docs <= 10) {
+    jfName = "Starter";
+    jfLimit = 10;
+    jfOne = 0;
+    jfPer = 0;
+  } else if (!hipaa && docs <= 100) {
+    jfName = "Bronze";
+    jfLimit = 100;
+    jfOne = annual ? 40800 : 46800;
+    jfPer = jfOne * seats;
+  } else if (!hipaa && docs <= 250) {
+    jfName = "Silver";
+    jfLimit = 250;
+    jfOne = annual ? 46800 : 58800;
+    jfPer = jfOne * seats;
+  } else if (docs <= 1000) {
+    jfName = "Gold";
+    jfLimit = 1000;
+    jfOne = annual ? 118800 : 154800;
+    jfPer = jfOne * seats;
+  } else {
+    jfName = "Enterprise";
+    jfQuote = "quote (Enterprise)";
+  }
+  return {
+    seats: seats,
+    docs: docs,
+    billing: billing,
+    hipaa: hipaa,
+    auto: auto,
+    autoMonth: autoMonth,
+    yearDocs: yearDocs,
+    allowance: allowance,
+    over: over,
+    pandaQuote: pandaQuote,
+    creditUnknown: creditUnknown,
+    starterSeat: starterSeat,
+    businessSeat: businessSeat,
+    dsQuote: dsQuote,
+    standard: standard,
+    businessPro: businessPro,
+    stdRateCents: stdRateCents,
+    bpRateCents: bpRateCents,
+    personal: personal,
+    personalCents: personalCents,
+    jfName: jfName,
+    jfOne: jfOne,
+    jfPer: jfPer,
+    jfQuote: jfQuote,
+    jfLimit: jfLimit
+  };
+}
+
+function esDefaultRates(billing) {
+  if (billing === "monthly") return { std: 540, bp: 780 };
+  return { std: 360, bp: 580 };
+}
+
+function esMoney(cents) {
+  if (cents === null) return "unknown";
+  var v = Math.round(cents);
+  var neg = v < 0;
+  v = Math.abs(v);
+  var dollars = Math.floor(v / 100);
+  var rem = v % 100;
+  var text = String(dollars);
+  var grouped = "";
+  while (text.length > 3) {
+    grouped = "," + text.slice(-3) + grouped;
+    text = text.slice(0, -3);
+  }
+  var out = "$" + text + grouped;
+  if (rem) out += "." + (rem < 10 ? "0" : "") + rem;
+  return neg ? "-" + out : out;
+}
+
+function esRate(cents) {
+  var v = Math.abs(Math.round(cents));
+  var dollars = Math.floor(v / 100);
+  var rem = v % 100;
+  return "$" + dollars + "." + (rem < 10 ? "0" : "") + rem;
+}
+
+function esFormula(c) {
+  var parts = [];
+  parts.push(c.seats + (c.seats === 1 ? " sender." : " senders."));
+  parts.push(c.docs + " documents a month, " + c.yearDocs + " in the year.");
+  parts.push(c.billing === "annual" ? "Annual, paid upfront." : "Month-to-month.");
+  parts.push(c.hipaa ? "HIPAA is on." : "HIPAA is off.");
+  if (c.autoMonth > 0) {
+    parts.push("Automation share is " + c.auto + "%, " + c.autoMonth + " documents a month. The PandaDoc year total leaves out an unknown credit pack.");
+  } else {
+    parts.push("Automation share is " + c.auto + "%. No PandaDoc credit pack is added.");
+  }
+  if (c.pandaQuote) {
+    parts.push("PandaDoc Starter and Business are " + c.pandaQuote + ".");
+  } else {
+    var stRate = c.billing === "annual" ? 19 : 35;
+    var buRate = c.billing === "annual" ? 49 : 65;
+    parts.push("PandaDoc Starter is " + c.seats + " seats at $" + stRate + " a month for a year, " + esMoney(c.starterSeat) + ".");
+    parts.push("PandaDoc Business is " + c.seats + " seats at $" + buRate + " a month for a year, " + esMoney(c.businessSeat) + ".");
+  }
+  if (c.dsQuote) {
+    parts.push("DocuSign Standard and Business Pro are " + c.dsQuote + ".");
+  } else {
+    var stdMonthly = c.billing === "annual" ? 25 : 45;
+    var bpMonthly = c.billing === "annual" ? 40 : 65;
+    parts.push("DocuSign Standard is " + c.seats + " users at $" + stdMonthly + " a month, " + esMoney(c.standard) + ".");
+    parts.push("Allowance for this team: " + c.allowance + ". Envelopes over that: " + c.over + ".");
+    parts.push("Standard overage rate " + esRate(c.stdRateCents) + ". Business Pro overage rate " + esRate(c.bpRateCents) + ".");
+    parts.push("DocuSign Business Pro is " + c.seats + " users at $" + bpMonthly + " a month, " + esMoney(c.businessPro) + ".");
+  }
+  if (c.personal === "price") parts.push("DocuSign Personal is " + esMoney(c.personalCents) + ".");
+  if (c.personal === "over") parts.push("DocuSign Personal is not offered at this volume.");
+  if (c.jfQuote) parts.push("Jotform Sign is " + c.jfQuote + ".");
+  else {
+    parts.push("Jotform Sign one account is " + c.jfName + ", " + esMoney(c.jfOne) + ".");
+    parts.push("One account per user is " + esMoney(c.jfPer) + ".");
+  }
+  return parts.join(" ");
+}
+
+function esPandaCell(c, seat) {
+  if (c.pandaQuote) return c.pandaQuote;
+  if (c.creditUnknown) return esMoney(seat) + " + unknown";
+  return esMoney(seat);
+}
+
+function esKnown(cents) {
+  return cents !== null && isFinite(cents);
+}
+
+function renderEsign(event) {
+  var billingEl = document.getElementById("es-billing");
+  var stdEl = document.getElementById("es-std-over");
+  var bpEl = document.getElementById("es-bp-over");
+  if (event && event.target && event.target.id === "es-billing") {
+    var next = esDefaultRates(billingEl.value);
+    var prev = esDefaultRates(billingEl.value === "monthly" ? "annual" : "monthly");
+    if (Math.round(Number(stdEl.value) * 100) === prev.std) stdEl.value = (next.std / 100).toFixed(2);
+    if (Math.round(Number(bpEl.value) * 100) === prev.bp) bpEl.value = (next.bp / 100).toFixed(2);
+  }
+  var c = calcEsign({
+    seats: document.getElementById("es-seats").value,
+    docs: document.getElementById("es-docs").value,
+    billing: billingEl.value,
+    hipaa: document.getElementById("es-hipaa").value,
+    auto: document.getElementById("es-auto").value,
+    stdRate: stdEl.value,
+    bpRate: bpEl.value
+  });
+  document.getElementById("es-seats-val").textContent = String(c.seats);
+  document.getElementById("es-docs-val").textContent = String(c.docs);
+  document.getElementById("es-auto-val").textContent = c.auto + "%";
+  document.getElementById("es-std-over-val").textContent = esRate(c.stdRateCents);
+  document.getElementById("es-bp-over-val").textContent = esRate(c.bpRateCents);
+  var rows = [];
+  rows.push({ name: "PandaDoc Starter", text: esPandaCell(c, c.starterSeat), cents: c.pandaQuote || c.creditUnknown ? null : c.starterSeat });
+  rows.push({ name: "PandaDoc Business", text: esPandaCell(c, c.businessSeat), cents: c.pandaQuote || c.creditUnknown ? null : c.businessSeat });
+  rows.push({ name: "DocuSign Standard", text: c.dsQuote || esMoney(c.standard), cents: c.dsQuote ? null : c.standard });
+  rows.push({ name: "DocuSign Business Pro", text: c.dsQuote || esMoney(c.businessPro), cents: c.dsQuote ? null : c.businessPro });
+  if (c.personal === "price") rows.push({ name: "DocuSign Personal", text: esMoney(c.personalCents), cents: c.personalCents });
+  if (c.personal === "over") rows.push({ name: "DocuSign Personal", text: "not offered", cents: null });
+  rows.push({ name: "Jotform Sign, one account", text: c.jfQuote || esMoney(c.jfOne), cents: c.jfQuote ? null : c.jfOne });
+  rows.push({ name: "Jotform Sign, one account per user", text: c.jfQuote || esMoney(c.jfPer), cents: c.jfQuote ? null : c.jfPer });
+  var known = [];
+  rows.forEach(function (row) {
+    if (esKnown(row.cents)) known.push(row);
+  });
+  known.sort(function (a, b) { return a.cents - b.cents; });
+  var lowest = known.length ? known[0] : null;
+  var tied = [];
+  if (lowest) {
+    known.forEach(function (row) {
+      if (row.cents === lowest.cents) tied.push(row.name);
+    });
+  }
+  document.getElementById("shell-product").textContent = lowest ? lowest.name : "Year-1 list price";
+  document.getElementById("shell-big").textContent = lowest ? esMoney(lowest.cents) : "unknown";
+  document.getElementById("shell-sub").textContent = "";
+  document.getElementById("shell-best").textContent = lowest ? "Lowest Year-1 cost: " + tied.join(" and ") + "." : "";
+  var bars = [
+    { row: "shell-row-base", amt: "shell-amt-base", title: "shell-title-base", text: rows[0].text, cents: rows[0].cents },
+    { row: "shell-row-seats", amt: "shell-amt-seats", title: "shell-title-seats", text: rows[2].text, cents: rows[2].cents },
+    { row: "shell-row-hidden", amt: "shell-amt-hidden", title: "shell-title-hidden", text: rows[rows.length - 2].text, cents: rows[rows.length - 2].cents }
+  ];
+  document.getElementById("shell-title-base").textContent = "PandaDoc Starter";
+  document.getElementById("shell-title-seats").textContent = "DocuSign Standard";
+  document.getElementById("shell-title-hidden").textContent = "Jotform Sign";
+  var maxCents = 1;
+  bars.forEach(function (bar) {
+    if (esKnown(bar.cents) && bar.cents > maxCents) maxCents = bar.cents;
+  });
+  bars.forEach(function (bar) {
+    var share = esKnown(bar.cents) ? (Math.round(bar.cents / maxCents * 1000) / 10) : 0;
+    var label = esKnown(bar.cents) ? esMoney(bar.cents) : (String(bar.text).indexOf("quote") === 0 ? "quote" : "unknown");
+    document.getElementById(bar.amt).textContent = label;
+    document.getElementById(bar.row).style.setProperty("--wb-bar-share", share + "%");
+  });
+  var html = "";
+  rows.forEach(function (row) {
+    html += "<tr><td data-label=\"Plan\">" + row.name + "</td><td data-label=\"Year 1\">" + row.text + "</td></tr>";
+  });
+  document.getElementById("es-body").innerHTML = html;
+  document.getElementById("shell-math").textContent = esFormula(c);
+}
+
+["es-seats", "es-docs", "es-billing", "es-hipaa", "es-auto", "es-std-over", "es-bp-over"].forEach(function (id) {
+  var el = document.getElementById(id);
+  el.addEventListener("input", renderEsign);
+  el.addEventListener("change", renderEsign);
+});
+renderEsign();
+</script>
+
+      
+      
+    <section aria-labelledby="related-calculators-heading" style="margin-top:36px; padding-top:24px; border-top:1px solid var(--border);">
+      <h2 id="related-calculators-heading" style="font-size:1.2rem; margin-top:0;">Related calculators</h2>
+      <div class="related-calc-grid">
+        
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../pricing/docusign-envelope-allowance-and-api-overage-calculator/" data-track="internal-audit">DocuSign 100-Envelope Cap &amp; Overage Calculator &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">The 100-envelope allowance versus Jotform Sign and PandaDoc.</p>
+        </div>
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../pricing/jotform-pricing-tier-calculator/" data-track="internal-audit">Jotform 2026 Pricing Tier Calculator &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">Starter, Bronze, Silver, and Gold Year-1 cost.</p>
+        </div>
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../compare/typeform-vs-jotform-response-limit-and-hipaa-cost/" data-track="internal-audit">Typeform vs. Jotform Response &amp; HIPAA Calculator &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">Response caps and which plan signs a HIPAA BAA.</p>
+        </div>
+      </div>
+      <details class="footer-directory-details">
+        <summary>Browse all calculators and guides</summary>
+        <div class="footer-directory-links">
+          <a href="../../index.html#site-directory" data-track="internal-audit">Every calculator and guide &rarr;</a><a href="../../" data-track="internal-audit">Year-1 SaaS True-Cost Directory &rarr;</a><a href="../../pricing/hubspot-true-cost-and-onboarding-fees/" data-track="internal-audit">HubSpot True Cost &amp; Onboarding &rarr;</a><a href="../../compare/close-crm-vs-hubspot-sales-hub-5-to-20-reps/" data-track="internal-audit">Close CRM vs. HubSpot Sales Hub &rarr;</a><a href="../../compare/close-vs-pipedrive-year-1-cost-calculator/" data-track="internal-audit">Close vs. Pipedrive Year-1 Cost (Calling Included) &rarr;</a><a href="../../compare/pipedrive-vs-salesforce-starter-and-pro-suite-cost/" data-track="internal-audit">Pipedrive vs Salesforce Year-1 cost &rarr;</a><a href="../../pricing/pipedrive-true-year-1-cost-calculator/" data-track="internal-audit">Pipedrive True Year-1 Cost &rarr;</a><a href="../../compare/pipedrive-vs-hubspot-sales-hub-year-1-cost/" data-track="internal-audit">Pipedrive vs. HubSpot Sales Hub Year-1 Cost &rarr;</a><a href="../../pricing/gong-io-platform-fee-and-seat-minimum-calculator/" data-track="internal-audit">Gong.io $5,000 Platform Fee &amp; Seat Calculator &rarr;</a><a href="../../compare/monday-crm-vs-pipedrive-vs-hubspot-seat-minimums/" data-track="internal-audit">monday CRM 3/5/10-Seat Bucket Calculator &rarr;</a><a href="../../intercom-fin-cost-calculator/" data-track="internal-audit">Intercom Fin AI Cost Calculator &rarr;</a><a href="../../intercom-vs-freshdesk-cost-comparison/" data-track="internal-audit">Intercom vs. Freshdesk Cost Comparison &rarr;</a><a href="../../exit/intercom-to-freshdesk-ticket-and-help-center-migration/" data-track="internal-audit">Intercom to Freshdesk migration Year-1 &rarr;</a><a href="../../intercom-vs-zendesk-cost-comparison/" data-track="internal-audit">Intercom vs. Zendesk Cost Comparison &rarr;</a><a href="../../pricing/intercom-fin-ai-resolution-cost-calculator/" data-track="internal-audit">Intercom Fin cost per AI resolution &rarr;</a><a href="../../zendesk-ai-cost-calculator/" data-track="internal-audit">Zendesk AI Cost Calculator &rarr;</a><a href="../../zendesk-vs-freshdesk-cost-comparison/" data-track="internal-audit">Zendesk vs. Freshdesk Cost Comparison &rarr;</a><a href="../../hubspot-onboarding-fee-calculator/" data-track="internal-audit">HubSpot Onboarding Fee Calculator &rarr;</a><a href="../../pricing/zendesk-ai-resolution-and-automated-outcome-cost/" data-track="internal-audit">Zendesk automated resolution cost &rarr;</a><a href="../../pricing/stripe-billing-0-7-percent-recurring-tax-calculator/" data-track="internal-audit">Stripe Billing 0.7% Fee, Tax &amp; Chargeback Calculator &rarr;</a><a href="../../compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/" data-track="internal-audit">Gumroad vs. Whop vs. Lemon Squeezy Take-Rate &amp; Chargeback Calculator &rarr;</a><a href="../../exit/stripe-shopify-paddle-frozen-funds-alternatives/" data-track="internal-audit">Stripe, Shopify &amp; Paddle Frozen Funds &amp; Reserve Calculator &rarr;</a><a href="../../chargeback-fee-and-recovery-calculator/" data-track="internal-audit">Stripe, Shopify &amp; Paddle Chargeback Cost Calculator &rarr;</a><a href="../../exit/paypal-180-day-permanent-limitation-fund-recovery/" data-track="internal-audit">PayPal 180-Day Hold &amp; Reserve Cost Calculator &rarr;</a><a href="../../exit/shopify-payments-chargeback-threshold-and-reserve-appeal/" data-track="internal-audit">Shopify Payments Reserve &amp; Dispute Threshold Calculator &rarr;</a><a href="../../pricing/stripe-radar-and-dispute-fee-calculator-2026/" data-track="internal-audit">Stripe dispute and Radar cost &rarr;</a><a href="../../exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/" data-track="internal-audit">ZoomInfo 60-Day Auto-Renewal Notice &rarr;</a><a href="../../compare/typeform-vs-jotform-response-limit-and-hipaa-cost/" data-track="internal-audit">Typeform vs. Jotform Response &amp; HIPAA Calculator &rarr;</a><a href="../../guides/jotform-wix-app-setup-and-pricing-guide/" data-track="internal-audit">Jotform Wix App Setup &amp; Pricing Guide &rarr;</a><a href="../../pricing/jotform-pricing-tier-calculator/" data-track="internal-audit">Jotform 2026 Pricing Tier Calculator &rarr;</a><a href="../../pricing/docusign-envelope-allowance-and-api-overage-calculator/" data-track="internal-audit">DocuSign 100-Envelope Cap &amp; Overage Calculator &rarr;</a><a href="../../pricing/pandadoc-vs-docusign-vs-jotform-sign-year-1-cost/" data-track="internal-audit">PandaDoc vs DocuSign vs Jotform Sign &rarr;</a><a href="../../compliance/hipaa-baa-and-soc2-pricing-tiers/" data-track="internal-audit">HIPAA BAA &amp; SOC 2 Pricing Tiers &rarr;</a><a href="../../compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/" data-track="internal-audit">Google Workspace vs. Microsoft 365 HIPAA BAA &rarr;</a><a href="../../compliance/okta-vs-workos-vs-1password-sso-tax-calculator/" data-track="internal-audit">SSO tax calculator &rarr;</a><a href="../../compliance/vanta-vs-drata-vs-comp-ai-soc2-negotiation-benchmarks/" data-track="internal-audit">SOC 2 cost calculator &rarr;</a><a href="../../compare/deel-vs-rippling-eor-hidden-fx-and-offboarding-fees/" data-track="internal-audit">Deel vs Rippling EOR cost &rarr;</a><a href="../../compliance/ai-voice-and-transcription-hipaa-baa-matrix-2026/" data-track="internal-audit">AI voice HIPAA BAA matrix &rarr;</a><a href="../../faq/does-hubspot-charge-onboarding-fees-2026/" data-track="internal-audit">Does HubSpot Charge Onboarding Fees in 2026? &rarr;</a><a href="../../faq/intercom-fin-ai-cost-calculator/" data-track="internal-audit">How much does Intercom Fin cost per resolution? &rarr;</a><a href="../../faq/stripe-vs-paddle-true-cost/" data-track="internal-audit">Stripe vs. Paddle vs. Whop True Cost &amp; Chargeback Calculator &rarr;</a><a href="../../pricing/stripe-shopify-chargeback-fee-and-chargeflow-roi-calculator/" data-track="internal-audit">Chargeflow ROI vs manual dispute handling &rarr;</a><a href="../../pricing/chargeflow-vs-stripe-smart-disputes-year-1-cost/" data-track="internal-audit">Chargeflow vs Stripe Smart Disputes &rarr;</a><a href="../../pricing/hubspot-payments-vs-stripe-platform-fee-year-1-cost/" data-track="internal-audit">HubSpot payments vs connecting Stripe &rarr;</a>
+        </div>
+      </details>
+    </section>
+    
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <p><strong>SaaSBill</strong> &middot; Year-1 cost &amp; contract calculators for B2B software.</p>
+      <p class="footer-note"><a class="footer-disclosure" href="../../index.html#methodology">Some links are affiliate links. They never change the math.</a> &middot; Updated <time datetime="2026-11-13">Nov 13, 2026</time> &middot; Inquiries: <a href="mailto:info@saasbill.io">info@saasbill.io</a></p>
+    </div>
+  </footer>
+  <script>
+  /* Plausible + local event dispatcher for: calculator_interaction, category_select, result_rendered, vendor_cta_click */
+  window.__saasbillEvents = window.__saasbillEvents || [];
+  try {
+    var p = (window.location && window.location.pathname ? window.location.pathname : '').toLowerCase();
+    if (p && p !== '/' && p !== '/index.html') {
+      var ctxCat = '';
+      var ctxTool = '';
+      if (p.indexOf('zoominfo') !== -1) {
+        ctxCat = 'CRM & Sales';
+        ctxTool = 'close-crm';
+      } else if (p.indexOf('stripe') !== -1 || p.indexOf('paddle') !== -1 || p.indexOf('whop') !== -1 || p.indexOf('gumroad') !== -1 || p.indexOf('paypal') !== -1) {
+        ctxCat = 'Payment Processors & MoR';
+        ctxTool = p.indexOf('paddle') !== -1 ? 'paddle-mor' : (p.indexOf('whop') !== -1 ? 'whop-payments' : 'stripe-payments');
+      } else if (p.indexOf('hubspot') !== -1 || p.indexOf('close-crm') !== -1 || p.indexOf('pipedrive') !== -1 || p.indexOf('monday-crm') !== -1 || p.indexOf('gong') !== -1) {
+        ctxCat = 'CRM & Sales';
+        ctxTool = p.indexOf('monday') !== -1 ? 'monday-crm' : (p.indexOf('close') !== -1 ? 'close-crm' : (p.indexOf('pipedrive') !== -1 ? 'pipedrive-crm' : 'hubspot-sales-pro'));
+      } else if (p.indexOf('hipaa') !== -1 || p.indexOf('soc2') !== -1 || p.indexOf('docusign') !== -1 || p.indexOf('typeform') !== -1 || p.indexOf('jotform') !== -1) {
+        ctxCat = 'Compliance, HIPAA & SOC 2';
+        ctxTool = (p.indexOf('typeform') !== -1 || p.indexOf('jotform') !== -1) ? 'jotform-hipaa' : 'vanta-soc2';
+      } else if (p.indexOf('intercom') !== -1 || p.indexOf('zendesk') !== -1 || p.indexOf('freshdesk') !== -1) {
+        ctxCat = 'Helpdesk & AI Support';
+        ctxTool = p.indexOf('intercom') !== -1 ? 'intercom-fin-ai' : (p.indexOf('freshdesk') !== -1 ? 'freshdesk-support' : 'zendesk-suite-team');
+      }
+      if (ctxCat && window.sessionStorage) {
+        sessionStorage.setItem('saasbill_last_cat', ctxCat);
+        if (ctxTool) sessionStorage.setItem('saasbill_last_tool', ctxTool);
+      }
+    }
+  } catch (err) {}
+  document.addEventListener('click', function(e) {
+    var cta = e.target.closest('[data-track="vendor-cta"], [data-track="vendor_cta_click"]');
+    if (cta) {
+      var vendor = cta.getAttribute('data-vendor') || '';
+      var location = cta.getAttribute('data-cta-location') || 'subpage-result';
+      var href = cta.getAttribute('href') || '';
+      if (typeof window.trackSaaSBillEvent === 'function') {
+        window.trackSaaSBillEvent('vendor_cta_click', { vendor: vendor, location: location, href: href });
+      }
+      return;
+    }
+    var catBtn = e.target.closest('[data-track="category-select"], [data-track="category_select"]');
+    if (catBtn) {
+      var cat = catBtn.getAttribute('data-cat') || '';
+      if (typeof window.trackSaaSBillEvent === 'function') {
+        window.trackSaaSBillEvent('category_select', { category: cat });
+      }
+    }
+  });
+  var _lastCalcTrackKey = '';
+  var _lastCalcTrackTs = 0;
+  function handleCalcControlEvent(e) {
+    var ctrl = e.target.closest('[data-track="calculator-control"], [data-track="calculator_interaction"], input[type="range"], select');
+    if (ctrl) {
+      var control = ctrl.getAttribute('data-control') || ctrl.id || '';
+      var val = String(ctrl.value);
+      var now = Date.now();
+      var key = control + ':' + val;
+      if (key === _lastCalcTrackKey && (now - _lastCalcTrackTs) < 150) return;
+      _lastCalcTrackKey = key;
+      _lastCalcTrackTs = now;
+      if (typeof window.trackSaaSBillEvent === 'function') {
+        window.trackSaaSBillEvent('calculator_interaction', { control: control, value: val });
+        if (ctrl.id === 'cat-filter') {
+          window.trackSaaSBillEvent('category_select', { category: val });
+        }
+      }
+    }
+  }
+  document.addEventListener('input', handleCalcControlEvent);
+  document.addEventListener('change', handleCalcControlEvent);
+  </script>
+  <script src="../../assets/app.js?v=20261030a"></script>
+</body>
+</html>

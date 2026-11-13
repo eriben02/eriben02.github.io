@@ -328,6 +328,7 @@ CRAWL_DIRECTORY = [
         ("guides/jotform-wix-app-setup-and-pricing-guide/index.html", "Jotform on Wix setup and pricing"),
         ("pricing/jotform-pricing-tier-calculator/index.html", "Jotform pricing tier calculator"),
         ("pricing/docusign-envelope-allowance-and-api-overage-calculator/index.html", "DocuSign envelope allowance calculator"),
+        ("pricing/pandadoc-vs-docusign-vs-jotform-sign-year-1-cost/index.html", "PandaDoc vs DocuSign vs Jotform Sign"),
         ("compliance/hipaa-baa-and-soc2-pricing-tiers/index.html", "HIPAA BAA and SOC 2 pricing tiers"),
         ("compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/index.html", "Google Workspace vs Microsoft 365 HIPAA BAA"),
         ("compliance/okta-vs-workos-vs-1password-sso-tax-calculator/index.html", "SSO tax calculator"),
@@ -423,6 +424,7 @@ def render_related_links(rel_path, prefix):
         ("guides/jotform-wix-app-setup-and-pricing-guide/index.html", "Jotform Wix App Setup &amp; Pricing Guide", "How to embed a B2B quote form on Wix, plus tier pricing."),
         ("pricing/jotform-pricing-tier-calculator/index.html", "Jotform 2026 Pricing Tier Calculator", "Starter, Bronze, Silver, and Gold Year-1 cost."),
         ("pricing/docusign-envelope-allowance-and-api-overage-calculator/index.html", "DocuSign 100-Envelope Cap &amp; Overage Calculator", "The 100-envelope allowance versus Jotform Sign and PandaDoc."),
+        ("pricing/pandadoc-vs-docusign-vs-jotform-sign-year-1-cost/index.html", "PandaDoc vs DocuSign vs Jotform Sign", "Year-1 list price for seats, sent envelopes, and signed documents."),
         ("compliance/hipaa-baa-and-soc2-pricing-tiers/index.html", "HIPAA BAA &amp; SOC 2 Pricing Tiers", "Which plan signs a BAA, and what the CPA audit adds."),
         ("compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/index.html", "Google Workspace vs. Microsoft 365 HIPAA BAA", "Minimum editions that sign a BAA, plus form intake rules."),
         ("compliance/okta-vs-workos-vs-1password-sso-tax-calculator/index.html", "SSO tax calculator", "What apps charge to turn on SAML, plus Okta, WorkOS, and 1Password as separate bills."),
@@ -453,6 +455,7 @@ def render_related_links(rel_path, prefix):
     radar_rel = "pricing/stripe-radar-and-dispute-fee-calculator-2026/index.html"
     smart_rel = "pricing/chargeflow-vs-stripe-smart-disputes-year-1-cost/index.html"
     hub_rel = "pricing/hubspot-payments-vs-stripe-platform-fee-year-1-cost/index.html"
+    sign_rel = "pricing/pandadoc-vs-docusign-vs-jotform-sign-year-1-cost/index.html"
     # CRM pages show each other first. The Close vs Pipedrive page leads with
     # the seat-bucket and Close vs HubSpot pages, then HubSpot and Gong.
     close_pipedrive_rel = "compare/close-vs-pipedrive-year-1-cost-calculator/index.html"
@@ -522,6 +525,12 @@ def render_related_links(rel_path, prefix):
             radar_rel,
             smart_rel,
             chargeback_rel,
+        ]
+    elif rel_path == sign_rel:
+        preferred = [
+            "pricing/docusign-envelope-allowance-and-api-overage-calculator/index.html",
+            "pricing/jotform-pricing-tier-calculator/index.html",
+            "compare/typeform-vs-jotform-response-limit-and-hipaa-cost/index.html",
         ]
     elif rel_path == radar_rel:
         preferred = [

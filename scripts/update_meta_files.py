@@ -60,6 +60,8 @@ def generate_meta_files(extra_urls=None):
         "/compare/deel-vs-rippling-eor-hidden-fx-and-offboarding-fees/",
         "/compliance/ai-voice-and-transcription-hipaa-baa-matrix-2026/",
         "/pricing/chargeflow-vs-stripe-smart-disputes-year-1-cost/",
+        "/pricing/hubspot-payments-vs-stripe-platform-fee-year-1-cost/",
+        "/pricing/pandadoc-vs-docusign-vs-jotform-sign-year-1-cost/",
     ]
     if extra_urls:
         for u in extra_urls:
