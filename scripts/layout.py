@@ -433,7 +433,7 @@ def render_related_links(rel_path, prefix):
         ("faq/intercom-fin-ai-cost-calculator/index.html", "How much does Intercom Fin cost per resolution?", "What $0.99 per resolution adds on top of the seat price."),
         ("faq/stripe-vs-paddle-true-cost/index.html", "Stripe vs. Paddle vs. Whop True Cost &amp; Chargeback Calculator", "Processing, billing, tax, and dispute cost side by side."),
         ("pricing/stripe-shopify-chargeback-fee-and-chargeflow-roi-calculator/index.html", "Chargeflow ROI vs manual dispute handling", "Dispute fees and manual prep versus automated recovery."),
-        ("pricing/chargeflow-vs-stripe-smart-disputes-year-1-cost/index.html", "Chargeflow vs Stripe Smart Disputes", "Manual response, Smart Disputes, and Chargeflow. The win rate is an assumption."),
+        ("pricing/chargeflow-vs-stripe-smart-disputes-year-1-cost/index.html", "Chargeflow vs Stripe Smart Disputes", "Compare a manual response, Smart Disputes, and Chargeflow."),
         ("pricing/hubspot-payments-vs-stripe-platform-fee-year-1-cost/index.html", "HubSpot payments vs connecting Stripe", "HubSpot payments fees versus Stripe connected to HubSpot."),
     ]
     by_rel = {rel: (label, summary) for rel, label, summary in all_links}
