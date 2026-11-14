@@ -62,6 +62,7 @@ def generate_meta_files(extra_urls=None):
         "/pricing/chargeflow-vs-stripe-smart-disputes-year-1-cost/",
         "/pricing/hubspot-payments-vs-stripe-platform-fee-year-1-cost/",
         "/pricing/pandadoc-vs-docusign-vs-jotform-sign-year-1-cost/",
+        "/pricing/apollo-vs-zoominfo-vs-sales-navigator-year-1-cost/",
     ]
     if extra_urls:
         for u in extra_urls:

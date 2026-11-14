@@ -979,6 +979,43 @@ function esignYear1() {
   check(oneOver.docs === 6, "input passes through");
 }
 
+function apolloYear() {
+  const html = fs.readFileSync(path.join(root, "pricing/apollo-vs-zoominfo-vs-sales-navigator-year-1-cost/index.html"), "utf8");
+  const fn = extractBalanced(html, "function calcApolloYear");
+  check(!!fn, "missing Apollo year math");
+  const box = {};
+  vm.createContext(box);
+  vm.runInContext(fn + "\nthis.fn = calcApolloYear;", box);
+  const base = { seats: 5, billing: "annual", emails: 300, phones: 30, plan: "professional", addon: "", ziPlatform: 14995, ziSeat: 1500, sn: "core" };
+  const day = box.fn(base);
+  check(day.apolloYear === 474000 && day.apolloSeat === 474000, "apollo professional annual " + day.apolloYear);
+  check(day.snYear === 539940 && day.ziYear === 2249500 && day.split === 833940, "navigator zoominfo and split");
+  check(day.need === 32400 && day.included === 240000 && day.shortfall === 0 && day.addonCost === 0, "default credits");
+  check(day.exports === 19800 && day.ziSeats === 5, "default exports");
+  const monthlyOrg = box.fn(Object.assign({}, base, { plan: "organization", billing: "monthly" }));
+  check(monthlyOrg.forcedAnnual === true && monthlyOrg.apolloYear === 714000 && monthlyOrg.billed === 5, "organization monthly uses the annual price");
+  const orgMin = box.fn(Object.assign({}, base, { plan: "organization", seats: 2 }));
+  check(orgMin.billed === 3 && orgMin.apolloSeat === 428400, "organization bills at least 3 seats");
+  const custom = box.fn(Object.assign({}, base, { plan: "custom" }));
+  check(custom.apolloYear === null && custom.split === 833940, "custom is a quote and the basic split stays priced");
+  const plus = box.fn(Object.assign({}, base, { sn: "plus" }));
+  check(plus.snYear === null && plus.split === null, "advanced plus is a quote");
+  const over = box.fn(Object.assign({}, base, { sn: "advanced", seats: 6 }));
+  check(over.snYear === null && over.snSeat === null, "advanced above five seats is unknown");
+  const blank = box.fn(Object.assign({}, base, { plan: "basic", billing: "monthly", seats: 1, emails: 3000, phones: 0 }));
+  check(blank.shortfall === 6000 && blank.apolloSeat === 78000 && blank.apolloYear === null, "blank add-on leaves a shortfall unknown");
+  const priced = box.fn(Object.assign({}, base, { plan: "basic", billing: "monthly", seats: 1, emails: 3000, phones: 0, addon: "0.10" }));
+  check(priced.addonCost === 60000 && priced.apolloYear === 138000, "typed add-on price");
+  const zero = box.fn(Object.assign({}, base, { plan: "basic", billing: "monthly", seats: 1, emails: 3000, phones: 0, addon: "0" }));
+  check(zero.addonCost === 0 && zero.apolloYear === 78000, "an entered zero is a real zero");
+  const ziSmall = box.fn(Object.assign({}, base, { seats: 1 }));
+  check(ziSmall.ziSeats === 3 && ziSmall.ziYear === 1949500, "zoominfo estimate keeps a 3-seat minimum");
+  const monthly = box.fn(Object.assign({}, base, { billing: "monthly" }));
+  check(monthly.apolloYear === 594000 && monthly.snYear === 719940, "monthly rates are not the annual rates");
+  const free = box.fn(Object.assign({}, base, { plan: "free", emails: 0, phones: 0 }));
+  check(free.apolloYear === 0 && free.included === 4500, "free is a published zero");
+}
+
 function main() {
   errors.length = 0;
   checks = 0;
@@ -1001,6 +1038,7 @@ function main() {
   smartDisputes();
   hubspotPayments();
   esignYear1();
+  apolloYear();
   plausible();
   if (errors.length) {
     console.error(errors.join("\n"));
