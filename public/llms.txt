@@ -56,6 +56,7 @@
 - [Chargeflow vs Stripe Smart Disputes](https://saasbill.io/pricing/chargeflow-vs-stripe-smart-disputes-year-1-cost/): Compares a manual Stripe response, Stripe Smart Disputes, and Chargeflow Automation for one year. Checked 2026-11-11.
 - [HubSpot payments vs Stripe](https://saasbill.io/pricing/hubspot-payments-vs-stripe-platform-fee-year-1-cost/): Compares HubSpot payments with Stripe connected to HubSpot. Checked 2026-11-12.
 - [PandaDoc vs DocuSign vs Jotform Sign](https://saasbill.io/pricing/pandadoc-vs-docusign-vs-jotform-sign-year-1-cost/): Year-1 list price for seats, sent envelopes, and signed documents. Checked 2026-11-13.
+- [Apollo vs ZoomInfo vs Sales Navigator](https://saasbill.io/pricing/apollo-vs-zoominfo-vs-sales-navigator-year-1-cost/): Year-1 seats, email and phone credits, and a labeled ZoomInfo estimate. Checked 2026-11-14.
 - [Typeform vs. Jotform Response Limit & HIPAA Cost Calculator](https://saasbill.io/compare/typeform-vs-jotform-response-limit-and-hipaa-cost/): Response caps & HIPAA BAA tiers ($99/mo Jotform Gold).
 - [DocuSign 100-Envelope Allowance & Overage Calculator](https://saasbill.io/pricing/docusign-envelope-allowance-and-api-overage-calculator/): 100-envelope annual cap vs. Jotform Sign & PandaDoc.
 - [HIPAA BAA & SOC 2 Type II Pricing Tier Matrix](https://saasbill.io/compliance/hipaa-baa-and-soc2-pricing-tiers/): Self-serve BAA tiers and Vanta/Drata negotiation calculator.
