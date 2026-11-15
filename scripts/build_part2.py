@@ -484,10 +484,10 @@ render_page(
 # ---------------------------------------------------------
 p5_body = """
 <section class="hero">
-  <h1>Which software plans actually sign a HIPAA BAA (and what SOC 2 really costs).</h1>
-  <p class="lead">Most vendors lock HIPAA Business Associate Agreements and SAML SSO behind $20,000+ Enterprise contracts. A handful include them on self-serve plans, and Vanta or Drata quotes rarely include your CPA auditor bill.</p>
+  <h1>Which software plans can sign a HIPAA BAA (and what SOC 2 really costs).</h1>
+  <p class="lead">Most vendors lock HIPAA Business Associate Agreements and SAML SSO behind $20,000+ Enterprise contracts. A handful offer HIPAA features or SAML SSO on self-serve plans, and Vanta or Drata quotes rarely include your CPA auditor bill.</p>
   <div class="geo-direct-answer">
-    <p><strong>The short version:</strong> Self-serve HIPAA Business Associate Agreements (BAAs) are available on <strong>Jotform Gold ($99/mo billed annually, $129/mo monthly, 1-user account)</strong> and <strong>1Password Business ($8.99/user/mo billed annually [$107.88/yr], which also includes SAML SSO with no Enterprise markup)</strong>, whereas HubSpot ($150/seat + $3,500 onboarding), Zendesk ($115/agent Suite Pro), and Intercom ($132/seat Expert) require upper-tier plans. For SOC 2 Type II compliance automation, <strong>Vanta and Drata</strong> do not publish public self-serve prices; custom list quotes typically start around <strong>$9,000–$15,000+/yr</strong> (frequently negotiated down by <strong>30%–50%</strong>), while <strong>Comp AI ($2,400–$12,000/yr)</strong> and <strong>Openlane (~$5,400/yr)</strong> cost less, plus a mandatory <strong>$6,500–$15,000+ external CPA auditor fee</strong> billed separately.</p>
+    <p><strong>The short version:</strong> HIPAA features are on <strong>Jotform Gold ($99/mo billed annually, $129/mo monthly, 1-user account)</strong>. Eligible customers with HIPAA features enabled can sign a BAA with Jotform. A self-serve HIPAA BAA is available on <strong>1Password Business ($8.99/user/mo billed annually [$107.88/yr], which also includes SAML SSO with no Enterprise markup)</strong>. HubSpot ($150/seat + $3,500 onboarding), Zendesk ($115/agent Suite Pro), and Intercom ($132/seat Expert) require upper-tier plans. For SOC 2 Type II compliance automation, <strong>Vanta and Drata</strong> do not publish public self-serve prices; custom list quotes typically start around <strong>$9,000–$15,000+/yr</strong> (frequently negotiated down by <strong>30%–50%</strong>), while <strong>Comp AI ($2,400–$12,000/yr)</strong> and <strong>Openlane (~$5,400/yr)</strong> cost less, plus a mandatory <strong>$6,500–$15,000+ external CPA auditor fee</strong> billed separately.</p>
   </div>
 </section>
 
@@ -513,7 +513,7 @@ p5_body = """
     </div>
   </div>
   <div id="soc2-summary" class="summary-strip" aria-live="polite"></div>
-  <p class="summary-interpretation"><strong>Verified vs. Estimated (Benchmark) note:</strong> Self-serve HIPAA BAA and SAML SSO tiers below (Jotform Gold, 1Password Business, Zendesk, Help Scout, HubSpot) are <span class="status-pill status-verified">Verified</span> against published vendor pricing. SOC 2 platform and CPA auditor figures are <span class="status-pill status-estimated">Estimated (Benchmark)</span> from buyer contract ranges because Vanta, Drata, and CPA firms quote custom packages.</p>
+  <p class="summary-interpretation"><strong>Verified vs. Estimated (Benchmark) note:</strong> HIPAA and SAML SSO tiers below (Jotform Gold, 1Password Business, Zendesk, Help Scout, HubSpot) are <span class="status-pill status-verified">Verified</span> against published vendor pricing. SOC 2 platform and CPA auditor figures are <span class="status-pill status-estimated">Estimated (Benchmark)</span> from buyer contract ranges because Vanta, Drata, and CPA firms quote custom packages.</p>
   <div class="table-wrap mobile-cards">
     <table>
       <caption>2026 SOC 2 Type II &amp; HIPAA Automation Total Cost Estimator: Vanta vs. Drata vs. Comp AI (USD, benchmarked Oct 25, 2026)</caption>
@@ -533,15 +533,15 @@ p5_body = """
 </section>
 
 <section>
-  <h2>Which SaaS tiers sign a HIPAA BAA or include SAML SSO</h2>
-  <p class="section-tldr">Before signing a $25,000+ Enterprise contract just to get a signed HIPAA BAA or Okta SAML Single Sign-On, check the minimum qualifying edition for each vendor below.</p>
+  <h2>Which SaaS tiers can sign a HIPAA BAA or include SAML SSO</h2>
+  <p class="section-tldr">Before signing a $25,000+ Enterprise contract for a HIPAA BAA or Okta SAML Single Sign-On, check the minimum qualifying edition for each vendor below.</p>
   <div class="table-wrap mobile-cards">
     <table>
-      <caption>Minimum Pricing Tier Required for Signed HIPAA BAA &amp; SAML SSO (verified Oct 25, 2026)</caption>
+      <caption>Minimum Pricing Tier for a HIPAA BAA &amp; SAML SSO (verified Oct 25, 2026)</caption>
       <thead>
         <tr>
           <th>Vendor &amp; Category</th>
-          <th>Lowest Tier That Signs a HIPAA BAA</th>
+          <th>Lowest Tier That Can Sign a HIPAA BAA</th>
           <th>Minimum SAML SSO Tier</th>
           <th>SOC 2 Type II Status</th>
           <th>Details</th>
@@ -666,10 +666,10 @@ function updateSocCalc() {
         </div>
       </div>
       <div class="summary-card card-highest">
-        <div class="summary-label">Self-Serve HIPAA BAA &amp; SSO</div>
+        <div class="summary-label">HIPAA features and SSO</div>
         <div class="summary-metric" style="color:var(--emerald);">Jotform Gold ($99/mo) &middot; 1Password ($8.99/u)</div>
         <div class="summary-scenario">Verified published self-serve tiers (no Enterprise quote required)</div>
-        <div class="summary-breakdown">Jotform Gold: $1,188/yr (1-user HIPAA BAA) &middot; 1Password Business: $107.88/user/yr (SAML SSO incl.)</div>
+        <div class="summary-breakdown">Jotform Gold: $1,188/yr (1 user, HIPAA features) &middot; 1Password Business: $107.88/user/yr (SAML SSO incl.)</div>
         <div class="summary-caveat"><strong>Verified terms:</strong> Both plans publish transparent self-serve pricing without $20k+ Enterprise gating.</div>
         <div class="summary-actions">
           <div class="cta-stack">
@@ -729,7 +729,7 @@ updateSocCalc();
 """
 
 p5_faqs = [
-    ("Which Jotform plan includes a signed HIPAA Business Associate Agreement (BAA)?", "Jotform includes HIPAA compliance and an automated Business Associate Agreement (BAA) starting on its self-serve Gold plan ($99/month billed annually, $129/month billed monthly, 1-user account) and Enterprise plan (multi-user), avoiding the $20,000+ custom Enterprise contract required by many form builders."),
+    ("Which Jotform plan has HIPAA features?", "HIPAA features are on the self-serve Gold plan ($99/month billed annually, $129/month billed monthly, 1-user account) and the Enterprise plan (multi-user)."),
     ("Does Vanta or Drata pricing include the SOC 2 CPA auditor fee?", "No. Vanta and Drata are compliance automation platforms that collect evidence and monitor controls, but an independent AICPA-licensed CPA firm must still perform the audit and issue the SOC 2 Type I or Type II report, which typically costs an additional $6,500 to $15,000+ per year."),
     ("How much discount can you negotiate on Vanta or Drata in 2026?", "Initial custom quotes from Vanta and Drata ($9,000–$15,000+/year for startups) are frequently negotiated down by 30% to 50%, especially when comparing against lower-cost alternatives like Comp AI ($2.4k–$12k) or Openlane (~$5.4k).")
 ]
@@ -737,7 +737,7 @@ p5_faqs = [
 render_page(
     "compliance/hipaa-baa-and-soc2-pricing-tiers/index.html",
     "HIPAA & SOC 2 True Year-1 Cost Calculator – saasbill.io",
-    "Calculate your 2026 SOC 2 Type II true cost and Year-1 budget (Vanta/Drata platform + mandatory CPA auditor fee) and compare self-serve HIPAA BAA tiers like Jotform Gold ($99/mo).",
+    "Calculate your 2026 SOC 2 Type II true cost and Year-1 budget (Vanta/Drata platform + mandatory CPA auditor fee) and compare HIPAA feature tiers like Jotform Gold ($99/mo).",
     "/compliance/hipaa-baa-and-soc2-pricing-tiers/",
     wrap_calculator_shell(p5_body),
     faqs=p5_faqs

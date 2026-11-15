@@ -20,13 +20,13 @@ PAGES = [
         "desc": "Calculate the 2026 true cost and Year-1 price of Typeform vs. Jotform including response overages and HIPAA BAA tiers ($99/mo Jotform Gold vs. Typeform Enterprise).",
         "summary_id": "tf-summary",
         "h1": "Typeform vs. Jotform True Cost (2026): Response Caps &amp; HIPAA BAA Tiers",
-        "lead": "Jotform Gold includes a signed HIPAA BAA and 10,000 monthly submissions for $99/month billed annually ($1,188/year) in 2026, whereas Typeform requires a custom Enterprise contract (benchmark $6,000+/year) for HIPAA compliance and caps Plus plans at 1,000 responses/month (sources: Jotform &amp; Typeform pricing pages, verified Oct 2026).",
+        "lead": "Jotform Gold lists 10,000 monthly submissions for $99/month billed annually ($1,188/year) in 2026. Eligible customers with HIPAA features enabled can sign a BAA with Jotform. Typeform requires a custom Enterprise contract (benchmark $6,000+/year) for HIPAA compliance and caps Plus plans at 1,000 responses/month (sources: Jotform HIPAA page, checked 15 Nov 2026, and Typeform pricing pages, verified Oct 2026).",
         "ctrl_label": "Monthly Form Submissions",
         "ctrl_min": 100, "ctrl_max": 10000, "ctrl_step": 100, "ctrl_val": 2500, "ctrl_unit": "responses/mo",
         "opt_label": "Compliance Tier",
         "opt1_val": "hipaa", "opt1_text": "HIPAA BAA Required (Healthcare / Regulated)",
         "opt2_val": "standard", "opt2_text": "Standard Business Forms (No HIPAA BAA)",
-        "winner_name": "Jotform Gold (HIPAA BAA Included)",
+        "winner_name": "Jotform Gold",
         "winner_url": "https://www.jotform.com/hipaa/pricing/?partner=saasbill",
         "winner_cta": "View Jotform HIPAA pricing",
         "winner_vendor": "jotform-hipaa",
@@ -40,13 +40,13 @@ PAGES = [
         const tfYr = tfMo * 12;
         const saved = Math.max(0, tfYr - jfYr);
         const rows = [
-          {name: mode === 'hipaa' ? 'Jotform Gold (HIPAA BAA)' : 'Jotform (Bronze/Silver/Gold)', plan: '$' + jfMo + '/mo annual', base: '$' + jfYr.toLocaleString('en-US') + '/yr', hidden: '$0 (BAA & 10k responses incl.)', total: '$' + jfYr.toLocaleString('en-US') + '/yr', url: 'https://www.jotform.com/hipaa/pricing/?partner=saasbill', cta: 'View Jotform HIPAA pricing', vendor: 'jotform-hipaa', status: 'Verified', src: 'https://www.jotform.com/hipaa/pricing/'},
+          {name: mode === 'hipaa' ? 'Jotform Gold' : 'Jotform (Bronze/Silver/Gold)', plan: '$' + jfMo + '/mo annual', base: '$' + jfYr.toLocaleString('en-US') + '/yr', hidden: mode === 'hipaa' ? 'HIPAA features on Gold' : '$0 extra inside the submission tier', total: '$' + jfYr.toLocaleString('en-US') + '/yr', url: 'https://www.jotform.com/hipaa/pricing/?partner=saasbill', cta: 'View Jotform HIPAA pricing', vendor: 'jotform-hipaa', status: 'Verified', src: 'https://www.jotform.com/hipaa/pricing/'},
           {name: mode === 'hipaa' ? 'Typeform Enterprise (HIPAA)' : 'Typeform (Basic/Plus/Business)', plan: mode === 'hipaa' ? 'Custom (~$500/mo est.)' : '$' + tfMo + '/mo annual', base: '$' + tfYr.toLocaleString('en-US') + '/yr', hidden: mode === 'hipaa' ? 'Mandatory Enterprise upgrade for BAA' : 'Hard response tier jumps at 100 & 1,000/mo', total: '$' + tfYr.toLocaleString('en-US') + '/yr', url: 'https://www.typeform.com/pricing/', cta: 'View Typeform pricing', vendor: 'typeform', status: mode === 'hipaa' ? 'Estimated (Benchmark)' : 'Verified', src: 'https://www.typeform.com/pricing/'}
         ];
         """,
         "faqs": [
-            ("Does Typeform offer a HIPAA BAA on Plus or Business plans in 2026?", "No. Typeform only signs a HIPAA Business Associate Agreement (BAA) on custom Enterprise contracts, whereas Jotform includes a HIPAA BAA on its self-serve Gold plan at $99/month billed annually ($1,188/year)."),
-            ("How many monthly submissions are included in Jotform Gold vs. Typeform Business?", "Both Jotform Gold ($99/mo annual) and Typeform Business ($83/mo annual) include 10,000 monthly submissions, but only Jotform Gold includes HIPAA compliance and signed BAA at that price.")
+            ("Does Typeform offer a HIPAA BAA on Plus or Business plans in 2026?", "No. Typeform signs a HIPAA Business Associate Agreement (BAA) on custom Enterprise contracts. HIPAA features are on the Jotform self-serve Gold plan at $99/month billed annually ($1,188/year)."),
+            ("How many monthly submissions are included in Jotform Gold vs. Typeform Business?", "Both Jotform Gold ($99/mo annual) and Typeform Business ($83/mo annual) include 10,000 monthly submissions. HIPAA features are on Jotform Gold at that price.")
         ]
     },
     {
