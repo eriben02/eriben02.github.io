@@ -979,6 +979,60 @@ function esignYear1() {
   check(oneOver.docs === 6, "input passes through");
 }
 
+function jotformTeamYear1() {
+  const rel = "pricing/jotform-multi-user-vs-enterprise-year-1-cost/index.html";
+  const html = read(rel);
+  const fn = extractBalanced(html, "function calcJotformTeam");
+  const formulaFn = extractBalanced(html, "function jfFormula");
+  const moneyFn = extractBalanced(html, "function jfMoney");
+  const quoteFn = extractBalanced(html, "function jfQuoteCents");
+  const wordFn = extractBalanced(html, "function jfAccountWord");
+  const breakFn = extractBalanced(html, "function jfBreakEven");
+  check(!!fn && !!formulaFn && !!moneyFn && !!quoteFn && !!wordFn && !!breakFn, "missing Jotform team math");
+  check(html.split("Paid partnership with Jotform (#JotformPartner)").length === 2, "one Jotform partnership line");
+  check(html.indexOf('rel="sponsored nofollow noopener"') !== -1, "Jotform link is sponsored");
+  check(html.indexOf("https://www.jotform.com/pricing/?partner=saasbill") !== -1, "pricing URL from affiliate_links.json");
+  check(html.indexOf(">$0<") === -1, "unknown is not shown as $0");
+  const box = {};
+  vm.createContext(box);
+  vm.runInContext([fn, formulaFn, moneyFn, quoteFn, wordFn, breakFn, "this.fn=calcJotformTeam;this.formula=jfFormula;this.breakEven=jfBreakEven;"].join("\n"), box);
+  const base = { team: 4, billing: "annual", hipaa: "no", plan: "gold", quote: "", discount: "no" };
+  const def = box.fn(base);
+  check(def.one === 118800 && def.separate === 475200 && def.quote === null && def.planName === "Gold", "4 Gold annual cents " + def.separate);
+  const math = box.formula(def);
+  check(html.indexOf(math) !== -1, "static formula matches the default");
+  check(math.indexOf("dedicated server") === -1, "formula does not repeat the intro");
+  check(box.breakEven(def) === "Enterprise is cheaper only if the quote is below $4,752.", "default break-even");
+  check(html.indexOf(box.breakEven(def)) !== -1, "break-even is on the page");
+  const three = box.fn(Object.assign({}, base, { team: 3 }));
+  check(three.separate === 356400, "3 Gold annual is $3,564");
+  const monthly = box.fn(Object.assign({}, base, { billing: "monthly" }));
+  check(monthly.monthEach === 12900 && monthly.one === 154800 && monthly.separate === 619200, "4 Gold monthly is $6,192");
+  check(box.formula(monthly).indexOf("4 times $129 times 12, which is $6,192.") !== -1, "monthly formula");
+  const hipaa = box.fn(Object.assign({}, base, { hipaa: "yes", plan: "bronze" }));
+  check(hipaa.plan === "gold" && hipaa.separate === 475200, "HIPAA forces Gold");
+  const bronze = box.fn(Object.assign({}, base, { plan: "bronze" }));
+  check(bronze.one === 40800 && bronze.separate === 163200, "4 Bronze annual is $1,632");
+  const silver = box.fn(Object.assign({}, base, { plan: "silver", billing: "monthly" }));
+  check(silver.monthEach === 4900 && silver.separate === 235200, "4 Silver monthly is $2,352");
+  const half = box.fn(Object.assign({}, base, { discount: "yes" }));
+  check(half.one === 59400 && half.separate === 237600, "eligible Gold discount is half");
+  const halfMonth = box.fn(Object.assign({}, base, { billing: "monthly", discount: "yes" }));
+  check(halfMonth.monthEach === 6450 && halfMonth.separate === 309600, "half of $129 is $64.50");
+  const low = box.fn(Object.assign({}, base, { quote: "4000" }));
+  check(low.quote === 400000 && low.quote < low.separate, "a typed quote below the separate accounts");
+  const high = box.fn(Object.assign({}, base, { quote: "$5,000" }));
+  check(high.quote === 500000 && high.quote > high.separate, "comma quote parses");
+  const blank = box.fn(Object.assign({}, base, { quote: "0" }));
+  check(blank.quote === null, "zero is not a quote");
+  const junk = box.fn(Object.assign({}, base, { quote: "ask" }));
+  check(junk.quote === null, "a non-numeric quote stays unknown");
+  const edge = box.fn({ team: 99, billing: "annual", hipaa: "no", plan: "gold", quote: "", discount: "no" });
+  check(edge.team === 10, "team size stops at 10");
+  const one = box.fn(Object.assign({}, base, { team: 0 }));
+  check(one.team === 1 && one.separate === 118800, "team size starts at 1");
+}
+
 function apolloYear() {
   const html = fs.readFileSync(path.join(root, "pricing/apollo-vs-zoominfo-vs-sales-navigator-year-1-cost/index.html"), "utf8");
   const fn = extractBalanced(html, "function calcApolloYear");
@@ -1039,6 +1093,7 @@ function main() {
   hubspotPayments();
   esignYear1();
   apolloYear();
+  jotformTeamYear1();
   plausible();
   if (errors.length) {
     console.error(errors.join("\n"));
