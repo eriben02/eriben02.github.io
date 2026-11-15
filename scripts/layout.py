@@ -297,6 +297,7 @@ CRAWL_DIRECTORY = [
         ("compare/pipedrive-vs-salesforce-starter-and-pro-suite-cost/index.html", "Pipedrive vs Salesforce Year-1 cost"),
         ("pricing/gong-io-platform-fee-and-seat-minimum-calculator/index.html", "Gong platform fee and seat calculator"),
         ("exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/index.html", "ZoomInfo 60-day auto-renewal notice"),
+        ("pricing/apollo-vs-zoominfo-vs-sales-navigator-year-1-cost/index.html", "Apollo vs ZoomInfo vs Sales Navigator"),
         ("compare/monday-crm-vs-pipedrive-vs-hubspot-seat-minimums/index.html", "monday CRM seat minimums"),
     ]),
     ("Helpdesk &amp; AI Support", [
@@ -329,6 +330,7 @@ CRAWL_DIRECTORY = [
         ("pricing/jotform-pricing-tier-calculator/index.html", "Jotform pricing tier calculator"),
         ("pricing/docusign-envelope-allowance-and-api-overage-calculator/index.html", "DocuSign envelope allowance calculator"),
         ("pricing/pandadoc-vs-docusign-vs-jotform-sign-year-1-cost/index.html", "PandaDoc vs DocuSign vs Jotform Sign"),
+        ("pricing/jotform-multi-user-vs-enterprise-year-1-cost/index.html", "Jotform team Year-1 cost"),
         ("compliance/hipaa-baa-and-soc2-pricing-tiers/index.html", "HIPAA BAA and SOC 2 pricing tiers"),
         ("compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/index.html", "Google Workspace vs Microsoft 365 HIPAA BAA"),
         ("compliance/okta-vs-workos-vs-1password-sso-tax-calculator/index.html", "SSO tax calculator"),
@@ -420,11 +422,13 @@ def render_related_links(rel_path, prefix):
         ("exit/shopify-payments-chargeback-threshold-and-reserve-appeal/index.html", "Shopify Payments Reserve &amp; Dispute Threshold Calculator", "US card rate, $15 dispute fee, and the published reserve and network thresholds."),
         ("pricing/stripe-radar-and-dispute-fee-calculator-2026/index.html", "Stripe dispute and Radar cost", "Dispute fees, lost order value, Smart Disputes, and Radar starting prices."),
         ("exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/index.html", "ZoomInfo 60-Day Auto-Renewal Notice", "The 60-day window and what the extension costs."),
+        ("pricing/apollo-vs-zoominfo-vs-sales-navigator-year-1-cost/index.html", "Apollo vs ZoomInfo vs Sales Navigator", "Year-1 seats, email and phone credits, and a labeled ZoomInfo estimate."),
         ("compare/typeform-vs-jotform-response-limit-and-hipaa-cost/index.html", "Typeform vs. Jotform Response &amp; HIPAA Calculator", "Response caps and which plan can sign a HIPAA BAA."),
         ("guides/jotform-wix-app-setup-and-pricing-guide/index.html", "Jotform Wix App Setup &amp; Pricing Guide", "How to embed a B2B quote form on Wix, plus tier pricing."),
         ("pricing/jotform-pricing-tier-calculator/index.html", "Jotform 2026 Pricing Tier Calculator", "Starter, Bronze, Silver, and Gold Year-1 cost."),
         ("pricing/docusign-envelope-allowance-and-api-overage-calculator/index.html", "DocuSign 100-Envelope Cap &amp; Overage Calculator", "The 100-envelope allowance versus Jotform Sign and PandaDoc."),
         ("pricing/pandadoc-vs-docusign-vs-jotform-sign-year-1-cost/index.html", "PandaDoc vs DocuSign vs Jotform Sign", "Year-1 list price for seats, sent envelopes, and signed documents."),
+        ("pricing/jotform-multi-user-vs-enterprise-year-1-cost/index.html", "Jotform team Year-1 cost", "Separate single-user plans versus an Enterprise quote."),
         ("compliance/hipaa-baa-and-soc2-pricing-tiers/index.html", "HIPAA BAA &amp; SOC 2 Pricing Tiers", "Which plan can sign a BAA, and what the CPA audit adds."),
         ("compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/index.html", "Google Workspace vs. Microsoft 365 HIPAA BAA", "Minimum editions that sign a BAA, plus form intake rules."),
         ("compliance/okta-vs-workos-vs-1password-sso-tax-calculator/index.html", "SSO tax calculator", "What apps charge to turn on SAML, plus Okta, WorkOS, and 1Password as separate bills."),
@@ -456,6 +460,8 @@ def render_related_links(rel_path, prefix):
     smart_rel = "pricing/chargeflow-vs-stripe-smart-disputes-year-1-cost/index.html"
     hub_rel = "pricing/hubspot-payments-vs-stripe-platform-fee-year-1-cost/index.html"
     sign_rel = "pricing/pandadoc-vs-docusign-vs-jotform-sign-year-1-cost/index.html"
+    apollo_rel = "pricing/apollo-vs-zoominfo-vs-sales-navigator-year-1-cost/index.html"
+    jotform_team_rel = "pricing/jotform-multi-user-vs-enterprise-year-1-cost/index.html"
     # CRM pages show each other first. The Close vs Pipedrive page leads with
     # the seat-bucket and Close vs HubSpot pages, then HubSpot and Gong.
     close_pipedrive_rel = "compare/close-vs-pipedrive-year-1-cost-calculator/index.html"
@@ -532,6 +538,19 @@ def render_related_links(rel_path, prefix):
             "pricing/jotform-pricing-tier-calculator/index.html",
             "compare/typeform-vs-jotform-response-limit-and-hipaa-cost/index.html",
         ]
+    elif rel_path == apollo_rel:
+        preferred = [
+            "exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/index.html",
+            "compare/close-crm-vs-hubspot-sales-hub-5-to-20-reps/index.html",
+            "compare/pipedrive-vs-salesforce-starter-and-pro-suite-cost/index.html",
+        ]
+    elif rel_path == jotform_team_rel:
+        preferred = [
+            "pricing/jotform-pricing-tier-calculator/index.html",
+            "compare/typeform-vs-jotform-response-limit-and-hipaa-cost/index.html",
+            sign_rel,
+            "compliance/hipaa-baa-and-soc2-pricing-tiers/index.html",
+        ]
     elif rel_path == radar_rel:
         preferred = [
             chargeback_rel,
@@ -588,7 +607,8 @@ def render_related_links(rel_path, prefix):
           <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="{href}" data-track="internal-audit">{label} &rarr;</a></h3>
           <p style="margin:0; font-size:0.84rem; color:var(--muted);">{summary}</p>
         </div>""")
-        if len(cards) >= (4 if smart_rel in preferred else 3):
+        card_limit = 4 if (smart_rel in preferred or rel_path == jotform_team_rel) else 3
+        if len(cards) >= card_limit:
             break
     directory_links = [
         f'<a href="{prefix}index.html#site-directory" data-track="internal-audit">Every calculator and guide &rarr;</a>'

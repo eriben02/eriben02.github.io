@@ -62,6 +62,8 @@ def generate_meta_files(extra_urls=None):
         "/pricing/chargeflow-vs-stripe-smart-disputes-year-1-cost/",
         "/pricing/hubspot-payments-vs-stripe-platform-fee-year-1-cost/",
         "/pricing/pandadoc-vs-docusign-vs-jotform-sign-year-1-cost/",
+        "/pricing/apollo-vs-zoominfo-vs-sales-navigator-year-1-cost/",
+        "/pricing/jotform-multi-user-vs-enterprise-year-1-cost/",
     ]
     if extra_urls:
         for u in extra_urls:
@@ -208,6 +210,8 @@ Sitemap: {SITE_ORIGIN}/sitemap.xml
 - [FAQ: Stripe vs. Paddle vs. Whop True Cost (2026)]({SITE_ORIGIN}/faq/stripe-vs-paddle-true-cost/): Answer-first guide & calculator.
 - [Jotform Wix App Setup & Pricing Guide (2026)]({SITE_ORIGIN}/guides/jotform-wix-app-setup-and-pricing-guide/): Step-by-step Wix App installation walkthrough, live B2B quote demo, and tier calculator.
 - [Jotform Pricing Tier Calculator (2026)]({SITE_ORIGIN}/pricing/jotform-pricing-tier-calculator/): Starter (Free), Bronze ($34/mo), Silver ($39/mo), and Gold ($99/mo, HIPAA features) Year-1 calculator.
+- [Apollo vs ZoomInfo vs Sales Navigator]({SITE_ORIGIN}/pricing/apollo-vs-zoominfo-vs-sales-navigator-year-1-cost/): Year-1 seats, email and phone credits, and a labeled ZoomInfo estimate. Checked 2026-11-14.
+- [Jotform team Year-1 cost]({SITE_ORIGIN}/pricing/jotform-multi-user-vs-enterprise-year-1-cost/): Separate single-user plans versus an Enterprise quote. Four Gold accounts on annual billing are $4,752. The Enterprise price is unknown. Checked 2026-11-15.
 
 ## AI Act Article 50 (test section)
 Article 50 applies and is enforceable from 2 Aug 2026. The 2 Dec 2026 date covers only Art. 50(2) machine-readable marking, for providers whose systems were on the market before 2 Aug 2026. Accessed 30 Oct 2026.
