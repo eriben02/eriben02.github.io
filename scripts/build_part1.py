@@ -370,7 +370,7 @@ home_body = f"""
     <div class="card" data-cat="compliance">
       <span class="badge badge-low">Compliance</span>
       <h3><a href="./compare/typeform-vs-jotform-response-limit-and-hipaa-cost/">Typeform vs Jotform: response caps and HIPAA</a></h3>
-      <p>Typeform&rsquo;s monthly response caps and Enterprise-only HIPAA BAA versus Jotform Gold ($99/mo annual with BAA included).</p>
+      <p>Typeform&rsquo;s monthly response caps and Enterprise-only HIPAA BAA versus Jotform Gold ($99/mo annual, BAA available to eligible customers).</p>
     </div>
     <div class="card" data-cat="compliance">
       <span class="badge badge-low">Guide</span>
@@ -380,7 +380,7 @@ home_body = f"""
     <div class="card" data-cat="compliance">
       <span class="badge badge-low">Pricing</span>
       <h3><a href="./pricing/jotform-pricing-tier-calculator/">Jotform pricing tier calculator</a></h3>
-      <p>Compare Starter (Free), Bronze ($34/mo), Silver ($39/mo), and Gold ($99/mo HIPAA BAA) submission and storage limits.</p>
+      <p>Compare Starter (Free), Bronze ($34/mo), Silver ($39/mo), and Gold ($99/mo, HIPAA features) submission and storage limits.</p>
     </div>
     <div class="card" data-cat="compliance">
       <span class="badge badge-medium">Compliance</span>
@@ -389,8 +389,8 @@ home_body = f"""
     </div>
     <div class="card" data-cat="compliance">
       <span class="badge badge-low">Compliance</span>
-      <h3><a href="./compliance/hipaa-baa-and-soc2-pricing-tiers/">Which software plans actually sign a HIPAA BAA</a></h3>
-      <p>Minimum plans for a signed HIPAA BAA or SAML SSO, plus Vanta/Drata platform quotes and external CPA audit fees.</p>
+      <h3><a href="./compliance/hipaa-baa-and-soc2-pricing-tiers/">Which software plans can sign a HIPAA BAA</a></h3>
+      <p>Minimum plans that can sign a HIPAA BAA or include SAML SSO, plus Vanta/Drata platform quotes and external CPA audit fees.</p>
     </div>
     <div class="card" data-cat="compliance">
       <span class="badge badge-high">Compliance</span>

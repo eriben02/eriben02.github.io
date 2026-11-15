@@ -59,7 +59,7 @@ def build_jotform_wix_guide():
   <ul class="key-list">
     <li><strong>No manual iframe height clipping:</strong> The official Wix App widget automatically resizes inside the Wix Editor canvas and mobile viewport so multi-field B2B forms never get cut off or trap users in double scrollbars.</li>
     <li><strong>Direct Jotform Tables &amp; CRM pipeline sync:</strong> Every quote inquiry lands immediately in a structured Jotform Table with status tags, timestamps, and 1-click export to Excel, Google Sheets, HubSpot, or Close CRM.</li>
-    <li><strong>Generous entry limits on Starter (Free) and Bronze ($34/mo):</strong> You can test the complete Wix workflow on Jotform Starter ($0/month for up to 5 active forms and 100 monthly submissions) before scaling to Bronze (25 forms, 1,000 submissions/mo) or Gold ($99/month annual with 10,000 submissions/mo and HIPAA BAA support).</li>
+    <li><strong>Generous entry limits on Starter (Free) and Bronze ($34/mo):</strong> You can test the complete Wix workflow on Jotform Starter ($0/month for up to 5 active forms and 100 monthly submissions) before scaling to Bronze (25 forms, 1,000 submissions/mo) or Gold ($99/month annual with 10,000 submissions/mo and HIPAA features).</li>
     <li><strong>Zero developer maintenance:</strong> Any field update you publish inside the Jotform Form Builder updates live on your Wix storefront immediately without republishing your Wix site.</li>
   </ul>
 </section>
@@ -202,9 +202,9 @@ function updateJotformWixCalc() {{
   let recMo = 0;
   let recLimit = '5 forms · 100 submissions/mo · 100 MB storage';
   if (mode === 'hipaa') {{
-    recTier = 'Jotform Gold (HIPAA BAA Included)';
+    recTier = 'Jotform Gold';
     recMo = 99;
-    recLimit = '100 forms · 10,000 submissions/mo · Signed HIPAA BAA';
+    recLimit = '100 forms · 10,000 submissions/mo · HIPAA features';
   }} else if (vol <= 100) {{
     recTier = 'Jotform Starter (Free)';
     recMo = 0;
@@ -220,7 +220,7 @@ function updateJotformWixCalc() {{
   }} else {{
     recTier = 'Jotform Gold';
     recMo = mode === 'annual' ? 99 : 129;
-    recLimit = '100 forms · 10,000 submissions/mo · HIPAA BAA eligible';
+    recLimit = '100 forms · 10,000 submissions/mo';
   }}
 
   const recYr = recMo * 12;
@@ -281,8 +281,8 @@ function updateJotformWixCalc() {{
     {{
       name: 'Jotform Gold (HIPAA Eligible)',
       rate: '$99/mo annual ($129/mo monthly)',
-      limits: '100 forms · 10,000 submissions/mo · Signed HIPAA BAA included',
-      hidden: '$0 onboarding · Cheapest self-serve HIPAA BAA form builder',
+      limits: '100 forms · 10,000 submissions/mo · HIPAA features',
+      hidden: '$0 onboarding',
       total: '$' + ((mode === 'monthly' ? 129 : 99) * 12).toLocaleString('en-US') + ' / yr',
       url: '{JOTFORM_HIPAA_PARTNER_URL}',
       cta: 'View Jotform Gold →'
@@ -345,7 +345,7 @@ updateJotformWixCalc();
         ),
         (
             "Which Jotform plan do I need if my Wix site collects HIPAA-regulated health information?",
-            "You need Jotform Gold ($99/month billed annually or $129/month billed monthly), which includes HIPAA compliance features and a signed Business Associate Agreement (BAA) alongside 10,000 monthly submissions.",
+            "You need Jotform Gold ($99/month billed annually or $129/month billed monthly) for HIPAA features, alongside 10,000 monthly submissions. Eligible customers with HIPAA features enabled can sign a BAA with Jotform.",
         ),
     ]
 
@@ -376,13 +376,13 @@ def build_jotform_pricing_calculator():
     slug = "/pricing/jotform-pricing-tier-calculator/"
     title = "Jotform Pricing Tier Calculator (2026) – saasbill.io"
     desc = (
-        "Calculate your 2026 Jotform Year-1 cost across Starter (Free), Bronze ($34/mo), Silver ($39/mo), and Gold ($99/mo HIPAA BAA) based on monthly submissions, payment volume, and Wix/website embedding."
+        "Calculate your 2026 Jotform Year-1 cost across Starter (Free), Bronze ($34/mo), Silver ($39/mo), and Gold ($99/mo, HIPAA features) based on monthly submissions, payment volume, and Wix/website embedding."
     )
 
     body = f"""
 <section class="hero">
   <h1>Jotform Pricing Tier Calculator (2026): Starter, Bronze, Silver &amp; Gold True Year-1 Cost</h1>
-  <p class="lead">In 2026, Jotform costs $0/month on Starter (100 submissions/mo), $34/month billed annually on Bronze (1,000 submissions/mo), $39/month billed annually on Silver (2,500 submissions/mo), and $99/month billed annually on Gold with a signed HIPAA BAA and 10,000 submissions/month (source: Jotform official pricing page, verified Oct 2026). Because Silver costs only $5/month ($60/year) more than Bronze on annual billing while increasing monthly submissions 2.5x and storage 10x, Silver is the sweet spot for growing B2B teams.</p>
+  <p class="lead">In 2026, Jotform costs $0/month on Starter (100 submissions/mo), $34/month billed annually on Bronze (1,000 submissions/mo), $39/month billed annually on Silver (2,500 submissions/mo), and $99/month billed annually on Gold, with 10,000 submissions/month (source: Jotform official pricing page, verified Oct 2026). Eligible customers with HIPAA features enabled can sign a BAA with Jotform (source: Jotform HIPAA page, checked 15 Nov 2026). Because Silver costs only $5/month ($60/year) more than Bronze on annual billing while increasing monthly submissions 2.5x and storage 10x, Silver is the sweet spot for growing B2B teams.</p>
 </section>
 
 <section class="calc-box" aria-label="Jotform 2026 Tier Calculator">
@@ -439,7 +439,7 @@ function runJfTierCalc() {{
   let bestName = 'Jotform Bronze';
   let bestYr = bronzeMo * 12;
   if (mode === 'hipaa') {{
-    bestName = 'Jotform Gold (HIPAA BAA)';
+    bestName = 'Jotform Gold';
     bestYr = goldMo * 12;
   }} else if (subs <= 100) {{
     bestName = 'Jotform Starter (Free)';
@@ -478,7 +478,7 @@ function runJfTierCalc() {{
     {{name: 'Jotform Starter (Free)', rate: '$0/mo', quotas: '5 forms · 100 submissions/mo · 100 MB storage', hidden: 'Jotform branding shown on embedded forms', total: '$0/yr', url: '{JOTFORM_PARTNER_URL}'}},
     {{name: 'Jotform Bronze', rate: '$' + bronzeMo + '/mo', quotas: '25 forms · 1,000 submissions/mo · 1 GB storage', hidden: '$0 onboarding · Custom branding unlocked', total: '$' + (bronzeMo * 12).toLocaleString('en-US') + '/yr', url: '{JOTFORM_PRICING_PARTNER_URL}'}},
     {{name: 'Jotform Silver', rate: '$' + silverMo + '/mo', quotas: '50 forms · 2,500 submissions/mo · 10 GB storage', hidden: 'Best value per submission ($0.015/submission at capacity)', total: '$' + (silverMo * 12).toLocaleString('en-US') + '/yr', url: '{JOTFORM_PRICING_PARTNER_URL}'}},
-    {{name: 'Jotform Gold (HIPAA BAA)', rate: '$' + goldMo + '/mo', quotas: '100 forms · 10,000 submissions/mo · 100 GB storage + BAA', hidden: 'Includes signed HIPAA BAA (vs. $6,000+/yr Enterprise on Typeform)', total: '$' + (goldMo * 12).toLocaleString('en-US') + '/yr', url: '{JOTFORM_HIPAA_PARTNER_URL}'}}
+    {{name: 'Jotform Gold', rate: '$' + goldMo + '/mo', quotas: '100 forms · 10,000 submissions/mo · 100 GB storage', hidden: 'HIPAA features, BAA available to eligible customers', total: '$' + (goldMo * 12).toLocaleString('en-US') + '/yr', url: '{JOTFORM_HIPAA_PARTNER_URL}'}}
   ];
 
   if (typeof window.saasbillApplyWorkbench === 'function') {{
@@ -520,7 +520,7 @@ runJfTierCalc();
     faqs = [
         (
             "How much does Jotform cost per month in 2026?",
-            "On annual billing in 2026, Jotform Starter is free ($0/mo for 5 forms and 100 submissions/mo), Bronze is $34/mo (25 forms, 1,000 submissions/mo), Silver is $39/mo (50 forms, 2,500 submissions/mo), and Gold is $99/mo (100 forms, 10,000 submissions/mo, plus HIPAA BAA eligibility).",
+            "On annual billing in 2026, Jotform Starter is free ($0/mo for 5 forms and 100 submissions/mo), Bronze is $34/mo (25 forms, 1,000 submissions/mo), Silver is $39/mo (50 forms, 2,500 submissions/mo), and Gold is $99/mo (100 forms, 10,000 submissions/mo).",
         ),
         (
             "Does Jotform charge extra to embed forms on Wix?",

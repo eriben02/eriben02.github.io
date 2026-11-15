@@ -226,9 +226,9 @@ if (typeof window !== "undefined") window.quotePayProfile = quotePayProfile;
       ["./pricing/gong-io-platform-fee-and-seat-minimum-calculator/", "Gong.io $5,000 Platform Fee &amp; Seat Calculator", "Platform fee plus per-seat licenses versus Close CRM."]
     ],
     compliance: [
-      ["./compliance/hipaa-baa-and-soc2-pricing-tiers/", "HIPAA BAA &amp; SOC 2 Pricing Tiers", "Which plan signs a BAA, and what the CPA audit adds."],
+      ["./compliance/hipaa-baa-and-soc2-pricing-tiers/", "HIPAA BAA &amp; SOC 2 Pricing Tiers", "Which plan can sign a BAA, and what the CPA audit adds."],
       ["./compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/", "Google Workspace vs. Microsoft 365 HIPAA BAA", "Minimum editions that sign a BAA, plus form intake rules."],
-      ["./compare/typeform-vs-jotform-response-limit-and-hipaa-cost/", "Typeform vs. Jotform Response &amp; HIPAA Calculator", "Response caps and which plan signs a HIPAA BAA."]
+      ["./compare/typeform-vs-jotform-response-limit-and-hipaa-cost/", "Typeform vs. Jotform Response &amp; HIPAA Calculator", "Response caps and which plan can sign a HIPAA BAA."]
     ],
     all: [
       ["./chargeback-fee-and-recovery-calculator/", "Stripe, Shopify &amp; Paddle Chargeback Cost Calculator", "Dispute fees, manual prep, and automated recovery."],
