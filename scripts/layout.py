@@ -297,6 +297,7 @@ CRAWL_DIRECTORY = [
         ("compare/pipedrive-vs-salesforce-starter-and-pro-suite-cost/index.html", "Pipedrive vs Salesforce Year-1 cost"),
         ("pricing/gong-io-platform-fee-and-seat-minimum-calculator/index.html", "Gong platform fee and seat calculator"),
         ("exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/index.html", "ZoomInfo 60-day auto-renewal notice"),
+        ("pricing/apollo-vs-zoominfo-vs-sales-navigator-year-1-cost/index.html", "Apollo vs ZoomInfo vs Sales Navigator"),
         ("compare/monday-crm-vs-pipedrive-vs-hubspot-seat-minimums/index.html", "monday CRM seat minimums"),
     ]),
     ("Helpdesk &amp; AI Support", [
@@ -420,6 +421,7 @@ def render_related_links(rel_path, prefix):
         ("exit/shopify-payments-chargeback-threshold-and-reserve-appeal/index.html", "Shopify Payments Reserve &amp; Dispute Threshold Calculator", "US card rate, $15 dispute fee, and the published reserve and network thresholds."),
         ("pricing/stripe-radar-and-dispute-fee-calculator-2026/index.html", "Stripe dispute and Radar cost", "Dispute fees, lost order value, Smart Disputes, and Radar starting prices."),
         ("exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/index.html", "ZoomInfo 60-Day Auto-Renewal Notice", "The 60-day window and what the extension costs."),
+        ("pricing/apollo-vs-zoominfo-vs-sales-navigator-year-1-cost/index.html", "Apollo vs ZoomInfo vs Sales Navigator", "Year-1 seats, email and phone credits, and a labeled ZoomInfo estimate."),
         ("compare/typeform-vs-jotform-response-limit-and-hipaa-cost/index.html", "Typeform vs. Jotform Response &amp; HIPAA Calculator", "Response caps and which plan signs a HIPAA BAA."),
         ("guides/jotform-wix-app-setup-and-pricing-guide/index.html", "Jotform Wix App Setup &amp; Pricing Guide", "How to embed a B2B quote form on Wix, plus tier pricing."),
         ("pricing/jotform-pricing-tier-calculator/index.html", "Jotform 2026 Pricing Tier Calculator", "Starter, Bronze, Silver, and Gold Year-1 cost."),
@@ -456,6 +458,7 @@ def render_related_links(rel_path, prefix):
     smart_rel = "pricing/chargeflow-vs-stripe-smart-disputes-year-1-cost/index.html"
     hub_rel = "pricing/hubspot-payments-vs-stripe-platform-fee-year-1-cost/index.html"
     sign_rel = "pricing/pandadoc-vs-docusign-vs-jotform-sign-year-1-cost/index.html"
+    apollo_rel = "pricing/apollo-vs-zoominfo-vs-sales-navigator-year-1-cost/index.html"
     # CRM pages show each other first. The Close vs Pipedrive page leads with
     # the seat-bucket and Close vs HubSpot pages, then HubSpot and Gong.
     close_pipedrive_rel = "compare/close-vs-pipedrive-year-1-cost-calculator/index.html"
@@ -531,6 +534,12 @@ def render_related_links(rel_path, prefix):
             "pricing/docusign-envelope-allowance-and-api-overage-calculator/index.html",
             "pricing/jotform-pricing-tier-calculator/index.html",
             "compare/typeform-vs-jotform-response-limit-and-hipaa-cost/index.html",
+        ]
+    elif rel_path == apollo_rel:
+        preferred = [
+            "exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/index.html",
+            "compare/close-crm-vs-hubspot-sales-hub-5-to-20-reps/index.html",
+            "compare/pipedrive-vs-salesforce-starter-and-pro-suite-cost/index.html",
         ]
     elif rel_path == radar_rel:
         preferred = [

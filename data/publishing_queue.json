@@ -12,7 +12,7 @@
   {
     "priority": 2,
     "slug": "/compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/",
-    "title": "Gumroad (10% + 50\u00a2 + 2.9% Processing) vs. Whop (2.7% + 30\u00a2) vs. Lemon Squeezy (5% + 50\u00a2) Calculator (2026): Net Payouts Compared",
+    "title": "Gumroad (10% + 50¢ + 2.9% Processing) vs. Whop (2.7% + 30¢) vs. Lemon Squeezy (5% + 50¢) Calculator (2026): Net Payouts Compared",
     "category": "Payment Processors & MoR",
     "primary_affiliate": "whop",
     "status": "published",
@@ -35,7 +35,7 @@
   {
     "priority": 4,
     "slug": "/compare/close-crm-vs-hubspot-sales-hub-5-to-20-reps/",
-    "title": "Close CRM vs. HubSpot Sales Hub for 5\u201320 Sales Reps (2026): Built-In Calling & SMS vs. Paid Add-Ons",
+    "title": "Close CRM vs. HubSpot Sales Hub for 5–20 Sales Reps (2026): Built-In Calling & SMS vs. Paid Add-Ons",
     "category": "CRM & Sales",
     "primary_affiliate": "close-crm",
     "status": "published",
@@ -65,7 +65,7 @@
   {
     "priority": 7,
     "slug": "/pricing/gong-io-platform-fee-and-seat-minimum-calculator/",
-    "title": "Gong.io Pricing & Hidden $5,000 Platform Fee Calculator (2026): Real Cost for 5\u201325 Reps vs. Close CRM",
+    "title": "Gong.io Pricing & Hidden $5,000 Platform Fee Calculator (2026): Real Cost for 5–25 Reps vs. Close CRM",
     "category": "CRM & Sales",
     "primary_affiliate": "close-crm",
     "status": "published",
@@ -120,7 +120,7 @@
   {
     "priority": 12,
     "slug": "/pricing/stripe-radar-and-dispute-fee-calculator-2026/",
-    "title": "Stripe Dispute Fee ($15\u2013$30) & Radar Cost Calculator (2026): True Cost of a 0.6% Chargeback Rate",
+    "title": "Stripe Dispute Fee ($15–$30) & Radar Cost Calculator (2026): True Cost of a 0.6% Chargeback Rate",
     "category": "Payment Processors & MoR",
     "primary_affiliate": "whop",
     "status": "published",
@@ -243,9 +243,11 @@
     "title": "What does Apollo cost in Year 1 versus ZoomInfo and Sales Navigator?",
     "category": "CRM & Sales",
     "primary_affiliate": "apollo",
-    "status": "queued",
+    "status": "published",
     "strategic_rationale": "Year-1 Apollo cost for a small or mid-size outbound team, counting seats, email and phone credits, credits that do not roll over, one plan for every seat, and add-on credits, versus ZoomInfo, Sales Navigator, or a split stack.",
-    "verification_note": "Reddit: https://www.reddit.com/r/work/comments/1wacab8/apollo_alternatives_after_the_price_hike_what_is/ and https://www.reddit.com/r/SaaS/comments/1s4y3u9/how_much_are_you_actually_spending_on_cold_email/. Re-read https://www.apollo.io/pricing and https://www.apollo.io/pricing/about-credits at build time. Credits expire at the end of the billing cycle and do not roll over. Email is no more than 1 credit per contact. All seats on an account must be on the same plan. Add-on credits are bought in the app, charged immediately, and renew until removed. An annual invoice cannot switch to monthly mid-cycle. Sales Navigator compare-plans, read 2026-11-10: Core $119.99 per month or $1,079.88 per year, Advanced $159.99 per month or $1,799.88 per year; LinkedIn calls those estimates. Stay unknown: ZoomInfo list price, Apollo plan prices and credit quotas until the live table is re-read, phone credit cost, and Sales Navigator Advanced Plus. Apollo is the affiliate. ZoomInfo and Sales Navigator are not."
+    "verification_note": "Read live 2026-11-14 on https://www.apollo.io/pricing and https://www.apollo.io/pricing/about-credits. Annual per seat per month: Free $0 with 900 credits a year granted monthly, Basic $49 with 30,000 credits a year upfront, Professional $79 with 48,000 credits a year upfront, Organization $119 with a 3-seat minimum and 72,000 credits a year upfront. Monthly view: Free $0 with 75 credits, Basic $65 with 2,500 credits, Professional $99 with 4,000 credits. Organization shows $149 and Annual Only, so the year uses $119. Email is 1 credit. A phone number is 8 credits. Credits do not roll over. Advanced Dialer is $119 per team per month billed annually and is not in the Year-1 total. No per-minute dialer rate is on Apollo's credits page. Add-on credit price is not published. Custom is a quote. Sales Navigator compare-plans, FAQ updated 27 Sep 2026: Core $119.99 a month or $1,079.88 a year, Advanced $159.99 a month or $1,799.88 a year. LinkedIn calls those estimates. Advanced Plus is a quote. Up to five Advanced licenses online. 50 InMail a month. No email or phone reveal credits. ZoomInfo pricing and the 1 May 2025 terms: no public list price, each export is one credit, the agreement is not cancellable. The renewal notice stays on the ZoomInfo exit page (March 6 2024 terms, 60-day written notice; the May 1 2025 terms omit the window). Third-party inputs, editable: platform about $14,995 a year, about $1,500 a seat, 3-seat minimum, about 5,000 bulk export credits. ZoomInfo's AI information page says figures such as $14,995 are out of date. Vendr median $33,500 a year is not the default total. Sources: https://www.getcleed.com/blog/zoominfo-pricing and https://www.pin.com/blog/zoominfo-pricing/. Apollo is the affiliate through /go/apollo. ZoomInfo and LinkedIn are not.",
+    "published_at": "2026-11-14",
+    "url": "https://saasbill.io/pricing/apollo-vs-zoominfo-vs-sales-navigator-year-1-cost/"
   },
   {
     "priority": 23,
