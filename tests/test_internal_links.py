@@ -75,7 +75,7 @@ def _sitemap_urls():
 class TestInternalLinks(unittest.TestCase):
     def test_every_sitemap_url_has_a_static_inbound_link(self):
         locs = _sitemap_urls()
-        self.assertEqual(len(locs), 48)
+        self.assertEqual(len(locs), 49)
         inbound = defaultdict(set)
         graph = defaultdict(set)
         home_directory = set()

@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-site-verification" content="W7-m7km1_5pZZUG38dpallcgdGss6_Vl2qo5pjVoMdA" />
+  <!-- Bing Webmaster Tools verification: paste <meta name="msvalidate.01" content="YOUR_BING_CODE" /> here or use 1-click Google Search Console import (see BING_WEBMASTER_VERIFICATION.md) -->
+  <title>Jotform Year-1 cost, team of 3 to 4 – saasbill.io</title>
+  <meta name="description" content="Year-1 cost of separate Jotform accounts versus an Enterprise quote. Checked 15 Nov 2026." />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+  <meta property="og:site_name" content="SaaSBill" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Jotform Year-1 cost, team of 3 to 4 – saasbill.io" />
+  <meta property="og:description" content="Year-1 cost of separate Jotform accounts versus an Enterprise quote. Checked 15 Nov 2026." />
+  <meta property="og:url" content="https://saasbill.io/pricing/jotform-multi-user-vs-enterprise-year-1-cost/" />
+  <meta property="og:updated_time" content="2026-11-15T00:00:00+00:00" />
+  <meta property="article:published_time" content="2026-11-15T00:00:00+01:00" />
+  <meta property="article:modified_time" content="2026-11-15T00:00:00+00:00" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Jotform Year-1 cost, team of 3 to 4 – saasbill.io" />
+  <meta name="twitter:description" content="Year-1 cost of separate Jotform accounts versus an Enterprise quote. Checked 15 Nov 2026." />
+  <meta name="last-modified" content="2026-11-15T00:00:00+00:00" />
+  <meta name="dcterms.modified" content="2026-11-15T00:00:00+00:00" />
+  <meta name="dcterms.issued" content="2026-11-15" />
+  <link rel="canonical" href="https://saasbill.io/pricing/jotform-multi-user-vs-enterprise-year-1-cost/" />
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261030c" />
+  <link rel="alternate" type="text/plain" href="https://saasbill.io/llms.txt" title="SaaSBill LLMs.txt Summary" />
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script defer data-domain="saasbill.io" src="https://plausible.io/js/pa-VAaSVNs5XOobt9cv2UtKo.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init();
+    window.__saasbillEvents = window.__saasbillEvents || [];
+    window.trackSaaSBillEvent = function(eventName, props) {
+      var p = props || {};
+      var entry = { event: eventName, ts: Date.now() };
+      for (var k in p) {
+        if (Object.prototype.hasOwnProperty.call(p, k)) entry[k] = p[k];
+      }
+      window.__saasbillEvents.push(entry);
+      if (typeof window.plausible === 'function') {
+        window.plausible(eventName, { props: p });
+      }
+    };
+    window.trackEvent = window.trackSaaSBillEvent;
+
+    window.saasbillMoney = function (n) {
+      var v = Math.round(Number(n) || 0);
+      var sign = v < 0 ? '-' : '';
+      return sign + '$' + Math.abs(v).toLocaleString('en-US');
+    };
+    window.saasbillResultLine = function (hidden, sticker) {
+      var h = Math.round(Number(hidden) || 0);
+      var s = Math.round(Number(sticker) || 0);
+      if (h <= 0) return 'Matches advertised price ($0 hidden fees).';
+      var pct = s > 0 ? Math.round((h / s) * 100) : 0;
+      return '+' + window.saasbillMoney(h) + ' (+' + pct + '%) above advertised price.';
+    };
+    window.saasbillApplyWorkbench = function (opts) {
+      opts = opts || {};
+      var sticker = Math.max(0, Math.round(Number(opts.sticker) || 0));
+      var seats = Math.max(0, Math.round(Number(opts.seats) || 0));
+      var hidden = Math.max(0, Math.round(Number(opts.hidden) || 0));
+      var total = Math.round(Number(opts.total));
+      if (!isFinite(total)) total = sticker + seats + hidden;
+      var parts = Math.max(1, sticker + seats + hidden);
+      function node(id) { return document.getElementById(id); }
+      function setText(id, value) {
+        var el = node(id);
+        if (el) el.textContent = value;
+      }
+      function setFlex(id, amount) {
+        var el = node(id);
+        if (!el) return;
+        var share = amount <= 0 ? 8 : (amount / parts) * 100;
+        el.style.flex = share + ' 1 0px';
+      }
+      setText('shell-product', opts.product || '');
+      setText('shell-big', window.saasbillMoney(total));
+      setText('shell-quote', 'True Year-1 cost');
+      setText('shell-sub', window.saasbillResultLine(hidden, sticker + seats));
+      setText('shell-amt-base', window.saasbillMoney(sticker));
+      setText('shell-amt-seats', window.saasbillMoney(seats));
+      setText('shell-amt-hidden', window.saasbillMoney(hidden));
+      setText('shell-title-base', 'Sticker Price');
+      setText('shell-title-seats', opts.seatsTitle || 'Other sticker fees');
+      setText('shell-title-hidden', 'Hidden Cost Gap');
+      setText('shell-sub-base', opts.baseLabel || 'Advertised price');
+      setText('shell-sub-seats', opts.seatsLabel || 'Included in the sticker');
+      setText('shell-sub-hidden', opts.hiddenLabel || 'Fees above the advertised price');
+      setFlex('shell-row-base', sticker);
+      setFlex('shell-row-seats', seats);
+      setFlex('shell-row-hidden', hidden);
+      var seatsRow = node('shell-row-seats');
+      if (seatsRow) seatsRow.style.display = seats <= 0 ? 'none' : '';
+      var math = node('shell-math');
+      if (math && opts.mathHtml) math.innerHTML = opts.mathHtml;
+      var best = node('shell-best');
+      if (best && opts.bestHtml) best.innerHTML = opts.bestHtml;
+      var cta = node('shell-cta');
+      if (cta && opts.ctaHref) {
+        cta.href = opts.ctaHref;
+        var label = opts.ctaLabel || 'See pricing';
+        cta.textContent = /→\s*$/.test(label) ? label : label + ' \u2192';
+        if (opts.ctaVendor) cta.setAttribute('data-vendor', opts.ctaVendor);
+      }
+      setText('shell-sticker', window.saasbillMoney(sticker + seats));
+      setText('shell-gap', hidden > 0 ? '+' + window.saasbillMoney(hidden) : '$0');
+      if (opts.product) setText('shell-sticker-note', opts.product);
+    };
+
+  </script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "TechArticle", "@id": "https://saasbill.io/pricing/jotform-multi-user-vs-enterprise-year-1-cost/#article", "headline": "Jotform Year-1 cost, team of 3 to 4 \u2013 saasbill.io", "description": "Year-1 cost of separate Jotform accounts versus an Enterprise quote. Checked 15 Nov 2026.", "datePublished": "2026-11-15", "dateModified": "2026-11-15T00:00:00+00:00", "author": {"@type": "Organization", "name": "SaaSBill Editorial", "url": "https://saasbill.io/"}, "publisher": {"@type": "Organization", "name": "SaaSBill", "url": "https://saasbill.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://saasbill.io/pricing/jotform-multi-user-vs-enterprise-year-1-cost/"}}, {"@type": "WebPage", "@id": "https://saasbill.io/pricing/jotform-multi-user-vs-enterprise-year-1-cost/", "url": "https://saasbill.io/pricing/jotform-multi-user-vs-enterprise-year-1-cost/", "name": "Jotform Year-1 cost, team of 3 to 4 \u2013 saasbill.io", "description": "Year-1 cost of separate Jotform accounts versus an Enterprise quote. Checked 15 Nov 2026.", "inLanguage": "en-US", "datePublished": "2026-11-15", "dateModified": "2026-11-15T00:00:00+00:00", "lastReviewed": "2026-11-15", "reviewedBy": {"@type": "Organization", "name": "SaaSBill Editorial"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "SaaSBill", "item": "https://saasbill.io/"}, {"@type": "ListItem", "position": 2, "name": "Jotform Year-1 cost, team of 3 to 4 \u2013 saasbill.io", "item": "https://saasbill.io/pricing/jotform-multi-user-vs-enterprise-year-1-cost/"}]}]}</script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-inner">
+      <div class="brand-wrap">
+        <a href="../../index.html" class="brand">SaaSBill<span>.io</span></a>
+        <span class="brand-tagline">Year-1 software cost &amp; contract calculators</span>
+      </div>
+      <nav class="nav-links" aria-label="Primary Navigation">
+        <a href="../../index.html#all-calculators">Audits &amp; Guides</a>
+        <a href="../../ai-act/">AI Act</a>
+        <a href="../../index.html#methodology">Methodology</a>
+        <span class="byline-bar">Updated <time datetime="2026-11-15" itemprop="dateModified">Nov 15, 2026</time></span>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+    <article itemscope itemtype="https://schema.org/TechArticle">
+      <meta itemprop="datePublished" content="2026-11-15" />
+      <meta itemprop="dateModified" content="2026-11-15T00:00:00+00:00" />
+      <section class="hero editorial-hero editorial-hero-wrap"><h1>What does Jotform cost in Year 1 for a team of 3 to 4?</h1><p class="lead">Standard plans run on shared servers with online support. Enterprise runs on a dedicated server, and the customer signs an agreement.</p></section>
+<div class="unified-inspector-tray">
+<section class="calc-box editorial-workbench" aria-label="True cost calculator">
+  <div class="workbench-grid">
+    <div class="wb-col-controls">
+      <div class="wb-col-title">Your team</div>
+      <div class="wb-controls-stack">
+        
+        <div class="wb-control-item">
+          <label class="wb-control-label" for="jf-team">People <span class="val-pill" id="jf-team-val">4</span></label>
+          <div class="wb-slider-row">
+            <input type="range" id="jf-team" min="1" max="10" step="1" value="4" aria-label="Number of people" data-track="calculator-control" data-control="team" />
+          </div>
+        </div>
+        <div class="wb-control-item">
+          <label class="wb-control-label" for="jf-billing">Billing</label>
+          <select id="jf-billing" class="wb-tool-select" data-track="calculator-control" data-control="billing">
+            <option value="annual" selected>Annual</option>
+            <option value="monthly">Month to month</option>
+          </select>
+        </div>
+        <div class="wb-control-item">
+          <label class="wb-control-label" for="jf-hipaa">Needs HIPAA</label>
+          <select id="jf-hipaa" class="wb-tool-select" data-track="calculator-control" data-control="hipaa">
+            <option value="no" selected>No</option>
+            <option value="yes">Yes</option>
+          </select>
+          <p class="wb-budget-subnote">Yes uses Gold.</p>
+        </div>
+        <div class="wb-control-item">
+          <label class="wb-control-label" for="jf-plan">Plan for separate accounts</label>
+          <select id="jf-plan" class="wb-tool-select" data-track="calculator-control" data-control="plan">
+            <option value="bronze">Bronze</option>
+            <option value="silver">Silver</option>
+            <option value="gold" selected>Gold</option>
+          </select>
+        </div>
+        <div class="wb-control-item">
+          <label class="wb-control-label" for="jf-quote">Enterprise quote per year</label>
+          <input type="text" inputmode="decimal" class="wb-tool-select" id="jf-quote" autocomplete="off" aria-label="Enterprise quote per year" data-track="calculator-control" data-control="enterprise-quote" />
+          <p class="wb-budget-subnote">Leave this blank when you have no quote.</p>
+        </div>
+        <div class="wb-control-item">
+          <label class="wb-control-label" for="jf-discount">Nonprofit or education discount</label>
+          <select id="jf-discount" class="wb-tool-select" data-track="calculator-control" data-control="discount">
+            <option value="no" selected>No</option>
+            <option value="yes">Yes, I qualify</option>
+          </select>
+          <p class="wb-budget-subnote">Only if you qualify. 50% off Bronze, Silver, and Gold. Enterprise is 30% off user fees only, so a quote you type is left as you typed it.</p>
+        </div>
+
+      </div>
+    </div>
+    <div class="wb-col-chart">
+      <div class="wb-col-title">Year-1 cost</div>
+      <div class="wb-vbar-container wb-vbar-separate" aria-live="polite">
+        <div class="wb-vbar-row" id="shell-row-base" style="--wb-bar-share: 25%;">
+          <div class="wb-vbar-block block-base"><span class="wb-block-amount" id="shell-amt-base">$1,188</span></div>
+          <div class="wb-callout-item"><div class="wb-leader-line"></div><div class="wb-callout-text"><strong id="shell-title-base">One Gold account</strong><span id="shell-sub-base">Year 1</span></div></div>
+        </div>
+        <div class="wb-vbar-row" id="shell-row-seats" style="--wb-bar-share: 100%;">
+          <div class="wb-vbar-block block-seats"><span class="wb-block-amount" id="shell-amt-seats">$4,752</span></div>
+          <div class="wb-callout-item"><div class="wb-leader-line"></div><div class="wb-callout-text"><strong id="shell-title-seats">4 separate Gold accounts</strong><span id="shell-sub-seats">Year 1</span></div></div>
+        </div>
+        <div class="wb-vbar-row" id="shell-row-hidden" style="--wb-bar-share: 0%;">
+          <div class="wb-vbar-block block-hidden"><span class="wb-block-amount" id="shell-amt-hidden">unknown</span></div>
+          <div class="wb-callout-item"><div class="wb-leader-line"></div><div class="wb-callout-text"><strong id="shell-title-hidden">Enterprise</strong><span id="shell-sub-hidden">Quote</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="wb-result-col" id="shell-result">
+      <div class="wb-selected-product" id="shell-product">4 separate Gold accounts</div>
+      <div class="wb-big-total"><span id="shell-big">$4,752</span> <span class="wb-per-year">/ year</span></div>
+      <details class="math-drawer" id="shell-calc">
+        <summary>Show calculation</summary>
+        <div class="math-drawer-body" id="shell-math">4 people. Annual billing. HIPAA is off. Discount is off. One Gold account is $1,188. 4 separate Gold accounts are 4 times $1,188, which is $4,752. Enterprise quote is unknown.</div>
+      </details>
+      <p class="wb-budget-quote" id="shell-quote">True Year-1 cost</p>
+      <p class="wb-budget-subnote" id="shell-sub"></p>
+      <div class="wb-best-option" id="shell-best">Enterprise is cheaper only if the quote is below $4,752.</div>
+      <div class="cta-stack">
+        <a id="shell-cta" class="btn-cta wb-primary-cta" href="#jf-costs">Cost table &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+
+<section id="jf-costs">
+  <h2>Year-1 cost</h2>
+  <div class="table-wrap editorial-gap-table mobile-cards">
+    <table>
+      <caption>Twelve months at the list price for the numbers above. An empty Enterprise quote stays unknown.</caption>
+      <thead>
+        <tr>
+          <th>Plan</th>
+          <th>Year 1</th>
+        </tr>
+      </thead>
+      <tbody id="jf-body">
+        <tr><td data-label="Plan">One Gold account</td><td data-label="Year 1">$1,188</td></tr>
+        <tr><td data-label="Plan">4 separate Gold accounts</td><td data-label="Year 1">$4,752</td></tr>
+        <tr><td data-label="Plan">Enterprise</td><td data-label="Year 1">unknown</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p id="jf-collab">Separate accounts mean separate forms and submissions for each person. Those people can use Form Collaboration, and they can share data through Jotform Tables. Enterprise is one shared workspace.</p>
+  <p class="paid-partnership-note">Paid partnership with Jotform (#JotformPartner)</p>
+  <div class="cta-stack">
+    <a class="btn-cta" href="https://www.jotform.com/pricing/?partner=saasbill" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="jotform" data-cta-location="subpage-summary">Jotform pricing &rarr;</a>
+  </div>
+</section>
+
+<section>
+  <h2>Plan prices and limits</h2>
+  <div class="table-wrap editorial-gap-table mobile-cards">
+    <table>
+      <caption>List prices checked 15 Nov 2026. Monthly Year-1 totals are the monthly rate times 12.</caption>
+      <thead>
+        <tr>
+          <th>Plan</th>
+          <th>One account</th>
+          <th>HIPAA features</th>
+          <th>Limits</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="Plan">Starter</td>
+          <td data-label="One account">Free</td>
+          <td data-label="HIPAA features">Unavailable</td>
+          <td data-label="Limits">1 user</td>
+        </tr>
+        <tr>
+          <td data-label="Plan">Bronze</td>
+          <td data-label="One account">$408 a year ($34 a month, billed annually) or $468 a year ($39 a month)</td>
+          <td data-label="HIPAA features">Unavailable</td>
+          <td data-label="Limits">1 user. 25 forms, 1,000 submissions a month</td>
+        </tr>
+        <tr>
+          <td data-label="Plan">Silver</td>
+          <td data-label="One account">$468 a year ($39 a month, billed annually) or $588 a year ($49 a month)</td>
+          <td data-label="HIPAA features">Unavailable</td>
+          <td data-label="Limits">1 user. 50 forms, 2,500 submissions a month</td>
+        </tr>
+        <tr>
+          <td data-label="Plan">Gold</td>
+          <td data-label="One account">$1,188 a year ($99 a month, billed annually) or $1,548 a year ($129 a month)</td>
+          <td data-label="HIPAA features">Available</td>
+          <td data-label="Limits">1 user. 100 forms, 10,000 submissions a month, 100 GB</td>
+        </tr>
+        <tr>
+          <td data-label="Plan">Enterprise</td>
+          <td data-label="One account">unknown</td>
+          <td data-label="HIPAA features">Available</td>
+          <td data-label="Limits">Unlimited forms and submissions. Multi-user platform, user management, SSO, SLA, data residency, and professional services.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>What applies to a team</h2>
+  <ul class="key-list">
+    <li>A standard plan has a 30-day money-back guarantee: a full refund if you cancel within 30 days of payment. You can cancel at any time. It is a recurring subscription.</li>
+    <li>Enterprise has no month-to-month price. Fees for the whole term are paid up front. There is no trial and no refund. Users added during the term are prorated.</li>
+    <li>Jotform staff say a standard plan cannot add seats, and sharing a login is against the Terms of Use. Enterprise requires a unique person and email for each user, does not allow group aliases, includes up to 5 users in the base package, and sells extra users in bundles of 5. <span class="src-cluster"><a class="src-link" href="https://www.jotform.com/answers/34688901-inquiry-about-multi-user-organizational-account-options" target="_blank" rel="noopener">Jotform staff answer on multi-user accounts</a> <span class="src-date">Accessed 15 Nov 2026.</span></span> <span class="src-cluster"><a class="src-link" href="https://www.jotform.com/answers/35726381-adding-another-user-to-license" target="_blank" rel="noopener">Jotform staff answer on adding a user</a> <span class="src-date">Accessed 15 Nov 2026.</span></span></li>
+    <li>HIPAA features are unavailable on Starter, Bronze, and Silver, and available on Gold and Enterprise. Eligible customers with HIPAA features enabled can sign a BAA with Jotform.</li>
+    <li>On a HIPAA server, administrators only see submission data that was explicitly shared with them. The HIPAA server add-on price, and any extra BAA or HIPAA fee on Enterprise, are unknown.</li>
+    <li>Whether several separate individual accounts are fine in practice when an organization wants shared data is unknown.</li>
+    <li>On Reddit, a small team asked why they cannot have separate individual accounts. This page uses only that question. <span class="src-cluster"><a class="src-link" href="https://www.reddit.com/r/jotform/comments/1w0ud3g/why_cant_a_small_team_have_separate_individual/" target="_blank" rel="noopener">Reddit thread</a> <span class="src-date">Accessed 15 Nov 2026.</span></span></li>
+  </ul>
+</section>
+
+<p class="summary-caveat">Checked 15 Nov 2026. <span class="src-cluster"><a class="src-link" href="https://www.jotform.com/pricing/" target="_blank" rel="noopener">Jotform pricing</a> <span class="src-date">Accessed 15 Nov 2026.</span></span> <span class="src-cluster"><a class="src-link" href="https://www.jotform.com/teams/pricing/" target="_blank" rel="noopener">Jotform teams pricing</a> <span class="src-date">Accessed 15 Nov 2026.</span></span> <span class="src-cluster"><a class="src-link" href="https://www.jotform.com/enterprise/faq/" target="_blank" rel="noopener">Jotform Enterprise FAQ</a> <span class="src-date">Accessed 15 Nov 2026.</span></span> <span class="src-cluster"><a class="src-link" href="https://www.jotform.com/hipaa/" target="_blank" rel="noopener">Jotform HIPAA</a> <span class="src-date">Accessed 15 Nov 2026.</span></span></p>
+
+<script>
+var JF_PLAN_BEFORE_HIPAA = "gold";
+
+function calcJotformTeam(input) {
+  var team = Math.round(Number(input.team));
+  if (!isFinite(team)) team = 4;
+  team = Math.max(1, Math.min(10, team));
+  var billing = input.billing === "monthly" ? "monthly" : "annual";
+  var hipaa = input.hipaa === "yes";
+  var plan = input.plan === "bronze" || input.plan === "silver" ? input.plan : "gold";
+  if (hipaa) plan = "gold";
+  var discount = input.discount === "yes";
+  var rates = {
+    bronze: { name: "Bronze", annual: 40800, monthlyYear: 46800, month: 3900 },
+    silver: { name: "Silver", annual: 46800, monthlyYear: 58800, month: 4900 },
+    gold: { name: "Gold", annual: 118800, monthlyYear: 154800, month: 12900 }
+  };
+  var picked = rates[plan];
+  var one = billing === "annual" ? picked.annual : picked.monthlyYear;
+  var monthEach = picked.month;
+  if (discount) {
+    one = Math.round(one / 2);
+    monthEach = Math.round(monthEach / 2);
+  }
+  var quote = jfQuoteCents(input.quote);
+  return {
+    team: team,
+    billing: billing,
+    hipaa: hipaa,
+    plan: plan,
+    planName: picked.name,
+    discount: discount,
+    one: one,
+    monthEach: monthEach,
+    separate: one * team,
+    quote: quote
+  };
+}
+
+function jfQuoteCents(raw) {
+  if (raw === null || raw === undefined) return null;
+  var text = String(raw).replace(/[$,\s]/g, "");
+  if (!text) return null;
+  if (!/^\d+(\.\d\d?)?$/.test(text)) return null;
+  var parts = text.split(".");
+  var dollars = parseInt(parts[0], 10);
+  var cents = 0;
+  if (parts.length === 2) {
+    var frac = parts[1];
+    if (frac.length === 1) frac += "0";
+    cents = parseInt(frac, 10);
+  }
+  var total = dollars * 100 + cents;
+  if (!isFinite(total) || total <= 0) return null;
+  return total;
+}
+
+function jfMoney(cents) {
+  if (cents === null) return "unknown";
+  var v = Math.round(cents);
+  var neg = v < 0;
+  v = Math.abs(v);
+  var dollars = Math.floor(v / 100);
+  var rem = v % 100;
+  var text = String(dollars);
+  var grouped = "";
+  while (text.length > 3) {
+    grouped = "," + text.slice(-3) + grouped;
+    text = text.slice(0, -3);
+  }
+  var out = "$" + text + grouped;
+  if (rem) out += "." + (rem < 10 ? "0" : "") + rem;
+  return neg ? "-" + out : out;
+}
+
+function jfAccountWord(team) {
+  return team === 1 ? "account" : "accounts";
+}
+
+function jfFormula(c) {
+  var word = jfAccountWord(c.team);
+  var verb = c.team === 1 ? "is" : "are";
+  var parts = [];
+  parts.push(c.team + (c.team === 1 ? " person." : " people."));
+  parts.push(c.billing === "annual" ? "Annual billing." : "Month-to-month billing.");
+  parts.push(c.hipaa ? "HIPAA is on." : "HIPAA is off.");
+  parts.push(c.discount ? "Nonprofit or education discount is on." : "Discount is off.");
+  if (c.billing === "annual") {
+    parts.push("One " + c.planName + " account is " + jfMoney(c.one) + ".");
+    parts.push(c.team + " separate " + c.planName + " " + word + " " + verb + " " + c.team + " times " + jfMoney(c.one) + ", which is " + jfMoney(c.separate) + ".");
+  } else {
+    parts.push("One " + c.planName + " account is " + jfMoney(c.monthEach) + " a month.");
+    parts.push(c.team + " separate " + c.planName + " " + word + " " + verb + " " + c.team + " times " + jfMoney(c.monthEach) + " times 12, which is " + jfMoney(c.separate) + ".");
+  }
+  parts.push(c.quote === null ? "Enterprise quote is unknown." : "Enterprise quote is " + jfMoney(c.quote) + ".");
+  return parts.join(" ");
+}
+
+function jfBreakEven(c) {
+  return "Enterprise is cheaper only if the quote is below " + jfMoney(c.separate) + ".";
+}
+
+function renderJotformTeam(event) {
+  var hipaaEl = document.getElementById("jf-hipaa");
+  var planEl = document.getElementById("jf-plan");
+  if (event && event.target && event.target.id === "jf-plan" && hipaaEl.value !== "yes") {
+    JF_PLAN_BEFORE_HIPAA = planEl.value;
+  }
+  if (event && event.target && event.target.id === "jf-hipaa") {
+    if (hipaaEl.value === "yes") {
+      if (planEl.value === "bronze" || planEl.value === "silver") JF_PLAN_BEFORE_HIPAA = planEl.value;
+      planEl.value = "gold";
+    } else if (JF_PLAN_BEFORE_HIPAA === "bronze" || JF_PLAN_BEFORE_HIPAA === "silver" || JF_PLAN_BEFORE_HIPAA === "gold") {
+      planEl.value = JF_PLAN_BEFORE_HIPAA;
+    }
+  }
+  planEl.disabled = hipaaEl.value === "yes";
+  if (hipaaEl.value === "yes") planEl.value = "gold";
+  var c = calcJotformTeam({
+    team: document.getElementById("jf-team").value,
+    billing: document.getElementById("jf-billing").value,
+    hipaa: hipaaEl.value,
+    plan: planEl.value,
+    quote: document.getElementById("jf-quote").value,
+    discount: document.getElementById("jf-discount").value
+  });
+  document.getElementById("jf-team-val").textContent = String(c.team);
+  var word = jfAccountWord(c.team);
+  var separateName = c.team + " separate " + c.planName + " " + word;
+  var oneName = "One " + c.planName + " account";
+  var showEnterprise = c.quote !== null && c.quote < c.separate;
+  document.getElementById("shell-product").textContent = showEnterprise ? "Enterprise" : separateName;
+  document.getElementById("shell-big").textContent = jfMoney(showEnterprise ? c.quote : c.separate);
+  document.getElementById("shell-sub").textContent = "";
+  document.getElementById("shell-best").textContent = jfBreakEven(c);
+  var bars = [
+    { row: "shell-row-base", amt: "shell-amt-base", cents: c.one },
+    { row: "shell-row-seats", amt: "shell-amt-seats", cents: c.separate },
+    { row: "shell-row-hidden", amt: "shell-amt-hidden", cents: c.quote }
+  ];
+  document.getElementById("shell-title-base").textContent = oneName;
+  document.getElementById("shell-title-seats").textContent = separateName;
+  document.getElementById("shell-title-hidden").textContent = "Enterprise";
+  document.getElementById("shell-sub-base").textContent = "Year 1";
+  document.getElementById("shell-sub-seats").textContent = "Year 1";
+  document.getElementById("shell-sub-hidden").textContent = "Quote";
+  var maxCents = 1;
+  bars.forEach(function (bar) {
+    if (bar.cents !== null && bar.cents > maxCents) maxCents = bar.cents;
+  });
+  bars.forEach(function (bar) {
+    var known = bar.cents !== null;
+    var share = known ? (Math.round(bar.cents / maxCents * 1000) / 10) : 0;
+    document.getElementById(bar.amt).textContent = known ? jfMoney(bar.cents) : "unknown";
+    document.getElementById(bar.row).style.setProperty("--wb-bar-share", share + "%");
+  });
+  var rows = [
+    { name: oneName, text: jfMoney(c.one) },
+    { name: separateName, text: jfMoney(c.separate) },
+    { name: "Enterprise", text: c.quote === null ? "unknown" : jfMoney(c.quote) }
+  ];
+  var html = "";
+  rows.forEach(function (row) {
+    html += "<tr><td data-label=\"Plan\">" + row.name + "</td><td data-label=\"Year 1\">" + row.text + "</td></tr>";
+  });
+  document.getElementById("jf-body").innerHTML = html;
+  document.getElementById("shell-math").textContent = jfFormula(c);
+}
+
+["jf-team", "jf-billing", "jf-hipaa", "jf-plan", "jf-quote", "jf-discount"].forEach(function (id) {
+  var el = document.getElementById(id);
+  el.addEventListener("input", renderJotformTeam);
+  el.addEventListener("change", renderJotformTeam);
+});
+renderJotformTeam();
+</script>
+
+      
+      
+    <section aria-labelledby="related-calculators-heading" style="margin-top:36px; padding-top:24px; border-top:1px solid var(--border);">
+      <h2 id="related-calculators-heading" style="font-size:1.2rem; margin-top:0;">Related calculators</h2>
+      <div class="related-calc-grid">
+        
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../pricing/jotform-pricing-tier-calculator/" data-track="internal-audit">Jotform 2026 Pricing Tier Calculator &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">Starter, Bronze, Silver, and Gold Year-1 cost.</p>
+        </div>
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../compare/typeform-vs-jotform-response-limit-and-hipaa-cost/" data-track="internal-audit">Typeform vs. Jotform Response &amp; HIPAA Calculator &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">Response caps and which plan signs a HIPAA BAA.</p>
+        </div>
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../pricing/pandadoc-vs-docusign-vs-jotform-sign-year-1-cost/" data-track="internal-audit">PandaDoc vs DocuSign vs Jotform Sign &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">Year-1 list price for seats, sent envelopes, and signed documents.</p>
+        </div>
+        <div class="card" style="padding:14px 16px;">
+          <h3 style="margin:0 0 6px; font-size:0.98rem;"><a href="../../compliance/hipaa-baa-and-soc2-pricing-tiers/" data-track="internal-audit">HIPAA BAA &amp; SOC 2 Pricing Tiers &rarr;</a></h3>
+          <p style="margin:0; font-size:0.84rem; color:var(--muted);">Which plan signs a BAA, and what the CPA audit adds.</p>
+        </div>
+      </div>
+      <details class="footer-directory-details">
+        <summary>Browse all calculators and guides</summary>
+        <div class="footer-directory-links">
+          <a href="../../index.html#site-directory" data-track="internal-audit">Every calculator and guide &rarr;</a><a href="../../" data-track="internal-audit">Year-1 SaaS True-Cost Directory &rarr;</a><a href="../../pricing/hubspot-true-cost-and-onboarding-fees/" data-track="internal-audit">HubSpot True Cost &amp; Onboarding &rarr;</a><a href="../../compare/close-crm-vs-hubspot-sales-hub-5-to-20-reps/" data-track="internal-audit">Close CRM vs. HubSpot Sales Hub &rarr;</a><a href="../../compare/close-vs-pipedrive-year-1-cost-calculator/" data-track="internal-audit">Close vs. Pipedrive Year-1 Cost (Calling Included) &rarr;</a><a href="../../compare/pipedrive-vs-salesforce-starter-and-pro-suite-cost/" data-track="internal-audit">Pipedrive vs Salesforce Year-1 cost &rarr;</a><a href="../../pricing/pipedrive-true-year-1-cost-calculator/" data-track="internal-audit">Pipedrive True Year-1 Cost &rarr;</a><a href="../../compare/pipedrive-vs-hubspot-sales-hub-year-1-cost/" data-track="internal-audit">Pipedrive vs. HubSpot Sales Hub Year-1 Cost &rarr;</a><a href="../../pricing/gong-io-platform-fee-and-seat-minimum-calculator/" data-track="internal-audit">Gong.io $5,000 Platform Fee &amp; Seat Calculator &rarr;</a><a href="../../compare/monday-crm-vs-pipedrive-vs-hubspot-seat-minimums/" data-track="internal-audit">monday CRM 3/5/10-Seat Bucket Calculator &rarr;</a><a href="../../intercom-fin-cost-calculator/" data-track="internal-audit">Intercom Fin AI Cost Calculator &rarr;</a><a href="../../intercom-vs-freshdesk-cost-comparison/" data-track="internal-audit">Intercom vs. Freshdesk Cost Comparison &rarr;</a><a href="../../exit/intercom-to-freshdesk-ticket-and-help-center-migration/" data-track="internal-audit">Intercom to Freshdesk migration Year-1 &rarr;</a><a href="../../intercom-vs-zendesk-cost-comparison/" data-track="internal-audit">Intercom vs. Zendesk Cost Comparison &rarr;</a><a href="../../pricing/intercom-fin-ai-resolution-cost-calculator/" data-track="internal-audit">Intercom Fin cost per AI resolution &rarr;</a><a href="../../zendesk-ai-cost-calculator/" data-track="internal-audit">Zendesk AI Cost Calculator &rarr;</a><a href="../../zendesk-vs-freshdesk-cost-comparison/" data-track="internal-audit">Zendesk vs. Freshdesk Cost Comparison &rarr;</a><a href="../../hubspot-onboarding-fee-calculator/" data-track="internal-audit">HubSpot Onboarding Fee Calculator &rarr;</a><a href="../../pricing/zendesk-ai-resolution-and-automated-outcome-cost/" data-track="internal-audit">Zendesk automated resolution cost &rarr;</a><a href="../../pricing/stripe-billing-0-7-percent-recurring-tax-calculator/" data-track="internal-audit">Stripe Billing 0.7% Fee, Tax &amp; Chargeback Calculator &rarr;</a><a href="../../compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/" data-track="internal-audit">Gumroad vs. Whop vs. Lemon Squeezy Take-Rate &amp; Chargeback Calculator &rarr;</a><a href="../../exit/stripe-shopify-paddle-frozen-funds-alternatives/" data-track="internal-audit">Stripe, Shopify &amp; Paddle Frozen Funds &amp; Reserve Calculator &rarr;</a><a href="../../chargeback-fee-and-recovery-calculator/" data-track="internal-audit">Stripe, Shopify &amp; Paddle Chargeback Cost Calculator &rarr;</a><a href="../../exit/paypal-180-day-permanent-limitation-fund-recovery/" data-track="internal-audit">PayPal 180-Day Hold &amp; Reserve Cost Calculator &rarr;</a><a href="../../exit/shopify-payments-chargeback-threshold-and-reserve-appeal/" data-track="internal-audit">Shopify Payments Reserve &amp; Dispute Threshold Calculator &rarr;</a><a href="../../pricing/stripe-radar-and-dispute-fee-calculator-2026/" data-track="internal-audit">Stripe dispute and Radar cost &rarr;</a><a href="../../exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/" data-track="internal-audit">ZoomInfo 60-Day Auto-Renewal Notice &rarr;</a><a href="../../compare/typeform-vs-jotform-response-limit-and-hipaa-cost/" data-track="internal-audit">Typeform vs. Jotform Response &amp; HIPAA Calculator &rarr;</a><a href="../../guides/jotform-wix-app-setup-and-pricing-guide/" data-track="internal-audit">Jotform Wix App Setup &amp; Pricing Guide &rarr;</a><a href="../../pricing/jotform-pricing-tier-calculator/" data-track="internal-audit">Jotform 2026 Pricing Tier Calculator &rarr;</a><a href="../../pricing/docusign-envelope-allowance-and-api-overage-calculator/" data-track="internal-audit">DocuSign 100-Envelope Cap &amp; Overage Calculator &rarr;</a><a href="../../pricing/pandadoc-vs-docusign-vs-jotform-sign-year-1-cost/" data-track="internal-audit">PandaDoc vs DocuSign vs Jotform Sign &rarr;</a><a href="../../pricing/jotform-multi-user-vs-enterprise-year-1-cost/" data-track="internal-audit">Jotform team Year-1 cost &rarr;</a><a href="../../compliance/hipaa-baa-and-soc2-pricing-tiers/" data-track="internal-audit">HIPAA BAA &amp; SOC 2 Pricing Tiers &rarr;</a><a href="../../compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/" data-track="internal-audit">Google Workspace vs. Microsoft 365 HIPAA BAA &rarr;</a><a href="../../compliance/okta-vs-workos-vs-1password-sso-tax-calculator/" data-track="internal-audit">SSO tax calculator &rarr;</a><a href="../../compliance/vanta-vs-drata-vs-comp-ai-soc2-negotiation-benchmarks/" data-track="internal-audit">SOC 2 cost calculator &rarr;</a><a href="../../compare/deel-vs-rippling-eor-hidden-fx-and-offboarding-fees/" data-track="internal-audit">Deel vs Rippling EOR cost &rarr;</a><a href="../../compliance/ai-voice-and-transcription-hipaa-baa-matrix-2026/" data-track="internal-audit">AI voice HIPAA BAA matrix &rarr;</a><a href="../../faq/does-hubspot-charge-onboarding-fees-2026/" data-track="internal-audit">Does HubSpot Charge Onboarding Fees in 2026? &rarr;</a><a href="../../faq/intercom-fin-ai-cost-calculator/" data-track="internal-audit">How much does Intercom Fin cost per resolution? &rarr;</a><a href="../../faq/stripe-vs-paddle-true-cost/" data-track="internal-audit">Stripe vs. Paddle vs. Whop True Cost &amp; Chargeback Calculator &rarr;</a><a href="../../pricing/stripe-shopify-chargeback-fee-and-chargeflow-roi-calculator/" data-track="internal-audit">Chargeflow ROI vs manual dispute handling &rarr;</a><a href="../../pricing/chargeflow-vs-stripe-smart-disputes-year-1-cost/" data-track="internal-audit">Chargeflow vs Stripe Smart Disputes &rarr;</a><a href="../../pricing/hubspot-payments-vs-stripe-platform-fee-year-1-cost/" data-track="internal-audit">HubSpot payments vs connecting Stripe &rarr;</a>
+        </div>
+      </details>
+    </section>
+    
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <p><strong>SaaSBill</strong> &middot; Year-1 cost &amp; contract calculators for B2B software.</p>
+      <p class="footer-note"><a class="footer-disclosure" href="../../index.html#methodology">Some links are affiliate links. They never change the math.</a> &middot; Updated <time datetime="2026-11-15">Nov 15, 2026</time> &middot; Inquiries: <a href="mailto:info@saasbill.io">info@saasbill.io</a></p>
+    </div>
+  </footer>
+  <script>
+  /* Plausible + local event dispatcher for: calculator_interaction, category_select, result_rendered, vendor_cta_click */
+  window.__saasbillEvents = window.__saasbillEvents || [];
+  try {
+    var p = (window.location && window.location.pathname ? window.location.pathname : '').toLowerCase();
+    if (p && p !== '/' && p !== '/index.html') {
+      var ctxCat = '';
+      var ctxTool = '';
+      if (p.indexOf('zoominfo') !== -1) {
+        ctxCat = 'CRM & Sales';
+        ctxTool = 'close-crm';
+      } else if (p.indexOf('stripe') !== -1 || p.indexOf('paddle') !== -1 || p.indexOf('whop') !== -1 || p.indexOf('gumroad') !== -1 || p.indexOf('paypal') !== -1) {
+        ctxCat = 'Payment Processors & MoR';
+        ctxTool = p.indexOf('paddle') !== -1 ? 'paddle-mor' : (p.indexOf('whop') !== -1 ? 'whop-payments' : 'stripe-payments');
+      } else if (p.indexOf('hubspot') !== -1 || p.indexOf('close-crm') !== -1 || p.indexOf('pipedrive') !== -1 || p.indexOf('monday-crm') !== -1 || p.indexOf('gong') !== -1) {
+        ctxCat = 'CRM & Sales';
+        ctxTool = p.indexOf('monday') !== -1 ? 'monday-crm' : (p.indexOf('close') !== -1 ? 'close-crm' : (p.indexOf('pipedrive') !== -1 ? 'pipedrive-crm' : 'hubspot-sales-pro'));
+      } else if (p.indexOf('hipaa') !== -1 || p.indexOf('soc2') !== -1 || p.indexOf('docusign') !== -1 || p.indexOf('typeform') !== -1 || p.indexOf('jotform') !== -1) {
+        ctxCat = 'Compliance, HIPAA & SOC 2';
+        ctxTool = (p.indexOf('typeform') !== -1 || p.indexOf('jotform') !== -1) ? 'jotform-hipaa' : 'vanta-soc2';
+      } else if (p.indexOf('intercom') !== -1 || p.indexOf('zendesk') !== -1 || p.indexOf('freshdesk') !== -1) {
+        ctxCat = 'Helpdesk & AI Support';
+        ctxTool = p.indexOf('intercom') !== -1 ? 'intercom-fin-ai' : (p.indexOf('freshdesk') !== -1 ? 'freshdesk-support' : 'zendesk-suite-team');
+      }
+      if (ctxCat && window.sessionStorage) {
+        sessionStorage.setItem('saasbill_last_cat', ctxCat);
+        if (ctxTool) sessionStorage.setItem('saasbill_last_tool', ctxTool);
+      }
+    }
+  } catch (err) {}
+  document.addEventListener('click', function(e) {
+    var cta = e.target.closest('[data-track="vendor-cta"], [data-track="vendor_cta_click"]');
+    if (cta) {
+      var vendor = cta.getAttribute('data-vendor') || '';
+      var location = cta.getAttribute('data-cta-location') || 'subpage-result';
+      var href = cta.getAttribute('href') || '';
+      if (typeof window.trackSaaSBillEvent === 'function') {
+        window.trackSaaSBillEvent('vendor_cta_click', { vendor: vendor, location: location, href: href });
+      }
+      return;
+    }
+    var catBtn = e.target.closest('[data-track="category-select"], [data-track="category_select"]');
+    if (catBtn) {
+      var cat = catBtn.getAttribute('data-cat') || '';
+      if (typeof window.trackSaaSBillEvent === 'function') {
+        window.trackSaaSBillEvent('category_select', { category: cat });
+      }
+    }
+  });
+  var _lastCalcTrackKey = '';
+  var _lastCalcTrackTs = 0;
+  function handleCalcControlEvent(e) {
+    var ctrl = e.target.closest('[data-track="calculator-control"], [data-track="calculator_interaction"], input[type="range"], select');
+    if (ctrl) {
+      var control = ctrl.getAttribute('data-control') || ctrl.id || '';
+      var val = String(ctrl.value);
+      var now = Date.now();
+      var key = control + ':' + val;
+      if (key === _lastCalcTrackKey && (now - _lastCalcTrackTs) < 150) return;
+      _lastCalcTrackKey = key;
+      _lastCalcTrackTs = now;
+      if (typeof window.trackSaaSBillEvent === 'function') {
+        window.trackSaaSBillEvent('calculator_interaction', { control: control, value: val });
+        if (ctrl.id === 'cat-filter') {
+          window.trackSaaSBillEvent('category_select', { category: val });
+        }
+      }
+    }
+  }
+  document.addEventListener('input', handleCalcControlEvent);
+  document.addEventListener('change', handleCalcControlEvent);
+  </script>
+  <script src="../../assets/app.js?v=20261030a"></script>
+</body>
+</html>
