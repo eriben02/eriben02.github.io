@@ -9,7 +9,7 @@ REL = "compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/index.html"
 TITLE = "Gumroad vs Whop vs Lemon Squeezy Fees (2026) – saasbill.io"
 CHECKED = "Oct 26, 2026"
 CHECKED_ISO = "2026-10-26"
-WHOP_URL = "https://whop.com/sell?a=baggyprairieae"
+WHOP_URL = "/go/whop"
 GUMROAD_URL = "https://gumroad.com/pricing"
 LS_URL = "https://www.lemonsqueezy.com/pricing"
 

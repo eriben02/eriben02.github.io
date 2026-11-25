@@ -9,7 +9,7 @@ REL = "compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/index.html"
 TITLE = "Google Workspace vs M365 HIPAA BAA (2026) – saasbill.io"
 DESC = ("Google Workspace vs. Microsoft 365 HIPAA BAA guide for 2026: the cheapest BAA-eligible editions both start at $7/user/mo. "
         "Compare Vault and archiving gaps, billing terms, auto-renewal and HIPAA form intake costs.")
-JOTFORM = "https://www.jotform.com/hipaa/pricing/?partner=saasbill"
+JOTFORM = "/go/jotform"
 GW_PRICING = "https://workspace.google.com/pricing"
 MS_PRICING = "https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products"
 
@@ -253,7 +253,7 @@ const GW = {starter:{annual:7, flex:8.40}, standard:{annual:14, flex:16.80}, plu
 const MS = {new:{basic:7, standard:14, premium:22}, old:{basic:6, standard:12.50, premium:22}};
 const EOA = 3;
 const JF = {annual:99, monthly:129};
-const URLS = {gw:'https://workspace.google.com/pricing', ms:'https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products', jf:'https://www.jotform.com/hipaa/pricing/?partner=saasbill'};
+const URLS = {gw:'https://workspace.google.com/pricing', ms:'https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products', jf:'/go/jotform'};
 const fmt = n => '$' + Math.round(n).toLocaleString('en-US');
 const fmt2 = n => '$' + n.toFixed(2);
 function msRate(base, term) {

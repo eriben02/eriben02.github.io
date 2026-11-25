@@ -23,6 +23,7 @@
   <meta name="dcterms.modified" content="2026-10-30T08:34:14+00:00" />
   <meta name="dcterms.issued" content="2026-10-30" />
   <link rel="canonical" href="https://saasbill.io/exit/paypal-180-day-permanent-limitation-fund-recovery/" />
+  <link rel="icon" href="/favicon.ico" />
   <link rel="stylesheet" href="../../assets/styles.css?v=20261030c" />
   <link rel="alternate" type="text/plain" href="https://saasbill.io/llms.txt" title="SaaSBill LLMs.txt Summary" />
   <!-- Privacy-friendly analytics by Plausible -->
@@ -192,7 +193,7 @@
       <p class="wb-budget-subnote" id="shell-sub">Matches advertised price ($0 hidden fees).</p>
       <div class="wb-best-option" id="shell-best"></div>
       <div class="cta-stack">
-        <a id="shell-cta" class="btn-cta wb-primary-cta" href="https://whop.com/sell?a=baggyprairieae" data-track="vendor-cta" data-vendor="whop-payments" data-cta-location="workbench">View Whop Payments pricing &rarr;</a>
+        <a id="shell-cta" class="btn-cta wb-primary-cta" href="/go/whop" data-track="vendor-cta" data-vendor="whop-payments" data-cta-location="workbench" rel="sponsored nofollow noopener" target="_blank">View Whop Payments pricing &rarr;</a>
       </div>
     </div>
   </div>
@@ -314,7 +315,7 @@ function runPageCalc() {
         const whopFeeYr = Math.round((gmv * 0.027 + tx * 0.30) * 12);
         const saved = Math.max(0, ppFeeYr - whopFeeYr) + ppHeld;
         const rows = [
-          {name: 'Whop Payments (Multi-PSP Orchestration)', plan: '2.7% + $0.30 per card charge', base: '$' + whopFeeYr.toLocaleString('en-US') + '/yr fees', hidden: '$0 single-processor freeze (multi-PSP routing)', total: '$' + whopFeeYr.toLocaleString('en-US') + '/yr', url: 'https://whop.com/sell?a=baggyprairieae', cta: 'View Whop Payments pricing', vendor: 'whop-payments', status: 'Verified', src: 'https://whop.com/sell'},
+          {name: 'Whop Payments (Multi-PSP Orchestration)', plan: '2.7% + $0.30 per card charge', base: '$' + whopFeeYr.toLocaleString('en-US') + '/yr fees', hidden: '$0 single-processor freeze (multi-PSP routing)', total: '$' + whopFeeYr.toLocaleString('en-US') + '/yr', url: '/go/whop', cta: 'View Whop Payments pricing', vendor: 'whop-payments', status: 'Verified', src: 'https://whop.com/sell'},
           {name: 'Chargeflow (Automated Dispute Recovery)', plan: '25% performance-only rev-share', base: '$0 fixed monthly fee', hidden: 'Prevents >1.5% High-Volume Dispute tier', total: 'Pay on won disputes only', url: 'https://www.chargeflow.io/pricing', cta: 'View Chargeflow pricing', vendor: 'chargeflow', status: 'Verified', src: 'https://www.chargeflow.io/pricing'},
           {name: 'PayPal Commercial Checkout', plan: '3.49% + $0.49 per transaction', base: '$' + ppFeeYr.toLocaleString('en-US') + '/yr fees', hidden: '$' + ppHeld.toLocaleString('en-US') + ' cash locked up to 180 days', total: '$' + ppFeeYr.toLocaleString('en-US') + '/yr + $' + ppHeld.toLocaleString('en-US') + ' held', url: 'https://www.paypal.com/us/business/paypal-business-fees', cta: 'View PayPal fees', vendor: 'paypal', status: 'Verified', src: 'https://www.paypal.com/us/business/paypal-business-fees'}
         ];
@@ -325,7 +326,7 @@ function runPageCalc() {
       <div class="summary-metric">${rows[0].total}</div>
       <div class="summary-scenario"><strong>${rows[0].name}</strong> &middot; Based on ${document.getElementById('p-slider-val').textContent}</div>
       <div class="summary-actions">
-        <a href="https://whop.com/sell?a=baggyprairieae" target="_blank" rel="noopener" class="btn-cta" data-track="vendor-cta" data-vendor="whop-payments" data-cta-location="subpage-summary">View Whop Payments pricing &rarr;</a>
+        <a href="/go/whop" target="_blank" rel="sponsored nofollow noopener" class="btn-cta" data-track="vendor-cta" data-vendor="whop-payments" data-cta-location="subpage-summary">View Whop Payments pricing &rarr;</a>
       </div>
     </div>
   `;

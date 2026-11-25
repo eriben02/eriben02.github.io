@@ -23,6 +23,7 @@
   <meta name="dcterms.modified" content="2026-10-30T08:34:14+00:00" />
   <meta name="dcterms.issued" content="2026-10-30" />
   <link rel="canonical" href="https://saasbill.io/pricing/jotform-pricing-tier-calculator/" />
+  <link rel="icon" href="/favicon.ico" />
   <link rel="stylesheet" href="../../assets/styles.css?v=20261030c" />
   <link rel="alternate" type="text/plain" href="https://saasbill.io/llms.txt" title="SaaSBill LLMs.txt Summary" />
   <!-- Privacy-friendly analytics by Plausible -->
@@ -273,7 +274,7 @@ function runJfTierCalc() {
     {name: 'Jotform Starter (Free)', rate: '$0/mo', quotas: '5 forms · 100 submissions/mo · 100 MB storage', hidden: 'Jotform branding shown on embedded forms', total: '$0/yr', url: 'https://www.jotform.com/?partner=eriben02'},
     {name: 'Jotform Bronze', rate: '$' + bronzeMo + '/mo', quotas: '25 forms · 1,000 submissions/mo · 1 GB storage', hidden: '$0 onboarding · Custom branding unlocked', total: '$' + (bronzeMo * 12).toLocaleString('en-US') + '/yr', url: 'https://www.jotform.com/pricing/?partner=eriben02'},
     {name: 'Jotform Silver', rate: '$' + silverMo + '/mo', quotas: '50 forms · 2,500 submissions/mo · 10 GB storage', hidden: 'Best value per submission ($0.015/submission at capacity)', total: '$' + (silverMo * 12).toLocaleString('en-US') + '/yr', url: 'https://www.jotform.com/pricing/?partner=eriben02'},
-    {name: 'Jotform Gold', rate: '$' + goldMo + '/mo', quotas: '100 forms · 10,000 submissions/mo · 100 GB storage', hidden: 'HIPAA features, BAA available to eligible customers', total: '$' + (goldMo * 12).toLocaleString('en-US') + '/yr', url: 'https://www.jotform.com/hipaa/pricing/?partner=saasbill'}
+    {name: 'Jotform Gold', rate: '$' + goldMo + '/mo', quotas: '100 forms · 10,000 submissions/mo · 100 GB storage', hidden: 'HIPAA features, BAA available to eligible customers', total: '$' + (goldMo * 12).toLocaleString('en-US') + '/yr', url: '/go/jotform'}
   ];
 
   if (typeof window.saasbillApplyWorkbench === 'function') {
@@ -297,7 +298,7 @@ function runJfTierCalc() {
       <td data-label="Included Quotas">${r.quotas}</td>
       <td data-label="Hidden Cost Highlight"><strong>Hidden Cost Highlight:</strong> ${r.hidden}</td>
       <td data-label="True Year-1 Cost"><strong>${r.total}</strong></td>
-      <td data-label="Action"><a class="btn-secondary" href="${r.url}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="jotform" data-cta-location="jf-tier-table">View Jotform pricing &rarr;</a></td>
+      <td data-label="Action"><a class="btn-secondary" href="${r.url}" target="_blank" rel="${String(r.url).indexOf('/go/')===0?'sponsored nofollow noopener':'nofollow noopener'}" data-track="vendor-cta" data-vendor="jotform" data-cta-location="jf-tier-table">View Jotform pricing &rarr;</a></td>
     </tr>
   `).join('');
 }

@@ -23,6 +23,7 @@
   <meta name="dcterms.modified" content="2026-10-30T08:34:14+00:00" />
   <meta name="dcterms.issued" content="2026-10-29" />
   <link rel="canonical" href="https://saasbill.io/exit/shopify-payments-chargeback-threshold-and-reserve-appeal/" />
+  <link rel="icon" href="/favicon.ico" />
   <link rel="stylesheet" href="../../assets/styles.css?v=20261030c" />
   <link rel="alternate" type="text/plain" href="https://saasbill.io/llms.txt" title="SaaSBill LLMs.txt Summary" />
   <!-- Privacy-friendly analytics by Plausible -->
@@ -206,7 +207,7 @@
       <p class="wb-budget-subnote" id="sh-sub"></p>
       <div class="wb-best-option" id="sh-best"></div>
       <div class="cta-stack">
-        <a id="sh-primary" class="btn-cta wb-primary-cta" href="../chargeback-fee-and-recovery-calculator/" data-track="internal-audit">Open the chargeback cost calculator &rarr;</a>
+        <a id="sh-primary" class="btn-cta wb-primary-cta" href="../../chargeback-fee-and-recovery-calculator/" data-track="internal-audit">Open the chargeback cost calculator &rarr;</a>
       </div>
     </div>
   </div>
@@ -382,7 +383,7 @@ function renderShopifyReserve() {
     + '<tr><td data-label="Path"><strong>Shopify Payments, manual contest</strong></td><td data-label="What you pay">' + shMoney(c.stickerYr) + '/yr sticker + dispute drain if you can fight</td><td data-label="Cash held">' + (c.ndrp ? 'Not this path' : shMoney(0) + ' published reserve') + '</td><td data-label="Limitation">Win rate is not guaranteed. Won disputes still count. <a href="https://help.shopify.com/en/manual/payments/chargebacks/chargeback-process" target="_blank" rel="noopener">Verified source</a></td></tr>'
     + '<tr><td data-label="Path"><strong>Shopify NDRP</strong></td><td data-label="What you pay">Full order reimbursed + $15 US fee</td><td data-label="Cash held">' + shMoney(c.reserveMo) + '/mo at the published 10%</td><td data-label="Limitation">' + (c.ndrp ? 'This rate is on the 1.5% enrollment line.' : 'Not on the 1.5% enrollment line at this rate.') + ' <a href="https://help.shopify.com/en/manual/payments/chargebacks/network-dispute-resolution-programs" target="_blank" rel="noopener">Verified source</a></td></tr>'
     + '<tr><td data-label="Path"><strong>Chargeflow</strong></td><td data-label="What you pay">25% of recovered dollars, $0/mo in this model</td><td data-label="Cash held">Does not release a Shopify reserve</td><td data-label="Limitation">' + cfLimit + '</td></tr>'
-    + '<tr><td data-label="Path"><strong>Another processor</strong></td><td data-label="What you pay">Its own rate. See the Stripe, Paddle, and Whop calculators.</td><td data-label="Cash held">Does not erase Shopify Payments history</td><td data-label="Limitation">Moving new volume elsewhere does not rewrite the 90-day Shopify rate. <a href="../exit/stripe-shopify-paddle-frozen-funds-alternatives/" data-track="internal-audit">Stripe, Shopify and Paddle reserves</a></td></tr>';
+    + '<tr><td data-label="Path"><strong>Another processor</strong></td><td data-label="What you pay">Its own rate. See the Stripe, Paddle, and Whop calculators.</td><td data-label="Cash held">Does not erase Shopify Payments history</td><td data-label="Limitation">Moving new volume elsewhere does not rewrite the 90-day Shopify rate. <a href="../../exit/stripe-shopify-paddle-frozen-funds-alternatives/" data-track="internal-audit">Stripe, Shopify and Paddle reserves</a></td></tr>';
   if (typeof window.trackSaaSBillEvent === 'function') {
     window.trackSaaSBillEvent('result_rendered', { page: 'shopify-reserve', orders: orders, aov: aov, rate: ratePct, plan: planId });
   }

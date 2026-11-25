@@ -29,8 +29,12 @@ PUBLIC_DIR = os.path.join(BASE_DIR, "public")
 GO_PAGES = {
     "close": "close-crm",
     "pipedrive": "pipedrive",
+    "apollo": "apollo",
     "vanta": "vanta",
     "drata": "drata",
+    # Approved tracking URLs already in affiliate_links.json. Not new destinations.
+    "whop": "whop",
+    "jotform": "jotform",
 }
 
 TEMPLATE = """<!doctype html><html lang="en"><head><meta charset="utf-8">

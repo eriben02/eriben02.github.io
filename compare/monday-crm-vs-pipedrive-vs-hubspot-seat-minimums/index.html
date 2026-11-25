@@ -23,6 +23,7 @@
   <meta name="dcterms.modified" content="2026-10-30T08:34:14+00:00" />
   <meta name="dcterms.issued" content="2026-10-30" />
   <link rel="canonical" href="https://saasbill.io/compare/monday-crm-vs-pipedrive-vs-hubspot-seat-minimums/" />
+  <link rel="icon" href="/favicon.ico" />
   <link rel="stylesheet" href="../../assets/styles.css?v=20261030c" />
   <link rel="alternate" type="text/plain" href="https://saasbill.io/llms.txt" title="SaaSBill LLMs.txt Summary" />
   <!-- Privacy-friendly analytics by Plausible -->
@@ -265,7 +266,7 @@ function updateSmCalc() {
     const lowestIsPipe = pipeYr <= monYr;
     const lowName = lowestIsPipe ? 'Pipedrive CRM' : 'monday CRM';
     const lowYr = lowestIsPipe ? pipeYr : monYr;
-    const lowUrl = lowestIsPipe ? 'https://www.pipedrive.com/en/pricing' : 'https://monday.com/pricing';
+    const lowUrl = lowestIsPipe ? '/go/pipedrive' : 'https://monday.com/pricing';
     const lowVendor = lowestIsPipe ? 'pipedrive-crm' : 'monday-crm';
     const lowCta = lowestIsPipe ? 'Explore Pipedrive plans &rarr;' : 'View monday CRM pricing &rarr;';
     smSummary.innerHTML = `
@@ -277,9 +278,9 @@ function updateSmCalc() {
         <div class="summary-caveat"><strong>Contract note:</strong> ${lowestIsPipe ? 'Pipedrive bills strictly 1:1 per active user with no seat-bucket padding.' : `At ${u} users, monday CRM's ${monSeats}-seat bucket beats 1:1 per-seat pricing.`}</div>
         <div class="summary-actions">
           <div class="cta-stack">
-            <a class="btn-cta" href="${lowUrl}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${lowVendor}" data-cta-location="summary-card">${lowCta}</a>
+            <a class="btn-cta" href="${lowUrl}" target="_blank" rel="${String(lowUrl).indexOf('/go/')===0?'sponsored nofollow noopener':'nofollow noopener'}" data-track="vendor-cta" data-vendor="${lowVendor}" data-cta-location="summary-card">${lowCta}</a>
           </div>
-          <a class="summary-audit-link" href="https://refer.close.com/3k5hp07b8soi-fetl0j" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="close-crm" data-cta-location="summary-card">Check Close CRM (1:1 seats + built-in calling) &rarr;</a>
+          <a class="summary-audit-link" href="/go/close" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="close-crm" data-cta-location="summary-card">Check Close CRM (1:1 seats + built-in calling) &rarr;</a>
         </div>
       </div>
       <div class="summary-card card-hidden">
@@ -319,7 +320,7 @@ function updateSmCalc() {
       baseLabel: u + ' users at $' + monRate + '/seat',
       hiddenLabel: unusedSeats + ' unused seats in the ' + monSeats + '-seat bucket',
       bestHtml: '<strong>Lowest modeled cost:</strong> ' + (pipeYr <= monYr ? 'Pipedrive' : 'monday CRM') + ' at $' + Math.min(pipeYr, monYr).toLocaleString() + '/yr.',
-      ctaHref: pipeYr <= monYr ? 'https://www.pipedrive.com/en/pricing' : 'https://monday.com/pricing',
+      ctaHref: pipeYr <= monYr ? '/go/pipedrive' : 'https://monday.com/pricing',
       ctaLabel: pipeYr <= monYr ? 'Explore Pipedrive plans' : 'View monday CRM pricing',
       ctaVendor: pipeYr <= monYr ? 'pipedrive-crm' : 'monday-crm'
     });
@@ -332,7 +333,7 @@ function updateSmCalc() {
       <td data-label="Billed Seats"><span class="badge badge-low">${u} seat(s) (exact 1:1)</span></td>
       <td data-label="Effective Cost / User" style="font-family:var(--sans); font-variant-numeric:tabular-nums;">$${pipeRate.toFixed(2)} / user / mo</td>
       <td data-label="Total Annual Bill" class="price-highlight">$${pipeYr.toLocaleString()} / yr<div class="cell-scenario">${scenarioLine}</div></td>
-      <td data-label="Next Step"><div class="cta-stack"><a class="btn-secondary" href="https://www.pipedrive.com/en/pricing" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="pipedrive-crm" data-cta-location="table-row">Explore Pipedrive plans &rarr;</a></div></td>
+      <td data-label="Next Step"><div class="cta-stack"><a class="btn-secondary" href="/go/pipedrive" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="pipedrive-crm" data-cta-location="table-row">Explore Pipedrive plans &rarr;</a></div></td>
     </tr>
     <tr>
       <td data-label="CRM Platform"><strong>Close CRM (${tier === 'entry' ? 'Essentials' : 'Growth'})</strong> <span class="status-pill status-verified">Verified</span><div class="source-inline">Verified source: <a href="https://www.close.com/pricing" target="_blank" rel="noopener">Close pricing &nearr;</a></div></td>
@@ -340,7 +341,7 @@ function updateSmCalc() {
       <td data-label="Billed Seats"><span class="badge badge-low">${u} seat(s) (exact 1:1, $0 onboarding)</span></td>
       <td data-label="Effective Cost / User" style="font-family:var(--sans); font-variant-numeric:tabular-nums;">$${closeRate.toFixed(2)} / user / mo</td>
       <td data-label="Total Annual Bill" class="price-highlight">$${closeYr.toLocaleString()} / yr<div class="cell-scenario">${scenarioLine}</div></td>
-      <td data-label="Next Step"><div class="cta-stack"><a class="btn-secondary" href="https://refer.close.com/3k5hp07b8soi-fetl0j" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="close-crm" data-cta-location="table-row">Check Close pricing &rarr;</a></div></td>
+      <td data-label="Next Step"><div class="cta-stack"><a class="btn-secondary" href="/go/close" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="close-crm" data-cta-location="table-row">Check Close pricing &rarr;</a></div></td>
     </tr>
     <tr>
       <td data-label="CRM Platform"><strong>monday CRM</strong> <span class="status-pill status-verified">Verified</span><div class="source-inline">Verified source: <a href="https://monday.com/pricing" target="_blank" rel="noopener">monday.com pricing &nearr;</a></div></td>

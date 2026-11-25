@@ -262,7 +262,8 @@ class TestSaaSBillCalculators(unittest.TestCase):
         self.assertIn('id="chart-dynamic-subtitle"', hs_html)
         self.assertNotIn('class="invoice-box"', hs_html)
         self.assertNotIn('id="hs-tbody"', hs_html)
-        self.assertIn("https://refer.close.com/3k5hp07b8soi-fetl0j", hs_html)
+        self.assertIn('href="/go/close"', hs_html)
+        self.assertNotIn("refer.close.com", hs_html)
 
         for ic_rel in ("intercom-fin-cost-calculator/index.html", "pricing/intercom-fin-ai-resolution-cost-calculator/index.html"):
             ic_page = os.path.join(PUBLIC_DIR, ic_rel)
@@ -526,7 +527,8 @@ class TestSaaSBillCalculators(unittest.TestCase):
         for bad in ["Answer First:", "Direct Answer", "TL;DR", "SaaSTruth", "Erik", "Bengtsson"]:
             self.assertNotIn(bad, html)
         self.assertIn('"FAQPage"', html)
-        self.assertIn("https://whop.com/sell?a=baggyprairieae", html)
+        self.assertIn("/go/whop", html)
+        self.assertNotIn("whop.com/sell?a=", html)
         self.assertIn("Verified source", html)
         self.assertIn('itemprop="dateModified"', html)
         self.assertIn("byline-bar", html)
@@ -938,11 +940,8 @@ class TestSaaSBillCalculators(unittest.TestCase):
             self.assertIn("index.html#methodology", html, rel)
             if any(marker in html for marker in markers):
                 affiliate_pages.append(rel)
-            if loc in ("", "/"):
-                self.assertEqual(html.count(full), 1, rel)
-                self.assertIn("<strong>Affiliate Disclosure &amp; Sources</strong>", html)
-            else:
-                self.assertNotIn(full, html, rel)
+            self.assertNotIn(full, html, rel)
+            self.assertNotIn("<strong>Affiliate Disclosure", html, rel)
         self.assertGreaterEqual(len(affiliate_pages), 10)
         self.assertIn("compare/close-vs-pipedrive-year-1-cost-calculator/index.html", affiliate_pages)
         self.assertIn("index.html", affiliate_pages)
@@ -1247,7 +1246,8 @@ class TestSaaSBillCalculators(unittest.TestCase):
         self.assertIn('id="full-table-details"', html)
         self.assertIn("https://www.zoominfo.com/legal/ltc_03_06_2024", html)
         self.assertIn("https://www.zoominfo.com/legal/ltc", html)
-        self.assertIn("https://refer.close.com/3k5hp07b8soi-fetl0j", html)
+        self.assertIn('href="/go/close"', html)
+        self.assertNotIn("refer.close.com", html)
         self.assertIn("Verified source", html)
         self.assertIn("not a ZoomInfo contact database", html)
         self.assertIn("out of date", html)

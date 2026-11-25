@@ -23,6 +23,7 @@
   <meta name="dcterms.modified" content="2026-10-30T08:34:14+00:00" />
   <meta name="dcterms.issued" content="2026-10-30" />
   <link rel="canonical" href="https://saasbill.io/pricing/docusign-envelope-allowance-and-api-overage-calculator/" />
+  <link rel="icon" href="/favicon.ico" />
   <link rel="stylesheet" href="../../assets/styles.css?v=20261030c" />
   <link rel="alternate" type="text/plain" href="https://saasbill.io/llms.txt" title="SaaSBill LLMs.txt Summary" />
   <!-- Privacy-friendly analytics by Plausible -->
@@ -192,7 +193,7 @@
       <p class="wb-budget-subnote" id="shell-sub">Matches advertised price ($0 hidden fees).</p>
       <div class="wb-best-option" id="shell-best"></div>
       <div class="cta-stack">
-        <a id="shell-cta" class="btn-cta wb-primary-cta" href="https://www.jotform.com/hipaa/pricing/?partner=saasbill" data-track="vendor-cta" data-vendor="jotform-hipaa" data-cta-location="workbench">View Jotform HIPAA pricing &rarr;</a>
+        <a id="shell-cta" class="btn-cta wb-primary-cta" href="/go/jotform" data-track="vendor-cta" data-vendor="jotform-hipaa" data-cta-location="workbench" rel="sponsored nofollow noopener" target="_blank">View Jotform HIPAA pricing &rarr;</a>
       </div>
     </div>
   </div>
@@ -319,7 +320,7 @@ function runPageCalc() {
         const pdYr = users * 49 * 12;
         const saved = Math.max(0, dsYr - jfYr);
         const rows = [
-          {name: 'Jotform Sign (Gold HIPAA Plan)', plan: '$99/mo flat annual', base: '$' + jfYr.toLocaleString('en-US') + '/yr', hidden: '$0 per-envelope overage fees', total: '$' + jfYr.toLocaleString('en-US') + '/yr', url: 'https://www.jotform.com/hipaa/pricing/?partner=saasbill', cta: 'View Jotform HIPAA pricing', vendor: 'jotform-hipaa', status: 'Verified', src: 'https://www.jotform.com/hipaa/pricing/'},
+          {name: 'Jotform Sign (Gold HIPAA Plan)', plan: '$99/mo flat annual', base: '$' + jfYr.toLocaleString('en-US') + '/yr', hidden: '$0 per-envelope overage fees', total: '$' + jfYr.toLocaleString('en-US') + '/yr', url: '/go/jotform', cta: 'View Jotform HIPAA pricing', vendor: 'jotform-hipaa', status: 'Verified', src: 'https://www.jotform.com/hipaa/pricing/'},
           {name: 'PandaDoc (Business)', plan: '$49/seat/mo annual (' + users + ' seats)', base: '$' + pdYr.toLocaleString('en-US') + '/yr', hidden: '$0 envelope cap on manual sends', total: '$' + pdYr.toLocaleString('en-US') + '/yr', url: 'https://www.pandadoc.com/pricing/', cta: 'View PandaDoc pricing', vendor: 'pandadoc', status: 'Verified', src: 'https://www.pandadoc.com/pricing/'},
           {name: 'DocuSign (Business Pro)', plan: '$40/user/mo annual (' + users + ' users)', base: '$' + dsBaseYr.toLocaleString('en-US') + '/yr', hidden: dsHiddenYr > 0 ? '+$' + dsHiddenYr.toLocaleString('en-US') + '/yr (' + dsOverageCount + ' extra envelopes @ $2.50)' : '$0 (within ' + dsIncluded + '/yr cap)', total: '$' + dsYr.toLocaleString('en-US') + '/yr', url: 'https://www.docusign.com/products-and-pricing', cta: 'View DocuSign pricing', vendor: 'docusign', status: 'Verified', src: 'https://www.docusign.com/products-and-pricing'}
         ];
@@ -330,7 +331,7 @@ function runPageCalc() {
       <div class="summary-metric">${rows[0].total}</div>
       <div class="summary-scenario"><strong>${rows[0].name}</strong> &middot; Based on ${document.getElementById('p-slider-val').textContent}</div>
       <div class="summary-actions">
-        <a href="https://www.jotform.com/hipaa/pricing/?partner=saasbill" target="_blank" rel="noopener" class="btn-cta" data-track="vendor-cta" data-vendor="jotform-hipaa" data-cta-location="subpage-summary">View Jotform HIPAA pricing &rarr;</a>
+        <a href="/go/jotform" target="_blank" rel="sponsored nofollow noopener" class="btn-cta" data-track="vendor-cta" data-vendor="jotform-hipaa" data-cta-location="subpage-summary">View Jotform HIPAA pricing &rarr;</a>
       </div>
     </div>
   `;

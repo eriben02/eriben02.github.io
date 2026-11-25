@@ -23,6 +23,7 @@
   <meta name="dcterms.modified" content="2026-10-30T09:31:32+00:00" />
   <meta name="dcterms.issued" content="2026-10-26" />
   <link rel="canonical" href="https://saasbill.io/compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/" />
+  <link rel="icon" href="/favicon.ico" />
   <link rel="stylesheet" href="../../assets/styles.css?v=20261030c" />
   <link rel="alternate" type="text/plain" href="https://saasbill.io/llms.txt" title="SaaSBill LLMs.txt Summary" />
   <!-- Privacy-friendly analytics by Plausible -->
@@ -415,7 +416,7 @@ function updateTr() {
     {id: 'whop-payments', name: 'Whop', sub: '2.7% + 30¢' + (o.whop_tax !== 'none' ? ' · +2% managed tax' : ' · tax not included'), base: R.whop.platform, addon: R.whop.surcharges + R.whop.tax + R.whop.billing + R.whop.disputes + R.whop.payout,
      addonText: trFmt(R.whop.surcharges) + ' intl/FX/fraud + ' + trFmt(R.whop.tax) + ' tax + ' + trFmt(R.whop.disputes + R.whop.payout + R.whop.billing) + ' disputes/payouts' + (o.sub ? '/billing' : ''), hidden: R.whop.tax > R.whop.surcharges ? R.whop.tax : R.whop.surcharges,
      hiddenText: R.whop.tax > R.whop.surcharges ? 'the 2% managed tax option (tax is not included in 2.7% + 30¢)' : 'international card (+1.5%), currency conversion (+1%) and Radar/3DS fees',
-     total: R.whop.total, net: R.whop.net, url: 'https://whop.com/sell?a=baggyprairieae', cta: 'Start selling on Whop →', tag: 'Referral link', badge: 'badge-low'}
+     total: R.whop.total, net: R.whop.net, url: '/go/whop', cta: 'Start selling on Whop →', tag: 'Referral link', badge: 'badge-low'}
   ].sort((a, b) => a.total - b.total);
   const low = rows[0], high = rows[rows.length - 1];
   const big = rows.slice().sort((a, b) => b.hidden - a.hidden)[0];
@@ -428,7 +429,7 @@ function updateTr() {
       <div class="summary-scenario">${scenarioLine}</div>
       <div class="summary-breakdown">${trFmt(low.total)}/mo in fees (${(low.total / G * 100).toFixed(1)}% of gross) &middot; keeps ${trFmt((low.net - high.net) * 12)}/yr more than ${high.name}</div>
       <div class="summary-actions">
-        <a class="btn-cta" href="${low.url}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${low.id}" data-cta-location="summary-card">${low.cta}</a>
+        <a class="btn-cta" href="${low.url}" target="_blank" rel="${String(low.url).indexOf('/go/')===0?'sponsored nofollow noopener':'nofollow noopener'}" data-track="vendor-cta" data-vendor="${low.id}" data-cta-location="summary-card">${low.cta}</a>
       </div>
     </div>
     <div class="summary-card result-card card-highest">
@@ -458,7 +459,7 @@ function updateTr() {
       <td data-label="Add-ons / mo"><span class="badge ${r.badge}">${r.addonText}</span></td>
       <td data-label="Total fees / mo" class="price-highlight">${trFmt(r.total)} <span style="font-size:0.8rem; color:var(--muted);">(${(r.total / G * 100).toFixed(1)}%)</span></td>
       <td data-label="Net payout / yr" class="price-highlight">${trFmt(r.net * 12)}<div class="cell-scenario">${scenarioLine}</div></td>
-      <td data-label="Next step"><div class="cta-stack"><a class="btn-secondary" href="${r.url}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${r.id}" data-cta-location="table-row">${r.cta}</a></div></td>
+      <td data-label="Next step"><div class="cta-stack"><a class="btn-secondary" href="${r.url}" target="_blank" rel="${String(r.url).indexOf('/go/')===0?'sponsored nofollow noopener':'nofollow noopener'}" data-track="vendor-cta" data-vendor="${r.id}" data-cta-location="table-row">${r.cta}</a></div></td>
     </tr>`).join('');
   let note = 'Assumptions: list prices, fees calculated on the pre-tax price (Lemon Squeezy calculates its fee on the order total including tax, so its real fee is slightly higher on taxed sales). Gumroad PayPal sales are modelled at the 2.9% + 30¢ card rate; actual PayPal fees may differ. Whop payouts assume 4 next-day ACH withdrawals/mo ($2.50 each). The Chargeflow card prices the disputed sale value and the $15 dispute fee. ';
   if (o.payout === 'intl') note += ' Whop international local-bank payout fees vary by country and are not included.';

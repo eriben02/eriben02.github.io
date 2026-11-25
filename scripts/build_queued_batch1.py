@@ -27,7 +27,7 @@ PAGES = [
         "opt1_val": "hipaa", "opt1_text": "HIPAA BAA Required (Healthcare / Regulated)",
         "opt2_val": "standard", "opt2_text": "Standard Business Forms (No HIPAA BAA)",
         "winner_name": "Jotform Gold",
-        "winner_url": "https://www.jotform.com/hipaa/pricing/?partner=saasbill",
+        "winner_url": "/go/jotform",
         "winner_cta": "View Jotform HIPAA pricing",
         "winner_vendor": "jotform-hipaa",
         "js_logic": """
@@ -40,7 +40,7 @@ PAGES = [
         const tfYr = tfMo * 12;
         const saved = Math.max(0, tfYr - jfYr);
         const rows = [
-          {name: mode === 'hipaa' ? 'Jotform Gold' : 'Jotform (Bronze/Silver/Gold)', plan: '$' + jfMo + '/mo annual', base: '$' + jfYr.toLocaleString('en-US') + '/yr', hidden: mode === 'hipaa' ? 'HIPAA features on Gold' : '$0 extra inside the submission tier', total: '$' + jfYr.toLocaleString('en-US') + '/yr', url: 'https://www.jotform.com/hipaa/pricing/?partner=saasbill', cta: 'View Jotform HIPAA pricing', vendor: 'jotform-hipaa', status: 'Verified', src: 'https://www.jotform.com/hipaa/pricing/'},
+          {name: mode === 'hipaa' ? 'Jotform Gold' : 'Jotform (Bronze/Silver/Gold)', plan: '$' + jfMo + '/mo annual', base: '$' + jfYr.toLocaleString('en-US') + '/yr', hidden: mode === 'hipaa' ? 'HIPAA features on Gold' : '$0 extra inside the submission tier', total: '$' + jfYr.toLocaleString('en-US') + '/yr', url: '/go/jotform', cta: 'View Jotform HIPAA pricing', vendor: 'jotform-hipaa', status: 'Verified', src: 'https://www.jotform.com/hipaa/pricing/'},
           {name: mode === 'hipaa' ? 'Typeform Enterprise (HIPAA)' : 'Typeform (Basic/Plus/Business)', plan: mode === 'hipaa' ? 'Custom (~$500/mo est.)' : '$' + tfMo + '/mo annual', base: '$' + tfYr.toLocaleString('en-US') + '/yr', hidden: mode === 'hipaa' ? 'Mandatory Enterprise upgrade for BAA' : 'Hard response tier jumps at 100 & 1,000/mo', total: '$' + tfYr.toLocaleString('en-US') + '/yr', url: 'https://www.typeform.com/pricing/', cta: 'View Typeform pricing', vendor: 'typeform', status: mode === 'hipaa' ? 'Estimated (Benchmark)' : 'Verified', src: 'https://www.typeform.com/pricing/'}
         ];
         """,
@@ -63,7 +63,7 @@ PAGES = [
         "opt1_val": "essentials", "opt1_text": "Close Essentials ($35/seat/mo) vs. HubSpot Sales Pro",
         "opt2_val": "growth", "opt2_text": "Close Growth ($99/seat/mo · AI & Sequences) vs. HubSpot Sales Pro",
         "winner_name": "Close CRM ($0 Mandatory Onboarding)",
-        "winner_url": "https://refer.close.com/3k5hp07b8soi-fetl0j",
+        "winner_url": "/go/close",
         "winner_cta": "View Close pricing",
         "winner_vendor": "close-crm",
         "after_summary_html": '<p class="summary-interpretation"><a href="../close-vs-pipedrive-year-1-cost-calculator/" data-track="internal-audit">Comparing Close with Pipedrive instead? Include calling costs &rarr;</a></p>',
@@ -78,7 +78,7 @@ PAGES = [
         const pipeYr = vol * __PD_PREMIUM_ANNUAL__ * 12;
         const saved = Math.max(0, hsYr - closeYr);
         const rows = [
-          {name: mode === 'essentials' ? 'Close CRM (Essentials)' : 'Close CRM (Growth)', plan: '$' + closeRate + '/seat/mo annual', base: '$' + closeYr.toLocaleString('en-US') + '/yr', hidden: '$0 mandatory onboarding', total: '$' + closeYr.toLocaleString('en-US') + '/yr', url: 'https://refer.close.com/3k5hp07b8soi-fetl0j', cta: 'View Close pricing', vendor: 'close-crm', status: 'Verified', src: 'https://www.close.com/pricing'},
+          {name: mode === 'essentials' ? 'Close CRM (Essentials)' : 'Close CRM (Growth)', plan: '$' + closeRate + '/seat/mo annual', base: '$' + closeYr.toLocaleString('en-US') + '/yr', hidden: '$0 mandatory onboarding', total: '$' + closeYr.toLocaleString('en-US') + '/yr', url: '/go/close', cta: 'View Close pricing', vendor: 'close-crm', status: 'Verified', src: 'https://www.close.com/pricing'},
           {name: 'Pipedrive CRM (__PD_PREMIUM_LABEL__)', plan: '$__PD_PREMIUM_ANNUAL__/seat/mo annual', base: '$' + pipeYr.toLocaleString('en-US') + '/yr', hidden: '$0 onboarding (add-ons extra)', total: '$' + pipeYr.toLocaleString('en-US') + '/yr', url: 'https://www.pipedrive.com/en/pricing', cta: 'View Pipedrive pricing', vendor: 'pipedrive-crm', status: 'Verified', src: 'https://www.pipedrive.com/en/pricing'},
           {name: 'HubSpot Sales Hub Professional', plan: '$90/seat/mo annual', base: '$' + hsSeatsYr.toLocaleString('en-US') + '/yr', hidden: '+$1,500 mandatory onboarding fee', total: '$' + hsYr.toLocaleString('en-US') + '/yr', url: 'https://www.hubspot.com/pricing/sales', cta: 'View HubSpot pricing', vendor: 'hubspot-sales-pro', status: 'Verified', src: 'https://www.hubspot.com/pricing/sales'}
         ];
@@ -102,7 +102,7 @@ PAGES = [
         "opt1_val": "full", "opt1_text": "Include Stripe Billing (+0.7%) & Automated Tax (+0.5%)",
         "opt2_val": "billing_only", "opt2_text": "Stripe Billing (+0.7%) Only · No Automated Tax",
         "winner_name": "Whop Payments (2.7% + 30¢ Base Processing)",
-        "winner_url": "https://whop.com/sell?a=baggyprairieae",
+        "winner_url": "/go/whop",
         "winner_cta": "View Whop Payments pricing",
         "winner_vendor": "whop-payments",
         "extra_controls": """
@@ -144,13 +144,13 @@ function calcStripeDisputes(mrr, txCount, disputePct) {
         const paddleYr = Math.round((mrr * 0.05 + txCount * 0.50) * 12);
         const saved = Math.max(0, stripeYr - whopYr);
         const rows = [
-          {name: 'Whop Payments', plan: '2.7% + $0.30 per card charge', base: '$' + whopBaseYr.toLocaleString('en-US') + '/yr', hidden: whopHiddenYr > 0 ? '+$' + whopHiddenYr.toLocaleString('en-US') + '/yr orchestration' : '$0 subscription billing tax', total: '$' + whopYr.toLocaleString('en-US') + '/yr', url: 'https://whop.com/sell?a=baggyprairieae', cta: 'View Whop Payments pricing', vendor: 'whop-payments', status: 'Verified', src: 'https://whop.com/sell'},
+          {name: 'Whop Payments', plan: '2.7% + $0.30 per card charge', base: '$' + whopBaseYr.toLocaleString('en-US') + '/yr', hidden: whopHiddenYr > 0 ? '+$' + whopHiddenYr.toLocaleString('en-US') + '/yr orchestration' : '$0 subscription billing tax', total: '$' + whopYr.toLocaleString('en-US') + '/yr', url: '/go/whop', cta: 'View Whop Payments pricing', vendor: 'whop-payments', status: 'Verified', src: 'https://whop.com/sell'},
           {name: 'Stripe (Cards + Billing + Tax)', plan: '2.9% + $0.30 base card rate', base: '$' + stripeBaseYr.toLocaleString('en-US') + '/yr', hidden: '+$' + stripeHiddenYr.toLocaleString('en-US') + '/yr (0.7% Billing' + (mode === 'full' ? ' + 0.5% Tax' : '') + ') + $' + cb.drain.toLocaleString('en-US') + '/yr chargeback drain', total: '$' + stripeYr.toLocaleString('en-US') + '/yr', url: 'https://stripe.com/pricing', cta: 'View Stripe pricing', vendor: 'stripe-payments', status: 'Verified', src: 'https://stripe.com/pricing'},
           {name: 'Paddle (Merchant of Record)', plan: '5.0% + $0.50 all-in MoR', base: '$' + paddleYr.toLocaleString('en-US') + '/yr', hidden: 'Global tax incl. (non-portable card vault)', total: '$' + paddleYr.toLocaleString('en-US') + '/yr', url: 'https://www.paddle.com/pricing', cta: 'View Paddle pricing', vendor: 'paddle-mor', status: 'Verified', src: 'https://www.paddle.com/pricing'},
           {name: 'Chargeflow (Automated Dispute Recovery)', plan: '25% of recovered disputes ($0/mo fixed)', base: '$0/yr base fee', hidden: 'Pay-on-performance add-on for Stripe/Shopify on disputed volume ($0 fee on unrecovered disputes). The 65% win rate is our planning assumption, not a Chargeflow figure. Adjust it to yours.', total: 'Saves $' + cb.net.toLocaleString('en-US') + '/yr net', url: 'https://www.chargeflow.io/', cta: 'View Chargeflow pricing', vendor: 'chargeflow', status: 'Verified', src: 'https://www.chargeflow.io/pricing', ctaLocation: 'table-row'}
         ];
         const sbMathText = 'Charges/mo = MRR / $50 = ' + txCount.toLocaleString('en-US') + '. Disputes/yr = ' + txCount.toLocaleString('en-US') + ' x 12 x ' + disputePct.toFixed(2) + '% = ' + cb.disputes.toLocaleString('en-US') + '. Disputed MRR = ' + cb.disputes.toLocaleString('en-US') + ' x $' + (txCount ? Math.round(mrr / txCount) : 50) + ' = $' + cb.disputed.toLocaleString('en-US') + '. Stripe dispute fees = ' + cb.disputes.toLocaleString('en-US') + ' x $15 = $' + cb.fees.toLocaleString('en-US') + '. Counter fee / manual prep = ' + cb.disputes.toLocaleString('en-US') + ' x $15 = $' + cb.counter.toLocaleString('en-US') + '. Annual chargeback and dispute drain = $' + cb.drain.toLocaleString('en-US') + '. Stripe Year-1 true cost adds that drain on top of card, Billing, and Tax fees ($' + stripeHiddenYr.toLocaleString('en-US') + '/yr). Paddle processing on this volume is $' + paddleYr.toLocaleString('en-US') + '/yr before disputes.';
-        customSummaryHtml = '<div class="summary-card result-card card-lowest"><div class="summary-label">Best value: Whop Payments</div><div class="summary-metric">$' + whopYr.toLocaleString('en-US') + ' / yr</div><div class="summary-scenario">Based on $' + mrr.toLocaleString('en-US') + '/mo MRR</div><div class="summary-breakdown">' + rows[0].plan + '. ' + rows[0].hidden + '.</div><div class="summary-actions"><a class="btn-cta" href="https://whop.com/sell?a=baggyprairieae" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="whop-payments" data-cta-location="summary-card">View Whop Payments pricing &rarr;</a></div></div>'
+        customSummaryHtml = '<div class="summary-card result-card card-lowest"><div class="summary-label">Best value: Whop Payments</div><div class="summary-metric">$' + whopYr.toLocaleString('en-US') + ' / yr</div><div class="summary-scenario">Based on $' + mrr.toLocaleString('en-US') + '/mo MRR</div><div class="summary-breakdown">' + rows[0].plan + '. ' + rows[0].hidden + '.</div><div class="summary-actions"><a class="btn-cta" href="/go/whop" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="whop-payments" data-cta-location="summary-card">View Whop Payments pricing &rarr;</a></div></div>'
           + '<div class="summary-card result-card card-highest"><div class="summary-label">Stripe / Paddle hidden cost breakdown</div><div class="summary-metric">$' + stripeYr.toLocaleString('en-US') + ' / yr</div><div class="summary-scenario">Based on $' + mrr.toLocaleString('en-US') + '/mo MRR and a ' + disputePct.toFixed(2) + '% dispute rate</div><div class="summary-breakdown">Stripe card + Billing + Tax $' + (stripeBaseYr + stripeHiddenYr).toLocaleString('en-US') + '/yr, plus $' + cb.drain.toLocaleString('en-US') + '/yr chargeback drain. Paddle processing $' + paddleYr.toLocaleString('en-US') + '/yr.</div><p class="summary-caveat"><strong>Hidden Cost Highlight:</strong> The dispute drain is disputed MRR plus a $15 dispute fee and a $15 counter fee on every dispute.</p><details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">' + sbMathText + '</div></details></div>'
           + '<div class="summary-card result-card card-lowest"><div class="summary-label">Dispute recovery: Chargeflow pay-on-performance</div><div class="summary-metric">$' + cb.net.toLocaleString('en-US') + ' net / yr</div><div class="summary-scenario">25% success fee, $0/mo fixed</div><div class="summary-breakdown">Gross recovered $' + cb.recovered.toLocaleString('en-US') + ' minus a $' + cb.successFee.toLocaleString('en-US') + ' success fee.</div><details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">65% of $' + cb.disputed.toLocaleString('en-US') + ' = $' + cb.recovered.toLocaleString('en-US') + '. Success fee 25% = $' + cb.successFee.toLocaleString('en-US') + '. Net recovered = $' + cb.net.toLocaleString('en-US') + '. </div></details><div class="summary-actions"><a id="sb-cf-cta" class="btn-secondary" href="https://www.chargeflow.io/" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="chargeflow" data-cta-location="summary-card">Recover $' + cb.net.toLocaleString('en-US') + '/yr net with Chargeflow &rarr;</a><a class="summary-audit-link" href="../../chargeback-fee-and-recovery-calculator/">Open the full chargeback calculator &rarr;</a></div></div>';
         """,
@@ -173,7 +173,7 @@ function calcStripeDisputes(mrr, txCount, disputePct) {
         "opt1_val": "5_users", "opt1_text": "5 Team Senders (500 DocuSign Envelopes/Yr Included)",
         "opt2_val": "2_users", "opt2_text": "2 Team Senders (200 DocuSign Envelopes/Yr Included)",
         "winner_name": "Jotform Sign / Gold (Flat Team Pricing)",
-        "winner_url": "https://www.jotform.com/hipaa/pricing/?partner=saasbill",
+        "winner_url": "/go/jotform",
         "winner_cta": "View Jotform HIPAA pricing",
         "winner_vendor": "jotform-hipaa",
         "js_logic": """
@@ -191,7 +191,7 @@ function calcStripeDisputes(mrr, txCount, disputePct) {
         const pdYr = users * 49 * 12;
         const saved = Math.max(0, dsYr - jfYr);
         const rows = [
-          {name: 'Jotform Sign (Gold HIPAA Plan)', plan: '$99/mo flat annual', base: '$' + jfYr.toLocaleString('en-US') + '/yr', hidden: '$0 per-envelope overage fees', total: '$' + jfYr.toLocaleString('en-US') + '/yr', url: 'https://www.jotform.com/hipaa/pricing/?partner=saasbill', cta: 'View Jotform HIPAA pricing', vendor: 'jotform-hipaa', status: 'Verified', src: 'https://www.jotform.com/hipaa/pricing/'},
+          {name: 'Jotform Sign (Gold HIPAA Plan)', plan: '$99/mo flat annual', base: '$' + jfYr.toLocaleString('en-US') + '/yr', hidden: '$0 per-envelope overage fees', total: '$' + jfYr.toLocaleString('en-US') + '/yr', url: '/go/jotform', cta: 'View Jotform HIPAA pricing', vendor: 'jotform-hipaa', status: 'Verified', src: 'https://www.jotform.com/hipaa/pricing/'},
           {name: 'PandaDoc (Business)', plan: '$49/seat/mo annual (' + users + ' seats)', base: '$' + pdYr.toLocaleString('en-US') + '/yr', hidden: '$0 envelope cap on manual sends', total: '$' + pdYr.toLocaleString('en-US') + '/yr', url: 'https://www.pandadoc.com/pricing/', cta: 'View PandaDoc pricing', vendor: 'pandadoc', status: 'Verified', src: 'https://www.pandadoc.com/pricing/'},
           {name: 'DocuSign (Business Pro)', plan: '$40/user/mo annual (' + users + ' users)', base: '$' + dsBaseYr.toLocaleString('en-US') + '/yr', hidden: dsHiddenYr > 0 ? '+$' + dsHiddenYr.toLocaleString('en-US') + '/yr (' + dsOverageCount + ' extra envelopes @ $2.50)' : '$0 (within ' + dsIncluded + '/yr cap)', total: '$' + dsYr.toLocaleString('en-US') + '/yr', url: 'https://www.docusign.com/products-and-pricing', cta: 'View DocuSign pricing', vendor: 'docusign', status: 'Verified', src: 'https://www.docusign.com/products-and-pricing'}
         ];
@@ -215,7 +215,7 @@ function calcStripeDisputes(mrr, txCount, disputePct) {
         "opt1_val": "with_crm", "opt1_text": "Yes: Include Separate CRM ($90/seat/mo HubSpot Sales Pro)",
         "opt2_val": "gong_only", "opt2_text": "No: Calculate Gong.io Standalone Contract Only",
         "winner_name": "Close CRM Growth (CRM + Calling + AI Transcripts)",
-        "winner_url": "https://refer.close.com/3k5hp07b8soi-fetl0j",
+        "winner_url": "/go/close",
         "winner_cta": "View Close pricing",
         "winner_vendor": "close-crm",
         "js_logic": """
@@ -229,7 +229,7 @@ function calcStripeDisputes(mrr, txCount, disputePct) {
         const closeYr = reps * 99 * 12;
         const saved = Math.max(0, gongYr - closeYr);
         const rows = [
-          {name: 'Close CRM (Growth + Built-In Calling)', plan: '$99/seat/mo annual', base: '$' + closeYr.toLocaleString('en-US') + '/yr', hidden: '$0 platform fee · CRM + VoIP included', total: '$' + closeYr.toLocaleString('en-US') + '/yr', url: 'https://refer.close.com/3k5hp07b8soi-fetl0j', cta: 'View Close pricing', vendor: 'close-crm', status: 'Verified', src: 'https://www.close.com/pricing'},
+          {name: 'Close CRM (Growth + Built-In Calling)', plan: '$99/seat/mo annual', base: '$' + closeYr.toLocaleString('en-US') + '/yr', hidden: '$0 platform fee · CRM + VoIP included', total: '$' + closeYr.toLocaleString('en-US') + '/yr', url: '/go/close', cta: 'View Close pricing', vendor: 'close-crm', status: 'Verified', src: 'https://www.close.com/pricing'},
           {name: 'Gong.io (Enterprise Revenue Intelligence)', plan: '~$1,600/user/yr benchmark', base: '$' + gongSeatsYr.toLocaleString('en-US') + '/yr', hidden: '+$5,000 platform fee' + (crmExtraYr > 0 ? ' + $' + crmExtraYr.toLocaleString('en-US') + ' CRM' : ''), total: '$' + gongYr.toLocaleString('en-US') + '/yr', url: 'https://www.gong.io/pricing/', cta: 'View Gong pricing', vendor: 'gong-io', status: 'Estimated (Benchmark)', src: 'https://www.gong.io/pricing/'}
         ];
         """,
@@ -252,7 +252,7 @@ function calcStripeDisputes(mrr, txCount, disputePct) {
         "opt1_val": "hold_30", "opt1_text": "30% Rolling Reserve / Frozen Monthly Balance",
         "opt2_val": "hold_100", "opt2_text": "100% Monthly Balance Frozen (180-Day Limitation)",
         "winner_name": "Whop Payments (Multi-Processor Failover)",
-        "winner_url": "https://whop.com/sell?a=baggyprairieae",
+        "winner_url": "/go/whop",
         "winner_cta": "View Whop Payments pricing",
         "winner_vendor": "whop-payments",
         "js_logic": """
@@ -265,7 +265,7 @@ function calcStripeDisputes(mrr, txCount, disputePct) {
         const whopFeeYr = Math.round((gmv * 0.027 + tx * 0.30) * 12);
         const saved = Math.max(0, ppFeeYr - whopFeeYr) + ppHeld;
         const rows = [
-          {name: 'Whop Payments (Multi-PSP Orchestration)', plan: '2.7% + $0.30 per card charge', base: '$' + whopFeeYr.toLocaleString('en-US') + '/yr fees', hidden: '$0 single-processor freeze (multi-PSP routing)', total: '$' + whopFeeYr.toLocaleString('en-US') + '/yr', url: 'https://whop.com/sell?a=baggyprairieae', cta: 'View Whop Payments pricing', vendor: 'whop-payments', status: 'Verified', src: 'https://whop.com/sell'},
+          {name: 'Whop Payments (Multi-PSP Orchestration)', plan: '2.7% + $0.30 per card charge', base: '$' + whopFeeYr.toLocaleString('en-US') + '/yr fees', hidden: '$0 single-processor freeze (multi-PSP routing)', total: '$' + whopFeeYr.toLocaleString('en-US') + '/yr', url: '/go/whop', cta: 'View Whop Payments pricing', vendor: 'whop-payments', status: 'Verified', src: 'https://whop.com/sell'},
           {name: 'Chargeflow (Automated Dispute Recovery)', plan: '25% performance-only rev-share', base: '$0 fixed monthly fee', hidden: 'Prevents >1.5% High-Volume Dispute tier', total: 'Pay on won disputes only', url: 'https://www.chargeflow.io/pricing', cta: 'View Chargeflow pricing', vendor: 'chargeflow', status: 'Verified', src: 'https://www.chargeflow.io/pricing'},
           {name: 'PayPal Commercial Checkout', plan: '3.49% + $0.49 per transaction', base: '$' + ppFeeYr.toLocaleString('en-US') + '/yr fees', hidden: '$' + ppHeld.toLocaleString('en-US') + ' cash locked up to 180 days', total: '$' + ppFeeYr.toLocaleString('en-US') + '/yr + $' + ppHeld.toLocaleString('en-US') + ' held', url: 'https://www.paypal.com/us/business/paypal-business-fees', cta: 'View PayPal fees', vendor: 'paypal', status: 'Verified', src: 'https://www.paypal.com/us/business/paypal-business-fees'}
         ];
@@ -290,7 +290,7 @@ function calcStripeDisputes(mrr, txCount, disputePct) {
         "opt1_val": "sales_pro", "opt1_text": "Sales Hub Professional ($90/seat/mo + $1,500 Onboarding)",
         "opt2_val": "marketing_pro", "opt2_text": "Marketing Hub Professional ($800/mo base + $3,000 Onboarding)",
         "winner_name": "Close CRM ($0 Mandatory Onboarding Fee)",
-        "winner_url": "https://refer.close.com/3k5hp07b8soi-fetl0j",
+        "winner_url": "/go/close",
         "winner_cta": "View Close pricing",
         "winner_vendor": "close-crm",
         "js_logic": """
@@ -303,7 +303,7 @@ function calcStripeDisputes(mrr, txCount, disputePct) {
         const closeYr = seats * 35 * 12;
         const saved = Math.max(0, hsYr - closeYr);
         const rows = [
-          {name: 'Close CRM (Essentials)', plan: '$35/seat/mo annual', base: '$' + closeYr.toLocaleString('en-US') + '/yr', hidden: '$0 mandatory onboarding fee', total: '$' + closeYr.toLocaleString('en-US') + '/yr', url: 'https://refer.close.com/3k5hp07b8soi-fetl0j', cta: 'View Close pricing', vendor: 'close-crm', status: 'Verified', src: 'https://www.close.com/pricing'},
+          {name: 'Close CRM (Essentials)', plan: '$35/seat/mo annual', base: '$' + closeYr.toLocaleString('en-US') + '/yr', hidden: '$0 mandatory onboarding fee', total: '$' + closeYr.toLocaleString('en-US') + '/yr', url: '/go/close', cta: 'View Close pricing', vendor: 'close-crm', status: 'Verified', src: 'https://www.close.com/pricing'},
           {name: mode === 'sales_pro' ? 'HubSpot Sales Hub Pro' : 'HubSpot Marketing Hub Pro', plan: mode === 'sales_pro' ? '$90/seat/mo annual' : '$800/mo (3 seats) + $45/extra seat', base: '$' + hsBaseYr.toLocaleString('en-US') + '/yr', hidden: '+$' + hsOnboard.toLocaleString('en-US') + ' mandatory onboarding fee', total: '$' + hsYr.toLocaleString('en-US') + '/yr', url: 'https://www.hubspot.com/pricing', cta: 'View HubSpot pricing', vendor: 'hubspot-sales-pro', status: 'Verified', src: 'https://www.hubspot.com/pricing'}
         ];
         """,
@@ -369,7 +369,7 @@ function calcStripeDisputes(mrr, txCount, disputePct) {
         "opt1_val": "domestic", "opt1_text": "Mostly Domestic Cards (0% International FX)",
         "opt2_val": "intl_40", "opt2_text": "40% International Cards (+1.5% Intl + 1% FX on Stripe/Whop)",
         "winner_name": "Whop Payments (Lowest Recurring Take Rate)",
-        "winner_url": "https://whop.com/sell?a=baggyprairieae",
+        "winner_url": "/go/whop",
         "winner_cta": "View Whop Payments pricing",
         "winner_vendor": "whop-payments",
         "extra_controls": """
@@ -412,13 +412,13 @@ function calcProcessorDisputes(gmv, tx, disputePct, fee) {
         const paddleYr = Math.round((gmv * 0.05 + tx * 0.50) * 12) + paddleCb.drain;
         const saved = Math.max(0, paddleYr - whopYr);
         const rows = [
-          {name: 'Whop Payments', plan: '2.7% + $0.30 base domestic rate', base: '$' + whopBaseYr.toLocaleString('en-US') + '/yr', hidden: whopHiddenYr > 0 ? '+$' + whopHiddenYr.toLocaleString('en-US') + '/yr intl/FX' : '$0 subscription billing tax', total: '$' + whopYr.toLocaleString('en-US') + '/yr', url: 'https://whop.com/sell?a=baggyprairieae', cta: 'View Whop Payments pricing', vendor: 'whop-payments', status: 'Verified', src: 'https://whop.com/sell'},
+          {name: 'Whop Payments', plan: '2.7% + $0.30 base domestic rate', base: '$' + whopBaseYr.toLocaleString('en-US') + '/yr', hidden: whopHiddenYr > 0 ? '+$' + whopHiddenYr.toLocaleString('en-US') + '/yr intl/FX' : '$0 subscription billing tax', total: '$' + whopYr.toLocaleString('en-US') + '/yr', url: '/go/whop', cta: 'View Whop Payments pricing', vendor: 'whop-payments', status: 'Verified', src: 'https://whop.com/sell'},
           {name: 'Stripe (Cards + Billing + Tax)', plan: '2.9% + $0.30 base card rate', base: '$' + stripeBaseYr.toLocaleString('en-US') + '/yr', hidden: '+$' + stripeHiddenYr.toLocaleString('en-US') + '/yr billing/tax + $' + stripeCb.drain.toLocaleString('en-US') + '/yr chargebacks ($15/dispute + 80% unrecovered sales)', total: '$' + stripeYr.toLocaleString('en-US') + '/yr', url: 'https://stripe.com/pricing', cta: 'View Stripe pricing', vendor: 'stripe-payments', status: 'Verified', src: 'https://stripe.com/pricing'},
           {name: 'Paddle (Merchant of Record)', plan: '5.0% + $0.50 all-in MoR rate', base: '$' + Math.round((gmv * 0.05 + tx * 0.50) * 12).toLocaleString('en-US') + '/yr', hidden: 'Global VAT handled + $' + paddleCb.drain.toLocaleString('en-US') + '/yr chargebacks ($20/dispute + 80% unrecovered sales)', total: '$' + paddleYr.toLocaleString('en-US') + '/yr', url: 'https://www.paddle.com/pricing', cta: 'View Paddle pricing', vendor: 'paddle-mor', status: 'Verified', src: 'https://www.paddle.com/pricing'},
           {name: 'Chargeflow (Automated Dispute Recovery)', plan: '25% of recovered disputes ($0/mo fixed)', base: '$0/yr base fee', hidden: 'Pay-on-performance add-on for Stripe/Shopify on disputed volume ($0 fee on unrecovered disputes). The 65% win rate is our planning assumption, not a Chargeflow figure. Adjust it to yours.', total: 'Saves $' + stripeCb.net.toLocaleString('en-US') + '/yr net', url: 'https://www.chargeflow.io/', cta: 'View Chargeflow pricing', vendor: 'chargeflow', status: 'Verified', src: 'https://www.chargeflow.io/pricing', ctaLocation: 'table-row'}
         ];
         const spMathText = 'Charges/mo = GMV / $50 = ' + tx.toLocaleString('en-US') + '. Disputes/yr = ' + tx.toLocaleString('en-US') + ' x 12 x ' + disputePct.toFixed(2) + '% = ' + stripeCb.disputes.toLocaleString('en-US') + '. Disputed sales = $' + stripeCb.disputed.toLocaleString('en-US') + '. Unrecovered at a 20% manual win rate (80%) = $' + stripeCb.unrecovered.toLocaleString('en-US') + '. Stripe dispute fees = ' + stripeCb.disputes.toLocaleString('en-US') + ' x $15 = $' + stripeCb.fees.toLocaleString('en-US') + '. Stripe annual chargeback line = $' + stripeCb.drain.toLocaleString('en-US') + '. Paddle dispute fees = ' + paddleCb.disputes.toLocaleString('en-US') + ' x $20 = $' + paddleCb.fees.toLocaleString('en-US') + '. Paddle annual chargeback line = $' + paddleCb.drain.toLocaleString('en-US') + '.';
-        customSummaryHtml = '<div class="summary-card result-card card-lowest"><div class="summary-label">Best value: Whop Payments</div><div class="summary-metric">$' + whopYr.toLocaleString('en-US') + ' / yr</div><div class="summary-scenario">Based on $' + gmv.toLocaleString('en-US') + '/mo GMV</div><div class="summary-breakdown">' + rows[0].hidden + '.</div><div class="summary-actions"><a class="btn-cta" href="https://whop.com/sell?a=baggyprairieae" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="whop-payments" data-cta-location="summary-card">View Whop Payments pricing &rarr;</a></div></div>'
+        customSummaryHtml = '<div class="summary-card result-card card-lowest"><div class="summary-label">Best value: Whop Payments</div><div class="summary-metric">$' + whopYr.toLocaleString('en-US') + ' / yr</div><div class="summary-scenario">Based on $' + gmv.toLocaleString('en-US') + '/mo GMV</div><div class="summary-breakdown">' + rows[0].hidden + '.</div><div class="summary-actions"><a class="btn-cta" href="/go/whop" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="whop-payments" data-cta-location="summary-card">View Whop Payments pricing &rarr;</a></div></div>'
           + '<div class="summary-card result-card card-highest"><div class="summary-label">Stripe / Paddle hidden cost breakdown</div><div class="summary-metric">$' + stripeYr.toLocaleString('en-US') + ' / yr Stripe</div><div class="summary-scenario">Based on $' + gmv.toLocaleString('en-US') + '/mo GMV and a ' + disputePct.toFixed(2) + '% dispute rate</div><div class="summary-breakdown">Stripe chargeback line $' + stripeCb.drain.toLocaleString('en-US') + '/yr ($15/dispute + 80% unrecovered). Paddle chargeback line $' + paddleCb.drain.toLocaleString('en-US') + '/yr ($20/dispute + 80% unrecovered). Paddle all-in $' + paddleYr.toLocaleString('en-US') + '/yr.</div><p class="summary-caveat"><strong>Hidden Cost Highlight:</strong> Dispute fees sit on top of the processing rate, and 80% of disputed sales stay lost at a 20% manual win rate.</p><details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">' + spMathText + '</div></details></div>'
           + '<div class="summary-card result-card card-lowest"><div class="summary-label">Dispute recovery: Chargeflow pay-on-performance</div><div class="summary-metric">$' + stripeCb.net.toLocaleString('en-US') + ' net / yr</div><div class="summary-scenario">25% success fee, $0/mo fixed</div><div class="summary-breakdown">Gross recovered $' + stripeCb.recovered.toLocaleString('en-US') + ' minus a $' + stripeCb.successFee.toLocaleString('en-US') + ' success fee.</div><details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">65% of $' + stripeCb.disputed.toLocaleString('en-US') + ' = $' + stripeCb.recovered.toLocaleString('en-US') + '. Success fee 25% = $' + stripeCb.successFee.toLocaleString('en-US') + '. Net recovered = $' + stripeCb.net.toLocaleString('en-US') + '. </div></details><div class="summary-actions"><a id="sp-cf-cta" class="btn-secondary" href="https://www.chargeflow.io/" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="chargeflow" data-cta-location="summary-card">Recover $' + stripeCb.net.toLocaleString('en-US') + '/yr net with Chargeflow &rarr;</a><a class="summary-audit-link" href="../../chargeback-fee-and-recovery-calculator/">Open the full chargeback calculator &rarr;</a></div></div>';
         """,

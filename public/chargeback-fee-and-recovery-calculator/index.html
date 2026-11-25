@@ -23,6 +23,7 @@
   <meta name="dcterms.modified" content="2026-10-30T08:34:14+00:00" />
   <meta name="dcterms.issued" content="2026-10-30" />
   <link rel="canonical" href="https://saasbill.io/chargeback-fee-and-recovery-calculator/" />
+  <link rel="icon" href="/favicon.ico" />
   <link rel="stylesheet" href="../assets/styles.css?v=20261030c" />
   <link rel="alternate" type="text/plain" href="https://saasbill.io/llms.txt" title="SaaSBill LLMs.txt Summary" />
   <!-- Privacy-friendly analytics by Plausible -->
@@ -547,7 +548,7 @@ function renderChargeback() {
     ['Manual In-House Dispute Handling', 'Staff time at $30 per dispute plus about a 20% win rate', money(c.manualLoss) + ' total annual drain', 'Gross recovered ' + money(c.manualGross) + '. Evidence prep ' + money(c.manualOps) + '. Lost sales ' + money(c.manualLost) + '.', 'https://docs.stripe.com/disputes', 'stripe-payments', 'Read dispute docs']
   ];
   document.getElementById('cb-tbody').innerHTML = rows.map(function(r) {
-    return '<tr><td data-label="Option"><strong>' + r[0] + '</strong></td><td data-label="How you pay">' + r[1] + '</td><td data-label="What this scenario costs">' + r[2] + '</td><td data-label="Coverage note">' + r[3] + ' <a href="' + r[4] + '" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="' + r[5] + '" data-cta-location="table-row">' + r[6] + ' &rarr;</a></td></tr>';
+    return '<tr><td data-label="Option"><strong>' + r[0] + '</strong></td><td data-label="How you pay">' + r[1] + '</td><td data-label="What this scenario costs">' + r[2] + '</td><td data-label="Coverage note">' + r[3] + ' <a href="' + r[4] + '" target="_blank" rel="' + (String(r[4]).indexOf('/go/')===0?'sponsored nofollow noopener':'nofollow noopener') + '" data-track="vendor-cta" data-vendor="' + r[5] + '" data-cta-location="table-row">' + r[6] + ' &rarr;</a></td></tr>';
   }).join('');
   if (typeof window.trackSaaSBillEvent === 'function') {
     window.trackSaaSBillEvent('result_rendered', { page: 'chargeback-fee-and-recovery-calculator', orders: orders, aov: aov, rate: ratePct, processor: processor });
