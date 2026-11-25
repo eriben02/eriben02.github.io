@@ -47,7 +47,7 @@ BODY = r"""
   <div class="ebc-rows" role="list" aria-live="polite">
     <div class="ebc-row" role="listitem">
       <div class="ebc-label-col">
-        <div class="ebc-tool-name"><a href="https://www.pipedrive.com/en/pricing" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="pipedrive-crm" data-cta-location="benchmark-chart">Pipedrive Growth &nearr;</a></div>
+        <div class="ebc-tool-name"><a href="/go/pipedrive" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="pipedrive-crm" data-cta-location="benchmark-chart">Pipedrive Growth &nearr;</a></div>
         <div class="ebc-tool-meta">Sequences and automation included &middot; $0 onboarding</div>
       </div>
       <div class="ebc-bar-col"><div class="ebc-bar-track"><div id="bar-pipedrive" class="ebc-bar-fill ebc-fill-neutral" style="width: 33.9%;"></div></div></div>
@@ -55,7 +55,7 @@ BODY = r"""
     </div>
     <div class="ebc-row ebc-row-sage" role="listitem">
       <div class="ebc-label-col">
-        <div class="ebc-tool-name"><a href="https://refer.close.com/3k5hp07b8soi-fetl0j" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="close" data-cta-location="benchmark-chart">Close CRM Startup &nearr;</a></div>
+        <div class="ebc-tool-name"><a href="/go/close" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="close" data-cta-location="benchmark-chart">Close CRM Startup &nearr;</a></div>
         <div class="ebc-tool-meta">Built-in calling and SMS &middot; $0 onboarding</div>
       </div>
       <div class="ebc-bar-col"><div class="ebc-bar-track"><div id="bar-close-startup" class="ebc-bar-fill ebc-fill-sage" style="width: 40.9%;"></div></div></div>
@@ -63,7 +63,7 @@ BODY = r"""
     </div>
     <div class="ebc-row" role="listitem">
       <div class="ebc-label-col">
-        <div class="ebc-tool-name"><a href="https://refer.close.com/3k5hp07b8soi-fetl0j" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="close" data-cta-location="benchmark-chart">Close CRM Growth &nearr;</a></div>
+        <div class="ebc-tool-name"><a href="/go/close" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="close" data-cta-location="benchmark-chart">Close CRM Growth &nearr;</a></div>
         <div class="ebc-tool-meta">Power Dialer and AI call summaries &middot; $0 onboarding</div>
       </div>
       <div class="ebc-bar-col"><div class="ebc-bar-track"><div id="bar-close-growth" class="ebc-bar-fill ebc-fill-slate" style="width: 86.1%;"></div></div></div>
@@ -95,7 +95,8 @@ BODY = r"""
   </details>
 
   <div id="hs-summary" class="ebc-action-strip">
-    <a id="hs-close-cta" class="btn-affiliate" href="https://refer.close.com/3k5hp07b8soi-fetl0j" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="close" data-cta-location="benchmark-cta">Save $4,080/yr with Close CRM ($0 Onboarding) &rarr;</a>
+    <a id="hs-close-cta" class="btn-cta" href="/go/close" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="close-crm" data-cta-location="benchmark-cta">See Close pricing &rarr;</a>
+    <a class="btn-secondary" href="/go/pipedrive" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="pipedrive-crm" data-cta-location="benchmark-cta">See Pipedrive pricing &rarr;</a>
     <a class="ebc-secondary-link" href="https://www.hubspot.com/pricing/sales" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="hubspot" data-cta-location="benchmark-cta">View official HubSpot Sales Hub pricing &nearr;</a>
   </div>
   <p id="chart-dynamic-footnote" class="ebc-footer-note"><strong>Hidden Cost Highlight:</strong> Based on 5 seats, annual billing, 2,000 marketing contacts. HubSpot Sales Pro adds a one-time $1,500 onboarding fee in Year 1. Source: <a href="https://legal.hubspot.com/hubspot-product-and-services-catalog/products" target="_blank" rel="noopener">HubSpot Product and Services Catalog</a>.</p>
@@ -221,11 +222,10 @@ function updateHs() {
   document.getElementById('val-hs-total').textContent = '$' + hsYear1.toLocaleString();
   document.getElementById('sub-hs-onb').textContent = '+$' + hsOnboard.toLocaleString() + ' onboarding';
 
-  const saved = Math.max(0, hsYear1 - closeStartupYr);
   const cta = document.getElementById('hs-close-cta');
-  cta.textContent = saved > 0
-    ? 'Save $' + saved.toLocaleString() + '/yr with Close CRM ($0 Onboarding) →'
-    : 'Compare Close CRM ($0 Onboarding) →';
+  cta.textContent = 'See Close pricing →';
+  cta.href = '/go/close';
+  cta.rel = 'sponsored nofollow noopener';
 
   document.getElementById('hs-calc-body').innerHTML =
     '<div class="calc-math-list">' +
@@ -270,8 +270,8 @@ function updateHs() {
       baseLabel: 'Advertised annual seats',
       hiddenLabel: 'Onboarding and contact bands',
       bestHtml: '<strong>Onboarding:</strong> $' + hsOnboard.toLocaleString() + ' is due in Year 1 on this tier.',
-      ctaHref: 'https://refer.close.com/3k5hp07b8soi-fetl0j',
-      ctaLabel: 'Check Close CRM pricing',
+      ctaHref: '/go/close',
+      ctaLabel: 'See Close pricing',
       ctaVendor: 'close'
     });
     window.trackSaaSBillEvent('result_rendered', { page: 'hubspot-onboarding-fee-calculator', seats: seats, contacts: contacts, tier: tier });

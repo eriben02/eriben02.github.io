@@ -9,7 +9,7 @@ from layout import render_page, SITE_ORIGIN, wrap_calculator_shell
 
 JOTFORM_PARTNER_URL = "https://www.jotform.com/?partner=eriben02"
 JOTFORM_PRICING_PARTNER_URL = "https://www.jotform.com/pricing/?partner=eriben02"
-JOTFORM_HIPAA_PARTNER_URL = "https://www.jotform.com/hipaa/pricing/?partner=saasbill"
+JOTFORM_HIPAA_PARTNER_URL = "/go/jotform"
 WIX_APP_MARKET_URL = "https://www.wix.com/app-market/web-solution/jotform"
 LIVE_WIX_DEMO_URL = "https://info149840.wixsite.com/my-site-1"
 LIVE_JOTFORM_URL = "https://form.jotform.com/262996430206056"

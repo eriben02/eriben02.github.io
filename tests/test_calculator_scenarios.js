@@ -991,7 +991,7 @@ function jotformTeamYear1() {
   check(!!fn && !!formulaFn && !!moneyFn && !!quoteFn && !!wordFn && !!breakFn, "missing Jotform team math");
   check(html.split("Paid partnership with Jotform (#JotformPartner)").length === 2, "one Jotform partnership line");
   check(html.indexOf('rel="sponsored nofollow noopener"') !== -1, "Jotform link is sponsored");
-  check(html.indexOf("https://www.jotform.com/pricing/?partner=saasbill") !== -1, "pricing URL from affiliate_links.json");
+  check(html.indexOf('href="/go/jotform"') !== -1, "Jotform pricing button uses /go/jotform");
   check(html.indexOf(">$0<") === -1, "unknown is not shown as $0");
   const box = {};
   vm.createContext(box);

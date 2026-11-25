@@ -786,6 +786,7 @@ def render_page(rel_path, title, description, canonical_path, body_html, faqs=No
   <meta name="dcterms.modified" content="{iso_datetime}" />
   <meta name="dcterms.issued" content="{pub_date}" />
   <link rel="canonical" href="{SITE_ORIGIN}{canonical_path}" />
+  <link rel="icon" href="/favicon.ico" />
   <link rel="stylesheet" href="{prefix}assets/styles.css?v=20261030c" />
   <link rel="alternate" type="text/plain" href="{SITE_ORIGIN}/llms.txt" title="SaaSBill LLMs.txt Summary" />
   <!-- Privacy-friendly analytics by Plausible -->

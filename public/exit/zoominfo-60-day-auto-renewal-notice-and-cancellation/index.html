@@ -23,6 +23,7 @@
   <meta name="dcterms.modified" content="2026-10-30T08:34:14+00:00" />
   <meta name="dcterms.issued" content="2026-10-28" />
   <link rel="canonical" href="https://saasbill.io/exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/" />
+  <link rel="icon" href="/favicon.ico" />
   <link rel="stylesheet" href="../../assets/styles.css?v=20261030c" />
   <link rel="alternate" type="text/plain" href="https://saasbill.io/llms.txt" title="SaaSBill LLMs.txt Summary" />
   <!-- Privacy-friendly analytics by Plausible -->
@@ -330,7 +331,7 @@
               <td data-label="Per year">$2,100</td>
               <td data-label="Term the formula uses">1 year of licenses</td>
               <td data-label="Full-term total">$2,100</td>
-              <td data-label="Next step"><div class="cta-stack"><a class="btn-secondary" href="https://refer.close.com/3k5hp07b8soi-fetl0j" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="close-crm" data-cta-location="table-row">View Close pricing &rarr;</a></div></td>
+              <td data-label="Next step"><div class="cta-stack"><a class="btn-secondary" href="/go/close" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="close-crm" data-cta-location="table-row">View Close pricing &rarr;</a></div></td>
             </tr>
             <tr>
               <td data-label="Scenario"><strong>Close CRM Growth</strong></td>
@@ -338,7 +339,7 @@
               <td data-label="Per year">$5,940</td>
               <td data-label="Term the formula uses">1 year of licenses</td>
               <td data-label="Full-term total">$5,940</td>
-              <td data-label="Next step"><div class="cta-stack"><a class="btn-secondary" href="https://refer.close.com/3k5hp07b8soi-fetl0j" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="close-crm" data-cta-location="table-row">View Close pricing &rarr;</a></div></td>
+              <td data-label="Next step"><div class="cta-stack"><a class="btn-secondary" href="/go/close" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="close-crm" data-cta-location="table-row">View Close pricing &rarr;</a></div></td>
             </tr>
             <tr>
               <td data-label="Scenario"><strong>Apollo Professional</strong></td>
@@ -346,7 +347,7 @@
               <td data-label="Per year">$4,740</td>
               <td data-label="Term the formula uses">1 year of seats, annual billing</td>
               <td data-label="Full-term total">$4,740</td>
-              <td data-label="Next step"><div class="cta-stack"><a class="btn-secondary" href="https://get.apollo.io/712wq4xq4p7v" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="apollo" data-cta-location="table-row">View Apollo pricing &rarr;</a></div></td>
+              <td data-label="Next step"><div class="cta-stack"><a class="btn-secondary" href="/go/apollo" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="apollo" data-cta-location="table-row">View Apollo pricing &rarr;</a></div></td>
             </tr>
           </tbody>
         </table>
@@ -707,9 +708,9 @@ function renderZoomInfo() {
     { name: 'Current fee, renewed flat', what: 'Your order-form annual fee, no uplift', per: calc.annual, term: termLabel, total: calc.annual * calc.extensionYears, cta: 'View ZoomInfo pricing', href: 'https://www.zoominfo.com/pricing', vendor: 'zoominfo' },
     { name: 'Negotiated renewal', what: (neg >= 0 ? '+' : '') + neg + '% versus the current fee', per: calc.negotiatedAnnual, term: termLabel, total: calc.negotiatedTotal, cta: 'View ZoomInfo pricing', href: 'https://www.zoominfo.com/pricing', vendor: 'zoominfo' },
     { name: version === '2024' ? 'March 2024 extension formula' : 'May 2025 terms, your uplift %', what: version === '2024' ? 'Annual fee + 10% + discount added back' : 'No formula printed. Using your uplift slider.', per: calc.extensionAnnual, term: version === '2024' ? ('Longer of initial term or 1 year (' + termLabel + ')') : '1 year (length not stated in the May 2025 terms)', total: calc.extensionTotal, cta: version === '2024' ? 'Read the March 6, 2024 clause' : 'Read the May 1, 2025 terms', href: version === '2024' ? 'https://www.zoominfo.com/legal/ltc_03_06_2024' : 'https://www.zoominfo.com/legal/ltc', vendor: 'zoominfo' },
-    { name: 'Close CRM Essentials', what: seats + ' user' + (seats === 1 ? '' : 's') + ' x $35/mo annual. CRM, email, calling. Not a contact database.', per: closeEss, term: '1 year of licenses', total: closeEss, cta: 'View Close pricing', href: 'https://refer.close.com/3k5hp07b8soi-fetl0j', vendor: 'close-crm' },
-    { name: 'Close CRM Growth', what: seats + ' user' + (seats === 1 ? '' : 's') + ' x $99/mo annual. Adds workflows and a power dialer. Calling minutes are extra.', per: closeGrowth, term: '1 year of licenses', total: closeGrowth, cta: 'View Close pricing', href: 'https://refer.close.com/3k5hp07b8soi-fetl0j', vendor: 'close-crm' },
-    { name: 'Apollo Professional', what: seats + ' user' + (seats === 1 ? '' : 's') + ' x $79/seat/mo billed annually ($99/seat if billed monthly). 48,000 credits per seat per year on annual, granted upfront. A phone number is 8 credits. Credits do not roll over. Not a ZoomInfo license.', per: seats * 79 * 12, term: '1 year of seats, annual billing', total: seats * 79 * 12, cta: 'View Apollo pricing', href: 'https://get.apollo.io/712wq4xq4p7v', vendor: 'apollo' }
+    { name: 'Close CRM Essentials', what: seats + ' user' + (seats === 1 ? '' : 's') + ' x $35/mo annual. CRM, email, calling. Not a contact database.', per: closeEss, term: '1 year of licenses', total: closeEss, cta: 'View Close pricing', href: '/go/close', vendor: 'close-crm' },
+    { name: 'Close CRM Growth', what: seats + ' user' + (seats === 1 ? '' : 's') + ' x $99/mo annual. Adds workflows and a power dialer. Calling minutes are extra.', per: closeGrowth, term: '1 year of licenses', total: closeGrowth, cta: 'View Close pricing', href: '/go/close', vendor: 'close-crm' },
+    { name: 'Apollo Professional', what: seats + ' user' + (seats === 1 ? '' : 's') + ' x $79/seat/mo billed annually ($99/seat if billed monthly). 48,000 credits per seat per year on annual, granted upfront. A phone number is 8 credits. Credits do not roll over. Not a ZoomInfo license.', per: seats * 79 * 12, term: '1 year of seats, annual billing', total: seats * 79 * 12, cta: 'View Apollo pricing', href: '/go/apollo', vendor: 'apollo' }
   ];
   document.getElementById('zi-tbody').innerHTML = tableRows.map(function(r) {
     return '<tr>'
@@ -718,7 +719,7 @@ function renderZoomInfo() {
       + '<td data-label="Per year">' + ziMoney(r.per) + '</td>'
       + '<td data-label="Term the formula uses">' + r.term + '</td>'
       + '<td data-label="Full-term total">' + ziMoney(r.total) + '</td>'
-      + '<td data-label="Next step"><div class="cta-stack"><a class="btn-secondary" href="' + r.href + '" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="' + r.vendor + '" data-cta-location="table-row">' + r.cta + ' &rarr;</a></div></td>'
+      + '<td data-label="Next step"><div class="cta-stack"><a class="btn-secondary" href="' + r.href + '" target="_blank" rel="' + (String(r.href).indexOf('/go/') === 0 ? 'sponsored nofollow noopener' : 'nofollow noopener') + '" data-track="vendor-cta" data-vendor="' + r.vendor + '" data-cta-location="table-row">' + r.cta + ' &rarr;</a></div></td>'
       + '</tr>';
   }).join('');
 

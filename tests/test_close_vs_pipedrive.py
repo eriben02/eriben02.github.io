@@ -277,14 +277,16 @@ class TestCloseVsPipedriveLinks(unittest.TestCase):
         self.assertIn(URL, llms)
 
     def test_other_close_links_unchanged(self):
-        for rel, expected in CLOSE_LINK_BASELINE.items():
+        for rel in CLOSE_LINK_BASELINE:
             html = read(os.path.join(ROOT, rel))
             # Some pages embed data/affiliate_links.json as data (const AFFILIATES);
             # that copy now also carries close-crm.go_url. Count rendered links only.
-            if "const AFFILIATES = " in html:
-                html = html.replace(balanced(html, "const AFFILIATES = "), "")
-            found = dict(sorted(collections.Counter(re.findall(r"refer\.close\.com/[A-Za-z0-9_-]+", html)).items()))
-            self.assertEqual(found, expected, rel)
+            visible = html
+            if "const AFFILIATES = " in visible:
+                visible = visible.replace(balanced(visible, "const AFFILIATES = "), "")
+            found = dict(sorted(collections.Counter(re.findall(r"refer\.close\.com/[A-Za-z0-9_-]+", visible)).items()))
+            self.assertEqual(found, {}, rel)
+            self.assertIn("/go/close", html, rel)
         close = affiliates()["close-crm"]
         self.assertEqual(close["tracking_url"], CLOSE_GO)
         self.assertEqual(close["destination_url"], CLOSE_GO)
@@ -629,8 +631,8 @@ class TestHomepageAndGoBrowser(unittest.TestCase):
             for _, href, rel in pd:
                 self.assertEqual((href, rel), ("/go/pipedrive", "sponsored nofollow noopener"))
             for _, href, rel in close:
-                self.assertTrue(href.startswith("https://refer.close.com/"), href)
-                self.assertEqual(rel, "nofollow noopener")
+                self.assertEqual(href, "/go/close", href)
+                self.assertEqual(rel, "sponsored nofollow noopener")
             b.close()
 
     def test_go_page_sends_pageview_then_redirects(self):

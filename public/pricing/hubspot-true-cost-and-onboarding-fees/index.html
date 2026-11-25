@@ -23,6 +23,7 @@
   <meta name="dcterms.modified" content="2026-10-30T08:34:14+00:00" />
   <meta name="dcterms.issued" content="2026-10-30" />
   <link rel="canonical" href="https://saasbill.io/pricing/hubspot-true-cost-and-onboarding-fees/" />
+  <link rel="icon" href="/favicon.ico" />
   <link rel="stylesheet" href="../../assets/styles.css?v=20261030c" />
   <link rel="alternate" type="text/plain" href="https://saasbill.io/llms.txt" title="SaaSBill LLMs.txt Summary" />
   <!-- Privacy-friendly analytics by Plausible -->
@@ -168,7 +169,7 @@
     <div class="ebc-row" role="listitem">
       <div class="ebc-label-col">
         <div class="ebc-tool-name">
-          <a href="https://www.pipedrive.com/en/pricing" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="pipedrive-crm" data-cta-location="benchmark-chart">Pipedrive Growth &nearr;</a>
+          <a href="/go/pipedrive" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="pipedrive-crm" data-cta-location="benchmark-chart">Pipedrive Growth &nearr;</a>
         </div>
         <div class="ebc-tool-meta">Sequences &amp; automation incl. &middot; Calling add-on extra &middot; $0 onboarding</div>
       </div>
@@ -204,7 +205,7 @@
     <div class="ebc-row ebc-row-sage" role="listitem">
       <div class="ebc-label-col">
         <div class="ebc-tool-name">
-          <a href="https://refer.close.com/3k5hp07b8soi-fetl0j" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="close" data-cta-location="benchmark-chart">Close CRM Startup &nearr;</a>
+          <a href="/go/close" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="close" data-cta-location="benchmark-chart">Close CRM Startup &nearr;</a>
         </div>
         <div class="ebc-tool-meta">Includes built-in VoIP calling &amp; SMS workflows &middot; $0 onboarding</div>
       </div>
@@ -222,7 +223,7 @@
     <div class="ebc-row" role="listitem">
       <div class="ebc-label-col">
         <div class="ebc-tool-name">
-          <a href="https://refer.close.com/3k5hp07b8soi-fetl0j" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="close" data-cta-location="benchmark-chart">Close CRM Growth &nearr;</a>
+          <a href="/go/close" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="close" data-cta-location="benchmark-chart">Close CRM Growth &nearr;</a>
         </div>
         <div class="ebc-tool-meta">Includes Power Dialer &amp; AI call summaries &middot; $0 onboarding</div>
       </div>
@@ -263,7 +264,8 @@
   </details>
 
   <div id="hs-summary" class="ebc-action-strip">
-    <a id="hs-close-cta" class="btn-affiliate" href="https://refer.close.com/3k5hp07b8soi-fetl0j" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="close" data-cta-location="benchmark-cta">Save $4,080/yr with Close CRM ($0 Onboarding) &rarr;</a>
+    <a id="hs-close-cta" class="btn-cta" href="/go/close" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="close-crm" data-cta-location="benchmark-cta">See Close pricing &rarr;</a>
+    <a class="btn-secondary" href="/go/pipedrive" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="pipedrive-crm" data-cta-location="benchmark-cta">See Pipedrive pricing &rarr;</a>
     <a class="ebc-secondary-link" href="https://www.hubspot.com/pricing/sales" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="hubspot" data-cta-location="benchmark-cta">View official HubSpot Sales Hub pricing &nearr;</a>
   </div>
 
@@ -282,7 +284,8 @@
       <p class="wb-budget-subnote" id="shell-sub">Matches advertised price ($0 hidden fees).</p>
       <div class="wb-best-option" id="shell-best"></div>
       <div class="cta-stack">
-        <a id="shell-cta" class="btn-cta wb-primary-cta" href="#comparison" data-track="vendor-cta" data-vendor="saasbill" data-cta-location="workbench">See pricing &rarr;</a>
+        <a id="shell-cta" class="btn-cta wb-primary-cta" href="/go/close" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="close-crm" data-cta-location="workbench">See Close pricing &rarr;</a>
+        <a class="btn-secondary" href="/go/pipedrive" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="pipedrive-crm" data-cta-location="workbench">See Pipedrive pricing &rarr;</a>
       </div>
     </div>
 
@@ -451,10 +454,9 @@ function updateHs() {
 
   const hsCloseCta = document.getElementById('hs-close-cta');
   if (hsCloseCta) {
-    const savedVsHs = Math.max(0, hsYear1 - closeStartupYr);
-    hsCloseCta.textContent = savedVsHs > 0
-      ? `Save $${savedVsHs.toLocaleString()}/yr with Close CRM ($0 Onboarding) →`
-      : 'Compare Close CRM ($0 Onboarding) →';
+    hsCloseCta.textContent = 'See Close pricing →';
+    hsCloseCta.href = '/go/close';
+    hsCloseCta.rel = 'sponsored nofollow noopener';
   }
   const hsCalcBody = document.getElementById('hs-calc-body');
   if (hsCalcBody) {
@@ -492,8 +494,8 @@ function updateHs() {
       baseLabel: 'Advertised annual seats',
       hiddenLabel: 'Mandatory onboarding',
       bestHtml: '<strong>Onboarding:</strong> $' + hsOnboard.toLocaleString() + ' is due in Year 1 on this tier.',
-      ctaHref: 'https://refer.close.com/3k5hp07b8soi-fetl0j',
-      ctaLabel: 'Check Close CRM pricing',
+      ctaHref: '/go/close',
+      ctaLabel: 'See Close pricing',
       ctaVendor: 'close'
     });
   }

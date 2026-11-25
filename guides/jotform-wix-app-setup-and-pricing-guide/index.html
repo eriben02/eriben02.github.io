@@ -23,6 +23,7 @@
   <meta name="dcterms.modified" content="2026-10-30T09:30:41+00:00" />
   <meta name="dcterms.issued" content="2026-10-30" />
   <link rel="canonical" href="https://saasbill.io/guides/jotform-wix-app-setup-and-pricing-guide/" />
+  <link rel="icon" href="/favicon.ico" />
   <link rel="stylesheet" href="../../assets/styles.css?v=20261030c" />
   <link rel="alternate" type="text/plain" href="https://saasbill.io/llms.txt" title="SaaSBill LLMs.txt Summary" />
   <!-- Privacy-friendly analytics by Plausible -->
@@ -435,7 +436,7 @@ function updateJotformWixCalc() {
       limits: '100 forms · 10,000 submissions/mo · HIPAA features',
       hidden: '$0 onboarding',
       total: '$' + ((mode === 'monthly' ? 129 : 99) * 12).toLocaleString('en-US') + ' / yr',
-      url: 'https://www.jotform.com/hipaa/pricing/?partner=saasbill',
+      url: '/go/jotform',
       cta: 'View Jotform Gold →'
     },
     {
@@ -470,7 +471,7 @@ function updateJotformWixCalc() {
       <td data-label="Form & Submission Limits">${r.limits}</td>
       <td data-label="Hidden Cost Highlight"><strong>Hidden Cost Highlight:</strong> ${r.hidden}</td>
       <td data-label="True Year-1 Cost"><strong>${r.total}</strong></td>
-      <td data-label="Official Link"><a class="btn-secondary" href="${r.url}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="jotform" data-cta-location="jw-table">${r.cta}</a></td>
+      <td data-label="Official Link"><a class="btn-secondary" href="${r.url}" target="_blank" rel="${String(r.url).indexOf('/go/')===0?'sponsored nofollow noopener':'nofollow noopener'}" data-track="vendor-cta" data-vendor="jotform" data-cta-location="jw-table">${r.cta}</a></td>
     </tr>
   `).join('');
 }

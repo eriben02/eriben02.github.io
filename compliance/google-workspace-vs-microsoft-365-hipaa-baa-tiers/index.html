@@ -23,6 +23,7 @@
   <meta name="dcterms.modified" content="2026-10-30T08:34:14+00:00" />
   <meta name="dcterms.issued" content="2026-10-27" />
   <link rel="canonical" href="https://saasbill.io/compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/" />
+  <link rel="icon" href="/favicon.ico" />
   <link rel="stylesheet" href="../../assets/styles.css?v=20261030c" />
   <link rel="alternate" type="text/plain" href="https://saasbill.io/llms.txt" title="SaaSBill LLMs.txt Summary" />
   <!-- Privacy-friendly analytics by Plausible -->
@@ -316,7 +317,7 @@
       <tbody>
         <tr><td data-label="Option"><strong>Google Forms</strong></td><td data-label="Extra cost">$0 (included in Workspace)</td><td data-label="Covered by a BAA">Yes, under Google's BAA (Drive incl. Forms)</td><td data-label="Limits &amp; notes">Responses live in Drive/Sheets; Marketplace form add-ons are not covered</td><td data-label="Next step"><a class="btn-secondary" href="https://workspace.google.com/pricing" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="google-workspace" data-cta-location="forms-table">View Google Workspace plans &rarr;</a></td></tr>
         <tr><td data-label="Option"><strong>Microsoft Forms</strong></td><td data-label="Extra cost">$0 (included in Microsoft 365)</td><td data-label="Covered by a BAA">Yes, listed in Microsoft's in-scope services</td><td data-label="Limits &amp; notes">Responses stored in Forms/Excel within your tenant</td><td data-label="Next step"><a class="btn-secondary" href="https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="microsoft-365" data-cta-location="forms-table">View Microsoft 365 plans &rarr;</a></td></tr>
-        <tr><td data-label="Option"><strong>Jotform Gold</strong></td><td data-label="Extra cost">$99/mo billed annually ($1,188/yr) or $129/mo monthly</td><td data-label="Covered by a BAA">HIPAA features on Gold and Enterprise only</td><td data-label="Limits &amp; notes">10,000 submissions/mo, 1,000 signed documents/mo, 1,000 payment submissions/mo, 1 user account</td><td data-label="Next step"><a class="btn-cta" href="https://www.jotform.com/hipaa/pricing/?partner=saasbill" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="jotform-hipaa" data-cta-location="forms-table">View Jotform HIPAA pricing &rarr;</a></td></tr>
+        <tr><td data-label="Option"><strong>Jotform Gold</strong></td><td data-label="Extra cost">$99/mo billed annually ($1,188/yr) or $129/mo monthly</td><td data-label="Covered by a BAA">HIPAA features on Gold and Enterprise only</td><td data-label="Limits &amp; notes">10,000 submissions/mo, 1,000 signed documents/mo, 1,000 payment submissions/mo, 1 user account</td><td data-label="Next step"><a class="btn-cta" href="/go/jotform" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="jotform-hipaa" data-cta-location="forms-table">View Jotform HIPAA pricing &rarr;</a></td></tr>
       </tbody>
     </table>
   </div>
@@ -392,7 +393,7 @@ const GW = {starter:{annual:7, flex:8.40}, standard:{annual:14, flex:16.80}, plu
 const MS = {new:{basic:7, standard:14, premium:22}, old:{basic:6, standard:12.50, premium:22}};
 const EOA = 3;
 const JF = {annual:99, monthly:129};
-const URLS = {gw:'https://workspace.google.com/pricing', ms:'https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products', jf:'https://www.jotform.com/hipaa/pricing/?partner=saasbill'};
+const URLS = {gw:'https://workspace.google.com/pricing', ms:'https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products', jf:'/go/jotform'};
 const fmt = n => '$' + Math.round(n).toLocaleString('en-US');
 const fmt2 = n => '$' + n.toFixed(2);
 function msRate(base, term) {
@@ -457,7 +458,7 @@ function updateGm() {
         <div class="summary-caveat"><strong>Hidden Cost Highlight:</strong> ${hidden}</div>
         <div class="summary-actions">
           <div class="cta-stack">
-            <a class="btn-secondary" href="${high.url}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${high.id}" data-cta-location="summary-card">${high.cta} &rarr;</a>
+            <a class="btn-secondary" href="${high.url}" target="_blank" rel="${String(high.url).indexOf('/go/')===0?'sponsored nofollow noopener':'nofollow noopener'}" data-track="vendor-cta" data-vendor="${high.id}" data-cta-location="summary-card">${high.cta} &rarr;</a>
           </div>
         </div>
       </div>
@@ -469,9 +470,9 @@ function updateGm() {
         <div class="summary-caveat"><strong>Feature note:</strong> ${low.diff}. Native Google Forms and Microsoft Forms are both on the BAA lists.</div>
         <div class="summary-actions">
           <div class="cta-stack">
-            <a class="btn-cta" href="${low.url}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${low.id}" data-cta-location="summary-card">${low.cta} &rarr;</a>
+            <a class="btn-cta" href="${low.url}" target="_blank" rel="${String(low.url).indexOf('/go/')===0?'sponsored nofollow noopener':'nofollow noopener'}" data-track="vendor-cta" data-vendor="${low.id}" data-cta-location="summary-card">${low.cta} &rarr;</a>
           </div>
-          <a class="summary-audit-link" href="${URLS.jf}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="jotform-hipaa" data-cta-location="summary-card">Need e-signatures or payments on intake? View Jotform HIPAA pricing &rarr;</a>
+          <a class="summary-audit-link" href="${URLS.jf}" target="_blank" rel="${String(URLS.jf).indexOf('/go/')===0?'sponsored nofollow noopener':'nofollow noopener'}" data-track="vendor-cta" data-vendor="jotform-hipaa" data-cta-location="summary-card">Need e-signatures or payments on intake? View Jotform HIPAA pricing &rarr;</a>
         </div>
       </div>`;
   }
@@ -497,7 +498,7 @@ function updateGm() {
       <td data-label="Seats"><span class="badge badge-low">${seats} (1:1, max 300)</span></td>
       <td data-label="Add-ons / yr">${r.addonText}</td>
       <td data-label="Year-1 total" class="price-highlight">${fmt(r.yr)}<div class="cell-scenario">${scenarioLine}</div></td>
-      <td data-label="Next step"><div class="cta-stack"><a class="btn-secondary" href="${r.url}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${r.id}" data-cta-location="table-row">${r.cta} &rarr;</a></div></td>
+      <td data-label="Next step"><div class="cta-stack"><a class="btn-secondary" href="${r.url}" target="_blank" rel="${String(r.url).indexOf('/go/')===0?'sponsored nofollow noopener':'nofollow noopener'}" data-track="vendor-cta" data-vendor="${r.id}" data-cta-location="table-row">${r.cta} &rarr;</a></div></td>
     </tr>`).join('');
   let note = 'Assumptions: US list prices, same seats and billing term on both suites, no taxes or reseller discounts.';
   if (term === 'flex') note += ' Microsoft month-to-month modeled at +20% over annual (partner price guides; not printed on Microsoft\'s US page).';

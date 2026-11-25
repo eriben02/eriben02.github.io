@@ -23,6 +23,7 @@
   <meta name="dcterms.modified" content="2026-10-30T08:34:14+00:00" />
   <meta name="dcterms.issued" content="2026-10-30" />
   <link rel="canonical" href="https://saasbill.io/compare/close-crm-vs-hubspot-sales-hub-5-to-20-reps/" />
+  <link rel="icon" href="/favicon.ico" />
   <link rel="stylesheet" href="../../assets/styles.css?v=20261030c" />
   <link rel="alternate" type="text/plain" href="https://saasbill.io/llms.txt" title="SaaSBill LLMs.txt Summary" />
   <!-- Privacy-friendly analytics by Plausible -->
@@ -192,7 +193,7 @@
       <p class="wb-budget-subnote" id="shell-sub">Matches advertised price ($0 hidden fees).</p>
       <div class="wb-best-option" id="shell-best"></div>
       <div class="cta-stack">
-        <a id="shell-cta" class="btn-cta wb-primary-cta" href="https://refer.close.com/3k5hp07b8soi-fetl0j" data-track="vendor-cta" data-vendor="close-crm" data-cta-location="workbench">View Close pricing &rarr;</a>
+        <a id="shell-cta" class="btn-cta wb-primary-cta" href="/go/close" data-track="vendor-cta" data-vendor="close-crm" data-cta-location="workbench" rel="sponsored nofollow noopener" target="_blank">View Close pricing &rarr;</a>
       </div>
     </div>
   </div>
@@ -315,7 +316,7 @@ function runPageCalc() {
         const pipeYr = vol * 59 * 12;
         const saved = Math.max(0, hsYr - closeYr);
         const rows = [
-          {name: mode === 'essentials' ? 'Close CRM (Essentials)' : 'Close CRM (Growth)', plan: '$' + closeRate + '/seat/mo annual', base: '$' + closeYr.toLocaleString('en-US') + '/yr', hidden: '$0 mandatory onboarding', total: '$' + closeYr.toLocaleString('en-US') + '/yr', url: 'https://refer.close.com/3k5hp07b8soi-fetl0j', cta: 'View Close pricing', vendor: 'close-crm', status: 'Verified', src: 'https://www.close.com/pricing'},
+          {name: mode === 'essentials' ? 'Close CRM (Essentials)' : 'Close CRM (Growth)', plan: '$' + closeRate + '/seat/mo annual', base: '$' + closeYr.toLocaleString('en-US') + '/yr', hidden: '$0 mandatory onboarding', total: '$' + closeYr.toLocaleString('en-US') + '/yr', url: '/go/close', cta: 'View Close pricing', vendor: 'close-crm', status: 'Verified', src: 'https://www.close.com/pricing'},
           {name: 'Pipedrive CRM (Premium)', plan: '$59/seat/mo annual', base: '$' + pipeYr.toLocaleString('en-US') + '/yr', hidden: '$0 onboarding (add-ons extra)', total: '$' + pipeYr.toLocaleString('en-US') + '/yr', url: 'https://www.pipedrive.com/en/pricing', cta: 'View Pipedrive pricing', vendor: 'pipedrive-crm', status: 'Verified', src: 'https://www.pipedrive.com/en/pricing'},
           {name: 'HubSpot Sales Hub Professional', plan: '$90/seat/mo annual', base: '$' + hsSeatsYr.toLocaleString('en-US') + '/yr', hidden: '+$1,500 mandatory onboarding fee', total: '$' + hsYr.toLocaleString('en-US') + '/yr', url: 'https://www.hubspot.com/pricing/sales', cta: 'View HubSpot pricing', vendor: 'hubspot-sales-pro', status: 'Verified', src: 'https://www.hubspot.com/pricing/sales'}
         ];
@@ -326,7 +327,7 @@ function runPageCalc() {
       <div class="summary-metric">${rows[0].total}</div>
       <div class="summary-scenario"><strong>${rows[0].name}</strong> &middot; Based on ${document.getElementById('p-slider-val').textContent}</div>
       <div class="summary-actions">
-        <a href="https://refer.close.com/3k5hp07b8soi-fetl0j" target="_blank" rel="noopener" class="btn-cta" data-track="vendor-cta" data-vendor="close-crm" data-cta-location="subpage-summary">View Close pricing &rarr;</a>
+        <a href="/go/close" target="_blank" rel="sponsored nofollow noopener" class="btn-cta" data-track="vendor-cta" data-vendor="close-crm" data-cta-location="subpage-summary">View Close pricing &rarr;</a>
       </div>
     </div>
   `;

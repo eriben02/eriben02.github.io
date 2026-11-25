@@ -164,7 +164,7 @@ home_body = f"""
       <p class="wb-budget-subnote" id="wb-budget-subnote"></p>
       <div class="wb-best-option" id="wb-best-option"><strong>Lowest Year-1 cost:</strong> <a href="https://www.freshworks.com/freshdesk/pricing/" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="freshdesk-support" data-cta-location="workbench-best-option">Freshdesk Pro + Freddy AI ($3,835/yr)</a> &middot; saves $8,015/yr</div>
       <div class="cta-stack">
-        <a id="wb-primary-cta" class="btn-cta wb-primary-cta" href="https://www.zendesk.com/pricing/" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="zendesk-suite-team" data-cta-location="workbench">View Zendesk pricing &rarr;</a>
+        <a id="wb-primary-cta" class="btn-cta wb-primary-cta" href="https://www.freshworks.com/freshdesk/pricing/" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="freshdesk-support" data-cta-location="workbench">See Freshdesk pricing &rarr;</a>
       </div>
     </div>
   </div>
@@ -492,10 +492,6 @@ home_body = f"""
       <span class="status-pill status-verified">Verified</span> indicates published self-serve pricing and contract terms checked directly against official vendor docs on Oct 25, 2026.<br/>
       <span class="status-pill status-estimated">Estimated (Benchmark)</span> indicates non-public, sales-quoted pricing modeled from verified buyer contract benchmarks.
     </div>
-    <div class="methodology-item">
-      <strong>Affiliate Disclosure &amp; Sources</strong>
-      Independent calculations. Some vendor links are affiliate links. This never changes our rankings or calculations. Every CTA button goes to the vendor&rsquo;s official site (<code>rel="nofollow noopener"</code>); affiliate links that pass through a saasbill.io/go/ redirect carry <code>rel="sponsored nofollow noopener"</code>. Each sits alongside a primary-source link for contract verification. Spot a pricing change? Email <a href="mailto:info@saasbill.io">info@saasbill.io</a>.
-    </div>
   </div>
   </div>
   </details>
@@ -705,6 +701,30 @@ const SHORT_VENDOR_NAMES = {{
   'vanta-soc2': 'Vanta',
   'drata-soc2': 'Drata'
 }};
+
+
+var GO_READY = {{close: 1, pipedrive: 1, apollo: 1, vanta: 1, drata: 1, whop: 1, jotform: 1}};
+function affiliateHref(aff) {{
+  if (!aff) return '#';
+  var candidates = [aff["go_path"] || "", aff["tracking_url"] || "", aff["destination_url"] || ""];
+  var i;
+  for (i = 0; i < candidates.length; i++) {{
+    var pathOnly = String(candidates[i]).split("?")[0];
+    var at = pathOnly.indexOf("/go/");
+    if (at < 0) continue;
+    pathOnly = pathOnly.slice(at);
+    if (pathOnly.charAt(pathOnly.length - 1) === "/") pathOnly = pathOnly.slice(0, -1);
+    var parts = pathOnly.split("/");
+    var slug = parts.length > 2 ? parts[2] : "";
+    if (GO_READY[slug]) return pathOnly;
+  }}
+  return aff["destination_url"] || "#";
+}}
+function affiliateRel(aff) {{
+  var href = affiliateHref(aff);
+  if (href.indexOf("/go/") === 0) return "sponsored nofollow noopener";
+  return (aff && aff["cta_rel"]) || "nofollow noopener";
+}}
 
 function getVendorCtaLabel(tool) {{
   return VENDOR_CTA_LABELS[tool.id] || `View ${{tool.vendor || tool.name}} pricing →`;
@@ -1149,7 +1169,7 @@ function renderDirectory() {{
       if (spotPayR.tool.id === 'whop-payments') {{
         bestOptPayEl.innerHTML = `<strong>Lowest direct fee in this category</strong> (${{payMoney(whopProf.total)}}/mo) &amp; multi-PSP failover`;
       }} else {{
-        bestOptPayEl.innerHTML = `<strong>Lowest direct fee:</strong> <a href="${{whopAffBest.destination_url}}" target="_blank" rel="${{whopAffBest.cta_rel || 'nofollow noopener'}}" data-track="vendor-cta" data-vendor="whop-payments" data-cta-location="workbench-best-option">Whop Payments (${{payMoney(whopProf.total)}}/mo)</a> &middot; $0 single-PSP reserve hold`;
+        bestOptPayEl.innerHTML = `<strong>Lowest direct fee:</strong> <a href="${{affiliateHref(whopAffBest)}}" target="_blank" rel="${{affiliateRel(whopAffBest)}}" data-track="vendor-cta" data-vendor="whop-payments" data-cta-location="workbench-best-option">Whop Payments (${{payMoney(whopProf.total)}}/mo)</a> &middot; $0 single-PSP reserve hold`;
       }}
     }}
     if (wbCalcBody) {{
@@ -1157,8 +1177,8 @@ function renderDirectory() {{
     }}
     const ctaEl = document.getElementById('wb-primary-cta');
     if (ctaEl) {{
-      ctaEl.href = spotPayAff.destination_url;
-      ctaEl.rel = spotPayAff.cta_rel || 'nofollow noopener';
+      ctaEl.href = affiliateHref(spotPayAff);
+      ctaEl.rel = affiliateRel(spotPayAff);
       ctaEl.setAttribute('data-vendor', spotPayR.tool.id);
       const isPayWinner = spotPayR.tool.id === 'whop-payments';
       ctaEl.textContent = isPayWinner
@@ -1183,7 +1203,7 @@ function renderDirectory() {{
           </details>
           <div class="summary-actions">
             <div class="cta-stack">
-              <a class="btn-cta" href="${{whopAff.destination_url}}" target="_blank" rel="${{whopAff.cta_rel || 'nofollow noopener'}}" data-track="vendor-cta" data-vendor="whop-payments" data-cta-location="summary-card">${{getContextualCtaLabel(whopR.tool, whopProf.total * 12, maxPayMo * 12, false)}}</a>
+              <a class="btn-cta" href="${{affiliateHref(whopAff)}}" target="_blank" rel="${{affiliateRel(whopAff)}}" data-track="vendor-cta" data-vendor="whop-payments" data-cta-location="summary-card">${{getContextualCtaLabel(whopR.tool, whopProf.total * 12, maxPayMo * 12, false)}}</a>
             </div>
           </div>
         </div>
@@ -1197,7 +1217,7 @@ function renderDirectory() {{
           <div class="summary-driver">On <strong>Paddle / Stripe / Lemon Squeezy</strong></div>
           <div class="summary-actions">
             <div class="cta-stack">
-              <a class="btn-secondary" href="${{paddleAff.destination_url}}" target="_blank" rel="${{paddleAff.cta_rel || 'nofollow noopener'}}" data-track="vendor-cta" data-vendor="paddle-mor" data-cta-location="summary-card">${{getVendorCtaLabel(paddleR.tool)}}</a>
+              <a class="btn-secondary" href="${{affiliateHref(paddleAff)}}" target="_blank" rel="${{affiliateRel(paddleAff)}}" data-track="vendor-cta" data-vendor="paddle-mor" data-cta-location="summary-card">${{getVendorCtaLabel(paddleR.tool)}}</a>
             </div>
           </div>
         </div>
@@ -1253,7 +1273,7 @@ function renderDirectory() {{
               <div class="viz-breakdown-text">${{p.tableFeeSub}} &middot; ${{p.tableHeldPill}}</div>
             </div>
             <div class="viz-total-label">${{vizTotal}}</div>
-            <a class="viz-action-link" href="${{aff.destination_url}}" target="_blank" rel="${{aff.cta_rel || 'nofollow noopener'}}" data-track="vendor-cta" data-vendor="${{r.tool.id}}" data-cta-location="chart-row">${{rowCta}}</a>
+            <a class="viz-action-link" href="${{affiliateHref(aff)}}" target="_blank" rel="${{affiliateRel(aff)}}" data-track="vendor-cta" data-vendor="${{r.tool.id}}" data-cta-location="chart-row">${{rowCta}}</a>
           </div>
         `;
       }}).join('');
@@ -1320,7 +1340,7 @@ function renderDirectory() {{
       if (spotR.tool.id === minR.tool.id || diffBest === 0) {{
         bestOptEl.innerHTML = `<strong>Lowest Year-1 cost in this category</strong> ($${{minR.year1Total.toLocaleString()}}/yr)`;
       }} else {{
-        bestOptEl.innerHTML = `<strong>Lowest Year-1 cost:</strong> <a href="${{minAffBest.destination_url}}" target="_blank" rel="${{minAffBest.cta_rel || 'nofollow noopener'}}" data-track="vendor-cta" data-vendor="${{minR.tool.id}}" data-cta-location="workbench-best-option">${{minR.tool.name}} ($${{minR.year1Total.toLocaleString()}}/yr)</a> &middot; saves $${{diffBest.toLocaleString()}}/yr`;
+        bestOptEl.innerHTML = `<strong>Lowest Year-1 cost:</strong> <a href="${{affiliateHref(minAffBest)}}" target="_blank" rel="${{affiliateRel(minAffBest)}}" data-track="vendor-cta" data-vendor="${{minR.tool.id}}" data-cta-location="workbench-best-option">${{minR.tool.name}} ($${{minR.year1Total.toLocaleString()}}/yr)</a> &middot; saves $${{diffBest.toLocaleString()}}/yr`;
       }}
     }}
     if (wbCalcBody) {{
@@ -1328,8 +1348,8 @@ function renderDirectory() {{
     }}
     const ctaEl = document.getElementById('wb-primary-cta');
     if (ctaEl) {{
-      ctaEl.href = spotAff.destination_url;
-      ctaEl.rel = spotAff.cta_rel || 'nofollow noopener';
+      ctaEl.href = affiliateHref(spotAff);
+      ctaEl.rel = affiliateRel(spotAff);
       ctaEl.setAttribute('data-vendor', spotR.tool.id);
       const isSpotTrapOrHighest = spotR.tool.id === topHidden.tool.id || spotR.tool.id === maxR.tool.id || spotR.onboarding > 0;
       const wbRefTotal = topHidden.year1Total > spotR.year1Total ? topHidden.year1Total : maxR.year1Total;
@@ -1360,7 +1380,7 @@ function renderDirectory() {{
           ${{savedVsRef > 0 ? `<div class="summary-driver">Saves $${{savedVsRef.toLocaleString()}}/yr vs. ${{refBenchmarkR.tool.name}}</div>` : ''}}
           <div class="summary-actions">
             <div class="cta-stack">
-              <a class="btn-cta" href="${{minAff.destination_url}}" target="_blank" rel="${{minAff.cta_rel || 'nofollow noopener'}}" data-track="vendor-cta" data-vendor="${{minR.tool.id}}" data-cta-location="summary-card">${{minCtaText}}</a>
+              <a class="btn-cta" href="${{affiliateHref(minAff)}}" target="_blank" rel="${{affiliateRel(minAff)}}" data-track="vendor-cta" data-vendor="${{minR.tool.id}}" data-cta-location="summary-card">${{minCtaText}}</a>
             </div>
             ${{minAudit ? `<a class="summary-audit-link" href="${{minAudit.url}}" data-track="internal-audit">${{minAudit.label}}</a>` : ''}}
           </div>
@@ -1375,7 +1395,7 @@ function renderDirectory() {{
           <div class="summary-driver">On <strong>${{topHidden.tool.name}}</strong></div>
           <div class="summary-actions">
             <div class="cta-stack">
-              <a class="btn-secondary" href="${{hidAff.destination_url}}" target="_blank" rel="${{hidAff.cta_rel || 'nofollow noopener'}}" data-track="vendor-cta" data-vendor="${{topHidden.tool.id}}" data-cta-location="summary-card">${{getVendorCtaLabel(topHidden.tool)}}</a>
+              <a class="btn-secondary" href="${{affiliateHref(hidAff)}}" target="_blank" rel="${{affiliateRel(hidAff)}}" data-track="vendor-cta" data-vendor="${{topHidden.tool.id}}" data-cta-location="summary-card">${{getVendorCtaLabel(topHidden.tool)}}</a>
             </div>
             ${{hidAudit ? `<a class="summary-audit-link" href="${{hidAudit.url}}" data-track="internal-audit">${{hidAudit.label}}</a>` : ''}}
           </div>
@@ -1389,7 +1409,7 @@ function renderDirectory() {{
           </details>
           <div class="summary-actions">
             <div class="cta-stack">
-              <a class="btn-secondary" href="${{maxAff.destination_url}}" target="_blank" rel="${{maxAff.cta_rel || 'nofollow noopener'}}" data-track="vendor-cta" data-vendor="${{maxR.tool.id}}" data-cta-location="summary-card">${{getVendorCtaLabel(maxR.tool)}}</a>
+              <a class="btn-secondary" href="${{affiliateHref(maxAff)}}" target="_blank" rel="${{affiliateRel(maxAff)}}" data-track="vendor-cta" data-vendor="${{maxR.tool.id}}" data-cta-location="summary-card">${{getVendorCtaLabel(maxR.tool)}}</a>
             </div>
             ${{maxAudit ? `<a class="summary-audit-link" href="${{maxAudit.url}}" data-track="internal-audit">${{maxAudit.label}}</a>` : ''}}
           </div>
@@ -1430,7 +1450,7 @@ function renderDirectory() {{
               <div class="viz-breakdown-text">${{parts.join(' + ')}}</div>
             </div>
             <div class="viz-total-label">$${{r.year1Total.toLocaleString()}} / yr</div>
-            <a class="viz-action-link" href="${{aff.destination_url}}" target="_blank" rel="${{aff.cta_rel || 'nofollow noopener'}}" data-track="vendor-cta" data-vendor="${{r.tool.id}}" data-cta-location="chart-row">${{rowCta}}</a>
+            <a class="viz-action-link" href="${{affiliateHref(aff)}}" target="_blank" rel="${{affiliateRel(aff)}}" data-track="vendor-cta" data-vendor="${{r.tool.id}}" data-cta-location="chart-row">${{rowCta}}</a>
           </div>
         `;
       }}).join('');
@@ -1442,7 +1462,7 @@ function renderDirectory() {{
     const aff = AFFILIATES[t.affiliate_slug] || {{ destination_url: '#', is_affiliate: false }};
     const verStatus = t.verification_status || 'Verified';
     const verClass = verStatus.startsWith('Verified') ? 'status-verified' : 'status-estimated';
-    const srcUrl = (t.source_urls && t.source_urls[0]) ? t.source_urls[0] : aff.destination_url;
+    const srcUrl = (t.source_urls && t.source_urls[0]) ? t.source_urls[0] : affiliateHref(aff);
     const srcLabel = t.source_label || 'Official pricing & terms';
     const auditObj = INTERNAL_AUDIT_LINKS[t.id];
     const fmtRate = n => Number.isInteger(n) ? n.toLocaleString() : n.toFixed(2);
@@ -1514,7 +1534,7 @@ function renderDirectory() {{
         <td data-label="Hidden Cost Gap">${{gapCellHtml}}</td>
         <td data-label="Official Pricing">
           <div class="cta-stack">
-            <a class="btn-secondary" href="${{aff.destination_url}}" target="_blank" rel="${{aff.cta_rel || 'nofollow noopener'}}" data-track="vendor-cta" data-vendor="${{t.id}}" data-cta-location="table-row">${{getVendorCtaLabel(t)}}</a>
+            <a class="btn-secondary" href="${{affiliateHref(aff)}}" target="_blank" rel="${{affiliateRel(aff)}}" data-track="vendor-cta" data-vendor="${{t.id}}" data-cta-location="table-row">${{getVendorCtaLabel(t)}}</a>
           </div>
         </td>
       </tr>
@@ -1891,7 +1911,7 @@ p1_body = """
     <div class="ebc-row" role="listitem">
       <div class="ebc-label-col">
         <div class="ebc-tool-name">
-          <a href="https://www.pipedrive.com/en/pricing" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="pipedrive-crm" data-cta-location="benchmark-chart">Pipedrive Growth &nearr;</a>
+          <a href="/go/pipedrive" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="pipedrive-crm" data-cta-location="benchmark-chart">Pipedrive Growth &nearr;</a>
         </div>
         <div class="ebc-tool-meta">Sequences &amp; automation incl. &middot; Calling add-on extra &middot; $0 onboarding</div>
       </div>
@@ -1927,7 +1947,7 @@ p1_body = """
     <div class="ebc-row ebc-row-sage" role="listitem">
       <div class="ebc-label-col">
         <div class="ebc-tool-name">
-          <a href="https://refer.close.com/3k5hp07b8soi-fetl0j" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="close" data-cta-location="benchmark-chart">Close CRM Startup &nearr;</a>
+          <a href="/go/close" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="close" data-cta-location="benchmark-chart">Close CRM Startup &nearr;</a>
         </div>
         <div class="ebc-tool-meta">Includes built-in VoIP calling &amp; SMS workflows &middot; $0 onboarding</div>
       </div>
@@ -1945,7 +1965,7 @@ p1_body = """
     <div class="ebc-row" role="listitem">
       <div class="ebc-label-col">
         <div class="ebc-tool-name">
-          <a href="https://refer.close.com/3k5hp07b8soi-fetl0j" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="close" data-cta-location="benchmark-chart">Close CRM Growth &nearr;</a>
+          <a href="/go/close" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="close" data-cta-location="benchmark-chart">Close CRM Growth &nearr;</a>
         </div>
         <div class="ebc-tool-meta">Includes Power Dialer &amp; AI call summaries &middot; $0 onboarding</div>
       </div>
@@ -1986,7 +2006,8 @@ p1_body = """
   </details>
 
   <div id="hs-summary" class="ebc-action-strip">
-    <a id="hs-close-cta" class="btn-affiliate" href="https://refer.close.com/3k5hp07b8soi-fetl0j" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="close" data-cta-location="benchmark-cta">Save $4,080/yr with Close CRM ($0 Onboarding) &rarr;</a>
+    <a id="hs-close-cta" class="btn-cta" href="/go/close" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="close-crm" data-cta-location="benchmark-cta">See Close pricing &rarr;</a>
+    <a class="btn-secondary" href="/go/pipedrive" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="pipedrive-crm" data-cta-location="benchmark-cta">See Pipedrive pricing &rarr;</a>
     <a class="ebc-secondary-link" href="https://www.hubspot.com/pricing/sales" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="hubspot" data-cta-location="benchmark-cta">View official HubSpot Sales Hub pricing &nearr;</a>
   </div>
 
@@ -2138,10 +2159,9 @@ function updateHs() {
 
   const hsCloseCta = document.getElementById('hs-close-cta');
   if (hsCloseCta) {
-    const savedVsHs = Math.max(0, hsYear1 - closeStartupYr);
-    hsCloseCta.textContent = savedVsHs > 0
-      ? `Save $${savedVsHs.toLocaleString()}/yr with Close CRM ($0 Onboarding) →`
-      : 'Compare Close CRM ($0 Onboarding) →';
+    hsCloseCta.textContent = 'See Close pricing →';
+    hsCloseCta.href = '/go/close';
+    hsCloseCta.rel = 'sponsored nofollow noopener';
   }
   const hsCalcBody = document.getElementById('hs-calc-body');
   if (hsCalcBody) {
@@ -2179,8 +2199,8 @@ function updateHs() {
       baseLabel: 'Advertised annual seats',
       hiddenLabel: 'Mandatory onboarding',
       bestHtml: '<strong>Onboarding:</strong> $' + hsOnboard.toLocaleString() + ' is due in Year 1 on this tier.',
-      ctaHref: 'https://refer.close.com/3k5hp07b8soi-fetl0j',
-      ctaLabel: 'Check Close CRM pricing',
+      ctaHref: '/go/close',
+      ctaLabel: 'See Close pricing',
       ctaVendor: 'close'
     });
   }

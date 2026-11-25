@@ -419,6 +419,30 @@ const SHORT_VENDOR_NAMES = {{
   'hubspot-service-hub': 'HubSpot'
 }};
 
+
+var GO_READY = {{close: 1, pipedrive: 1, apollo: 1, vanta: 1, drata: 1, whop: 1, jotform: 1}};
+function affiliateHref(aff) {{
+  if (!aff) return '#';
+  var candidates = [aff["go_path"] || "", aff["tracking_url"] || "", aff["destination_url"] || ""];
+  var i;
+  for (i = 0; i < candidates.length; i++) {{
+    var pathOnly = String(candidates[i]).split("?")[0];
+    var at = pathOnly.indexOf("/go/");
+    if (at < 0) continue;
+    pathOnly = pathOnly.slice(at);
+    if (pathOnly.charAt(pathOnly.length - 1) === "/") pathOnly = pathOnly.slice(0, -1);
+    var parts = pathOnly.split("/");
+    var slug = parts.length > 2 ? parts[2] : "";
+    if (GO_READY[slug]) return pathOnly;
+  }}
+  return aff["destination_url"] || "#";
+}}
+function affiliateRel(aff) {{
+  var href = affiliateHref(aff);
+  if (href.indexOf("/go/") === 0) return "sponsored nofollow noopener";
+  return (aff && aff["cta_rel"]) || "nofollow noopener";
+}}
+
 function getVendorCtaLabel(tool) {{
   return VENDOR_CTA_LABELS[tool.id] || `View ${{tool.vendor || tool.name}} pricing →`;
 }}
@@ -637,7 +661,7 @@ function renderDirectory() {{
     if (spotR.tool.id === minR.tool.id || diffBest === 0) {{
       bestOptEl.innerHTML = `<strong>Lowest cost:</strong> Lowest Year-1 true cost ($${{minR.year1Total.toLocaleString()}}/yr)`;
     }} else {{
-      bestOptEl.innerHTML = `<strong>Lowest cost:</strong> <a href="${{minAffBest.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${{minR.tool.id}}" data-cta-location="workbench-best-option">${{minR.tool.name}} ($${{minR.year1Total.toLocaleString()}}/yr)</a> &middot; saves $${{diffBest.toLocaleString()}}/yr`;
+      bestOptEl.innerHTML = `<strong>Lowest cost:</strong> <a href="${{affiliateHref(minAffBest)}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${{minR.tool.id}}" data-cta-location="workbench-best-option">${{minR.tool.name}} ($${{minR.year1Total.toLocaleString()}}/yr)</a> &middot; saves $${{diffBest.toLocaleString()}}/yr`;
     }}
   }}
 
@@ -648,7 +672,7 @@ function renderDirectory() {{
 
   const ctaEl = document.getElementById('wb-primary-cta');
   if (ctaEl) {{
-    ctaEl.href = spotAff.destination_url;
+    ctaEl.href = affiliateHref(spotAff);
     ctaEl.setAttribute('data-vendor', spotR.tool.id);
     const isSpotTrapOrHighest = spotR.tool.id === primaryR.tool.id || spotR.tool.id === maxR.tool.id || spotR.onboarding > 0;
     const wbRefTotal = primaryR.year1Total > spotR.year1Total ? primaryR.year1Total : maxR.year1Total;
@@ -701,7 +725,7 @@ function renderDirectory() {{
         <div class="summary-breakdown">${{money(fdR.annualSeatsCost)}} licenses + ${{money(fdR.aiAnnual)}} Freddy AI sessions</div>
         <div class="summary-caveat"><strong>Contract note:</strong> Freshdesk (Freddy AI) bills $49 per 100 sessions after 500 one-time free sessions.</div>
         <details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">${{renderCalcBreakdownHtml(fdR, seats, aiVol, mode)}}</div></details>
-        <div class="summary-actions"><div class="cta-stack"><a class="btn-cta" href="${{fdAff.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="freshdesk-support" data-cta-location="summary-card">${{getVendorCtaLabel(fdR.tool)}}</a></div></div>
+        <div class="summary-actions"><div class="cta-stack"><a class="btn-cta" href="${{affiliateHref(fdAff)}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="freshdesk-support" data-cta-location="summary-card">${{getVendorCtaLabel(fdR.tool)}}</a></div></div>
       </div>
       <div class="summary-card result-card card-hidden">
         <div class="summary-label">Intercom + Fin AI ($0.99/resolution)</div>
@@ -719,7 +743,7 @@ function renderDirectory() {{
         <div class="summary-breakdown">Hidden cost gap on Intercom is ${{money(icR.hiddenFees)}}. Hidden cost gap on Freshdesk is ${{money(fdR.hiddenFees)}}.</div>
         <div class="summary-caveat"><strong>Head-to-head:</strong> ${{cheaperName}} is the lower Year-1 bill. The table below still lists every helpdesk tool.</div>
         <details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">${{renderCalcBreakdownHtml(gap >= 0 ? icR : fdR, seats, aiVol, mode)}}</div></details>
-        <div class="summary-actions"><div class="cta-stack"><a class="btn-secondary" href="${{fdAff.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="freshdesk-support" data-cta-location="summary-card">Compare Freshdesk pricing &rarr;</a></div></div>
+        <div class="summary-actions"><div class="cta-stack"><a class="btn-secondary" href="${{affiliateHref(fdAff)}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="freshdesk-support" data-cta-location="summary-card">Compare Freshdesk pricing &rarr;</a></div></div>
       </div>`;
     }} else if (COMPARE_MODE === 'intercom_vs_zendesk') {{
       const zdWins = zdTeamR.year1Total < icR.year1Total;
@@ -742,7 +766,7 @@ function renderDirectory() {{
         <div class="summary-breakdown">${{money(zdTeamR.annualSeatsCost)}} licenses + ${{money(zdTeamR.aiAnnual)}} resolution overage</div>
         <div class="summary-caveat"><strong>Contract note:</strong> Suite Pro is $115/seat plus a separate $50/seat Copilot add-on, then $1.50 per resolution over the included allowance. This card is Suite Team and does not add Copilot.</div>
         <details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">${{renderCalcBreakdownHtml(zdTeamR, seats, aiVol, mode)}}</div></details>
-        <div class="summary-actions"><div class="cta-stack"><a class="btn-secondary" href="${{zdAff.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="zendesk-suite-team" data-cta-location="summary-card">${{getVendorCtaLabel(zdTeamR.tool)}}</a></div></div>
+        <div class="summary-actions"><div class="cta-stack"><a class="btn-secondary" href="${{affiliateHref(zdAff)}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="zendesk-suite-team" data-cta-location="summary-card">${{getVendorCtaLabel(zdTeamR.tool)}}</a></div></div>
       </div>
       <div class="summary-card result-card card-highest">
         <div class="summary-label">Lowest-Cost Alternative: Freshdesk</div>
@@ -751,7 +775,7 @@ function renderDirectory() {{
         <div class="summary-breakdown">${{money(fdR.annualSeatsCost)}} licenses + ${{money(fdR.aiAnnual)}} Freddy AI sessions</div>
         <div class="summary-caveat"><strong>Contract note:</strong> Freshdesk stays in the table as the lower-cost helpdesk alternative.</div>
         <details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">${{renderCalcBreakdownHtml(fdR, seats, aiVol, mode)}}</div></details>
-        <div class="summary-actions"><div class="cta-stack"><a class="btn-secondary" href="${{fdAff.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="freshdesk-support" data-cta-location="summary-card">${{getVendorCtaLabel(fdR.tool)}}</a></div></div>
+        <div class="summary-actions"><div class="cta-stack"><a class="btn-secondary" href="${{affiliateHref(fdAff)}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="freshdesk-support" data-cta-location="summary-card">${{getVendorCtaLabel(fdR.tool)}}</a></div></div>
       </div>`;
     }} else if (COMPARE_MODE === 'zendesk_vs_freshdesk') {{
       const gap = zdTeamR.year1Total - fdR.year1Total;
@@ -765,7 +789,7 @@ function renderDirectory() {{
         <div class="summary-breakdown">${{money(fdR.annualSeatsCost)}} licenses + ${{money(fdR.aiAnnual)}} Freddy AI sessions</div>
         <div class="summary-caveat"><strong>Contract note:</strong> Freshdesk (Freddy AI) uses session packs, not a per-resolution meter.</div>
         <details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">${{renderCalcBreakdownHtml(fdR, seats, aiVol, mode)}}</div></details>
-        <div class="summary-actions"><div class="cta-stack"><a class="btn-cta" href="${{fdAff.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="freshdesk-support" data-cta-location="summary-card">${{getVendorCtaLabel(fdR.tool)}}</a></div></div>
+        <div class="summary-actions"><div class="cta-stack"><a class="btn-cta" href="${{affiliateHref(fdAff)}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="freshdesk-support" data-cta-location="summary-card">${{getVendorCtaLabel(fdR.tool)}}</a></div></div>
       </div>
       <div class="summary-card result-card card-hidden">
         <div class="summary-label">Zendesk Suite + AI</div>
@@ -774,7 +798,7 @@ function renderDirectory() {{
         <div class="summary-breakdown">${{money(zdTeamR.annualSeatsCost)}} licenses + ${{money(zdTeamR.aiAnnual)}} resolution overage</div>
         <div class="summary-caveat"><strong>Contract note:</strong> Zendesk Suite + Advanced AI bills included resolutions, then $1.50 committed or $2.00 monthly.</div>
         <details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">${{renderCalcBreakdownHtml(zdTeamR, seats, aiVol, mode)}}</div></details>
-        <div class="summary-actions"><div class="cta-stack"><a class="btn-secondary" href="${{zdAff.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="zendesk-suite-team" data-cta-location="summary-card">${{getVendorCtaLabel(zdTeamR.tool)}}</a></div></div>
+        <div class="summary-actions"><div class="cta-stack"><a class="btn-secondary" href="${{affiliateHref(zdAff)}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="zendesk-suite-team" data-cta-location="summary-card">${{getVendorCtaLabel(zdTeamR.tool)}}</a></div></div>
       </div>
       <div class="summary-card result-card card-highest">
         <div class="summary-label">Head-to-Head Savings: Save ${{money(save)}}/yr with ${{cheaperName}}</div>
@@ -783,7 +807,7 @@ function renderDirectory() {{
         <div class="summary-breakdown">Hidden cost gap: Freshdesk ${{money(fdR.hiddenFees)}}, Zendesk ${{money(zdTeamR.hiddenFees)}}.</div>
         <div class="summary-caveat"><strong>Head-to-head:</strong> ${{cheaperName}} is lower at these sliders. Ticket history can be exported from either helpdesk.</div>
         <details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">${{renderCalcBreakdownHtml(fdR, seats, aiVol, mode)}}</div></details>
-        <div class="summary-actions"><div class="cta-stack"><a class="btn-secondary" href="${{fdAff.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="freshdesk-support" data-cta-location="summary-card">View Freshdesk pricing &rarr;</a></div></div>
+        <div class="summary-actions"><div class="cta-stack"><a class="btn-secondary" href="${{affiliateHref(fdAff)}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="freshdesk-support" data-cta-location="summary-card">View Freshdesk pricing &rarr;</a></div></div>
       </div>`;
     }}
 
@@ -800,7 +824,7 @@ function renderDirectory() {{
         </details>
         <div class="summary-actions">
           <div class="cta-stack">
-            <a class="btn-cta" href="${{minAff.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${{minR.tool.id}}" data-cta-location="summary-card">${{minCtaText}}</a>
+            <a class="btn-cta" href="${{affiliateHref(minAff)}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${{minR.tool.id}}" data-cta-location="summary-card">${{minCtaText}}</a>
           </div>
           ${{minAudit ? `<a class="summary-audit-link" href="${{minAudit.url}}" data-track="internal-audit">${{minAudit.label}}</a>` : ''}}
         </div>
@@ -817,7 +841,7 @@ function renderDirectory() {{
         </details>
         <div class="summary-actions">
           <div class="cta-stack">
-            <a class="btn-secondary" href="${{primaryAff.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${{primaryR.tool.id}}" data-cta-location="summary-card">${{getVendorCtaLabel(primaryR.tool)}}</a>
+            <a class="btn-secondary" href="${{affiliateHref(primaryAff)}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${{primaryR.tool.id}}" data-cta-location="summary-card">${{getVendorCtaLabel(primaryR.tool)}}</a>
           </div>
           ${{primaryAudit ? `<a class="summary-audit-link" href="${{primaryAudit.url}}" data-track="internal-audit">${{primaryAudit.label}}</a>` : ''}}
         </div>
@@ -834,7 +858,7 @@ function renderDirectory() {{
         </details>
         <div class="summary-actions">
           <div class="cta-stack">
-            <a class="btn-secondary" href="${{thirdAff.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${{thirdR.tool.id}}" data-cta-location="summary-card">${{thirdCta}}</a>
+            <a class="btn-secondary" href="${{affiliateHref(thirdAff)}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${{thirdR.tool.id}}" data-cta-location="summary-card">${{thirdCta}}</a>
           </div>
           ${{thirdAuditLink}}
         </div>
@@ -867,7 +891,7 @@ function renderDirectory() {{
             <div class="viz-breakdown-text">${{parts.join(' + ')}}</div>
           </div>
           <div class="viz-total-label">$${{r.year1Total.toLocaleString()}} / yr</div>
-          <a class="viz-action-link" href="${{aff.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${{r.tool.id}}" data-cta-location="chart-row">${{rowCta}}</a>
+          <a class="viz-action-link" href="${{affiliateHref(aff)}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${{r.tool.id}}" data-cta-location="chart-row">${{rowCta}}</a>
         </div>
       `;
     }}).join('');
@@ -878,7 +902,7 @@ function renderDirectory() {{
     const aff = AFFILIATES[t.affiliate_slug] || {{ destination_url: '#' }};
     const verStatus = t.verification_status || 'Verified';
     const verClass = verStatus.startsWith('Verified') ? 'status-verified' : 'status-estimated';
-    const srcUrl = (t.source_urls && t.source_urls[0]) ? t.source_urls[0] : aff.destination_url;
+    const srcUrl = (t.source_urls && t.source_urls[0]) ? t.source_urls[0] : affiliateHref(aff);
     const auditObj = INTERNAL_AUDIT_LINKS[t.id];
     const fmtRate = n => Number.isInteger(n) ? n.toLocaleString() : n.toFixed(2);
 
@@ -920,7 +944,7 @@ function renderDirectory() {{
         <td data-label="Hidden Cost Gap">${{gapCellHtml}}</td>
         <td data-label="Official Pricing">
           <div class="cta-stack">
-            <a class="btn-secondary" href="${{aff.destination_url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${{t.id}}" data-cta-location="table-row">${{tableCtaText}}</a>
+            <a class="btn-secondary" href="${{affiliateHref(aff)}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${{t.id}}" data-cta-location="table-row">${{tableCtaText}}</a>
           </div>
         </td>
       </tr>
