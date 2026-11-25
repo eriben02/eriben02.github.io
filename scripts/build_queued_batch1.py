@@ -16,8 +16,8 @@ PAGES = [
     {
         "rel": "compare/typeform-vs-jotform-response-limit-and-hipaa-cost/index.html",
         "slug": "/compare/typeform-vs-jotform-response-limit-and-hipaa-cost/",
-        "title": "Typeform vs Jotform True Cost & HIPAA (2026) – saasbill.io",
-        "desc": "Calculate the 2026 true cost and Year-1 price of Typeform vs. Jotform including response overages and HIPAA BAA tiers ($99/mo Jotform Gold vs. Typeform Enterprise).",
+        "title": "Typeform vs Jotform HIPAA cost – saasbill.io",
+        "desc": "Jotform Gold is $99/month with a BAA option. Typeform HIPAA is an Enterprise quote. Plus caps at 1,000 responses.",
         "summary_id": "tf-summary",
         "h1": "Typeform vs. Jotform True Cost (2026): Response Caps &amp; HIPAA BAA Tiers",
         "lead": "Jotform Gold lists 10,000 monthly submissions for $99/month billed annually ($1,188/year) in 2026. Eligible customers with HIPAA features enabled can sign a BAA with Jotform. Typeform requires a custom Enterprise contract (benchmark $6,000+/year) for HIPAA compliance and caps Plus plans at 1,000 responses/month (sources: Jotform HIPAA page, checked 15 Nov 2026, and Typeform pricing pages, verified Oct 2026).",
@@ -52,11 +52,11 @@ PAGES = [
     {
         "rel": "compare/close-crm-vs-hubspot-sales-hub-5-to-20-reps/index.html",
         "slug": "/compare/close-crm-vs-hubspot-sales-hub-5-to-20-reps/",
-        "title": "Close CRM vs HubSpot True Year-1 Cost (2026) – saasbill.io",
-        "desc": "Compare the 2026 true cost and Year-1 price of Close CRM ($0 onboarding, built-in calling) vs. HubSpot Sales Hub Pro ($90/seat/mo + $1,500 onboarding fee) for 5–20 reps.",
+        "title": "Close vs HubSpot cost for 5-20 reps – saasbill.io",
+        "desc": "For 8 reps, HubSpot Sales Pro is $10,140 in Year 1. Close Essentials is $3,360, with $0 onboarding.",
         "summary_id": "ch-summary",
         "h1": "Close CRM vs. HubSpot Sales Hub for 5&ndash;20 Reps (2026): True Year-1 Cost",
-        "lead": "HubSpot Sales Hub seats and the mandatory onboarding fee, next to Close CRM, for a team of 5 to 20 reps.",
+        "lead": "For 8 reps, HubSpot Sales Pro is $10,140 in Year 1 and Close Essentials is $3,360 (close.com/pricing, 25 Nov 2026).",
         "ctrl_label": "Sales Reps (Seats)",
         "ctrl_min": 1, "ctrl_max": 25, "ctrl_step": 1, "ctrl_val": 8, "ctrl_unit": "sales reps",
         "opt_label": "Close CRM Tier Comparison",
@@ -91,8 +91,8 @@ PAGES = [
     {
         "rel": "pricing/stripe-billing-0-7-percent-recurring-tax-calculator/index.html",
         "slug": "/pricing/stripe-billing-0-7-percent-recurring-tax-calculator/",
-        "title": "Stripe Billing 0.7% Fee & True Cost (2026) – saasbill.io",
-        "desc": "Calculate the 2026 true cost and Year-1 fee of Stripe Billing (0.7% recurring fee) + Stripe Tax (0.5%) + 2.9% + 30¢ card processing vs. Whop (2.7% + 30¢) and Paddle.",
+        "title": "Stripe Billing 0.7% fee calculator – saasbill.io",
+        "desc": "Stripe Billing adds 0.7% and Stripe Tax adds 0.5%, on top of 2.9% + $0.30. Whop's card rate is 2.7% + $0.30.",
         "summary_id": "sb-summary",
         "h1": "Stripe Billing 0.7% Recurring Revenue Tax &amp; Chargeback Cost Calculator (2026)",
         "lead": "In 2026, Stripe charges an extra 0.7% on recurring subscription volume (Stripe Billing) plus 0.5% for automated tax calculation (Stripe Tax) on top of 2.9% + $0.30 card processing, pushing effective recurring take rates to ~4.1% + $0.30 per charge versus 2.7% + $0.30 base card processing on Whop (sources: Stripe, Whop &amp; Paddle pricing pages, verified Oct 2026).",
@@ -150,8 +150,8 @@ function calcStripeDisputes(mrr, txCount, disputePct) {
           {name: 'Chargeflow (Automated Dispute Recovery)', plan: '25% of recovered disputes ($0/mo fixed)', base: '$0/yr base fee', hidden: 'Pay-on-performance add-on for Stripe/Shopify on disputed volume ($0 fee on unrecovered disputes). The 65% win rate is our planning assumption, not a Chargeflow figure. Adjust it to yours.', total: 'Saves $' + cb.net.toLocaleString('en-US') + '/yr net', url: 'https://www.chargeflow.io/', cta: 'View Chargeflow pricing', vendor: 'chargeflow', status: 'Verified', src: 'https://www.chargeflow.io/pricing', ctaLocation: 'table-row'}
         ];
         const sbMathText = 'Charges/mo = MRR / $50 = ' + txCount.toLocaleString('en-US') + '. Disputes/yr = ' + txCount.toLocaleString('en-US') + ' x 12 x ' + disputePct.toFixed(2) + '% = ' + cb.disputes.toLocaleString('en-US') + '. Disputed MRR = ' + cb.disputes.toLocaleString('en-US') + ' x $' + (txCount ? Math.round(mrr / txCount) : 50) + ' = $' + cb.disputed.toLocaleString('en-US') + '. Stripe dispute fees = ' + cb.disputes.toLocaleString('en-US') + ' x $15 = $' + cb.fees.toLocaleString('en-US') + '. Counter fee / manual prep = ' + cb.disputes.toLocaleString('en-US') + ' x $15 = $' + cb.counter.toLocaleString('en-US') + '. Annual chargeback and dispute drain = $' + cb.drain.toLocaleString('en-US') + '. Stripe Year-1 true cost adds that drain on top of card, Billing, and Tax fees ($' + stripeHiddenYr.toLocaleString('en-US') + '/yr). Paddle processing on this volume is $' + paddleYr.toLocaleString('en-US') + '/yr before disputes.';
-        customSummaryHtml = '<div class="summary-card result-card card-lowest"><div class="summary-label">Best value: Whop Payments</div><div class="summary-metric">$' + whopYr.toLocaleString('en-US') + ' / yr</div><div class="summary-scenario">Based on $' + mrr.toLocaleString('en-US') + '/mo MRR</div><div class="summary-breakdown">' + rows[0].plan + '. ' + rows[0].hidden + '.</div><div class="summary-actions"><a class="btn-cta" href="/go/whop" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="whop-payments" data-cta-location="summary-card">View Whop Payments pricing &rarr;</a></div></div>'
-          + '<div class="summary-card result-card card-highest"><div class="summary-label">Stripe / Paddle hidden cost breakdown</div><div class="summary-metric">$' + stripeYr.toLocaleString('en-US') + ' / yr</div><div class="summary-scenario">Based on $' + mrr.toLocaleString('en-US') + '/mo MRR and a ' + disputePct.toFixed(2) + '% dispute rate</div><div class="summary-breakdown">Stripe card + Billing + Tax $' + (stripeBaseYr + stripeHiddenYr).toLocaleString('en-US') + '/yr, plus $' + cb.drain.toLocaleString('en-US') + '/yr chargeback drain. Paddle processing $' + paddleYr.toLocaleString('en-US') + '/yr.</div><p class="summary-caveat"><strong>Hidden Cost Highlight:</strong> The dispute drain is disputed MRR plus a $15 dispute fee and a $15 counter fee on every dispute.</p><details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">' + sbMathText + '</div></details></div>'
+        customSummaryHtml = '<div class="summary-card result-card card-lowest"><div class="summary-label">Lowest Year-1 cost: Whop Payments</div><div class="summary-metric">$' + whopYr.toLocaleString('en-US') + ' / yr</div><div class="summary-scenario">Based on $' + mrr.toLocaleString('en-US') + '/mo MRR</div><div class="summary-breakdown">' + rows[0].plan + '. ' + rows[0].hidden + '.</div><div class="summary-actions"><a class="btn-cta" href="/go/whop" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="whop-payments" data-cta-location="summary-card">View Whop Payments pricing &rarr;</a></div></div>'
+          + '<div class="summary-card result-card card-highest"><div class="summary-label">Stripe / Paddle hidden cost breakdown</div><div class="summary-metric">$' + stripeYr.toLocaleString('en-US') + ' / yr</div><div class="summary-scenario">Based on $' + mrr.toLocaleString('en-US') + '/mo MRR and a ' + disputePct.toFixed(2) + '% dispute rate</div><div class="summary-breakdown">Stripe card + Billing + Tax $' + (stripeBaseYr + stripeHiddenYr).toLocaleString('en-US') + '/yr, plus $' + cb.drain.toLocaleString('en-US') + '/yr chargeback drain. Paddle processing $' + paddleYr.toLocaleString('en-US') + '/yr.</div><p class="summary-caveat">The dispute drain is disputed MRR plus a $15 dispute fee and a $15 counter fee on every dispute.</p><details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">' + sbMathText + '</div></details></div>'
           + '<div class="summary-card result-card card-lowest"><div class="summary-label">Dispute recovery: Chargeflow pay-on-performance</div><div class="summary-metric">$' + cb.net.toLocaleString('en-US') + ' net / yr</div><div class="summary-scenario">25% success fee, $0/mo fixed</div><div class="summary-breakdown">Gross recovered $' + cb.recovered.toLocaleString('en-US') + ' minus a $' + cb.successFee.toLocaleString('en-US') + ' success fee.</div><details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">65% of $' + cb.disputed.toLocaleString('en-US') + ' = $' + cb.recovered.toLocaleString('en-US') + '. Success fee 25% = $' + cb.successFee.toLocaleString('en-US') + '. Net recovered = $' + cb.net.toLocaleString('en-US') + '. </div></details><div class="summary-actions"><a id="sb-cf-cta" class="btn-secondary" href="https://www.chargeflow.io/" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="chargeflow" data-cta-location="summary-card">Recover $' + cb.net.toLocaleString('en-US') + '/yr net with Chargeflow &rarr;</a><a class="summary-audit-link" href="../../chargeback-fee-and-recovery-calculator/">Open the full chargeback calculator &rarr;</a></div></div>';
         """,
         "faqs": [
@@ -162,11 +162,11 @@ function calcStripeDisputes(mrr, txCount, disputePct) {
     {
         "rel": "pricing/docusign-envelope-allowance-and-api-overage-calculator/index.html",
         "slug": "/pricing/docusign-envelope-allowance-and-api-overage-calculator/",
-        "title": "DocuSign 100-Envelope Cap & True Cost (2026) – saasbill.io",
-        "desc": "Calculate the 2026 true cost and Year-1 overage fees of DocuSign's 100 envelopes/user/year cap vs. Jotform Sign and PandaDoc unlimited e-signature plans.",
+        "title": "DocuSign 100-envelope cap cost – saasbill.io",
+        "desc": "DocuSign Standard is $25/user/month and caps each user at 100 envelopes a year, then about $2.50 each.",
         "summary_id": "ds-summary",
         "h1": "DocuSign 100-Envelope Cap Calculator (2026): True Year-1 Cost vs. Jotform Sign &amp; PandaDoc",
-        "lead": "DocuSign Standard ($25/user/month annual) and Business Pro ($40/user/month annual) cap every user at just 100 sent envelopes per year (~8/month) in 2026 and charging ~$2.50 per extra envelope beyond your allowance, whereas Jotform Gold ($99/month flat) and PandaDoc Business ($49/user/month) include high-volume e-signatures without per-envelope overage penalties (sources: DocuSign, PandaDoc &amp; Jotform pricing pages, verified Oct 2026).",
+        "lead": "DocuSign Standard is $25/user/month and Business Pro is $40, both billed annually, with 100 sent envelopes a user each year and about $2.50 after that (DocuSign pricing, Oct 2026).",
         "ctrl_label": "Monthly Envelopes Sent (Total Team)",
         "ctrl_min": 20, "ctrl_max": 400, "ctrl_step": 20, "ctrl_val": 120, "ctrl_unit": "envelopes/mo",
         "opt_label": "Team Size & Compliance",
@@ -204,11 +204,11 @@ function calcStripeDisputes(mrr, txCount, disputePct) {
     {
         "rel": "pricing/gong-io-platform-fee-and-seat-minimum-calculator/index.html",
         "slug": "/pricing/gong-io-platform-fee-and-seat-minimum-calculator/",
-        "title": "Gong.io $5,000 Platform Fee & True Cost – saasbill.io",
-        "desc": "Calculate the 2026 Gong.io true cost and Year-1 contract price ($5,000 base platform fee + ~$1,600/seat/yr + separate CRM cost) vs. Close CRM all-in-one calling.",
+        "title": "Gong platform fee: $5,000 a year – saasbill.io",
+        "desc": "This model uses a $5,000 platform fee plus $1,600 a seat, plus a CRM. Close Growth is $99/user/month and includes calling.",
         "summary_id": "gong-summary",
         "h1": "Gong.io Platform Fee &amp; Seat Calculator (2026): True Year-1 Cost vs. Close CRM",
-        "lead": "Gong's platform fee and per-seat license, next to Close CRM, which includes calling.",
+        "lead": "This model uses a $5,000 Gong platform fee plus $1,600 a seat. Close Growth is $99/user/month and includes calling (close.com/pricing, 25 Nov 2026).",
         "ctrl_label": "Sales Reps (Recorded Seats)",
         "ctrl_min": 3, "ctrl_max": 25, "ctrl_step": 1, "ctrl_val": 8, "ctrl_unit": "sales reps",
         "opt_label": "Include Separate CRM License for Gong?",
@@ -241,8 +241,8 @@ function calcStripeDisputes(mrr, txCount, disputePct) {
     {
         "rel": "exit/paypal-180-day-permanent-limitation-fund-recovery/index.html",
         "slug": "/exit/paypal-180-day-permanent-limitation-fund-recovery/",
-        "title": "PayPal 180-Day Hold & True Cost (2026) – saasbill.io",
-        "desc": "Calculate the 2026 true cost and working-capital impact of a PayPal 180-day permanent limitation hold and 3.49% + 49¢ fees vs. Whop multi-processor orchestration.",
+        "title": "PayPal 180-day hold, what it costs – saasbill.io",
+        "desc": "A PayPal permanent limitation can lock the balance for up to 180 days. Commercial checkout is 3.49% + $0.49.",
         "summary_id": "pp-summary",
         "h1": "PayPal 180-Day Hold &amp; Reserve Cost Calculator (2026)",
         "lead": "Under the 2026 PayPal US User Agreement, a permanent account limitation locks 100% of your held balance for up to 180 days on top of 3.49% + $0.49 commercial transaction fees and $15&ndash;$30 dispute fees, whereas routing checkouts through Whop (2.7% + $0.30 base) distributes volume across redundant payment processors (sources: PayPal User Agreement &amp; Whop pricing, verified Oct 2026).",
@@ -279,8 +279,8 @@ function calcStripeDisputes(mrr, txCount, disputePct) {
     {
         "rel": "faq/does-hubspot-charge-onboarding-fees-2026/index.html",
         "slug": "/faq/does-hubspot-charge-onboarding-fees-2026/",
-        "title": "Does HubSpot Charge Onboarding Fees (2026)? – saasbill.io",
-        "desc": "Yes: HubSpot charges mandatory $1,500–$7,000 onboarding fees on Professional and Enterprise plans in 2026. Calculate your true Year-1 cost vs. Close CRM ($0 onboarding).",
+        "title": "Does HubSpot charge an onboarding fee? – saasbill.io",
+        "desc": "Yes. Sales Hub Professional adds $1,500. Pro and Enterprise onboarding runs from $1,500 to $7,000.",
         "summary_id": "faq-hs-summary",
         "h1": "Does HubSpot Charge Onboarding Fees in 2026? (Exact Fee Schedule &amp; Waivers)",
         "lead": "Yes. HubSpot charges a mandatory $1,500 onboarding fee for Sales Hub Professional ($3,500 for Enterprise) and a mandatory $3,000 onboarding fee for Marketing Hub Professional ($7,000 for Enterprise) in 2026 (source: HubSpot official pricing &amp; product catalog, verified Oct 2026).",
@@ -315,8 +315,8 @@ function calcStripeDisputes(mrr, txCount, disputePct) {
     {
         "rel": "faq/intercom-fin-ai-cost-calculator/index.html",
         "slug": "/faq/intercom-fin-ai-cost-calculator/",
-        "title": "Intercom Fin AI True Cost Calculator (2026) – saasbill.io",
-        "desc": "Intercom Fin AI costs $0.99 per resolved conversation in 2026 plus $29–$132/seat/mo. Calculate your true Year-1 AI support cost vs. Freshdesk and Help Scout.",
+        "title": "Intercom Fin cost per resolution – saasbill.io",
+        "desc": "Fin is $0.99 per resolved conversation in 2026, plus $29 to $132 per seat per month.",
         "summary_id": "faq-ic-summary",
         "h1": "Intercom Fin AI Cost Calculator (2026): True Year-1 Price at $0.99/Resolution",
         "lead": "Intercom Fin AI costs $0.99 per resolved conversation in 2026 on top of mandatory helpdesk agent seat licenses ($29 to $132/seat/month annual), meaning 1,000 monthly AI resolutions add $990/month ($11,880/year) to your base subscription (source: Intercom official pricing page, verified Oct 2026).",
@@ -358,8 +358,8 @@ function calcStripeDisputes(mrr, txCount, disputePct) {
     {
         "rel": "faq/stripe-vs-paddle-true-cost/index.html",
         "slug": "/faq/stripe-vs-paddle-true-cost/",
-        "title": "Stripe vs Paddle vs Whop True Cost (2026) – saasbill.io",
-        "desc": "Compare the 2026 true cost and Year-1 take rate of Stripe (2.9% + 0.7% Billing + 0.5% Tax) vs. Paddle (5% + 50¢ MoR) vs. Whop (2.7% + 30¢ with $0 billing tax).",
+        "title": "Stripe vs Paddle vs Whop fees – saasbill.io",
+        "desc": "Stripe Billing adds 0.7% and Tax adds 0.5% on 2.9% + $0.30. Paddle is 5% + $0.50. Whop is 2.7% + $0.30.",
         "summary_id": "faq-sp-summary",
         "h1": "Stripe vs. Paddle vs. Whop True Cost &amp; Chargeback Calculator (2026)",
         "lead": "In 2026, Stripe's true recurring SaaS cost is 3.6% to 4.1% + $0.30 per charge once you add Stripe Billing (0.7%) and Stripe Tax (0.5%) to the 2.9% + $0.30 base card rate, compared with 5.0% + $0.50 all-in on Paddle (Merchant of Record) and 2.7% + $0.30 on Whop with $0 extra subscription billing tax (source: Stripe, Paddle, and Whop official pricing pages, verified Oct 2026).",
@@ -418,8 +418,8 @@ function calcProcessorDisputes(gmv, tx, disputePct, fee) {
           {name: 'Chargeflow (Automated Dispute Recovery)', plan: '25% of recovered disputes ($0/mo fixed)', base: '$0/yr base fee', hidden: 'Pay-on-performance add-on for Stripe/Shopify on disputed volume ($0 fee on unrecovered disputes). The 65% win rate is our planning assumption, not a Chargeflow figure. Adjust it to yours.', total: 'Saves $' + stripeCb.net.toLocaleString('en-US') + '/yr net', url: 'https://www.chargeflow.io/', cta: 'View Chargeflow pricing', vendor: 'chargeflow', status: 'Verified', src: 'https://www.chargeflow.io/pricing', ctaLocation: 'table-row'}
         ];
         const spMathText = 'Charges/mo = GMV / $50 = ' + tx.toLocaleString('en-US') + '. Disputes/yr = ' + tx.toLocaleString('en-US') + ' x 12 x ' + disputePct.toFixed(2) + '% = ' + stripeCb.disputes.toLocaleString('en-US') + '. Disputed sales = $' + stripeCb.disputed.toLocaleString('en-US') + '. Unrecovered at a 20% manual win rate (80%) = $' + stripeCb.unrecovered.toLocaleString('en-US') + '. Stripe dispute fees = ' + stripeCb.disputes.toLocaleString('en-US') + ' x $15 = $' + stripeCb.fees.toLocaleString('en-US') + '. Stripe annual chargeback line = $' + stripeCb.drain.toLocaleString('en-US') + '. Paddle dispute fees = ' + paddleCb.disputes.toLocaleString('en-US') + ' x $20 = $' + paddleCb.fees.toLocaleString('en-US') + '. Paddle annual chargeback line = $' + paddleCb.drain.toLocaleString('en-US') + '.';
-        customSummaryHtml = '<div class="summary-card result-card card-lowest"><div class="summary-label">Best value: Whop Payments</div><div class="summary-metric">$' + whopYr.toLocaleString('en-US') + ' / yr</div><div class="summary-scenario">Based on $' + gmv.toLocaleString('en-US') + '/mo GMV</div><div class="summary-breakdown">' + rows[0].hidden + '.</div><div class="summary-actions"><a class="btn-cta" href="/go/whop" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="whop-payments" data-cta-location="summary-card">View Whop Payments pricing &rarr;</a></div></div>'
-          + '<div class="summary-card result-card card-highest"><div class="summary-label">Stripe / Paddle hidden cost breakdown</div><div class="summary-metric">$' + stripeYr.toLocaleString('en-US') + ' / yr Stripe</div><div class="summary-scenario">Based on $' + gmv.toLocaleString('en-US') + '/mo GMV and a ' + disputePct.toFixed(2) + '% dispute rate</div><div class="summary-breakdown">Stripe chargeback line $' + stripeCb.drain.toLocaleString('en-US') + '/yr ($15/dispute + 80% unrecovered). Paddle chargeback line $' + paddleCb.drain.toLocaleString('en-US') + '/yr ($20/dispute + 80% unrecovered). Paddle all-in $' + paddleYr.toLocaleString('en-US') + '/yr.</div><p class="summary-caveat"><strong>Hidden Cost Highlight:</strong> Dispute fees sit on top of the processing rate, and 80% of disputed sales stay lost at a 20% manual win rate.</p><details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">' + spMathText + '</div></details></div>'
+        customSummaryHtml = '<div class="summary-card result-card card-lowest"><div class="summary-label">Lowest Year-1 cost: Whop Payments</div><div class="summary-metric">$' + whopYr.toLocaleString('en-US') + ' / yr</div><div class="summary-scenario">Based on $' + gmv.toLocaleString('en-US') + '/mo GMV</div><div class="summary-breakdown">' + rows[0].hidden + '.</div><div class="summary-actions"><a class="btn-cta" href="/go/whop" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="whop-payments" data-cta-location="summary-card">View Whop Payments pricing &rarr;</a></div></div>'
+          + '<div class="summary-card result-card card-highest"><div class="summary-label">Stripe / Paddle hidden cost breakdown</div><div class="summary-metric">$' + stripeYr.toLocaleString('en-US') + ' / yr Stripe</div><div class="summary-scenario">Based on $' + gmv.toLocaleString('en-US') + '/mo GMV and a ' + disputePct.toFixed(2) + '% dispute rate</div><div class="summary-breakdown">Stripe chargeback line $' + stripeCb.drain.toLocaleString('en-US') + '/yr ($15/dispute + 80% unrecovered). Paddle chargeback line $' + paddleCb.drain.toLocaleString('en-US') + '/yr ($20/dispute + 80% unrecovered). Paddle all-in $' + paddleYr.toLocaleString('en-US') + '/yr.</div><p class="summary-caveat">Dispute fees sit on top of the processing rate, and 80% of disputed sales stay lost at a 20% manual win rate.</p><details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">' + spMathText + '</div></details></div>'
           + '<div class="summary-card result-card card-lowest"><div class="summary-label">Dispute recovery: Chargeflow pay-on-performance</div><div class="summary-metric">$' + stripeCb.net.toLocaleString('en-US') + ' net / yr</div><div class="summary-scenario">25% success fee, $0/mo fixed</div><div class="summary-breakdown">Gross recovered $' + stripeCb.recovered.toLocaleString('en-US') + ' minus a $' + stripeCb.successFee.toLocaleString('en-US') + ' success fee.</div><details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">65% of $' + stripeCb.disputed.toLocaleString('en-US') + ' = $' + stripeCb.recovered.toLocaleString('en-US') + '. Success fee 25% = $' + stripeCb.successFee.toLocaleString('en-US') + '. Net recovered = $' + stripeCb.net.toLocaleString('en-US') + '. </div></details><div class="summary-actions"><a id="sp-cf-cta" class="btn-secondary" href="https://www.chargeflow.io/" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="chargeflow" data-cta-location="summary-card">Recover $' + stripeCb.net.toLocaleString('en-US') + '/yr net with Chargeflow &rarr;</a><a class="summary-audit-link" href="../../chargeback-fee-and-recovery-calculator/">Open the full chargeback calculator &rarr;</a></div></div>';
         """,
         "faqs": [

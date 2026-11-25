@@ -10,8 +10,8 @@ from layout import render_page, wrap_calculator_shell
 
 BODY = r"""
 <section class="hero">
-  <h1>HubSpot Onboarding Fee Calculator: Mandatory Setup &amp; Real Year-1 Cost ($1,500–$7,000)</h1>
-  <p class="lead">Calculate your real Year-1 HubSpot cost including the mandatory $1,500 to $7,000 onboarding fee. Adjust your seats, marketing contacts, and tier below to compare your total against Close CRM and Pipedrive.</p>
+  <h1>HubSpot onboarding is $1,500 to $7,000.</h1>
+  <p class="lead">Sales Hub Professional is $1,500 and Marketing Hub Enterprise is $7,000 (HubSpot catalog, 2026). Five Sales Pro seats are $6,900 in Year 1.</p>
 </section>
 
 <section class="calc-box editorial-bar-chart-card" id="crm-apples-to-apples-chart" aria-labelledby="chart-dynamic-headline">
@@ -41,7 +41,7 @@ BODY = r"""
     </div>
   </div>
 
-  <h2 id="chart-dynamic-headline" class="ebc-title">At 5 seats, HubSpot Sales Pro ($6,900) costs 2.4x Close Startup ($2,820) in Year 1</h2>
+  <h2 id="chart-dynamic-headline" class="ebc-title">At 5 seats, HubSpot Sales Pro ($6,900) costs 3.3x Close Essentials ($2,100) in Year 1</h2>
   <p id="chart-dynamic-subtitle" class="ebc-subtitle">Year-1 total for 5 sales reps on annual billing, including mandatory onboarding. Marketing contact bands apply only on Marketing Hub.</p>
 
   <div class="ebc-rows" role="list" aria-live="polite">
@@ -55,11 +55,11 @@ BODY = r"""
     </div>
     <div class="ebc-row ebc-row-sage" role="listitem">
       <div class="ebc-label-col">
-        <div class="ebc-tool-name"><a href="/go/close" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="close" data-cta-location="benchmark-chart">Close CRM Startup &nearr;</a></div>
-        <div class="ebc-tool-meta">Built-in calling and SMS &middot; $0 onboarding</div>
+        <div class="ebc-tool-name"><a href="/go/close" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="close" data-cta-location="benchmark-chart">Close CRM Essentials &nearr;</a></div>
+        <div class="ebc-tool-meta">Pipelines, email, and calling. Workflows start on Growth. $0 onboarding</div>
       </div>
-      <div class="ebc-bar-col"><div class="ebc-bar-track"><div id="bar-close-startup" class="ebc-bar-fill ebc-fill-sage" style="width: 40.9%;"></div></div></div>
-      <div class="ebc-val-col"><span id="val-close-startup" class="ebc-val-main ebc-val-sage">$2,820</span><span class="ebc-val-sub">$47/seat/mo</span></div>
+      <div class="ebc-bar-col"><div class="ebc-bar-track"><div id="bar-close-essentials" class="ebc-bar-fill ebc-fill-sage" style="width: 30.4%;"></div></div></div>
+      <div class="ebc-val-col"><span id="val-close-essentials" class="ebc-val-main ebc-val-sage">$2,100</span><span class="ebc-val-sub">$35/seat/mo</span></div>
     </div>
     <div class="ebc-row" role="listitem">
       <div class="ebc-label-col">
@@ -99,7 +99,7 @@ BODY = r"""
     <a class="btn-secondary" href="/go/pipedrive" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="pipedrive-crm" data-cta-location="benchmark-cta">See Pipedrive pricing &rarr;</a>
     <a class="ebc-secondary-link" href="https://www.hubspot.com/pricing/sales" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="hubspot" data-cta-location="benchmark-cta">View official HubSpot Sales Hub pricing &nearr;</a>
   </div>
-  <p id="chart-dynamic-footnote" class="ebc-footer-note"><strong>Hidden Cost Highlight:</strong> Based on 5 seats, annual billing, 2,000 marketing contacts. HubSpot Sales Pro adds a one-time $1,500 onboarding fee in Year 1. Source: <a href="https://legal.hubspot.com/hubspot-product-and-services-catalog/products" target="_blank" rel="noopener">HubSpot Product and Services Catalog</a>.</p>
+  <p id="chart-dynamic-footnote" class="ebc-footer-note">Based on 5 seats, annual billing, 2,000 marketing contacts. HubSpot Sales Pro adds a one-time $1,500 onboarding fee in Year 1. Source: <a href="https://legal.hubspot.com/hubspot-product-and-services-catalog/products" target="_blank" rel="noopener">HubSpot Product and Services Catalog</a>.</p>
 </section>
 
 <section class="hidden-gap-section" aria-labelledby="gap-heading">
@@ -192,21 +192,21 @@ function updateHs() {
   const hsSeatsYr = hsMonthly * 12;
   const hsYear1 = hsSeatsYr + hsOnboard + contactYr;
   const pipeYr = seats * 39 * 12;
-  const closeStartupYr = seats * 47 * 12;
+  const closeEssentialsYr = seats * 35 * 12;
   const closeGrowthYr = seats * 99 * 12;
   const maxVal = Math.max(hsYear1, closeGrowthYr, pipeYr, 1);
-  const ratio = (hsYear1 / Math.max(closeStartupYr, 1)).toFixed(1);
+  const ratio = (hsYear1 / Math.max(closeEssentialsYr, 1)).toFixed(1);
   const seatWord = seats === 1 ? '1 seat' : seats + ' seats';
 
   document.getElementById('chart-dynamic-headline').textContent =
-    'At ' + seatWord + ', ' + hsShortName + ' ($' + hsYear1.toLocaleString() + ') costs ' + ratio + 'x Close Startup ($' + closeStartupYr.toLocaleString() + ') in Year 1';
+    'At ' + seatWord + ', ' + hsShortName + ' ($' + hsYear1.toLocaleString() + ') costs ' + ratio + 'x Close Essentials ($' + closeEssentialsYr.toLocaleString() + ') in Year 1';
   document.getElementById('chart-dynamic-subtitle').textContent =
     'Year-1 total for ' + seatWord + ' on annual billing. ' + contact.note;
 
   document.getElementById('bar-pipedrive').style.width = ((pipeYr / maxVal) * 100).toFixed(1) + '%';
   document.getElementById('val-pipedrive').textContent = '$' + pipeYr.toLocaleString();
-  document.getElementById('bar-close-startup').style.width = ((closeStartupYr / maxVal) * 100).toFixed(1) + '%';
-  document.getElementById('val-close-startup').textContent = '$' + closeStartupYr.toLocaleString();
+  document.getElementById('bar-close-essentials').style.width = ((closeEssentialsYr / maxVal) * 100).toFixed(1) + '%';
+  document.getElementById('val-close-essentials').textContent = '$' + closeEssentialsYr.toLocaleString();
   document.getElementById('bar-close-growth').style.width = ((closeGrowthYr / maxVal) * 100).toFixed(1) + '%';
   document.getElementById('val-close-growth').textContent = '$' + closeGrowthYr.toLocaleString();
 
@@ -233,21 +233,21 @@ function updateHs() {
     '<div class="calc-math-row"><span class="calc-math-label"><strong>Mandatory onboarding</strong><span class="calc-math-formula">One-time direct implementation fee</span></span><span class="calc-math-val">+$' + hsOnboard.toLocaleString() + '</span></div>' +
     '<div class="calc-math-row"><span class="calc-math-label"><strong>Marketing contact tier</strong><span class="calc-math-formula">' + contacts.toLocaleString() + ' contacts. ' + contact.note + '</span></span><span class="calc-math-val">+$' + contactYr.toLocaleString() + '</span></div>' +
     '<div class="calc-math-total"><span>' + hsShortName + ' Year-1 total</span><span>$' + hsYear1.toLocaleString() + ' / yr</span></div>' +
-    '<div class="calc-math-row" style="margin-top:6px;"><span class="calc-math-label"><strong>Close CRM Startup</strong><span class="calc-math-formula">' + seats + ' x $47/seat/mo x 12 mos + $0 onboarding</span></span><span class="calc-math-val">$' + closeStartupYr.toLocaleString() + ' / yr</span></div>' +
+    '<div class="calc-math-row" style="margin-top:6px;"><span class="calc-math-label"><strong>Close CRM Essentials</strong><span class="calc-math-formula">' + seats + ' x $35/seat/mo x 12 mos + $0 onboarding</span></span><span class="calc-math-val">$' + closeEssentialsYr.toLocaleString() + ' / yr</span></div>' +
     '</div>';
 
   document.getElementById('chart-dynamic-footnote').innerHTML =
-    '<strong>Hidden Cost Highlight:</strong> Based on ' + seatWord + ', annual billing, ' + contacts.toLocaleString() + ' marketing contacts. ' +
+    'Based on ' + seatWord + ', annual billing, ' + contacts.toLocaleString() + ' marketing contacts. ' +
     hsShortName + ' adds a one-time $' + hsOnboard.toLocaleString() + ' onboarding fee' +
     (contactYr > 0 ? ' and $' + contactYr.toLocaleString() + '/yr in contact bands' : '') +
-    '. Year-2 renewal drops the onboarding fee. Source: saasbill.io';
+    '. Year-2 renewal drops the onboarding fee. Sources: HubSpot Product and Services Catalog, and close.com/pricing checked 25 Nov 2026.';
 
   const sub = document.getElementById('gap-dynamic-subhead');
   if (sub) sub.textContent = 'Based on ' + seatWord + ', annual billing, ' + contacts.toLocaleString() + ' marketing contacts.';
 
   const rows = [
     ['HubSpot ' + hsShortName, hsSeatsYr, hsOnboard, contactYr, hsYear1],
-    ['Close CRM Startup', closeStartupYr, 0, 0, closeStartupYr],
+    ['Close CRM Essentials', closeEssentialsYr, 0, 0, closeEssentialsYr],
     ['Close CRM Growth', closeGrowthYr, 0, 0, closeGrowthYr],
     ['Pipedrive Growth', pipeYr, 0, 0, pipeYr]
   ];
@@ -302,7 +302,7 @@ FAQS = [
     ),
     (
         "What does HubSpot Sales Hub Professional cost for 5 users in Year 1?",
-        "Five seats at $90/month billed annually are $5,400, plus the $1,500 onboarding fee, for $6,900 in Year 1. Close CRM Startup for the same five seats is $2,820 with $0 onboarding.",
+        "Five seats at $90/month billed annually are $5,400, plus the $1,500 onboarding fee, for $6,900 in Year 1. Close CRM Essentials for the same five seats is $2,100 ($35/user/month annual) with $0 onboarding. Source: close.com/pricing, checked 25 Nov 2026.",
     ),
 ]
 
@@ -310,8 +310,8 @@ FAQS = [
 def build():
     render_page(
         "hubspot-onboarding-fee-calculator/index.html",
-        "HubSpot Onboarding Fee &amp; True Cost Calculator (2026): Pro vs Enterprise | SaaSBill",
-        "Calculate HubSpot Year-1 cost with the $1,500 to $7,000 onboarding fee, extra seats, and marketing contact tiers versus Close CRM and Pipedrive.",
+        "HubSpot onboarding fee calculator – saasbill.io",
+        "Sales Pro onboarding is $1,500 and Marketing Enterprise is $7,000. Five Sales Pro seats are $6,900 in Year 1.",
         "/hubspot-onboarding-fee-calculator/",
         wrap_calculator_shell(BODY),
         faqs=FAQS,

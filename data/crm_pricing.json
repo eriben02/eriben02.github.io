@@ -12,20 +12,20 @@
   "close": {
     "name": "Close",
     "source_url": "https://www.close.com/pricing",
-    "trial": {"value": "14-day free trial, no credit card", "source_url": "https://www.close.com/pricing", "status": "verified", "verified_date": "2026-10-30"},
+    "trial": {"value": "14-day free trial, no credit card", "source_url": "https://www.close.com/pricing", "status": "verified", "verified_date": "2026-11-25"},
     "plans": {
-      "solo":       {"label": "Solo",       "annual": 9,   "monthly": 19,  "max_users": 1, "source_url": "https://www.close.com/pricing", "status": "verified", "verified_date": "2026-10-30"},
-      "essentials": {"label": "Essentials", "annual": 35,  "monthly": 49,  "source_url": "https://www.close.com/pricing", "status": "verified", "verified_date": "2026-10-30"},
-      "growth":     {"label": "Growth",     "annual": 99,  "monthly": 109, "source_url": "https://www.close.com/pricing", "status": "verified", "verified_date": "2026-10-30"},
-      "scale":      {"label": "Scale",      "annual": 139, "monthly": 149, "source_url": "https://www.close.com/pricing", "status": "verified", "verified_date": "2026-10-30"}
+      "solo":       {"label": "Solo",       "annual": 9,   "monthly": 19,  "max_users": 1, "source_url": "https://www.close.com/pricing", "status": "verified", "verified_date": "2026-11-25"},
+      "essentials": {"label": "Essentials", "annual": 35,  "monthly": 49,  "source_url": "https://www.close.com/pricing", "status": "verified", "verified_date": "2026-11-25"},
+      "growth":     {"label": "Growth",     "annual": 99,  "monthly": 109, "source_url": "https://www.close.com/pricing", "status": "verified", "verified_date": "2026-11-25"},
+      "scale":      {"label": "Scale",      "annual": 139, "monthly": 149, "source_url": "https://www.close.com/pricing", "status": "verified", "verified_date": "2026-11-25"}
     },
     "usage": {
-      "call_per_min_usd": {"value": 0.02, "qualifier": "around; most outbound calls; varies by country and number type", "source_url": "https://www.close.com/pricing", "status": "verified", "verified_date": "2026-10-30"},
-      "number_per_month_usd": {"value": 1, "qualifier": "starting at about", "source_url": "https://www.close.com/pricing", "status": "verified", "verified_date": "2026-10-30"},
+      "call_per_min_usd": {"value": 0.02, "qualifier": "around; most outbound calls; varies by country and number type", "source_url": "https://www.close.com/pricing", "status": "verified", "verified_date": "2026-11-25"},
+      "number_per_month_usd": {"value": 1, "qualifier": "starting at about", "source_url": "https://www.close.com/pricing", "status": "verified", "verified_date": "2026-11-25"},
       "call_rounding": {"value": "per call, rounded up to the next full minute", "source_url": "https://help.close.com/account-management/variable-usage-costs-calling-sms-phone-numbers-ai-tools", "status": "verified", "verified_date": "2026-10-30"},
       "sms_per_unit_usd": {"value": null, "source_url": "https://help.close.com/account-management/variable-usage-costs-calling-sms-phone-numbers-ai-tools", "status": "unknown", "note": "Twilio price per SMS unit; amount not stated"},
-      "call_assistant": {"monthly_usd": 50, "per_min_usd": 0.02, "per": "billing account", "source_url": "https://www.close.com/pricing", "status": "verified", "verified_date": "2026-10-30"},
-      "extra_org_monthly_usd": {"value": 50, "source_url": "https://www.close.com/pricing", "status": "verified", "verified_date": "2026-10-30"}
+      "call_assistant": {"monthly_usd": 50, "per_min_usd": 0.02, "per": "billing account", "source_url": "https://www.close.com/pricing", "status": "verified", "verified_date": "2026-11-25"},
+      "extra_org_monthly_usd": {"value": 50, "source_url": "https://www.close.com/pricing", "status": "verified", "verified_date": "2026-11-25"}
     },
     "volume_discount": {"value": null, "note": "Discounts exist for 10+ seats and 12+ month terms; amount not stated", "source_url": "https://help.close.com/account-management/plans-and-billing", "status": "unknown", "verified_date": "2026-10-30"},
     "features": {
@@ -38,9 +38,9 @@
       "call_recording_retention_days": {"solo": 30, "essentials": 30, "growth": 90, "scale": "unlimited"},
       "source_url": "https://www.close.com/pricing",
       "status": "verified",
-      "verified_date": "2026-10-30"
+      "verified_date": "2026-11-25"
     },
-    "seat_minimum": {"value": null, "note": "None stated; Solo is limited to 1 user", "source_url": "https://www.close.com/pricing", "status": "verified", "verified_date": "2026-10-30"},
+    "seat_minimum": {"value": null, "note": "None stated; Solo is limited to 1 user", "source_url": "https://www.close.com/pricing", "status": "verified", "verified_date": "2026-11-25"},
     "sso": {"google_sso": "all plans", "saml_sso": null, "saml_sso_status": "unknown", "note": "Google SSO is listed on all plans; a SAML SSO tier is not stated", "source_url": "https://www.close.com/pricing", "status": "verified", "verified_date": "2026-10-30"},
     "vat": {"value": null, "status": "unknown"}
   },

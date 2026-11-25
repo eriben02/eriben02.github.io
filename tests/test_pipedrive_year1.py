@@ -109,7 +109,7 @@ class TestPipedriveYear1Pages(unittest.TestCase):
             self.assertIn("editorial-hero editorial-hero-wrap", html)
             self.assertIn("editorial-workbench", html)
             self.assertIn("wb-fill-chart", html)
-            self.assertIn("Your Estimated True Cost", html)
+            self.assertIn("Year-1 cost", html)
             self.assertIn(">Show calculation<", html)
             self.assertIn("Lowest Year-1 cost", html)
             self.assertIn("True Year-1 cost", html)

@@ -434,7 +434,7 @@ def build():
         ('id="shell-title-seats">Other sticker fees<', 'id="shell-title-seats">DocuSign Standard<'),
         ('id="shell-sub-seats">Included in the sticker<', 'id="shell-sub-seats">Year 1<'),
         ('id="shell-amt-seats">$0<', 'id="shell-amt-seats">$900<'),
-        ('id="shell-title-hidden">Hidden Cost Gap<', 'id="shell-title-hidden">Jotform Sign<'),
+        ('id="shell-title-hidden">Cost above list price<', 'id="shell-title-hidden">Jotform Sign<'),
         ('id="shell-sub-hidden">Fees above the advertised price<', 'id="shell-sub-hidden">One account<'),
         ('id="shell-amt-hidden">$0<', 'id="shell-amt-hidden">$408<'),
         ('id="shell-best"></div>', 'id="shell-best">Lowest Year-1 cost: Jotform Sign, one account.</div>'),

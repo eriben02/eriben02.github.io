@@ -26,16 +26,15 @@ inside the $30 handling line so it is not added a second time.
 """
 from layout import WORKBENCH_JS, render_page
 
-TITLE = "Stripe, Shopify &amp; Paddle Chargeback Cost Calculator (2026): Dispute Fees, Manual Prep vs. Automated Recovery"
+TITLE = "Stripe chargeback fees: $15 to $25"
 DESCRIPTION = (
-    "Compare dispute fees, manual evidence prep, a 25% pay-on-performance recovery model, "
-    "and Stripe's 2019 Chargeback Protection launch price of 0.40% of sales, which Stripe no longer lists."
+    "A chargeback costs the order plus a $15 to $25 dispute fee. A 25% recovery fee applies only to dollars won."
 )
 LEAD = (
-    "Every chargeback costs the full order value plus a non-refundable $15 to $25 processor dispute fee. "
-    "Adjust your monthly orders and dispute rate below to see the annual loss against automated recovery."
+    "Every chargeback costs the order plus a $15 to $25 dispute fee. "
+    "A 25% recovery fee applies only to dollars won."
 )
-H1 = TITLE
+H1 = "What does a chargeback cost?"
 
 CF = "https://www.chargeflow.io/"
 
@@ -88,7 +87,7 @@ TEMPLATE = r"""
       <div id="cb-vbar" class="wb-vbar-container" aria-live="polite">
         <div class="wb-vbar-row" id="cb-row-lost" style="flex: 68 1 0px;">
           <div class="wb-vbar-block block-hidden"><span class="wb-block-amount" id="cb-amt-lost">$14,976</span></div>
-          <div class="wb-callout-item"><div class="wb-leader-line"></div><div class="wb-callout-text"><strong>Hidden Cost Gap: Lost sales</strong><span>80% unrecovered at a 20% manual win rate</span></div></div>
+          <div class="wb-callout-item"><div class="wb-leader-line"></div><div class="wb-callout-text"><strong>Cost above list price: Lost sales</strong><span>80% unrecovered at a 20% manual win rate</span></div></div>
         </div>
         <div class="wb-vbar-row" id="cb-row-ops" style="flex: 21 1 0px;">
           <div class="wb-vbar-block block-base"><span class="wb-block-amount" id="cb-amt-ops">$4,680</span></div>

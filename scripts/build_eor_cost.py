@@ -390,13 +390,13 @@ def build():
         ('id="shell-title-seats">Other sticker fees<', 'id="shell-title-seats">Deposit<'),
         ('id="shell-sub-seats">Included in the sticker<', 'id="shell-sub-seats">Cash lock-up, not a fee<'),
         ('id="shell-amt-seats">$0<', 'id="shell-amt-seats">$5,599<'),
-        ('id="shell-title-hidden">Hidden Cost Gap<', 'id="shell-title-hidden">Rippling fee<'),
+        ('id="shell-title-hidden">Cost above list price<', 'id="shell-title-hidden">Rippling fee<'),
         ('id="shell-sub-hidden">Fees above the advertised price<', 'id="shell-sub-hidden">Unknown unless you enter one<'),
         ('id="shell-amt-hidden">$0<', 'id="shell-amt-hidden">unknown<'),
         ('<div class="summary-label">Sticker Price</div>', '<div class="summary-label">Deel Year-1 fee</div>'),
         ('id="shell-sticker">$0<', 'id="shell-sticker">$7,188<'),
         ('id="shell-sticker-note">Advertised price<', 'id="shell-sticker-note">Deel management fee<'),
-        ('<div class="summary-label">Hidden Cost Gap</div>', '<div class="summary-label">Deposit lock-up</div>'),
+        ('<div class="summary-label">Cost above list price</div>', '<div class="summary-label">Deposit lock-up</div>'),
         ('id="shell-gap">$0<', 'id="shell-gap">$5,599<'),
         ('<div class="summary-scenario">Above the advertised price</div>', '<div class="summary-scenario">Not added to the Year-1 fee</div>'),
     ):
@@ -406,8 +406,8 @@ def build():
     body = (
         '<section class="hero">'
         "<h1>Deel vs. Rippling EOR cost (2026)</h1>"
-        '<p class="lead">Deel\'s published EOR management fee next to Rippling, which does not publish an EOR price. '
-        "The deposit shown is an example, not a quote and not a ranking.</p>"
+        '<p class="lead">Deel EOR starts at $599 per employee per month, $7,188 for one employee over a year (checked 8 Nov 2026). '
+        "Rippling does not publish an EOR price.</p>"
         "</section>"
         + workbench
         + REST

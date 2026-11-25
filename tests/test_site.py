@@ -16,7 +16,7 @@ class TestChargebackCalculator(unittest.TestCase):
         with open(os.path.join(PUBLIC_DIR, REL), encoding="utf-8") as f:
             html = f.read()
         self.assertIn(
-            "<h1>Stripe, Shopify &amp; Paddle Chargeback Cost Calculator (2026): Dispute Fees, Manual Prep vs. Automated Recovery</h1>",
+            "<h1>What does a chargeback cost?</h1>",
             html,
         )
         lead = re.search(r'<p class="lead">(.*?)</p>', html, re.S).group(1)
@@ -135,7 +135,7 @@ class TestChargebackCalculator(unittest.TestCase):
             home = f.read()
         self.assertIn("Sticker Price: Base rate", home)
         self.assertIn("0.65% chargeback drain", home)
-        self.assertIn("Hidden Cost Gap", home)
+        self.assertIn("Cost above list price", home)
         self.assertNotIn("25% of $2k recovered", home)
 
         for rel in (
@@ -153,7 +153,7 @@ class TestChargebackCalculator(unittest.TestCase):
             self.assertIn("Frozen Funds", cards)
             self.assertIn("stripe-billing-0-7-percent-recurring-tax-calculator/", cards)
             self.assertIn("stripe-vs-paddle-true-cost/", cards)
-            self.assertIn("Hidden Cost Gap: Lost sales", page)
+            self.assertIn("Cost above list price: Lost sales", page)
             self.assertIn("Hidden Cost: Evidence prep", page)
             self.assertIn("Sticker Fee: Processor dispute fees", page)
 
@@ -196,7 +196,7 @@ class TestSharedWorkbenchShell(unittest.TestCase):
             self.assertIn(">Show calculation<", html, rel)
             self.assertIn("True Year-1 cost", html, rel)
             self.assertIn("Sticker Price", html, rel)
-            self.assertIn("Hidden Cost Gap", html, rel)
+            self.assertIn("Cost above list price", html, rel)
             self.assertIn("data-label=", html, rel)
             self.assertNotIn("calc-card", html, rel)
             self.assertNotIn("—", html, rel)

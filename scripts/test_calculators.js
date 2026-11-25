@@ -194,7 +194,7 @@ const payLemon = paySandbox.quotePayProfile("lemon-squeezy", 50000, 1000);
 const payCf = paySandbox.quotePayProfile("chargeflow", 50000, 1000);
 assert.strictEqual(payStripe.total, 2683);
 assert.strictEqual(payStripe.h, 933);
-assert.strictEqual(payStripe.gapLine, "+$933/mo (+$11,196/yr, +53% Hidden Cost Gap above the $1,750/mo advertised sticker rate)");
+assert.strictEqual(payStripe.gapLine, "+$933/mo (+$11,196/yr, +53% above the $1,750/mo list price)");
 assert.strictEqual(payWhop.total, 2275);
 assert.strictEqual(payWhop.without, 1875);
 assert.strictEqual(payWhop.held, 0);
