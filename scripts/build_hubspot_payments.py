@@ -13,7 +13,7 @@ from layout import BASE_DIR, PUBLIC_DIR, render_page, render_workbench, wrap_cal
 
 TITLE = "HubSpot Payments vs Stripe fees – saasbill.io"
 DESCRIPTION = (
-    "Compares HubSpot payments with Stripe connected to HubSpot. Checked 12 Nov 2026."
+    "At $10,000 a month in card volume, HubSpot payments is $4,080 in Year 1 and Stripe connected to HubSpot is $4,740."
 )
 CANONICAL = "/pricing/hubspot-payments-vs-stripe-platform-fee-year-1-cost/"
 REL = "pricing/hubspot-payments-vs-stripe-platform-fee-year-1-cost/index.html"
@@ -335,7 +335,7 @@ def build():
         ('id="shell-title-seats">Other sticker fees<', 'id="shell-title-seats">Stripe connected<'),
         ('id="shell-sub-seats">Included in the sticker<', 'id="shell-sub-seats">Year 1<'),
         ('id="shell-amt-seats">$0<', 'id="shell-amt-seats">$4,740<'),
-        ('id="shell-title-hidden">Hidden Cost Gap<', 'id="shell-title-hidden">HubSpot payments<'),
+        ('id="shell-title-hidden">Cost above list price<', 'id="shell-title-hidden">HubSpot payments<'),
         ('id="shell-sub-hidden">Fees above the advertised price<', 'id="shell-sub-hidden">Year 2<'),
         ('id="shell-amt-hidden">$0<', 'id="shell-amt-hidden">$4,080<'),
         ('id="shell-best"></div>', 'id="shell-best">$660 less than Stripe connected.</div>'),
@@ -351,7 +351,7 @@ def build():
     body = (
         '<section class="hero">'
         "<h1>What do HubSpot Payments fees cost versus connecting Stripe?</h1>"
-        '<p class="lead">This page compares HubSpot payments with Stripe connected to HubSpot.</p>'
+        '<p class="lead">At $10,000 a month in card volume, HubSpot payments is $4,080 in Year 1 and Stripe connected to HubSpot is $4,740 (checked 12 Nov 2026).</p>'
         "</section>"
         + workbench
         + REST

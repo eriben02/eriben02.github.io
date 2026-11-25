@@ -16,8 +16,8 @@ aff_js = json.dumps(AFFILIATES)
 
 def render_intercom_calculator_body(
     prefix="../",
-    h1="Intercom Fin AI Cost Calculator (2026): True Year-1 Price at $0.99 per Resolution",
-    lead="See what Intercom Fin actually costs for your team. Adjust the agents and AI volume below to see your real Year-1 total and how it compares to Freshdesk and Zendesk.",
+    h1="What does Intercom Fin cost at $0.99 a resolution?",
+    lead="10 agents and 1,500 Fin resolutions a month cost $21,300 in Year 1 on Essential at $29 a seat plus $0.99 a resolution (Intercom pricing, 2026).",
     compare_mode="intercom_fin",
     page_id="intercom-fin-cost-calculator",
     spotlight_id="intercom-fin-ai",
@@ -99,7 +99,7 @@ def render_intercom_calculator_body(
   <div class="workbench-grid">
     <!-- Left Column: ESTIMATE YOUR TRUE COST (Prefilled: Intercom + Fin AI, 10 Agents, 1,500 AI Resolutions/mo, Annual) -->
     <div class="wb-col-controls">
-      <div class="wb-col-title">Estimate Your True Cost</div>
+      <div class="wb-col-title">Your numbers</div>
       <div class="wb-controls-stack">
         <div class="wb-control-item" id="tool-select-group">
           <label class="wb-control-label" for="spotlight-tool-select">Platform to inspect</label>
@@ -136,7 +136,7 @@ def render_intercom_calculator_body(
 
     <!-- Center Column: YOUR ESTIMATED TRUE COST (3-Row Vertical Stacked Bar + Leader Lines) -->
     <div class="wb-col-chart">
-      <div class="wb-col-title" id="wb-chart-col-title">Your Estimated True Cost</div>
+      <div class="wb-col-title" id="wb-chart-col-title">Year-1 cost</div>
       <div id="wb-vbar-mount" class="wb-vbar-container" aria-live="polite">
         <div class="wb-vbar-row" id="wb-row-base" style="flex: 15.5 1 0px;">
           <div class="wb-vbar-block block-base">
@@ -171,7 +171,7 @@ def render_intercom_calculator_body(
           <div class="wb-callout-item">
             <div class="wb-leader-line"></div>
             <div class="wb-callout-text">
-              <strong id="wb-call-title-hidden">Hidden Cost Gap</strong>
+              <strong id="wb-call-title-hidden">Cost above list price</strong>
               <span id="wb-call-sub-hidden">{static_hidden_sub}</span>
             </div>
           </div>
@@ -247,7 +247,7 @@ def render_intercom_calculator_body(
               <th id="th-col-1">Scenario</th>
               <th id="th-col-2"><span class="legend-dot dot-sticker" aria-hidden="true"></span>Sticker Price / Year</th>
               <th id="th-col-3">True Cost / Year (Est.)</th>
-              <th id="th-col-4"><span class="legend-dot dot-hidden" aria-hidden="true"></span>Hidden Cost Gap</th>
+              <th id="th-col-4"><span class="legend-dot dot-hidden" aria-hidden="true"></span>Cost above list price</th>
               <th id="th-col-5">Official Pricing</th>
             </tr>
           </thead>
@@ -941,7 +941,7 @@ function renderDirectory() {{
         </td>
         <td data-label="Sticker Price / Year"><div class="gap-figure">$${{stickerAnnual.toLocaleString()}}</div><div class="gap-sub-detail">$${{fmtRate(r.unitRate)}}/seat/mo</div></td>
         <td data-label="Year-1 Total"><div class="gap-figure">$${{r.year1Total.toLocaleString()}}</div><div class="gap-sub-detail">${{r.effSeats}} billed seat${{r.effSeats === 1 ? '' : 's'}}</div></td>
-        <td data-label="Hidden Cost Gap">${{gapCellHtml}}</td>
+        <td data-label="Cost above list price">${{gapCellHtml}}</td>
         <td data-label="Official Pricing">
           <div class="cta-stack">
             <a class="btn-secondary" href="${{affiliateHref(aff)}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="${{t.id}}" data-cta-location="table-row">${{tableCtaText}}</a>
@@ -1068,29 +1068,29 @@ ic_faqs = [
 def build_all():
     render_page(
         "intercom-fin-cost-calculator/index.html",
-        "Intercom Fin Cost Calculator (2026) – saasbill.io",
-        "Calculate your 2026 Intercom Fin AI true Year-1 cost at $0.99 per resolution (prefilled for 10 agents & 1,500 AI resolutions/month) and compare against Freshdesk and Zendesk AI.",
+        "Intercom Fin cost at $0.99 – saasbill.io",
+        "10 agents and 1,500 resolutions a month cost $21,300 in Year 1 on Essential plus Fin at $0.99 each.",
         "/intercom-fin-cost-calculator/",
         render_intercom_calculator_body(prefix="../"),
         faqs=ic_faqs,
     )
     render_page(
         "pricing/intercom-fin-ai-resolution-cost-calculator/index.html",
-        "Intercom Fin AI True Cost & Year-1 Calculator – saasbill.io",
-        "Calculate your 2026 Intercom Fin AI true cost and Year-1 support bill at $0.99 per AI resolution plus seat licenses ($29-$132/mo), and compare AI cost against Freshdesk and Zendesk.",
+        "Intercom Fin $0.99 resolution fee – saasbill.io",
+        "Fin adds $0.99 per resolution on seats from $29 to $132 a month. 10 agents and 1,500 resolutions are $21,300.",
         "/pricing/intercom-fin-ai-resolution-cost-calculator/",
         render_intercom_calculator_body(prefix="../../"),
         faqs=ic_faqs,
     )
     render_page(
         "intercom-vs-freshdesk-cost-comparison/index.html",
-        "Intercom vs Freshdesk Cost Comparison (2026) – saasbill.io",
-        "Compare 2026 Intercom + Fin AI ($0.99/resolution) vs Freshdesk Freddy AI ($49/100 sessions) Year-1 total cost for your exact team size and AI ticket volume.",
+        "Intercom vs Freshdesk AI cost – saasbill.io",
+        "At 10 agents and 1,500 resolutions a month, Intercom is $21,300 and Freshdesk is $10,855.",
         "/intercom-vs-freshdesk-cost-comparison/",
         render_intercom_calculator_body(
             prefix="../",
-            h1="Intercom vs Freshdesk Cost Comparison (2026): Real Year-1 Price &amp; AI Fees",
-            lead="Compare what Intercom Fin and Freshdesk Freddy AI actually cost for your support team. Adjust the agents and AI volume below to see the real Year-1 total and exact savings side by side.",
+            h1="Intercom vs Freshdesk at 1,500 resolutions",
+            lead="At 10 agents and 1,500 resolutions a month, Intercom is $21,300 and Freshdesk is $10,855 (2026 prices on this page).",
             compare_mode="intercom_vs_freshdesk",
             page_id="intercom-vs-freshdesk-cost-comparison",
             calc_heading="Intercom vs. Freshdesk Year-1 Cost &amp; AI Resolution Calculator (2026)",
@@ -1100,13 +1100,13 @@ def build_all():
     )
     render_page(
         "intercom-vs-zendesk-cost-comparison/index.html",
-        "Intercom vs Zendesk Cost Comparison (2026) – saasbill.io",
-        "Compare 2026 Intercom Fin AI ($0.99/resolution) vs Zendesk AI Agents ($1.50/resolution) Year-1 total cost for your exact agent count and monthly AI volume.",
+        "Intercom vs Zendesk AI cost – saasbill.io",
+        "Intercom Fin is $0.99 per resolution. Zendesk Suite Team is $1.50 after 5 resolutions per agent.",
         "/intercom-vs-zendesk-cost-comparison/",
         render_intercom_calculator_body(
             prefix="../",
-            h1="Intercom vs Zendesk Cost Comparison (2026): Real Year-1 Price &amp; AI Overage",
-            lead="Compare what Intercom Fin and Zendesk AI actually cost for your support team. Adjust the agents and AI volume below to see the real Year-1 total, per-resolution overages, and lower-cost alternatives.",
+            h1="Intercom vs Zendesk at $0.99 vs $1.50",
+            lead="At 10 agents and 1,500 resolutions a month, Intercom Fin is $0.99 each and Zendesk Suite Team is $1.50 after 5 resolutions per agent (2026).",
             compare_mode="intercom_vs_zendesk",
             page_id="intercom-vs-zendesk-cost-comparison",
             calc_heading="Intercom vs. Zendesk Year-1 Cost &amp; AI Resolution Calculator (2026)",
@@ -1183,10 +1183,10 @@ def _zendesk_body(prefix, h1, lead, compare_mode, page_id, legacy_summary_id, ca
 
 
 def build_zendesk_cluster():
-    h1 = "Zendesk AI Cost Calculator: Calculate Your Real Year-1 Total ($50/Seat Add-On + $1.50/Resolution)"
-    lead = "See what Zendesk AI actually costs once the $50/agent add-on and per-resolution overages are included. Adjust the agents and AI volume below to see your real Year-1 total and how it compares to Freshdesk and Intercom."
-    title = "Zendesk AI Cost Calculator (2026): Real Per-Resolution &amp; Add-On Pricing | SaaSBill"
-    description = "Calculate Zendesk AI Year-1 cost for 10 agents and 1,500 resolutions: Suite Team is $32,700 versus $10,855 on Freshdesk, a $21,845 gap."
+    h1 = "Zendesk AI is $1.50 a resolution after 5 included"
+    lead = "10 agents and 1,500 resolutions a month cost $32,700 on Zendesk Suite Team and $10,855 on Freshdesk (2026 prices on this page)."
+    title = "Zendesk AI cost: $1.50 a resolution – saasbill.io"
+    description = "10 agents and 1,500 resolutions: Zendesk Suite Team is $32,700 and Freshdesk is $10,855."
     render_page(
         "zendesk-ai-cost-calculator/index.html",
         title,
@@ -1206,13 +1206,13 @@ def build_zendesk_cluster():
     )
     render_page(
         "zendesk-vs-freshdesk-cost-comparison/index.html",
-        "Zendesk vs Freshdesk Cost Comparison (2026): AI &amp; Seat Pricing Calculator | SaaSBill",
-        "Compare Zendesk Suite Team AI at $32,700 with Freshdesk Freddy AI at $10,855 for 10 agents and 1,500 AI resolutions a month.",
+        "Zendesk vs Freshdesk AI cost – saasbill.io",
+        "Zendesk Suite Team is $32,700 and Freshdesk Freddy AI is $10,855 for 10 agents and 1,500 resolutions a month.",
         "/zendesk-vs-freshdesk-cost-comparison/",
         _zendesk_body(
             "../",
-            "Zendesk vs Freshdesk Cost Comparison: Real Year-1 Pricing with AI Resolutions",
-            "Compare what Zendesk AI and Freshdesk Freddy AI actually cost for your support team. Adjust the agents and AI volume below to see the real Year-1 total and exact annual savings side by side.",
+            "Zendesk vs Freshdesk at 1,500 resolutions",
+            "For 10 agents and 1,500 resolutions a month, Zendesk Suite Team is $32,700 and Freshdesk Freddy AI is $10,855, a $21,845 gap (2026).",
             "zendesk_vs_freshdesk",
             "zendesk-vs-freshdesk-cost-comparison",
             "zd-summary",

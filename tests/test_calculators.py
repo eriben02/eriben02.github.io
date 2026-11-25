@@ -256,8 +256,10 @@ class TestSaaSBillCalculators(unittest.TestCase):
         hs_page = os.path.join(PUBLIC_DIR, "pricing/hubspot-true-cost-and-onboarding-fees/index.html")
         with open(hs_page) as f:
             hs_html = f.read()
-        self.assertIn("seats * 47 * 12", hs_html)
-        self.assertIn("Close CRM Startup", hs_html)
+        self.assertIn("seats * 35 * 12", hs_html)
+        self.assertIn("Close CRM Essentials", hs_html)
+        self.assertNotIn("Close CRM Startup", hs_html)
+        self.assertNotIn("$47/seat", hs_html)
         self.assertIn('id="chart-dynamic-headline"', hs_html)
         self.assertIn('id="chart-dynamic-subtitle"', hs_html)
         self.assertNotIn('class="invoice-box"', hs_html)
@@ -355,7 +357,7 @@ class TestSaaSBillCalculators(unittest.TestCase):
                 self.assertNotIn(phrase, html_no_rel, f"Forbidden phrase '{phrase}' found in {rel}")
             self.assertIn(f'id="{summary_ids[rel]}"', html, f"Missing summary strip #{summary_ids[rel]} in {rel}")
             self.assertIn("Based on ", html, f"Missing scenario description ('Based on ...') in {rel}")
-            self.assertIn("Hidden Cost Highlight:", html, f"Missing 'Hidden Cost Highlight:' in {rel}")
+            self.assertIn("Based on ", html, f"Missing scenario note in {rel}")
             self.assertIn('data-track="vendor-cta"', html, f"Missing data-track='vendor-cta' in {rel}")
             self.assertEqual(html.count("Some links are affiliate links. They never change the math."), 1, f"Footer disclosure should appear once in {rel}")
             self.assertIn('class="footer-disclosure"', html, f"Missing footer disclosure link in {rel}")
@@ -401,7 +403,7 @@ class TestSaaSBillCalculators(unittest.TestCase):
         self.assertIn('id="wb-big-amount"', index_html)
         self.assertIn('Sticker Price: Base plan', index_html)
         self.assertIn('Sticker Price: Added seats', index_html)
-        self.assertIn('<strong id="wb-call-title-hidden">Hidden Cost Gap</strong>', index_html)
+        self.assertIn('<strong id="wb-call-title-hidden">Cost above list price</strong>', index_html)
         self.assertIn('class="legend-dot dot-sticker"', index_html)
         self.assertIn('class="legend-dot dot-hidden"', index_html)
         self.assertIn('id="gap-dynamic-subhead"', index_html)
@@ -426,7 +428,7 @@ class TestSaaSBillCalculators(unittest.TestCase):
         """Verify Payment Processors & MoR separate processing fees (b + s + h == total) from temporary reserves (held), unify CTAs, and tone down hero lead."""
         with open(os.path.join(PUBLIC_DIR, "index.html")) as f:
             html = f.read()
-        self.assertIn("can significantly increase the real Year-1 cost", html)
+        self.assertIn("HubSpot Sales Pro is $6,900 for 5 seats", html)
         self.assertNotIn("often doubling", html)
         self.assertNotIn("Explore Whop Payments", html)
 
@@ -463,7 +465,7 @@ class TestSaaSBillCalculators(unittest.TestCase):
             self.assertIn("Potential funds temporarily held:", p["quote"])
             self.assertIn("Assumptions ($50k/mo GMV", p["sub"])
         stripe = profiles["stripe-payments"]
-        self.assertEqual(stripe["gapLine"], "+$933/mo (+$11,196/yr, +53% Hidden Cost Gap above the $1,750/mo advertised sticker rate)")
+        self.assertEqual(stripe["gapLine"], "+$933/mo (+$11,196/yr, +53% above the $1,750/mo list price)")
         self.assertEqual(stripe["h"], 933)
         self.assertEqual(profiles["whop-payments"]["without"], 1875)
         self.assertEqual(profiles["whop-payments"]["h"], 625)
@@ -473,7 +475,7 @@ class TestSaaSBillCalculators(unittest.TestCase):
         self.assertEqual(profiles["chargeflow"]["netMo"], 158)
         self.assertIn("Monthly GMV ($k)", html)
         self.assertIn("Monthly transactions", html)
-        self.assertIn("Your Estimated True Cost", html)
+        self.assertIn("Year-1 cost", html)
         self.assertNotIn("Estimated Monthly Fees", html)
         self.assertNotIn("25% of $2k recovered", html)
 
@@ -1097,22 +1099,22 @@ class TestSaaSBillCalculators(unittest.TestCase):
             (
                 "intercom-fin-cost-calculator/index.html",
                 "https://saasbill.io/intercom-fin-cost-calculator/",
-                "See what Intercom Fin actually costs for your team. Adjust the agents and AI volume below to see your real Year-1 total and how it compares to Freshdesk and Zendesk.",
+                "10 agents and 1,500 Fin resolutions a month cost $21,300 in Year 1 on Essential at $29 a seat plus $0.99 a resolution (Intercom pricing, 2026).",
             ),
             (
                 "pricing/intercom-fin-ai-resolution-cost-calculator/index.html",
                 "https://saasbill.io/pricing/intercom-fin-ai-resolution-cost-calculator/",
-                "See what Intercom Fin actually costs for your team. Adjust the agents and AI volume below to see your real Year-1 total and how it compares to Freshdesk and Zendesk.",
+                "10 agents and 1,500 Fin resolutions a month cost $21,300 in Year 1 on Essential at $29 a seat plus $0.99 a resolution (Intercom pricing, 2026).",
             ),
             (
                 "intercom-vs-freshdesk-cost-comparison/index.html",
                 "https://saasbill.io/intercom-vs-freshdesk-cost-comparison/",
-                "Compare what Intercom Fin and Freshdesk Freddy AI actually cost for your support team. Adjust the agents and AI volume below to see the real Year-1 total and exact savings side by side.",
+                "At 10 agents and 1,500 resolutions a month, Intercom is $21,300 and Freshdesk is $10,855 (2026 prices on this page).",
             ),
             (
                 "intercom-vs-zendesk-cost-comparison/index.html",
                 "https://saasbill.io/intercom-vs-zendesk-cost-comparison/",
-                "Compare what Intercom Fin and Zendesk AI actually cost for your support team. Adjust the agents and AI volume below to see the real Year-1 total, per-resolution overages, and lower-cost alternatives.",
+                "At 10 agents and 1,500 resolutions a month, Intercom Fin is $0.99 each and Zendesk Suite Team is $1.50 after 5 resolutions per agent (2026).",
             ),
         ]:
             with open(os.path.join(PUBLIC_DIR, rel), encoding="utf-8") as f:
@@ -1153,30 +1155,30 @@ class TestSaaSBillCalculators(unittest.TestCase):
 
     def test_zendesk_and_hubspot_high_intent_calculators(self):
         """Zendesk spotlight pages and the HubSpot onboarding calculator: leads, disclosure, and Year-1 math."""
-        zendesk_lead = "See what Zendesk AI actually costs once the $50/agent add-on and per-resolution overages are included. Adjust the agents and AI volume below to see your real Year-1 total and how it compares to Freshdesk and Intercom."
-        zendesk_vs_lead = "Compare what Zendesk AI and Freshdesk Freddy AI actually cost for your support team. Adjust the agents and AI volume below to see the real Year-1 total and exact annual savings side by side."
-        hubspot_pricing_lead = "See what HubSpot actually costs once mandatory onboarding fees, extra seats, and contact tiers are included. Adjust your team size, contacts, and tier below to see your real Year-1 total and how it compares to Close CRM and Pipedrive."
-        hubspot_root_lead = "Calculate your real Year-1 HubSpot cost including the mandatory $1,500 to $7,000 onboarding fee. Adjust your seats, marketing contacts, and tier below to compare your total against Close CRM and Pipedrive."
+        zendesk_lead = "10 agents and 1,500 resolutions a month cost $32,700 on Zendesk Suite Team and $10,855 on Freshdesk (2026 prices on this page)."
+        zendesk_vs_lead = "For 10 agents and 1,500 resolutions a month, Zendesk Suite Team is $32,700 and Freshdesk Freddy AI is $10,855, a $21,845 gap (2026)."
+        hubspot_pricing_lead = "Five Sales Hub Professional seats are $6,900: $5,400 plus a $1,500 onboarding fee (HubSpot pricing, Oct 2026)."
+        hubspot_root_lead = "Sales Hub Professional is $1,500 and Marketing Hub Enterprise is $7,000 (HubSpot catalog, 2026). Five Sales Pro seats are $6,900 in Year 1."
         zendesk_pages = [
             (
                 "zendesk-ai-cost-calculator/index.html",
                 "https://saasbill.io/zendesk-ai-cost-calculator/",
-                "Zendesk AI Cost Calculator (2026): Real Per-Resolution &amp; Add-On Pricing | SaaSBill",
-                "Zendesk AI Cost Calculator: Calculate Your Real Year-1 Total ($50/Seat Add-On + $1.50/Resolution)",
+                "Zendesk AI cost: $1.50 a resolution – saasbill.io",
+                "Zendesk AI is $1.50 a resolution after 5 included",
                 zendesk_lead,
             ),
             (
                 "pricing/zendesk-ai-resolution-and-automated-outcome-cost/index.html",
                 "https://saasbill.io/pricing/zendesk-ai-resolution-and-automated-outcome-cost/",
-                "Zendesk AI Cost Calculator (2026): Real Per-Resolution &amp; Add-On Pricing | SaaSBill",
-                "Zendesk AI Cost Calculator: Calculate Your Real Year-1 Total ($50/Seat Add-On + $1.50/Resolution)",
+                "Zendesk AI cost: $1.50 a resolution – saasbill.io",
+                "Zendesk AI is $1.50 a resolution after 5 included",
                 zendesk_lead,
             ),
             (
                 "zendesk-vs-freshdesk-cost-comparison/index.html",
                 "https://saasbill.io/zendesk-vs-freshdesk-cost-comparison/",
-                "Zendesk vs Freshdesk Cost Comparison (2026): AI &amp; Seat Pricing Calculator | SaaSBill",
-                "Zendesk vs Freshdesk Cost Comparison: Real Year-1 Pricing with AI Resolutions",
+                "Zendesk vs Freshdesk AI cost – saasbill.io",
+                "Zendesk vs Freshdesk at 1,500 resolutions",
                 zendesk_vs_lead,
             ),
         ]
@@ -1222,7 +1224,7 @@ class TestSaaSBillCalculators(unittest.TestCase):
         with open(os.path.join(PUBLIC_DIR, "hubspot-onboarding-fee-calculator/index.html"), encoding="utf-8") as f:
             hs_html = f.read()
         self.assertIn('<link rel="canonical" href="https://saasbill.io/hubspot-onboarding-fee-calculator/" />', hs_html)
-        self.assertIn("HubSpot Onboarding Fee Calculator: Mandatory Setup", hs_html)
+        self.assertIn("HubSpot onboarding is $1,500 to $7,000.", hs_html)
         self.assertIn(f'<p class="lead">{hubspot_root_lead}</p>', hs_html)
         self.assertIn('id="hs-users"', hs_html)
         self.assertIn('id="hs-contacts"', hs_html)

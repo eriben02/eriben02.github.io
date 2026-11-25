@@ -16,7 +16,7 @@ from layout import BASE_DIR, PUBLIC_DIR, render_page, render_workbench, wrap_cal
 
 TITLE = "Chargeflow vs Stripe Smart Disputes – saasbill.io"
 DESCRIPTION = (
-    "Compares a manual Stripe response, Stripe Smart Disputes, and Chargeflow Automation for one year. Checked 11 Nov 2026."
+    "A manual Stripe response is $2,700 in Year 1 at the default. Chargeflow Automation is $3,300, 25% of recovered dollars."
 )
 REL = "pricing/chargeflow-vs-stripe-smart-disputes-year-1-cost/index.html"
 CANONICAL = "/pricing/chargeflow-vs-stripe-smart-disputes-year-1-cost/"
@@ -206,7 +206,7 @@ def build():
         ('id="shell-title-seats">Other sticker fees<', 'id="shell-title-seats">Smart Disputes<'),
         ('id="shell-sub-seats">Included in the sticker<', 'id="shell-sub-seats">30% of the amount you win<'),
         ('id="shell-amt-seats">$0<', 'id="shell-amt-seats">$3,600<'),
-        ('id="shell-title-hidden">Hidden Cost Gap<', 'id="shell-title-hidden">Chargeflow<'),
+        ('id="shell-title-hidden">Cost above list price<', 'id="shell-title-hidden">Chargeflow<'),
         ('id="shell-sub-hidden">Fees above the advertised price<', 'id="shell-sub-hidden">25% of the amount you recover<'),
         ('id="shell-amt-hidden">$0<', 'id="shell-amt-hidden">$3,300<'),
         ('<a id="shell-cta" class="btn-cta wb-primary-cta" href="#sd-compare">See the three costs &rarr;</a>', ''),
@@ -222,7 +222,7 @@ def build():
     body = (
         '<section class="hero">'
         "<h1>What does Chargeflow cost versus Stripe Smart Disputes in Year 1?</h1>"
-        '<p class="lead">This page compares a manual Stripe response, Stripe Smart Disputes, and Chargeflow Automation.</p>'
+        '<p class="lead">A manual Stripe response is $2,700 in Year 1 at this default, and Chargeflow Automation is $3,300 (25% of recovered dollars, checked 11 Nov 2026).</p>'
         "</section>"
         + workbench
         + REST

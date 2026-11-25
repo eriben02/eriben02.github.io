@@ -9,16 +9,16 @@ TOOLS, AFFILIATES = load_data()
 # ---------------------------------------------------------
 p3_body = """
 <section class="hero">
-  <h1>Stripe, Shopify &amp; Paddle Frozen Funds &amp; 25% Rolling Reserve Calculator (2026)</h1>
-  <p class="lead">A chargeback rate near 0.5% to 0.75% can trigger a 25% rolling reserve or a 180-day payout hold and lock your cash. If a Merchant of Record drops you, you cannot take your subscribers' card tokens with you.</p>
+  <h1>Stripe froze your funds?</h1>
+  <p class="lead">On $50,000 a month, a 25% rolling reserve plus a 15% capital repayment holds $21,450 before expenses (2026 example on this page).</p>
   <div class="geo-direct-answer">
-    <p><strong>The short version:</strong> Standard payment processors (<strong>Stripe, Shopify Payments, PayPal</strong>) can impose a <strong>25% rolling reserve for 90–180 days</strong> or a <strong>120–180 day payout hold</strong> if your dispute rate crosses ~0.5%–0.75% or volume spikes unexpectedly. With Stripe, however, you own the customer relationship and can export PGP-encrypted card tokens. With a Merchant of Record (<strong>Paddle, 5% + $0.50</strong>), Paddle is the legal seller of record and owns the card vault; if Paddle terminates your account on a risk review, <strong>card tokens cannot be exported</strong>. To protect cashflow, pair <strong>Chargeflow</strong> (keeps dispute rate &lt;0.5%) with a multi-processor failover rail like <strong>Whop Payments (2.7% + $0.30 base + 0.8% orchestration)</strong>.</p>
+    <p><strong>The short version:</strong> That reserve in these examples runs 90 to 180 days, and a payout hold runs 120 to 180 days. With Stripe you can export card tokens. With Paddle (5% + $0.50) you cannot. Whop's card rate is 2.7% + $0.30.</p>
   </div>
 </section>
 
 <section class="calc-box">
   <h2 style="margin-top:0;">Simulate a rolling reserve &amp; capital loan cashflow squeeze</h2>
-  <p style="color:var(--muted); margin-bottom:20px; font-size:0.95rem;">On $50,000/month in gross volume, a 25% rolling reserve combined with a 15% Stripe Capital or Shopify Capital repayment deduction locks up $21,450/month (42.9% of your gross revenue) before operating expenses.</p>
+  <p style="color:var(--muted); margin-bottom:20px; font-size:0.95rem;">The sliders start at $50,000 a month, a 25% reserve, and a 15% capital repayment.</p>
   <div class="calc-grid">
     <div class="control-group">
       <label for="gm-rev">Monthly gross processing volume: $<span class="val-pill" id="gm-rev-val">50,000</span></label>
@@ -171,7 +171,7 @@ function updateReserveSim() {
       <div class="summary-metric">$${frozenMo.toLocaleString()} / mo held</div>
       <div class="summary-scenario">${scenarioLine}</div>
       <div class="summary-breakdown">$${frozenMo.toLocaleString()}/mo in a ${resPct}% reserve, plus $${cb.drain.toLocaleString()}/yr dispute drain (${cb.disputesYr.toLocaleString()} disputes: $${cb.disputed.toLocaleString()} disputed + $${cb.fees.toLocaleString()} fees + $${cb.prep.toLocaleString()} prep).</div>
-      <p class="summary-caveat"><strong>Hidden Cost Highlight:</strong> The reserve withholds ${heldPct}% of gross payouts ($${tempHeld.toLocaleString()}/mo including the capital deduction) and is a cash hold, not a fee. ${trigger}</p>
+      <p class="summary-caveat">The reserve withholds ${heldPct}% of gross payouts ($${tempHeld.toLocaleString()}/mo including the capital deduction) and is a cash hold, not a fee. ${trigger}</p>
       <details class="math-drawer">
         <summary>Show calculation</summary>
         <div class="math-drawer-body">Reserve = ${resPct}% x $${rev.toLocaleString()} = $${frozenMo.toLocaleString()}/mo. Capital deduction = ${capPct}% x $${rev.toLocaleString()} = $${loanDed.toLocaleString()}/mo. Orders/mo = volume / $100. Disputes/yr = orders/mo x ${disputePct.toFixed(2)}% x 12 = ${cb.disputesYr.toLocaleString()}. Disputed sales $${cb.disputed.toLocaleString()} + fees $${cb.fees.toLocaleString()} + prep $${cb.prep.toLocaleString()} = $${cb.drain.toLocaleString()}/yr.</div>
@@ -241,8 +241,8 @@ p3_faqs = [
 
 render_page(
     "exit/stripe-shopify-paddle-frozen-funds-alternatives/index.html",
-    "Stripe vs Paddle True Year-1 Cost & Holds – saasbill.io",
-    "Calculate the 2026 true cost and Year-1 cashflow impact of Stripe, Shopify Payments, and Paddle 25% rolling reserves, payout holds, and MoR token lock-in vs. Whop and Chargeflow.",
+    "Stripe froze your funds? 25% holds – saasbill.io",
+    "On $50,000 a month, a 25% reserve plus a 15% capital repayment holds $21,450. Example holds run 90 to 180 days.",
     "/exit/stripe-shopify-paddle-frozen-funds-alternatives/",
     wrap_calculator_shell(p3_body),
     faqs=p3_faqs
@@ -274,7 +274,7 @@ def _fill_pd(text):
 p4_body = """
 <section class="hero">
   <h1>Why a "$12/seat" CRM costs $36 a month for a solo founder.</h1>
-  <p class="lead">monday CRM bills in fixed buckets starting at three seats, while Pipedrive and Close bill per actual user. Use the calculator below to see where the math flips.</p>
+  <p class="lead">A solo user on monday CRM Basic pays $36 a month for 3 seats (monday.com pricing). Pipedrive and Close bill each seat you use.</p>
   <div class="geo-direct-answer">
     <p><strong>The short version:</strong> For <strong>1 user</strong>, <strong>Pipedrive</strong> ($__PD_LITE__/mo __PD_LITE_LABEL__ or $__PD_GROWTH__/mo Growth, billed annually) is up to <strong>60% cheaper</strong> than <strong>monday CRM</strong> because monday CRM enforces a <strong>3-seat minimum</strong> ($36/mo Basic [$12/seat annual, $18/seat monthly] or $51/mo Standard [$17/seat annual, $25/seat monthly] minimum). For <strong>2 users</strong>, monday CRM still bills for 3 seats ($25.50/user/mo effective rate on Standard). At <strong>exactly 3, 5, or 10 users</strong>, however, monday CRM becomes the lowest-cost full-featured CRM at $51/mo (3 users) vs. $__PD_GROWTH_3__/mo on Pipedrive Growth and $270/mo (+ $1,500 onboarding) on HubSpot Sales Pro.</p>
   </div>
@@ -384,7 +384,7 @@ function updateSmCalc() {
         <div class="summary-metric" style="color:${unusedSeats > 0 ? 'var(--rose)' : 'var(--emerald)'};">$${monYr.toLocaleString()} / yr (${monSeats} seats)</div>
         <div class="summary-scenario">${scenarioLine}</div>
         <div class="summary-breakdown">$${(u * monRate * 12).toLocaleString()} active seats + $${unusedCostYr.toLocaleString()} unused seat padding</div>
-        <div class="summary-caveat"><strong>Hidden Cost Highlight:</strong> ${unusedSeats > 0 ? `monday CRM forces a ${monSeats}-seat bucket for ${u} user${u===1?'':'s'}, adding $${unusedCostYr.toLocaleString()}/yr for ${unusedSeats} unused seat${unusedSeats===1?'':'s'} ($${(monMo / u).toFixed(2)}/user/mo effective rate).` : `At exactly ${u} users, you use 100% of monday CRM's ${monSeats}-seat bucket ($0 wasted seat padding).`}</div>
+        <div class="summary-caveat">${unusedSeats > 0 ? `monday CRM forces a ${monSeats}-seat bucket for ${u} user${u===1?'':'s'}, adding $${unusedCostYr.toLocaleString()}/yr for ${unusedSeats} unused seat${unusedSeats===1?'':'s'} ($${(monMo / u).toFixed(2)}/user/mo effective rate).` : `At exactly ${u} users, you use 100% of monday CRM's ${monSeats}-seat bucket ($0 wasted seat padding).`}</div>
         <div class="summary-actions">
           <div class="cta-stack">
             <a class="btn-secondary" href="https://monday.com/pricing" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="monday-crm" data-cta-location="summary-card">View monday CRM pricing &rarr;</a>
@@ -472,8 +472,8 @@ p4_faqs = [
 
 render_page(
     "compare/monday-crm-vs-pipedrive-vs-hubspot-seat-minimums/index.html",
-    "CRM True Year-1 Cost & Seat Minimums (2026) – saasbill.io",
-    "Compare the 2026 true cost and Year-1 price of monday CRM (3-seat minimum & 5-seat buckets), Pipedrive, Close CRM, and HubSpot (with mandatory onboarding fees) for 1 to 15 users.",
+    "monday CRM 3-seat minimum cost – saasbill.io",
+    "A solo user on monday CRM Basic pays for 3 seats, $36/month. Pipedrive and Close bill the seats you use.",
     "/compare/monday-crm-vs-pipedrive-vs-hubspot-seat-minimums/",
     wrap_calculator_shell(_fill_pd(p4_body)),
     faqs=p4_faqs
@@ -645,7 +645,7 @@ function updateSocCalc() {
         <div class="summary-metric" style="color:var(--rose);">+$${auditorFee.toLocaleString()} / yr CPA Audit Fee</div>
         <div class="summary-scenario">${scenarioLine}</div>
         <div class="summary-breakdown">Billed separately by an independent AICPA-licensed CPA firm (${auditSharePct}% of total Drata Year-1 budget)</div>
-        <div class="summary-caveat"><strong>Hidden Cost Highlight:</strong> Vanta and Drata quotes cover software automation only. Your external CPA auditor report ($6,500&ndash;$15,000+) is never included in the platform subscription.</div>
+        <div class="summary-caveat">Vanta and Drata quotes cover software automation only. Your external CPA auditor report ($6,500&ndash;$15,000+) is never included in the platform subscription.</div>
         <div class="summary-actions">
           <div class="cta-stack">
             <a class="btn-secondary" href="/go/vanta" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="vanta-soc2" data-cta-location="summary-card">View Vanta pricing &rarr;</a>
@@ -736,8 +736,8 @@ p5_faqs = [
 
 render_page(
     "compliance/hipaa-baa-and-soc2-pricing-tiers/index.html",
-    "HIPAA & SOC 2 True Year-1 Cost Calculator – saasbill.io",
-    "Calculate your 2026 SOC 2 Type II true cost and Year-1 budget (Vanta/Drata platform + mandatory CPA auditor fee) and compare HIPAA feature tiers like Jotform Gold ($99/mo).",
+    "HIPAA BAA and SOC 2 Year-1 cost – saasbill.io",
+    "Jotform Gold with HIPAA features is $99/month. Vanta and Drata quotes are separate from the CPA audit fee.",
     "/compliance/hipaa-baa-and-soc2-pricing-tiers/",
     wrap_calculator_shell(p5_body),
     faqs=p5_faqs

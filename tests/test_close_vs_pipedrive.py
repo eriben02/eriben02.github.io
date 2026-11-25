@@ -409,8 +409,8 @@ class TestCloseVsPipedrivePublishing(unittest.TestCase):
             self.assertIn('data-control="%s"' % control, pub)
         self.assertIn('"@type": "FAQPage"', pub)
         # Shared shell pieces, as on the other comparison pages.
-        self.assertIn('<div class="wb-col-title">Estimate Your True Cost</div>', pub)
-        self.assertIn('<div class="wb-col-title">Your Estimated True Cost</div>', pub)
+        self.assertIn('<div class="wb-col-title">Your numbers</div>', pub)
+        self.assertIn('<div class="wb-col-title">Year-1 cost</div>', pub)
         self.assertIn('<div class="workbench-grid wb-fill-chart">', pub)
         strip = re.search(r'<div class="summary-strip" id="cp-cards" aria-live="polite">(.*?)</div>\s*</section>', pub, re.S).group(1)
         self.assertEqual(strip.count('class="summary-card result-card'), 3)

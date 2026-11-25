@@ -18,9 +18,9 @@ LIVE_JOTFORM_URL = "https://form.jotform.com/262996430206056"
 def build_jotform_wix_guide():
     rel = "guides/jotform-wix-app-setup-and-pricing-guide/index.html"
     slug = "/guides/jotform-wix-app-setup-and-pricing-guide/"
-    title = "Jotform Wix App Setup & Pricing Guide (2026) – saasbill.io"
+    title = "Jotform on Wix: setup and price – saasbill.io"
     desc = (
-        "Step-by-step 2026 visual guide and video walkthrough showing how to embed a B2B Custom Quote & Bulk Order form on Wix using the official Jotform Wix App, plus Jotform Starter, Bronze, Silver, and Gold pricing."
+        "How to add a Jotform quote form on Wix, plus Starter $0, Bronze $34, Silver $39, and Gold $99 a month."
     )
 
     body = f"""
@@ -243,7 +243,7 @@ function updateJotformWixCalc() {{
       <div class="summary-label">Hidden Cost Highlight (Typeform &amp; Native Caps)</div>
       <div class="summary-metric" style="color:var(--rose);">Saves $${{savedVsTf.toLocaleString('en-US')}} / yr vs. Typeform</div>
       <div class="summary-scenario">Based on ${{vol.toLocaleString('en-US')}} submissions/mo (${{modeLabel}})</div>
-      <div class="summary-breakdown"><strong>Hidden Cost Highlight:</strong> Typeform Free caps at just 10 responses/mo across all forms and requires Enterprise (~$6,000+/yr) for a HIPAA BAA.</div>
+      <div class="summary-breakdown">Typeform Free caps at just 10 responses/mo across all forms and requires Enterprise (~$6,000+/yr) for a HIPAA BAA.</div>
       <div class="summary-actions" style="margin-top:8px;">
         <a class="summary-audit-link" href="../../compare/typeform-vs-jotform-response-limit-and-hipaa-cost/" data-track="internal-audit">Read Typeform vs. Jotform audit &rarr;</a>
       </div>
@@ -317,7 +317,7 @@ function updateJotformWixCalc() {{
       <td data-label="Plan / Platform"><strong>${{r.name}}</strong> <span class="status-pill status-verified">Verified</span></td>
       <td data-label="Monthly Rate">${{r.rate}}</td>
       <td data-label="Form & Submission Limits">${{r.limits}}</td>
-      <td data-label="Hidden Cost Highlight"><strong>Hidden Cost Highlight:</strong> ${{r.hidden}}</td>
+      <td data-label="Hidden Cost Highlight">${{r.hidden}}</td>
       <td data-label="True Year-1 Cost"><strong>${{r.total}}</strong></td>
       <td data-label="Official Link"><a class="btn-secondary" href="${{r.url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="jotform" data-cta-location="jw-table">${{r.cta}}</a></td>
     </tr>
@@ -374,9 +374,9 @@ updateJotformWixCalc();
 def build_jotform_pricing_calculator():
     rel = "pricing/jotform-pricing-tier-calculator/index.html"
     slug = "/pricing/jotform-pricing-tier-calculator/"
-    title = "Jotform Pricing Tier Calculator (2026) – saasbill.io"
+    title = "Jotform pricing: Bronze, Silver, Gold – saasbill.io"
     desc = (
-        "Calculate your 2026 Jotform Year-1 cost across Starter (Free), Bronze ($34/mo), Silver ($39/mo), and Gold ($99/mo, HIPAA features) based on monthly submissions, payment volume, and Wix/website embedding."
+        "Starter is $0. Bronze is $34, Silver is $39, and Gold is $99 a month, billed annually. Gold is the HIPAA tier."
     )
 
     body = f"""
@@ -467,17 +467,17 @@ function runJfTierCalc() {{
       </div>
     </div>
     <div class="summary-card result-card card-hidden">
-      <div class="summary-label">Hidden Cost Highlight (Silver vs. Bronze Spread)</div>
+      <div class="summary-label">Silver versus Bronze</div>
       <div class="summary-metric" style="color:var(--rose);">Only +$60 / yr from Bronze to Silver</div>
       <div class="summary-scenario">Based on annual billing ($34/mo Bronze vs. $39/mo Silver)</div>
-      <div class="summary-breakdown"><strong>Hidden Cost Highlight:</strong> Paying $5/mo extra for Silver unlocks 2.5x more monthly submissions (2,500 vs. 1,000) and 10x more file storage (10 GB vs. 1 GB).</div>
+      <div class="summary-breakdown">Paying $5/mo extra for Silver gives 2.5x more monthly submissions (2,500 vs. 1,000) and 10x more file storage (10 GB vs. 1 GB).</div>
     </div>
   `;
 
   const rows = [
     {{name: 'Jotform Starter (Free)', rate: '$0/mo', quotas: '5 forms · 100 submissions/mo · 100 MB storage', hidden: 'Jotform branding shown on embedded forms', total: '$0/yr', url: '{JOTFORM_PARTNER_URL}'}},
     {{name: 'Jotform Bronze', rate: '$' + bronzeMo + '/mo', quotas: '25 forms · 1,000 submissions/mo · 1 GB storage', hidden: '$0 onboarding · Custom branding unlocked', total: '$' + (bronzeMo * 12).toLocaleString('en-US') + '/yr', url: '{JOTFORM_PRICING_PARTNER_URL}'}},
-    {{name: 'Jotform Silver', rate: '$' + silverMo + '/mo', quotas: '50 forms · 2,500 submissions/mo · 10 GB storage', hidden: 'Best value per submission ($0.015/submission at capacity)', total: '$' + (silverMo * 12).toLocaleString('en-US') + '/yr', url: '{JOTFORM_PRICING_PARTNER_URL}'}},
+    {{name: 'Jotform Silver', rate: '$' + silverMo + '/mo', quotas: '50 forms · 2,500 submissions/mo · 10 GB storage', hidden: 'Lowest cost per submission ($0.015/submission at capacity)', total: '$' + (silverMo * 12).toLocaleString('en-US') + '/yr', url: '{JOTFORM_PRICING_PARTNER_URL}'}},
     {{name: 'Jotform Gold', rate: '$' + goldMo + '/mo', quotas: '100 forms · 10,000 submissions/mo · 100 GB storage', hidden: 'HIPAA features, BAA available to eligible customers', total: '$' + (goldMo * 12).toLocaleString('en-US') + '/yr', url: '{JOTFORM_HIPAA_PARTNER_URL}'}}
   ];
 
@@ -500,7 +500,7 @@ function runJfTierCalc() {{
       <td data-label="Jotform Tier"><strong>${{r.name}}</strong> <span class="status-pill status-verified">Verified</span> &middot; <a href="https://www.jotform.com/pricing/" target="_blank" rel="noopener">Verified source</a></td>
       <td data-label="Advertised Rate">${{r.rate}}</td>
       <td data-label="Included Quotas">${{r.quotas}}</td>
-      <td data-label="Hidden Cost Highlight"><strong>Hidden Cost Highlight:</strong> ${{r.hidden}}</td>
+      <td data-label="Hidden Cost Highlight">${{r.hidden}}</td>
       <td data-label="True Year-1 Cost"><strong>${{r.total}}</strong></td>
       <td data-label="Action"><a class="btn-secondary" href="${{r.url}}" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="jotform" data-cta-location="jf-tier-table">View Jotform pricing &rarr;</a></td>
     </tr>

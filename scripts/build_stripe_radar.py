@@ -21,11 +21,10 @@ $270/mo ($3,240/yr). Lost orders $600/mo ($7,200/yr). Smart Disputes $0. Radar $
 Total $870/mo, $10,440 Year-1. Smart Disputes on the same fights is $11,520.
 Accepting every dispute is $16,560. Lowest Year-1 cost is manual counter.
 """
-import json
 import os
 import shutil
 
-from layout import BASE_DIR, DATA_DIR, PUBLIC_DIR, render_page, wrap_calculator_shell
+from layout import BASE_DIR, PUBLIC_DIR, render_page, wrap_calculator_shell
 
 TITLE = "Stripe dispute and Radar cost (2026) – saasbill.io"
 DESCRIPTION = (
@@ -521,12 +520,8 @@ FAQS = [
 
 
 def whop_url():
-    with open(os.path.join(DATA_DIR, "affiliate_links.json"), encoding="utf-8") as handle:
-        data = json.load(handle)
-    url = data["whop"]["destination_url"]
-    if "whop.com" not in url:
-        raise SystemExit("whop destination_url is missing")
-    return url
+    # Approved vendor buttons go through /go/whop, which redirects to the affiliate URL.
+    return "/go/whop"
 
 
 def copy_to_root(rel):

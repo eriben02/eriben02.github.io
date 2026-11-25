@@ -7,8 +7,7 @@ from layout import render_page, wrap_calculator_shell
 SLUG = "/compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/"
 REL = "compliance/google-workspace-vs-microsoft-365-hipaa-baa-tiers/index.html"
 TITLE = "Google Workspace vs M365 HIPAA BAA (2026) – saasbill.io"
-DESC = ("Google Workspace vs. Microsoft 365 HIPAA BAA guide for 2026: the cheapest BAA-eligible editions both start at $7/user/mo. "
-        "Compare Vault and archiving gaps, billing terms, auto-renewal and HIPAA form intake costs.")
+DESC = ("The cheapest HIPAA BAA edition is $7/user/month on Workspace Business Starter and Microsoft 365 Business Basic. Checked Oct 27, 2026.")
 JOTFORM = "/go/jotform"
 GW_PRICING = "https://workspace.google.com/pricing"
 MS_PRICING = "https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products"

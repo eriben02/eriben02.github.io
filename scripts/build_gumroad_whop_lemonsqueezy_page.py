@@ -6,7 +6,7 @@ from layout import render_page, wrap_calculator_shell
 
 SLUG = "/compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/"
 REL = "compare/gumroad-vs-whop-vs-lemon-squeezy-take-rate-calculator/index.html"
-TITLE = "Gumroad vs Whop vs Lemon Squeezy Fees (2026) – saasbill.io"
+TITLE = "Gumroad vs Whop vs Lemon Squeezy fees – saasbill.io"
 CHECKED = "Oct 26, 2026"
 CHECKED_ISO = "2026-10-26"
 WHOP_URL = "/go/whop"
@@ -75,8 +75,7 @@ def single(price):
 
 S29 = single(29); S10 = single(10); S100 = single(100)
 
-DESC = (f"Gumroad takes 10% + 50¢ plus 2.9% + 30¢ card processing; Lemon Squeezy 5% + 50¢ (+1.5% international/PayPal); Whop 2.7% + 30¢ (+2% for managed tax). "
-        f"On $5,800/mo of $29 sales you net ${f(E['gumroad']['net'])} on Gumroad vs ${f(E['ls']['net'])} on Lemon Squeezy and ${f(E['whop']['net'])} on Whop. Verified {CHECKED}.")
+DESC = (f"On $5,800 of $29 sales you net ${f(E['gumroad']['net'])} on Gumroad, ${f(E['ls']['net'])} on Lemon Squeezy, and ${f(E['whop']['net'])} on Whop. Checked {CHECKED}.")
 
 SOURCES = [
     ("Gumroad pricing page (10% + $0.50 per direct sale; 30% via Discover; merchant of record since Jan 1, 2025)", GUMROAD_URL),

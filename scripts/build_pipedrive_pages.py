@@ -491,6 +491,7 @@ def build():
     pd_run = run_node(core, "pd", {"default": DEFAULT})["default"]
     hs_run = run_node(core, "hs", {"default": DEFAULT})["default"]
     pd_row = pd_run["r"]["current"]
+    cmp = hs_run["r"]
     pd_lead = "Annual Pipedrive seats and add-ons. An unpublished price basis stays a floor, never $0."
     hs_lead = "The same seats on Pipedrive and HubSpot Sales Hub, with HubSpot onboarding in the Year-1 total."
     fine = "Prices last verified: Pipedrive <time datetime=\"%s\">%s</time>, HubSpot <time datetime=\"%s\">%s</time> &middot; USD, annual billing" % (
@@ -521,10 +522,10 @@ def build():
 {HS_JS % HS_SLUG}
 </script>
 """
-    render_page(PD_REL, "Pipedrive True Year-1 Cost Calculator (2026) – saasbill.io",
+    render_page(PD_REL, "Pipedrive Year-1 cost calculator – saasbill.io",
                 "Pipedrive Year-1 cost from published annual seat prices and add-ons. Unknown price bases are a floor, not $0. Example: %s for 5 Growth seats." % money(pd_row["total"]),
                 PD_SLUG, pd_body, faqs=pd_faqs(pricing, pd_run["r"]), published_date="2026-10-30")
-    render_page(HS_REL, "Pipedrive vs HubSpot Sales Hub True Year-1 Cost (2026) – saasbill.io",
+    render_page(HS_REL, "Pipedrive vs HubSpot Year-1 cost – saasbill.io",
                 "Compare Pipedrive and HubSpot Sales Hub Year-1 cost for the same seats. Default: %s vs %s. Unpublished add-on price bases are not ranked."
                 % (money(cmp["pipedrive"]["total"]), money(cmp["hubspot"]["total"])),
                 HS_SLUG, hs_body, faqs=hs_faqs(pricing, hs, cmp), published_date="2026-10-30")

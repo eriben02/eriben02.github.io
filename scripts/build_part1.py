@@ -33,8 +33,8 @@ aff_js = json.dumps(_home_aff)
 # ---------------------------------------------------------
 home_body = f"""
 <section class="hero editorial-hero">
-  <h1>Your SaaS bill is lying to you.</h1>
-  <p class="lead">Mandatory onboarding fees, seat-bucket minimums, and metered AI overages can significantly increase the real Year-1 cost of your tools.</p>
+  <h1>What does a SaaS stack cost in Year 1?</h1>
+  <p class="lead">HubSpot Sales Pro is $6,900 for 5 seats: $5,400 plus a $1,500 onboarding fee (HubSpot pricing, Oct 2026).</p>
 </section>
 
 <div class="editorial-cat-bar">
@@ -72,7 +72,7 @@ home_body = f"""
   <div class="workbench-grid">
     <!-- Left Column: ESTIMATE YOUR TRUE COST -->
     <div class="wb-col-controls">
-      <div class="wb-col-title">Estimate Your True Cost</div>
+      <div class="wb-col-title">Your numbers</div>
       <div class="wb-controls-stack">
         <div class="wb-control-item" id="tool-select-group">
           <label class="wb-control-label" for="spotlight-tool-select">Platform to inspect</label>
@@ -109,7 +109,7 @@ home_body = f"""
 
     <!-- Center Column: YOUR ESTIMATED TRUE COST (Static DOM 3-Row Vertical Stacked Bar + Leader Lines) -->
     <div class="wb-col-chart">
-      <div class="wb-col-title" id="wb-chart-col-title">Your Estimated True Cost</div>
+      <div class="wb-col-title" id="wb-chart-col-title">Year-1 cost</div>
       <div id="wb-vbar-mount" class="wb-vbar-container" aria-live="polite">
         <div class="wb-vbar-row" id="wb-row-base" style="flex: 11.5 1 0px;">
           <div class="wb-vbar-block block-base">
@@ -144,7 +144,7 @@ home_body = f"""
           <div class="wb-callout-item">
             <div class="wb-leader-line"></div>
             <div class="wb-callout-text">
-              <strong id="wb-call-title-hidden">Hidden Cost Gap</strong>
+              <strong id="wb-call-title-hidden">Cost above list price</strong>
               <span id="wb-call-sub-hidden">Onboarding, AI &amp; seat minimums</span>
             </div>
           </div>
@@ -222,7 +222,7 @@ home_body = f"""
               <th id="th-col-1">Scenario</th>
               <th id="th-col-2"><span class="legend-dot dot-sticker" aria-hidden="true"></span>Sticker Price / Year</th>
               <th id="th-col-3">True Cost / Year (Est.)</th>
-              <th id="th-col-4"><span class="legend-dot dot-hidden" aria-hidden="true"></span>Hidden Cost Gap</th>
+              <th id="th-col-4"><span class="legend-dot dot-hidden" aria-hidden="true"></span>Cost above list price</th>
               <th id="th-col-5">Official Pricing</th>
             </tr>
           </thead>
@@ -286,6 +286,11 @@ home_body = f"""
       <span class="badge badge-high">CRM</span>
       <h3><a href="./pricing/gong-io-platform-fee-and-seat-minimum-calculator/">Gong.io platform fee and seat calculator</a></h3>
       <p>Gong&rsquo;s $5,000/yr base platform fee and ~$1,600/seat licenses plus a separate CRM versus Close CRM all-in-one.</p>
+    </div>
+    <div class="card" data-cat="crm">
+      <span class="badge badge-high">CRM</span>
+      <h3><a href="./pricing/apollo-vs-zoominfo-vs-sales-navigator-year-1-cost/">Apollo vs ZoomInfo vs Sales Navigator</a></h3>
+      <p>Year-1 seats, email and phone credits, and a labeled ZoomInfo estimate.</p>
     </div>
     <div class="card" data-cat="crm">
       <span class="badge badge-high">CRM</span>
@@ -354,6 +359,16 @@ home_body = f"""
     </div>
     <div class="card" data-cat="payments">
       <span class="badge badge-high">Payments</span>
+      <h3><a href="./pricing/chargeflow-vs-stripe-smart-disputes-year-1-cost/">Chargeflow vs Stripe Smart Disputes</a></h3>
+      <p>Year-1 cost of a manual response, Smart Disputes at 30% of wins, and Chargeflow at 25% of the recovered amount. The win rate is yours to set.</p>
+    </div>
+    <div class="card" data-cat="payments">
+      <span class="badge badge-high">Payments</span>
+      <h3><a href="./pricing/hubspot-payments-vs-stripe-platform-fee-year-1-cost/">HubSpot payments vs Stripe</a></h3>
+      <p>HubSpot payments fees versus Stripe connected to HubSpot. The first-year promotion stays off unless you turn it on.</p>
+    </div>
+    <div class="card" data-cat="payments">
+      <span class="badge badge-high">Payments</span>
       <h3><a href="./exit/shopify-payments-chargeback-threshold-and-reserve-appeal/">Shopify Payments reserve and dispute threshold</a></h3>
       <p>US Shopify Payments card rate, the $15 dispute fee, and the reserve and network thresholds Shopify actually publishes.</p>
     </div>
@@ -386,6 +401,16 @@ home_body = f"""
       <span class="badge badge-medium">Compliance</span>
       <h3><a href="./pricing/docusign-envelope-allowance-and-api-overage-calculator/">DocuSign 100-envelope cap calculator</a></h3>
       <p>DocuSign&rsquo;s 100 envelopes/user/year cap on Standard &amp; Business Pro plans compared with PandaDoc and Jotform Sign.</p>
+    </div>
+    <div class="card" data-cat="compliance">
+      <span class="badge badge-medium">Compliance</span>
+      <h3><a href="./pricing/pandadoc-vs-docusign-vs-jotform-sign-year-1-cost/">PandaDoc vs DocuSign vs Jotform Sign</a></h3>
+      <p>Year-1 list price for the sender count and monthly volume you enter. A credit pack with no published price stays unknown.</p>
+    </div>
+    <div class="card" data-cat="compliance">
+      <span class="badge badge-medium">Compliance</span>
+      <h3><a href="./pricing/jotform-multi-user-vs-enterprise-year-1-cost/">Jotform Year-1 cost for a team of 3 to 4</a></h3>
+      <p>Separate single-user plans versus an Enterprise quote. The quote stays unknown until you enter it.</p>
     </div>
     <div class="card" data-cat="compliance">
       <span class="badge badge-low">Compliance</span>
@@ -490,7 +515,7 @@ home_body = f"""
     <div class="methodology-item">
       <strong>Verification Status Badges</strong>
       <span class="status-pill status-verified">Verified</span> indicates published self-serve pricing and contract terms checked directly against official vendor docs on Oct 25, 2026.<br/>
-      <span class="status-pill status-estimated">Estimated (Benchmark)</span> indicates non-public, sales-quoted pricing modeled from verified buyer contract benchmarks.
+      <span class="status-pill status-estimated">Estimated (Benchmark)</span> indicates non-public, sales-quoted pricing buyer contracts, not a published list price.
     </div>
   </div>
   </div>
@@ -771,7 +796,7 @@ function renderCalcBreakdownHtml(r, seats, aiVol, mode, cat) {{
             <span class="calc-math-val">${{money(bench.recovered)}}/yr</span>
           </div>
           <div class="calc-math-row">
-            <span class="calc-math-label"><strong>Hidden Cost Gap: 25% success fee</strong><span class="calc-math-formula">25% of recovered dollars only</span></span>
+            <span class="calc-math-label"><strong>Cost above list price: 25% success fee</strong><span class="calc-math-formula">25% of recovered dollars only</span></span>
             <span class="calc-math-val">${{money(bench.fee)}}/yr</span>
           </div>
           <div class="calc-math-total">
@@ -1112,13 +1137,13 @@ function renderDirectory() {{
     if (isPayCat) {{
       th2.innerHTML = '<span class="legend-dot dot-sticker" aria-hidden="true"></span>Sticker Price / Month';
       th3.textContent = 'True Cost / Month (Est.)';
-      th4.innerHTML = '<span class="legend-dot dot-hidden" aria-hidden="true"></span>Hidden Cost Gap';
-      if (chartColTitle) chartColTitle.textContent = 'Your Estimated True Cost';
+      th4.innerHTML = '<span class="legend-dot dot-hidden" aria-hidden="true"></span>Cost above list price';
+      if (chartColTitle) chartColTitle.textContent = 'Year-1 cost';
     }} else {{
       th2.innerHTML = '<span class="legend-dot dot-sticker" aria-hidden="true"></span>Sticker Price / Year';
       th3.textContent = 'True Cost / Year (Est.)';
-      th4.innerHTML = '<span class="legend-dot dot-hidden" aria-hidden="true"></span>Hidden Cost Gap';
-      if (chartColTitle) chartColTitle.textContent = 'Your Estimated True Cost';
+      th4.innerHTML = '<span class="legend-dot dot-hidden" aria-hidden="true"></span>Cost above list price';
+      if (chartColTitle) chartColTitle.textContent = 'Year-1 cost';
     }}
   }}
 
@@ -1212,7 +1237,7 @@ function renderDirectory() {{
           <div class="summary-metric" style="color:var(--rose);">${{payMoney(paddleProf.held)}} / mo temporarily held</div>
           <details class="math-drawer">
             <summary>Show calculation</summary>
-            <div class="math-drawer-body"><div class="summary-scenario">On <strong>Paddle / Stripe / Lemon Squeezy</strong> (25% rolling reserve scenario)</div><div class="summary-breakdown">${{payMoney(paddleProf.total)}}/mo Paddle true cost (${{payMoney(paddleProf.total * 12)}}/yr) including a ${{payMoney(paddleProf.h)}}/mo Hidden Cost Gap</div><div class="summary-caveat"><strong>Hidden Cost Highlight:</strong> A 25% rolling reserve locks ${{payMoney(paddleProf.held)}}/mo in working capital for 90&ndash;180 days.</div>${{renderCalcBreakdownHtml(paddleR, seats, aiVol, mode, cat)}}</div>
+            <div class="math-drawer-body"><div class="summary-scenario">On <strong>Paddle / Stripe / Lemon Squeezy</strong> (25% rolling reserve scenario)</div><div class="summary-breakdown">${{payMoney(paddleProf.total)}}/mo Paddle true cost (${{payMoney(paddleProf.total * 12)}}/yr) including a ${{payMoney(paddleProf.h)}}/mo Cost above list price</div><div class="summary-caveat">A 25% rolling reserve locks ${{payMoney(paddleProf.held)}}/mo in working capital for 90&ndash;180 days.</div>${{renderCalcBreakdownHtml(paddleR, seats, aiVol, mode, cat)}}</div>
           </details>
           <div class="summary-driver">On <strong>Paddle / Stripe / Lemon Squeezy</strong></div>
           <div class="summary-actions">
@@ -1244,7 +1269,7 @@ function renderDirectory() {{
         vizLegendEl.innerHTML = `
           <span class="viz-legend-item"><span class="viz-swatch" style="background:var(--bar-seats);"></span>Sticker Price: Base rate</span>
           <span class="viz-legend-item"><span class="viz-swatch" style="background:var(--bar-onboarding);"></span>Sticker Price: Per-tx fees</span>
-          <span class="viz-legend-item"><span class="viz-swatch" style="background:var(--bar-ai);"></span>Hidden Cost Gap</span>
+          <span class="viz-legend-item"><span class="viz-swatch" style="background:var(--bar-ai);"></span>Cost above list price</span>
         `;
       }}
       vizRowsEl.innerHTML = rows.map(r => {{
@@ -1312,7 +1337,7 @@ function renderDirectory() {{
       document.getElementById('wb-call-sub-seats').textContent = 'Remaining team seat licenses';
 
       document.getElementById('wb-amt-hidden').textContent = `$${{overagesAddonsYr.toLocaleString()}}`;
-      document.getElementById('wb-call-title-hidden').textContent = 'Hidden Cost Gap';
+      document.getElementById('wb-call-title-hidden').textContent = 'Cost above list price';
       document.getElementById('wb-call-sub-hidden').textContent = 'Onboarding, AI & seat minimums';
     }}
 
@@ -1390,7 +1415,7 @@ function renderDirectory() {{
           <div class="summary-metric" style="color:var(--rose);">+$${{topHidden.hiddenFees.toLocaleString()}} / yr (${{hiddenPct}}% of Year-1 bill)</div>
           <details class="math-drawer">
             <summary>Show calculation</summary>
-            <div class="math-drawer-body"><div class="summary-scenario">On <strong>${{topHidden.tool.name}}</strong> ($${{topHidden.year1Total.toLocaleString()}}/yr total &middot; ${{scenarioLine.replace('Based on ', '')}})</div><div class="summary-breakdown">$${{topHidden.annualSeatsCost.toLocaleString()}} licenses + $${{topHidden.onboarding.toLocaleString()}} onboarding + $${{topHidden.aiAnnual.toLocaleString()}} AI</div><div class="summary-caveat"><strong>Hidden Cost Highlight:</strong> ${{hiddenReasonText}}.</div>${{renderCalcBreakdownHtml(topHidden, seats, aiVol, mode, cat)}}</div>
+            <div class="math-drawer-body"><div class="summary-scenario">On <strong>${{topHidden.tool.name}}</strong> ($${{topHidden.year1Total.toLocaleString()}}/yr total &middot; ${{scenarioLine.replace('Based on ', '')}})</div><div class="summary-breakdown">$${{topHidden.annualSeatsCost.toLocaleString()}} licenses + $${{topHidden.onboarding.toLocaleString()}} onboarding + $${{topHidden.aiAnnual.toLocaleString()}} AI</div><div class="summary-caveat">${{hiddenReasonText}}.</div>${{renderCalcBreakdownHtml(topHidden, seats, aiVol, mode, cat)}}</div>
           </details>
           <div class="summary-driver">On <strong>${{topHidden.tool.name}}</strong></div>
           <div class="summary-actions">
@@ -1500,7 +1525,7 @@ function renderDirectory() {{
       const pillClass = payProf.h > 0 ? 'gap-orange-pill' : 'gap-zero-pill';
       const heldNote = payProf.held > 0 ? `${{payProf.tableHeldPill}}. ` : '';
       gapCellHtml = `
-        <div class="${{pillClass}}">+${{payGapPct}}% Hidden Cost Gap (+$${{payProf.h.toLocaleString('en-US')}}/mo)</div>
+        <div class="${{pillClass}}">+${{payGapPct}}% Cost above list price (+$${{payProf.h.toLocaleString('en-US')}}/mo)</div>
         <div class="gap-sub-detail">${{heldNote}}${{payProf.tableHeldSub}} &middot; <a href="${{srcUrl}}" target="_blank" rel="noopener">Verified source &nearr;</a></div>
       `;
     }} else if (gapDollars > 0) {{
@@ -1531,7 +1556,7 @@ function renderDirectory() {{
         </td>
         <td data-label="Sticker Price / Year">${{stickerDisplay}}</td>
         <td data-label="Year-1 Total">${{totalText}}</td>
-        <td data-label="Hidden Cost Gap">${{gapCellHtml}}</td>
+        <td data-label="Cost above list price">${{gapCellHtml}}</td>
         <td data-label="Official Pricing">
           <div class="cta-stack">
             <a class="btn-secondary" href="${{affiliateHref(aff)}}" target="_blank" rel="${{affiliateRel(aff)}}" data-track="vendor-cta" data-vendor="${{t.id}}" data-cta-location="table-row">${{getVendorCtaLabel(t)}}</a>
@@ -1863,8 +1888,8 @@ home_faqs = [
 
 render_page(
     "index.html",
-    "saasbill.io – True Year-1 SaaS Cost & Fee Calculator (2026)",
-    "Calculate the 2026 true cost and Year-1 invoice of B2B SaaS tools including HubSpot mandatory onboarding fees ($1,500-$7,000), Intercom and Zendesk AI cost overages, CRM seat minimums, and Stripe vs. Paddle vs. Whop fees.",
+    "SaaS Year-1 cost calculator – saasbill.io",
+    "HubSpot Sales Pro is $6,900 for 5 seats after a $1,500 onboarding fee. The calculator adds seat minimums and per-resolution fees. Checked Oct 2026.",
     "/",
     home_body,
     faqs=home_faqs,
@@ -1883,8 +1908,8 @@ render_page(
 # ---------------------------------------------------------
 p1_body = """
 <section class="hero">
-  <h1>What HubSpot actually costs in Year 1 (once you add onboarding).</h1>
-  <p class="lead">See what HubSpot actually costs once mandatory onboarding fees, extra seats, and contact tiers are included. Adjust your team size, contacts, and tier below to see your real Year-1 total and how it compares to Close CRM and Pipedrive.</p>
+  <h1>What does HubSpot cost in Year 1?</h1>
+  <p class="lead">Five Sales Hub Professional seats are $6,900: $5,400 plus a $1,500 onboarding fee (HubSpot pricing, Oct 2026).</p>
 </section>
 
 <section class="calc-box editorial-bar-chart-card" id="crm-apples-to-apples-chart" aria-labelledby="chart-dynamic-headline">
@@ -1904,8 +1929,8 @@ p1_body = """
     </div>
   </div>
 
-  <h2 id="chart-dynamic-headline" class="ebc-title">At 5 seats, HubSpot Sales Pro ($6,900) costs 2.4x Close Startup ($2,820) in Year 1</h2>
-  <p id="chart-dynamic-subtitle" class="ebc-subtitle">Year-1 total contract cost for 5 sales reps on annual billing with multi-pipeline automation and sales sequences (licenses + mandatory onboarding).</p>
+  <h2 id="chart-dynamic-headline" class="ebc-title">At 5 seats, HubSpot Sales Pro ($6,900) costs 3.3x Close Essentials ($2,100) in Year 1</h2>
+  <p id="chart-dynamic-subtitle" class="ebc-subtitle">Year-1 total for 5 sales reps on annual billing. Close Essentials does not include workflows. Close Growth does. HubSpot onboarding is in the Year-1 total.</p>
 
   <div class="ebc-rows" role="list" aria-live="polite">
     <div class="ebc-row" role="listitem">
@@ -1947,18 +1972,18 @@ p1_body = """
     <div class="ebc-row ebc-row-sage" role="listitem">
       <div class="ebc-label-col">
         <div class="ebc-tool-name">
-          <a href="/go/close" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="close" data-cta-location="benchmark-chart">Close CRM Startup &nearr;</a>
+          <a href="/go/close" target="_blank" rel="sponsored nofollow noopener" data-track="vendor-cta" data-vendor="close" data-cta-location="benchmark-chart">Close CRM Essentials &nearr;</a>
         </div>
-        <div class="ebc-tool-meta">Includes built-in VoIP calling &amp; SMS workflows &middot; $0 onboarding</div>
+        <div class="ebc-tool-meta">Pipelines, email, and calling. Workflows start on Growth. $0 onboarding</div>
       </div>
       <div class="ebc-bar-col">
         <div class="ebc-bar-track">
-          <div id="bar-close-startup" class="ebc-bar-fill ebc-fill-sage" style="width: 40.9%;"></div>
+          <div id="bar-close-essentials" class="ebc-bar-fill ebc-fill-sage" style="width: 30.4%;"></div>
         </div>
       </div>
       <div class="ebc-val-col">
-        <span id="val-close-startup" class="ebc-val-main ebc-val-sage">$2,820</span>
-        <span class="ebc-val-sub">$47/seat/mo</span>
+        <span id="val-close-essentials" class="ebc-val-main ebc-val-sage">$2,100</span>
+        <span class="ebc-val-sub">$35/seat/mo</span>
       </div>
     </div>
 
@@ -2011,7 +2036,7 @@ p1_body = """
     <a class="ebc-secondary-link" href="https://www.hubspot.com/pricing/sales" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="hubspot" data-cta-location="benchmark-cta">View official HubSpot Sales Hub pricing &nearr;</a>
   </div>
 
-  <p id="chart-dynamic-footnote" class="ebc-footer-note"><strong>Hidden Cost Highlight:</strong> Based on 5 seats, annual billing. Official prices verified Oct 2026. All tiers compared include multi-stage pipelines and automated sales sequences for 5 seats billed annually (Close CRM Essentials is $35/user/mo for basic pipelines without sequences). HubSpot Sales Pro requires a one-time $1,500 onboarding fee in Year 1; Year-2 renewal drops to $5,400/yr. Source: saasbill.io</p>
+  <p id="chart-dynamic-footnote" class="ebc-footer-note">Based on 5 seats, annual billing. Close Essentials is $35/user/mo and does not include workflows. Close Growth is $99/user/mo and includes workflows. HubSpot Sales Pro adds a one-time $1,500 onboarding fee in Year 1. Year-2 renewal is $5,400. Sources: <a href="https://www.close.com/pricing" target="_blank" rel="noopener">close.com/pricing</a> (checked 25 Nov 2026) and <a href="https://www.hubspot.com/pricing/sales" target="_blank" rel="noopener">HubSpot pricing</a> (Oct 2026).</p>
 </section>
 
 <section>
@@ -2113,19 +2138,18 @@ function updateHs() {
   const hsYear1 = hsSeatsYr + hsOnboard;
   const pipeYr = seats * 39 * 12;
   const freshYr = seats * 39 * 12;
-  const closeStartupYr = seats * 47 * 12;
-  const closeGrowthYr = seats * 99 * 12;
   const closeEssentialsYr = seats * 35 * 12;
+  const closeGrowthYr = seats * 99 * 12;
 
   const maxVal = Math.max(hsYear1, closeGrowthYr, 1);
-  const ratio = (hsYear1 / Math.max(closeStartupYr, 1)).toFixed(1);
+  const ratio = (hsYear1 / Math.max(closeEssentialsYr, 1)).toFixed(1);
   const repWord = seats === 1 ? '1 sales rep' : `${seats} sales reps`;
   const seatWord = seats === 1 ? '1 seat' : `${seats} seats`;
 
   document.getElementById('chart-dynamic-headline').textContent =
-    `At ${seatWord}, ${hsShortName} ($${hsYear1.toLocaleString()}) costs ${ratio}x Close Startup ($${closeStartupYr.toLocaleString()}) in Year 1`;
+    `At ${seatWord}, ${hsShortName} ($${hsYear1.toLocaleString()}) costs ${ratio}x Close Essentials ($${closeEssentialsYr.toLocaleString()}) in Year 1`;
   document.getElementById('chart-dynamic-subtitle').textContent =
-    `Year-1 total contract cost for ${repWord} on annual billing with multi-pipeline automation and sales sequences (licenses + mandatory onboarding).`;
+    `Year-1 total for ${repWord} on annual billing. Close Essentials does not include workflows. Close Growth does. HubSpot onboarding is in the Year-1 total.`;
 
   document.getElementById('bar-pipedrive').style.width = `${((pipeYr / maxVal) * 100).toFixed(1)}%`;
   document.getElementById('val-pipedrive').textContent = `$${pipeYr.toLocaleString()}`;
@@ -2133,8 +2157,8 @@ function updateHs() {
   document.getElementById('bar-freshsales').style.width = `${((freshYr / maxVal) * 100).toFixed(1)}%`;
   document.getElementById('val-freshsales').textContent = `$${freshYr.toLocaleString()}`;
 
-  document.getElementById('bar-close-startup').style.width = `${((closeStartupYr / maxVal) * 100).toFixed(1)}%`;
-  document.getElementById('val-close-startup').textContent = `$${closeStartupYr.toLocaleString()}`;
+  document.getElementById('bar-close-essentials').style.width = `${((closeEssentialsYr / maxVal) * 100).toFixed(1)}%`;
+  document.getElementById('val-close-essentials').textContent = `$${closeEssentialsYr.toLocaleString()}`;
 
   document.getElementById('bar-close-growth').style.width = `${((closeGrowthYr / maxVal) * 100).toFixed(1)}%`;
   document.getElementById('val-close-growth').textContent = `$${closeGrowthYr.toLocaleString()}`;
@@ -2180,15 +2204,15 @@ function updateHs() {
           <span>$${hsYear1.toLocaleString()} / yr</span>
         </div>
         <div class="calc-math-row" style="margin-top:6px;">
-          <span class="calc-math-label"><strong>Close CRM Startup Comparison</strong><span class="calc-math-formula">${seats} × $47/seat/mo × 12 mos + $0 onboarding</span></span>
-          <span class="calc-math-val">$${closeStartupYr.toLocaleString()} / yr</span>
+          <span class="calc-math-label"><strong>Close CRM Essentials</strong><span class="calc-math-formula">${seats} × $35/seat/mo × 12 mos + $0 onboarding</span></span>
+          <span class="calc-math-val">$${closeEssentialsYr.toLocaleString()} / yr</span>
         </div>
       </div>
     `;
   }
   const footEl = document.getElementById('chart-dynamic-footnote');
   if (footEl) {
-    footEl.innerHTML = `<strong>Hidden Cost Highlight:</strong> Based on ${seatWord}, annual billing. Official prices verified Oct 2026. All tiers compared include multi-stage pipelines and automated sales sequences for ${seatWord} billed annually (Close CRM (Essentials) is $${closeEssentialsYr.toLocaleString()}/yr at $35/user/mo for basic pipelines without sequences). ${hsShortName} requires a one-time $${hsOnboard.toLocaleString()} onboarding fee in Year 1; Year-2 renewal drops to $${hsSeatsYr.toLocaleString()}/yr. Source: saasbill.io`;
+    footEl.innerHTML = `Based on ${seatWord}, annual billing. Close Essentials is $35/user/mo ($${closeEssentialsYr.toLocaleString()}/yr here) and does not include workflows. Close Growth is $99/user/mo and includes workflows. ${hsShortName} adds a one-time $${hsOnboard.toLocaleString()} onboarding fee in Year 1. Year-2 renewal is $${hsSeatsYr.toLocaleString()}. Sources: close.com/pricing (checked 25 Nov 2026) and HubSpot pricing (Oct 2026).`;
   }
   if (typeof window.saasbillApplyWorkbench === 'function') {
     window.saasbillApplyWorkbench({
@@ -2223,8 +2247,8 @@ p1_faqs = [
 
 render_page(
     "pricing/hubspot-true-cost-and-onboarding-fees/index.html",
-    "HubSpot True Year-1 Cost & Onboarding Fees – saasbill.io",
-    "Calculate the 2026 HubSpot true cost and Year-1 invoice including mandatory $1,500-$7,000 onboarding fees on Sales Hub Pro and Marketing Hub Pro vs. Close CRM ($0 onboarding) and Pipedrive.",
+    "HubSpot Year-1 cost with onboarding – saasbill.io",
+    "Five Sales Pro seats are $6,900 in Year 1: $5,400 plus a $1,500 onboarding fee. Marketing Hub onboarding runs to $7,000.",
     "/pricing/hubspot-true-cost-and-onboarding-fees/",
     wrap_calculator_shell(p1_body),
     faqs=p1_faqs
@@ -2342,7 +2366,7 @@ function updateIcCalc() {
         <div class="summary-metric" style="color:var(--rose);">$${icYear.toLocaleString()} / yr ($${icTotalMo.toLocaleString()}/mo)</div>
         <div class="summary-scenario">${scenarioLine}</div>
         <div class="summary-breakdown">$${icSeatsYr.toLocaleString()} licenses + $0 onboarding + $${icAiYr.toLocaleString()} Fin AI</div>
-        <div class="summary-caveat"><strong>Hidden Cost Highlight:</strong> Metered Fin AI resolution fees ($0.99 &times; ${resolvedTickets.toLocaleString()}/mo) add $${icAiYr.toLocaleString()}/yr (${aiSharePct}% of your total Year-1 bill).</div>
+        <div class="summary-caveat">Metered Fin AI resolution fees ($0.99 &times; ${resolvedTickets.toLocaleString()}/mo) add $${icAiYr.toLocaleString()}/yr (${aiSharePct}% of your total Year-1 bill).</div>
         <div class="summary-actions">
           <div class="cta-stack">
             <a class="btn-secondary" href="https://www.intercom.com/pricing" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="intercom-fin-ai" data-cta-location="summary-card">Check Intercom pricing &rarr;</a>

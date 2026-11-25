@@ -418,7 +418,7 @@ def body_html(pricing, affiliates, runs, data, core):
 </section>
 """
 
-    lead = "Pipedrive has no built-in calling, so a team that calls from its CRM also pays for a dialer."
+    lead = "Pipedrive has no built-in calling, and Close bills most outbound calls at about $0.02 a minute."
 
     return f"""
 <section class="hero editorial-hero editorial-hero-wrap">
@@ -556,12 +556,11 @@ def build():
     core = js_core(data)
     runs = run_node(core, scenarios())
     d = runs["default"]["r"]
-    desc = ("Close vs Pipedrive Year-1 cost with calling included: seats, Close call minutes and numbers, "
-            "or a third-party dialer for Pipedrive. Example: %s vs %s for 5 reps. Prices verified %s."
+    desc = ("For 5 reps, one example is %s on Close and %s on Pipedrive plus a dialer. Prices checked %s."
             % (money(d["close"]["total"]), money(d["pipedrive"]["total"]), human(oldest_verified(pricing))))
     render_page(
         REL,
-        "Close vs Pipedrive True Year-1 Cost (2026) – saasbill.io",
+        "Close vs Pipedrive cost with calling – saasbill.io",
         desc,
         SLUG,
         body_html(pricing, affiliates, runs, data, core),

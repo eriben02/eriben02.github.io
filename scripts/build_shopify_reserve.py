@@ -37,7 +37,7 @@ BODY = r"""
   <h2 id="sh-heading" class="sr-only-control">Shopify Payments reserve and dispute threshold calculator</h2>
   <div class="workbench-grid">
     <div class="wb-col-controls">
-      <div class="wb-col-title">Estimate Your True Cost</div>
+      <div class="wb-col-title">Your numbers</div>
       <div class="wb-controls-stack">
         <div class="wb-control-item">
           <label class="wb-control-label" for="sh-orders">Monthly orders <span class="val-pill" id="sh-orders-val">1,000</span></label>
@@ -73,7 +73,7 @@ BODY = r"""
     </div>
 
     <div class="wb-col-chart">
-      <div class="wb-col-title">Your Estimated True Cost</div>
+      <div class="wb-col-title">Year-1 cost</div>
       <div id="sh-vbar" class="wb-vbar-container" aria-live="polite">
         <div class="wb-vbar-row" id="sh-row-base">
           <div class="wb-vbar-block block-base"><span class="wb-block-amount" id="sh-amt-base">$1,450</span></div>
@@ -85,7 +85,7 @@ BODY = r"""
         </div>
         <div class="wb-vbar-row" id="sh-row-hidden">
           <div class="wb-vbar-block block-hidden"><span class="wb-block-amount" id="sh-amt-hidden">$0</span></div>
-          <div class="wb-callout-item"><div class="wb-leader-line"></div><div class="wb-callout-text"><strong>Hidden Cost Gap</strong><span id="sh-sub-hidden">Dispute fees and unrecovered orders</span></div></div>
+          <div class="wb-callout-item"><div class="wb-leader-line"></div><div class="wb-callout-text"><strong>Cost above list price</strong><span id="sh-sub-hidden">Dispute fees and unrecovered orders</span></div></div>
         </div>
       </div>
     </div>
@@ -265,13 +265,13 @@ function renderShopifyReserve() {
   document.getElementById('sh-best').innerHTML = '<strong>Threshold:</strong> ' + status + ' ' + reserveLine;
   const manualNote = '20% win rate is a planning benchmark. Shopify returns the $15 fee only when you win, and a win still counts in the chargeback rate.';
   const ndrpNote = 'At 1.5% or higher over 90 days, Shopify can auto-enroll an NDRP: the order is reimbursed, the fee is charged, and you cannot submit evidence.';
-  document.getElementById('sh-math').innerHTML = 'Monthly GMV = ' + orders.toLocaleString('en-US') + ' x ' + shMoney(aov) + ' = ' + shMoney(c.gmvMo) + '. Sticker = ' + (c.pct * 100).toFixed(2) + '% x ' + shMoney(c.gmvMo) + ' + 30¢ x ' + orders.toLocaleString('en-US') + ' = ' + shMoney(c.stickerMo) + '/mo (' + shMoney(c.stickerYr) + '/yr). Disputes/yr = round(' + orders.toLocaleString('en-US') + ' x 12 x ' + ratePct.toFixed(2) + '%) = ' + c.disputesYr.toLocaleString('en-US') + '. Disputed sales = ' + shMoney(c.disputedYr) + '. ' + (c.ndrp ? ndrpNote : manualNote) + ' Dispute fees ' + shMoney(c.feesYr) + '. Unrecovered or reimbursed orders ' + shMoney(c.lostYr) + '. Hidden Cost Gap ' + shMoney(c.hiddenYr) + '. True Year-1 cost ' + shMoney(c.stickerYr) + ' + ' + shMoney(c.hiddenYr) + ' = ' + shMoney(c.trueYr) + '. Reserve cash ' + shMoney(c.reserveMo) + '/mo is held working capital, not added to that fee total. Visa excessive ratio is 1.5% and also needs 1,500 combined fraud reports and disputes in a month outside CEMEA. Dispute count this month is ' + c.disputesMo.toLocaleString('en-US') + (c.vampCount ? ', which meets that count.' : ', which does not meet that count.') + ' A 65% recovery benchmark on the disputed sales would keep ' + shMoney(c.net) + ' after a 25% fee, and only if the disputes can be contested. NDRP disputes cannot.';
+  document.getElementById('sh-math').innerHTML = 'Monthly GMV = ' + orders.toLocaleString('en-US') + ' x ' + shMoney(aov) + ' = ' + shMoney(c.gmvMo) + '. Sticker = ' + (c.pct * 100).toFixed(2) + '% x ' + shMoney(c.gmvMo) + ' + 30¢ x ' + orders.toLocaleString('en-US') + ' = ' + shMoney(c.stickerMo) + '/mo (' + shMoney(c.stickerYr) + '/yr). Disputes/yr = round(' + orders.toLocaleString('en-US') + ' x 12 x ' + ratePct.toFixed(2) + '%) = ' + c.disputesYr.toLocaleString('en-US') + '. Disputed sales = ' + shMoney(c.disputedYr) + '. ' + (c.ndrp ? ndrpNote : manualNote) + ' Dispute fees ' + shMoney(c.feesYr) + '. Unrecovered or reimbursed orders ' + shMoney(c.lostYr) + '. Cost above list price ' + shMoney(c.hiddenYr) + '. True Year-1 cost ' + shMoney(c.stickerYr) + ' + ' + shMoney(c.hiddenYr) + ' = ' + shMoney(c.trueYr) + '. Reserve cash ' + shMoney(c.reserveMo) + '/mo is held working capital, not added to that fee total. Visa excessive ratio is 1.5% and also needs 1,500 combined fraud reports and disputes in a month outside CEMEA. Dispute count this month is ' + c.disputesMo.toLocaleString('en-US') + (c.vampCount ? ', which meets that count.' : ', which does not meet that count.') + ' A 65% recovery benchmark on the disputed sales would keep ' + shMoney(c.net) + ' after a 25% fee, and only if the disputes can be contested. NDRP disputes cannot.';
   const cfLimit = c.ndrp
     ? 'Chargeflow cannot submit evidence on an NDRP dispute. Shopify says those outcomes are final.'
     : 'The 65% win rate is our planning assumption, not a Chargeflow figure. Adjust it to yours. Shopify still counts a won dispute in the chargeback rate.';
   document.getElementById('sh-summary').innerHTML = ''
     + '<div class="summary-card result-card"><div class="summary-label">Sticker Price</div><div class="summary-metric">' + shMoney(c.stickerYr) + ' / yr</div><div class="summary-scenario">US online standard cards on ' + c.plan + '</div><div class="summary-breakdown">' + shMoney(c.pctMo) + '/mo percentage + ' + shMoney(c.fixedMo) + '/mo per-order fees.</div><p class="summary-caveat"><strong>Limitation:</strong> Premium and international cards are extra. This sticker is not the whole bill.</p></div>'
-    + '<div class="summary-card result-card card-hidden"><div class="summary-label">Hidden Cost Gap</div><div class="summary-metric" style="color:var(--rose);">+' + shMoney(c.hiddenYr) + ' / yr</div><div class="summary-scenario">' + status + '</div><div class="summary-breakdown">Fees ' + shMoney(c.feesYr) + ' + unrecovered or reimbursed orders ' + shMoney(c.lostYr) + '.</div><p class="summary-caveat"><strong>Cash held:</strong> ' + shMoney(c.reserveMo) + '/mo. ' + reserveLine + '</p><details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">' + document.getElementById('sh-math').textContent + '</div></details></div>'
+    + '<div class="summary-card result-card card-hidden"><div class="summary-label">Cost above list price</div><div class="summary-metric" style="color:var(--rose);">+' + shMoney(c.hiddenYr) + ' / yr</div><div class="summary-scenario">' + status + '</div><div class="summary-breakdown">Fees ' + shMoney(c.feesYr) + ' + unrecovered or reimbursed orders ' + shMoney(c.lostYr) + '.</div><p class="summary-caveat"><strong>Cash held:</strong> ' + shMoney(c.reserveMo) + '/mo. ' + reserveLine + '</p><details class="math-drawer"><summary>Show calculation</summary><div class="math-drawer-body">' + document.getElementById('sh-math').textContent + '</div></details></div>'
     + '<div class="summary-card result-card"><div class="summary-label">Add-on: contested recovery</div><div class="summary-metric">+' + shMoney(c.net) + ' / yr net</div><div class="summary-scenario">25% fee, $0/mo</div><div class="summary-breakdown">Gross recovered ' + shMoney(c.recovered) + ' minus ' + shMoney(c.successFee) + '.</div><p class="summary-caveat"><strong>Limitation:</strong> ' + cfLimit + '</p><div class="summary-actions"><a class="btn-secondary" href="https://www.chargeflow.io/" target="_blank" rel="nofollow noopener" data-track="vendor-cta" data-vendor="chargeflow" data-cta-location="summary-card">Review Chargeflow</a></div></div>';
   document.getElementById('sh-tbody').innerHTML = ''
     + '<tr><td data-label="Path"><strong>Shopify Payments, manual contest</strong></td><td data-label="What you pay">' + shMoney(c.stickerYr) + '/yr sticker + dispute drain if you can fight</td><td data-label="Cash held">' + (c.ndrp ? 'Not this path' : shMoney(0) + ' published reserve') + '</td><td data-label="Limitation">Win rate is not guaranteed. Won disputes still count. <a href="https://help.shopify.com/en/manual/payments/chargebacks/chargeback-process" target="_blank" rel="noopener">Verified source</a></td></tr>'

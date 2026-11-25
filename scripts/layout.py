@@ -69,7 +69,7 @@ WORKBENCH_JS = r"""
       setText('shell-amt-hidden', window.saasbillMoney(hidden));
       setText('shell-title-base', 'Sticker Price');
       setText('shell-title-seats', opts.seatsTitle || 'Other sticker fees');
-      setText('shell-title-hidden', 'Hidden Cost Gap');
+      setText('shell-title-hidden', 'Cost above list price');
       setText('shell-sub-base', opts.baseLabel || 'Advertised price');
       setText('shell-sub-seats', opts.seatsLabel || 'Included in the sticker');
       setText('shell-sub-hidden', opts.hiddenLabel || 'Fees above the advertised price');
@@ -96,7 +96,7 @@ WORKBENCH_JS = r"""
 """
 
 
-def render_workbench(controls_html, controls_title="Estimate Your True Cost", chart_title="Your Estimated True Cost", cta_href="#comparison", cta_label="See pricing", cta_vendor="saasbill"):
+def render_workbench(controls_html, controls_title="Your numbers", chart_title="Year-1 cost", cta_href="#comparison", cta_label="See pricing", cta_vendor="saasbill"):
     """Shared tactile editorial workbench: recessed controls, stacked bar, raised result column, summary cards."""
     # Hash links stay on this site. vendor_cta_click is for vendor and affiliate clicks only.
     if str(cta_href).startswith("#"):
@@ -126,7 +126,7 @@ def render_workbench(controls_html, controls_title="Estimate Your True Cost", ch
         </div>
         <div class="wb-vbar-row" id="shell-row-hidden" style="flex: 52 1 0px;">
           <div class="wb-vbar-block block-hidden"><span class="wb-block-amount" id="shell-amt-hidden">$0</span></div>
-          <div class="wb-callout-item"><div class="wb-leader-line"></div><div class="wb-callout-text"><strong id="shell-title-hidden">Hidden Cost Gap</strong><span id="shell-sub-hidden">Fees above the advertised price</span></div></div>
+          <div class="wb-callout-item"><div class="wb-leader-line"></div><div class="wb-callout-text"><strong id="shell-title-hidden">Cost above list price</strong><span id="shell-sub-hidden">Fees above the advertised price</span></div></div>
         </div>
       </div>
     </div>
@@ -155,7 +155,7 @@ def render_workbench(controls_html, controls_title="Estimate Your True Cost", ch
       <div class="summary-scenario" id="shell-sticker-note">Advertised price</div>
     </div>
     <div class="summary-card result-card card-hidden">
-      <div class="summary-label">Hidden Cost Gap</div>
+      <div class="summary-label">Cost above list price</div>
       <div class="summary-metric" id="shell-gap">$0</div>
       <div class="summary-scenario">Above the advertised price</div>
     </div>
@@ -211,7 +211,7 @@ _SHELL_SUMMARY = """
       <div class="summary-scenario" id="shell-sticker-note">Advertised price</div>
     </div>
     <div class="summary-card result-card card-hidden">
-      <div class="summary-label">Hidden Cost Gap</div>
+      <div class="summary-label">Cost above list price</div>
       <div class="summary-metric" id="shell-gap">$0</div>
       <div class="summary-scenario">Above the advertised price</div>
     </div>
@@ -220,7 +220,7 @@ _SHELL_SUMMARY = """
 """
 
 
-def wrap_calculator_shell(html, controls_title="Your numbers", chart_title="Your Estimated True Cost"):
+def wrap_calculator_shell(html, controls_title="Your numbers", chart_title="Year-1 cost"):
     """Put a legacy calc-box on the shared workbench. Pages that already use it are left in place, aside from the wrapping hero."""
     html = html.replace(
         '<section class="hero">',

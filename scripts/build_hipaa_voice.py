@@ -10,7 +10,7 @@ from layout import BASE_DIR, PUBLIC_DIR, render_page, render_workbench, wrap_cal
 
 TITLE = "AI voice HIPAA BAA matrix – saasbill.io"
 DESCRIPTION = (
-    "A BAA is necessary but not sufficient. Zoom healthcare Pro lists $14.16 a user a month on the annual plan. "
+    "Zoom healthcare Pro is $14.16 a user a month on the annual plan. "
     "Otter's HIPAA add-on price is unknown. Checked 9 Nov 2026."
 )
 REL = "compliance/ai-voice-and-transcription-hipaa-baa-matrix-2026/index.html"
@@ -30,7 +30,7 @@ CONTROLS = """
             <option value="monthly">Monthly</option>
           </select>
         </div>
-        <p class="wb-budget-subnote">A BAA is necessary but not sufficient. The matrix does not rank vendors.</p>
+        <p class="wb-budget-subnote">The matrix does not rank vendors.</p>
 """
 
 REST = r"""
@@ -59,7 +59,7 @@ REST = r"""
       </tbody>
     </table>
   </div>
-  <p id="hv-note" class="summary-caveat">A BAA is necessary but not sufficient. No vendor is ranked.</p>
+  <p id="hv-note" class="summary-caveat">No vendor is ranked.</p>
 </section>
 
 <section>
@@ -165,7 +165,7 @@ function renderHipaa() {
   if (perYear) perYear.textContent = "";
   document.getElementById("shell-product").textContent = "Published seat list prices";
   document.getElementById("shell-quote").textContent = "Published seat list prices, not a full cost";
-  document.getElementById("shell-sub").textContent = "A BAA is necessary but not sufficient. Missing prices stay unknown.";
+  document.getElementById("shell-sub").textContent = "Missing prices stay unknown.";
   document.getElementById("shell-best").textContent = "Not a ranking.";
   var bars = [
     ["shell-row-base", "shell-amt-base", "shell-title-base", "shell-sub-base", "Zoom Pro", c.zoomYear, "Healthcare list price"],
@@ -206,7 +206,7 @@ function renderHipaa() {
     + row("AssemblyAI", "BAA, no premium pricing", "unknown", "Per-hour usage. $50 of credits")
     + row("Deepgram", "Enterprise", "unknown", "Enterprise is custom. Growth from $4,000 is not a BAA price");
   document.getElementById("shell-math").textContent = c.seats + " " + seatWord + ", " + term + ". Otter unknown. Fireflies " + firefliesText + ". Fathom " + hvMoney(c.fathomYear) + " on " + billed + ". Granola " + hvMoney(c.granolaYear) + ". Zoom " + hvMoney(c.zoomYear) + ". AssemblyAI unknown. Deepgram unknown. Published seat list prices, not a full cost. Not a ranking.";
-  document.getElementById("hv-note").textContent = "A BAA is necessary but not sufficient. No vendor is ranked. Fathom Team and Business list a standard BAA on the pricing page checked 9 Nov 2026.";
+  document.getElementById("hv-note").textContent = "No vendor is ranked. Fathom Team and Business list a standard BAA on the pricing page checked 9 Nov 2026.";
   if (typeof window.trackSaaSBillEvent === "function") {
     window.trackSaaSBillEvent("result_rendered", { page: "hipaa-voice", seats: c.seats });
   }
@@ -261,20 +261,20 @@ def build():
         ('id="shell-product">Year-1 total<', 'id="shell-product">Published seat list prices<'),
         ('id="shell-big">$0</span> <span class="wb-per-year">/ year</span>', 'id="shell-big">Not a ranking</span> <span class="wb-per-year"></span>'),
         ('id="shell-quote">True Year-1 cost<', 'id="shell-quote">Published seat list prices, not a full cost<'),
-        ('id="shell-sub">Matches advertised price ($0 hidden fees).</p>', 'id="shell-sub">A BAA is necessary but not sufficient. Missing prices stay unknown.</p>'),
+        ('id="shell-sub">Matches advertised price ($0 hidden fees).</p>', 'id="shell-sub">Missing prices stay unknown.</p>'),
         ('id="shell-title-base">Sticker Price<', 'id="shell-title-base">Zoom Pro<'),
         ('id="shell-sub-base">Advertised price<', 'id="shell-sub-base">Healthcare list price<'),
         ('id="shell-amt-base">$0<', 'id="shell-amt-base">$849.60<'),
         ('id="shell-title-seats">Other sticker fees<', 'id="shell-title-seats">Fathom Team<'),
         ('id="shell-sub-seats">Included in the sticker<', 'id="shell-sub-seats">Standard BAA, 2-seat minimum<'),
         ('id="shell-amt-seats">$0<', 'id="shell-amt-seats">$900<'),
-        ('id="shell-title-hidden">Hidden Cost Gap<', 'id="shell-title-hidden">Granola Enterprise<'),
+        ('id="shell-title-hidden">Cost above list price<', 'id="shell-title-hidden">Granola Enterprise<'),
         ('id="shell-sub-hidden">Fees above the advertised price<', 'id="shell-sub-hidden">$35 per user per month<'),
         ('id="shell-amt-hidden">$0<', 'id="shell-amt-hidden">$2,100<'),
         ('<div class="summary-label">Sticker Price</div>', '<div class="summary-label">Published seat lists</div>'),
         ('id="shell-sticker">$0<', 'id="shell-sticker">3<'),
         ('id="shell-sticker-note">Advertised price<', 'id="shell-sticker-note">Zoom, Fathom, and Granola seat lists<'),
-        ('<div class="summary-label">Hidden Cost Gap</div>', '<div class="summary-label">Unknown or incomplete</div>'),
+        ('<div class="summary-label">Cost above list price</div>', '<div class="summary-label">Unknown or incomplete</div>'),
         ('id="shell-gap">$0<', 'id="shell-gap">4<'),
         ('<div class="summary-scenario">Above the advertised price</div>', '<div class="summary-scenario">Not a full HIPAA cost</div>'),
         ('aria-label="Sticker price and hidden cost gap"', 'aria-label="Published prices and unknown lines"'),
@@ -285,8 +285,8 @@ def build():
     body = (
         '<section class="hero">'
         "<h1>AI voice and transcription HIPAA BAA matrix (2026)</h1>"
-        '<p class="lead">A BAA is necessary but not sufficient. '
-        "The matrix lists which plan publishes a BAA, and which Year-1 prices stay unknown.</p>"
+        '<p class="lead">Zoom healthcare Pro lists $14.16 a user a month on the annual plan (checked 9 Nov 2026). '
+        "Otter's HIPAA add-on price is unknown.</p>"
         "</section>"
         + workbench
         + REST

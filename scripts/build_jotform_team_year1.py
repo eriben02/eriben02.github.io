@@ -386,7 +386,7 @@ def build():
         ('id="shell-title-seats">Other sticker fees<', 'id="shell-title-seats">4 separate Gold accounts<'),
         ('id="shell-sub-seats">Included in the sticker<', 'id="shell-sub-seats">Year 1<'),
         ('id="shell-amt-seats">$0<', 'id="shell-amt-seats">$4,752<'),
-        ('id="shell-title-hidden">Hidden Cost Gap<', 'id="shell-title-hidden">Enterprise<'),
+        ('id="shell-title-hidden">Cost above list price<', 'id="shell-title-hidden">Enterprise<'),
         ('id="shell-sub-hidden">Fees above the advertised price<', 'id="shell-sub-hidden">Quote<'),
         ('id="shell-amt-hidden">$0<', 'id="shell-amt-hidden">unknown<'),
         ('id="shell-best"></div>', 'id="shell-best">%s</div>' % BREAK_EVEN_DEFAULT),

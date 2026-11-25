@@ -408,7 +408,7 @@ def build():
         ('id="shell-title-seats">Other sticker fees<', 'id="shell-title-seats">Sales Navigator<'),
         ('id="shell-sub-seats">Included in the sticker<', 'id="shell-sub-seats">Year 1<'),
         ('id="shell-amt-seats">$0<', 'id="shell-amt-seats">$5,399.40<'),
-        ('id="shell-title-hidden">Hidden Cost Gap<', 'id="shell-title-hidden">ZoomInfo<'),
+        ('id="shell-title-hidden">Cost above list price<', 'id="shell-title-hidden">ZoomInfo<'),
         ('id="shell-sub-hidden">Fees above the advertised price<', 'id="shell-sub-hidden">Year 1<'),
         ('id="shell-amt-hidden">$0<', 'id="shell-amt-hidden">$22,495<'),
         ('id="shell-best"></div>', 'id="shell-best">$659.40 less than Sales Navigator.</div>'),

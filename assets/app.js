@@ -10,7 +10,7 @@ function quotePayProfile(id, gmvMo, txMo) {
   }
   function gapLine(hidden, sticker) {
     var pct = sticker > 0 ? Math.round((hidden / sticker) * 100) : 0;
-    return "+" + payMoney(hidden) + "/mo (+" + payMoney(hidden * 12) + "/yr, +" + pct + "% Hidden Cost Gap above the " + payMoney(sticker) + "/mo advertised sticker rate)";
+    return "+" + payMoney(hidden) + "/mo (+" + payMoney(hidden * 12) + "/yr, +" + pct + "% above the " + payMoney(sticker) + "/mo list price)";
   }
   var gmv = Math.max(0, Number(gmvMo) || 0);
   var tx = Math.max(0, Number(txMo) || 0);
@@ -35,7 +35,7 @@ function quotePayProfile(id, gmvMo, txMo) {
       callSubBase: "2.7% base rate (" + payMoney(b) + "/mo)",
       callTitleSeats: "Sticker Price: Per-tx fees",
       callSubSeats: "$0.30 × " + txLabel + " tx (" + payMoney(s) + "/mo)",
-      callTitleHidden: "Hidden Cost Gap",
+      callTitleHidden: "Cost above list price",
       callSubHidden: "+1.5% Intl FX (" + payMoney(intl) + ") + optional 0.8% multi-PSP failover (" + payMoney(failover) + ") = " + payMoney(h) + "/mo",
       quote: "<strong>Estimated monthly processing fees:</strong> " + payMoney(total) + "/mo (" + payMoney(total * 12) + "/yr)<br/><strong>Potential funds temporarily held:</strong> $0/mo (multi-acquirer routing)",
       sub: assumptions + ". " + line + " " + payMoney(total) + "/mo total with multi-PSP failover, or " + payMoney(without) + "/mo without orchestration. $0 single-PSP reserve hold.",
@@ -64,14 +64,14 @@ function quotePayProfile(id, gmvMo, txMo) {
       callSubBase: "5.0% MoR base (" + payMoney(pb) + "/mo)",
       callTitleSeats: "Sticker Price: Per-tx fees",
       callSubSeats: "$0.50 × " + txLabel + " tx (" + payMoney(ps) + "/mo)",
-      callTitleHidden: "Hidden Cost Gap",
+      callTitleHidden: "Cost above list price",
       callSubHidden: "+FX conversion spread (" + payMoney(fx) + ") + 0.65% dispute drain (" + payMoney(pdrain) + "/mo unrecovered + $20 fees) = " + payMoney(ph) + "/mo",
       quote: "<strong>Estimated monthly processing fees:</strong> " + payMoney(ptotal) + "/mo (" + payMoney(ptotal * 12) + "/yr)<br/><strong>Potential funds temporarily held:</strong> " + payMoney(heldReserve) + "/mo (25% hold risk)",
       sub: assumptions + ". " + pline,
       gapLine: pline,
       disputeLine: "0.65% dispute rate. Unrecovered sales at a 20% manual win rate plus $20 fees = " + payMoney(pdrain) + "/mo.",
       disputeAmt: payMoney(pdrain) + "/mo",
-      tableFeeSub: payMoney(psticker) + " sticker (5.0% + $0.50) + " + payMoney(ph) + " Hidden Cost Gap",
+      tableFeeSub: payMoney(psticker) + " sticker (5.0% + $0.50) + " + payMoney(ph) + " Cost above list price",
       tableHeldPill: payMoney(heldReserve) + " / mo temporarily held",
       tableHeldSub: "If 25% payout hold triggers on review (not a fee) · Non-exportable MoR card vault"
     };
@@ -92,14 +92,14 @@ function quotePayProfile(id, gmvMo, txMo) {
       callSubBase: "5.0% MoR base (" + payMoney(lb) + "/mo)",
       callTitleSeats: "Sticker Price: Per-tx fees",
       callSubSeats: "$0.50 × " + txLabel + " tx (" + payMoney(ls) + "/mo)",
-      callTitleHidden: "Hidden Cost Gap",
+      callTitleHidden: "Cost above list price",
       callSubHidden: "+0.5% subscription fee (" + payMoney(subFee) + ") + 1.5% Intl (" + payMoney(intl) + ") + 0.65% dispute drain (" + payMoney(ldrain) + "/mo) = " + payMoney(lh) + "/mo",
       quote: "<strong>Estimated monthly processing fees:</strong> " + payMoney(ltotal) + "/mo (" + payMoney(ltotal * 12) + "/yr)<br/><strong>Potential funds temporarily held:</strong> " + payMoney(heldReserve) + "/mo (25% reserve)",
       sub: assumptions + ". " + lline,
       gapLine: lline,
       disputeLine: "0.65% dispute rate. Unrecovered sales at a 20% manual win rate plus $15 fees = " + payMoney(ldrain) + "/mo.",
       disputeAmt: payMoney(ldrain) + "/mo",
-      tableFeeSub: payMoney(lsticker) + " sticker (5.0% + $0.50) + " + payMoney(lh) + " Hidden Cost Gap",
+      tableFeeSub: payMoney(lsticker) + " sticker (5.0% + $0.50) + " + payMoney(lh) + " Cost above list price",
       tableHeldPill: payMoney(heldReserve) + " / mo temporarily held",
       tableHeldSub: "If 25% rolling reserve triggers during onboarding review (not a fee)"
     };
@@ -120,7 +120,7 @@ function quotePayProfile(id, gmvMo, txMo) {
       callSubBase: "$0/mo base platform fee",
       callTitleSeats: "Sticker Price: Per-tx fees",
       callSubSeats: "$0 evidence prep",
-      callTitleHidden: "Hidden Cost Gap",
+      callTitleHidden: "Cost above list price",
       callSubHidden: "25% success fee (" + payMoney(fee) + "/yr) on " + payMoney(recovered) + " recovered. Net kept " + payMoney(net) + "/yr (" + payMoney(netMo) + "/mo).",
       quote: "<strong>Estimated monthly processing fees:</strong> $0/mo<br/><strong>Potential funds temporarily held:</strong> $0/mo (add-on dispute layer)",
       sub: assumptions + ". " + cline + ". Disputed sales " + payMoney(disputed) + "/yr. Gross recovered at 65% " + payMoney(recovered) + ". Success fee 25% " + payMoney(fee) + ". $0/mo base platform fee and $0 evidence prep.",
@@ -147,14 +147,14 @@ function quotePayProfile(id, gmvMo, txMo) {
     callSubBase: "2.9% card rate (" + payMoney(sb) + "/mo)",
     callTitleSeats: "Sticker Price: Per-tx fees",
     callSubSeats: "$0.30 × " + txLabel + " tx (" + payMoney(ss) + "/mo)",
-    callTitleHidden: "Hidden Cost Gap",
+    callTitleHidden: "Cost above list price",
     callSubHidden: "+0.7% Billing (" + payMoney(billing) + ") + 1.5% Intl FX (" + payMoney(intl) + ") + 0.65% chargeback drain (" + payMoney(sdrain) + "/mo unrecovered disputes & $15 fees) = " + payMoney(sh) + "/mo",
     quote: "<strong>Estimated monthly processing fees:</strong> " + payMoney(stotal) + "/mo (" + payMoney(stotal * 12) + "/yr)<br/><strong>Potential funds temporarily held:</strong> " + payMoney(heldReserve) + "/mo (25% reserve)",
     sub: assumptions + ". " + sline,
     gapLine: sline,
     disputeLine: "0.65% dispute rate. Unrecovered sales at a 20% manual win rate plus $15 fees = " + payMoney(sdrain) + "/mo.",
     disputeAmt: payMoney(sdrain) + "/mo",
-    tableFeeSub: payMoney(ssticker) + " sticker (2.9% + $0.30) + " + payMoney(sh) + " Hidden Cost Gap",
+    tableFeeSub: payMoney(ssticker) + " sticker (2.9% + $0.30) + " + payMoney(sh) + " Cost above list price",
     tableHeldPill: payMoney(heldReserve) + " / mo temporarily held",
     tableHeldSub: "If 25% rolling reserve triggers (held 90–180 days, not a fee) · Portable card tokens"
   };

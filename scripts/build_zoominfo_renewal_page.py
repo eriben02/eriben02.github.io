@@ -8,10 +8,9 @@ from layout import render_page, wrap_calculator_shell
 
 SLUG = "/exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/"
 REL = "exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/index.html"
-TITLE = "ZoomInfo 60-Day Renewal Notice – saasbill.io"
+TITLE = "ZoomInfo 60-day cancellation notice – saasbill.io"
 DESC = (
-    "ZoomInfo's March 6, 2024 terms require written notice 60 days before term end "
-    "or the contract extends at the annual fee plus 10% plus any discount. The May 1, 2025 terms omit that formula."
+    "Write ZoomInfo 60 days before the term ends or the March 2024 terms add 10% plus any discount. May 2025 terms omit that."
 )
 
 CLOSE = "/go/close"
@@ -83,7 +82,7 @@ body = """
 
   <p class="zi-deadline" id="zi-deadline">May 1, 2027</p>
   <p id="zi-deadline-note" style="margin-top:6px;">Based on a contract ending June 30, 2027 and 60 days of written notice. Send notice on or before this date.</p>
-  <p id="zi-hidden" style="margin-top:8px;"><strong>Hidden Cost Highlight:</strong> On a $20,000 annual fee with no discount, the March 6, 2024 formula prices the extension at $22,000 per year ($2,000 of that is the 10%).</p>
+  <p id="zi-hidden" style="margin-top:8px;">On a $20,000 annual fee with no discount, the March 6, 2024 formula prices the extension at $22,000 per year ($2,000 of that is the 10%).</p>
 
   <details class="math-drawer" id="zi-calc-details">
     <summary>Show calculation</summary>
@@ -502,7 +501,7 @@ function renderZoomInfo() {
       + ', for ' + ziMoney(calc.extensionAnnual) + ' per year across ' + calc.extensionYears + ' year' + (calc.extensionYears === 1 ? '' : 's')
       + ' (' + ziMoney(calc.extensionTotal) + ' for the full extension).'
     : 'The May 1, 2025 terms state no uplift. The chart uses the ' + uplift + '% you entered (' + ziMoney(calc.upliftDollars) + ' on ' + ziMoney(calc.annual) + '), for one year, because the extension length is not printed.';
-  document.getElementById('zi-hidden').innerHTML = '<strong>Hidden Cost Highlight:</strong> ' + hidden;
+  document.getElementById('zi-hidden').innerHTML = '' + hidden;
 
   var rows = [
     { key: 'annual', label: 'Annualized fee (your number)', formula: ziMoney(calc.annual) + ' x ' + calc.extensionYears + ' year' + (calc.extensionYears === 1 ? '' : 's'), amount: calc.annual * calc.extensionYears },
@@ -550,7 +549,7 @@ function renderZoomInfo() {
   document.getElementById('zi-chart-sub').textContent = 'Annual dollars for a contract ending ' + ziFormatLong(end) + '. ' + (version === '2024'
     ? 'The long bar is section 3.2 of the March 6, 2024 terms applied to your fee.'
     : 'The long bar uses only the uplift percent you typed.');
-  document.getElementById('zi-chart-note').innerHTML = '<strong>Hidden Cost Highlight:</strong> ' + hidden + ' Negotiated renewal on the same length is ' + ziMoney(calc.negotiatedTotal) + '.';
+  document.getElementById('zi-chart-note').innerHTML = '' + hidden + ' Negotiated renewal on the same length is ' + ziMoney(calc.negotiatedTotal) + '.';
 
   var closeGrowth = seats * 99 * 12;
   var closeEss = seats * 35 * 12;
