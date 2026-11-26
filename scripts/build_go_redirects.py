@@ -6,17 +6,21 @@ data/affiliate_links.json (go_url). These pages are noindex, are not in the
 sitemap, are disallowed in robots.txt, and do NOT go through render_page (the
 deploy guard's 20 KiB page minimum is for content pages).
 
-Pageview: one navigator.sendBeacon to Plausible's Events API
-(https://plausible.io/docs/events-api, text/plain JSON body) right before
-location.replace. A beacon is queued by the browser and survives the
-navigation, so the redirect is not delayed; it is skipped off saasbill.io
-(local previews, tests) and when sendBeacon is missing or blocked. The meta
-refresh stays as the no-JS fallback.
+The Cloudflare Web Analytics snippet sits in <head>, before the delay-0 meta
+refresh, so the browser starts the beacon while the document is still parsing.
+With JavaScript, the refresh tag is removed and location.replace runs when the
+beacon script loads or after 300 ms, whichever comes first. Without JavaScript
+the meta refresh (content="0") still redirects immediately. The Continue link
+keeps rel="sponsored nofollow".
 """
 import html
 import json
 import os
+import sys
 from urllib.parse import urlparse
+
+sys.path.insert(0, os.path.dirname(__file__))
+from layout import CF_WEB_ANALYTICS  # noqa: E402
 
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 DATA_DIR = os.path.join(BASE_DIR, "data")
@@ -37,12 +41,15 @@ GO_PAGES = {
     "jotform": "jotform",
 }
 
+# CF_WEB_ANALYTICS contains {token} braces. Double them so str.format leaves
+# the snippet unchanged and only substitutes {attr} and {js}.
 TEMPLATE = """<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="robots" content="noindex,nofollow">
+""" + CF_WEB_ANALYTICS.replace("{", "{{").replace("}", "}}") + """
 <meta http-equiv="refresh" content="0;url={attr}">
 <link rel="canonical" href="{attr}">
 <title>Redirecting…</title>
-<script>try{{if(location.hostname==="saasbill.io"&&navigator.sendBeacon)navigator.sendBeacon("https://plausible.io/api/event",JSON.stringify({{name:"pageview",url:location.href,domain:"saasbill.io",referrer:document.referrer||null}}));}}catch(e){{}}location.replace({js});</script>
+<script>(function(){{var meta=document.querySelector('meta[http-equiv="refresh"]');if(meta&&meta.parentNode)meta.parentNode.removeChild(meta);var done=false;function go(){{if(done)return;done=true;location.replace({js});}}var beacon=document.querySelector('script[data-cf-beacon]');if(beacon){{beacon.addEventListener('load',go);beacon.addEventListener('error',go);}}setTimeout(go,300);}})();</script>
 </head><body><a href="{attr}" rel="sponsored nofollow">Continue</a></body></html>
 """
 

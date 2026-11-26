@@ -1,4 +1,4 @@
-"""Close vs Pipedrive Year-1 calculator: math, links, sources, publishing, Plausible.
+"""Close vs Pipedrive Year-1 calculator: math, links, sources, publishing, analytics.
 
 Spec: Growth Sprint 1 build spec, section 9. Runs the page's own JS in Node.
 """
@@ -17,11 +17,13 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 PUBLIC = os.path.join(ROOT, "public")
 DATA = os.path.join(ROOT, "data")
+sys.path.insert(0, os.path.join(ROOT, "scripts"))
+from layout import CF_WEB_ANALYTICS  # noqa: E402
 REL = "compare/close-vs-pipedrive-year-1-cost-calculator/index.html"
 URL = "https://saasbill.io/compare/close-vs-pipedrive-year-1-cost-calculator/"
 CLOSE_GO = "https://refer.close.com/3k5hp07b8soi-fetl0j"
 PIPEDRIVE_GO = "https://aff.trypipedrive.com/mlquvdui44me"
-PLAUSIBLE_EVENT = "https://plausible.io/api/event"
+CF_BEACON_SRC = "https://static.cloudflareinsights.com/beacon.min.js"
 CHROME = "/opt/google/chrome/chrome"
 
 # refer.close.com links per published page on main before this page existed.
@@ -241,11 +243,17 @@ class TestCloseVsPipedriveLinks(unittest.TestCase):
             self.assertIn('<meta name="robots" content="noindex,nofollow">', pub)
             self.assertIn('<meta http-equiv="refresh" content="0;url=%s">' % url, pub)
             self.assertIn('location.replace("%s")' % url, pub)
-            self.assertEqual(set(re.findall(r"https://[^\"<>]+", pub)) - {PLAUSIBLE_EVENT}, {url})
-            # Pageview beacon before the redirect, only on the live host.
-            self.assertIn('location.hostname==="saasbill.io"&&navigator.sendBeacon', pub)
-            self.assertLess(pub.index("navigator.sendBeacon("), pub.index("location.replace("))
-            self.assertIn('domain:"saasbill.io"', pub)
+            self.assertIn('rel="sponsored nofollow"', pub)
+            # Beacon is in <head>, before the delay-0 refresh, and the redirect waits at most 300 ms.
+            self.assertIn(CF_WEB_ANALYTICS, pub)
+            self.assertLess(pub.index(CF_WEB_ANALYTICS), pub.index('<meta http-equiv="refresh"'))
+            self.assertIn("setTimeout(go,300)", pub)
+            self.assertLess(pub.index(CF_WEB_ANALYTICS), pub.index("location.replace("))
+            self.assertIn(CF_BEACON_SRC, pub)
+            self.assertEqual(
+                set(re.findall(r"https://[^\"'<> ]+", pub)),
+                {url, CF_BEACON_SRC},
+            )
 
     def test_go_not_in_sitemap_and_disallowed(self):
         for base in (ROOT, PUBLIC):
@@ -422,9 +430,13 @@ class TestCloseVsPipedrivePublishing(unittest.TestCase):
         self.assertRegex(pub, r"<details[^>]*>\s*<summary>Browse all calculators and guides</summary>")
         self.assertEqual(pub.count('class="faq-item"'), 8)
 
-    def test_plausible_static(self):
+    def test_cloudflare_beacon_static(self):
         html = page()
-        self.assertIn('data-domain="saasbill.io"', html)
+        body_at = html.rfind("</body>")
+        beacon_at = html.rfind(CF_WEB_ANALYTICS)
+        self.assertGreater(beacon_at, 0)
+        self.assertGreater(body_at, beacon_at)
+        self.assertEqual(html[beacon_at:body_at].strip(), CF_WEB_ANALYTICS)
         self.assertIn("window.trackSaaSBillEvent('vendor_cta_click', { vendor: vendor, location: location, href: href });", html)
         self.assertIn("[data-track=\"vendor-cta\"]", html)
 
@@ -436,17 +448,6 @@ def _browser_or_skip():
         from playwright.sync_api import sync_playwright  # noqa: F401
     except ImportError:
         raise unittest.SkipTest("playwright is not installed")
-
-
-PLAUSIBLE_SHIM = """
-(function () {
-  var q = (window.plausible && window.plausible.q) || [];
-  window.plausible = function (name, opts) {
-    fetch('https://plausible.io/api/event', {method: 'POST', body: JSON.stringify({n: name, d: 'saasbill.io', u: location.href, p: (opts || {}).props || {}})});
-  };
-  q.forEach(function (args) { window.plausible.apply(null, args); });
-})();
-"""
 
 
 class TestCloseVsPipedriveBrowser(unittest.TestCase):
@@ -471,21 +472,23 @@ class TestCloseVsPipedriveBrowser(unittest.TestCase):
 
     def open(self, p, width, height):
         ctx = p.chromium.launch(executable_path=CHROME, args=["--no-sandbox"]).new_context(viewport={"width": width, "height": height})
-        events = []
-        # The real Plausible script ignores localhost; serve a shim with the same
-        # plausible(name, {props}) contract and capture what reaches the network.
-        ctx.route("https://plausible.io/js/**", lambda route: route.fulfill(status=200, content_type="application/javascript", body=PLAUSIBLE_SHIM))
-        ctx.route("https://plausible.io/api/event", lambda route: (events.append(json.loads(route.request.post_data)), route.fulfill(status=202, body="ok")))
+        beacon_urls = []
+        ctx.route(
+            "https://static.cloudflareinsights.com/**",
+            lambda route: (beacon_urls.append(route.request.url), route.fulfill(status=200, content_type="text/javascript", body="")),
+        )
         pg = ctx.new_page()
         pg.goto(self.base, wait_until="networkidle")
         pg.evaluate("window.addEventListener('click', function (e) { if (e.target.closest('a[href]')) e.preventDefault(); })")
-        return ctx, pg, events
+        return ctx, pg, beacon_urls
 
-    def test_cta_clicks_reach_plausible(self):
+    def test_cta_clicks_are_recorded(self):
         from playwright.sync_api import sync_playwright
         with sync_playwright() as p:
-            ctx, pg, events = self.open(p, 1280, 800)
+            ctx, pg, beacon_urls = self.open(p, 1280, 800)
             self.assertEqual(pg.inner_text("#shell-big"), "$2,760")
+            self.assertIn(CF_BEACON_SRC, beacon_urls)
+            self.assertEqual(pg.locator("script[data-cf-beacon]").get_attribute("data-cf-beacon"), '{"token": "94a8dcc3648c4d3a93119f4f7dfc1577"}')
             ctas = pg.query_selector_all('[data-track="vendor-cta"]')
             expected = []
             for a in ctas:
@@ -496,8 +499,6 @@ class TestCloseVsPipedriveBrowser(unittest.TestCase):
             pushed = pg.evaluate("window.__saasbillEvents.filter(function (e) { return e.event === 'vendor_cta_click'; }).map(function (e) { return {vendor: e.vendor, location: e.location, href: e.href}; })")
             self.assertEqual(pushed, expected)
             self.assertEqual({e["href"] for e in expected}, {"/go/close", "/go/pipedrive"})
-            sent = [e for e in events if e["n"] == "vendor_cta_click"]
-            self.assertEqual([e["p"] for e in sent], expected)
             ctx.browser.close()
 
     def test_mobile_layout_and_tap_targets(self):
@@ -618,7 +619,7 @@ class TestHomepageAndGoBrowser(unittest.TestCase):
         with sync_playwright() as p:
             b = p.chromium.launch(executable_path=CHROME, args=["--no-sandbox"])
             pg = b.new_page(viewport={"width": 1280, "height": 900})
-            pg.route("https://plausible.io/**", lambda route: route.fulfill(status=202, body=""))
+            pg.route("https://static.cloudflareinsights.com/**", lambda route: route.fulfill(status=200, content_type="text/javascript", body=""))
             pg.goto(url)
             pg.click('.cat-tab[data-cat="CRM & Sales"]')
             pg.wait_for_timeout(300)
@@ -635,23 +636,28 @@ class TestHomepageAndGoBrowser(unittest.TestCase):
                 self.assertEqual(rel, "sponsored nofollow noopener")
             b.close()
 
-    def test_go_page_sends_pageview_then_redirects(self):
+    def test_go_page_loads_beacon_then_redirects(self):
         from playwright.sync_api import sync_playwright
+        import time
         page_html = read(os.path.join(ROOT, "go", "pipedrive", "index.html"))
-        beacons = []
+        beacon_urls = []
         with sync_playwright() as p:
             b = p.chromium.launch(executable_path=CHROME, args=["--no-sandbox"])
             ctx = b.new_context()
             ctx.route("https://saasbill.io/go/pipedrive/", lambda route: route.fulfill(status=200, content_type="text/html", body=page_html))
-            ctx.route(PLAUSIBLE_EVENT, lambda route: (beacons.append(route.request.post_data), route.fulfill(status=202, body="")))
+            ctx.route(
+                "https://static.cloudflareinsights.com/**",
+                lambda route: (beacon_urls.append(route.request.url), route.fulfill(status=200, content_type="text/javascript", body="")),
+            )
             ctx.route("https://aff.trypipedrive.com/**", lambda route: route.fulfill(status=200, content_type="text/html", body="<p>vendor</p>"))
             pg = ctx.new_page()
+            started = time.monotonic()
             pg.goto("https://saasbill.io/go/pipedrive/")
             pg.wait_for_url(PIPEDRIVE_GO + "*", timeout=5000)
-            pg.wait_for_timeout(300)
-            self.assertEqual(len(beacons), 1)
-            body = json.loads(beacons[0])
-            self.assertEqual((body["name"], body["domain"], body["url"]), ("pageview", "saasbill.io", "https://saasbill.io/go/pipedrive/"))
+            elapsed = time.monotonic() - started
+            self.assertIn(CF_BEACON_SRC, beacon_urls)
+            self.assertLess(elapsed, 1.5)
+            self.assertIn('rel="sponsored nofollow"', page_html)
             b.close()
 
 

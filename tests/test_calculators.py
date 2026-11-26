@@ -2,6 +2,7 @@ import json
 import os
 import re
 import subprocess
+import sys
 import unittest
 from urllib.parse import urlparse
 
@@ -9,6 +10,8 @@ from urllib.parse import urlparse
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 DATA_DIR = os.path.join(BASE_DIR, "data")
 PUBLIC_DIR = os.path.join(BASE_DIR, "public")
+sys.path.insert(0, os.path.join(BASE_DIR, "scripts"))
+from layout import CF_WEB_ANALYTICS  # noqa: E402
 
 
 def load_tools_and_affiliates():
@@ -363,8 +366,12 @@ class TestSaaSBillCalculators(unittest.TestCase):
             self.assertIn('class="footer-disclosure"', html, f"Missing footer disclosure link in {rel}")
             self.assertNotIn('<span class="direct-link-tag">', html, f"Per-button .direct-link-tag should be removed in {rel}")
             self.assertIn("window.__saasbillEvents", html, f"Missing local __saasbillEvents instrumentation in {rel}")
-            # Verify Plausible Analytics is present in <head> and no heavy third-party trackers are loaded
-            self.assertIn('src="https://plausible.io/js/pa-VAaSVNs5XOobt9cv2UtKo.js"', html)
+            # Cloudflare Web Analytics beacon sits immediately before </body>.
+            beacon_at = html.rfind("<!-- Cloudflare Web Analytics -->")
+            body_at = html.rfind("</body>")
+            self.assertGreater(beacon_at, 0, rel)
+            self.assertGreater(body_at, beacon_at, rel)
+            self.assertEqual(html[beacon_at:body_at].strip(), CF_WEB_ANALYTICS, rel)
             self.assertNotIn("googletagmanager.com", html)
             self.assertNotIn("posthog.com", html)
 
@@ -766,47 +773,40 @@ class TestSaaSBillCalculators(unittest.TestCase):
         self.assertIn('id="hs-calc-details"', hs_html)
         self.assertIn("Show calculation", hs_html)
 
-    def test_priority2_plausible_event_forwarding(self):
-        """Priority 2: Plausible receives calculator_interaction, category_select, result_rendered, and vendor_cta_click."""
+    def test_priority2_cloudflare_beacon_and_local_events(self):
+        """Priority 2: the Cloudflare beacon is on the homepage, and the local dispatcher records calculator events."""
         with open(os.path.join(PUBLIC_DIR, "index.html"), encoding="utf-8") as f:
             index_html = f.read()
+        self.assertIn(CF_WEB_ANALYTICS, index_html)
+        self.assertLess(index_html.rfind(CF_WEB_ANALYTICS), index_html.rfind("</body>"))
         self.assertIn("window.trackSaaSBillEvent = function(eventName, props)", index_html)
         for ev_name in ("calculator_interaction", "category_select", "result_rendered", "vendor_cta_click"):
             self.assertIn(f"'{ev_name}'", index_html)
 
-        # Execute trackSaaSBillEvent in Node.js with Plausible queue function
-        runner = """
-        const window = {};
-        window.plausible=window.plausible||function(){(window.plausible.q=window.plausible.q||[]).push(Array.from(arguments))};
-        window.__saasbillEvents = window.__saasbillEvents || [];
-        window.trackSaaSBillEvent = function(eventName, props) {
-          var p = props || {};
-          var entry = { event: eventName, ts: 12345 };
-          for (var k in p) {
-            if (Object.prototype.hasOwnProperty.call(p, k)) entry[k] = p[k];
-          }
-          window.__saasbillEvents.push(entry);
-          if (typeof window.plausible === 'function') {
-            window.plausible(eventName, { props: p });
-          }
-        };
-        window.trackSaaSBillEvent('category_select', { category: 'CRM & Sales' });
-        window.trackSaaSBillEvent('calculator_interaction', { control: 'seats', value: '10' });
-        window.trackSaaSBillEvent('result_rendered', { category: 'CRM & Sales', seats: 10 });
-        window.trackSaaSBillEvent('vendor_cta_click', { vendor: 'close-crm', location: 'workbench', href: 'https://refer.close.com/3k5hp07b8soi-fetl0j' });
-        console.log(JSON.stringify({ local: window.__saasbillEvents, plausible: window.plausible.q }));
-        """
+        start = index_html.index("window.__saasbillEvents = window.__saasbillEvents || [];")
+        end_marker = "window.trackEvent = window.trackSaaSBillEvent;"
+        end = index_html.index(end_marker, start) + len(end_marker)
+        snippet = index_html[start:end]
+        runner = (
+            "const vm = require('vm'); const sandbox = { Date: Date }; sandbox.window = sandbox;"
+            "vm.createContext(sandbox); vm.runInContext(%s, sandbox);"
+            "sandbox.trackEvent('category_select', { category: 'CRM & Sales' });"
+            "sandbox.trackEvent('calculator_interaction', { control: 'seats', value: '10' });"
+            "sandbox.trackEvent('result_rendered', { category: 'CRM & Sales', seats: 10 });"
+            "sandbox.trackEvent('vendor_cta_click', { vendor: 'close-crm', location: 'workbench', href: 'https://refer.close.com/3k5hp07b8soi-fetl0j' });"
+            "console.log(JSON.stringify(sandbox.__saasbillEvents));"
+        ) % json.dumps(snippet)
         res = subprocess.run(["node", "-e", runner], capture_output=True, text=True, check=True)
         out = json.loads(res.stdout)
-        self.assertEqual(len(out["local"]), 4)
-        self.assertEqual(len(out["plausible"]), 4)
-        self.assertEqual([x[0] for x in out["plausible"]], [
+        self.assertEqual([row["event"] for row in out], [
             "category_select",
             "calculator_interaction",
             "result_rendered",
             "vendor_cta_click",
         ])
-        self.assertEqual(out["plausible"][3][1]["props"]["vendor"], "close-crm")
+        self.assertEqual(out[1]["control"], "seats")
+        self.assertEqual(out[1]["value"], "10")
+        self.assertEqual(out[3]["vendor"], "close-crm")
 
     def test_priority3_result_hierarchy_and_full_table_disclosure(self):
         """Priority 3: Progressive disclosure order Inputs -> Answer/Best Option -> Calculation -> CTA -> Verdict -> 'Compare all tools' (Sort + Graph + Full Table)."""
@@ -1300,8 +1300,8 @@ class TestSaaSBillCalculators(unittest.TestCase):
         self.assertIn("./exit/zoominfo-60-day-auto-renewal-notice-and-cancellation/", home)
         self.assertIn("ZoomInfo 60-Day Auto-Renewal Notice", home)
 
-    def test_three_scenario_suite_and_plausible_events(self):
-        """Zero, normal, and high scenarios for every calculator, plus the Plausible dispatcher."""
+    def test_three_scenario_suite_and_cloudflare_beacon(self):
+        """Zero, normal, and high scenarios for every calculator, plus the Cloudflare beacon."""
         res = subprocess.run(
             ["node", os.path.join(BASE_DIR, "tests", "test_calculator_scenarios.js")],
             cwd=BASE_DIR,

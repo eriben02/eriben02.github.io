@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Zero / normal / high scenarios for every SaaSBill calculator, plus Plausible events.
+ * Zero / normal / high scenarios for every SaaSBill calculator, plus the Cloudflare beacon.
  * Run: node tests/test_calculator_scenarios.js
  */
 const assert = require("assert");
@@ -35,8 +35,8 @@ function walkHtml(dir, out) {
     const full = path.join(dir, name);
     const stat = fs.statSync(full);
     if (stat.isDirectory()) {
-      // go/ holds the static affiliate redirect stubs (no analytics, noindex);
-      // tests/test_close_vs_pipedrive.py checks them.
+      // go/ redirects keep the beacon in <head> (see tests/test_close_vs_pipedrive.py).
+      // They have no calculator dispatcher.
       if (name === "preview" || name === "node_modules" || (name === "go" && dir === pub)) continue;
       walkHtml(full, out);
     } else if (name.endsWith(".html") && name !== "preview.html" && !/^google[0-9a-f]+\.html$/.test(name)) {
@@ -667,13 +667,17 @@ function ssoTax() {
   check(custom.workos === -1, "101 or more connections stay unknown");
 }
 
-function plausible() {
+const CF_WEB_ANALYTICS = "<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{\"token\": \"94a8dcc3648c4d3a93119f4f7dfc1577\"}'></script><!-- End Cloudflare Web Analytics -->";
+
+function cloudflareBeacon() {
   const files = walkHtml(pub, []);
   check(files.length >= 29, "expected the built HTML pages, found " + files.length);
   files.forEach(function (full) {
     const html = fs.readFileSync(full, "utf8");
     const rel = path.relative(pub, full);
-    check(html.indexOf('data-domain="saasbill.io"') !== -1, rel + " missing Plausible data-domain");
+    const beaconAt = html.lastIndexOf(CF_WEB_ANALYTICS);
+    const bodyAt = html.lastIndexOf("</body>");
+    check(beaconAt > 0 && bodyAt > beaconAt && html.slice(beaconAt, bodyAt).trim() === CF_WEB_ANALYTICS, rel + " missing Cloudflare beacon immediately before </body>");
     check(html.indexOf("window.trackSaaSBillEvent") !== -1 && html.indexOf("window.trackEvent = window.trackSaaSBillEvent") !== -1, rel + " missing trackEvent dispatcher");
     ["calculator_interaction", "category_select", "result_rendered", "vendor_cta_click"].forEach(function (name) {
       check(html.indexOf(name) !== -1, rel + " dispatcher missing " + name);
@@ -694,20 +698,17 @@ function plausible() {
   });
 
   const home = read("index.html");
-  const start = home.indexOf("window.plausible=window.plausible");
-  const end = home.indexOf("window.trackEvent = window.trackSaaSBillEvent;");
+  const start = home.indexOf("window.__saasbillEvents = window.__saasbillEvents || [];");
+  const endMarker = "window.trackEvent = window.trackSaaSBillEvent;";
+  const end = home.indexOf(endMarker);
   check(start > 0 && end > start, "homepage dispatcher block should be extractable");
-  const snippet = home.slice(start, end + "window.trackEvent = window.trackSaaSBillEvent;".length);
+  const snippet = home.slice(start, end + endMarker.length);
   const sandbox = { window: {}, Date: Date };
   sandbox.window = sandbox;
   vm.createContext(sandbox);
   vm.runInContext(snippet, sandbox);
-  const calls = [];
-  sandbox.plausible = function (name, payload) { calls.push({ name: name, payload: payload }); };
   sandbox.trackEvent("calculator_interaction", { control: "seats", value: "10" });
   sandbox.trackEvent("vendor_cta_click", { vendor: "whop-payments", location: "summary-card" });
-  check(calls.length === 2 && calls[0].name === "calculator_interaction" && calls[0].payload.props.control === "seats" && calls[0].payload.props.value === "10", "trackEvent should forward props to plausible");
-  check(calls[1].name === "vendor_cta_click" && calls[1].payload.props.vendor === "whop-payments", "vendor_cta_click props should reach plausible");
   check(sandbox.__saasbillEvents.length === 2, "trackEvent should push onto __saasbillEvents");
   check(sandbox.__saasbillEvents[0].event === "calculator_interaction" && sandbox.__saasbillEvents[0].control === "seats" && sandbox.__saasbillEvents[0].value === "10", "__saasbillEvents should keep the exact calculator_interaction props");
   check(sandbox.__saasbillEvents[1].event === "vendor_cta_click" && sandbox.__saasbillEvents[1].vendor === "whop-payments" && sandbox.__saasbillEvents[1].location === "summary-card", "__saasbillEvents should keep the exact vendor_cta_click props");
@@ -1094,7 +1095,7 @@ function main() {
   esignYear1();
   apolloYear();
   jotformTeamYear1();
-  plausible();
+  cloudflareBeacon();
   if (errors.length) {
     console.error(errors.join("\n"));
     throw new Error(errors.length + " scenario failures");

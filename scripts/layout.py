@@ -11,6 +11,16 @@ PUBLIC_DIR = os.path.join(BASE_DIR, "public")
 SITE_ORIGIN = "https://saasbill.io"
 BASE_PATH = ""
 
+# Exact Cloudflare Web Analytics snippet. Content pages place it immediately
+# before </body>. /go/ redirects place the same string in <head> (see
+# scripts/build_go_redirects.py) because those pages refresh with delay 0.
+CF_WEB_ANALYTICS = (
+    "<!-- Cloudflare Web Analytics -->"
+    "<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' "
+    "data-cf-beacon='{\"token\": \"94a8dcc3648c4d3a93119f4f7dfc1577\"}'></script>"
+    "<!-- End Cloudflare Web Analytics -->"
+)
+
 def get_freshness_timestamps():
     now_local = datetime.now().astimezone()
     iso_date = now_local.strftime("%Y-%m-%d")
@@ -789,11 +799,7 @@ def render_page(rel_path, title, description, canonical_path, body_html, faqs=No
   <link rel="icon" href="/favicon.ico" />
   <link rel="stylesheet" href="{prefix}assets/styles.css?v=20261030c" />
   <link rel="alternate" type="text/plain" href="{SITE_ORIGIN}/llms.txt" title="SaaSBill LLMs.txt Summary" />
-  <!-- Privacy-friendly analytics by Plausible -->
-  <script defer data-domain="saasbill.io" src="https://plausible.io/js/pa-VAaSVNs5XOobt9cv2UtKo.js"></script>
   <script>
-    window.plausible=window.plausible||function(){{(plausible.q=plausible.q||[]).push(arguments)}},plausible.init=plausible.init||function(i){{plausible.o=i||{{}}}};
-    plausible.init();
     window.__saasbillEvents = window.__saasbillEvents || [];
     window.trackSaaSBillEvent = function(eventName, props) {{
       var p = props || {{}};
@@ -802,9 +808,6 @@ def render_page(rel_path, title, description, canonical_path, body_html, faqs=No
         if (Object.prototype.hasOwnProperty.call(p, k)) entry[k] = p[k];
       }}
       window.__saasbillEvents.push(entry);
-      if (typeof window.plausible === 'function') {{
-        window.plausible(eventName, {{ props: p }});
-      }}
     }};
     window.trackEvent = window.trackSaaSBillEvent;
   </script>
@@ -841,7 +844,7 @@ def render_page(rel_path, title, description, canonical_path, body_html, faqs=No
     </div>
   </footer>
   <script>
-  /* Plausible + local event dispatcher for: calculator_interaction, category_select, result_rendered, vendor_cta_click */
+  /* Local event dispatcher for: calculator_interaction, category_select, result_rendered, vendor_cta_click */
   window.__saasbillEvents = window.__saasbillEvents || [];
   try {{
     var p = (window.location && window.location.pathname ? window.location.pathname : '').toLowerCase();
@@ -913,6 +916,7 @@ def render_page(rel_path, title, description, canonical_path, body_html, faqs=No
   document.addEventListener('change', handleCalcControlEvent);
   </script>
   <script src="{prefix}assets/app.js?v=20261030a"></script>
+  {CF_WEB_ANALYTICS}
 </body>
 </html>"""
     html = html.replace(

@@ -26,11 +26,7 @@
   <link rel="icon" href="/favicon.ico" />
   <link rel="stylesheet" href="../../assets/styles.css?v=20261030c" />
   <link rel="alternate" type="text/plain" href="https://saasbill.io/llms.txt" title="SaaSBill LLMs.txt Summary" />
-  <!-- Privacy-friendly analytics by Plausible -->
-  <script defer data-domain="saasbill.io" src="https://plausible.io/js/pa-VAaSVNs5XOobt9cv2UtKo.js"></script>
   <script>
-    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
-    plausible.init();
     window.__saasbillEvents = window.__saasbillEvents || [];
     window.trackSaaSBillEvent = function(eventName, props) {
       var p = props || {};
@@ -39,9 +35,6 @@
         if (Object.prototype.hasOwnProperty.call(p, k)) entry[k] = p[k];
       }
       window.__saasbillEvents.push(entry);
-      if (typeof window.plausible === 'function') {
-        window.plausible(eventName, { props: p });
-      }
     };
     window.trackEvent = window.trackSaaSBillEvent;
 
@@ -636,7 +629,7 @@ renderChargeback();
     </div>
   </footer>
   <script>
-  /* Plausible + local event dispatcher for: calculator_interaction, category_select, result_rendered, vendor_cta_click */
+  /* Local event dispatcher for: calculator_interaction, category_select, result_rendered, vendor_cta_click */
   window.__saasbillEvents = window.__saasbillEvents || [];
   try {
     var p = (window.location && window.location.pathname ? window.location.pathname : '').toLowerCase();
@@ -708,5 +701,6 @@ renderChargeback();
   document.addEventListener('change', handleCalcControlEvent);
   </script>
   <script src="../../assets/app.js?v=20261030a"></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "94a8dcc3648c4d3a93119f4f7dfc1577"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
