@@ -996,9 +996,6 @@ function renderDirectory() {{
     }} else {{
       window.__saasbillEvents = window.__saasbillEvents || [];
       window.__saasbillEvents.push({{ event: 'result_rendered', category: cat, seats: seats, aiTickets: aiVol, billingMode: mode, sortMode: sortMode, ts: _rrNow }});
-      if (typeof window.plausible === 'function') {{
-        window.plausible('result_rendered', {{ props: {{ category: cat, seats: seats, aiTickets: aiVol, billingMode: mode, sortMode: sortMode }} }});
-      }}
     }}
   }}
 
