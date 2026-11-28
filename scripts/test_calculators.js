@@ -29,10 +29,10 @@ const required = [
   "Shopify Payments ($15 fee)",
   "Manual In-House Dispute Handling",
   "Chargeflow Pay-On-Performance",
-  "Stripe Chargeback Protection (0.40% of GMV)",
+  "Chargeback Protection is not listed",
+  "deprecated Chargeback Protection",
   "Baseline (20% Win Rate)",
   "25% of recovered dollars",
-  "Flat Volume Fee",
   "best-card",
   "Lowest modeled cost",
   "The 65% win rate is our planning assumption, not a Chargeflow figure. Adjust it to yours.",
@@ -53,7 +53,7 @@ if (!match) fail("could not extract calcChargeback");
 const sandbox = {};
 vm.createContext(sandbox);
 vm.runInContext(match[0].replace(/\nfunction renderChargeback$/, ""), sandbox);
-const c = sandbox.calcChargeback({ orders: 2000, aov: 120, rate: 0.0065, fee: 15 });
+const c = sandbox.calcChargeback({ orders: 2000, aov: 120, rate: 0.0065, fee: 15, counterFee: 15 });
 
 assert.strictEqual(c.gmv, 2880000);
 assert.strictEqual(c.disputes, 156);
@@ -64,30 +64,32 @@ assert.strictEqual(c.manualGross, 3744);
 assert.strictEqual(c.manualLost, 14976);
 assert.strictEqual(c.manualOps, 4680);
 assert.strictEqual(c.manualNetAfterOps, -936);
-assert.strictEqual(c.manualLoss, 21996);
+assert.strictEqual(c.manualFeeKept, 2340);
+assert.strictEqual(c.manualCounterKept, 1872);
+assert.strictEqual(c.manualLoss, 23868);
 assert.strictEqual(c.recovered, 12168);
 assert.strictEqual(c.successFee, 3042);
 assert.strictEqual(c.netRecovered, 9126);
 assert.strictEqual(c.cfLost, 6552);
 assert.strictEqual(c.cfOps, 0);
+assert.strictEqual(c.cfFeeKept, 2340);
 assert.strictEqual(c.cfLoss, 11934);
-assert.strictEqual(c.savings, 10062);
-assert.strictEqual(c.radarFee, 11520);
-assert.strictEqual(c.nonFraudDisputes, 47);
-assert.strictEqual(c.fraudDisputes, 109);
-assert.strictEqual(c.nonFraudDisputed, 5640);
-assert.strictEqual(c.nonFraudLost, 4512);
-assert.strictEqual(c.nonFraudFees, 705);
-assert.strictEqual(c.nonFraudOps, 1410);
-assert.strictEqual(c.nonFraudDrain, 6627);
-assert.strictEqual(c.radarLoss, 18147);
-assert.strictEqual(c.radar, 18147);
-assert.ok(c.cfLoss < c.radar);
+assert.strictEqual(c.savings, 11934);
+assert.ok(c.cfLoss < c.manualLoss);
+assert.ok(!html.includes("0.40%") && !html.includes("0.4%"), "do not print 0.40% as a Chargeback Protection price");
+assert.ok(!mirror.includes("0.40%") && !mirror.includes("0.4%"), "mirror must not print 0.40%");
 
-const severe = sandbox.calcChargeback({ orders: 2000, aov: 120, rate: 0.02, fee: 15 });
-assert.ok(severe.radar < severe.cfLoss, "at a 2% dispute rate the 0.40% path should cost less than pay-on-performance");
+const severe = sandbox.calcChargeback({ orders: 2000, aov: 120, rate: 0.02, fee: 15, counterFee: 15 });
+assert.ok(severe.cfLoss < severe.manualLoss, "at a 2% dispute rate pay-on-performance should still cost less than manual handling");
+assert.strictEqual(severe.disputes, 480);
 assert.strictEqual(c.cfWin, 0.65);
 assert.strictEqual(c.manualWin, 0.2);
+
+const shopify = sandbox.calcChargeback({ orders: 2000, aov: 120, rate: 0.0065, fee: 15, feeReturnedOnWin: true });
+assert.strictEqual(shopify.manualFeeKept, 1872);
+assert.strictEqual(shopify.cfFeeKept, 819);
+assert.strictEqual(shopify.manualLoss, 21528);
+assert.strictEqual(shopify.cfLoss, 10413);
 
 const paddle = sandbox.calcChargeback({ orders: 2000, aov: 120, rate: 0.0065, fee: 20 });
 assert.strictEqual(paddle.fees, 3120);
@@ -95,7 +97,7 @@ assert.strictEqual(paddle.manualLoss, 22776);
 assert.strictEqual(paddle.cfLoss, 12714);
 assert.strictEqual(paddle.savings, 10062);
 
-console.log("ok chargeback calculator: net $9,126, save $10,062 vs manual drain $21,996");
+console.log("ok chargeback calculator: net $9,126, save $11,934 vs manual drain $23,868");
 
 function extractFn(file, name) {
   const text = fs.readFileSync(path.join(root, file), "utf8");

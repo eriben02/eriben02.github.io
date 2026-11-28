@@ -279,13 +279,19 @@ function chargebackMath() {
   const box = {};
   vm.createContext(box);
   vm.runInContext(src + "\nthis.calcChargeback = calcChargeback;", box);
-  const zero = box.calcChargeback({ orders: 2000, aov: 120, rate: 0, fee: 15 });
-  const normal = box.calcChargeback({ orders: 2000, aov: 120, rate: 0.0065, fee: 15 });
-  const high = box.calcChargeback({ orders: 2000, aov: 120, rate: 0.02, fee: 15 });
-  check(zero.disputes === 0 && zero.fees === 0 && zero.netRecovered === 0, "Zero dispute rate should have no disputes and $0 recovery");
-  check(normal.disputes === 156 && normal.netRecovered === 9126 && normal.cfLoss < normal.radar, "At 0.65% Chargeflow's modeled drain should beat the 0.40% path");
-  check(high.disputes > normal.disputes && high.radar < high.cfLoss, "At 2% the 0.40% of GMV path should cost less than 25% pay-on-performance");
-  check(high.manualLoss > normal.manualLoss, "High dispute volume should raise the manual drain");
+  const zero = box.calcChargeback({ orders: 2000, aov: 120, rate: 0, fee: 15, counterFee: 15 });
+  const normal = box.calcChargeback({ orders: 2000, aov: 120, rate: 0.0065, fee: 15, counterFee: 15 });
+  const high = box.calcChargeback({ orders: 2000, aov: 120, rate: 0.02, fee: 15, counterFee: 15 });
+  const shopify = box.calcChargeback({ orders: 2000, aov: 120, rate: 0.0065, fee: 15, feeReturnedOnWin: true });
+  check(zero.disputes === 0 && zero.fees === 0 && zero.netRecovered === 0 && zero.manualLoss === 0, "Zero dispute rate should have no disputes and $0 recovery");
+  check(normal.disputes === 156 && normal.netRecovered === 9126 && normal.manualCounterKept === 1872 && normal.manualLoss === 23868 && normal.cfLoss === 11934, "Stripe default drain should keep the counter fee on losses");
+  check(normal.cfLoss < normal.manualLoss, "At 0.65% pay-on-performance should cost less than manual handling");
+  check(high.disputes > normal.disputes && high.manualLoss > normal.manualLoss && high.cfLoss < high.manualLoss, "A 2% dispute rate should raise both drains, with pay-on-performance still lower");
+  check(shopify.manualFeeKept === 1872 && shopify.cfLoss === 10413, "Shopify should return the fee on the modeled wins");
+  check(html.indexOf("0.4%") === -1 && html.indexOf("0.40%") === -1, "do not use 0.40% as a Chargeback Protection price");
+  check(html.indexOf("Chargeback Protection is not listed") !== -1, "Chargeback Protection status note");
+  const mirror = read("pricing/stripe-shopify-chargeback-fee-and-chargeflow-roi-calculator/index.html");
+  check(mirror.indexOf("0.4%") === -1 && mirror.indexOf("Chargeback Protection is not listed") !== -1, "mirror drops the 0.40% claim");
 }
 
 function namedPaymentFns() {
