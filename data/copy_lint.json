@@ -37,16 +37,6 @@
       "reason": "Ordinary English in the Commission guidelines summary: a published text is open to a large, undefined audience. Not an unset template value."
     },
     {
-      "path": "chargeback-fee-and-recovery-calculator/index.html",
-      "phrase": "Winner",
-      "reason": "Ordinary English: Shopify Protect is not the dollar winner for the whole dispute volume. Not a result label."
-    },
-    {
-      "path": "pricing/stripe-shopify-chargeback-fee-and-chargeflow-roi-calculator/index.html",
-      "phrase": "Winner",
-      "reason": "Same sentence as the chargeback calculator: not the dollar winner for the whole volume."
-    },
-    {
       "path": "exit/stripe-shopify-paddle-frozen-funds-alternatives/index.html",
       "phrase": "Winner",
       "reason": "Ordinary English: payment processors do not have a single fixed-price winner. Not a result label."
